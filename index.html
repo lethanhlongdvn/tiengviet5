@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduRobot - Tiếng Việt Lớp 5 Online</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .bg-yellow-bright {
+            background-color: #facc15;
+        }
+
+        .text-blue-primary {
+            color: #3b82f6;
+        }
+
+        .card-shadow:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+
+    <!-- Header (Thanh điều hướng) -->
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div
+                        class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white text-xl font-bold">
+                        E</div>
+                    <span class="text-xl font-extrabold text-blue-600 tracking-tight">EduRobot - <span
+                            class="text-yellow-500">Tiếng Việt 5</span></span>
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-8 font-semibold text-gray-600">
+                <li><a href="index.html" class="text-blue-500 font-bold border-b-2 border-blue-500">Trang chủ</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Giới thiệu</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Bảng xếp hạng</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
+            </ul>
+
+            <!-- Mobile Menu Toggle (Simplified) -->
+            <button class="md:hidden text-gray-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section (Phần mở đầu) -->
+    <section
+        class="relative bg-gradient-to-r from-blue-500 via-blue-400 to-blue-500 text-white py-20 px-4 overflow-hidden">
+        <!-- Abstract Shapes for Decoration -->
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-400 rounded-full opacity-20 blur-2xl"></div>
+        <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-green-400 rounded-full opacity-20 blur-3xl"></div>
+
+        <div class="container mx-auto text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                Cùng <span class="text-yellow-300">EduRobot</span> khám phá <br> Tiếng Việt 5
+            </h1>
+            <p class="text-lg md:text-xl font-medium mb-10 opacity-90 max-w-2xl mx-auto">
+                Học vui, nhớ lâu với các bài học tương tác và trò chơi thú vị. Khám phá kho tàng kiến thức thông qua
+                những câu chuyện và bài học đầy sắc màu!
+            </p>
+            <button
+                class="bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold py-4 px-10 rounded-full text-xl shadow-lg transition-transform transform hover:scale-110 focus:outline-none">
+                Bắt đầu học ngay
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Content (Lộ trình học tập) -->
+    <main class="container mx-auto px-4 py-16">
+
+        <div class="flex flex-col items-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-4">Lộ trình học tập - Học kì II</h2>
+            <div class="w-24 h-1.5 bg-yellow-400 rounded-full"></div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            <!-- Thẻ 1: Xanh lá -->
+            <div
+                class="bg-white rounded-3xl overflow-hidden shadow-md border-b-8 border-green-500 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                <img src="https://placehold.co/600x400/22c55e/ffffff?text=Vẻ+đẹp+cuộc+sống" alt="Vẻ đẹp cuộc sống"
+                    class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-green-600 font-bold text-sm uppercase tracking-wider mb-2">Tuần 19 - 22</span>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Vẻ đẹp cuộc sống</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Khám phá những nét đẹp bình dị quanh ta và ý nghĩa của sự
+                        trân trọng cuộc sống.</p>
+                    <a href="ve-dep-cuoc-song.html"
+                        class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl transition-colors text-center block">Vào
+                        học</a>
+                </div>
+            </div>
+
+            <!-- Thẻ 2: Hồng/Cam -->
+            <div
+                class="bg-white rounded-3xl overflow-hidden shadow-md border-b-8 border-orange-500 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                <img src="https://placehold.co/600x400/f97316/ffffff?text=Hương+sắc+trăm+miền" alt="Hương sắc trăm miền"
+                    class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-orange-600 font-bold text-sm uppercase tracking-wider mb-2">Tuần 23 - 26</span>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Hương sắc trăm miền</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Hành trình du ngoạn qua các vùng miền để ngắm nhìn vẻ đẹp
+                        thiên nhiên và con người Việt Nam.</p>
+                    <button
+                        class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition-colors">Vào
+                        học</button>
+                </div>
+            </div>
+
+            <!-- Thẻ 3: Đỏ -->
+            <div
+                class="bg-white rounded-3xl overflow-hidden shadow-md border-b-8 border-red-500 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                <img src="https://placehold.co/600x400/ef4444/ffffff?text=Tiếp+bước+cha+ông" alt="Tiếp bước cha ông"
+                    class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-red-600 font-bold text-sm uppercase tracking-wider mb-2">Tuần 28 - 31</span>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Tiếp bước cha ông</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Tự hào về truyền thống dân tộc, học hỏi từ gương sáng của
+                        những người đi trước.</p>
+                    <button
+                        class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-colors">Vào
+                        học</button>
+                </div>
+            </div>
+
+            <!-- Thẻ 4: Xanh dương đậm -->
+            <div
+                class="bg-white rounded-3xl overflow-hidden shadow-md border-b-8 border-blue-700 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                <img src="https://placehold.co/600x400/1d4ed8/ffffff?text=Thế+giới+của+chúng+ta"
+                    alt="Thế giới của chúng ta" class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-blue-700 font-bold text-sm uppercase tracking-wider mb-2">Tuần 32 - 34</span>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Thế giới của chúng ta</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Mở rộng tầm nhìn ra thế giới, hiểu về tình hữu nghị và tương
+                        lai bền vững.</p>
+                    <button
+                        class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-colors">Vào
+                        học</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Ôn tập & Đánh giá Section -->
+        <div class="mt-20">
+            <div
+                class="bg-yellow-50 rounded-[40px] p-8 md:p-12 border-2 border-dashed border-yellow-300 relative overflow-hidden">
+                <div class="absolute -right-4 -bottom-4 opacity-10">
+                    <svg class="w-48 h-48" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10.394 2.827a1 1 0 00-.788 0l-7 3a1 1 0 000 1.848l7 3a1 1 0 00.788 0l7-3a1 1 0 000-1.848l-7-3zM14 9.581L14 9.581l4.606-1.974a1 1 0 011.394.91v4.5a1 1 0 01-.606.91l-7 3a1 1 0 01-.788 0l-7-3A1 1 0 011 13.017V8.517a1 1 0 011.394-.91L7 9.581v3.394l3.394 1.455a1 1 0 00.788 0L14 12.975V9.581zM11 11.27l3.106-1.332L11 8.606 7.894 9.938 11 11.27z" />
+                    </svg>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+                    <div class="max-w-xl text-center md:text-left">
+                        <span
+                            class="inline-block bg-yellow-400 text-blue-900 text-xs font-bold px-4 py-1.5 rounded-full uppercase mb-4">Giai
+                            đoạn quan trọng</span>
+                        <h2 class="text-3xl font-bold text-blue-900 mb-4">Ôn tập & Đánh giá</h2>
+                        <p class="text-gray-700 text-lg">Hệ thống lại toàn bộ kiến thức qua các bài kiểm tra định kỳ
+                            (Tuần 27 & 35) để chuẩn bị tốt cho kì thi cuối kì nhé!</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                        <a href="#"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-2xl text-center transition-all shadow-md active:scale-95">Ôn
+                            tập Tuần 27</a>
+                        <a href="#"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-2xl text-center transition-all shadow-md active:scale-95">Ôn
+                            tập Tuần 35</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer (Chân trang) -->
+    <!-- Footer (Chân trang) -->
+    <footer class="bg-zinc-900 text-zinc-400 py-3 px-4 mt-2">
+        <div class="container mx-auto text-center text-sm">
+            <p>@ 2026 EduRobot - Phát triển bởi Lê Thành Long</p>
+        </div>
+    </footer>
+
+    <!-- Simple JavaScript for Interactivity (Optional) -->
+    <script>
+        // Smooth scroll for anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle logic could be added here
+    </script>
+</body>
+
+</html>
