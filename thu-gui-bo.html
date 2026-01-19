@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư gửi bố - EduRobot</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Nunito & Merriweather -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 18px;
+        }
+
+        .serif-font {
+            font-family: 'Merriweather', serif;
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-open .accordion-content {
+            max-height: 1000px;
+        }
+
+        .accordion-open svg {
+            transform: rotate(180deg);
+        }
+
+        .bg-paper {
+            background-color: #fdfcf7;
+            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+
+        .poem-line {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div
+                        class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg font-bold">
+                        E</div>
+                    <span class="text-lg font-extrabold text-blue-600 tracking-tight">EduRobot - <span
+                            class="text-yellow-500">Tiếng Việt 5</span></span>
+                </a>
+            </div>
+
+            <ul class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
+                <li><a href="index.html" class="hover:text-blue-500 transition-colors">Trang chủ</a></li>
+                <li><a href="ve-dep-cuoc-song.html" class="hover:text-blue-500 transition-colors">Bài học</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Bảng xếp hạng</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-4">
+
+        <!-- Navigation -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
+            <div>
+                <a href="ve-dep-cuoc-song.html"
+                    class="flex items-center text-gray-600 hover:text-blue-600 font-bold transition-colors">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Quay lại Tuần 21
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+
+            <!-- Cột trái (70%) - Bài thơ -->
+            <section class="w-full lg:w-[70%] text-center">
+                <div class="bg-white rounded-[30px] shadow-sm border border-gray-100 p-2 md:p-3">
+
+                    <div class="p-6 md:p-10 bg-paper rounded-2xl shadow-inner border border-gray-50">
+                        <div class="serif-font text-gray-800">
+                            <h1 class="text-3xl font-black mb-2 text-blue-900 text-center uppercase tracking-tight">
+                                Thư gửi bố</h1>
+                            <p class="text-center text-sm italic text-gray-500 mb-8">Tác giả: Thuỵ Anh</p>
+
+                            <div class="text-left max-w-2xl mx-auto space-y-6">
+                                <!-- Khổ 1 -->
+                                <div class="mb-6">
+                                    <p class="poem-line">Con lớn lên, quen vắng bố trong nhà</p>
+                                    <p class="poem-line">Hai mẹ con, nhà một phòng cũng trống</p>
+                                    <p class="poem-line">Chỉ mong đợi những lá thư gió lộng</p>
+                                    <p class="poem-line">Và mặn mòi hương biển xa xôi...</p>
+                                    <p class="poem-line">Nghe êm đềm sóng lặng lững lờ trôi,</p>
+                                    <p class="poem-line">Thấy đàn cá heo giỡn đùa mặt nước.</p>
+                                </div>
+
+                                <!-- Khổ 2 -->
+                                <div class="mb-6">
+                                    <p class="poem-line">Thư không kể về cơn bão chờ phía trước,</p>
+                                    <p class="poem-line">Dải đá ngầm, thăm thẳm nước đen.</p>
+                                    <p class="poem-line">Nhịp bước khẩn trương khi khẩu lệnh vang lên,</p>
+                                    <p class="poem-line">Mắt dõi theo vật ra-đa rà quét,</p>
+                                    <p class="poem-line">Áo đọng muối khô, da nhận mùi nắng khét,...</p>
+                                    <p class="poem-line">Thư chỉ nói về nỗi nhớ với thương yêu...</p>
+                                </div>
+
+                                <!-- Khổ 3 -->
+                                <div class="mb-6">
+                                    <p class="poem-line">Con đã lớn khôn, đọc được cả những điều</p>
+                                    <p class="poem-line">Chưa được viết trong thư người lính biển</p>
+                                    <p class="poem-line">Nơi đầu sóng, sẵn sàng nghênh chiến</p>
+                                    <p class="poem-line">Vẫn dịu dàng, êm ái lá thư xanh...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Cột phải (30%) - Tìm hiểu bài -->
+            <aside class="w-full lg:w-[30%]">
+                <div class="bg-yellow-50 rounded-[30px] shadow-sm border border-yellow-100 p-4 sticky top-20">
+                    <h2 class="text-xl font-black text-blue-900 mb-4 flex items-center">
+                        <span class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                        </span>
+                        Tìm hiểu bài
+                    </h2>
+
+                    <div class="space-y-4">
+                        <!-- Câu 1 -->
+                        <div
+                            class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                            <button onclick="toggleAccordion(this)"
+                                class="w-full p-5 text-left flex justify-between items-center group">
+                                <span
+                                    class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">1.
+                                    Ở khổ thơ thứ nhất, bạn nhỏ đã chia sẻ điều gì?</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div
+                                    class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                    <span class="text-green-600 font-bold block mb-1 text-base">Trả lời:</span>
+                                    Bạn nhỏ chia sẻ hoàn cảnh của gia đình mình: Bố công tác ngoài đảo xa nên hai mẹ con
+                                    luôn cảm thấy <span class="font-bold text-blue-600">trống vắng</span>, luôn hướng về
+                                    cuộc sống ngoài đảo của bố. Bạn nhỏ luôn <span class="font-bold text-blue-600">mong
+                                        chờ những lá thư</span> kể chuyện biển cả thú vị do bố gửi về.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Câu 2 -->
+                        <div
+                            class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                            <button onclick="toggleAccordion(this)"
+                                class="w-full p-5 text-left flex justify-between items-center group">
+                                <span
+                                    class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">2.
+                                    Những chi tiết nào cho thấy bố bạn nhỏ phải vượt qua nhiều khó khăn, vất vả để bảo
+                                    vệ biển đảo của Tổ quốc?</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div
+                                    class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                    <span class="text-green-600 font-bold block mb-1 text-base">Trả lời:</span>
+                                    <ul class="list-disc ml-4 space-y-1">
+                                        <li><span class="font-bold text-blue-600">Cơn bão</span> chờ phía trước</li>
+                                        <li><span class="font-bold text-blue-600">Dải đá ngầm</span>, thăm thẳm nước đen
+                                        </li>
+                                        <li><span class="font-bold text-blue-600">Áo đọng muối khô</span></li>
+                                        <li><span class="font-bold text-blue-600">Da nhận mùi nắng khét</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Câu 3 -->
+                        <div
+                            class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                            <button onclick="toggleAccordion(this)"
+                                class="w-full p-5 text-left flex justify-between items-center group">
+                                <span
+                                    class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">3.
+                                    Theo em, vì sao trong thư bố bạn nhỏ không kể về những khó khăn, vất vả của
+                                    mình?</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div
+                                    class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                    <span class="text-green-600 font-bold block mb-1 text-base">Trả lời:</span>
+                                    Bố bạn nhỏ không kể vì <span class="font-bold text-blue-600">không muốn người thân
+                                        phải lo lắng</span>.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Câu 4 -->
+                        <div
+                            class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                            <button onclick="toggleAccordion(this)"
+                                class="w-full p-5 text-left flex justify-between items-center group">
+                                <span
+                                    class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">4.
+                                    Bạn nhỏ đã thể hiện tình cảm của mình với bố qua những hành động, việc làm
+                                    nào?</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div
+                                    class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                    <span class="text-green-600 font-bold block mb-1 text-base">Trả lời:</span>
+                                    <ul class="list-disc ml-4 space-y-1">
+                                        <li><span class="font-bold text-blue-600">A.</span> Làm quen với cuộc sống vắng
+                                            bố</li>
+                                        <li><span class="font-bold text-blue-600">B.</span> Mong đợi những lá thư của bố
+                                        </li>
+                                        <li><span class="font-bold text-blue-600">C.</span> Hiểu được cả những điều bố
+                                            chưa viết trong thư</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Câu 5 -->
+                        <div
+                            class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                            <button onclick="toggleAccordion(this)"
+                                class="w-full p-5 text-left flex justify-between items-center group">
+                                <span
+                                    class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">5.
+                                    Hai dòng thơ "Nơi đầu sóng, sẵn sàng nghênh chiến/ Vẫn dịu dàng, êm ái lá thư xanh…"
+                                    cho em hiểu điều gì về người lính biển?</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div
+                                    class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                    <span class="text-green-600 font-bold block mb-1 text-base">Trả lời:</span>
+                                    Hai dòng thơ cho thấy <span class="font-bold text-blue-600">tinh thần, ý chí quật
+                                        cường, tư thế chủ động, luôn sẵn sàng chiến đấu</span> để bảo vệ chủ quyền biển
+                                    đảo. Đồng thời, nó cũng hiện lên hình ảnh một <span
+                                        class="font-bold text-blue-600">người chồng, người cha thân thương, gần gũi và
+                                        chan chứa tình yêu thương gia đình</span>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Nội dung chính (Full Width Bottom) -->
+        <div class="mt-2 bg-white rounded-[30px] shadow-sm border border-blue-100 p-6 md:p-8 overflow-hidden relative">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-50 rounded-full opacity-50"></div>
+            <div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                <div
+                    class="bg-blue-600 p-8 rounded-3xl text-white shadow-xl shadow-blue-200 shrink-0 text-center md:text-left">
+                    <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-2">Thông điệp</p>
+                    <h3 class="text-2xl font-black uppercase tracking-wider">Nội dung chính</h3>
+                </div>
+                <div class="flex-grow">
+                    <p class="text-lg font-semibold leading-relaxed text-blue-900 mb-2">
+                        Bài thơ ca ngợi tinh thần vượt lên khó khăn, thử thách để hoàn thành nhiệm vụ của người lính
+                        biển.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        Bài thơ thể hiện tình yêu, sự gắn bó của người lính đối với gia đình cũng như sự quan tâm, thấu
+                        hiểu, sẻ chia của gia đình dành cho họ. Qua đó, em hiểu được sự hy sinh thầm lặng của những
+                        người lính biển đang ngày đêm bảo vệ chủ quyền biển đảo thiêng liêng của Tổ quốc.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-900 text-zinc-400 py-2 px-4 mt-2">
+        <div class="container mx-auto text-center text-xs">
+            <p>@ 2026 EduRobot - Phát triển bởi Lê Thành Long</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('accordion-open');
+
+            // Close all
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('accordion-open');
+            });
+
+            // Open if was closed
+            if (!isOpen) {
+                item.classList.add('accordion-open');
+            }
+        }
+    </script>
+</body>
+
+</html>
