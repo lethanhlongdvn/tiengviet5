@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hoa tháng năm - EduRobot</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Nunito & Merriweather -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 18px;
+        }
+
+        .serif-font {
+            font-family: 'Merriweather', serif;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .serif-font p {
+            text-indent: 2em;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-open .accordion-content {
+            max-height: 1000px;
+        }
+
+        .accordion-open svg {
+            transform: rotate(180deg);
+        }
+
+        .bg-paper {
+            background-color: #fdfcf7;
+            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div
+                        class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg font-bold">
+                        E</div>
+                    <span class="text-lg font-extrabold text-blue-600 tracking-tight">EduRobot - <span
+                            class="text-yellow-500">Tiếng Việt 5</span></span>
+                </a>
+            </div>
+
+            <ul class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
+                <li><a href="index.html" class="hover:text-blue-500 transition-colors">Trang chủ</a></li>
+                <li><a href="ve-dep-cuoc-song.html" class="hover:text-blue-500 transition-colors">Bài học</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Bảng xếp hạng</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-4">
+
+        <!-- Navigation -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
+            <div>
+                <a href="ve-dep-cuoc-song.html"
+                    class="flex items-center text-gray-600 hover:text-blue-600 font-bold transition-colors">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Quay lại Tuần 21
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+
+            <!-- Cột trái (70%) - Bài đọc -->
+            <section class="w-full lg:w-[70%] text-center">
+                <div class="bg-white rounded-[30px] shadow-sm border border-gray-100 p-2 md:p-3">
+
+                    <div class="p-6 md:p-10 bg-paper rounded-2xl shadow-inner border border-gray-50">
+                        <div class="serif-font text-gray-800 text-justify">
+                            <h1 class="text-3xl font-black mb-6 text-blue-900 text-center uppercase tracking-tight">
+                                Giỏ hoa tháng năm</h1>
+
+                            <p class="mb-4">
+                                Với bọn trẻ chúng tôi, ngày lễ Mừng xuân vào tháng Năm luôn đáng mong chờ, bởi đó là dịp
+                                chúng tôi được vui đùa thoả thích. Chúng tôi thường bí mật làm những giỏ hoa rực rỡ, đặt
+                                lên bậc thềm nhà người quen hoặc bạn bè, gõ cửa rồi ba chân bốn cẳng chạy trốn thật
+                                nhanh. Từ xa, chúng tôi hồi hộp theo dõi chủ nhà mở cửa, cầm món quà lên với vẻ ngạc
+                                nhiên, thích thú.
+                            </p>
+                            <p class="mb-4">
+                                Tôi còn nhớ lễ Mừng xuân năm tôi học lớp Năm. Lúc đó, tôi đang giận Pam, cô bạn thân
+                                nhất của mình. Từ nhỏ Pam và tôi đã thân nhau như hình với bóng. Gần đây, một gia đình
+                                mới dọn đến thị trấn của chúng tôi và Pam đã kết thân với con gái của họ. Mặc dù chúng
+                                tôi vẫn chơi với nhau, nhưng thời gian Pam dành cho tôi không còn nhiều như trước. Tôi
+                                cảm thấy như bị bỏ rơi. Giận Pam, tôi không chơi với bạn mấy ngày.
+                            </p>
+                            <p class="mb-4">
+                                Khi mẹ hỏi tôi có mang hoa cho Pam không, tôi trả lời: "Không bao giờ, mẹ ạ!". Mẹ dừng
+                                tay làm bếp, ôm tôi và an ủi. Cơn tủi thân bỗng dâng lên và tôi oà khóc nức nở. Mẹ dịu
+                                dàng vuốt tóc và lau nước mắt cho tôi. Mẹ bảo càng lớn, chúng tôi sẽ càng có nhiều bạn.
+                                Những người bạn không thể chỉ chơi với một mình tôi. Và ngay cả tôi cũng không thể chỉ
+                                chơi với một người bạn.
+                            </p>
+                            <p class="mb-4">
+                                Cuối cùng, tôi cũng quyết định tặng Pam một giỏ hoa. Tôi chọn thật nhiều hoa màu vàng mà
+                                Pam yêu thích, rồi nhờ chị tôi đem đến nhà bạn. Từ chỗ nấp, tôi thấy Pam nâng giỏ hoa
+                                lên, dịu dàng áp mặt vào những bông hoa và nói to như để tôi nghe được: "Cảm ơn Xu-di,
+                                hi vọng cậu không còn giận mình!". Lần ấy tôi học được rằng là bạn bè đích thực, ta sẽ
+                                đặt bạn trong tim nhưng không buộc họ luôn ở bên mình.
+                            </p>
+                            <p class="text-right italic font-bold text-gray-600 mt-6">(Theo Minh Hương)</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Cột phải (30%) - Tìm hiểu bài -->
+            <aside class="w-full lg:w-[30%]">
+                <div class="bg-yellow-50 rounded-[30px] shadow-sm border border-yellow-100 p-4 sticky top-20">
+                    <h2 class="text-xl font-black text-blue-900 mb-4 flex items-center">
+                        <span class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                        </span>
+                        Tìm hiểu bài
+                    </h2>
+
+                    <div class="space-y-4">
+                        <!-- Câu 1 -->
+                        <div
+                            class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                            <button onclick="toggleAccordion(this)"
+                                class="w-full p-5 text-left flex justify-between items-center group">
+                                <span
+                                    class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">1.
+                                    Ngày lễ nào trong năm được các bạn nhỏ mong chờ? Việc làm nào trong ngày đó khiến
+                                    các bạn thấy thú vị?</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div
+                                    class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                    <span class="text-green-600 font-bold block mb-1 text-base">Trả lời:</span>
+                                    Ngày lễ được các bạn nhỏ mong chờ là <span class="font-bold text-blue-600">ngày lễ
+                                        mừng xuân vào tháng năm</span>. Các bạn thường bí mật làm những giỏ hoa rực rỡ,
+                                    đặt lên bậc thềm nhà người quen hoặc bạn bè, gõ cửa rồi ba chân bốn cẳng chạy trốn
+                                    thật nhanh, hồi hộp theo dõi chủ nhà có cảm xúc như thế nào trước món quà đó.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Câu 2 -->
+                        <div
+                            class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                            <button onclick="toggleAccordion(this)"
+                                class="w-full p-5 text-left flex justify-between items-center group">
+                                <span
+                                    class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">2.
+                                    Bạn thân của Xu-di là ai? Vì sao Xu-di lại giận người bạn thân của mình?</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div
+                                    class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                    <span class="text-green-600 font-bold block mb-1 text-base">Trả lời:</span>
+                                    Bạn thân của Xu-di là <span class="font-bold text-blue-600">Pam</span>. Xu-di giận
+                                    người bạn thân của mình vì có một gia đình mới dọn đến thị trấn của hai người và Pam
+                                    đã kết thân với con gái của gia đình đó, thời gian Pam dành cho Xu-di không còn
+                                    nhiều như trước, Xu-di cảm thấy như bị bỏ rơi.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Câu 3 -->
+                        <div
+                            class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                            <button onclick="toggleAccordion(this)"
+                                class="w-full p-5 text-left flex justify-between items-center group">
+                                <span
+                                    class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">3.
+                                    Việc Xu-di vẫn quyết định tặng bạn giỏ hoa với nhiều bông màu vàng mà bạn yêu thích
+                                    thể hiện điều gì?</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div
+                                    class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                    <span class="text-green-600 font-bold block mb-1 text-base">Trả lời:</span>
+                                    Việc đó cho thấy <span class="font-bold text-blue-600">Xu-di rất yêu quý Pam và hiểu
+                                        sở thích của bạn</span>.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Câu 4 -->
+                        <div
+                            class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                            <button onclick="toggleAccordion(this)"
+                                class="w-full p-5 text-left flex justify-between items-center group">
+                                <span
+                                    class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">4.
+                                    Người bạn của Xu-di đón nhận giỏ hoa như thế nào? Theo em, Xu-di có cảm nghĩ gì
+                                    trước cử chỉ, lời nói của bạn lúc nhận giỏ hoa?</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div
+                                    class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                    <span class="text-green-600 font-bold block mb-1 text-base">Trả lời:</span>
+                                    Pam nâng giỏ hoa lên, dịu dàng áp mặt vào những bông hoa và nói to như để Xu-di nghe
+                                    được: <span class="font-bold text-blue-600">"Cảm ơn Xu-di, hi vọng cậu không còn
+                                        giận mình!"</span>. Chắc hẳn là Xu-di rất cảm động trước cử chỉ, lời nói của Pam
+                                    lúc nhận hoa.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Câu 5 -->
+                        <div
+                            class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                            <button onclick="toggleAccordion(this)"
+                                class="w-full p-5 text-left flex justify-between items-center group">
+                                <span
+                                    class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">5.
+                                    Đoạn kết của câu chuyện muốn nói điều gì?</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div
+                                    class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                    <span class="text-green-600 font-bold block mb-1 text-base">Trả lời:</span>
+                                    Đã là bạn bè đích thực luôn có sự <span class="font-bold text-blue-600">gắn bó thân
+                                        thiết, chân thành</span>, luôn ở bên nhau, quan tâm đến nhau dù không ở cạnh
+                                    nhau thường xuyên nhưng tấm lòng luôn hướng về nhau, luôn trân trọng và có vị trí
+                                    nhất định trong lòng mỗi người.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Nội dung chính (Full Width Bottom) -->
+        <div class="mt-2 bg-white rounded-[30px] shadow-sm border border-blue-100 p-6 md:p-8 overflow-hidden relative">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-50 rounded-full opacity-50"></div>
+            <div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                <div
+                    class="bg-blue-600 p-8 rounded-3xl text-white shadow-xl shadow-blue-200 shrink-0 text-center md:text-left">
+                    <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-2">Thông điệp</p>
+                    <h3 class="text-2xl font-black uppercase tracking-wider">Nội dung chính</h3>
+                </div>
+                <div class="flex-grow">
+                    <p class="text-lg font-semibold leading-relaxed text-blue-900 mb-2">
+                        Một tình bạn đẹp là một tình bạn dựa trên sự chân thành, thấu hiểu, và sẻ chia.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        Những người bạn tốt sẽ luôn ở bên cạnh ta, giúp đỡ ta trong lúc khó khăn, và chia sẻ niềm vui
+                        với ta trong những lúc vui vẻ. Tình bạn đích thực không đòi hỏi phải luôn ở bên nhau mà là sự
+                        trân trọng, tin tưởng và tôn trọng không gian riêng của nhau.
+                    </p>
+                    <div class="mt-4 p-4 bg-yellow-50 rounded-xl border-l-4 border-yellow-400">
+                        <p class="text-sm font-bold text-yellow-800 mb-1">💭 Câu hỏi mở rộng:</p>
+                        <p class="text-sm text-gray-700 italic">Qua bài học ngày hôm nay, em hãy nêu cảm nghĩ của mình
+                            về tình bạn?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-900 text-zinc-400 py-2 px-4 mt-2">
+        <div class="container mx-auto text-center text-xs">
+            <p>@ 2026 EduRobot - Phát triển bởi Lê Thành Long</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('accordion-open');
+
+            // Close all
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('accordion-open');
+            });
+
+            // Open if was closed
+            if (!isOpen) {
+                item.classList.add('accordion-open');
+            }
+        }
+    </script>
+</body>
+
+</html>
