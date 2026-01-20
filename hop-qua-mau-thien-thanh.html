@@ -11,6 +11,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
     <style>
         body {
             font-family: 'Nunito', sans-serif;
@@ -86,6 +91,25 @@
             border-color: #ef4444 !important;
             background-color: #fef2f2 !important;
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 
@@ -109,7 +133,8 @@
                 <li><a href="ve-dep-cuoc-song.html"
                         class="hover:text-blue-500 transition-colors font-bold text-blue-600 border-b-2 border-blue-600">Bài
                         học</a></li>
-                <li><a href="#" class="hover:text-blue-500 transition-colors">Bảng xếp hạng</a></li>
+                <li><a href="#" onclick="openTeacherStats()" class="hover:text-blue-500 transition-colors">Thống kê</a>
+                </li>
                 <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
             </ul>
         </nav>
@@ -563,6 +588,39 @@
                 </div>
             </div>
         </div>
+
+        <!-- Teacher Statistics Modal -->
+        <div id="statsModal" class="modal">
+            <div
+                class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col m-4">
+                <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-blue-600 text-white">
+                    <h2 class="text-2xl font-black">THỐNG KÊ KẾT QUẢ HỌC TẬP</h2>
+                    <button onclick="closeModal()" class="hover:bg-blue-700 p-2 rounded-full transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-6 overflow-x-auto flex-1">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-600 uppercase text-xs font-bold tracking-widest">
+                                <th class="p-4 border-b">STT</th>
+                                <th class="p-4 border-b">Họ và tên</th>
+                                <th class="p-4 border-b">Lớp</th>
+                                <th class="p-4 border-b">Trường</th>
+                                <th class="p-4 border-b text-center">Điểm số</th>
+                                <th class="p-4 border-b text-right">Thời gian nộp</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statsTableBody" class="text-sm">
+                            <!-- Data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -614,6 +672,79 @@
             audioStatus.classList.remove('text-green-500');
             audioStatus.classList.add('text-gray-400');
         };
+
+        /* FIREBASE CONFIG */
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
+            authDomain: "gamhoctap.firebaseapp.com",
+            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "gamhoctap",
+            storageBucket: "gamhoctap.firebasestorage.app",
+            messagingSenderId: "833329613932",
+            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
+            measurementId: "G-YT1PKCYS67"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        /* TEACHER STATS LOGIC */
+        function openTeacherStats() {
+            const pin = prompt("Vui lòng nhập mã PIN giáo viên:");
+            if (pin === 'dvn') {
+                document.getElementById('statsModal').classList.add('active');
+                loadStats();
+            } else if (pin !== null) {
+                alert("Mã PIN không chính xác!");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('statsModal').classList.remove('active');
+        }
+
+        async function loadStats() {
+            const tbody = document.getElementById('statsTableBody');
+            tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
+
+            try {
+                const snapshot = await db.collection("diem_tieng_viet_lop5")
+                    .where("lessonTitle", "==", "Hộp quà màu thiên thanh")
+                    .get();
+
+                tbody.innerHTML = '';
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
+                    return;
+                }
+
+                // Sort in memory to avoid needing Firestore index
+                const results = [];
+                snapshot.forEach(doc => results.push(doc.data()));
+                results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
+
+                results.forEach((data, index) => {
+                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50";
+                    tr.innerHTML = `
+                        <td class="p-4 font-bold text-gray-400">${index + 1}</td>
+                        <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
+                        <td class="p-4 text-gray-600">${data.className}</td>
+                        <td class="p-4 text-gray-600">${data.school}</td>
+                        <td class="p-4 text-center">
+                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">
+                                ${data.score}/100
+                            </span>
+                        </td>
+                        <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (error) {
+                console.error("Error loading stats:", error);
+                tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu. Vui lòng thử lại.</td></tr>';
+            }
+        }
 
         /* TAB LOGIC */
         function switchTab(tabId) {
@@ -776,15 +907,34 @@
             startQuiz();
         }
 
-        function submitResults() {
+        async function submitResults() {
             const finalData = {
-                ...studentData,
+                studentName: studentData.name,
+                className: studentData.className,
+                school: studentData.school,
+                lessonTitle: "Hộp quà màu thiên thanh",
                 score: score,
-                endTime: new Date().toISOString()
+                startTime: studentData.startTime,
+                endTime: new Date().toISOString(),
+                submittedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
-            console.log("Submitting Results:", finalData);
-            alert(`Cảm ơn ${studentData.name}! Kết quả của em đã được ghi nhận.\nLớp: ${studentData.className}\nĐiểm: ${score}/100`);
-            // You can add real submission logic here (fetch to API/Firebase)
+
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.disabled = true;
+            btn.innerText = "Đang gửi...";
+
+            try {
+                await db.collection("diem_tieng_viet_lop5").add(finalData);
+                alert(`Chúc mừng em ${studentData.name}!\nKết quả của em đã được gửi thành công đến thầy cô.\nĐiểm: ${score}/100`);
+                switchTab('lesson');
+            } catch (error) {
+                console.error("Error submitting quiz:", error);
+                alert("Có lỗi xảy ra khi nộp bài. Em hãy kiểm tra lại kết nối mạng nhé!");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = originalText;
+            }
         }
     </script>
 </body>
