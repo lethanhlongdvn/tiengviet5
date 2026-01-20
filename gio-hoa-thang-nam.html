@@ -593,24 +593,21 @@
                 playIcon.classList.add('hidden');
                 pauseIcon.classList.remove('hidden');
                 audioStatus.innerText = "Đang phát...";
-                audioStatus.classList.remove('text-gray-400');
-                audioStatus.classList.add('text-green-500');
+                audioStatus.classList.replace('text-gray-400', 'text-green-500');
             } else {
                 audio.pause();
                 playIcon.classList.remove('hidden');
                 pauseIcon.classList.add('hidden');
                 audioStatus.innerText = "Đang dừng...";
-                audioStatus.classList.remove('text-green-500');
-                audioStatus.classList.add('text-gray-400');
+                audioStatus.classList.replace('text-green-500', 'text-gray-400');
             }
         }
 
-        audio.onended = function () {
+        audio.onended = () => {
             playIcon.classList.remove('hidden');
             pauseIcon.classList.add('hidden');
             audioStatus.innerText = "Đang dừng...";
-            audioStatus.classList.remove('text-green-500');
-            audioStatus.classList.add('text-gray-400');
+            audioStatus.classList.replace('text-green-500', 'text-gray-400');
         };
 
         /* FIREBASE CONFIG */
