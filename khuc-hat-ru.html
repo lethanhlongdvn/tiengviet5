@@ -545,70 +545,71 @@
         </div>
     </footer>
 
-    <script>
-        /* FIREBASE CONFIG */
-        const firebaseConfig = {
-            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
-            authDomain: "gamhoctap.firebaseapp.com",
-            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "gamhoctap",
-            storageBucket: "gamhoctap.firebasestorage.app",
-            messagingSenderId: "833329613932",
-            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
-            measurementId: "G-YT1PKCYS67"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+    /* FIREBASE CONFIG */
+    const firebaseConfig = {
+    apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
+    authDomain: "gamhoctap.firebaseapp.com",
+    databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "gamhoctap",
+    storageBucket: "gamhoctap.firebasestorage.app",
+    messagingSenderId: "833329613932",
+    appId: "1:833329613932:web:0d8574827bcfe50b535c49",
+    measurementId: "G-YT1PKCYS67"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-        /* TEACHER STATS LOGIC */
-        function openTeacherStats() {
-            const pin = prompt("Vui lòng nhập mã PIN giáo viên:");
-            if (pin === 'dvn') {
-                document.getElementById('statsModal').classList.add('active');
-                loadStats();
-            } else if (pin !== null) {
-                alert("Mã PIN không chính xác!");
-            }
-        }
+    /* TEACHER STATS LOGIC */
+    function openTeacherStats() {
+    const pin = prompt("Vui lòng nhập mã PIN giáo viên:");
+    if (pin === 'dvn') {
+    document.getElementById('statsModal').classList.add('active');
+    loadStats();
+    } else if (pin !== null) {
+    alert("Mã PIN không chính xác!");
+    }
+    }
 
-        function closeModal() {
-            document.getElementById('statsModal').classList.remove('active');
-        }
+    function closeModal() {
+    document.getElementById('statsModal').classList.remove('active');
+    }
 
-        async function loadStats() {
-            const tbody = document.getElementById('statsTableBody');
-            tbody.innerHTML = `<tr>
-        <td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td>
-    </tr>`;
-            try {
-                const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Khúc hát ru những em bé lớn trên lưng mẹ").get();
-                tbody.innerHTML = '';
-                if (snapshot.empty) {
-                    tbody.innerHTML = `<tr>
+    async function loadStats() {
+    const tbody = document.getElementById('statsTableBody');
+    tbody.innerHTML = '<tr>
+        <td colspan="6" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td>
+    </tr>';
+    try {
+    const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Khúc hát ru những em bé lớn
+    trên lưng mẹ").get();
+    tbody.innerHTML = '';
+    if (snapshot.empty) {
+    tbody.innerHTML = '<tr>
+        <td colspan="6" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td>
         <td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td>
-    </tr>`;
-                    return;
-                }
-                const results = [];
-                snapshot.forEach(doc => results.push(doc.data()));
-                results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
-                results.forEach((data, index) => {
-                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
+    </tr>';
+    return;
+    }
+    const results = [];
+    snapshot.forEach(doc => results.push(doc.data()));
+    results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
+    results.forEach((data, index) => {
+    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
 
-                    // Tính thời gian làm bài
-                    let duration = '---';
-                    if (data.startTime && data.endTime) {
-                        const start = new Date(data.startTime);
-                        const end = new Date(data.endTime);
-                        const diffMs = end - start;
-                        const mins = Math.floor(diffMs / 60000);
-                        const secs = Math.floor((diffMs % 60000) / 1000);
-                        duration = `${mins} phút ${secs} giây`;
-                    }
+    // Tính thời gian làm bài
+    let duration = '---';
+    if (data.startTime && data.endTime) {
+    const start = new Date(data.startTime);
+    const end = new Date(data.endTime);
+    const diffMs = end - start;
+    const mins = Math.floor(diffMs / 60000);
+    const secs = Math.floor((diffMs % 60000) / 1000);
+    duration = `${mins} phút ${secs} giây`;
+    }
 
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50";
-                    tr.innerHTML = `
+    const tr = document.createElement('tr');
+    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50";
+    tr.innerHTML = `
     <td class="p-4 font-bold text-gray-400">${index + 1}</td>
     <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
     <td class="p-4 text-gray-600">${data.className}</td>
@@ -622,258 +623,242 @@
     <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
     <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
     `;
-                    tbody.appendChild(tr);
-                });
-            } catch (error) {
-                console.error("Error loading stats:", error);
-                tbody.innerHTML = `<tr>
+    tbody.appendChild(tr);
+    });
+    } catch (error) {
+    console.error("Error loading stats:", error);
+    tbody.innerHTML = '<tr>
         <td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td>
-    </tr>`;
-            }
-        }
+    </tr>';
+    }
+    }
 
-        function exportToExcel() {
-            const table = document.querySelector("#statsModal table");
-            // raw: true giúp giữ định dạng văn bản cho các cột như "Lớp"
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
-            XLSX.writeFile(wb, "ThongKe_GiaoVien_EduRobot.xlsx");
-        }
+    function exportToExcel() {
+    const table = document.querySelector("#statsModal table");
+    // raw: true giúp giữ định dạng văn bản cho các cột như "Lớp"
+    const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
+    XLSX.writeFile(wb, "ThongKe_GiaoVien_EduRobot.xlsx");
+    }
 
-        /* TAB LOGIC */
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-blue-600'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.getElementById('btn-' + tabId).classList.add('active', 'text-blue-600');
-            document.getElementById('tab-' + tabId).classList.add('active');
-        }
+    /* TAB LOGIC */
+    function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-blue-600'));
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    document.getElementById('btn-' + tabId).classList.add('active', 'text-blue-600');
+    document.getElementById('tab-' + tabId).classList.add('active');
+    }
 
-        /* REGISTRATION LOGIC */
-        const otherSchoolInput = document.getElementById('otherSchool');
-        function checkSchool(select) {
-            if (select.value === 'other') {
-                otherSchoolInput.classList.remove('hidden');
-                otherSchoolInput.required = true;
-            } else {
-                otherSchoolInput.classList.add('hidden');
-                otherSchoolInput.required = false;
-            }
-        }
-        let studentData = {};
-        document.getElementById('regForm').onsubmit = function (e) {
-            e.preventDefault();
-            studentData = {
-                name: document.getElementById('studentName').value,
-                className: document.getElementById('studentClass').value,
-                school: document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value :
-                    document.getElementById('schoolSelect').value,
-                startTime: new Date().toISOString()
-            };
-            document.getElementById('quiz-registration').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            startQuiz();
-        };
+    /* REGISTRATION LOGIC */
+    const otherSchoolInput = document.getElementById('otherSchool');
+    function checkSchool(select) {
+    if (select.value === 'other') {
+    otherSchoolInput.classList.remove('hidden');
+    otherSchoolInput.required = true;
+    } else {
+    otherSchoolInput.classList.add('hidden');
+    otherSchoolInput.required = false;
+    }
+    }
+    let studentData = {};
+    document.getElementById('regForm').onsubmit = function (e) {
+    e.preventDefault();
+    studentData = {
+    name: document.getElementById('studentName').value,
+    className: document.getElementById('studentClass').value,
+    school: document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value :
+    document.getElementById('schoolSelect').value,
+    startTime: new Date().toISOString()
+    };
+    document.getElementById('quiz-registration').classList.add('hidden');
+    document.getElementById('quiz-container').classList.remove('hidden');
+    startQuiz();
+    };
 
-        /* QUIZ ENGINE */
-        const allQuestions = [
-            {
-                q: "Tác giả của bài thơ \"Khúc hát ru những em bé lớn trên lưng mẹ\" là ai?", a: ["Tố Hữu", "Trần Đăng Khoa",
-                    "Nguyễn Khoa Điềm", "Huy Cận"], c: 2
-            },
-            {
-                q: "Em bé được nhắc đến trong bài thơ có tên là gì?", a: ["A-lưi", "Cu Tai", "Ka-lưi", "A-kay (tên gọi thân mật của con) "], c: 1
-            },
-            {
-                q: "Trong khổ thơ đầu, người mẹ làm công việc gì khi địu con trên lưng?", a: ["Tỉa bắp", "Dệt vải", "Giã gạo",
-                    "Sàng sảy"], c: 2
-            },
-            {
-                q: "Mục đích chính của việc mẹ giã gạo là gì?", a: ["Để bán lấy tiền", "Để chuẩn bị cho bữa tối của gia đình", "Để nuôi bộ đội kháng chiến", "Để làm bánh chưng"], c: 2
-            },
-            {
-                q: "Câu thơ \"Nhịp chày nghiêng giấc ngủ em nghiêng\" gợi tả hình ảnh gì?", a: ["Cái chày bị cong", "Giấc ngủ của em bé chao đảo theo nhịp lao động của mẹ", "Em bé đang nằm võng", "Người mẹ đang ru con ngủ trên giường"], c: 1
-            },
-            {
-                q: "Hình ảnh nào diễn tả sự gian khổ của mẹ tác động trực tiếp đến em bé đang ngủ?", a: ["Lưng đưa nôi", "Tim hát thành lời", "Mồ hôi mẹ rơi má em nóng hổi", "Vai mẹ gầy"], c: 2
-            },
-            {
-                q: "Trong lời ru ở khổ 1, mẹ mong ước con mơ thấy điều gì?", a: ["Con mơ thấy mặt trời", "Con mơ cho mẹ hạt gạo trắng ngần", "Con mơ thấy núi Ka - lưi", "Con mơ thấy bộ đội về làng"], c: 1
-            },
-            {
-                q: "Câu thơ \"Mai sau con lớn vung chày lún sân\" thể hiện mong muốn gì của người mẹ?", a: ["Mong con trở thành người nông dân giỏi", "Mong con lớn lên khỏe mạnh, cường tráng để giúp ích cho đất nước", "Mong con sửa lại cái sân nhà", "Mong con đi bộ đội ngay lập tức"], c: 1
-            },
-            {
-                q: "Ở khổ thơ thứ hai, người mẹ làm công việc gì và ở đâu?", a: ["Giã gạo bên suối", "Hái rau trong rừng", "Làm rẫy trên nương", "Tỉa bắp trên núi Ka - lưi"], c: 3
-            },
-            {
-                q: "Hình ảnh đối lập nào được sử dụng để làm nổi bật sự nhỏ bé nhưng kiên cường của người mẹ?", a: ["Mặt trời to - mặt trời nhỏ", "Lưng núi thì to mà lưng mẹ nhỏ", "Núi cao - suối sâu", "Rừng xanh - tóc mẹ bạc"], c: 1
-            },
-            {
-                q: "Trong câu \"Mặt trời của bắp thì nằm trên đồi\", hình ảnh \"mặt trời\" được hiểu theo nghĩa nào?", a: ["Mặt trời của thiên nhiên, mang ánh sáng và sự sống cho cây bắp", "Một loại bắp có màu đỏ", "Ngọn đèn trên đồi", "Người nông dân trồng bắp"], c: 0
-            },
-            {
-                q: "Trong câu \"Mặt trời của mẹ, em nằm trên lưng\", tác giả sử dụng biện pháp nghệ thuật gì?", a: ["So sánh", "Ẩn dụ", "Nhân hóa", "Hoán dụ"], c: 1
-            },
-            {
-                q: "Vì sao tác giả gọi em bé là \"Mặt trời của mẹ\"?", a: ["Vì em bé có khuôn mặt tròn trịa", "Vì em bé mặc áo màu đỏ", "Vì con là niềm tin, là nguồn sống và là động lực lao động của mẹ", "Vì em bé thức dậy sớm cùng mặt trời"], c: 2
-            },
-            {
-                q: "Những công việc của mẹ như giã gạo, tỉa bắp có ý nghĩa gì đối với cuộc kháng chiến?", a: ["Giúp mẹ quên đi nỗi buồn chiến tranh", "Góp phần nuôi quân, phục vụ kháng chiến giành độc lập dân tộc", "Để mẹ có sức khỏe tốt hơn", "Để dạy con cách lao động từ nhỏ"], c: 1
-            },
-            {
-                q: "Chủ đề chính của bài thơ là gì?", a: ["Ca ngợi vẻ đẹp của thiên nhiên miền núi", "Miêu tả quy trình trồng bắp và giã gạo", "Ca ngợi tình yêu con tha thiết gắn liền with tình yêu quê hương, đất nước của người mẹ Tà - ôi", "Kể về tuổi thơ gian khổ của em bé Cu Tai"], c: 2
-            }
-        ];
+    /* QUIZ ENGINE */
+    const allQuestions = [
+    { q: "Tác giả của bài thơ \"Khúc hát ru những em bé lớn trên lưng mẹ\" là ai?", a: ["Tố Hữu", "Trần Đăng Khoa",
+    "Nguyễn Khoa Điềm", "Huy Cận"], c: 2 },
+    { q: "Em bé được nhắc đến trong bài thơ có tên là gì?", a: ["A-lưi", "Cu Tai", "Ka-lưi", "A-kay (tên gọi thân mật
+    của con)"], c: 1 },
+    { q: "Trong khổ thơ đầu, người mẹ làm công việc gì khi địu con trên lưng?", a: ["Tỉa bắp", "Dệt vải", "Giã gạo",
+    "Sàng sảy"], c: 2 },
+    { q: "Mục đích chính của việc mẹ giã gạo là gì?", a: ["Để bán lấy tiền", "Để chuẩn bị cho bữa tối của gia đình", "Để
+    nuôi bộ đội kháng chiến", "Để làm bánh chưng"], c: 2 },
+    { q: "Câu thơ \"Nhịp chày nghiêng giấc ngủ em nghiêng\" gợi tả hình ảnh gì?", a: ["Cái chày bị cong", "Giấc ngủ của
+    em bé chao đảo theo nhịp lao động của mẹ", "Em bé đang nằm võng", "Người mẹ đang ru con ngủ trên giường"], c: 1 },
+    { q: "Hình ảnh nào diễn tả sự gian khổ của mẹ tác động trực tiếp đến em bé đang ngủ?", a: ["Lưng đưa nôi", "Tim hát
+    thành lời", "Mồ hôi mẹ rơi má em nóng hổi", "Vai mẹ gầy"], c: 2 },
+    { q: "Trong lời ru ở khổ 1, mẹ mong ước con mơ thấy điều gì?", a: ["Con mơ thấy mặt trời", "Con mơ cho mẹ hạt gạo
+    trắng ngần", "Con mơ thấy núi Ka-lưi", "Con mơ thấy bộ đội về làng"], c: 1 },
+    { q: "Câu thơ \"Mai sau con lớn vung chày lún sân\" thể hiện mong muốn gì của người mẹ?", a: ["Mong con trở thành
+    người nông dân giỏi", "Mong con lớn lên khỏe mạnh, cường tráng để giúp ích cho đất nước", "Mong con sửa lại cái sân
+    nhà", "Mong con đi bộ đội ngay lập tức"], c: 1 },
+    { q: "Ở khổ thơ thứ hai, người mẹ làm công việc gì và ở đâu?", a: ["Giã gạo bên suối", "Hái rau trong rừng", "Làm
+    rẫy trên nương", "Tỉa bắp trên núi Ka-lưi"], c: 3 },
+    { q: "Hình ảnh đối lập nào được sử dụng để làm nổi bật sự nhỏ bé nhưng kiên cường của người mẹ?", a: ["Mặt trời to -
+    mặt trời nhỏ", "Lưng núi thì to mà lưng mẹ nhỏ", "Núi cao - suối sâu", "Rừng xanh - tóc mẹ bạc"], c: 1 },
+    { q: "Trong câu \"Mặt trời của bắp thì nằm trên đồi\", hình ảnh \"mặt trời\" được hiểu theo nghĩa nào?", a: ["Mặt
+    trời của thiên nhiên, mang ánh sáng và sự sống cho cây bắp", "Một loại bắp có màu đỏ", "Ngọn đèn trên đồi", "Người
+    nông dân trồng bắp"], c: 0 },
+    { q: "Trong câu \"Mặt trời của mẹ, em nằm trên lưng\", tác giả sử dụng biện pháp nghệ thuật gì?", a: ["So sánh", "Ẩn
+    dụ", "Nhân hóa", "Hoán dụ"], c: 1 },
+    { q: "Vì sao tác giả gọi em bé là \"Mặt trời của mẹ\"?", a: ["Vì em bé có khuôn mặt tròn trịa", "Vì em bé mặc áo màu
+    đỏ", "Vì con là niềm tin, là nguồn sống và là động lực lao động của mẹ", "Vì em bé thức dậy sớm cùng mặt trời"], c:
+    2 },
+    { q: "Những công việc của mẹ như giã gạo, tỉa bắp có ý nghĩa gì đối với cuộc kháng chiến?", a: ["Giúp mẹ quên đi nỗi
+    buồn chiến tranh", "Góp phần nuôi quân, phục vụ kháng chiến giành độc lập dân tộc", "Để mẹ có sức khỏe tốt hơn", "Để
+    dạy con cách lao động từ nhỏ"], c: 1 },
+    { q: "Chủ đề chính của bài thơ là gì?", a: ["Ca ngợi vẻ đẹp của thiên nhiên miền núi", "Miêu tả quy trình trồng bắp
+    và giã gạo", "Ca ngợi tình yêu con tha thiết gắn liền với tình yêu quê hương, đất nước của người mẹ Tà-ôi", "Kể về
+    tuổi thơ gian khổ của em bé Cu Tai"], c: 2 }
+    ];
 
-        let currentQuizQuestions = [];
-        let currentQuestionIdx = 0;
-        let score = 0;
-        let selectedOption = null;
-        let timeLeft = 1200; // 20 minutes
-        let timerInterval;
+    let currentQuizQuestions = [];
+    let currentQuestionIdx = 0;
+    let score = 0;
+    let selectedOption = null;
+    let timeLeft = 1200; // 20 minutes
+    let timerInterval;
 
-        function startTimer() {
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                const mins = Math.floor(timeLeft / 60);
-                const secs = timeLeft % 60;
-                document.getElementById('timer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2,
-                    '0')}`;
-                if (timeLeft <= 0) { clearInterval(timerInterval); showResults(); }
-            }, 1000);
-        } function startQuiz() {
-            currentQuizQuestions = [...allQuestions].sort(() => Math.random() - 0.5);
-            currentQuestionIdx = 0;
-            score = 0;
-            document.getElementById('timer').innerText = "20:00";
-            timeLeft = 1200;
-            startTimer();
-            showQuestion();
+    function startTimer() {
+    timerInterval = setInterval(() => {
+    timeLeft--;
+    const mins = Math.floor(timeLeft / 60);
+    const secs = timeLeft % 60;
+    document.getElementById('timer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2,
+    '0')}`;
+    if (timeLeft <= 0) { clearInterval(timerInterval); showResults(); } }, 1000); } function startQuiz() {
+        currentQuizQuestions=[...allQuestions].sort(()=> Math.random() - 0.5);
+        currentQuestionIdx = 0;
+        score = 0;
+        document.getElementById('timer').innerText = "20:00";
+        timeLeft = 1200;
+        startTimer();
+        showQuestion();
         }
 
         function showQuestion() {
-            const q = currentQuizQuestions[currentQuestionIdx];
-            document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
-            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx +
-                1}/${currentQuizQuestions.length}`;
-            document.getElementById('questionText').innerText = q.q;
-            const optionsArea = document.getElementById('optionsArea');
-            optionsArea.innerHTML = '';
-            q.a.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
-                btn.innerHTML = `<span
+        const q = currentQuizQuestions[currentQuestionIdx];
+        document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
+        document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx +
+        1}/${currentQuizQuestions.length}`;
+        document.getElementById('questionText').innerText = q.q;
+        const optionsArea = document.getElementById('optionsArea');
+        optionsArea.innerHTML = '';
+        q.a.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
+        btn.innerHTML = `<span
             class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100">${String.fromCharCode(65
-                    + idx)}</span><span class="flex-1">${opt}</span>`;
-                btn.onclick = () => selectOption(idx, btn);
-                optionsArea.appendChild(btn);
-            });
-            document.getElementById('nextBtn').disabled = true;
-            selectedOption = null;
+            + idx)}</span><span class="flex-1">${opt}</span>`;
+        btn.onclick = () => selectOption(idx, btn);
+        optionsArea.appendChild(btn);
+        });
+        document.getElementById('nextBtn').disabled = true;
+        selectedOption = null;
         }
 
         function selectOption(idx, btn) {
-            document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500'));
-            btn.classList.add('selected', 'border-blue-500');
-            selectedOption = idx;
-            document.getElementById('nextBtn').disabled = false;
+        document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500'));
+        btn.classList.add('selected', 'border-blue-500');
+        selectedOption = idx;
+        document.getElementById('nextBtn').disabled = false;
         }
 
         document.getElementById('nextBtn').onclick = function () {
-            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) {
-                score += (100 / currentQuizQuestions.length);
-            }
-            currentQuestionIdx++;
-            if (currentQuestionIdx < currentQuizQuestions.length) { showQuestion(); } else { showResults(); }
-        }; function
-            showResults() {
-            clearInterval(timerInterval);
+        if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) {
+        score += (100 / currentQuizQuestions.length);
+        }
+        currentQuestionIdx++;
+        if (currentQuestionIdx < currentQuizQuestions.length) { showQuestion(); } else { showResults(); } }; function
+            showResults() { clearInterval(timerInterval);
             document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('quiz-results').classList.remove('hidden');
-            document.getElementById('scoreText').innerText = Math.round(score); const
-                circle = document.getElementById('scoreCircle'); circle.setAttribute('stroke-dasharray',
-                    `${Math.round(score)}, 100`); if (score >= 80) {
-                        document.getElementById('resultTitle').innerText = "Xuất sắc!";
-                        document.getElementById('resultMsg').innerText = "Em rất hiểu khúc hát ru này. Cố gắng phát huy nhé!";
-                    } else if (score >= 50) {
-                        document.getElementById('resultTitle').innerText = "Khá tốt!";
-                        document.getElementById('resultMsg').innerText = "Em đã cảm nhận được tình mẹ thương con qua bài thơ.";
-                    } else {
-                document.getElementById('resultTitle').innerText = "Cố gắng lên!";
-                document.getElementById('resultMsg').innerText = "Em hãy đọc lại lời ru và thử lại nhé.";
+            document.getElementById('scoreText').innerText=Math.round(score); const
+            circle=document.getElementById('scoreCircle'); circle.setAttribute('stroke-dasharray',
+            `${Math.round(score)}, 100`); if (score>= 80) {
+            document.getElementById('resultTitle').innerText = "Xuất sắc!";
+            document.getElementById('resultMsg').innerText = "Em rất hiểu khúc hát ru này. Cố gắng phát huy nhé!";
+            } else if (score >= 50) {
+            document.getElementById('resultTitle').innerText = "Khá tốt!";
+            document.getElementById('resultMsg').innerText = "Em đã cảm nhận được tình mẹ thương con qua bài thơ.";
+            } else {
+            document.getElementById('resultTitle').innerText = "Cố gắng lên!";
+            document.getElementById('resultMsg').innerText = "Em hãy đọc lại lời ru và thử lại nhé.";
             }
-        }
+            }
 
-        function restartQuiz() {
+            function restartQuiz() {
             clearInterval(timerInterval);
             document.getElementById('quiz-results').classList.add('hidden');
             document.getElementById('quiz-container').classList.remove('hidden');
             startQuiz();
-        }
+            }
 
-        async function submitResults() {
+            async function submitResults() {
             const finalData = {
-                studentName: studentData.name,
-                className: studentData.className,
-                school: studentData.school,
-                lessonTitle: "Khúc hát ru những em bé lớn trên lưng mẹ",
-                score: score,
-                startTime: studentData.startTime,
-                endTime: new Date().toISOString(),
-                submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+            studentName: studentData.name,
+            className: studentData.className,
+            school: studentData.school,
+            lessonTitle: "Khúc hát ru những em bé lớn trên lưng mẹ",
+            score: score,
+            startTime: studentData.startTime,
+            endTime: new Date().toISOString(),
+            submittedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
             const btn = event.target;
             const originalText = btn.innerText;
             btn.disabled = true;
             btn.innerText = "Đang gửi...";
             try {
-                await db.collection("diem_tieng_viet_lop5").add(finalData);
-                alert(`Chào em ${studentData.name}!\nKết quả của em đã được gửi thành công.\nĐiểm: ${score}/100`);
-                switchTab('lesson');
+            await db.collection("diem_tieng_viet_lop5").add(finalData);
+            alert(`Chào em ${studentData.name}!\nKết quả của em đã được gửi thành công.\nĐiểm: ${score}/100`);
+            switchTab('lesson');
             } catch (error) {
-                console.error("Error submitting quiz:", error);
-                alert("Lỗi khi nộp bài. Kiểm tra lại mạng nhé!");
+            console.error("Error submitting quiz:", error);
+            alert("Lỗi khi nộp bài. Kiểm tra lại mạng nhé!");
             } finally {
-                btn.disabled = false;
-                btn.innerText = originalText;
+            btn.disabled = false;
+            btn.innerText = originalText;
             }
-        }
+            }
 
-        function toggleAccordion(button) {
+            function toggleAccordion(button) {
             const item = button.parentElement;
             const isOpen = item.classList.contains('accordion-open');
             document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-open'));
             if (!isOpen) item.classList.add('accordion-open');
-        }
-
-        const audio = document.getElementById('lessonAudio');
-        const playIcon = document.getElementById('playIcon');
-        const pauseIcon = document.getElementById('pauseIcon');
-        const audioStatus = document.getElementById('audioStatus');
-        function toggleAudio() {
-            if (audio.paused) {
-                audio.play();
-                playIcon.classList.add('hidden');
-                pauseIcon.classList.remove('hidden');
-                audioStatus.innerText = "Đang phát...";
-                audioStatus.classList.remove('text-gray-400');
-                audioStatus.classList.add('text-green-500');
-            } else {
-                audio.pause();
-                playIcon.classList.remove('hidden');
-                pauseIcon.classList.add('hidden');
-                audioStatus.innerText = "Đang dừng...";
-                audioStatus.classList.remove('text-green-500');
-                audioStatus.classList.add('text-gray-400');
             }
-        }
-        audio.onended = function () {
+
+            const audio = document.getElementById('lessonAudio');
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+            const audioStatus = document.getElementById('audioStatus');
+            function toggleAudio() {
+            if (audio.paused) {
+            audio.play();
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+            audioStatus.innerText = "Đang phát...";
+            audioStatus.classList.remove('text-gray-400');
+            audioStatus.classList.add('text-green-500');
+            } else {
+            audio.pause();
             playIcon.classList.remove('hidden');
             pauseIcon.classList.add('hidden');
             audioStatus.innerText = "Đang dừng...";
             audioStatus.classList.remove('text-green-500');
             audioStatus.classList.add('text-gray-400');
-        };
-    </script>
+            }
+            }
+            audio.onended = function () {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            audioStatus.innerText = "Đang dừng...";
+            audioStatus.classList.remove('text-green-500');
+            audioStatus.classList.add('text-gray-400');
+            };
+            </script>
 </body>
 
 </html>
