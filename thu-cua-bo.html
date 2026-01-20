@@ -15,8 +15,6 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <!-- SheetJS for Excel Export -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 
     <style>
         body {
@@ -506,7 +504,7 @@
                         <button onclick="restartQuiz()"
                             class="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-4 px-10 rounded-2xl transition-all active:scale-95">Làm
                             lại</button>
-                        <button onclick="submitResults(event)"
+                        <button onclick="submitResults()"
                             class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition-all active:scale-95">Nộp
                             bài</button>
                     </div>
@@ -778,8 +776,8 @@
             startQuiz();
         }
 
-        async function submitResults(e) {
-            if (e) e.preventDefault();
+        async function submitResults() {
+            event.preventDefault();
             const finalData = {
                 studentName: studentData.name,
                 className: studentData.className,
@@ -790,7 +788,7 @@
                 endTime: new Date().toISOString(),
                 submittedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
-            const btn = e ? e.target : event.target;
+            const btn = event.target;
             const originalText = btn.innerText;
             btn.disabled = true;
             btn.innerText = "Đang gửi...";
