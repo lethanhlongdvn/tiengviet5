@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vũ điệu trên nền thổ cẩm - EduRobot</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Nunito & Merriweather -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <!-- SheetJS for Excel Export -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 18px;
+        }
+
+        .serif-font {
+            font-family: 'Merriweather', serif;
+            line-height: 1.8;
+        }
+
+        .bg-paper {
+            background-color: #fdfbf7;
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+        }
+
+        .tab-btn.active {
+            color: #ea580c;
+            border-bottom: 3px solid #ea580c;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+            opacity: 0;
+        }
+
+        .accordion-open .accordion-content {
+            max-height: 500px;
+            opacity: 1;
+            padding-bottom: 20px;
+        }
+
+        .accordion-open svg {
+            transform: rotate(180deg);
+        }
+
+        .quiz-option.selected {
+            background-color: #fff7ed;
+            border-color: #f97316;
+            color: #ea580c;
+        }
+
+        /* Modal Teacher Stats */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-sm border-b border-orange-100">
+        <nav class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div
+                        class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center text-white text-lg font-bold">
+                        E</div>
+                    <span class="text-lg font-extrabold text-blue-600 tracking-tight">EduRobot - <span
+                            class="text-orange-500">Tiếng Việt 5</span></span>
+                </a>
+            </div>
+
+            <ul class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
+                <li><a href="index.html" class="hover:text-orange-500 transition-colors">Trang chủ</a></li>
+                <li><a href="huong-sac-tram-mien.html" class="text-orange-600 border-b-2 border-orange-500">Bài học</a>
+                </li>
+                <li><button onclick="openTeacherStats()" class="hover:text-orange-500 transition-colors">Dành cho Giáo
+                        viên</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-4">
+        <!-- Navigation -->
+        <div class="flex items-center justify-between mb-4">
+            <a href="huong-sac-tram-mien.html"
+                class="flex items-center text-gray-600 hover:text-orange-600 font-bold transition-colors">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Chủ điểm: Hương sắc trăm miền
+            </a>
+        </div>
+
+        <!-- Tab & Audio Header -->
+        <div
+            class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-200 mb-4 bg-white rounded-t-2xl overflow-hidden shadow-sm">
+            <div class="flex-1 flex">
+                <button onclick="switchTab('lesson')" id="btn-lesson"
+                    class="tab-btn active flex-1 py-3 text-center font-bold text-gray-500 transition-all hover:bg-orange-50 border-r border-gray-100">
+                    1. Bài học
+                </button>
+                <button onclick="switchTab('quiz')" id="btn-quiz"
+                    class="tab-btn flex-1 py-3 text-center font-bold text-gray-500 transition-all hover:bg-orange-50">
+                    2. Luyện tập
+                </button>
+            </div>
+
+            <div id="audio-container" class="p-2 md:pr-4">
+                <div
+                    class="flex items-center space-x-3 bg-orange-50/50 rounded-full p-1 pr-6 border border-orange-100 shadow-sm transition-all hover:bg-orange-50">
+                    <button id="audioControl" onclick="toggleAudio()"
+                        class="w-11 h-11 bg-orange-600 rounded-full flex items-center justify-center text-white hover:bg-orange-700 transition-all shadow-md active:scale-95">
+                        <svg id="playIcon" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M6 4l10 6-10 6V4z"></path>
+                        </svg>
+                        <svg id="pauseIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 4h4v16H6zm8 0h4v16h-4z"></path>
+                        </svg>
+                    </button>
+                    <div class="flex flex-col">
+                        <p class="text-[11px] font-black text-orange-600 uppercase tracking-widest leading-none mb-1">
+                            NGHE ĐỌC MẪU</p>
+                        <p id="audioStatus" class="text-[12px] text-gray-400 font-bold italic leading-none">Đang dừng...
+                        </p>
+                    </div>
+                </div>
+                <audio id="lessonAudio">
+                    <source src="am_thanh/vudieuthocam.wav" type="audio/wav">
+                </audio>
+            </div>
+        </div>
+
+        <!-- TAB 1: BÀI HỌC -->
+        <div id="tab-lesson" class="tab-content active">
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="bg-white rounded-[30px] shadow-sm border border-orange-100 p-6 md:p-8">
+                        <div class="p-6 md:p-10 bg-paper rounded-2xl shadow-inner border border-gray-100">
+                            <div class="serif-font text-gray-800 text-justify">
+                                <h1
+                                    class="text-3xl font-black mb-6 text-orange-900 text-center uppercase tracking-tight">
+                                    Vũ điệu trên nền thổ cẩm</h1>
+
+                                <p class="mb-4">
+                                    Dân tộc Cơ-tu cư trú ở núi rừng Trường Sơn còn bảo lưu nhiều di sản văn hóa độc đáo.
+                                    Một trong những di sản đó là nghề dệt thổ cẩm. Bộ trang phục cổ truyền của dân tộc
+                                    Cơ-tu được làm từ thổ cẩm luôn rực rỡ bởi những hoa văn dệt bằng hạt cườm. Trong đó,
+                                    nổi bật nhất là hoa văn da dá, mô phỏng điệu múa Da dá.
+                                </p>
+                                <p class="mb-4">
+                                    Điệu múa Da dá là một trong những điệu múa cổ xưa nhất của phụ nữ Cơ-tu. Đây là điệu
+                                    múa cầu mùa, thường được thực hiện trong các lễ hội cộng đồng của người Cơ-tu. Khi
+                                    múa, đôi tay của người phụ nữ xoè lên trời như để cầu xin và đón nhận hạt lúa từ
+                                    thần linh.
+                                </p>
+                                <p class="mb-4">
+                                    Điệu múa Da dá đã được thợ dệt Cơ-tu khắc hoạ một cách sống động thành hoa văn trên
+                                    nền thổ cẩm truyền thống. Bằng đôi tay khéo léo, người thợ dệt đã đính những hạt
+                                    cườm trắng vào nền vải thô rám, tạo thành hoa văn da dá, trang trí trên váy, áo của
+                                    phụ nữ.
+                                </p>
+                                <p class="mb-4">
+                                    Với vẻ đẹp mang đậm sắc thái tộc người, hoa văn da dá thực sự góp phần làm cho di
+                                    sản trang phục của đồng bào Cơ-tu thêm giá trị.
+                                </p>
+                                <p class="text-right italic font-bold text-gray-600 mt-6">(Theo Trần Tấn Vịnh)</p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div
+                            class="mt-8 bg-orange-50 rounded-3xl p-6 border border-orange-100 relative overflow-hidden">
+                            <div class="absolute -right-10 -top-10 w-40 h-40 bg-orange-100 rounded-full opacity-50">
+                            </div>
+                            <div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                                <div class="bg-orange-600 p-6 rounded-2xl text-white shadow-lg shrink-0 text-center">
+                                    <p class="text-[10px] font-bold uppercase tracking-widest opacity-80 mb-1">Thông
+                                        điệp</p>
+                                    <h3 class="text-xl font-black uppercase">Nội dung chính</h3>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700 font-bold leading-relaxed">
+                                        Mỗi dân tộc trên đất nước ta đều có những di sản văn hoá độc đáo. Chúng ta cần
+                                        trân trọng và biết lưu giữ những giá trị văn hoá độc đáo của đồng bào các dân
+                                        tộc sống trên đất nước ta.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="bg-yellow-50 rounded-[30px] shadow-sm border border-yellow-100 p-4 sticky top-20">
+                        <h2 class="text-xl font-black text-blue-900 mb-4 flex items-center">
+                            <span class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center mr-3">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
+                            </span>
+                            Tìm hiểu bài
+                        </h2>
+
+                        <!-- Illustration -->
+                        <div id="illustrationContainer"
+                            class="mb-4 overflow-hidden rounded-2xl shadow-sm relative group max-w-full mx-auto shadow-lg border-4 border-white">
+                            <img src="hinh_anh/vudieuthocam.png" alt="Vũ điệu trên nền thổ cẩm"
+                                class="w-full h-auto block transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-4 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-orange-600 transition-colors text-sm">1.
+                                        Trang phục Cơ-tu có gì độc đáo?</span>
+                                    <svg class="w-4 h-4 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content px-4">
+                                    <div class="text-sm text-gray-600 border-t border-gray-50 pt-2">
+                                        <span class="text-green-600 font-bold">Trả lời:</span> Hoa văn được dệt nhúng
+                                        bằng hạt cườm và mô phỏng điệu múa Da dá truyền thống.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 2 -->
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-4 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-orange-600 transition-colors text-sm">2.
+                                        Ý nghĩa điệu múa Da dá?</span>
+                                    <svg class="w-4 h-4 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content px-4">
+                                    <div class="text-sm text-gray-600 border-t border-gray-50 pt-2">
+                                        <span class="text-green-600 font-bold">Trả lời:</span> Là điệu múa cầu mùa; đôi
+                                        tay xoè lên trời để cầu xin và đón nhận hạt lúa từ thần linh.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 3 -->
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-4 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-orange-600 transition-colors text-sm">3.
+                                        Cách tạo hoa văn Da dá?</span>
+                                    <svg class="w-4 h-4 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content px-4">
+                                    <div class="text-sm text-gray-600 border-t border-gray-50 pt-2">
+                                        <span class="text-green-600 font-bold">Trả lời:</span> Đính những hạt cườm trắng
+                                        vào nền vải thô rám một cách khéo léo để tạo thành hoa văn sinh động.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 4 -->
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-4 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-orange-600 transition-colors text-sm">4.
+                                        Tại sao mang sắc thái tộc người?</span>
+                                    <svg class="w-4 h-4 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content px-4">
+                                    <div class="text-sm text-gray-600 border-t border-gray-50 pt-2">
+                                        <span class="text-green-600 font-bold">Trả lời:</span> Vì nó khắc họa điệu múa
+                                        cổ xưa, sản phẩm thủ công tinh xảo riêng biệt của người thợ Cơ-tu.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- TAB 2: LUYỆN TẬP -->
+        <div id="tab-quiz" class="tab-content">
+            <div
+                class="max-w-4xl mx-auto bg-white rounded-[32px] shadow-xl border border-orange-100 overflow-hidden min-h-[500px] flex flex-col">
+                <!-- Registration -->
+                <div id="quiz-registration"
+                    class="p-8 md:p-12 flex-grow flex flex-col items-center justify-center text-center">
+                    <div
+                        class="w-20 h-20 bg-orange-100 rounded-3xl flex items-center justify-center text-orange-600 mb-6">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-black text-gray-800 mb-2">Sẵn sàng thử thách?</h2>
+                    <p class="text-gray-500 mb-8 font-medium">Nhập thông tin bên dưới để bắt đầu bài luyện tập nhé!</p>
+
+                    <form id="regForm" class="w-full max-w-sm space-y-4">
+                        <input type="text" id="studentName" placeholder="Họ và tên của em" required
+                            class="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none font-bold">
+
+                        <div class="flex gap-4">
+                            <input type="text" id="studentClass" placeholder="Lớp (Vd: 5A1)" required
+                                class="w-1/3 px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none font-bold">
+
+                            <select id="schoolSelect" onchange="checkSchool(this)" required
+                                class="w-2/3 px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none font-bold appearance-none">
+                                <option value="">Chọn trường của em</option>
+                                <option value="Tiểu học Cơ Tu">TH Cơ Tu</option>
+                                <option value="Tiểu học Tây Sơn">TH Tây Sơn</option>
+                                <option value="Tiểu học Kim Liên">TH Kim Liên</option>
+                                <option value="other">Trường khác...</option>
+                            </select>
+                        </div>
+                        <input type="text" id="otherSchool" placeholder="Nhập tên trường của em"
+                            class="hidden w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none font-bold">
+
+                        <button type="submit"
+                            class="w-full bg-orange-600 hover:bg-orange-700 text-white font-black py-4 rounded-2xl shadow-lg shadow-orange-200 transition-all active:scale-95 text-lg">
+                            BẮT ĐẦU NGAY
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Quiz Engine -->
+                <div id="quiz-container" class="hidden flex-grow flex flex-col">
+                    <div class="bg-orange-50 px-8 py-4 flex justify-between items-center border-b border-orange-100">
+                        <div class="flex items-center">
+                            <span
+                                class="w-10 h-10 bg-orange-600 text-white rounded-xl flex items-center justify-center font-black mr-3 shadow-md"
+                                id="questionNum">1</span>
+                            <p class="font-black text-orange-900 uppercase tracking-wider text-sm" id="progressText">
+                                Đang thực hiện: 1/10</p>
+                        </div>
+                        <div
+                            class="text-orange-600 font-bold text-sm bg-white px-4 py-2 rounded-full shadow-sm border border-orange-100">
+                            Vũ điệu thổ cẩm
+                        </div>
+                    </div>
+
+                    <div class="p-8 md:p-12 flex-grow">
+                        <h3 class="text-2xl font-black text-gray-800 mb-8 leading-tight" id="questionText">Câu hỏi sẽ
+                            hiện ở đây?</h3>
+                        <div class="grid grid-cols-1 gap-4" id="optionsArea">
+                            <!-- Options go here -->
+                        </div>
+                    </div>
+
+                    <div class="p-8 border-t border-gray-50 flex justify-end">
+                        <button id="nextBtn" disabled
+                            class="bg-orange-600 disabled:opacity-30 hover:bg-orange-700 text-white font-black py-4 px-12 rounded-2xl shadow-lg transition-all active:scale-95">
+                            CÂU TIẾP THEO
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div id="quiz-results"
+                    class="hidden p-8 md:p-12 flex-grow flex flex-col items-center justify-center text-center">
+                    <div class="relative w-48 h-48 mb-6">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="96" cy="96" r="80" stroke="currentColor" stroke-width="12" fill="transparent"
+                                class="text-gray-100" />
+                            <circle id="scoreCircle" cx="96" cy="96" r="80" stroke="currentColor" stroke-width="12"
+                                fill="transparent" class="text-orange-500" stroke-dasharray="0, 100"
+                                stroke-linecap="round" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-5xl font-black text-gray-800" id="scoreText">0</span>
+                            <span class="text-gray-400 font-bold uppercase tracking-widest text-xs italic">Điểm
+                                số</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Hoàn thành bài tập!</h2>
+                    <p class="text-gray-500 mb-10 max-w-md font-medium" id="resultMsg">Em đã nỗ lực hết mình rồi đấy!
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
+                        <button onclick="restartQuiz()"
+                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-black py-4 rounded-2xl transition-all">LÀM
+                            LẠI</button>
+                        <button onclick="submitResults(event)"
+                            class="bg-orange-600 hover:bg-orange-700 text-white font-black py-4 rounded-2xl shadow-lg shadow-orange-200 transition-all">NỘP
+                            KẾT QUẢ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Teacher Stats -->
+    <div id="statsModal" class="modal">
+        <div class="bg-white rounded-[32px] w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl m-4">
+            <div class="p-6 border-b flex justify-between items-center bg-orange-50">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-black text-orange-900">Bảng kết quả học tập</h2>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="exportToExcel()"
+                        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-xl text-sm flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg> Xuất Excel
+                    </button>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-grow overflow-auto p-6 bg-gray-50">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="text-left text-gray-500 uppercase text-xs font-black tracking-widest border-b pb-4">
+                            <th class="p-4">STT</th>
+                            <th class="p-4">Họ và Tên</th>
+                            <th class="p-4">Lớp</th>
+                            <th class="p-4">Trường</th>
+                            <th class="p-4 text-center">Điểm số</th>
+                            <th class="p-4 text-center">Thời gian</th>
+                            <th class="p-4 text-right">Ngày nộp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statsTableBody">
+                        <!-- Data rows here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-zinc-900 text-zinc-400 py-4 px-4 mt-8">
+        <div class="container mx-auto text-center text-xs">
+            <p>@ 2026 EduRobot - Phát triển bởi Lê Thành Long</p>
+        </div>
+    </footer>
+
+    <script>
+        /* UI LOGIC */
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('accordion-open');
+            document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-open'));
+            if (!isOpen) item.classList.add('accordion-open');
+        }
+
+        const audio = document.getElementById('lessonAudio');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const audioStatus = document.getElementById('audioStatus');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                audioStatus.innerText = "Đang phát...";
+                audioStatus.classList.replace('text-gray-400', 'text-green-500');
+            } else {
+                audio.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                audioStatus.innerText = "Đang dừng...";
+                audioStatus.classList.replace('text-green-500', 'text-gray-400');
+            }
+        }
+
+        audio.onended = () => {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            audioStatus.innerText = "Đang dừng...";
+            audioStatus.classList.replace('text-green-500', 'text-gray-400');
+        };
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('btn-' + tabId).classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        /* FIREBASE & TEACHER STATS */
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
+            authDomain: "gamhoctap.firebaseapp.com",
+            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "gamhoctap",
+            storageBucket: "gamhoctap.firebasestorage.app",
+            messagingSenderId: "833329613932",
+            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
+            measurementId: "G-YT1PKCYS67"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        function openTeacherStats() {
+            const pin = prompt("Vui lòng nhập mã PIN giáo viên:");
+            if (pin === 'dvn') {
+                document.getElementById('statsModal').classList.add('active');
+                loadStats();
+            } else if (pin !== null) alert("Mã PIN không chính xác!");
+        }
+
+        function closeModal() { document.getElementById('statsModal').classList.remove('active'); }
+
+        async function loadStats() {
+            const tbody = document.getElementById('statsTableBody');
+            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
+            try {
+                const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Vũ điệu trên nền thổ cẩm").get();
+                tbody.innerHTML = '';
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
+                    return;
+                }
+                const results = [];
+                snapshot.forEach(doc => results.push(doc.data()));
+                results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
+
+                results.forEach((data, index) => {
+                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
+                    let duration = '---';
+                    if (data.startTime && data.endTime) {
+                        const diffMs = new Date(data.endTime) - new Date(data.startTime);
+                        duration = `${Math.floor(diffMs / 60000)} phút ${Math.floor((diffMs % 60000) / 1000)} giây`;
+                    }
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-orange-50 transition-colors border-b border-gray-50 text-sm";
+                    tr.innerHTML = `
+                        <td class="p-4 font-bold text-gray-400">${index + 1}</td>
+                        <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
+                        <td class="p-4 text-gray-600">${data.className}</td>
+                        <td class="p-4 text-gray-600">${data.school}</td>
+                        <td class="p-4 text-center">
+                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">${data.score}/100</span>
+                        </td>
+                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
+                        <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (e) { tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>'; }
+        }
+
+        function exportToExcel() {
+            const table = document.querySelector("#statsModal table");
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
+            XLSX.writeFile(wb, "KetQua_VuDieuThoCẩm.xlsx");
+        }
+
+        /* QUIZ ENGINE */
+        const allQuestions = [
+            { q: "Bài đọc \"Vũ điệu trên nền thổ cẩm\" viết về nét văn hóa độc đáo của dân tộc nào?", a: ["Dân tộc Thái", "Dân tộc Mường", "Dân tộc Cơ-tu", "Dân tộc Ê-đê"], c: 2 },
+            { q: "Dân tộc Cơ-tu cư trú chủ yếu ở vùng nào?", a: ["Vùng núi Tây Bắc", "Núi rừng Trường Sơn", "Vùng Tây Nguyên", "Đồng bằng sông Cửu Long"], c: 1 },
+            { q: "Di sản văn hóa độc đáo nào của người Cơ-tu được nhắc đến trong bài?", a: ["Nghề làm gốm", "Nghề đan lát", "Nghề dệt thổ cẩm", "Nghề rèn đúc"], c: 2 },
+            { q: "Hoa văn trên trang phục cổ truyền của người Cơ-tu được tạo nên từ vật liệu gì?", a: ["Chỉ thêu ngũ sắc", "Những hạt cườm", "Những viên đá nhỏ", "Những mảnh kim loại"], c: 1 },
+            { q: "Hoa văn nổi bật nhất trên trang phục của người Cơ-tu có tên là gì?", a: ["Hoa văn mặt trời", "Hoa văn chim hạc", "Hoa văn da dá", "Hoa văn ngọn lửa"], c: 2 },
+            { q: "Hoa văn da dá mô phỏng điều gì trong đời sống của người Cơ-tu?", a: ["Hình ảnh con thú rừng", "Hình ảnh ngọn núi cao", "Điệu múa Da dá", "Hình ảnh dòng suối"], c: 2 },
+            { q: "Điệu múa Da dá là điệu múa mang ý nghĩa gì?", a: ["Múa cầu mưa", "Múa cầu mùa", "Múa mừng chiến thắng", "Múa đám cưới"], c: 1 },
+            { q: "Khi múa điệu Da dá, động tác tay của người phụ nữ được miêu tả như thế nào?", a: ["Đôi tay vỗ vào nhau", "Đôi tay nắm chặt đặt trước ngực", "Đôi tay múa lượn như cánh chim", "Đôi tay xoè lên trời"], c: 3 },
+            { q: "Động tác xoè tay lên trời trong điệu múa thể hiện mong ước gì?", a: ["Cầu xin mưa thuận gió hòa", "Cầu xin và đón nhận hạt lúa từ thần linh", "Cầu xin sức khỏe cho buôn làng", "Cầu xin bình an, không có thú dữ"], c: 1 },
+            { q: "Người thợ dệt đã tạo ra hoa văn da dá trên chất liệu vải gì?", a: ["Vải lụa mềm mại", "Nền vải thô rám", "Vải nhung sang trọng", "Vải lanh mỏng"], c: 1 },
+            { q: "Màu sắc của hạt cườm được sử dụng để đính lên nền vải là màu gì?", a: ["Màu đỏ", "Màu vàng", "Màu xanh", "Màu trắng"], c: 3 },
+            { q: "Hoa văn da dá thường được trang trí trên loại trang phục nào?", a: ["Khăn đội đầu", "Váy, áo của phụ nữ", "Áo khố của đàn ông", "Túi đeo vai"], c: 1 },
+            { q: "Cụm từ \"Vũ điệu trên nền thổ cẩm\" trong tên bài muốn nói đến điều gì?", a: ["Người phụ nữ múa trên tấm thảm thổ cẩm", "Một lễ hội múa hát của người Cơ-tu", "Điệu múa Da dá được khắc họa sống động thành hoa văn trên vải thổ cẩm", "Tên một bài hát của người Cơ-tu"], c: 2 },
+            { q: "Theo bài đọc, hoa văn da dá góp phần làm điều gì cho trang phục của người Cơ-tu?", a: ["Làm cho trang phục bền hơn", "Giúp trang phục bán được giá cao", "Làm cho di sản trang phục thêm giá trị và mang đậm sắc thái tộc người", "Giúp trang phục nhẹ hơn"], c: 2 },
+            { q: "Qua bài đọc, tác giả muốn gửi gắm thông điệp gì?", a: ["Cần phải học cách múa điệu Da dá", "Nên mua trang phục thổ cẩm để ủng hộ người dân", "Cần trân trọng và lưu giữ những giá trị văn hóa độc đáo của các dân tộc", "Cần phải đi du lịch đến núi rừng Trường Sơn"], c: 2 }
+        ];
+
+        let studentData = {}, currentQuizQuestions = [], currentQuestionIdx = 0, score = 0, selectedOption = null;
+
+        function checkSchool(s) { document.getElementById('otherSchool').classList.toggle('hidden', s.value !== 'other'); }
+
+        document.getElementById('regForm').onsubmit = (e) => {
+            e.preventDefault();
+            studentData = {
+                name: document.getElementById('studentName').value,
+                className: document.getElementById('studentClass').value,
+                school: document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
+                startTime: new Date().toISOString()
+            };
+            document.getElementById('quiz-registration').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            startQuiz();
+        };
+
+        function startQuiz() {
+            currentQuizQuestions = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 10);
+            currentQuestionIdx = 0; score = 0; showQuestion();
+        }
+
+        function showQuestion() {
+            const q = currentQuizQuestions[currentQuestionIdx];
+            document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
+            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/10`;
+            document.getElementById('questionText').innerText = q.q;
+            const area = document.getElementById('optionsArea'); area.innerHTML = '';
+            q.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group border-2 border-transparent bg-gray-50 hover:bg-orange-50 transition-all';
+                btn.innerHTML = `<span class="w-8 h-8 rounded-lg bg-white flex items-center justify-center mr-4 shadow-sm group-hover:bg-orange-100">${String.fromCharCode(65 + i)}</span><span class="flex-1">${opt}</span>`;
+                btn.onclick = () => {
+                    document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected'); selectedOption = i;
+                    document.getElementById('nextBtn').disabled = false;
+                };
+                area.appendChild(btn);
+            });
+            document.getElementById('nextBtn').disabled = true; selectedOption = null;
+        }
+
+        document.getElementById('nextBtn').onclick = () => {
+            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) score += 10;
+            currentQuestionIdx++;
+            if (currentQuestionIdx < 10) showQuestion(); else showResults();
+        };
+
+        function showResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            document.getElementById('scoreText').innerText = score;
+            document.getElementById('scoreCircle').setAttribute('stroke-dasharray', `${score}, 100`);
+            const title = document.getElementById('resultTitle'), msg = document.getElementById('resultMsg');
+            if (score >= 90) { title.innerText = "Xuất sắc!"; msg.innerText = "Em rất am hiểu về văn hóa người Cơ-tu!"; }
+            else if (score >= 70) { title.innerText = "Rất tốt!"; msg.innerText = "Em đã cảm nhận được vẻ đẹp của thổ cẩm!"; }
+            else { title.innerText = "Cần cố gắng!"; msg.innerText = "Hãy đọc kĩ lại về hoa văn Da dá và điệu múa cầu mùa nhé!"; }
+        }
+
+        function restartQuiz() { document.getElementById('quiz-results').classList.add('hidden'); document.getElementById('quiz-registration').classList.remove('hidden'); }
+
+        async function submitResults(e) {
+            const btn = e.target; btn.disabled = true; btn.innerText = "Đang gửi...";
+            try {
+                await db.collection("diem_tieng_viet_lop5").add({
+                    ...studentData, lessonTitle: "Vũ điệu trên nền thổ cẩm", score: score, endTime: new Date().toISOString(), submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert(`Chúc mừng ${studentData.name} đã hoàn thành bài tập!`);
+                restartQuiz(); switchTab('lesson');
+            } catch (e) { alert("Lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
+        }
+    </script>
+</body>
+
+</html>
