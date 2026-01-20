@@ -598,7 +598,9 @@
 
     // Tính thời gian làm bài
     let duration = '---';
-    if (data.startTime && data.endTime) {
+    const snapshot = await db.collection("diem_tieng_viet_lop5")
+    .where("lessonTitle", "==", "Khúc hát ru những em bé lớn trên lưng mẹ")
+    .get();
     const start = new Date(data.startTime);
     const end = new Date(data.endTime);
     const diffMs = end - start;
