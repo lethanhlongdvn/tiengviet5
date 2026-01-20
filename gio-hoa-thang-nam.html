@@ -591,17 +591,16 @@
 
     async function loadStats() {
     const tbody = document.getElementById('statsTableBody');
-    tbody.innerHTML = '<tr>
-        <td colspan="6" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td>
-    </tr>';
+    tbody.innerHTML = `<tr>
+        <td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td>
+    </tr>`;
     try {
     const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Giỏ hoa tháng Năm").get();
     tbody.innerHTML = '';
     if (snapshot.empty) {
-    tbody.innerHTML = '<tr>
-        <td colspan="6" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td>
+    tbody.innerHTML = `<tr>
         <td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td>
-    </tr>';
+    </tr>`;
     return;
     }
     const results = [];
@@ -641,9 +640,9 @@
     });
     } catch (error) {
     console.error("Error loading stats:", error);
-    tbody.innerHTML = '<tr>
+    tbody.innerHTML = `<tr>
         <td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td>
-    </tr>';
+    </tr>`;
     }
     }
 
