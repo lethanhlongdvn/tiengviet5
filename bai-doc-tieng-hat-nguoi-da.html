@@ -814,11 +814,15 @@
                 timeLeft--;
                 const mins = Math.floor(timeLeft / 60);
                 const secs = timeLeft % 60;
-                document.getElementById('timer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2,
-                    '0')}`;
-                if (timeLeft <= 0) { clearInterval(timerInterval); showResults(); }
+                document.getElementById('timer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    showResults();
+                }
             }, 1000);
-        } function startQuiz() {
+        }
+
+        function startQuiz() {
             currentQuizQuestions = [...allQuestions].sort(() => Math.random() - 0.5);
             currentQuestionIdx = 0;
             score = 0;
@@ -831,17 +835,14 @@
         function showQuestion() {
             const q = currentQuizQuestions[currentQuestionIdx];
             document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
-            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx +
-                1}/${currentQuizQuestions.length}`;
+            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/${currentQuizQuestions.length}`;
             document.getElementById('questionText').innerText = q.q;
             const optionsArea = document.getElementById('optionsArea');
             optionsArea.innerHTML = '';
             q.a.forEach((opt, idx) => {
                 const btn = document.createElement('button');
                 btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
-                btn.innerHTML = `<span
-            class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100">${String.fromCharCode(65
-                    + idx)}</span><span class="flex-1">${opt}</span>`;
+                btn.innerHTML = `<span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100">${String.fromCharCode(65 + idx)}</span><span class="flex-1">${opt}</span>`;
                 btn.onclick = () => selectOption(idx, btn);
                 optionsArea.appendChild(btn);
             });
@@ -861,21 +862,27 @@
                 score += (100 / currentQuizQuestions.length);
             }
             currentQuestionIdx++;
-            if (currentQuestionIdx < currentQuizQuestions.length) { showQuestion(); } else { showResults(); }
-        }; function
-            showResults() {
+            if (currentQuestionIdx < currentQuizQuestions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        };
+
+        function showResults() {
             clearInterval(timerInterval);
             document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('quiz-results').classList.remove('hidden');
-            document.getElementById('scoreText').innerText = Math.round(score); const
-                circle = document.getElementById('scoreCircle'); circle.setAttribute('stroke-dasharray',
-                    `${Math.round(score)}, 100`); if (score >= 80) {
-                        document.getElementById('resultTitle').innerText = "Rất tuyệt vời!";
-                        document.getElementById('resultMsg').innerText = "Em rất hiểu câu chuyện về Nai Ngọc.";
-                    } else if (score >= 50) {
-                        document.getElementById('resultTitle').innerText = "Khá tốt!";
-                        document.getElementById('resultMsg').innerText = "Em đã nắm được ý nghĩa của tiếng hát hòa bình.";
-                    } else {
+            document.getElementById('scoreText').innerText = Math.round(score);
+            const circle = document.getElementById('scoreCircle');
+            circle.setAttribute('stroke-dasharray', `${Math.round(score)}, 100`);
+            if (score >= 80) {
+                document.getElementById('resultTitle').innerText = "Rất tuyệt vời!";
+                document.getElementById('resultMsg').innerText = "Em rất hiểu câu chuyện về Nai Ngọc.";
+            } else if (score >= 50) {
+                document.getElementById('resultTitle').innerText = "Khá tốt!";
+                document.getElementById('resultMsg').innerText = "Em đã nắm được ý nghĩa của tiếng hát hòa bình.";
+            } else {
                 document.getElementById('resultTitle').innerText = "Cố gắng lên!";
                 document.getElementById('resultMsg').innerText = "Em hãy đọc lại truyện và thử lại nhé.";
             }
