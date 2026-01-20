@@ -539,6 +539,7 @@
                                 <th class="p-4 border-b">Lớp</th>
                                 <th class="p-4 border-b">Trường</th>
                                 <th class="p-4 border-b text-center">Điểm số</th>
+                                <th class="p-4 border-b text-center">Thời gian làm</th>
                                 <th class="p-4 border-b text-right">Thời gian nộp</th>
                             </tr>
                         </thead>
@@ -596,6 +597,7 @@
     if (snapshot.empty) {
     tbody.innerHTML = '<tr>
         <td colspan="6" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td>
+        <td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td>
     </tr>';
     return;
     }
@@ -604,22 +606,40 @@
     results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
     results.forEach((data, index) => {
     const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
+
+    // Tính thời gian làm bài
+    let duration = '---';
+    if (data.startTime && data.endTime) {
+    const start = new Date(data.startTime);
+    const end = new Date(data.endTime);
+    const diffMs = end - start;
+    const mins = Math.floor(diffMs / 60000);
+    const secs = Math.floor((diffMs % 60000) / 1000);
+    duration = `${mins} phút ${secs} giây`;
+    }
+
     const tr = document.createElement('tr');
     tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50";
-    tr.innerHTML = `<td class="p-4 font-bold text-gray-400">${index + 1}</td>
+    tr.innerHTML = `
+    <td class="p-4 font-bold text-gray-400">${index + 1}</td>
     <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
     <td class="p-4 text-gray-600">${data.className}</td>
     <td class="p-4 text-gray-600">${data.school}</td>
-    <td class="p-4 text-center"><span
-            class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">${data.score}/100</span>
+    <td class="p-4 text-center">
+        <span
+            class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">
+            ${data.score}/100
+        </span>
     </td>
-    <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>`;
+    <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
+    <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
+    `;
     tbody.appendChild(tr);
     });
     } catch (error) {
     console.error("Error loading stats:", error);
     tbody.innerHTML = '<tr>
-        <td colspan="6" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td>
+        <td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td>
     </tr>';
     }
     }
@@ -797,10 +817,12 @@
 
         const audio = document.getElementById('lessonAudio');
         const playIcon = document.getElementById('playIcon');
-        const pauseIcon = document.getElementById('pauseIcon');
-        const audioStatus = document.getElementById('audioStatus');
-        function toggleAudio() {
-        if (audio.paused) {
+        const pauseIcon = document.getEleme function exportToExcel() {
+        const table = document.querySelector("#statsModal table");
+        // raw: true giúp giữ định dạng văn bản cho các cột như "Lớp"
+        const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
+        XLSX.writeFile(wb, "ThongKe_GiaoVien_EduRobot.xlsx");
+        } if (audio.paused) {
         audio.play();
         playIcon.classList.add('hidden');
         pauseIcon.classList.remove('hidden');
