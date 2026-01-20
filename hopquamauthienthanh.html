@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hộp quà màu thiên thanh - EduRobot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 18px;
+        }
+
+        .serif-font {
+            font-family: 'Merriweather', serif;
+            font-size: 19px;
+            line-height: 1.8;
+        }
+
+        .serif-font p {
+            text-indent: 2em;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-open .accordion-content {
+            max-height: 800px;
+        }
+
+        .accordion-open svg {
+            transform: rotate(180deg);
+        }
+
+        .bg-paper {
+            background-color: #fdfcf7;
+            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+
+        /* Tab Styles */
+        .tab-btn.active {
+            border-bottom: 4px solid #1d4ed8;
+            color: #1d4ed8;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Quiz Styles */
+        .quiz-option {
+            transition: all 0.2s;
+            border: 2px solid #e5e7eb;
+        }
+
+        .quiz-option:hover {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .quiz-option.selected {
+            border-color: #2563eb;
+            background-color: #dbeafe;
+        }
+
+        .correct {
+            border-color: #10b981 !important;
+            background-color: #ecfdf5 !important;
+        }
+
+        .incorrect {
+            border-color: #ef4444 !important;
+            background-color: #fef2f2 !important;
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div
+                        class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg font-bold">
+                        E</div>
+                    <span class="text-lg font-extrabold text-blue-600 tracking-tight">EduRobot - <span
+                            class="text-yellow-500">Tiếng Việt 5</span></span>
+                </a>
+            </div>
+
+            <ul class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
+                <li><a href="index.html" class="hover:text-blue-500 transition-colors">Trang chủ</a></li>
+                <li><a href="ve-dep-cuoc-song.html"
+                        class="hover:text-blue-500 transition-colors font-bold text-blue-600 border-b-2 border-blue-600">Bài
+                        học</a></li>
+                <li><a href="bang-vang.html" class="hover:text-blue-500 transition-colors">Bảng xếp hạng</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-4">
+
+        <div class="mb-4">
+            <a href="ve-dep-cuoc-song.html?week=20"
+                class="inline-flex items-center text-gray-600 hover:text-blue-600 font-bold transition-colors">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Quay lại Tuần 20
+            </a>
+        </div>
+
+        <div class="flex border-b border-gray-200 mb-6 bg-white rounded-t-2xl overflow-hidden shadow-sm">
+            <button onclick="switchTab('lesson')" id="btn-lesson"
+                class="tab-btn active flex-1 py-4 text-center font-bold text-gray-500 transition-all hover:bg-blue-50">
+                1. Bài học
+            </button>
+            <button onclick="switchTab('quiz')" id="btn-quiz"
+                class="tab-btn flex-1 py-4 text-center font-bold text-gray-500 transition-all hover:bg-blue-50">
+                2. Luyện tập
+            </button>
+        </div>
+
+        <div id="tab-lesson" class="tab-content active">
+            <div class="flex justify-end mb-4">
+                <div
+                    class="flex items-center space-x-4 bg-white rounded-full p-2 pr-6 shadow-sm border border-blue-100">
+                    <button id="audioControl" onclick="toggleAudio()"
+                        class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-all shadow-lg shadow-blue-200">
+                        <svg id="playIcon" class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M6 4l10 6-10 6V4z"></path>
+                        </svg>
+                        <svg id="pauseIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <div>
+                        <p class="text-[10px] font-black text-blue-600 uppercase tracking-widest">Nghe đọc mẫu</p>
+                        <p id="audioStatus" class="text-xs text-gray-400 font-bold italic">Đang dừng...</p>
+                    </div>
+                    <audio id="lessonAudio">
+                        <source src="am_thanh/hopquamauthienthanh.wav" type="audio/wav">
+                    </audio>
+                </div>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-8">
+
+                <section class="w-full lg:w-[70%]">
+                    <div class="bg-white rounded-[30px] shadow-sm border border-gray-100 p-6 md:p-8">
+                        <div class="mb-6 overflow-hidden rounded-2xl shadow-sm">
+                            <img src="hinh_anh/hop-qua-mau-thien-thanh.png" alt="Hộp quà màu thiên thanh"
+                                class="w-full h-auto object-cover">
+                        </div>
+                        <div class="p-6 md:p-10 bg-paper rounded-2xl shadow-inner border border-gray-50">
+                            <div class="serif-font text-gray-800 text-justify">
+                                <h1 class="text-3xl font-black mb-6 text-blue-900 text-center uppercase tracking-tight">
+                                    HỘP
+                                    QUÀ MÀU THIÊN THANH</h1>
+
+                                <p class="mb-4">
+                                    Tân vừa nấu cơm xong thì Quang và Huệ tới. Quang nói:
+                                </p>
+                                <p class="mb-4">
+                                    – Ngày mai tổng kết năm học, mỗi bạn sẽ viết một lá thư như một món quà đặc biệt để
+                                    tặng
+                                    cô chủ nhiệm.
+                                </p>
+                                <p class="mb-4">
+                                    Huệ cười:
+                                </p>
+                                <p class="mb-4">
+                                    – Cậu nhớ viết nhé!
+                                </p>
+                                <p class="mb-4">
+                                    Nói rồi, hai đứa phóng xe đi.
+                                </p>
+                                <p class="mb-4">
+                                    Buổi tối, Tân ngồi vào bàn học chuẩn bị viết thư. Tân nhớ về kỉ niệm một lần đi học
+                                    muộn
+                                    vì mải bẻ ngô giúp mẹ. Khi cô hỏi lí do, Tân còn đang ấp úng thì Huệ nhanh nhảu:
+                                </p>
+                                <p class="mb-4">
+                                    – Thưa cô, chắc Tân lại giúp mẹ làm vườn.
+                                </p>
+                                <p class="mb-4">
+                                    Tân thấy mặt nóng ran. Cô nhìn Tân trìu mến:
+                                </p>
+                                <p class="mb-4">
+                                    – Tân như thế là biết thương mẹ. Nhưng nếu em vừa biết giúp mẹ vừa đi học đúng giờ
+                                    thì
+                                     còn biết thương mẹ nhiều hơn!
+                                </p>
+                                <p class="mb-4">
+                                    Tân thầm hứa sẽ không đi học muộn nữa...
+                                </p>
+                                <p class="mb-4">
+                                    Cảm xúc dâng trào, Tân bèn cầm bút viết. Tân kể lại buổi đi học muộn hôm ấy và cả
+                                    những
+                                    cố gắng của Tân trong học tập: dậy sớm hơn để học bài, tranh thủ các buổi chiều nghỉ
+                                    học, Tân giúp mẹ việc nhà,... Cuối năm, Tân được cô giáo khen vì có nhiều tiến bộ.
+                                    Giờ
+                                    sắp phải xa cô, xa trường lớp, Tân sẽ rất nhớ cô...
+                                </p>
+                                <p class="mb-4">
+                                    Hôm sau, Tân đến lớp sớm. Huệ đang đón những lá thư của các bạn xếp vào chiếc hộp
+                                    màu
+                                    thiên thanh.
+                                </p>
+                                <p class="mb-4">
+                                    – Cậu viết gì gửi cô đấy? – Quang vừa đi vào vừa hỏi.
+                                </p>
+                                <p class="mb-4">
+                                    Tân mỉm cười:
+                                </p>
+                                <p class="mb-4">
+                                    – Thư gửi cô, tớ phải giữ bí mật chứ!
+                                </p>
+                                <p class="mb-4">
+                                    Nói xong, Tân đặt lá thư của mình vào chiếc hộp.
+                                </p>
+                                <p class="mb-4">
+                                    Cô giáo mặc áo dài màu thiên thanh bước vào lớp trong tiếng vỗ tay giòn giã. Quang
+                                    thay
+                                    mặt lớp cảm ơn cô đã dạy dỗ. Đôi má cô ửng hồng khi nhận hộp quà với lời nhắn của
+                                    Quang:
+                                    “Chúng em gửi cô hết ở trong này, cô về đọc nhé!".
+                                </p>
+                                <p class="mb-4">
+                                    Ba mươi lăm lá thư tạo thành một hộp quà đặc biệt tặng cô được giữ bí mật tuyệt đối.
+                                    Chỉ
+                                    cô giáo mới biết từng học trò đã viết gì trong những lá thư ấy.
+                                </p>
+                                <p class="text-right italic font-bold text-gray-600 mt-6">(Nguyễn Thu Hằng)</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <aside class="w-full lg:w-[30%]">
+                    <div class="bg-yellow-50 rounded-[30px] shadow-sm border border-yellow-100 p-4 sticky top-20">
+                        <h2 class="text-xl font-black text-blue-900 mb-4 flex items-center">
+                            <span class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center mr-3">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
+                            </span>
+                            Tìm hiểu bài
+                        </h2>
+
+                        <div class="space-y-4">
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">
+                                        1. Dự định của lớp Tân là gì?
+                                    </span>
+                                    <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content">
+                                    <div
+                                        class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                        <span class="text-green-600 font-bold block mb-1">Gợi ý:</span>
+                                        <p>Trong buổi tổng kết năm học, lớp Tân có dự định tặng cô giáo một món quà bất
+                                            ngờ
+                                            bằng cách <b>mỗi bạn viết một lá thư như một món quà đặc biệt</b> để tặng cô
+                                            chủ
+                                            nhiệm.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">
+                                        2. Tân đã nhớ lại kỉ niệm gì?
+                                    </span>
+                                    <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content">
+                                    <div
+                                        class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                        <span class="text-green-600 font-bold block mb-1">Gợi ý:</span>
+                                        <p>Tân nhớ về kỉ niệm một lần <b>đi học muộn vì mải bẻ ngô giúp mẹ</b>. Khi ấy,
+                                            cô
+                                            giáo đã không trách mắng mà còn ân cần khuyên bảo, khiến Tân rất xúc động và
+                                            hứa
+                                             sẽ sửa đổi.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">
+                                        3. Vì sao Tân có nhiều tiến bộ trong học tập?
+                                    </span>
+                                    <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content">
+                                    <div
+                                        class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                        <span class="text-green-600 font-bold block mb-1">Gợi ý:</span>
+                                        <ul class="list-disc ml-4 space-y-1">
+                                            <li>Tân thương mẹ, muốn gánh vác việc nhà.</li>
+                                            <li>Tân có ý thức sửa chữa khuyết điểm sau lời khuyên của cô.</li>
+                                            <li>Cô giáo rất yêu thương và biết cách động viên học trò.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">
+                                        4. Tình cảm cô trò trong buổi tổng kết?
+                                    </span>
+                                    <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content">
+                                    <div
+                                        class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                        <span class="text-green-600 font-bold block mb-1">Gợi ý:</span>
+                                        <p>Các chi tiết như: <i>tiếng vỗ tay giòn giã, lời cảm ơn chân thành của Quang,
+                                                đôi
+                                                má cô ửng hồng xúc động khi nhận hộp quà...</i> cho thấy sự gắn bó, yêu
+                                            thương và trân trọng sâu sắc giữa cô giáo và học trò.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">
+                                        5. Ý nghĩa "Hộp quà màu thiên thanh"?
+                                    </span>
+                                    <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content">
+                                    <div
+                                        class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
+                                        <span class="text-green-600 font-bold block mb-1">Gợi ý:</span>
+                                        <p>Hộp quà thể hiện tình yêu thương, lòng biết ơn của HS đối với cô giáo. Màu
+                                            thiên
+                                            thanh (xanh da trời) tượng trưng cho những kỉ niệm đẹp đẽ, trong sáng của
+                                            tuổi
+                                            học trò.</p>
+                                        <p class="mt-2 font-bold italic text-blue-600">Nhan đề khác: Hộp quà bí mật, Món
+                                            quà
+                                            cuối năm, Những bức thư xanh...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <div
+                class="mt-2 bg-white rounded-[30px] shadow-sm border border-blue-100 p-6 md:p-8 overflow-hidden relative">
+                <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-50 rounded-full opacity-50"></div>
+                <div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                    <div
+                        class="bg-blue-600 p-8 rounded-3xl text-white shadow-xl shadow-blue-200 shrink-0 text-center md:text-left">
+                        <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-2">Thông điệp</p>
+                        <h3 class="text-2xl font-black uppercase tracking-wider">Nội dung chính</h3>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-lg font-semibold leading-relaxed text-blue-900 mb-2">
+                            Tình cảm thầy trò là tình cảm đẹp đẽ, vô cùng đáng quý.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed text-base">
+                            Câu chuyện nhắc nhở chúng ta cần biết trân trọng, giữ gìn và bồi đắp cho tình cảm thầy trò
+                            ngày
+                             càng tốt đẹp hơn. Những bức thư chân thành chính là món quà quý giá nhất dành tặng thầy cô.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-quiz" class="tab-content">
+            <div class="bg-white rounded-[30px] shadow-sm border border-gray-100 p-6 md:p-10 max-w-4xl mx-auto">
+                <div id="quiz-registration">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-black text-blue-900 mb-2">THÔNG TIN HỌC SINH</h2>
+                        <p class="text-gray-500">Vui lòng nhập thông tin để bắt đầu bài luyện tập</p>
+                    </div>
+                    <form id="regForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Họ và tên:</label>
+                            <input type="text" id="studentName" required
+                                class="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all"
+                                placeholder="Nhập đầy đủ họ tên của em">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Lớp:</label>
+                                <select id="studentClass" required
+                                    class="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all">
+                                    <option value="">-- Chọn lớp --</option>
+                                    <option value="5/1">Lớp 5/1</option>
+                                    <option value="5/2">Lớp 5/2</option>
+                                    <option value="5/3">Lớp 5/3</option>
+                                    <option value="5/4">Lớp 5/4</option>
+                                    <option value="5/5">Lớp 5/5</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Trường:</label>
+                                <div class="relative">
+                                    <select id="schoolSelect" onchange="checkSchool(this)"
+                                        class="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all">
+                                        <option value="Tiểu học Đỗ Văn Nại">Tiểu học Đỗ Văn Nại</option>
+                                        <option value="other">Trường khác...</option>
+                                    </select>
+                                    <input type="text" id="otherSchool"
+                                        class="hidden mt-4 w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all"
+                                        placeholder="Nhập tên trường của em">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-lg uppercase tracking-wider">
+                            Bắt đầu làm bài
+                        </button>
+                    </form>
+                </div>
+
+                <div id="quiz-container" class="hidden">
+                    <div class="flex justify-between items-center mb-8 pb-4 border-b border-gray-100">
+                        <div class="flex items-center space-x-3">
+                            <span id="questionNum"
+                                class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center font-black text-xl">1</span>
+                            <div>
+                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Câu hỏi</p>
+                                <p class="text-xs text-gray-400 font-bold" id="progressText">Đang thực hiện: 1/5</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Thời gian còn
+                                lại</p>
+                            <p id="timer" class="text-lg font-black text-blue-900">--:--</p>
+                        </div>
+                    </div>
+
+                    <div id="questionArea" class="mb-8">
+                        <h3 id="questionText" class="text-xl font-bold text-gray-800 mb-6 leading-relaxed"></h3>
+                        <div id="optionsArea" class="grid grid-cols-1 gap-4">
+                            </div>
+                    </div>
+
+                    <div class="flex justify-end pt-6 border-t border-gray-100">
+                        <button id="nextBtn" disabled
+                            class="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition-all active:scale-95 flex items-center">
+                            Tiếp theo
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="quiz-results" class="hidden text-center py-12">
+                    <div class="mb-8 relative inline-block">
+                        <svg class="w-48 h-48 mx-auto" viewBox="0 0 36 36">
+                            <path class="text-gray-100" stroke-width="3" fill="none"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path id="scoreCircle" class="text-green-500" stroke-width="3" stroke-dasharray="0, 100"
+                                stroke-linecap="round" fill="none"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span id="scoreText" class="text-5xl font-black text-blue-900">0</span>
+                            <span class="text-sm font-bold text-gray-400 uppercase">Điểm</span>
+                        </div>
+                    </div>
+                    <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Hoàn thành!</h2>
+                    <p class="text-gray-500 mb-10" id="resultMsg">Chúc mừng em đã hoàn thành bài luyện tập.</p>
+
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="restartQuiz()"
+                            class="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-4 px-10 rounded-2xl transition-all active:scale-95">
+                            Làm lại
+                        </button>
+                        <button onclick="submitResults()"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition-all active:scale-95">
+                            Nộp bài
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-zinc-900 text-zinc-400 py-3 px-4 mt-2">
+        <div class="container mx-auto text-center text-sm">
+            <p>@ 2026 EduRobot - Phát triển bởi Lê Thành Long</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. CẤU HÌNH FIREBASE (Sử dụng dự án gamhoctap) ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
+            authDomain: "gamhoctap.firebaseapp.com",
+            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "gamhoctap",
+            storageBucket: "gamhoctap.firebasestorage.app",
+            messagingSenderId: "833329613932",
+            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
+            measurementId: "G-YT1PKCYS67"
+        };
+        // Khởi tạo Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // --- 2. LOGIC GIAO DIỆN ---
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('accordion-open');
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('accordion-open');
+            });
+            if (!isOpen) {
+                item.classList.add('accordion-open');
+            }
+        }
+
+        const audio = document.getElementById('lessonAudio');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const audioStatus = document.getElementById('audioStatus');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                audioStatus.innerText = "Đang phát...";
+                audioStatus.classList.remove('text-gray-400');
+                audioStatus.classList.add('text-green-500');
+            } else {
+                audio.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                audioStatus.innerText = "Đang dừng...";
+                audioStatus.classList.remove('text-green-500');
+                audioStatus.classList.add('text-gray-400');
+            }
+        }
+
+        audio.onended = function () {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            audioStatus.innerText = "Đang dừng...";
+            audioStatus.classList.remove('text-green-500');
+            audioStatus.classList.add('text-gray-400');
+        };
+
+        /* TAB LOGIC */
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-blue-600'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            document.getElementById('btn-' + tabId).classList.add('active', 'text-blue-600');
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        /* REGISTRATION LOGIC */
+        const regForm = document.getElementById('regForm');
+        const otherSchoolInput = document.getElementById('otherSchool');
+
+        function checkSchool(select) {
+            if (select.value === 'other') {
+                otherSchoolInput.classList.remove('hidden');
+                otherSchoolInput.required = true;
+            } else {
+                otherSchoolInput.classList.add('hidden');
+                otherSchoolInput.required = false;
+            }
+        }
+
+        let studentData = {};
+
+        regForm.onsubmit = function (e) {
+            e.preventDefault();
+            studentData = {
+                name: document.getElementById('studentName').value,
+                className: document.getElementById('studentClass').value,
+                school: document.getElementById('schoolSelect').value === 'other' ?
+                    document.getElementById('otherSchool').value :
+                    document.getElementById('schoolSelect').value,
+                startTime: new Date().toISOString()
+            };
+            document.getElementById('quiz-registration').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            startQuiz();
+        };
+
+        /* QUIZ ENGINE */
+        const allQuestions = [
+            { q: "Các bạn lớp Tân có dự định gì đặc biệt cho buổi tổng kết năm học?", a: ["Cùng nhau mua một bó hoa thật lớn tặng cô chủ nhiệm.", "Mỗi bạn viết một lá thư như một món quà đặc biệt tặng cô.", "Tổ chức một buổi liên hoan chia tay tại lớp.", "Vẽ một bức tranh tập thể về kỉ niệm trường lớp."], c: 1 },
+            { q: "Ai là người đã thông báo cho Tân về ý tưởng món quà tặng cô giáo?", a: ["Cô chủ nhiệm.", "Bạn Quang và bạn Huệ.", "Cả lớp trong giờ sinh hoạt.", "Mẹ của Tân."], c: 1 },
+            { q: "Khi ngồi viết thư, Tân đã nhớ lại kỉ niệm buồn hay vui nào?", a: ["Một lần được cô giáo khen vì đạt điểm cao.", "Một lần cùng các bạn đi cắm trại hè.", "Một lần đi học muộn vì mải bẻ ngô giúp mẹ.", "Một lần làm hỏng dụng cụ học tập của bạn."], c: 2 },
+            { q: "Khi cô giáo hỏi lí do đi học muộn, bạn Huệ đã làm gì để giúp Tân?", a: ["Huệ giữ im lặng để Tân tự trả lời.", "Huệ nhanh nhảu đoán giúp: \"Chắc Tân lại giúp mẹ làm vườn\".", "Huệ xin lỗi cô thay cho Tân.", "Huệ giải thích rằng xe của Tân bị hỏng."], c: 1 },
+            { q: "Thái độ của cô giáo như thế nào khi nghe về lí do Tân đi học muộn?", a: ["Cô nghiêm khắc nhắc nhở Tân trước lớp.", "Cô không nói gì và yêu cầu Tân vào chỗ.", "Cô nhìn Tân trìu mến và khen Tân biết thương mẹ.", "Cô yêu cầu Tân phải viết bản kiểm điểm."], c: 2 },
+            { q: "Lời khuyên nào của cô giáo đã khiến Tân thay đổi và tiến bộ hơn?", a: ["Đi học đúng giờ quan trọng hơn việc giúp đỡ gia đình.", "Vừa biết giúp mẹ vừa đi học đúng giờ thì còn biết thương mẹ nhiều hơn.", "Em nên ưu tiên việc học tập lên hàng đầu.", "Hãy cố gắng thức dậy sớm để chuẩn bị bài thật tốt."], c: 1 },
+            { q: "Để không đi học muộn nữa, Tân đã thực hiện những thay đổi gì?", a: ["Dậy sớm hơn để học bài.", "Tranh thủ các buổi chiều nghỉ để giúp mẹ việc nhà.", "Luôn cố gắng để có nhiều tiến bộ trong học tập.", "Tất cả các ý trên đều đúng."], c: 3 },
+            { q: "Tại sao Tân lại giữ bí mật nội dung lá thư khi Quang hỏi?", a: ["Vì Tân sợ các bạn cười chê kỉ niệm đi học muộn.", "Vì Tân chưa viết xong lá thư của mình.", "Vì đó là tình cảm riêng tư, bí mật gửi cho cô giáo.", "Vì cô giáo yêu cầu không được cho ai xem thư."], c: 2 },
+            { q: "Chi tiết nào miêu tả sự xuất hiện của cô giáo trong buổi tổng kết?", a: ["Cô mặc bộ áo dài màu trắng tinh khôi.", "Cô mặc áo dài màu thiên thanh bước vào lớp trong tiếng vỗ tay.", "Cô bước vào lớp với một nụ cười thật tươi và giỏ hoa trên tay.", "Cô xúc động đứng nhìn học trò từ cửa lớp."], c: 1 },
+            { q: "Hộp quà tặng cô giáo có bao nhiêu lá thư?", a: ["33 lá thư.", "34 lá thư.", "35 lá thư.", "30 lá thư."], c: 2 },
+            { q: "Phản ứng của cô giáo khi nhận được hộp quà từ bạn Quang là gì?", a: ["Cô cười thật lớn và mở quà ngay tại lớp.", "Đôi má cô ửng hồng vì xúc động khi nhận hộp quà.", "Cô đọc to một lá thư cho cả lớp cùng nghe.", "Cô hứa sẽ giữ hộp quà này mãi mãi bên mình."], c: 1 },
+            { q: "Tại sao câu chuyện lại có tên là \"Hộp quà màu thiên thanh\"?", a: ["Vì đó là màu sắc yêu thích nhất của tất cả học sinh.", "Vì chiếc hộp và áo dài của cô giáo đều có màu xanh thiên thanh.", "Vì màu thiên thanh tượng trưng cho sự thuần khiết và tình cảm trong sáng.", "Cả B và C đều đúng."], c: 3 },
+            { q: "Qua bức thư của Tân, em thấy cô giáo là người như thế nào?", a: ["Rất nghiêm khắc và cứng nhắc trong kỉ luật.", "Chỉ quan tâm đến kết quả học tập của học sinh.", "Yêu thương, thấu hiểu và biết cách động viên học trò.", "Luôn bao che cho những lỗi lầm của học sinh."], c: 2 },
+            { q: "Ý nghĩa sâu sắc nhất của hình ảnh \"Hộp quà màu thiên thanh\" là gì?", a: ["Thể hiện lòng biết ơn, sự gắn bó và tình cảm chân thành giữa thầy và trò.", "Nhấn mạnh việc học sinh cần phải viết thư thật hay.", "Khuyên học sinh nên chọn những chiếc hộp màu xanh để tặng quà.", "Ca ngợi sự trưởng thành về ngoại hình của các bạn học sinh."], c: 0 },
+            { q: "Nhan đề nào dưới đây có thể thay thế cho câu chuyện này?", a: ["Kỉ niệm đi học muộn.", "Món quà từ trái tim.", "Chiếc hộp màu xanh.", "Lá thư của Tân."], c: 1 }
+        ];
+
+        let currentQuizQuestions = [];
+        let currentQuestionIdx = 0;
+        let score = 0;
+        let selectedOption = null;
+        let lastUsedQuestions = [];
+
+        function startQuiz() {
+            // Pick 5 random questions ensuring at least 50% different from last time
+            let available = [...allQuestions];
+            available.sort(() => Math.random() - 0.5);
+
+            // Filter out questions used in the previous session if possible to ensure variety
+            if (lastUsedQuestions.length > 0) {
+                let fresh = available.filter(q => !lastUsedQuestions.includes(q.q));
+                let repeated = available.filter(q => lastUsedQuestions.includes(q.q));
+
+                currentQuizQuestions = fresh.slice(0, 5);
+                if (currentQuizQuestions.length < 5) {
+                    currentQuizQuestions = currentQuizQuestions.concat(repeated.slice(0, 5 - currentQuizQuestions.length));
+                }
+            } else {
+                currentQuizQuestions = available.slice(0, 5);
+            }
+
+            lastUsedQuestions = currentQuizQuestions.map(q => q.q);
+            currentQuestionIdx = 0;
+            score = 0;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = currentQuizQuestions[currentQuestionIdx];
+            document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
+            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
+            document.getElementById('questionText').innerText = q.q;
+
+            const optionsArea = document.getElementById('optionsArea');
+            optionsArea.innerHTML = '';
+
+            q.a.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
+                btn.innerHTML = `
+                    <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100 transition-colors">${String.fromCharCode(65 + idx)}</span>
+                    <span class="flex-1">${opt}</span>
+                `;
+                btn.onclick = () => selectOption(idx, btn);
+                optionsArea.appendChild(btn);
+            });
+
+            document.getElementById('nextBtn').disabled = true;
+            selectedOption = null;
+        }
+
+        function selectOption(idx, btn) {
+            document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500'));
+            btn.classList.add('selected', 'border-blue-500');
+            selectedOption = idx;
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        document.getElementById('nextBtn').onclick = function () {
+            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) {
+                score += 20;
+            }
+
+            currentQuestionIdx++;
+            if (currentQuestionIdx < 5) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        };
+
+        function showResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+
+            document.getElementById('scoreText').innerText = score;
+            const circle = document.getElementById('scoreCircle');
+            circle.setAttribute('stroke-dasharray', `${score}, 100`);
+
+            if (score >= 80) {
+                document.getElementById('resultTitle').innerText = "Xuất sắc!";
+                document.getElementById('resultMsg').innerText = "Em rất hiểu nội dung bài học. Phát huy nhé!";
+            } else if (score >= 50) {
+                document.getElementById('resultTitle').innerText = "Khá tốt!";
+                document.getElementById('resultMsg').innerText = "Em đã hiểu cơ bản về bài học rồi đấy.";
+            } else {
+                document.getElementById('resultTitle').innerText = "Cố gắng lên!";
+                document.getElementById('resultMsg').innerText = "Em nên đọc lại bài và thử lại lần nữa nhé.";
+            }
+        }
+
+        function restartQuiz() {
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            startQuiz();
+        }
+
+        // --- 3. CẬP NHẬT: HÀM NỘP BÀI LÊN FIREBASE ---
+        async function submitResults() {
+            const finalData = {
+                studentName: studentData.name,
+                className: studentData.className,
+                school: studentData.school,
+                lessonTitle: "Hộp quà màu thiên thanh", // Tên bài để lọc
+                score: score,
+                startTime: studentData.startTime,
+                endTime: new Date().toISOString(),
+                submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                // ĐÃ CẬP NHẬT: Lưu vào collection 'diem_tieng_viet_lop5' trong dự án gamhoctap
+                await db.collection("diem_tieng_viet_lop5").add(finalData);
+                
+                alert(`Cảm ơn em ${studentData.name}!\nKết quả của em đã được gửi thành công đến thầy cô.\nĐiểm: ${score}/100`);
+                
+                switchTab('lesson');
+            } catch (error) {
+                console.error("Lỗi khi lưu điểm: ", error);
+                alert("Có lỗi xảy ra khi nộp bài. Em hãy kiểm tra lại mạng internet nhé!");
+            }
+        }
+    </script>
+</body>
+
+</html>
