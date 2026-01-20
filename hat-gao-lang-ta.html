@@ -501,9 +501,9 @@
                             </div>
                         </div>
                         <div class="text-right">
-                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Thời gian làm bài
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Thời gian còn lại
                             </p>
-                            <p id="timer" class="text-lg font-black text-blue-900">00:00</p>
+                            <p id="timer" class="text-lg font-black text-blue-900">20:00</p>
                         </div>
                     </div>
 
@@ -733,176 +733,188 @@
 
     /* QUIZ ENGINE */
     const allQuestions = [
-    { q: "Ai là tác giả của bài thơ \"Hạt gạo làng ta\"?", a: ["Phạm Tiến Duật", "Trần Đăng Khoa", "Lâm Thị Mỹ Dạ",
-    "Nguyễn Khoa Điềm"], c: 1 },
-    { q: "Hạt gạo làng ta mang vị phù sa của con sông nào?", a: ["Sông Hồng", "Sông Cửu Long", "Sông Kinh Thầy", "Sông
-    Hương"], c: 2 },
-    { q: "Chi tiết \"Hương sen thơm trong hồ nước đầy\" nói lên điều gì về hạt gạo?", a: ["Hạt gạo rất thơm giống mùi
-    hoa sen.", "Hạt gạo được kết tinh từ những gì đẹp đẽ nhất của thiên nhiên.", "Hạt gạo được trồng trong hồ sen.",
-    "Hạt gạo có màu trắng như hoa sen."], c: 1 },
-    { q: "Trong khổ thơ thứ 2, sự vất vả của người nông dân được gợi ra qua hình ảnh nào?", a: ["Bão tháng Bảy, mưa
-    tháng Ba", "Giọt mồ hôi sa những trưa tháng Sáu", "Nước như ai nấu, chết cả cá cờ", "Tất cả các ý trên đều đúng."],
-    c: 3 },
-    { q: "Tại sao con cua phải \"ngoi lên bờ\" trong bài thơ?", a: ["Vì trời sắp có bão lớn.", "Vì muốn đi tìm thức
-    ăn.", "Vì nước ruộng quá nóng do cái nắng gay gắt.", "Vì ruộng bị ngập úng nước."], c: 2 },
-    { q: "Hình ảnh \"Mẹ em xuống cấy\" trong thời điểm nước nóng như nấu chứng tỏ điều gì?", a: ["Mẹ thích làm việc lúc
-    trời nóng.", "Sự hy sinh, chịu thương chịu khó của mẹ để tạo ra hạt gạo.", "Mẹ không sợ nóng.", "Mẹ muốn tranh thủ
-    thời gian nghỉ hè."], c: 1 },
-    { q: "Chi tiết \"Hạt gạo làng ta/ Những năm bom Mỹ/ Trút trên mái nhà\" gợi nhớ thời kỳ nào?", a: ["Thời kỳ kháng
-    chiến chống Mỹ.", "Thời kỳ kháng chiến chống Pháp.", "Thời kỳ xây dựng đất nước.", "Thời kỳ hòa bình."], c: 0 },
-    { q: "Câu thơ \"Thơm hào giao thông\" trong bài có ý nghĩa gì?", a: ["Hào giao thông có mùi thơm của lúa.", "Hạt gạo
-    được các bạn nhỏ mang ra hào giao thông ăn.", "Hạt gạo ấm áp nghĩa tình của hậu phương dành cho tiền phương.", "Bát
-    cơm được nấu ngay dưới hào giao thông."], c: 2 },
-    { q: "Các bạn nhỏ đã đóng góp công sức gì để làm ra hạt gạo?", a: ["Sớm nào chống hạn, trưa nào bắt sâu.", "Chiều
-    nào gánh phân, quang trành quết đất.", "Dậy sớm học bài và giúp mẹ việc nhà.", "Cả A và B đều đúng."], c: 3 },
-    { q: "Tại sao tác giả lại gọi hạt gạo là \"Hạt vàng làng ta\"?", a: ["Vì hạt gạo có màu vàng óng như vàng thật.",
-    "Vì hạt gạo vô cùng quý giá, chứa đựng nhiều mồ hôi công sức.", "Vì hạt gạo có thể đem bán lấy nhiều tiền.", "Vì lúa
-    khi chín sẽ có màu vàng."], c: 1 },
-    { q: "Công việc \"Chống hạn\" của các bạn nhỏ được miêu tả qua hình ảnh nào?", a: ["Lúa cao rát mặt", "Vục mẻ miệng
-    gàu", "Quang trành quết đất", "Giọt mồ hôi sa"], c: 1 },
-    { q: "Tại sao các bạn nhỏ phải đi bắt sâu vào lúc \"Trưa nào bắt sâu\"?", a: ["Vì buổi trưa sâu mới xuất hiện.", "Vì
-    buổi trưa các bạn không phải đi học.", "Thể hiện tinh thần vượt khó, tranh thủ thời gian giúp dân.", "Vì buổi trưa
-    trời mát mẻ."], c: 2 },
-    { q: "Bài thơ mượn hình ảnh hạt gạo để ca ngợi ai?", a: ["Các bạn nhỏ dũng cảm.", "Người nông dân vất vả và tinh
-    thần kháng chiến của dân tộc.", "Vẻ đẹp của thiên nhiên làng quê Việt Nam.", "Tác giả Trần Đăng Khoa."], c: 1 },
-    { q: "Ý nghĩa của câu thơ \"Có lời mẹ hát/ Ngọt bùi đắng cay\" là gì?", a: ["Mẹ hay hát cho em nghe lúc ăn cơm.",
-    "Hạt gạo chứa đựng cả tình yêu thương và sự nhọc nhằn của mẹ.", "Hạt gạo có vị ngọt như lời hát.", "Mẹ dạy em hát
-    bài về hạt gạo."], c: 1 },
-    { q: "Nội dung chính của bài thơ là gì?", a: ["Kể về vẻ đẹp của làng quê Việt Nam.", "Ca ngợi hạt gạo và sự vất vả
-    của người làm ra hạt gạo.", "Kể về các hoạt động của thiếu nhi thời chiến.", "Miêu tả cánh đồng lúa chín vàng."], c:
-    1 }
+    { q: "Bài thơ \"Hạt gạo làng ta\" do nhà thơ nào sáng tác?", a: ["Tố Hữu", "Trần Đăng Khoa", "Phạm Tiến Duật",
+    "Nguyễn Duy"], c: 1 },
+    { q: "Dòng sông nào đã mang nặng phù sa bồi đắp cho hạt gạo làng ta?", a: ["Sông Hồng", "Sông Đuống", "Sông Cửu
+    Long", "Sông Kinh Thầy"], c: 3 },
+    { q: "Ngoài vị phù sa và hương sen thơm, trong khổ thơ đầu, hạt gạo còn chứa đựng điều gì sâu sắc từ người mẹ?", a:
+    ["Lời ru buồn", "Lời mẹ hát ngọt bùi đắng cay", "Những câu chuyện cổ tích", "Tiếng cười vui vẻ"], c: 1 },
+    { q: "Những khó khăn của thiên nhiên mà hạt gạo và người nông dân phải trải qua được nhắc đến trong khổ thơ thứ hai
+    là gì?", a: ["Bão tháng Bảy, mưa tháng Ba", "Lũ lụt miền Trung", "Hạn hán kéo dài quanh năm", "Gió rét mùa đông"],
+    c: 0 },
+    { q: "Hình ảnh \"Nước như ai nấu / Chết cả cá cờ\" gợi tả điều gì?", a: ["Nước sông bị ô nhiễm", "Người dân đang nấu
+    nước sôi", "Cái nắng nóng khắc nghiệt của trưa tháng Sáu", "Cuộc sống ấm no, sung túc"], c: 2 },
+    { q: "Trước cái nắng nóng làm \"cua ngoi lên bờ\", hình ảnh người mẹ hiện lên như thế nào?", a: ["Mẹ nghỉ ngơi dưới
+    bóng cây", "Mẹ em xuống cấy", "Mẹ về nhà tránh nắng", "Mẹ ngồi quạt mát cho con"], c: 1 },
+    { q: "Khổ thơ thứ ba nhắc đến bối cảnh lịch sử nào của đất nước?", a: ["Thời kỳ xây dựng chủ nghĩa xã hội", "Những
+    năm kháng chiến chống Pháp", "Những năm bom Mỹ trút trên mái nhà", "Thời kỳ bao cấp"], c: 2 },
+    { q: "Trong những năm tháng chiến tranh, hạt gạo đã theo người đi xa như thế nào?", a: ["Trong những năm băng đạn,
+    bát cơm mùa gặt thơm hào giao thông", "Được chở bằng xe tải lớn ra chiến trường", "Được cất giấu kỹ trong kho", "Chỉ
+    dùng để nuôi quân ở hậu phương"], c: 0 },
+    { q: "Các bạn nhỏ trong bài thơ đã góp công sức làm ra hạt gạo bằng những việc làm nào?", a: ["Đi học và trông em",
+    "Nấu cơm giúp mẹ", "Chống hạn, vục mẻ miệng gàu, bắt sâu, gánh phân", "Chăn trâu và cắt cỏ"], c: 2 },
+    { q: "Câu thơ \"Quang trành quết đất\" nói lên điều gì về sự đóng góp của các bạn nhỏ?", a: ["Các bạn nhỏ rất ham
+    chơi", "Sự vất vả, nỗ lực lao động của các bạn nhỏ dù tuổi còn nhỏ", "Các bạn nhỏ làm hỏng dụng cụ lao động", "Đất
+    ngoài đồng rất dính"], c: 1 },
+    { q: "Hạt gạo làm ra được gửi đi đâu?", a: ["Chỉ để ăn trong gia đình", "Xuất khẩu ra nước ngoài", "Gửi ra tiền
+    tuyến, gửi về phương xa", "Đem ra chợ bán"], c: 2 },
+    { q: "Vì sao tác giả gọi hạt gạo là \"hạt vàng\"?", a: ["Vì hạt gạo có màu vàng óng", "Vì hạt gạo bán được rất nhiều
+    tiền", "Vì hạt gạo rất quý giá, được làm nên từ mồ hôi công sức của bao người", "Vì lúa chín trên đồng trông như
+    vàng"], c: 2 },
+    { q: "Bài thơ ca ngợi phẩm chất tốt đẹp nào của người nông dân?", a: ["Cần cù, chịu khó, không ngại gian khổ và yêu
+    lao động", "Thông minh, sáng tạo trong sản xuất", "Vui vẻ, lạc quan yêu đời", "Dũng cảm trong chiến đấu"], c: 0 },
+    { q: "Hình ảnh nào dưới đây thể hiện sự kết tinh của đất trời trong hạt gạo?", a: ["Giọt mồ hôi sa", "Vị phù sa,
+    hương sen thơm", "Mẻ miệng gàu", "Hào giao thông"], c: 1 },
+    { q: "Qua bài thơ, tác giả muốn nhắc nhở chúng ta điều gì?", a: ["Phải biết tiết kiệm nước", "Phải chăm chỉ học
+    tập", "Phải biết quý trọng hạt gạo và công sức của những người lao động", "Phải yêu thiên nhiên, đất nước"], c: 2 }
     ];
 
     let currentQuizQuestions = [];
     let currentQuestionIdx = 0;
     let score = 0;
     let selectedOption = null;
+    let timeLeft = 1200; // 20 minutes
+    let timerInterval;
 
-    function startQuiz() {
-    let available = [...allQuestions];
-    available.sort(() => Math.random() - 0.5);
-    currentQuizQuestions = available.slice(0, 5);
-    currentQuestionIdx = 0;
-    score = 0;
-    showQuestion();
-    }
-
-    function showQuestion() {
-    const q = currentQuizQuestions[currentQuestionIdx];
-    document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
-    document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
-    document.getElementById('questionText').innerText = q.q;
-    const optionsArea = document.getElementById('optionsArea');
-    optionsArea.innerHTML = '';
-    q.a.forEach((opt, idx) => {
-    const btn = document.createElement('button');
-    btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
-    btn.innerHTML = `<span
-        class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100">${String.fromCharCode(65
-        + idx)}</span><span class="flex-1">${opt}</span>`;
-    btn.onclick = () => selectOption(idx, btn);
-    optionsArea.appendChild(btn);
-    });
-    document.getElementById('nextBtn').disabled = true;
-    selectedOption = null;
-    }
-
-    function selectOption(idx, btn) {
-    document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500'));
-    btn.classList.add('selected', 'border-blue-500');
-    selectedOption = idx;
-    document.getElementById('nextBtn').disabled = false;
-    }
-
-    document.getElementById('nextBtn').onclick = function () {
-    if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) score += 20;
-    currentQuestionIdx++;
-    if (currentQuestionIdx < 5) showQuestion(); else showResults(); }; function showResults() {
-        document.getElementById('quiz-container').classList.add('hidden');
-        document.getElementById('quiz-results').classList.remove('hidden');
-        document.getElementById('scoreText').innerText=score; const circle=document.getElementById('scoreCircle');
-        circle.setAttribute('stroke-dasharray', `${score}, 100`); if (score>= 80) {
-        document.getElementById('resultTitle').innerText = "Xuất sắc!";
-        document.getElementById('resultMsg').innerText = "Em rất hiểu bài thơ. Hạt vàng thật quý phải không nào!";
-        } else if (score >= 50) {
-        document.getElementById('resultTitle').innerText = "Khá tốt!";
-        document.getElementById('resultMsg').innerText = "Em đã hiểu cơ bản về ý nghĩa bài thơ rồi đấy.";
-        } else {
-        document.getElementById('resultTitle').innerText = "Cố gắng lên!";
-        document.getElementById('resultMsg').innerText = "Em nên đọc lại bài và thử lại lần nữa nhé.";
-        }
+    function startTimer() {
+    timerInterval = setInterval(() => {
+    timeLeft--;
+    const mins = Math.floor(timeLeft / 60);
+    const secs = timeLeft % 60;
+    document.getElementById('timer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2,
+    '0')}`;
+    if (timeLeft <= 0) { clearInterval(timerInterval); showResults(); } }, 1000); } function startQuiz() {
+        currentQuizQuestions=[...allQuestions].sort(()=> Math.random() - 0.5);
+        currentQuestionIdx = 0;
+        score = 0;
+        document.getElementById('timer').innerText = "20:00";
+        timeLeft = 1200;
+        startTimer();
+        showQuestion();
         }
 
-        function restartQuiz() {
-        document.getElementById('quiz-results').classList.add('hidden');
-        document.getElementById('quiz-container').classList.remove('hidden');
-        startQuiz();
+        function showQuestion() {
+        const q = currentQuizQuestions[currentQuestionIdx];
+        document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
+        document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx +
+        1}/${currentQuizQuestions.length}`;
+        document.getElementById('questionText').innerText = q.q;
+        const optionsArea = document.getElementById('optionsArea');
+        optionsArea.innerHTML = '';
+        q.a.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
+        btn.innerHTML = `<span
+            class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100">${String.fromCharCode(65
+            + idx)}</span><span class="flex-1">${opt}</span>`;
+        btn.onclick = () => selectOption(idx, btn);
+        optionsArea.appendChild(btn);
+        });
+        document.getElementById('nextBtn').disabled = true;
+        selectedOption = null;
         }
 
-        async function submitResults() {
-        const finalData = {
-        studentName: studentData.name,
-        className: studentData.className,
-        school: studentData.school,
-        lessonTitle: "Hạt gạo làng ta",
-        score: score,
-        startTime: studentData.startTime,
-        endTime: new Date().toISOString(),
-        submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
-        const btn = event.target;
-        const originalText = btn.innerText;
-        btn.disabled = true;
-        btn.innerText = "Đang gửi...";
-        try {
-        await db.collection("diem_tieng_viet_lop5").add(finalData);
-        alert(`Chúc mừng em ${studentData.name}!\nKết quả của em đã được gửi thành công.\nĐiểm: ${score}/100`);
-        switchTab('lesson');
-        } catch (error) {
-        console.error("Error submitting quiz:", error);
-        alert("Lỗi khi nộp bài. Kiểm tra lại mạng nhé!");
-        } finally {
-        btn.disabled = false;
-        btn.innerText = originalText;
-        }
+        function selectOption(idx, btn) {
+        document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500'));
+        btn.classList.add('selected', 'border-blue-500');
+        selectedOption = idx;
+        document.getElementById('nextBtn').disabled = false;
         }
 
-        function toggleAccordion(button) {
-        const item = button.parentElement;
-        const isOpen = item.classList.contains('accordion-open');
-        document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-open'));
-        if (!isOpen) item.classList.add('accordion-open');
+        document.getElementById('nextBtn').onclick = function () {
+        if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) {
+        score += (100 / currentQuizQuestions.length);
         }
+        currentQuestionIdx++;
+        if (currentQuestionIdx < currentQuizQuestions.length) { showQuestion(); } else { showResults(); } }; function
+            showResults() { clearInterval(timerInterval);
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            document.getElementById('scoreText').innerText=Math.round(score); const
+            circle=document.getElementById('scoreCircle'); circle.setAttribute('stroke-dasharray',
+            `${Math.round(score)}, 100`); if (score>= 80) {
+            document.getElementById('resultTitle').innerText = "Xuất sắc!";
+            document.getElementById('resultMsg').innerText = "Em rất hiểu bài thơ. Hạt vàng thật quý phải không nào!";
+            } else if (score >= 50) {
+            document.getElementById('resultTitle').innerText = "Khá tốt!";
+            document.getElementById('resultMsg').innerText = "Em đã hiểu cơ bản về ý nghĩa bài thơ rồi đấy.";
+            } else {
+            document.getElementById('resultTitle').innerText = "Cố gắng lên!";
+            document.getElementById('resultMsg').innerText = "Em nên đọc lại bài và thử lại lần nữa nhé.";
+            }
+            }
 
-        const audio = document.getElementById('lessonAudio');
-        const playIcon = document.getElementById('playIcon');
-        const pauseIcon = document.getElementById('pauseIcon');
-        const audioStatus = document.getElementById('audioStatus');
-        function toggleAudio() {
-        if (audio.paused) {
-        audio.play();
-        playIcon.classList.add('hidden');
-        pauseIcon.classList.remove('hidden');
-        audioStatus.innerText = "Đang phát...";
-        audioStatus.classList.remove('text-gray-400');
-        audioStatus.classList.add('text-green-500');
-        } else {
-        audio.pause();
-        playIcon.classList.remove('hidden');
-        pauseIcon.classList.add('hidden');
-        audioStatus.innerText = "Đang dừng...";
-        audioStatus.classList.remove('text-green-500');
-        audioStatus.classList.add('text-gray-400');
-        }
-        }
-        audio.onended = function () {
-        playIcon.classList.remove('hidden');
-        pauseIcon.classList.add('hidden');
-        audioStatus.innerText = "Đang dừng...";
-        audioStatus.classList.remove('text-green-500');
-        audioStatus.classList.add('text-gray-400');
-        };
-        </script>
+            function restartQuiz() {
+            clearInterval(timerInterval);
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            startQuiz();
+            }
+
+            async function submitResults() {
+            const finalData = {
+            studentName: studentData.name,
+            className: studentData.className,
+            school: studentData.school,
+            lessonTitle: "Hạt gạo làng ta",
+            score: score,
+            startTime: studentData.startTime,
+            endTime: new Date().toISOString(),
+            submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.disabled = true;
+            btn.innerText = "Đang gửi...";
+            try {
+            await db.collection("diem_tieng_viet_lop5").add(finalData);
+            alert(`Chúc mừng em ${studentData.name}!\nKết quả của em đã được gửi thành công.\nĐiểm: ${score}/100`);
+            switchTab('lesson');
+            } catch (error) {
+            console.error("Error submitting quiz:", error);
+            alert("Lỗi khi nộp bài. Kiểm tra lại mạng nhé!");
+            } finally {
+            btn.disabled = false;
+            btn.innerText = originalText;
+            }
+            }
+
+            function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('accordion-open');
+            document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-open'));
+            if (!isOpen) item.classList.add('accordion-open');
+            }
+
+            const audio = document.getElementById('lessonAudio');
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+            const audioStatus = document.getElementById('audioStatus');
+            function toggleAudio() {
+            if (audio.paused) {
+            audio.play();
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+            audioStatus.innerText = "Đang phát...";
+            audioStatus.classList.remove('text-gray-400');
+            audioStatus.classList.add('text-green-500');
+            } else {
+            audio.pause();
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            audioStatus.innerText = "Đang dừng...";
+            audioStatus.classList.remove('text-green-500');
+            audioStatus.classList.add('text-gray-400');
+            }
+            }
+            audio.onended = function () {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            audioStatus.innerText = "Đang dừng...";
+            audioStatus.classList.remove('text-green-500');
+            audioStatus.classList.add('text-gray-400');
+            };
+            </script>
 </body>
 
 </html>
