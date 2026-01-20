@@ -635,8 +635,9 @@
         <td colspan="6" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td>
     </tr>';
     try {
-    const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Tiếng hát của người
-    đá").get();
+    const snapshot = await db.collection("diem_tieng_viet_lop5")
+    .where("lessonTitle", "==", "Tiếng hát của người đá")
+    .get();
     tbody.innerHTML = '';
     if (snapshot.empty) {
     tbody.innerHTML = '<tr>
