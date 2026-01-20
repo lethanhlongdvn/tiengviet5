@@ -121,11 +121,14 @@
                 </a>
             </div>
 
-            <li><a href="ve-dep-cuoc-song.html"
-                    class="hover:text-blue-500 transition-colors font-bold text-blue-600 border-b-2 border-blue-600">Bài
-                    học</a></li>
-            <li><a href="#" onclick="openTeacherStats()" class="hover:text-blue-500 transition-colors">Thống kê</a></li>
-            <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
+            <ul class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
+                <li><a href="index.html" class="hover:text-blue-500 transition-colors">Trang chủ</a></li>
+                <li><a href="ve-dep-cuoc-song.html"
+                        class="hover:text-blue-500 transition-colors font-bold text-blue-600 border-b-2 border-blue-600">Bài
+                        học</a></li>
+                <li><a href="#" onclick="openTeacherStats()" class="hover:text-blue-500 transition-colors">Thống kê</a>
+                </li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
             </ul>
         </nav>
     </header>
@@ -465,9 +468,9 @@
                             </div>
                         </div>
                         <div class="text-right">
-                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Thời gian làm bài
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Thời gian còn lại
                             </p>
-                            <p id="timer" class="text-lg font-black text-blue-900">00:00</p>
+                            <p id="timer" class="text-lg font-black text-blue-900">20:00</p>
                         </div>
                     </div>
 
@@ -680,172 +683,201 @@
 
     /* QUIZ ENGINE */
     const allQuestions = [
-    { q: "Lễ Mừng xuân vào tháng Năm là dịp để bọn trẻ làm gì?", a: ["Đi học thêm.", "Vui đùa thỏa thích và bí mật tặng
-    quà.", "Đi du lịch xa.", "Giúp bố mẹ làm việc nhà."], c: 1 },
-    { q: "Bọn trẻ thường bí mật tặng món quà gì cho người quen hoặc bạn bè?", a: ["Những giỏ hoa rực rỡ.", "Những chiếc
-    bánh ngọt.", "Những quyển sách hay.", "Những con gấu bông."], c: 0 },
-    { q: "Cách tặng quà của các bạn nhỏ trong ngày lễ tháng Năm có gì thú vị?", a: ["Gửi qua bưu điện.", "Hẹn gặp mặt
-    trực tiếp để tặng.", "Đặt trên thềm, gõ cửa rồi chạy trốn thật nhanh.", "Nhờ bố mẹ tặng hộ."], c: 2 },
-    { q: "Tại sao Xu-di lại cảm thấy giận Pam?", a: ["Vì Pam làm hỏng đồ chơi của Xu-di.", "Vì Pam kết thân với bạn mới
-    và ít dành thời gian cho Xu-di.", "Vì Pam không đi chơi cùng Xu-di.", "Vì Pam nói xấu Xu-di."], c: 1 },
-    { q: "Xu-di cảm thấy thế nào khi thấy Pam chơi với người bạn mới?", a: ["Vui lây cho bạn.", "Không quan tâm.", "Cảm
-    thấy như bị bỏ rơi và tủi thân.", "Tức giận và muốn nghỉ chơi luôn."], c: 2 },
-    { q: "Khi mẹ hỏi về việc tặng hoa cho Pam, Xu-di đã trả lời thế nào?", a: ["\"Vâng ạ, con sẽ tặng.\"", "\"Không bao
-    giờ, mẹ ạ!\"", "\"Con chưa biết nữa.\"", "\"Pam không thích hoa đâu mẹ.\""], c: 1 },
-    { q: "Mẹ của Xu-di đã làm gì khi thấy con oà khóc nức nở?", a: ["Mắng Xu-di vì hay dỗi.", "Yêu cầu Xu-di đi làm bài
-    tập.", "Ôm, an ủi, vuốt tóc và lau nước mắt cho con.", "Để mặc Xu-di tự khóc."], c: 2 },
-    { q: "Mẹ đã giải thích thế nào về việc có thêm những người bạn mới?", a: ["Càng lớn càng có nhiều bạn, không thể chỉ
-    chơi với một mình ai mãi mãi.", "Bạn cũ sẽ không còn tốt nữa.", "Phải tìm thêm nhiều bạn mới để không buồn.", "Chỉ
-    nên chơi với một người bạn thân nhất thôi."], c: 0 },
-    { q: "Cuối cùng, Xu-di đã quyết định tặng Pam loại hoa gì?", a: ["Hoa màu đỏ rực.", "Hoa màu vàng mà Pam yêu
-    thích.", "Hoa màu trắng tinh khôi.", "Hoa màu hồng lãng mạn."], c: 1 },
-    { q: "Ai là người đã giúp Xu-di mang giỏ hoa đến nhà Pam?", a: ["Mẹ của Xu-di.", "Chị của Xu-di.", "Bố của Xu-di.",
-    "Một người hàng xóm."], c: 1 },
-    { q: "Pam đã làm gì và nói gì khi nhận được giỏ hoa?", a: ["Nâng hoa lên, áp mặt vào và nói: \"Cảm ơn Xu-di, hi vọng
-    cậu không còn giận mình!\"", "Vứt hoa đi vì không thích.", "Hỏi xem ai đã tặng hoa.", "Không nói gì cả."], c: 0 },
-    { q: "Bài học Xu-di rút ra về tình bạn đích thực ở cuối truyện là gì?", a: ["Luôn phải ở bên cạnh nhau mọi lúc.",
-    "Cấm bạn chơi với người khác.", "Đặt bạn trong tim nhưng không buộc họ luôn ở bên mình.", "Không nên tin tưởng bạn
-    quá nhiều."], c: 2 },
-    { q: "Pam và Xu-di đã thân nhau như thế nào từ trước?", a: ["Chỉ là bạn học bình thường.", "Thân nhau như hình với
-    bóng.", "Mới biết nhau gần đây.", "Thường xuyên cãi vã."], c: 1 },
-    { q: "Màu hoa mà bạn Pam yêu thích nhất là màu gì?", a: ["Màu đỏ.", "Màu xanh dương.", "Màu vàng.", "Màu tím."], c:
-    2 },
-    { q: "Theo bài đọc, yếu tố nào quan trọng nhất trong một tình bạn đẹp?", a: ["Sự giàu có.", "Sự chân thành, thấu
-    hiểu và sẻ chia.", "Sự cạnh tranh.", "Sự im lặng."], c: 1 }
+    { q: "Ngày lễ Mừng xuân được nhắc đến trong bài diễn ra vào tháng mấy?", a: ["Tháng Giêng", "Tháng Ba", "Tháng Năm",
+    "Tháng Chạp"], c: 2 },
+    { q: "Vào ngày lễ Mừng xuân, các bạn nhỏ thường có hoạt động thú vị nào?", a: ["Đi hái hoa trong rừng", "Bí mật đặt
+    giỏ hoa trước cửa nhà bạn bè rồi chạy trốn", "Tổ chức tiệc trà trong vườn", "Viết thư tay gửi cho nhau"], c: 1 },
+    { q: "Cụm từ \"ba chân bốn cẳng\" trong câu \"gõ cửa rồi ba chân bốn cẳng chạy trốn thật nhanh\" gợi tả điều gì?",
+    a: ["Sự sợ hãi tột độ", "Sự vấp ngã khi chạy", "Sự vội vã, nhanh nhẹn và tinh nghịch", "Sự chậm chạp, từ tốn"], c: 2
+    },
+    { q: "Nhân vật \"tôi\" (Xu-di) và Pam có mối quan hệ như thế nào từ nhỏ?", a: ["Là chị em ruột", "Là hàng xóm mới
+    quen", "Thân nhau như hình với bóng", "Là bạn học cùng lớp nhưng ít chơi chung"], c: 2 },
+    { q: "Vì sao Xu-di lại cảm thấy giận Pam?", a: ["Vì Pam quên sinh nhật của Xu-di", "Vì Pam kết thân với một người
+    bạn mới và dành ít thời gian cho Xu-di", "Vì Pam làm hỏng đồ chơi của Xu-di", "Vì Pam không chịu làm giỏ hoa cùng
+    Xu-di"], c: 1 },
+    { q: "Khi mẹ hỏi có mang hoa cho Pam không, phản ứng đầu tiên của Xu-di là gì?", a: ["Đồng ý ngay lập tức", "Im lặng
+    không nói gì", "Trả lời \"Không bao giờ\" và òa khóc nức nở", "Tức giận bỏ đi ra ngoài"], c: 2 },
+    { q: "Mẹ đã an ủi và khuyên Xu-di điều gì về tình bạn?", a: ["Nên tìm một người bạn tốt hơn Pam", "Chúng ta không
+    thể bắt bạn chỉ chơi với một mình mình", "Không nên chơi với những người bạn mới đến", "Nên nghỉ chơi với Pam để bạn
+    ấy hối hận"], c: 1 },
+    { q: "Cuối cùng, Xu-di đã quyết định làm gì?", a: ["Tiếp tục giận Pam", "Viết một lá thư xin lỗi Pam", "Tặng Pam một
+    giỏ hoa", "Mời Pam sang nhà ăn tối"], c: 2 },
+    { q: "Xu-di đã chọn loại hoa màu gì để tặng Pam và vì sao?", a: ["Màu đỏ, vì đó là màu rực rỡ nhất", "Màu vàng, vì
+    đó là màu Pam yêu thích", "Màu tím, vì đó là màu của sự thủy chung", "Màu trắng, vì đó là màu có sẵn trong vườn"],
+    c: 1 },
+    { q: "Ai là người đã giúp Xu-di mang giỏ hoa đến nhà Pam?", a: ["Xu-di tự mang đến", "Mẹ của Xu-di", "Chị của
+    Xu-di", "Người bạn hàng xóm mới"], c: 2 },
+    { q: "Khi nhận được giỏ hoa, Pam đã có cử chỉ như thế nào?", a: ["Ngạc nhiên và chạy đi tìm người tặng", "Nâng giỏ
+    hoa lên, dịu dàng áp mặt vào những bông hoa", "Đặt giỏ hoa xuống và đóng cửa lại", "Gọi điện thoại ngay cho Xu-di"],
+    c: 1 },
+    { q: "Pam đã nói to câu gì khi nhận được hoa?", a: ["\"Ai đã tặng mình giỏ hoa đẹp thế này?\"", "\"Cảm ơn bạn, mình
+    rất thích!\"", "\"Cảm ơn Xu-di, hi vọng cậu không còn giận mình!\"", "\"Xu-di ơi, ra đây chơi với mình đi!\""], c: 2
+    },
+    { q: "Chi tiết Pam nói to lời cảm ơn \"như để tôi nghe được\" cho thấy điều gì?", a: ["Pam biết Xu-di đang nấp gần
+    đó và muốn làm hòa", "Pam có thói quen nói to một mình", "Pam muốn khoe với mọi người xung quanh", "Pam nhầm chị của
+    Xu-di là Xu-di"], c: 0 },
+    { q: "Qua câu chuyện này, nhân vật Xu-di đã rút ra bài học gì về tình bạn đích thực?", a: ["Bạn bè phải luôn ở cạnh
+    nhau mọi lúc mọi nơi", "Không bao giờ được chia sẻ bạn thân với người khác", "Đặt bạn trong tim nhưng không buộc họ
+    luôn ở bên mình", "Chỉ nên chơi với những người bạn cũ"], c: 2 },
+    { q: "Theo nội dung bài đọc, một tình bạn đẹp là tình bạn như thế nào?", a: ["Luôn tặng quà cho nhau vào các dịp
+    lễ", "Dựa trên sự chân thành, thấu hiểu và sẻ chia", "Chỉ cần vui chơi thỏa thích cùng nhau", "Không bao giờ có sự
+    giận dỗi hay hiểu lầm"], c: 1 }
     ];
 
     let currentQuizQuestions = [];
     let currentQuestionIdx = 0;
     let score = 0;
     let selectedOption = null;
+    let timeLeft = 1200; // 20 minutes
+    let timerInterval;
 
-    function startQuiz() {
-    let available = [...allQuestions];
-    available.sort(() => Math.random() - 0.5);
-    currentQuizQuestions = available.slice(0, 5);
-    currentQuestionIdx = 0;
-    score = 0;
-    showQuestion();
-    }
-
-    function showQuestion() {
-    const q = currentQuizQuestions[currentQuestionIdx];
-    document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
-    document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
-    document.getElementById('questionText').innerText = q.q;
-    const optionsArea = document.getElementById('optionsArea');
-    optionsArea.innerHTML = '';
-    q.a.forEach((opt, idx) => {
-    const btn = document.createElement('button');
-    btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
-    btn.innerHTML = `<span
-        class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100">${String.fromCharCode(65
-        + idx)}</span><span class="flex-1">${opt}</span>`;
-    btn.onclick = () => selectOption(idx, btn);
-    optionsArea.appendChild(btn);
-    });
-    document.getElementById('nextBtn').disabled = true;
-    selectedOption = null;
-    }
-
-    function selectOption(idx, btn) {
-    document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500'));
-    btn.classList.add('selected', 'border-blue-500');
-    selectedOption = idx;
-    document.getElementById('nextBtn').disabled = false;
-    }
-
-    document.getElementById('nextBtn').onclick = function () {
-    if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) score += 20;
-    currentQuestionIdx++;
-    if (currentQuestionIdx < 5) showQuestion(); else showResults(); }; function showResults() {
-        document.getElementById('quiz-container').classList.add('hidden');
-        document.getElementById('quiz-results').classList.remove('hidden');
-        document.getElementById('scoreText').innerText=score; const circle=document.getElementById('scoreCircle');
-        circle.setAttribute('stroke-dasharray', `${score}, 100`); if (score>= 80) {
-        document.getElementById('resultTitle').innerText = "Thật tuyệt vời!";
-        document.getElementById('resultMsg').innerText = "Em hiểu rất rõ về ý nghĩa của tình bạn.";
-        } else if (score >= 50) {
-        document.getElementById('resultTitle').innerText = "Rất tốt!";
-        document.getElementById('resultMsg').innerText = "Em đã cảm nhận được tình cảm chân thành trong bài học.";
-        } else {
-        document.getElementById('resultTitle').innerText = "Cố gắng lên!";
-        document.getElementById('resultMsg').innerText = "Em hãy đọc lại câu chuyện và thử lại nhé.";
-        }
+    function startTimer() {
+    timerInterval = setInterval(() => {
+    timeLeft--;
+    const mins = Math.floor(timeLeft / 60);
+    const secs = timeLeft % 60;
+    document.getElementById('timer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2,
+    document.getElementById('timer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2,
+    '0')}`;
+    if (timeLeft <= 0) { clearInterval(timerInterval); showResults(); } }, 1000); } function startQuiz() {
+        currentQuizQuestions=[...allQuestions].sort(()=> Math.random() - 0.5);
+        currentQuestionIdx = 0;
+        score = 0;
+        startTimer();
+        showQuestion();
         }
 
-        function restartQuiz() {
-        document.getElementById('quiz-results').classList.add('hidden');
-        document.getElementById('quiz-container').classList.remove('hidden');
-        startQuiz();
+        function showQuestion() {
+        const q = currentQuizQuestions[currentQuestionIdx];
+        document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
+        document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx +
+        1}/${currentQuizQuestions.length}`;
+        document.getElementById('questionText').innerText = q.q;
+        const optionsArea = document.getElementById('optionsArea');
+        optionsArea.innerHTML = '';
+        q.a.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
+        btn.innerHTML = `<span
+            class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100">${String.fromCharCode(65
+            + idx)}</span><span class="flex-1">${opt}</span>`;
+        btn.onclick = () => selectOption(idx, btn);
+        optionsArea.appendChild(btn);
+        });
+        document.getElementById('nextBtn').disabled = true;
+        selectedOption = null;
         }
 
-        async function submitResults() {
-        const finalData = {
-        studentName: studentData.name,
-        className: studentData.className,
-        school: studentData.school,
-        lessonTitle: "Giỏ hoa tháng Năm",
-        score: score,
-        startTime: studentData.startTime,
-        endTime: new Date().toISOString(),
-        submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
-        const btn = event.target;
-        const originalText = btn.innerText;
-        btn.disabled = true;
-        btn.innerText = "Đang gửi...";
-        try {
-        await db.collection("diem_tieng_viet_lop5").add(finalData);
-        alert(`Chúc mừng em ${studentData.name}!\nKết quả của em đã được gửi thành công.\nĐiểm: ${score}/100`);
-        switchTab('lesson');
-        } catch (error) {
-        console.error("Error submitting quiz:", error);
-        alert("Lỗi khi nộp bài. Kiểm tra lại mạng nhé!");
-        } finally {
-        btn.disabled = false;
-        btn.innerText = originalText;
-        }
+        function selectOption(idx, btn) {
+        document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500'));
+        btn.classList.add('selected', 'border-blue-500');
+        selectedOption = idx;
+        document.getElementById('nextBtn').disabled = false;
         }
 
-        function toggleAccordion(button) {
-        const item = button.parentElement;
-        const isOpen = item.classList.contains('accordion-open');
-        document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-open'));
-        if (!isOpen) item.classList.add('accordion-open');
+        document.getElementById('nextBtn').onclick = function () {
+        if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) {
+        score += (100 / currentQuizQuestions.length);
         }
+        currentQuestionIdx++;
+        if (currentQuestionIdx < currentQuizQuestions.length) { showQuestion(); } else { showResults(); } }; function
+            showResults() { clearInterval(timerInterval);
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            document.getElementById('scoreText').innerText=Math.round(score); const
+            circle=document.getElementById('scoreCircle'); circle.setAttribute('stroke-dasharray',
+            `${Math.round(score)}, 100`); if (score>= 80) {
+            document.getElementById('resultTitle').innerText = "Thật tuyệt vời!";
+            document.getElementById('resultMsg').innerText = "Em hiểu rất rõ về ý nghĩa của tình bạn.";
+            } else if (score >= 50) {
+            document.getElementById('resultTitle').innerText = "Rất tốt!";
+            document.getElementById('resultMsg').innerText = "Em đã cảm nhận được tình cảm chân thành trong bài học.";
+            } else {
+            document.getElementById('resultTitle').innerText = "Cố gắng lên!";
+            document.getElementById('resultMsg').innerText = "Em hãy đọc lại câu chuyện và thử lại nhé.";
+            }
+            }
 
-        const audio = document.getElementById('lessonAudio');
-        const playIcon = document.getElementById('playIcon');
-        const pauseIcon = document.getEleme function exportToExcel() {
-        const table = document.querySelector("#statsModal table");
-        // raw: true giúp giữ định dạng văn bản cho các cột như "Lớp"
-        const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
-        XLSX.writeFile(wb, "ThongKe_GiaoVien_EduRobot.xlsx");
-        } if (audio.paused) {
-        audio.play();
-        playIcon.classList.add('hidden');
-        pauseIcon.classList.remove('hidden');
-        audioStatus.innerText = "Đang phát...";
-        audioStatus.classList.remove('text-gray-400');
-        audioStatus.classList.add('text-green-500');
-        } else {
-        audio.pause();
-        playIcon.classList.remove('hidden');
-        pauseIcon.classList.add('hidden');
-        audioStatus.innerText = "Đang dừng...";
-        audioStatus.classList.remove('text-green-500');
-        audioStatus.classList.add('text-gray-400');
-        }
-        }
-        audio.onended = function () {
-        playIcon.classList.remove('hidden');
-        pauseIcon.classList.add('hidden');
-        audioStatus.innerText = "Đang dừng...";
-        audioStatus.classList.remove('text-green-500');
-        audioStatus.classList.add('text-gray-400');
-        };
-        </script>
+            function restartQuiz() {
+            clearInterval(timerInterval);
+            timeLeft = 1200;
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            startQuiz();
+            }
+
+            async function submitResults() {
+            const finalData = {
+            studentName: studentData.name,
+            className: studentData.className,
+            school: studentData.school,
+            lessonTitle: "Giỏ hoa tháng Năm",
+            score: score,
+            startTime: studentData.startTime,
+            endTime: new Date().toISOString(),
+            submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.disabled = true;
+            btn.innerText = "Đang gửi...";
+            try {
+            await db.collection("diem_tieng_viet_lop5").add(finalData);
+            alert(`Chúc mừng em ${studentData.name}!\nKết quả của em đã được gửi thành công.\nĐiểm: ${score}/100`);
+            switchTab('lesson');
+            } catch (error) {
+            console.error("Error submitting quiz:", error);
+            alert("Lỗi khi nộp bài. Kiểm tra lại mạng nhé!");
+            } finally {
+            btn.disabled = false;
+            btn.innerText = originalText;
+            }
+            }
+
+            function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('accordion-open');
+            document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-open'));
+            if (!isOpen) item.classList.add('accordion-open');
+            }
+
+            const audio = document.getElementById('lessonAudio');
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+            const audioStatus = document.getElementById('audioStatus');
+
+            function toggleAudio() {
+            if (audio.paused) {
+            audio.play();
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+            audioStatus.innerText = "Đang phát...";
+            audioStatus.classList.remove('text-gray-400');
+            audioStatus.classList.add('text-green-500');
+            } else {
+            audio.pause();
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            audioStatus.innerText = "Đang dừng...";
+            audioStatus.classList.remove('text-green-500');
+            audioStatus.classList.add('text-gray-400');
+            }
+            }
+
+            function exportToExcel() {
+            const table = document.querySelector("#statsModal table");
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
+            XLSX.writeFile(wb, "ThongKe_GiaoVien_EduRobot.xlsx");
+            }
+
+            audio.onended = function () {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            audioStatus.innerText = "Đang dừng...";
+            audioStatus.classList.remove('text-green-500');
+            audioStatus.classList.add('text-gray-400');
+            };
+            </script>
 </body>
 
 </html>
