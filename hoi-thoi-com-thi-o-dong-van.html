@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hội thổi cơm thi ở Đồng Vân - EduRobot</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Nunito & Merriweather -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <!-- SheetJS for Excel Export -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 18px;
+        }
+
+        .serif-font {
+            font-family: 'Merriweather', serif;
+            line-height: 1.8;
+        }
+
+        .bg-paper {
+            background-color: #fdfbf7;
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+        }
+
+        .tab-btn.active {
+            color: #ea580c;
+            border-bottom: 3px solid #ea580c;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+            opacity: 0;
+        }
+
+        .accordion-open .accordion-content {
+            max-height: 500px;
+            opacity: 1;
+            padding-bottom: 20px;
+        }
+
+        .accordion-open svg {
+            transform: rotate(180deg);
+        }
+
+        .quiz-option.selected {
+            background-color: #fff7ed;
+            border-color: #f97316;
+            color: #ea580c;
+        }
+
+        /* Modal Teacher Stats */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-sm border-b border-orange-100">
+        <nav class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div
+                        class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center text-white text-lg font-bold">
+                        E</div>
+                    <span class="text-lg font-extrabold text-blue-600 tracking-tight">EduRobot - <span
+                            class="text-orange-500">Tiếng Việt 5</span></span>
+                </a>
+            </div>
+
+            <ul class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
+                <li><a href="index.html" class="hover:text-orange-500 transition-colors">Trang chủ</a></li>
+                <li><a href="huong-sac-tram-mien.html" class="text-orange-600 border-b-2 border-orange-500">Bài học</a>
+                </li>
+                <li><button onclick="openTeacherStats()" class="hover:text-orange-500 transition-colors">Dành cho Giáo
+                        viên</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-4">
+        <!-- Navigation -->
+        <div class="flex items-center justify-between mb-4">
+            <a href="huong-sac-tram-mien.html"
+                class="flex items-center text-gray-600 hover:text-orange-600 font-bold transition-colors">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Chủ điểm: Hương sắc trăm miền
+            </a>
+        </div>
+
+        <!-- Tab & Audio Header -->
+        <div
+            class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-200 mb-4 bg-white rounded-t-2xl overflow-hidden shadow-sm">
+            <div class="flex-1 flex">
+                <button onclick="switchTab('lesson')" id="btn-lesson"
+                    class="tab-btn active flex-1 py-3 text-center font-bold text-gray-500 transition-all hover:bg-orange-50 border-r border-gray-100">
+                    1. Bài học
+                </button>
+                <button onclick="switchTab('quiz')" id="btn-quiz"
+                    class="tab-btn flex-1 py-3 text-center font-bold text-gray-500 transition-all hover:bg-orange-50">
+                    2. Luyện tập
+                </button>
+            </div>
+
+            <div id="audio-container" class="p-2 md:pr-4">
+                <div
+                    class="flex items-center space-x-3 bg-orange-50/50 rounded-full p-1 pr-6 border border-orange-100 shadow-sm transition-all hover:bg-orange-50">
+                    <button id="audioControl" onclick="toggleAudio()"
+                        class="w-11 h-11 bg-orange-600 rounded-full flex items-center justify-center text-white hover:bg-orange-700 transition-all shadow-md active:scale-95">
+                        <svg id="playIcon" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M6 4l10 6-10 6V4z"></path>
+                        </svg>
+                        <svg id="pauseIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 4h4v16H6zm8 0h4v16h-4z"></path>
+                        </svg>
+                    </button>
+                    <div class="flex flex-col">
+                        <p class="text-[11px] font-black text-orange-600 uppercase tracking-widest leading-none mb-1">
+                            NGHE ĐỌC MẪU</p>
+                        <p id="audioStatus" class="text-[12px] text-gray-400 font-bold italic leading-none">Đang dừng...
+                        </p>
+                    </div>
+                </div>
+                <audio id="lessonAudio">
+                    <source src="am_thanh/hoithoicomthi.wav" type="audio/wav">
+                </audio>
+            </div>
+        </div>
+
+        <!-- TAB 1: BÀI HỌC -->
+        <div id="tab-lesson" class="tab-content active">
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="bg-white rounded-[30px] shadow-sm border border-orange-100 p-6 md:p-8">
+                        <div class="p-6 md:p-10 bg-paper rounded-2xl shadow-inner border border-gray-100">
+                            <div class="serif-font text-gray-800 text-justify">
+                                <h1
+                                    class="text-3xl font-black mb-6 text-orange-900 text-center uppercase tracking-tight">
+                                    Hội thổi cơm thi ở Đồng Vân</h1>
+
+                                <p class="mb-4">
+                                    Hội thổi cơm thi ở làng Đồng Vân bắt nguồn từ các cuộc trẩy quân đánh giặc của người
+                                    Việt cổ bên bờ sông Đáy xưa.
+                                </p>
+                                <p class="mb-4">
+                                    Hội thi bắt đầu bằng việc lấy lửa. Khi tiếng trống hiệu vừa dứt, bốn thanh niên của
+                                    bốn đội nhanh như sóc, thoan thoắt leo lên bốn cây chuối bôi mỡ bóng nhẫy để lấy nén
+                                    hương cắm ở trên ngọn. Có người leo lên, tụt xuống, lại leo lên,... Khi mang được
+                                    nén hương xuống, người dự thi được phát ba que diêm để châm vào hương cho cháy thành
+                                    ngọn lửa. Trong khi đó, những người trong đội, mỗi người một việc. Người thì ngồi
+                                    vót những thanh tre già thành những chiếc đũa bông. Người thì nhanh tay giã thóc,
+                                    giần sàng thành gạo, người thì lấy nước và bắt đầu thổi cơm.
+                                </p>
+                                <p class="mb-4">
+                                    Mỗi người nấu cơm đều mang một cái cần tre được cắm rất khéo vào dây lưng, uốn cong
+                                    hình cánh cung từ phía sau ra trước mặt, đầu cần treo cái nồi nho nhỏ. Người nấu cơm
+                                    tay giữ cần, tay cầm đuốc đung đưa cho ánh lửa bập bùng. Các đội vừa thổi cơm vừa
+                                    đan xen nhau uốn lượn trên sân đình trong sự cổ vũ nồng nhiệt của người xem hội.
+                                </p>
+                                <p class="mb-4">
+                                    Sau độ một giờ rưỡi, các nồi cơm được lần lượt trình trước cửa đình. Mỗi nồi cơm
+                                    được đánh một số để giữ bí mật. Ban giám khảo chấm theo ba tiêu chí: cơm trắng, dẻo
+                                    và không có cháy. Cuộc thi nào cũng hồi hộp và việc giật giải đã trở thành niềm tự
+                                    hào khó có gì sánh nổi đối với dân làng.
+                                </p>
+                                <p class="text-right italic font-bold text-gray-600 mt-6">(Theo Minh Nhương)</p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div
+                            class="mt-8 bg-orange-50 rounded-3xl p-6 border border-orange-100 relative overflow-hidden">
+                            <div class="absolute -right-10 -top-10 w-40 h-40 bg-orange-100 rounded-full opacity-50">
+                            </div>
+                            <div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                                <div class="bg-orange-600 p-6 rounded-2xl text-white shadow-lg shrink-0 text-center">
+                                    <p class="text-[10px] font-bold uppercase tracking-widest opacity-80 mb-1">Thông
+                                        điệp</p>
+                                    <h3 class="text-xl font-black uppercase">Nội dung chính</h3>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700 font-bold leading-relaxed">
+                                        Bài đọc giúp em hiểu rõ hơn về ý nghĩa của lễ hội ở mỗi vùng quê. Hội thi không
+                                        chỉ là một hoạt động văn hóa giải trí mà còn là cách để kết nối quá khứ với hiện
+                                        tại, thể hiện sự khéo léo, tài hoa và lòng tự hào về truyền thống dân tộc.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="bg-yellow-50 rounded-[30px] shadow-sm border border-yellow-100 p-4 sticky top-20">
+                        <h2 class="text-xl font-black text-blue-900 mb-4 flex items-center">
+                            <span class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center mr-3">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
+                            </span>
+                            Tìm hiểu bài
+                        </h2>
+
+                        <!-- Illustration -->
+                        <div id="illustrationContainer"
+                            class="mb-4 overflow-hidden rounded-2xl shadow-sm relative group max-w-full mx-auto shadow-lg border-4 border-white">
+                            <img src="hinh_anh/hoithoicomthi.png" alt="Hội thổi cơm thi"
+                                class="w-full h-auto block transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-4 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-orange-600 transition-colors text-sm">1.
+                                        Hội thổi cơm thi ở Đồng Vân bắt nguồn từ đâu?</span>
+                                    <svg class="w-4 h-4 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content px-4">
+                                    <div class="text-sm text-gray-600 border-t border-gray-50 pt-2">
+                                        <span class="text-green-600 font-bold">Trả lời:</span> Bắt nguồn từ các cuộc
+                                        trẩy quân đánh giặc của người Việt cổ bên bờ sông Đáy xưa.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 2 -->
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-4 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-orange-600 transition-colors text-sm">2.
+                                        Cách lấy lửa được miêu tả như thế nào?</span>
+                                    <svg class="w-4 h-4 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content px-4">
+                                    <div class="text-sm text-gray-600 border-t border-gray-50 pt-2">
+                                        <span class="text-green-600 font-bold">Trả lời:</span> Thanh niên leo lên cây
+                                        chuối bôi mỡ bóng nhẫy để lấy nén hương trên ngọn, sau đó châm diêm vào hương
+                                        cho cháy thành lửa.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 3 -->
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-4 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-orange-600 transition-colors text-sm">3.
+                                        Các thành viên phối hợp thế nào?</span>
+                                    <svg class="w-4 h-4 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content px-4">
+                                    <div class="text-sm text-gray-600 border-t border-gray-50 pt-2">
+                                        <span class="text-green-600 font-bold">Trả lời:</span> Mỗi người một việc: vót
+                                        tre thành đũa bông, giã thóc, giần sàng gạo, lấy nước. Họ phối hợp chủ động và
+                                        rất khéo léo.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 5 -->
+                            <div
+                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-4 text-left flex justify-between items-center group">
+                                    <span
+                                        class="font-bold text-gray-700 group-hover:text-orange-600 transition-colors text-sm">4.
+                                        Tác giả muốn nói điều gì qua bài đọc?</span>
+                                    <svg class="w-4 h-4 text-gray-400 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="accordion-content px-4">
+                                    <div class="text-sm text-gray-600 border-t border-gray-50 pt-2">
+                                        <span class="text-green-600 font-bold">Ý nghĩa:</span> Ca ngợi, tự hào về nét
+                                        đẹp văn hóa cổ truyền của dân tộc và khơi dậy ý thức giữ gìn các giá trị tốt đẹp
+                                        đó.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- TAB 2: LUYỆN TẬP -->
+        <div id="tab-quiz" class="tab-content">
+            <div
+                class="max-w-4xl mx-auto bg-white rounded-[32px] shadow-xl border border-orange-100 overflow-hidden min-h-[500px] flex flex-col">
+                <!-- Registration -->
+                <div id="quiz-registration"
+                    class="p-8 md:p-12 flex-grow flex flex-col items-center justify-center text-center">
+                    <div
+                        class="w-20 h-20 bg-orange-100 rounded-3xl flex items-center justify-center text-orange-600 mb-6">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-black text-gray-800 mb-2">Sẵn sàng thử thách?</h2>
+                    <p class="text-gray-500 mb-8 font-medium">Nhập thông tin bên dưới để bắt đầu bài luyện tập nhé!</p>
+
+                    <form id="regForm" class="w-full max-w-sm space-y-4">
+                        <input type="text" id="studentName" placeholder="Họ và tên của em" required
+                            class="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none font-bold">
+
+                        <div class="flex gap-4">
+                            <input type="text" id="studentClass" placeholder="Lớp (Vd: 5A1)" required
+                                class="w-1/3 px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none font-bold">
+
+                            <select id="schoolSelect" onchange="checkSchool(this)" required
+                                class="w-2/3 px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none font-bold appearance-none">
+                                <option value="">Chọn trường của em</option>
+                                <option value="Tiểu học Trưng Vương">TH Trưng Vương</option>
+                                <option value="Tiểu học Tây Sơn">TH Tây Sơn</option>
+                                <option value="Tiểu học Kim Liên">TH Kim Liên</option>
+                                <option value="other">Trường khác...</option>
+                            </select>
+                        </div>
+                        <input type="text" id="otherSchool" placeholder="Nhập tên trường của em"
+                            class="hidden w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none font-bold">
+
+                        <button type="submit"
+                            class="w-full bg-orange-600 hover:bg-orange-700 text-white font-black py-4 rounded-2xl shadow-lg shadow-orange-200 transition-all active:scale-95 text-lg">
+                            BẮT ĐẦU NGAY
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Quiz Engine -->
+                <div id="quiz-container" class="hidden flex-grow flex flex-col">
+                    <div class="bg-orange-50 px-8 py-4 flex justify-between items-center border-b border-orange-100">
+                        <div class="flex items-center">
+                            <span
+                                class="w-10 h-10 bg-orange-600 text-white rounded-xl flex items-center justify-center font-black mr-3 shadow-md"
+                                id="questionNum">1</span>
+                            <p class="font-black text-orange-900 uppercase tracking-wider text-sm" id="progressText">
+                                Đang thực hiện: 1/10</p>
+                        </div>
+                        <div
+                            class="text-orange-600 font-bold text-sm bg-white px-4 py-2 rounded-full shadow-sm border border-orange-100">
+                            Hương sắc trăm miền
+                        </div>
+                    </div>
+
+                    <div class="p-8 md:p-12 flex-grow">
+                        <h3 class="text-2xl font-black text-gray-800 mb-8 leading-tight" id="questionText">Câu hỏi sẽ
+                            hiện ở đây?</h3>
+                        <div class="grid grid-cols-1 gap-4" id="optionsArea">
+                            <!-- Options go here -->
+                        </div>
+                    </div>
+
+                    <div class="p-8 border-t border-gray-50 flex justify-end">
+                        <button id="nextBtn" disabled
+                            class="bg-orange-600 disabled:opacity-30 hover:bg-orange-700 text-white font-black py-4 px-12 rounded-2xl shadow-lg transition-all active:scale-95">
+                            CÂU TIẾP THEO
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div id="quiz-results"
+                    class="hidden p-8 md:p-12 flex-grow flex flex-col items-center justify-center text-center">
+                    <div class="relative w-48 h-48 mb-6">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="96" cy="96" r="80" stroke="currentColor" stroke-width="12" fill="transparent"
+                                class="text-gray-100" />
+                            <circle id="scoreCircle" cx="96" cy="96" r="80" stroke="currentColor" stroke-width="12"
+                                fill="transparent" class="text-orange-500" stroke-dasharray="0, 100"
+                                stroke-linecap="round" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-5xl font-black text-gray-800" id="scoreText">0</span>
+                            <span class="text-gray-400 font-bold uppercase tracking-widest text-xs italic">Điểm
+                                số</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Hoàn thành bài tập!</h2>
+                    <p class="text-gray-500 mb-10 max-w-md font-medium" id="resultMsg">Em đã nỗ lực hết mình rồi đấy!
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
+                        <button onclick="restartQuiz()"
+                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-black py-4 rounded-2xl transition-all">LÀM
+                            LẠI</button>
+                        <button onclick="submitResults(event)"
+                            class="bg-orange-600 hover:bg-orange-700 text-white font-black py-4 rounded-2xl shadow-lg shadow-orange-200 transition-all">NỘP
+                            KẾT QUẢ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Teacher Stats -->
+    <div id="statsModal" class="modal">
+        <div class="bg-white rounded-[32px] w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl m-4">
+            <div class="p-6 border-b flex justify-between items-center bg-orange-50">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-black text-orange-900">Bảng kết quả học tập</h2>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="exportToExcel()"
+                        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-xl text-sm flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg> Xuất Excel
+                    </button>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-grow overflow-auto p-6 bg-gray-50">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="text-left text-gray-500 uppercase text-xs font-black tracking-widest border-b pb-4">
+                            <th class="p-4">STT</th>
+                            <th class="p-4">Họ và Tên</th>
+                            <th class="p-4">Lớp</th>
+                            <th class="p-4">Trường</th>
+                            <th class="p-4 text-center">Điểm số</th>
+                            <th class="p-4 text-center">Thời gian</th>
+                            <th class="p-4 text-right">Ngày nộp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statsTableBody">
+                        <!-- Data rows here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-zinc-900 text-zinc-400 py-4 px-4 mt-8">
+        <div class="container mx-auto text-center text-xs">
+            <p>@ 2026 EduRobot - Phát triển bởi Lê Thành Long</p>
+        </div>
+    </footer>
+
+    <script>
+        /* UI LOGIC */
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('accordion-open');
+            document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-open'));
+            if (!isOpen) item.classList.add('accordion-open');
+        }
+
+        const audio = document.getElementById('lessonAudio');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const audioStatus = document.getElementById('audioStatus');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                audioStatus.innerText = "Đang phát...";
+                audioStatus.classList.replace('text-gray-400', 'text-green-500');
+            } else {
+                audio.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                audioStatus.innerText = "Đang dừng...";
+                audioStatus.classList.replace('text-green-500', 'text-gray-400');
+            }
+        }
+
+        audio.onended = () => {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            audioStatus.innerText = "Đang dừng...";
+            audioStatus.classList.replace('text-green-500', 'text-gray-400');
+        };
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('btn-' + tabId).classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        /* FIREBASE & TEACHER STATS */
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
+            authDomain: "gamhoctap.firebaseapp.com",
+            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "gamhoctap",
+            storageBucket: "gamhoctap.firebasestorage.app",
+            messagingSenderId: "833329613932",
+            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
+            measurementId: "G-YT1PKCYS67"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        function openTeacherStats() {
+            const pin = prompt("Vui lòng nhập mã PIN giáo viên:");
+            if (pin === 'dvn') {
+                document.getElementById('statsModal').classList.add('active');
+                loadStats();
+            } else if (pin !== null) alert("Mã PIN không chính xác!");
+        }
+
+        function closeModal() { document.getElementById('statsModal').classList.remove('active'); }
+
+        async function loadStats() {
+            const tbody = document.getElementById('statsTableBody');
+            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
+            try {
+                const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Hội thổi cơm thi ở Đồng Vân").get();
+                tbody.innerHTML = '';
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
+                    return;
+                }
+                const results = [];
+                snapshot.forEach(doc => results.push(doc.data()));
+                results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
+
+                results.forEach((data, index) => {
+                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
+                    let duration = '---';
+                    if (data.startTime && data.endTime) {
+                        const diffMs = new Date(data.endTime) - new Date(data.startTime);
+                        duration = `${Math.floor(diffMs / 60000)} phút ${Math.floor((diffMs % 60000) / 1000)} giây`;
+                    }
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-orange-50 transition-colors border-b border-gray-50 text-sm";
+                    tr.innerHTML = `
+                        <td class="p-4 font-bold text-gray-400">${index + 1}</td>
+                        <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
+                        <td class="p-4 text-gray-600">${data.className}</td>
+                        <td class="p-4 text-gray-600">${data.school}</td>
+                        <td class="p-4 text-center">
+                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">${data.score}/100</span>
+                        </td>
+                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
+                        <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (e) { tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>'; }
+        }
+
+        function exportToExcel() {
+            const table = document.querySelector("#statsModal table");
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
+            XLSX.writeFile(wb, "KetQua_HoiThoiComThi.xlsx");
+        }
+
+        /* QUIZ ENGINE */
+        const allQuestions = [
+            { q: "Hội thổi cơm thi ở làng Đồng Vân bắt nguồn từ sự kiện lịch sử nào?", a: ["Lễ hội mừng lúa mới của người nông dân", "Các cuộc trẩy quân đánh giặc của người Việt cổ bên bờ sông Đáy xưa", "Cuộc thi kén rể của vua Hùng", "Lễ hội cầu mưa thuận gió hòa"], c: 1 },
+            { q: "Thử thách đầu tiên để lấy lửa nấu cơm trong cuộc thi là gì?", a: ["Chạy thi đi lấy lửa từ đình làng", "Dùng đá đánh lửa", "Leo lên cây chuối bôi mỡ bóng nhẫy để lấy nén hương", "Giải câu đố để nhận đuốc"], c: 2 },
+            { q: "Hình ảnh \"nhanh như sóc, thoăn thoắt leo lên\" dùng để miêu tả hành động của ai?", a: ["Những người đi xem hội", "Ban giám khảo cuộc thi", "Bốn thanh niên của bốn đội leo cây chuối lấy lửa", "Những người đang vo gạo"], c: 2 },
+            { q: "Dụng cụ nấu cơm trong hội thi được thiết kế đặc biệt như thế nào?", a: ["Nồi cơm được đặt trên kiềng ba chân cố định", "Cần tre cắm vào dây lưng, uốn cong hình cánh cung, đầu treo cái nồi nhỏ", "Nồi cơm được đội trên đầu người nấu", "Nồi cơm được treo trên một cành cây cao"], c: 1 },
+            { q: "Trong quá trình nấu cơm, người dự thi di chuyển như thế nào?", a: ["Đứng yên một chỗ để giữ lửa", "Ngồi xổm để chắn gió", "Vừa thổi cơm vừa đan xen nhau uốn lượn trên sân đình", "Chạy vòng quanh sân đình"], c: 2 },
+            { q: "Ngoài việc lấy lửa và nấu cơm, các đội thi còn phải thực hiện những công việc nào khác xen kẽ?", a: ["Múa hát và đánh trống", "Vót tre thành đũa, giã thóc, giần sàng gạo, lấy nước", "Đi chợ mua thức ăn và bày biện mâm cỗ", "May quần áo và trang trí trại"], c: 1 },
+            { q: "Sự phối hợp giữa các thành viên trong đội thi được nhận xét như thế nào?", a: ["Rời rạc, thiếu thống nhất", "Căng thẳng, hay tranh cãi", "Phối hợp với nhau nhịp nhàng, chủ động và rất khéo léo", "Chậm chạp nhưng chắc chắn"], c: 2 },
+            { q: "Người nấu cơm giữ lửa bằng cách nào khi di chuyển?", a: ["Nhờ người khác cầm hộ đuốc", "Đặt đuốc xuống đất", "Tay giữ cần, tay cầm đuốc đung đưa cho ánh lửa bập bùng", "Dùng đèn dầu thay cho đuốc"], c: 2 },
+            { q: "Thời gian dành cho việc thổi cơm là bao lâu?", a: ["Độ một giờ rưỡi", "Nửa ngày", "Ba mươi phút", "Đến khi trời tối"], c: 0 },
+            { q: "Ban giám khảo chấm điểm nồi cơm dựa trên những tiêu chí nào?", a: ["Cơm chín đều, có nhiều cháy giòn", "Cơm có màu sắc đẹp mắt", "Cơm trắng, dẻo và không có cháy", "Cơm nấu được số lượng nhiều nhất"], c: 2 },
+            { q: "Để đảm bảo công bằng, các nồi cơm trước khi chấm được xử lý ra sao?", a: ["Giấu tên đội thi", "Đánh số để giữ bí mật", "Đảo lộn vị trí các nồi", "Cho tất cả cơm vào một nồi lớn"], c: 1 },
+            { q: "Việc giật giải trong cuộc thi có ý nghĩa gì đối với dân làng?", a: ["Nhận được nhiều tiền thưởng", "Được miễn làm việc đồng áng", "Là niềm tự hào khó có gì sánh nổi", "Được làm trưởng làng"], c: 2 },
+            { q: "Không khí của hội thi được miêu tả qua chi tiết nào?", a: ["Mọi người im lặng theo dõi", "Sự cổ vũ nồng nhiệt của người xem hội, tiếng trống hiệu", "Tiếng cãi vã ồn òa", "Mọi người lo lắng, hồi hộp không dám nhìn"], c: 1 },
+            { q: "Tác giả muốn ca ngợi điều gì qua bài đọc này?", a: ["Ca ngợi sức khỏe phi thường của thanh niên trai tráng", "Ca ngợi nét đẹp văn hóa cổ truyền và sự tài hoa, khéo léo của người dân", "Ca ngợi sự giàu có của làng Đồng Vân", "Ca ngợi kĩ thuật trồng lúa nước"], c: 1 },
+            { q: "Qua bài đọc, em hiểu ý nghĩa sâu xa của các lễ hội dân gian là gì?", a: ["Chỉ để vui chơi giải trí", "Để tụ tập ăn uống linh đình", "Giúp kết nối quá khứ với hiện tại, giữ gìn và tôn vinh bản sắc dân tộc", "Để thi thố xem ai giỏi nhất làng"], c: 2 }
+        ];
+
+        let studentData = {}, currentQuizQuestions = [], currentQuestionIdx = 0, score = 0, selectedOption = null;
+
+        function checkSchool(s) { document.getElementById('otherSchool').classList.toggle('hidden', s.value !== 'other'); }
+
+        document.getElementById('regForm').onsubmit = (e) => {
+            e.preventDefault();
+            studentData = {
+                name: document.getElementById('studentName').value,
+                className: document.getElementById('studentClass').value,
+                school: document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
+                startTime: new Date().toISOString()
+            };
+            document.getElementById('quiz-registration').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            startQuiz();
+        };
+
+        function startQuiz() {
+            currentQuizQuestions = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 10);
+            currentQuestionIdx = 0; score = 0; showQuestion();
+        }
+
+        function showQuestion() {
+            const q = currentQuizQuestions[currentQuestionIdx];
+            document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
+            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/10`;
+            document.getElementById('questionText').innerText = q.q;
+            const area = document.getElementById('optionsArea'); area.innerHTML = '';
+            q.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group border-2 border-transparent bg-gray-50 hover:bg-orange-50 transition-all';
+                btn.innerHTML = `<span class="w-8 h-8 rounded-lg bg-white flex items-center justify-center mr-4 shadow-sm group-hover:bg-orange-100">${String.fromCharCode(65 + i)}</span><span class="flex-1">${opt}</span>`;
+                btn.onclick = () => {
+                    document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected'); selectedOption = i;
+                    document.getElementById('nextBtn').disabled = false;
+                };
+                area.appendChild(btn);
+            });
+            document.getElementById('nextBtn').disabled = true; selectedOption = null;
+        }
+
+        document.getElementById('nextBtn').onclick = () => {
+            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) score += 10;
+            currentQuestionIdx++;
+            if (currentQuestionIdx < 10) showQuestion(); else showResults();
+        };
+
+        function showResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            document.getElementById('scoreText').innerText = score;
+            document.getElementById('scoreCircle').setAttribute('stroke-dasharray', `${score}, 100`);
+            const title = document.getElementById('resultTitle'), msg = document.getElementById('resultMsg');
+            if (score >= 90) { title.innerText = "Xuất sắc!"; msg.innerText = "Em là một chuyên gia về lễ hội Đồng Vân!"; }
+            else if (score >= 70) { title.innerText = "Rất tốt!"; msg.innerText = "Em hiểu khá rõ về truyền thống lúa nước rồi!"; }
+            else { title.innerText = "Cần cố gắng!"; msg.innerText = "Hãy đọc lại bài để hiểu sâu hơn về hội thi nhé!"; }
+        }
+
+        function restartQuiz() { document.getElementById('quiz-results').classList.add('hidden'); document.getElementById('quiz-registration').classList.remove('hidden'); }
+
+        async function submitResults(e) {
+            const btn = e.target; btn.disabled = true; btn.innerText = "Đang gửi...";
+            try {
+                await db.collection("diem_tieng_viet_lop5").add({
+                    ...studentData, lessonTitle: "Hội thổi cơm thi ở Đồng Vân", score: score, endTime: new Date().toISOString(), submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert(`Chúc mừng ${studentData.name} đã hoàn thành bài tập!`);
+                restartQuiz(); switchTab('lesson');
+            } catch (e) { alert("Lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
+        }
+    </script>
+</body>
+
+</html>
