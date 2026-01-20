@@ -625,6 +625,7 @@
                                 <th class="p-4 border-b">Lớp</th>
                                 <th class="p-4 border-b">Trường</th>
                                 <th class="p-4 border-b text-center">Điểm số</th>
+                                <th class="p-4 border-b text-center">Thời gian làm</th>
                                 <th class="p-4 border-b text-right">Thời gian nộp</th>
                             </tr>
                         </thead>
@@ -738,6 +739,18 @@
 
                 results.forEach((data, index) => {
                     const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
+
+                    // Calculate duration
+                    let duration = '---';
+                    if (data.startTime && data.endTime) {
+                        const start = new Date(data.startTime);
+                        const end = new Date(data.endTime);
+                        const diffMs = end - start;
+                        const mins = Math.floor(diffMs / 60000);
+                        const secs = Math.floor((diffMs % 60000) / 1000);
+                        duration = `${mins} phút ${secs} giây`;
+                    }
+
                     const tr = document.createElement('tr');
                     tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50";
                     tr.innerHTML = `
@@ -750,6 +763,7 @@
                                 ${data.score}/100
                             </span>
                         </td>
+                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
                         <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
                     `;
                     tbody.appendChild(tr);
@@ -762,7 +776,8 @@
 
         function exportToExcel() {
             const table = document.querySelector("#statsModal table");
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả" });
+            // raw: true helps preserve text formatting for columns like "Class"
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
             XLSX.writeFile(wb, "ThongKe_GiaoVien_EduRobot.xlsx");
         }
 
