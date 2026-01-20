@@ -143,9 +143,9 @@
 
             <div id="audio-container" class="p-2 md:pr-4">
                 <div
-                    class="flex items-center space-x-3 bg-orange-50/50 rounded-full p-1 pr-6 border border-orange-100 shadow-sm transition-all hover:bg-orange-50">
+                    class="flex items-center space-x-3 bg-blue-50/50 rounded-full p-1 pr-6 border border-blue-100 shadow-sm transition-all hover:bg-blue-50">
                     <button id="audioControl" onclick="toggleAudio()"
-                        class="w-11 h-11 bg-orange-600 rounded-full flex items-center justify-center text-white hover:bg-orange-700 transition-all shadow-md active:scale-95">
+                        class="w-11 h-11 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-all shadow-md active:scale-95">
                         <svg id="playIcon" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M6 4l10 6-10 6V4z"></path>
                         </svg>
@@ -154,7 +154,7 @@
                         </svg>
                     </button>
                     <div class="flex flex-col">
-                        <p class="text-[11px] font-black text-orange-600 uppercase tracking-widest leading-none mb-1">
+                        <p class="text-[11px] font-black text-blue-600 uppercase tracking-widest leading-none mb-1">
                             NGHE ĐỌC MẪU</p>
                         <p id="audioStatus" class="text-[12px] text-gray-400 font-bold italic leading-none">Đang dừng...
                         </p>
@@ -618,7 +618,14 @@
 
         function exportToExcel() {
             const table = document.querySelector("#statsModal table");
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true, cellStyles: true });
+            const ws = wb.Sheets["Kết quả"];
+            // Set column 'C' (Class) to text format to prevent date auto-formatting
+            if (ws['!cols']) {
+                ws['!cols'][2] = { t: 's' }; // 's' for string
+            } else {
+                ws['!cols'] = [{ wch: 10 }, { wch: 25 }, { t: 's', wch: 10 }, { wch: 25 }, { wch: 10 }, { wch: 20 }, { wch: 20 }];
+            }
             XLSX.writeFile(wb, "KetQua_VuDieuThoCẩm.xlsx");
         }
 
