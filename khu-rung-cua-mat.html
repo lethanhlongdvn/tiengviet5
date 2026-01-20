@@ -498,25 +498,26 @@
 
         <!-- Quiz Tab Content -->
         <div id="tab-quiz" class="tab-content">
-            <div class="bg-white rounded-[30px] shadow-sm border border-gray-100 p-6 md:p-10 max-w-4xl mx-auto">
+            <div class="bg-white rounded-[30px] shadow-sm border border-gray-100 p-4 md:p-6 max-w-4xl mx-auto">
                 <div id="quiz-registration">
-                    <div class="text-center mb-8">
-                        <h2 class="text-3xl font-black text-blue-900 mb-2">THÔNG TIN HỌC SINH</h2>
-                        <p class="text-gray-500">Vui lòng nhập thông tin để bắt đầu luyện tập: <b>Khu rừng của Mát</b>
+                    <div class="text-center mb-4">
+                        <h2 class="text-2xl font-black text-blue-900 mb-1">THÔNG TIN HỌC SINH</h2>
+                        <p class="text-sm text-gray-500">Vui lòng nhập thông tin để bắt đầu luyện tập: <b>Khu rừng của
+                                Mát</b>
                         </p>
                     </div>
-                    <form id="regForm" class="space-y-6">
+                    <form id="regForm" class="space-y-4">
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2">Họ và tên:</label>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Họ và tên:</label>
                             <input type="text" id="studentName" required
-                                class="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all"
+                                class="w-full p-3 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all"
                                 placeholder="Nhập đầy đủ họ tên của em">
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Lớp:</label>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Lớp:</label>
                                 <select id="studentClass" required
-                                    class="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all">
+                                    class="w-full p-3 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all">
                                     <option value="">-- Chọn lớp --</option>
                                     <option value="5/1">Lớp 5/1</option>
                                     <option value="5/2">Lớp 5/2</option>
@@ -526,28 +527,28 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Trường:</label>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Trường:</label>
                                 <div class="relative">
                                     <select id="schoolSelect" onchange="checkSchool(this)"
-                                        class="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all">
+                                        class="w-full p-3 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all">
                                         <option value="Tiểu học Đỗ Văn Nại">Tiểu học Đỗ Văn Nại</option>
                                         <option value="other">Trường khác...</option>
                                     </select>
                                     <input type="text" id="otherSchool"
-                                        class="hidden mt-4 w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all"
+                                        class="hidden mt-2 w-full p-3 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all"
                                         placeholder="Nhập tên trường của em">
                                 </div>
                             </div>
                         </div>
                         <button type="submit"
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-lg uppercase tracking-wider">
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-lg uppercase tracking-wider">
                             Bắt đầu làm bài
                         </button>
                     </form>
                 </div>
 
                 <div id="quiz-container" class="hidden">
-                    <div class="flex justify-between items-center mb-8 pb-4 border-b border-gray-100">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-100">
                         <div class="flex items-center space-x-3">
                             <span id="questionNum"
                                 class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center font-black text-xl">1</span>
@@ -563,12 +564,12 @@
                         </div>
                     </div>
 
-                    <div id="questionArea" class="mb-8">
-                        <h3 id="questionText" class="text-xl font-bold text-gray-800 mb-6 leading-relaxed"></h3>
-                        <div id="optionsArea" class="grid grid-cols-1 gap-4"></div>
+                    <div id="questionArea" class="mb-4">
+                        <h3 id="questionText" class="text-lg font-bold text-gray-800 mb-4 leading-relaxed"></h3>
+                        <div id="optionsArea" class="grid grid-cols-1 gap-3"></div>
                     </div>
 
-                    <div class="flex justify-end pt-6 border-t border-gray-100">
+                    <div class="flex justify-end pt-4 border-t border-gray-100">
                         <button id="nextBtn" disabled
                             class="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition-all active:scale-95 flex items-center">
                             Tiếp theo
@@ -580,9 +581,9 @@
                     </div>
                 </div>
 
-                <div id="quiz-results" class="hidden text-center py-12">
-                    <div class="mb-8 relative inline-block">
-                        <svg class="w-48 h-48 mx-auto" viewBox="0 0 36 36">
+                <div id="quiz-results" class="hidden text-center py-6">
+                    <div class="mb-4 relative inline-block">
+                        <svg class="w-32 h-32 mx-auto" viewBox="0 0 36 36">
                             <path class="text-gray-100" stroke-width="3" fill="none"
                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                             <path id="scoreCircle" class="text-green-500" stroke-width="3" stroke-dasharray="0, 100"
@@ -590,12 +591,12 @@
                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                         </svg>
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <span id="scoreText" class="text-5xl font-black text-blue-900">0</span>
-                            <span class="text-sm font-bold text-gray-400 uppercase">Điểm</span>
+                            <span id="scoreText" class="text-3xl font-black text-blue-900">0</span>
+                            <span class="text-[10px] font-bold text-gray-400 uppercase">Điểm</span>
                         </div>
                     </div>
-                    <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Hoàn thành!</h2>
-                    <p class="text-gray-500 mb-10" id="resultMsg">Chúc mừng em đã hoàn thành bài luyện tập.</p>
+                    <h2 class="text-2xl font-black text-gray-800 mb-1" id="resultTitle">Hoàn thành!</h2>
+                    <p class="text-sm text-gray-500 mb-6" id="resultMsg">Chúc mừng em đã hoàn thành bài luyện tập.</p>
 
                     <div class="flex flex-col sm:flex-row justify-center gap-4">
                         <button onclick="restartQuiz()"
