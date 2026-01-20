@@ -560,10 +560,9 @@
                             class="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-4 px-10 rounded-2xl transition-all active:scale-95">
                             Làm lại
                         </button>
-                        <button onclick="submitResults()"
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition-all active:scale-95">
-                            Nộp bài
-                        </button>
+                        <button onclick="submitResults(event)"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition-all active:scale-95">Nộp
+                            bài</button>
                     </div>
                 </div>
             </div>
@@ -961,7 +960,7 @@
             }
         }
 
-        async function submitResults() {
+        async function submitResults(e) {
             try {
                 const finalScore = Math.round(score);
                 await db.collection("diem_tieng_viet_lop5").add({
@@ -974,8 +973,11 @@
                     endTime: userData.endTime,
                     submittedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                alert("Đã nộp bài thành công!");
-                window.location.href = "ve-dep-cuoc-song.html";
+                alert(`Chúc mừng em ${userData.studentName}!\nKết quả của em đã được gửi thành công đến thầy cô.\nĐiểm: ${finalScore}/100`);
+                // Reset Quiz UI for next time
+                document.getElementById('quiz-results').classList.add('hidden');
+                document.getElementById('quiz-registration').classList.remove('hidden');
+                switchTab('lesson');
             } catch (error) {
                 console.error("Error submitting results:", error);
                 alert("Có lỗi khi nộp bài. Em hãy thử lại nhé.");
