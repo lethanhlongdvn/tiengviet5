@@ -698,7 +698,7 @@
         };
 
         function startQuiz() {
-            currentQuizQuestions = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
+            currentQuizQuestions = shuffle([...allQuestions]).slice(0, 5);
             currentQuestionIdx = 0; score = 0; showQuestion();
         }
 
@@ -808,6 +808,7 @@
         </div>
         <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Trở về</span>
     </a>
+
 </body>
 
 </html>
