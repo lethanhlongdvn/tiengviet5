@@ -23,6 +23,14 @@
         body {
             font-family: 'Nunito', sans-serif;
             font-size: 18px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         .serif-font {
@@ -34,55 +42,144 @@
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .accordion-open .accordion-content {
-            max-height: 800px;
-        }
-
-        .accordion-open svg {
-            transform: rotate(180deg);
+            max-height: 1000px;
+            padding-bottom: 1.5rem;
         }
 
         .bg-paper {
             background-color: #fdfcf7;
-            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
+            background-image: radial-gradient(#e5e7eb 0.8px, transparent 0.8px);
+            background-size: 24px 24px;
+        }
+
+        .poem-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: fit-content;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .poem-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem 4rem;
+            }
         }
 
         .poem-stanza {
-            margin-bottom: 2rem;
+            break-inside: avoid;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .poem-stanza p:first-child {
+            font-weight: 900;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
         }
 
         /* Tab Styles */
+        .tab-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: #2563eb;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .tab-btn.active::after {
+            width: 100%;
+        }
+
         .tab-btn.active {
-            border-bottom: 4px solid #1d4ed8;
-            color: #1d4ed8;
+            color: #1e40af;
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .tab-content {
-            display: none;
+            display: none !important;
+            animation: fadeIn 0.4s ease-out;
         }
 
         .tab-content.active {
-            display: block;
+            display: block !important;
         }
 
-        /* Quiz Styles */
-        .quiz-option {
-            transition: all 0.2s;
-            border: 2px solid #e5e7eb;
+        #tab-quiz.active {
+            display: flex !important;
         }
 
-        .quiz-option:hover {
-            border-color: #3b82f6;
-            background-color: #eff6ff;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .quiz-option.selected {
-            border-color: #2563eb;
-            background-color: #dbeafe;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Success Modal Styles */
+        .success-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            padding: 1rem;
+            animation: fadeInModal 0.3s ease-out;
+        }
+
+        .success-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-card {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .success-modal.active .success-card {
+            transform: scale(1);
+            opacity: 1;
         }
 
         /* Modal Styles */
@@ -103,54 +200,108 @@
             align-items: center;
             justify-content: center;
         }
+
+        @keyframes fadeInModal {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
-<body class="bg-blue-50 text-gray-800">
+<body class="bg-blue-50 text-gray-800 min-h-screen flex flex-col overflow-x-hidden">
 
     <!-- Header -->
-    <header class="bg-white sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 py-1 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <a href="index.html" class="flex items-center space-x-2">
-                    <div
-                        class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg font-bold">
-                        E</div>
-                    <span class="text-lg font-extrabold text-blue-600 tracking-tight">EduRobot - <span
-                            class="text-yellow-500">Tiếng Việt 5</span></span>
-                </a>
+    <header class="sticky top-0 z-50 px-4 py-2">
+        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-3">
+                <div
+                    class="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-lg flex items-center justify-center text-white shadow-xl transform hover:rotate-6 transition-transform">
+                    <span class="text-lg font-black">E</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <span
+                            class="text-base font-black bg-gradient-to-r from-blue-600 to-indigo-800 bg-clip-text text-transparent hidden md:block">EduRobot</span>
+                        <span
+                            class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-sm shadow-amber-200 animate-pulse">TIẾNG
+                            VIỆT 5</span>
+                    </div>
+                    <div class="h-4 w-px bg-gray-200 hidden md:block"></div>
+                    <div class="flex items-center space-x-1.5 overflow-hidden">
+                        <span class="text-[9px] font-black uppercase tracking-widest text-gray-400">Chủ điểm:</span>
+                        <span
+                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">Vẻ
+                            đẹp cuộc sống</span>
+                    </div>
+                </div>
             </div>
-
-            <ul class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
-                <li><a href="index.html" class="hover:text-blue-500 transition-colors">Trang chủ</a></li>
+            <ul class="flex space-x-6 text-xs font-bold items-center">
                 <li><a href="cd5-ve-dep-cuoc-song.html"
-                        class="hover:text-blue-500 transition-colors font-bold text-blue-600 border-b-2 border-blue-600">Bài
-                        học</a></li>
-                <li><a href="#" onclick="openTeacherStats()" class="hover:text-blue-500 transition-colors">Thống kê</a>
-                </li>
-                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
+                        class="flex items-center text-blue-600 hover:text-blue-700 transition-colors">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Quay lại
+                    </a></li>
+                <li class="border-l border-gray-200 pl-6"><a href="index.html"
+                        class="text-gray-500 hover:text-blue-600 transition-colors">Trang chủ</a></li>
+                <li><button onclick="openTeacherStats()"
+                        class="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-all">Giáo
+                        viên</button></li>
             </ul>
         </nav>
     </header>
 
-    <main class="container mx-auto px-4 py-1">
-
-
-
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
         <div
-            class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-200 mb-6 bg-white rounded-t-2xl overflow-hidden shadow-sm">
-            <div class="flex-1 flex">
+            class="success-card glass-card p-10 rounded-[40px] shadow-3xl max-w-md w-full text-center relative overflow-hidden border-2 border-white/50">
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-green-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+            <div class="relative">
+                <div
+                    class="w-24 h-24 bg-gradient-to-tr from-green-500 to-emerald-400 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-green-200 transform rotate-12">
+                    <svg class="w-12 h-12 text-white transform -rotate-12" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+
+                <h2 class="text-3xl font-black text-slate-800 mb-3 uppercase tracking-tight">Nộp bài thành công!</h2>
+                <p class="text-slate-600 font-medium mb-8 leading-relaxed">Tuyệt vời! Kết quả của em đã được lưu lại.
+                    Hãy tiếp tục cố gắng nhé!</p>
+
+                <button onclick="closeSuccessModal()"
+                    class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 uppercase tracking-wider text-sm">
+                    Trở về bài học
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-2 flex-grow flex flex-col min-h-0">
+
+        <!-- Tab & Audio Header -->
+        <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
+            <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
-                    class="tab-btn active flex-1 py-3 text-center font-bold text-gray-500 transition-all hover:bg-blue-50 border-r border-gray-100">
+                    class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">
                     1. Bài học
                 </button>
                 <button onclick="switchTab('quiz')" id="btn-quiz"
-                    class="tab-btn flex-1 py-3 text-center font-bold text-gray-500 transition-all hover:bg-blue-50">
+                    class="tab-btn flex-1 py-4 text-center font-black text-base text-gray-400 transition-all uppercase tracking-wider">
                     2. Luyện tập
                 </button>
             </div>
 
-            <div id="audio-container" class="p-2 md:pr-4">
+            <div id="audio-container" class="p-2 md:pr-4 flex items-center bg-blue-600/5 backdrop-blur-md">
                 <div
                     class="flex items-center space-x-3 bg-blue-50/50 rounded-full p-1 pr-6 border border-blue-100 shadow-sm transition-all hover:bg-blue-50">
                     <button id="audioControl" onclick="toggleAudio()"
@@ -187,8 +338,9 @@
                                 <h1 class="text-3xl font-black mb-2 text-blue-900 text-center">Hạt gạo làng ta</h1>
                                 <p class="text-lg italic mb-8 text-gray-600 font-bold text-center">Trần Đăng Khoa</p>
 
-                                <div class="md:columns-2 gap-12 md:gap-20">
-                                    <div class="poem-stanza break-inside-avoid mb-8">
+                                <div
+                                    class="poem-container py-12 px-10 bg-blue-50/30 rounded-[40px] border border-blue-100/50 shadow-inner max-w-3xl mx-auto">
+                                    <div class="poem-stanza">
                                         <p>Hạt gạo làng ta</p>
                                         <p>Có vị phù sa</p>
                                         <p>Của sông Kinh Thầy</p>
@@ -198,7 +350,7 @@
                                         <p>Ngọt bùi đắng cay...</p>
                                     </div>
 
-                                    <div class="poem-stanza break-inside-avoid mb-8">
+                                    <div class="poem-stanza">
                                         <p>Hạt gạo làng ta</p>
                                         <p>Có bão tháng Bảy</p>
                                         <p>Có mưa tháng Ba</p>
@@ -210,7 +362,7 @@
                                         <p>Mẹ em xuống cấy...</p>
                                     </div>
 
-                                    <div class="poem-stanza break-inside-avoid mb-8">
+                                    <div class="poem-stanza">
                                         <p>Hạt gạo làng ta</p>
                                         <p>Những năm bom Mỹ</p>
                                         <p>Trút trên mái nhà</p>
@@ -222,7 +374,7 @@
                                         <p>Thơm hào giao thông...</p>
                                     </div>
 
-                                    <div class="poem-stanza break-inside-avoid mb-8">
+                                    <div class="poem-stanza">
                                         <p>Hạt gạo làng ta</p>
                                         <p>Có công các bạn</p>
                                         <p>Sớm nào chống hạn</p>
@@ -233,7 +385,7 @@
                                         <p>Quang trành quết đất</p>
                                     </div>
 
-                                    <div class="poem-stanza break-inside-avoid mb-8">
+                                    <div class="poem-stanza col-span-1 md:col-span-2 md:mx-auto">
                                         <p>Hạt gạo làng ta</p>
                                         <p>Gửi ra tiền tuyến</p>
                                         <p>Gửi về phương xa</p>
@@ -249,6 +401,12 @@
                 <!-- Cột phải (30%) - Tìm hiểu bài -->
                 <aside class="w-full lg:w-[30%]">
                     <div class="bg-yellow-50 rounded-[30px] shadow-sm border border-yellow-100 p-4 sticky top-20">
+                        <div class="mb-4 overflow-hidden rounded-2xl shadow-sm relative group max-w-full mx-auto">
+                            <img src="C:/Users/Admin/.gemini/antigravity/brain/cbb865b6-a5f3-4a35-b283-692f4fd0abc3/hat_gao_lang_ta_illustration_1768924318312.png"
+                                alt="Hạt gạo làng ta"
+                                class="w-full h-auto block transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
+
                         <h2 class="text-xl font-black text-blue-900 mb-4 flex items-center">
                             <span class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center mr-3">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -259,10 +417,6 @@
                             </span>
                             Tìm hiểu bài
                         </h2>
-                        <div class="mb-4 overflow-hidden rounded-2xl shadow-sm relative group max-w-full mx-auto">
-                            <img src="C:/Users/Admin/.gemini/antigravity/brain/cbb865b6-a5f3-4a35-b283-692f4fd0abc3/hat_gao_lang_ta_illustration_1768924318312.png"
-                                alt="Hạt gạo làng ta" class="w-full h-auto block">
-                        </div>
 
                         <div class="space-y-4">
                             <!-- Câu 1 -->
@@ -409,82 +563,132 @@
 
             <!-- Nội dung chính -->
             <div
-                class="mt-2 bg-white rounded-[30px] shadow-sm border border-blue-100 p-6 md:p-8 overflow-hidden relative">
-                <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-50 rounded-full opacity-50"></div>
-                <div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                class="mt-8 bg-gradient-to-br from-white to-blue-50/50 rounded-[40px] shadow-xl border border-blue-100/50 p-8 md:p-12 overflow-hidden relative group">
+                <div
+                    class="absolute -right-20 -top-20 w-64 h-64 bg-blue-100/30 rounded-full blur-3xl group-hover:bg-blue-200/30 transition-colors duration-700">
+                </div>
+                <div
+                    class="absolute -left-20 -bottom-20 w-64 h-64 bg-indigo-100/20 rounded-full blur-3xl group-hover:bg-indigo-200/20 transition-colors duration-700">
+                </div>
+
+                <div class="flex flex-col lg:flex-row items-center gap-10 relative z-10">
                     <div
-                        class="bg-blue-600 p-8 rounded-3xl text-white shadow-xl shadow-blue-200 shrink-0 text-center md:text-left">
-                        <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-2">Thông điệp</p>
-                        <h3 class="text-2xl font-black uppercase tracking-wider">Nội dung chính</h3>
+                        class="bg-gradient-to-br from-blue-600 to-indigo-700 p-10 rounded-[2.5rem] text-white shadow-2xl shadow-blue-200/50 shrink-0 text-center md:text-left transform hover:rotate-2 transition-transform duration-300">
+                        <div
+                            class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4 mx-auto md:mx-0">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18 18.246 18.477 16.5 18.477 14.754 18.477 13.168 18.477 12 19.253">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-black uppercase tracking-[0.2em] opacity-80 mb-2">Thông điệp</p>
+                        <h3 class="text-3xl font-black uppercase tracking-tight leading-tight">Nội dung<br>chính</h3>
                     </div>
-                    <div class="flex-grow">
-                        <p class="text-lg font-semibold leading-relaxed text-blue-900 mb-2">
-                            Để làm ra hạt lúa, hạt gạo, người nông dân đã trải qua biết bao vất vả, khổ cực.
-                        </p>
-                        <p class="text-gray-600 leading-relaxed text-base">
-                            Bài thơ ca ngợi tinh thần lao động bền bỉ, vượt khó của người nông dân và các bạn nhỏ. Qua
-                            đó
-                            nhắc nhở chúng ta phải biết <b>quý trọng công sức lao động</b> và trân quý hạt gạo mình ăn
-                            mỗi
-                            ngày.
-                        </p>
+
+                    <div class="flex-grow space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="mt-1.5 w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
+                                <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+                            </div>
+                            <p class="text-xl font-black leading-relaxed text-slate-800">
+                                Bài thơ ca ngợi giá trị của hạt gạo được làm nên từ mồ hôi, công sức của con người và
+                                những tinh túy của đất trời.
+                            </p>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="mt-1.5 w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
+                                <div class="w-2 h-2 bg-emerald-600 rounded-full"></div>
+                            </div>
+                            <p class="text-lg text-slate-600 leading-relaxed font-medium">
+                                Đồng thời, tác giả muốn nhắc nhở chúng ta lòng biết ơn đối với người nông dân, trân
+                                trọng từng hạt gạo mình ăn mỗi ngày vì đó là "hạt vàng" quý giá.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Quiz Tab Content -->
-        <div id="tab-quiz" class="tab-content">
-            <div class="bg-white rounded-[30px] shadow-sm border border-gray-100 p-6 md:p-10 max-w-4xl mx-auto">
-                <div id="quiz-registration">
-                    <div class="text-center mb-8">
-                        <h2 class="text-3xl font-black text-blue-900 mb-2">THÔNG TIN HỌC SINH</h2>
-                        <p class="text-gray-500">Vui lòng nhập thông tin để bắt đầu luyện tập: <b>Hạt gạo làng ta</b>
-                        </p>
+        <div id="tab-quiz" class="tab-content flex-grow flex-col overflow-hidden">
+            <div
+                class="bg-white rounded-[30px] shadow-sm border border-gray-100 flex-grow flex flex-col overflow-hidden relative max-w-4xl mx-auto w-full">
+                <div id="quiz-registration" class="p-4 md:p-8 flex-grow flex flex-col justify-center overflow-auto">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-black text-blue-900 mb-1 leading-tight tracking-tight">THÔNG TIN HỌC
+                            SINH</h2>
+                        <p class="text-xs text-gray-500 font-bold uppercase tracking-wider">Hạt gạo làng ta</p>
                     </div>
-                    <form id="regForm" class="space-y-6">
+                    <form id="regForm" class="space-y-4 max-w-2xl mx-auto w-full">
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2">Họ và tên:</label>
+                            <label
+                                class="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-2 ml-1">Họ
+                                và tên:</label>
                             <input type="text" id="studentName" required
-                                class="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all"
+                                class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition-all font-bold placeholder:text-gray-300 shadow-sm"
                                 placeholder="Nhập đầy đủ họ tên của em">
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Lớp:</label>
-                                <select id="studentClass" required
-                                    class="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all">
-                                    <option value="">-- Chọn lớp --</option>
-                                    <option value="5/1">Lớp 5/1</option>
-                                    <option value="5/2">Lớp 5/2</option>
-                                    <option value="5/3">Lớp 5/3</option>
-                                    <option value="5/4">Lớp 5/4</option>
-                                    <option value="5/5">Lớp 5/5</option>
-                                </select>
+                                <label
+                                    class="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-2 ml-1">Lớp:</label>
+                                <div class="relative">
+                                    <select id="studentClass" required
+                                        class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none cursor-pointer">
+                                        <option value="">-- Chọn lớp --</option>
+                                        <option value="5/1">Lớp 5/1</option>
+                                        <option value="5/2">Lớp 5/2</option>
+                                        <option value="5/3">Lớp 5/3</option>
+                                        <option value="5/4">Lớp 5/4</option>
+                                        <option value="5/5">Lớp 5/5</option>
+                                    </select>
+                                    <div
+                                        class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Trường:</label>
+                                <label
+                                    class="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-2 ml-1">Trường:</label>
                                 <div class="relative">
                                     <select id="schoolSelect" onchange="checkSchool(this)"
-                                        class="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all">
+                                        class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none cursor-pointer">
                                         <option value="Tiểu học Đỗ Văn Nại">Tiểu học Đỗ Văn Nại</option>
                                         <option value="other">Trường khác...</option>
                                     </select>
-                                    <input type="text" id="otherSchool"
-                                        class="hidden mt-4 w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all"
-                                        placeholder="Nhập tên trường của em">
+                                    <div
+                                        class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit"
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-lg uppercase tracking-wider">
-                            Bắt đầu làm bài
-                        </button>
+                        <input type="text" id="otherSchool"
+                            class="hidden w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition-all font-bold shadow-sm"
+                            placeholder="Nhập tên trường của em">
+
+                        <div class="pt-2">
+                            <button type="submit"
+                                class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-base uppercase tracking-[0.1em]">
+                                Bắt đầu làm bài
+                            </button>
+                        </div>
                     </form>
                 </div>
 
-                <div id="quiz-container" class="hidden">
-                    <div class="flex justify-between items-center mb-8 pb-4 border-b border-gray-100">
+                <div id="quiz-container" class="hidden flex-grow flex-col overflow-hidden">
+                    <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100 bg-gray-50/50">
                         <div class="flex items-center space-x-3">
                             <span id="questionNum"
                                 class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center font-black text-xl">1</span>
@@ -500,14 +704,16 @@
                         </div>
                     </div>
 
-                    <div id="questionArea" class="mb-8">
-                        <h3 id="questionText" class="text-xl font-bold text-gray-800 mb-6 leading-relaxed"></h3>
-                        <div id="optionsArea" class="grid grid-cols-1 gap-4"></div>
+                    <div id="questionArea" class="flex-grow overflow-auto p-6 flex flex-col justify-center">
+                        <h3 id="questionText" class="text-xl md:text-2xl font-black text-gray-800 mb-6 leading-tight">
+                        </h3>
+                        <div id="optionsArea" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
                     </div>
 
-                    <div class="flex justify-end pt-6 border-t border-gray-100">
+                    <div class="flex justify-between items-center px-6 py-4 border-t border-gray-100 bg-gray-50/50">
+                        <span class="text-xs font-bold text-gray-400 italic">* Chọn đáp án đúng nhất</span>
                         <button id="nextBtn" disabled
-                            class="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition-all active:scale-95 flex items-center">
+                            class="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-10 rounded-2xl shadow-lg transition-all active:scale-95 flex items-center">
                             Tiếp theo
                             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -517,7 +723,8 @@
                     </div>
                 </div>
 
-                <div id="quiz-results" class="hidden text-center py-12">
+                <div id="quiz-results"
+                    class="hidden p-8 flex-grow flex flex-col items-center justify-center text-center">
                     <div class="mb-8 relative inline-block">
                         <svg class="w-48 h-48 mx-auto" viewBox="0 0 36 36">
                             <path class="text-gray-100" stroke-width="3" fill="none"
@@ -634,10 +841,17 @@
         };
 
         function switchTab(tabId) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-blue-600'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.getElementById('btn-' + tabId).classList.add('active');
+
+            document.getElementById('btn-' + tabId).classList.add('active', 'text-blue-600');
             document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+            restartQuiz();
+            switchTab('lesson');
         }
 
         /* QUIZ ENGINE */
@@ -772,14 +986,24 @@
         const db = firebase.firestore();
 
         async function submitResults(e) {
-            const btn = e.target; btn.disabled = true; btn.innerText = "Đang gửi...";
+            const btn = e.target;
+            btn.disabled = true;
+            btn.innerText = "Đang nộp...";
             try {
                 await db.collection("diem_tieng_viet_lop5").add({
-                    ...studentData, lessonTitle: "Hạt gạo làng ta", score: score, endTime: new Date().toISOString(), submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    ...studentData,
+                    lessonTitle: "Hạt gạo làng ta",
+                    score: score,
+                    endTime: new Date().toISOString(),
+                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                alert(`Chúc mừng ${studentData.studentName} đã hoàn thành bài tập!`);
-                restartQuiz(); switchTab('lesson');
-            } catch (e) { alert("Lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
+                document.getElementById('successModal').classList.add('active');
+            } catch (e) {
+                alert("Lỗi khi gửi kết quả: " + e.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Nộp bài";
+            }
         }
 
         async function loadStats() {
@@ -847,16 +1071,6 @@
             document.getElementById('statsModal').classList.remove('active');
         }
     </script>
-    <a href="cd5-ve-dep-cuoc-song.html?week=20"
-        class="fixed bottom-8 right-8 z-[100] group flex items-center space-x-3 bg-white/80 backdrop-blur-xl p-2 pr-6 rounded-2xl shadow-2xl border border-white/50 hover:scale-105 transition-all active:scale-95">
-        <div
-            class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:rotate-12 transition-transform">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-        </div>
-        <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Trở về</span>
-    </a>
 
 </body>
 
