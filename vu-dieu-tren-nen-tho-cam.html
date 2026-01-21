@@ -673,7 +673,7 @@
         function showQuestion() {
             const q = currentQuizQuestions[currentQuestionIdx];
             document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
-            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/10`;
+            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
             document.getElementById('questionText').innerText = q.q;
             const area = document.getElementById('optionsArea'); area.innerHTML = '';
             q.a.forEach((opt, i) => {
@@ -715,12 +715,12 @@
                 await db.collection("diem_tieng_viet_lop5").add({
                     ...studentData, lessonTitle: "Vũ điệu trên nền thổ cẩm", score: score, endTime: new Date().toISOString(), submittedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                alert(`Chúc mừng ${studentData.name} đã hoàn thành bài tập!`);
+                alert(`Chúc mừng ${studentData.studentName} đã hoàn thành bài tập!`);
                 restartQuiz(); switchTab('lesson');
             } catch (e) { alert("Lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
         }
     </script>
-    <a href="huong-sac-tram-mien.html?week=23"
+    <a href="huong-sac-tram-mien.html?week=24"
         class="fixed bottom-8 right-8 z-[100] group flex items-center space-x-3 bg-white/80 backdrop-blur-xl p-2 pr-6 rounded-2xl shadow-2xl border border-white/50 hover:scale-105 transition-all active:scale-95">
         <div
             class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:rotate-12 transition-transform">
