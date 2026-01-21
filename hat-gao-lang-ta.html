@@ -135,18 +135,7 @@
 
     <main class="container mx-auto px-4 py-1">
 
-        <!-- Navigation & Audio Player Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-2 gap-4">
-            <div>
-                <a href="ve-dep-cuoc-song.html?week=20"
-                    class="flex items-center text-gray-600 hover:text-blue-600 font-bold transition-colors">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
-                </a>
-            </div>
-        </div>
+
 
         <div
             class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-200 mb-6 bg-white rounded-t-2xl overflow-hidden shadow-sm">
@@ -709,7 +698,7 @@
         };
 
         function startQuiz() {
-            currentQuizQuestions = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
+            currentQuizQuestions = shuffle([...allQuestions]).slice(0, 5);
             currentQuestionIdx = 0; score = 0; showQuestion();
         }
 
@@ -868,6 +857,7 @@
         </div>
         <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Trở về</span>
     </a>
+
 </body>
 
 </html>
