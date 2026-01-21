@@ -612,12 +612,8 @@
         function toggleAccordion(button) {
             const item = button.parentElement;
             const isOpen = item.classList.contains('accordion-open');
-            document.querySelectorAll('.accordion-item').forEach(el => {
-                el.classList.remove('accordion-open');
-            });
-            if (!isOpen) {
-                item.classList.add('accordion-open');
-            }
+            document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-open'));
+            if (!isOpen) item.classList.add('accordion-open');
         }
 
         const audio = document.getElementById('lessonAudio');
@@ -648,135 +644,12 @@
             audioStatus.classList.replace('text-green-500', 'text-gray-400');
         };
 
-        /* FIREBASE CONFIG */
-        const firebaseConfig = {
-            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
-            authDomain: "gamhoctap.firebaseapp.com",
-            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "gamhoctap",
-            storageBucket: "gamhoctap.firebasestorage.app",
-            messagingSenderId: "833329613932",
-            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
-            measurementId: "G-YT1PKCYS67"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        /* TEACHER STATS LOGIC */
-        function openTeacherStats() {
-            const pin = prompt("Vui lòng nhập mã PIN giáo viên:");
-            if (pin === 'dvn') {
-                document.getElementById('statsModal').classList.add('active');
-                loadStats();
-            } else if (pin !== null) {
-                alert("Mã PIN không chính xác!");
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('statsModal').classList.remove('active');
-        }
-
-        async function loadStats() {
-            const tbody = document.getElementById('statsTableBody');
-            tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
-
-            try {
-                const snapshot = await db.collection("diem_tieng_viet_lop5")
-                    .where("lessonTitle", "==", "Hạt gạo làng ta")
-                    .get();
-
-                tbody.innerHTML = '';
-                if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
-                    return;
-                }
-
-                const results = [];
-                snapshot.forEach(doc => results.push(doc.data()));
-                results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
-
-                results.forEach((data, index) => {
-                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
-
-                    let duration = '---';
-                    if (data.startTime && data.endTime) {
-                        const start = new Date(data.startTime);
-                        const end = new Date(data.endTime);
-                        const diffMs = end - start;
-                        const mins = Math.floor(diffMs / 60000);
-                        const secs = Math.floor((diffMs % 60000) / 1000);
-                        duration = `${mins} phút ${secs} giây`;
-                    }
-
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50";
-                    tr.innerHTML = `
-                        <td class="p-4 font-bold text-gray-400">${index + 1}</td>
-                        <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
-                        <td class="p-4 text-gray-600">${data.className}</td>
-                        <td class="p-4 text-gray-600">${data.school}</td>
-                        <td class="p-4 text-center">
-                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">
-                                ${data.score}/100
-                            </span>
-                        </td>
-                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
-                        <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            } catch (error) {
-                console.error("Error loading stats:", error);
-                tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu. Vui lòng thử lại.</td></tr>';
-            }
-        }
-
-        function exportToExcel() {
-            const table = document.querySelector("#statsModal table");
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
-            XLSX.writeFile(wb, "ThongKe_GiaoVien_EduRobot.xlsx");
-        }
-
-        /* TAB LOGIC */
         function switchTab(tabId) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-blue-600'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-            document.getElementById('btn-' + tabId).classList.add('active', 'text-blue-600');
+            document.getElementById('btn-' + tabId).classList.add('active');
             document.getElementById('tab-' + tabId).classList.add('active');
         }
-
-        /* REGISTRATION LOGIC */
-        const regForm = document.getElementById('regForm');
-        const otherSchoolInput = document.getElementById('otherSchool');
-
-        function checkSchool(select) {
-            if (select.value === 'other') {
-                otherSchoolInput.classList.remove('hidden');
-                otherSchoolInput.required = true;
-            } else {
-                otherSchoolInput.classList.add('hidden');
-                otherSchoolInput.required = false;
-            }
-        }
-
-        let studentData = {};
-
-        regForm.onsubmit = function (e) {
-            e.preventDefault();
-            studentData = {
-                name: document.getElementById('studentName').value,
-                className: document.getElementById('studentClass').value,
-                school: document.getElementById('schoolSelect').value === 'other' ?
-                    document.getElementById('otherSchool').value :
-                    document.getElementById('schoolSelect').value,
-                startTime: new Date().toISOString()
-            };
-            document.getElementById('quiz-registration').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            startQuiz();
-        };
 
         /* QUIZ ENGINE */
         const allQuestions = [
@@ -793,138 +666,251 @@
             { q: "Hạt gạo làm ra được gửi đi đâu?", a: ["Chỉ để ăn trong gia đình", "Xuất khẩu ra nước ngoài", "Gửi ra tiền tuyến, gửi về phương xa", "Đem ra chợ bán"], c: 2 },
             { q: "Vì sao tác giả gọi hạt gạo là \" hạt vàng\"?", a: ["Vì hạt gạo có màu vàng óng", "Vì hạt gạo bán được rất nhiều tiền", "Vì hạt gạo rất quý giá, được làm nên từ mồ hôi công sức của bao người", "Vì lúa chín trên đồng trông như vàng"], c: 2 },
             { q: "Bài thơ ca ngợi phẩm chất tốt đẹp nào của người nông dân?", a: ["Cần cù, chịu khó, không ngại gian khổ và yêu lao động", "Thông minh, sáng tạo trong sản xuất", "Vui vẻ, lạc quan yêu đời", "Dũng cảm trong chiến đấu"], c: 0 },
-            { q: "Hình ảnh nào dưới đây thể hiện sự kết tinh của đất trời trong hạt gạo?", a: ["Giọt mồ hôi sa", "V vị phù sa, hương sen thơm", "Mẻ miệng gàu", "Hào giao thông"], c: 1 },
-            { q: "Qua bài thơ, tác giả muốn nhắc nhở chúng ta điều gì?", a: ["Phải biết tiết kiệm nước", "Phải chăm chỉ học tập", "Phải biết quý trọng hạt gạo and công sức của những người lao động", "Phải yêu thiên nhiên, đất nước"], c: 2 }
+            { q: "Hình ảnh nào dưới đây thể hiện sự kết tinh của đất trời trong hạt gạo?", a: ["Giọt mồ hôi sa", "Vị phù sa, hương sen thơm", "Mẻ miệng gàu", "Hào giao thông"], c: 1 },
+            { q: "Qua bài thơ, tác giả muốn nhắc nhở chúng ta điều gì?", a: ["Phải biết tiết kiệm nước", "Phải chăm chỉ học tập", "Phải biết quý trọng hạt gạo và công sức của những người lao động", "Phải yêu thiên nhiên, đất nước"], c: 2 }
         ];
 
-        let currentQuizQuestions = [];
-        let currentQuestionIdx = 0;
+        let selectedQuestions = [];
+        let currentIdx = 0;
         let score = 0;
-        let selectedOption = null;
-        let lastUsedQuestions = [];
+        let studentData = {};
+        let startTime = null;
 
-        function startQuiz() {
-            let available = [...allQuestions];
-            available.sort(() => Math.random() - 0.5);
-
-            if (lastUsedQuestions.length > 0) {
-                let fresh = available.filter(q => !lastUsedQuestions.includes(q.q));
-                let repeated = available.filter(q => lastUsedQuestions.includes(q.q));
-                currentQuizQuestions = fresh.slice(0, 5);
-                if (currentQuizQuestions.length < 5) {
-                    currentQuizQuestions = currentQuizQuestions.concat(repeated.slice(0, 5 - currentQuizQuestions.length));
-                }
+        function checkSchool() {
+            const select = document.getElementById('schoolSelect');
+            const other = document.getElementById('otherSchool');
+            if (select.value === 'other' || select.value === 'Khác') {
+                other.classList.remove('hidden');
+                other.required = true;
             } else {
-                currentQuizQuestions = available.slice(0, 5);
+                other.classList.add('hidden');
+                other.required = false;
             }
+        }
 
-            lastUsedQuestions = currentQuizQuestions.map(q => q.q);
-            currentQuestionIdx = 0;
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        const regForm = document.getElementById('regForm');
+        regForm.onsubmit = function (e) {
+            e.preventDefault();
+            const schoolVal = document.getElementById('schoolSelect').value;
+            studentData = {
+                studentName: document.getElementById('studentName').value,
+                studentClass: document.getElementById('studentClass').value,
+                school: (schoolVal === 'other' || schoolVal === 'Khác') ? document.getElementById('otherSchool').value : schoolVal
+            };
+            const shuffled = shuffle([...allQuestions]);
+            selectedQuestions = shuffled.slice(0, 5);
+            currentIdx = 0;
             score = 0;
+            startTime = new Date();
+            document.getElementById('quiz-registration').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
             showQuestion();
         }
 
         function showQuestion() {
-            const q = currentQuizQuestions[currentQuestionIdx];
-            document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
-            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
+            const q = selectedQuestions[currentIdx];
+            document.getElementById('questionNum').innerText = currentIdx + 1;
+            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentIdx + 1}/5`;
             document.getElementById('questionText').innerText = q.q;
 
-            const optionsArea = document.getElementById('optionsArea');
-            optionsArea.innerHTML = '';
-
-            q.a.forEach((opt, idx) => {
+            const area = document.getElementById('optionsArea');
+            area.innerHTML = '';
+            q.a.forEach((opt, i) => {
                 const btn = document.createElement('button');
-                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
+                btn.className = "w-full p-4 text-left border-2 border-gray-100 rounded-2xl font-bold transition-all hover:border-blue-200 hover:bg-blue-50/50 flex items-center group";
                 btn.innerHTML = `
-                    <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100 transition-colors">${String.fromCharCode(65 + idx)}</span>
+                    <span class="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all text-sm">${String.fromCharCode(65 + i)}</span>
                     <span class="flex-1">${opt}</span>
                 `;
-                btn.onclick = () => selectOption(idx, btn);
-                optionsArea.appendChild(btn);
+                btn.onclick = () => selectOption(i, btn);
+                area.appendChild(btn);
             });
-
             document.getElementById('nextBtn').disabled = true;
-            selectedOption = null;
+            document.getElementById('nextBtn').onclick = nextQuestion;
         }
 
         function selectOption(idx, btn) {
-            document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500'));
-            btn.classList.add('selected', 'border-blue-500');
-            selectedOption = idx;
+            document.querySelectorAll('#optionsArea button').forEach(b => {
+                b.classList.remove('border-blue-600', 'bg-blue-50');
+                b.querySelector('span').classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+            });
+            btn.classList.add('border-blue-600', 'bg-blue-50');
+            btn.querySelector('span').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
             document.getElementById('nextBtn').disabled = false;
+            document.getElementById('nextBtn').dataset.selected = idx;
         }
 
-        document.getElementById('nextBtn').onclick = function () {
-            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) {
-                score += 20;
-            }
+        function nextQuestion() {
+            const selected = parseInt(document.getElementById('nextBtn').dataset.selected);
+            if (selected === selectedQuestions[currentIdx].c) score += 20;
 
-            currentQuestionIdx++;
-            if (currentQuestionIdx < 5) {
-                showQuestion();
-            } else {
-                showResults();
-            }
-        };
+            currentIdx++;
+            if (currentIdx < 5) showQuestion();
+            else showResults();
+        }
 
         function showResults() {
             document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('quiz-results').classList.remove('hidden');
-
             document.getElementById('scoreText').innerText = score;
             const circle = document.getElementById('scoreCircle');
             circle.setAttribute('stroke-dasharray', `${score}, 100`);
 
             if (score >= 80) {
-                document.getElementById('resultTitle').innerText = "Thật tuyệt vời!";
+                document.getElementById('resultTitle').innerText = "Rất tuyệt vời!";
                 document.getElementById('resultMsg').innerText = "Em hiểu rất rõ về ý nghĩa bài thơ này.";
-            } else if (score >= 50) {
-                document.getElementById('resultTitle').innerText = "Rất tốt!";
+            } else if (score >= 60) {
+                document.getElementById('resultTitle').innerText = "Làm tốt lắm!";
                 document.getElementById('resultMsg').innerText = "Em đã cảm nhận được giá trị hạt gạo và lòng biết ơn.";
             } else {
-                document.getElementById('resultTitle').innerText = "Cố gắng lên!";
+                document.getElementById('resultTitle').innerText = "Cố gắng lên nhé!";
                 document.getElementById('resultMsg').innerText = "Em hãy đọc lại bài thơ và thử lại nhé.";
             }
         }
 
         function restartQuiz() {
             document.getElementById('quiz-results').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            startQuiz();
+            document.getElementById('quiz-registration').classList.remove('hidden');
+            // Reset state
+            selectedQuestions = [];
+            currentIdx = 0;
+            score = 0;
+            studentData = {};
+            startTime = null;
         }
 
-        async function submitResults(e) {
-            const finalData = {
-                studentName: studentData.name,
-                className: studentData.className,
-                school: studentData.school,
-                lessonTitle: "Hạt gạo làng ta",
-                score: score,
-                startTime: studentData.startTime,
-                endTime: new Date().toISOString(),
-                submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-            };
+        /* FIREBASE CONFIG */
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
+            authDomain: "gamhoctap.firebaseapp.com",
+            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "gamhoctap",
+            storageBucket: "gamhoctap.firebasestorage.app",
+            messagingSenderId: "833329613932",
+            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
+            measurementId: "G-YT1PKCYS67"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
+        async function submitResults(e) {
             const btn = e.target;
-            const originalText = btn.innerText;
             btn.disabled = true;
             btn.innerText = "Đang gửi...";
+            const duration = Math.floor((new Date() - startTime) / 1000);
+            const minutes = Math.floor(duration / 60);
+            const seconds = duration % 60;
+            const timeStr = `${minutes}p ${seconds}s`;
 
             try {
-                await db.collection("diem_tieng_viet_lop5").add(finalData);
-                alert(`Chúc mừng em ${studentData.name}!\nKết quả của em đã được gửi thành công đến thầy cô.\nĐiểm: ${score}/100`);
-                // Reset Quiz UI for next time
-                document.getElementById('quiz-results').classList.add('hidden');
-                document.getElementById('quiz-registration').classList.remove('hidden');
+                await db.collection("diem_tieng_viet_lop5").add({
+                    ...studentData,
+                    lessonTitle: "Hạt gạo làng ta",
+                    score: score,
+                    duration: duration,
+                    timeDisplay: timeStr,
+                    endTime: new Date().toISOString(),
+                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert(`Chúc mừng em ${studentData.studentName}! Kết quả của em đã được gửi thành công.`);
+                restartQuiz();
                 switchTab('lesson');
-            } catch (error) {
-                console.error("Error submitting quiz:", error);
-                alert("Có lỗi xảy ra khi nộp bài. Em hãy kiểm tra lại kết nối mạng nhé!");
+            } catch (err) {
+                console.error(err);
+                alert("Có lỗi khi gửi kết quả. Em vui lòng thử lại nhé!");
             } finally {
                 btn.disabled = false;
-                btn.innerText = originalText;
+                btn.innerText = "NỘP KẾT QUẢ";
             }
+        }
+
+        /* TEACHER STATS */
+        function openTeacherStats() {
+            const pin = prompt("Vui lòng nhập mã PIN bảo mật:");
+            if (pin === "dvn") {
+                document.getElementById('statsModal').classList.add('active');
+                loadStats();
+            } else if (pin !== null) {
+                alert("Mã PIN không chính xác!");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('statsModal').classList.remove('active');
+        }
+
+        let currentStatsData = [];
+        async function loadStats() {
+            const tbody = document.getElementById('statsTableBody');
+            tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-gray-400 font-bold italic">Đang tải dữ liệu...</td></tr>';
+
+            try {
+                const snapshot = await db.collection("diem_tieng_viet_lop5")
+                    .where("lessonTitle", "==", "Hạt gạo làng ta")
+                    .orderBy("submittedAt", "desc")
+                    .get();
+
+                currentStatsData = [];
+                tbody.innerHTML = '';
+
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-gray-400 font-bold italic">Chưa có dữ liệu học sinh nộp bài.</td></tr>';
+                    return;
+                }
+
+                snapshot.forEach((doc, index) => {
+                    const data = doc.data();
+                    currentStatsData.push(data);
+                    const row = document.createElement('tr');
+                    row.className = "border-b hover:bg-gray-50 transition-colors bg-white";
+                    row.innerHTML = `
+                        <td class="p-4 font-bold text-gray-400">${index + 1}</td>
+                        <td class="p-4 font-black text-gray-800">${data.studentName}</td>
+                        <td class="p-4"><span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-black">${data.studentClass}</span></td>
+                        <td class="p-4 text-gray-600 font-medium">${data.school}</td>
+                        <td class="p-4 text-center"><span class="text-xl font-black ${data.score >= 80 ? 'text-green-600' : 'text-blue-600'}">${data.score}</span></td>
+                        <td class="p-4 text-center font-bold text-gray-500">${data.timeDisplay || 'N/A'}</td>
+                        <td class="p-4 text-right text-gray-400 text-xs font-bold">${data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : 'N/A'}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } catch (err) {
+                console.error(err);
+                tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-red-500 font-bold">Lỗi khi tải dữ liệu. Hãy thử lại!</td></tr>';
+            }
+        }
+
+        function exportToExcel() {
+            if (currentStatsData.length === 0) {
+                alert("Không có dữ liệu để xuất!");
+                return;
+            }
+
+            const dataToExport = currentStatsData.map((item, index) => ({
+                'STT': index + 1,
+                'Họ và Tên': item.studentName,
+                'Lớp': item.studentClass,
+                'Trường': item.school,
+                'Điểm số': item.score,
+                'Thời gian làm bài': item.timeDisplay || 'N/A',
+                'Ngày nộp': item.submittedAt ? item.submittedAt.toDate().toLocaleString('vi-VN') : 'N/A'
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(dataToExport);
+            ws['!cols'] = [{}, {}, { t: 's' }, {}, {}, {}, {}];
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "KetQua");
+            XLSX.writeFile(wb, "ThongKe_HatGaoLangTa.xlsx");
         }
     </script>
 </body>
