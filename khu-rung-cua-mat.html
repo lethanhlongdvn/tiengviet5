@@ -10,11 +10,11 @@
         href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <!-- SheetJS for Excel Export -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
 
     <style>
         body {
@@ -657,57 +657,53 @@
 
         async function loadStats() {
             const tbody = document.getElementById('statsTableBody');
-            tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
             try {
-                const snapshot = await db.collection("diem_tieng_viet_lop5")
-                    .where("lessonTitle", "==", "Khu rừng của Mát")
-                    .get();
+                const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Khu rừng của Mát").get();
                 tbody.innerHTML = '';
                 if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
                     return;
                 }
                 const results = [];
                 snapshot.forEach(doc => results.push(doc.data()));
                 results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
+
                 results.forEach((data, index) => {
                     const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
                     let duration = '---';
                     if (data.startTime && data.endTime) {
-                        const start = new Date(data.startTime);
-                        const end = new Date(data.endTime);
-                        const diffMs = end - start;
-                        const mins = Math.floor(diffMs / 60000);
-                        const secs = Math.floor((diffMs % 60000) / 1000);
-                        duration = `${mins} phút ${secs} giây`;
+                        const diffMs = new Date(data.endTime) - new Date(data.startTime);
+                        duration = `${Math.floor(diffMs / 60000)} phút ${Math.floor((diffMs % 60000) / 1000)} giây`;
                     }
                     const tr = document.createElement('tr');
-                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50";
+                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50 text-sm bg-white";
                     tr.innerHTML = `
-                    <td class="p-4 font-bold text-gray-400">${index + 1}</td>
-                    <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
-                    <td class="p-4 text-gray-600">${data.className}</td>
-                    <td class="p-4 text-gray-600">${data.school}</td>
-                    <td class="p-4 text-center">
-                        <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">
-                            ${Math.round(data.score)}/100
-                        </span>
-                    </td>
-                    <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
-                    <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
-                `;
+                        <td class="p-4 font-bold text-gray-400">${index + 1}</td>
+                        <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
+                        <td class="p-4 text-gray-600">${data.className}</td>
+                        <td class="p-4 text-gray-600">${data.school}</td>
+                        <td class="p-4 text-center">
+                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">${data.score}/100</span>
+                        </td>
+                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
+                        <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
+                    `;
                     tbody.appendChild(tr);
                 });
-            } catch (error) {
-                console.error("Error loading stats:", error);
-                tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>';
-            }
+            } catch (e) { tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>'; }
         }
 
         function exportToExcel() {
             const table = document.querySelector("#statsModal table");
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
-            XLSX.writeFile(wb, "ThongKe_GiaoVien_EduRobot.xlsx");
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true, cellStyles: true });
+            const ws = wb.Sheets["Kết quả"];
+            if (ws['!cols']) {
+                ws['!cols'][2] = { t: 's' }; // Ensure 'Class' column is text
+            } else {
+                ws['!cols'] = [{ wch: 10 }, { wch: 25 }, { t: 's', wch: 10 }, { wch: 25 }, { wch: 10 }, { wch: 20 }, { wch: 20 }];
+            }
+            XLSX.writeFile(wb, "KetQua_KhuRungCuaMat.xlsx");
         }
 
         /* TAB LOGIC */
@@ -718,25 +714,26 @@
             document.getElementById('tab-' + tabId).classList.add('active');
         }
 
-        /* REGISTRATION LOGIC */
-        const otherSchoolInput = document.getElementById('otherSchool');
-        function checkSchool(select) {
+        let studentData = {}, currentQuizQuestions = [], currentQuestionIdx = 0, score = 0, selectedOption = null;
+
+        function checkSchool() {
+            const select = document.getElementById('schoolSelect');
+            const other = document.getElementById('otherSchool');
             if (select.value === 'other') {
-                otherSchoolInput.classList.remove('hidden');
-                otherSchoolInput.required = true;
+                other.classList.remove('hidden');
+                other.required = true;
             } else {
-                otherSchoolInput.classList.add('hidden');
-                otherSchoolInput.required = false;
+                other.classList.add('hidden');
+                other.required = false;
             }
         }
-        let studentData = {};
-        document.getElementById('regForm').onsubmit = function (e) {
+
+        document.getElementById('regForm').onsubmit = (e) => {
             e.preventDefault();
             studentData = {
-                name: document.getElementById('studentName').value,
+                studentName: document.getElementById('studentName').value,
                 className: document.getElementById('studentClass').value,
-                school: document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value :
-                    document.getElementById('schoolSelect').value,
+                school: document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
                 startTime: new Date().toISOString()
             };
             document.getElementById('quiz-registration').classList.add('hidden');
@@ -744,50 +741,9 @@
             startQuiz();
         };
 
-        /* QUIZ ENGINE */
-        const allQuestions = [
-            { q: "Mát sống cùng với ai và ở đâu?", a: ["Sống với bố mẹ ở thành phố", "Sống với ông nội ở \"Trang trại rừng\"", "Sống một mình trong rừng sâu", "Sống với bà lão ở ven biển"], c: 1 },
-            { q: "\"Trang trại rừng\" nơi Mát sống có nguồn gốc như thế nào?", a: ["Do Mát tự khai phá", "Do ông nội mới mua được", "Là cơ nghiệp của tổ tiên để lại, nổi tiếng trong vùng", "Là đất thuê của nhà nước"], c: 2 },
-            { q: "Ông nội đã dạy cho Mát những kiến thức gì khi chăm sóc rừng cây?", a: ["Cách săn bắt thú rừng", "Cách chặt cây lấy gỗ", "Tên và đặc tính của nhiều loại cây", "Cách dự báo thời tiết"], c: 2 },
-            { q: "Trước khi qua đời, ông nội đã gửi gắm điều gì cho Mát?", a: ["Hãy bán trang trại để lên thành phố sống", "Bảo vệ trang trại thật tốt và gìn giữ hồi ức đẹp đã có cùng ông", "Hãy chặt hết cây cổ thụ để bán", "Hãy tìm một công việc mới tốt hơn"], c: 1 },
-            { q: "Nguyên nhân nào đã gây ra vụ cháy lớn tại trang trại?", a: ["Do người dân đốt nương làm rẫy", "Do một tia sét đánh trúng ngọn cây cao nhất trong đêm mưa bão", "Do Mát sơ ý làm đổ đèn dầu", "Do nắng nóng kéo dài gây cháy rừng"], c: 1 },
-            { q: "Mức độ thiệt hại của vụ cháy được miêu tả như thế nào?", a: ["Chỉ cháy một góc nhỏ của khu rừng", "Đám cháy được dập tắt ngay lập tức", "Trang trại cháy suốt một ngày và một đêm, cây cối bị thiêu rụi, cảnh vật hoang tàn", "Không có thiệt hại gì đáng kể"], c: 2 },
-            { q: "Sau khi trang trại bị cháy rụi, tâm trạng của Mát như thế nào?", a: ["Bình tĩnh và lạc quan", "Tức giận và muốn tìm người chịu trách nhiệm", "Đau xót, kiệt sức, buồn bã và tuyệt vọng", "Thờ ơ vì không quan tâm"], c: 2 },
-            { q: "Ai là người đã đưa ra lời khuyên giúp Mát bừng tỉnh trong bệnh viện?", a: ["Bác sĩ điều trị", "Ông nội hiện về trong mơ", "Một bà lão nằm giường bên cạnh", "Một người bạn thân của Mát"], c: 2 },
-            { q: "Câu nói nào của bà lão đã trở thành động lực cho Mát?", a: ["\"Cáu hãy bán mảnh đất đó đi.\"", "\"Cây bị thiêu cháy thì trồng lại là được. Cậu còn trẻ mà!\"", "\"Chuyện đã rồi, hãy quên nó đi.\"", "\"Cậu nên chuyển nghề khác cho đỡ vất vả.\""], c: 1 },
-            { q: "Theo nội dung tìm hiểu bài, vì sao lời khuyên của bà lão lại có tác động lớn đến Mát?", a: ["Vì bà lão hứa sẽ cho Mát tiền", "Vì bà đã chỉ ra hướng giải quyết (trồng lại) và nhắc nhở Mát về sức mạnh của tuổi trẻ", "Vì bà lão là người quen cũ của ông nội", "Vì Mát sợ bà lão buồn"], c: 1 },
-            { q: "Mát đã nảy ra ý tưởng gì để kiếm vốn khôi phục lại trang trại?", a: ["Vay tiền ngân hàng", "Kêu gọi mọi người quyên góp", "Biến những thân cây bị đốt cháy thành than củi đem bán", "Bán bớt một phần đất đai"], c: 2 },
-            { q: "Hành động biến thân cây cháy thành than củi để mua cây giống thể hiện phẩm chất gì của Mát?", a: ["Sự thông minh, sáng tạo và biết tận dụng cơ hội trong khó khăn", "Sự liều lĩnh và mạo hiểm", "Sự tham lam muốn kiếm tiền nhanh", "Sự lãng phí tài nguyên"], c: 0 },
-            { q: "Kết quả sau nhiều năm nỗ lực của Mát là gì?", a: ["Trang trại vẫn chỉ là vùng đất trống", "Mát bỏ cuộc và chuyển đi nơi khác", "Trang trại lại được phủ một màu xanh mướt", "Mát bán trang trại cho người khác"], c: 2 },
-            { q: "Vì sao mọi người gọi trang trại là \"Rừng của Mát\"?", a: ["Để phân biệt với rừng của người khác", "Thể hiện niềm khâm phục đối với cậu chủ mới đã hồi sinh khu rừng", "Vì Mát là người duy nhất sống ở đó", "Vì tên khu rừng vốn dĩ là như vậy"], c: 1 },
-            { q: "Câu chuyện muốn gửi gắm thông điệp ý nghĩa nào đến người đọc?", a: ["Cần phải biết cách phòng cháy chữa cháy rừng", "Tuổi trẻ cần phải đi xa để lập nghiệp", "Nếu có ý chí, nghị lực vượt qua thất bại và khó khăn, chúng ta sẽ gặt hái được thành công", "Cần phải giữ gìn tài sản của tổ tiên bằng mọi giá"], c: 2 }
-        ];
-
-        let currentQuizQuestions = [];
-        let currentQuestionIdx = 0;
-        let score = 0;
-        let selectedOption = null;
-        let lastUsedQuestions = [];
-
         function startQuiz() {
-            let available = [...allQuestions];
-            available.sort(() => Math.random() - 0.5);
-
-            if (lastUsedQuestions.length > 0) {
-                let fresh = available.filter(q => !lastUsedQuestions.includes(q.q));
-                let repeated = available.filter(q => lastUsedQuestions.includes(q.q));
-                currentQuizQuestions = fresh.slice(0, 5);
-                if (currentQuizQuestions.length < 5) {
-                    currentQuizQuestions = currentQuizQuestions.concat(repeated.slice(0, 5 - currentQuizQuestions.length));
-                }
-            } else {
-                currentQuizQuestions = available.slice(0, 5);
-            }
-
-            lastUsedQuestions = currentQuizQuestions.map(q => q.q);
-            currentQuestionIdx = 0;
-            score = 0;
-            showQuestion();
+            currentQuizQuestions = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
+            currentQuestionIdx = 0; score = 0; showQuestion();
         }
 
         function showQuestion() {
@@ -795,36 +751,30 @@
             document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
             document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
             document.getElementById('questionText').innerText = q.q;
-            const optionsArea = document.getElementById('optionsArea');
-            optionsArea.innerHTML = '';
-            q.a.forEach((opt, idx) => {
+            const area = document.getElementById('optionsArea'); area.innerHTML = '';
+            q.a.forEach((opt, i) => {
                 const btn = document.createElement('button');
-                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
-                btn.innerHTML = `<span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100">${String.fromCharCode(65 + idx)}</span><span class="flex-1">${opt}</span>`;
-                btn.onclick = () => selectOption(idx, btn);
-                optionsArea.appendChild(btn);
+                btn.className = 'w-full p-4 text-left border-2 border-gray-100 rounded-2xl font-bold transition-all hover:border-blue-200 hover:bg-blue-50/50 flex items-center group';
+                btn.innerHTML = `<span class="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all text-sm">${String.fromCharCode(65 + i)}</span><span class="flex-1">${opt}</span>`;
+                btn.onclick = () => {
+                    document.querySelectorAll('#optionsArea button').forEach(b => {
+                        b.classList.remove('border-blue-600', 'bg-blue-50');
+                        b.querySelector('span').classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+                    });
+                    btn.classList.add('border-blue-600', 'bg-blue-50');
+                    btn.querySelector('span').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+                    document.getElementById('nextBtn').disabled = false;
+                    selectedOption = i;
+                };
+                area.appendChild(btn);
             });
-            document.getElementById('nextBtn').disabled = true;
-            selectedOption = null;
+            document.getElementById('nextBtn').disabled = true; selectedOption = null;
         }
 
-        function selectOption(idx, btn) {
-            document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500'));
-            btn.classList.add('selected', 'border-blue-500');
-            selectedOption = idx;
-            document.getElementById('nextBtn').disabled = false;
-        }
-
-        document.getElementById('nextBtn').onclick = function () {
-            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) {
-                score += 20;
-            }
+        document.getElementById('nextBtn').onclick = () => {
+            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) score += 20;
             currentQuestionIdx++;
-            if (currentQuestionIdx < 5) {
-                showQuestion();
-            } else {
-                showResults();
-            }
+            if (currentQuestionIdx < 5) showQuestion(); else showResults();
         };
 
         function showResults() {
@@ -845,41 +795,20 @@
             }
         }
 
-        function restartQuiz() {
-            document.getElementById('quiz-results').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            startQuiz();
+        async function submitResults(e) {
+            const btn = e.target; btn.disabled = true; btn.innerText = "Đang gửi...";
+            try {
+                await db.collection("diem_tieng_viet_lop5").add({
+                    ...studentData, lessonTitle: "Khu rừng của Mát", score: score, endTime: new Date().toISOString(), submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert(`Chúc mừng ${studentData.studentName} đã hoàn thành bài tập!`);
+                restartQuiz(); switchTab('lesson');
+            } catch (e) { alert("Lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
         }
 
-        async function submitResults(e) {
-            const finalData = {
-                studentName: studentData.name,
-                className: studentData.className,
-                school: studentData.school,
-                lessonTitle: "Khu rừng của Mát",
-                score: Math.round(score),
-                startTime: studentData.startTime,
-                endTime: new Date().toISOString(),
-                submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-            };
-            const btn = e.target;
-            const originalText = btn.innerText;
-            btn.disabled = true;
-            btn.innerText = "Đang gửi...";
-            try {
-                await db.collection("diem_tieng_viet_lop5").add(finalData);
-                alert(`Chúc mừng em ${studentData.name}!\nKết quả của em đã được gửi thành công.\nĐiểm: ${Math.round(score)}/100`);
-                // Reset Quiz UI for next time
-                document.getElementById('quiz-results').classList.add('hidden');
-                document.getElementById('quiz-registration').classList.remove('hidden');
-                switchTab('lesson');
-            } catch (error) {
-                console.error("Error submitting quiz:", error);
-                alert("Lỗi khi nộp bài. Thử lại sau nhé!");
-            } finally {
-                btn.disabled = false;
-                btn.innerText = originalText;
-            }
+        function restartQuiz() {
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-registration').classList.remove('hidden');
         }
     </script>
 </body>
