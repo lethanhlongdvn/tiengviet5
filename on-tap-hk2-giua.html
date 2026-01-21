@@ -31,6 +31,8 @@
             </div>
             <ul class="hidden md:flex space-x-8 font-semibold text-gray-600">
                 <li><a href="index.html" class="hover:text-blue-500 transition-colors">Trang chủ</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Giới thiệu</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Phản hồi</a></li>
             </ul>
         </nav>
     </header>
@@ -39,34 +41,71 @@
         <div class="max-w-4xl mx-auto">
             <div
                 class="bg-white rounded-[40px] p-8 md:p-12 shadow-xl border-4 border-yellow-400 relative overflow-hidden">
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-yellow-100 rounded-full opacity-50 z-0"></div>
+
                 <div class="relative z-10">
                     <div
                         class="inline-block bg-yellow-400 text-blue-900 font-bold px-6 py-2 rounded-full uppercase text-sm mb-6 shadow-sm">
                         Tuần 27
                     </div>
+
                     <h1 class="text-4xl md:text-5xl font-black text-blue-900 mb-6 leading-tight">
                         Ôn tập Giữa Học Kỳ 2
                     </h1>
+
                     <p class="text-xl text-gray-600 mb-10 leading-relaxed">
                         Hệ thống lại kiến thức từ <span class="text-blue-600 font-bold">Tuần 19 đến Tuần 26</span>.
                     </p>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                        <div class="bg-blue-50 p-8 rounded-3xl border-2 border-blue-100 group">
+                        <div
+                            class="bg-blue-50 p-8 rounded-3xl border-2 border-blue-100 group hover:border-blue-300 transition-all">
+                            <div
+                                class="w-14 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                                    </path>
+                                </svg>
+                            </div>
                             <h3 class="text-2xl font-bold text-blue-900 mb-3">Ôn tập Tiếng Việt</h3>
-                            <button
-                                class="bg-blue-600 text-white font-bold py-3 px-8 rounded-2xl shadow-md hover:bg-blue-700 transition-colors w-full">Bắt
-                                đầu ôn tập</button>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6">Ôn lại các quy tắc ngữ pháp, từ vựng
+                                và các bài đọc hiểu trọng tâm.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 font-bold hover:underline">Bắt đầu
+                                ôn tập →</a>
                         </div>
-                        <div class="bg-green-50 p-8 rounded-3xl border-2 border-green-100 group">
+
+                        <div
+                            class="bg-green-50 p-8 rounded-3xl border-2 border-green-100 group hover:border-green-300 transition-all">
+                            <div
+                                class="w-14 h-14 bg-green-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                    </path>
+                                </svg>
+                            </div>
                             <h3 class="text-2xl font-bold text-green-900 mb-3">Đề thi thử</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6">Thử sức với bộ đề mô phỏng cấu trúc
+                                thi thật để rèn luyện kĩ năng.</p>
                             <button
-                                class="bg-green-600 text-white font-bold py-3 px-8 rounded-2xl shadow-md hover:bg-green-700 transition-colors w-full">Làm
+                                class="bg-green-600 text-white font-bold py-3 px-8 rounded-2xl shadow-md hover:bg-green-700 transition-colors active:scale-95">Làm
                                 đề thi</button>
                         </div>
                     </div>
-                    <div class="text-center">
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                        <div></div>
+                        <button
+                            class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-black py-5 px-12 rounded-[24px] shadow-xl transition-all active:scale-95 text-lg order-1 sm:order-2">
+                            Xem tài liệu ôn tập
+                        </button>
                     </div>
                 </div>
+            </div>
+
+            <div class="mt-12 text-center text-gray-400 text-sm italic">
+                "Học thầy không tày học bạn, nhưng ôn bài là cách tự học tốt nhất!"
             </div>
         </div>
     </main>
