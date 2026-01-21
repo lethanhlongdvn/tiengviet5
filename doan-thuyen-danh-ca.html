@@ -7,58 +7,32 @@
     <title>Đoàn thuyền đánh cá - EduRobot</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Nunito & Merriweather -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
-
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
-    <!-- SheetJS for Excel Export -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- SheetJS for Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <style>
         body {
             font-family: 'Nunito', sans-serif;
-            font-size: 18px;
         }
 
         .serif-font {
             font-family: 'Merriweather', serif;
-            font-size: 19px;
-            line-height: 1.8;
-        }
-
-        .serif-font p {
-            margin-bottom: 1.5rem;
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-
-        .accordion-open .accordion-content {
-            max-height: 800px;
-        }
-
-        .accordion-open svg {
-            transform: rotate(180deg);
         }
 
         .bg-paper {
-            background-color: #fdfcf7;
-            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
+            background-color: #fcfaf2;
         }
 
-        /* Tab Styles */
         .tab-btn.active {
-            border-bottom: 4px solid #1d4ed8;
-            color: #1d4ed8;
+            color: #2563eb;
+            background-color: #eff6ff;
+            border-bottom: 3px solid #2563eb;
         }
 
         .tab-content {
@@ -69,49 +43,34 @@
             display: block;
         }
 
-        /* Quiz Styles */
-        .quiz-option {
-            transition: all 0.2s;
-            border: 2px solid #e5e7eb;
+        /* Accordion Custom */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
         }
 
-        .quiz-option:hover {
-            border-color: #3b82f6;
-            background-color: #eff6ff;
+        .accordion-open .accordion-content {
+            max-height: 800px;
         }
 
-        .quiz-option.selected {
-            border-color: #2563eb;
-            background-color: #dbeafe;
+        .accordion-open svg {
+            transform: rotate(180deg);
         }
 
-        .correct {
-            border-color: #10b981 !important;
-            background-color: #ecfdf5 !important;
-        }
-
-        .incorrect {
-            border-color: #ef4444 !important;
-            background-color: #fef2f2 !important;
-        }
-
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(4px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal.active {
             display: flex;
-            align-items: center;
-            justify-content: center;
         }
     </style>
 </head>
@@ -120,40 +79,32 @@
 
     <!-- Header -->
     <header class="bg-white sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 py-1 flex justify-between items-center">
+        <nav class="container mx-auto px-4 py-2 flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <a href="index.html" class="flex items-center space-x-2">
-                    <div
-                        class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg font-bold">
-                        E</div>
-                    <span class="text-lg font-extrabold text-blue-600 tracking-tight">EduRobot - <span
-                            class="text-yellow-500">Tiếng Việt 5</span></span>
-                </a>
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg">
+                    <span class="text-xl font-black">E</span>
+                </div>
+                <span class="text-xl font-black text-blue-600 hidden md:block">EduRobot - Tiếng Việt 5</span>
             </div>
-
-            <ul class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
+            <ul class="flex space-x-6 text-sm font-bold text-gray-500">
                 <li><a href="index.html" class="hover:text-blue-500 transition-colors">Trang chủ</a></li>
-                <li><a href="ve-dep-cuoc-song.html"
-                        class="hover:text-blue-500 transition-colors font-bold text-blue-600 border-b-2 border-blue-600">Bài
-                        học</a></li>
-                <li><a href="#" onclick="openTeacherStats()" class="hover:text-blue-500 transition-colors">Thống kê</a>
-                </li>
-                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
+                <li><button onclick="openTeacherStats()" class="hover:text-blue-500 transition-colors">Dành cho Giáo
+                        viên</button></li>
             </ul>
         </nav>
     </header>
 
     <main class="container mx-auto px-4 py-1">
 
-        <!-- Navigation Header -->
-        <div class="mb-4">
-            <a href="ve-dep-cuoc-song.html?week=22"
-                class="inline-flex items-center text-gray-600 hover:text-blue-600 font-bold transition-colors">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        <!-- Navigation -->
+        <div class="flex items-center justify-between mb-2">
+            <a href="ve-dep-cuoc-song.html"
+                class="flex items-center text-gray-500 hover:text-blue-600 transition-colors text-sm font-bold">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                         d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
-                Quay lại Tuần 22
+                Trở về
             </a>
         </div>
 
@@ -525,46 +476,61 @@
             </div>
         </div>
 
+        <!-- Bottom Navigation Link -->
+        <div class="flex justify-end mt-4 mb-2">
+            <a href="ve-dep-cuoc-song.html"
+                class="flex items-center text-gray-500 hover:text-blue-600 transition-colors text-[13px] font-bold bg-white/50 backdrop-blur-sm px-4 py-2 rounded-xl border border-gray-100 shadow-sm">
+                Trở về
+                <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3">
+                    </path>
+                </svg>
+            </a>
+        </div>
+
         <!-- Teacher Statistics Modal -->
         <div id="statsModal" class="modal">
             <div
-                class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col m-4">
+                class="bg-white rounded-[32px] shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col m-4 border border-blue-100">
                 <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-blue-600 text-white">
-                    <h2 class="text-2xl font-black">THỐNG KÊ KẾT QUẢ HỌC TẬP</h2>
-                    <div class="flex items-center space-x-2">
+                    <div>
+                        <h2 class="text-2xl font-black">THỐNG KÊ KẾT QUẢ</h2>
+                        <p class="text-blue-100 text-xs font-bold uppercase tracking-widest mt-1">Dành cho Giáo viên</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
                         <button onclick="exportToExcel()"
-                            class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-xl flex items-center text-sm font-bold shadow-lg transition-all">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="bg-white/20 hover:bg-white/30 p-2.5 rounded-xl transition-all flex items-center text-sm font-bold">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
                                 </path>
                             </svg>
                             Xuất Excel
                         </button>
-                        <button onclick="closeModal()" class="hover:bg-blue-700 p-2 rounded-full transition-colors">
+                        <button onclick="closeModal()"
+                            class="bg-white/20 hover:bg-white/30 p-2.5 rounded-xl transition-all">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
                                     d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                         </button>
                     </div>
                 </div>
-                <div class="p-6 overflow-x-auto flex-1">
-                    <table class="w-full text-left border-collapse">
+                <div class="p-6 overflow-x-auto flex-1 bg-gray-50/50">
+                    <table class="w-full text-left border-separate border-spacing-y-2">
                         <thead>
-                            <tr class="bg-gray-50 text-gray-600 uppercase text-xs font-bold tracking-widest">
-                                <th class="p-4 border-b">STT</th>
-                                <th class="p-4 border-b">Họ và tên</th>
-                                <th class="p-4 border-b">Lớp</th>
-                                <th class="p-4 border-b">Trường</th>
-                                <th class="p-4 border-b text-center">Điểm số</th>
-                                <th class="p-4 border-b text-center">Thời gian làm</th>
-                                <th class="p-4 border-b text-right">Thời gian nộp</th>
+                            <tr class="text-gray-400 uppercase text-[10px] font-black tracking-[0.2em] px-4">
+                                <th class="px-6 py-3">STT</th>
+                                <th class="px-6 py-3">Học sinh</th>
+                                <th class="px-6 py-3">Lớp</th>
+                                <th class="px-6 py-3">Trường</th>
+                                <th class="px-6 py-3 text-center">Điểm</th>
+                                <th class="px-6 py-3 text-center">Thời gian</th>
+                                <th class="px-6 py-3 text-right">Ngày nộp</th>
                             </tr>
                         </thead>
-                        <tbody id="statsTableBody" class="text-sm">
-                            <!-- Data will be loaded here -->
-                        </tbody>
+                        <tbody id="statsTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -618,7 +584,6 @@
             audioStatus.classList.replace('text-green-500', 'text-gray-400');
         };
 
-        /* FIREBASE CONFIG */
         const firebaseConfig = {
             apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
             authDomain: "gamhoctap.firebaseapp.com",
@@ -632,322 +597,199 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        /* TEACHER STATS LOGIC */
         function openTeacherStats() {
-            const pin = prompt("Vui lòng nhập mã PIN giáo viên:");
+            const pin = prompt("Vui lòng nhập mã PIN:");
             if (pin === 'dvn') {
                 document.getElementById('statsModal').classList.add('active');
                 loadStats();
-            } else if (pin !== null) {
-                alert("Mã PIN không chính xác!");
-            }
+            } else if (pin !== null) alert("Mã PIN sai!");
         }
-
-        function closeModal() {
-            document.getElementById('statsModal').classList.remove('active');
-        }
+        function closeModal() { document.getElementById('statsModal').classList.remove('active'); }
 
         async function loadStats() {
             const tbody = document.getElementById('statsTableBody');
-            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
-
+            tbody.innerHTML = '<tr><td colspan="7" class="p-12 text-center text-gray-400 font-bold">Đang tải dữ liệu...</td></tr>';
             try {
-                const snapshot = await db.collection("diem_tieng_viet_lop5")
-                    .where("lessonTitle", "==", "Đoàn thuyền đánh cá")
-                    .get();
-
+                const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Đoàn thuyền đánh cá").get();
                 tbody.innerHTML = '';
                 if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="7" class="p-12 text-center text-gray-400 font-bold italic">Chưa có dữ liệu.</td></tr>';
                     return;
                 }
-
-                // Sort in memory to avoid needing Firestore index
                 const results = [];
                 snapshot.forEach(doc => results.push(doc.data()));
                 results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
 
                 results.forEach((data, index) => {
-                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
-
-                    // Calculate duration
+                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '---';
                     let duration = '---';
                     if (data.startTime && data.endTime) {
-                        const start = new Date(data.startTime);
-                        const end = new Date(data.endTime);
-                        const diffMs = end - start;
+                        const diffMs = new Date(data.endTime) - new Date(data.startTime);
                         const mins = Math.floor(diffMs / 60000);
                         const secs = Math.floor((diffMs % 60000) / 1000);
-                        duration = `${mins} phút ${secs} giây`;
+                        duration = `${mins}:${secs.toString().padStart(2, '0')}`;
                     }
-
                     const tr = document.createElement('tr');
-                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50";
+                    tr.className = "bg-white hover:bg-blue-50/50 transition-all shadow-sm";
                     tr.innerHTML = `
-                        <td class="p-4 font-bold text-gray-400">${index + 1}</td>
-                        <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
-                        <td class="p-4 text-gray-600 font-bold">${data.className}</td>
-                        <td class="p-4 text-gray-600">${data.school}</td>
-                        <td class="p-4 text-center">
-                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">
-                                ${data.score}/100
-                            </span>
+                        <td class="px-6 py-4 rounded-l-2xl font-black text-gray-400 text-xs">${index + 1}</td>
+                        <td class="px-6 py-4 font-black text-gray-800 text-sm">${data.studentName}</td>
+                        <td class="px-6 py-4 font-bold text-blue-600 text-sm">${data.className}</td>
+                        <td class="px-6 py-4 font-bold text-gray-500 text-sm">${data.school}</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-3 py-1 rounded-lg font-black text-sm ${data.score >= 80 ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}">${data.score}</span>
                         </td>
-                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
-                        <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
+                        <td class="px-6 py-4 text-center font-bold text-gray-400 text-sm">${duration}</td>
+                        <td class="px-6 py-4 text-right rounded-r-2xl font-bold text-gray-400 text-[10px]">${date}</td>
                     `;
                     tbody.appendChild(tr);
                 });
             } catch (error) {
-                console.error("Error loading stats:", error);
-                tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu. Vui lòng thử lại.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" class="p-12 text-center text-red-500 font-bold">Lỗi.</td></tr>';
             }
         }
 
         function exportToExcel() {
             const table = document.querySelector("#statsModal table");
             const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
-            XLSX.writeFile(wb, "ThongKe_GiaoVien_EduRobot.xlsx");
+            const ws = wb.Sheets["Kết quả"];
+            const range = XLSX.utils.decode_range(ws['!ref']);
+            for (let R = range.s.r + 1; R <= range.e.r; ++R) {
+                const cell = ws[XLSX.utils.encode_cell({ r: R, c: 2 })];
+                if (cell) cell.t = 's';
+            }
+            XLSX.writeFile(wb, "ThongKe_DoanThuyenDanhCa.xlsx");
         }
 
-        /* TAB LOGIC */
         function switchTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-blue-600'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
             document.getElementById('btn-' + tabId).classList.add('active', 'text-blue-600');
             document.getElementById('tab-' + tabId).classList.add('active');
         }
 
-        /* QUIZ DATA */
-        const quizData = [
-            {
-                question: "Tác giả của bài thơ \"Đoàn thuyền đánh cá\" là ai?",
-                options: ["Tố Hữu", "Trần Đăng Khoa", "Huy Cận", "Xuân Diệu"],
-                answer: 2
-            },
-            {
-                question: "Đoàn thuyền đánh cá ra khơi vào thời điểm nào trong ngày?",
-                options: ["Bình minh", "Giữa trưa", "Hoàng hôn (lúc mặt trời lặn)", "Nửa đêm"],
-                answer: 2
-            },
-            {
-                question: "Trong khổ thơ đầu, hình ảnh \"Mặt trời xuống biển\" được so sánh với sự vật gì?",
-                options: ["Quả cầu lửa", "Hòn lửa", "Hòn than", "Ngọn đèn"],
-                answer: 1
-            },
-            {
-                question: "Biện pháp nghệ thuật nào được sử dụng trong câu thơ \"Sóng đã cài then, đêm sập cửa\"?",
-                options: ["So sánh", "Nhân hóa", "Điệp từ", "Đảo ngữ"],
-                answer: 1
-            },
-            {
-                question: "Cùng với gió khơi, âm thanh nào đã cùng đoàn thuyền căng buồm ra khơi?",
-                options: ["Tiếng sóng vỗ", "Tiếng còi tàu", "Câu hát", "Tiếng gõ thuyền"],
-                answer: 2
-            },
-            {
-                question: "Trong câu \"Cá thu Biển Đông như đoàn thoi\", tác giả dùng hình ảnh \"đoàn thoi\" để tả loài cá nào?",
-                options: ["Cá bạc", "Cá nục", "Cá chim", "Cá thu"],
-                answer: 3
-            },
-            {
-                question: "Những người ngư dân đã \"hát bài ca gọi cá vào\" với niềm tin gì?",
-                options: ["Để xua đuổi các loài thú dữ", "Xua tan mệt nhọc và mong muốn thu hoạch bội thu", "Để thông báo vị trí cho các thuyền khác", "Để ru ngủ biển cả"],
-                answer: 1
-            },
-            {
-                question: "Hình ảnh \"Biển cho ta cá như lòng mẹ\" thể hiện tình cảm gì của người ngư dân?",
-                options: ["Sự sợ hãi trước thiên nhiên", "Sự chinh phục thiên nhiên", "Lòng biết ơn và sự gắn bó với biển cả", "Sự thờ ơ với biển cả"],
-                answer: 2
-            },
-            {
-                question: "Âm thanh nào đóng vai trò giữ nhịp cho bài ca gọi cá vào?",
-                options: ["Tiếng sóng vỗ bờ", "Tiếng gió thổi", "Nhịp trăng cao gõ thuyền", "Tiếng mái chèo khua nước"],
-                answer: 2
-            },
-            {
-                question: "Đoàn thuyền đánh cá trở về vào thời điểm nào?",
-                options: ["Khi mặt trời đứng bóng", "Khi trăng lên cao", "Khi sao mờ, trời sắp sáng (rạng đông)", "Khi màn đêm buông xuống"],
-                answer: 2
-            },
-            {
-                question: "Hình ảnh \"Ta kéo xoăn tay chùm cá nặng\" gợi tả điều gì?",
-                options: ["Người dân chài đang tập thể dục", "Vẻ đẹp khỏe khoắn của người lao động và mẻ lưới bội thu", "Sự vất vả, đau đớn của người dân chài", "Sự vội vã vì sợ bão"],
-                answer: 1
-            },
-            {
-                question: "Màu sắc nào được nhắc đến khi mô tả vẻ đẹp của cá và cảnh rạng đông trong khổ 4?",
-                options: ["Vảy bạc", "Đuôi vàng", "Nắng hồng", "Tất cả các màu trên"],
-                answer: 3
-            },
-            {
-                question: "Hình ảnh \"Đoàn thuyền chạy đua cùng mặt trời\" ở khổ cuối có ý nghĩa gì?",
-                options: ["Thuyền cố gắng chạy trốn ánh nắng gay gắt", "Tư thế hào hùng, khẩn trương của người lao động tranh thủ thời gian với thiên nhiên", "Cuộc thi thể thao trên biển", "Thuyền bị mặt trời đuổi theo"],
-                answer: 1
-            },
-            {
-                question: "Theo nội dung bài đọc, bài thơ ca ngợi vẻ đẹp nào?",
-                options: ["Vẻ đẹp của những con thuyền hiện đại", "Vẻ đẹp của con người yêu lao động và sự huy hoàng của biển cả", "Vẻ đẹp hoang sơ và đáng sợ của biển đêm", "Vẻ đẹp của bầu trời đầy sao"],
-                answer: 1
-            },
-            {
-                question: "Cảm hứng chủ đạo xuyên suốt bài thơ là gì?",
-                options: ["Nỗi buồn man mác của người đi biển", "Sự lo lắng trước những hiểm nguy của biển cả", "Niềm vui, sự lạc quan và hăng say trong lao động", "Sự cô đơn giữa biển trời mênh mông"],
-                answer: 2
-            }
+        const allQuestions = [
+            { q: "Tác giả của bài thơ \"Đoàn thuyền đánh cá\" là ai?", a: ["Tố Hữu", "Trần Đăng Khoa", "Huy Cận", "Xuân Diệu"], c: 2 },
+            { q: "Đoàn thuyền đánh cá ra khơi vào thời điểm nào trong ngày?", a: ["Bình minh", "Giữa trưa", "Hoàng hôn (lúc mặt trời lặn)", "Nửa đêm"], c: 2 },
+            { q: "Trong khổ thơ đầu, hình ảnh \"Mặt trời xuống biển\" được so sánh với sự vật gì?", a: ["Quả cầu lửa", "Hòn lửa", "Hòn than", "Ngọn đèn"], c: 1 },
+            { q: "Biện pháp nghệ thuật nào được sử dụng trong câu thơ \"Sóng đã cài then, đêm sập cửa\"?", a: ["So sánh", "Nhân hóa", "Điệp từ", "Đảo ngữ"], c: 1 },
+            { q: "Cùng với gió khơi, âm thanh nào đã cùng đoàn thuyền căng buồm ra khơi?", a: ["Tiếng sóng vỗ", "Tiếng còi tàu", "Câu hát", "Tiếng gõ thuyền"], c: 2 },
+            { q: "Trong câu \"Cá thu Biển Đông như đoàn thoi\", tác giả dùng hình ảnh \"đoàn thoi\" để tả loài cá nào?", a: ["Cá bạc", "Cá nục", "Cá chim", "Cá thu"], c: 3 },
+            { q: "Những người ngư dân đã \"hát bài ca gọi cá vào\" với niềm tin gì?", a: ["Để xua đuổi các loài thú dữ", "Xua tan mệt nhọc và mong muốn thu hoạch bội thu", "Để thông báo vị trí cho các thuyền khác", "Để ru ngủ biển cả"], c: 1 },
+            { q: "Hình ảnh \"Biển cho ta cá như lòng mẹ\" thể hiện tình cảm gì của người ngư dân?", a: ["Sự sợ hãi trước thiên nhiên", "Sự chinh phục thiên nhiên", "Lòng biết ơn và sự gắn bó với biển cả", "Sự thờ ơ với biển cả"], c: 2 },
+            { q: "Âm thanh nào đóng vai trò giữ nhịp cho bài ca gọi cá vào?", a: ["Tiếng sóng vỗ bờ", "Tiếng gió thổi", "Nhịp trăng cao gõ thuyền", "Tiếng mái chèo khua nước"], c: 2 },
+            { q: "Đoàn thuyền đánh cá trở về vào thời điểm nào?", a: ["Khi mặt trời đứng bóng", "Khi trăng lên cao", "Khi sao mờ, trời sắp sáng (rạng đông)", "Khi màn đêm buông xuống"], c: 2 },
+            { q: "Hình ảnh \"Ta kéo xoăn tay chùm cá nặng\" gợi tả điều gì?", a: ["Người dân chài đang tập thể dục", "Vẻ đẹp khỏe khoắn của người lao động và mẻ lưới bội thu", "Sự vất vả, đau đớn của người dân chài", "Sự vội vã vì sợ bão"], c: 1 },
+            { q: "Màu sắc nào được nhắc đến khi mô tả vẻ đẹp của cá và cảnh rạng đông trong khổ 4?", a: ["Vảy bạc", "Đuôi vàng", "Nắng hồng", "Tất cả các màu trên"], c: 3 },
+            { q: "Hình ảnh \"Đoàn thuyền chạy đua cùng mặt trời\" ở khổ cuối có ý nghĩa gì?", a: ["Thuyền cố gắng chạy trốn ánh nắng gay gắt", "Tư thế hào hùng, khẩn trương của người lao động tranh thủ thời gian với thiên nhiên", "Cuộc thi thể thao trên biển", "Thuyền bị mặt trời đuổi theo"], c: 1 },
+            { q: "Theo nội dung bài đọc, bài thơ ca ngợi vẻ đẹp nào?", a: ["Vẻ đẹp của những con thuyền hiện đại", "Vẻ đẹp của con người yêu lao động và sự huy hoàng của biển cả", "Vẻ đẹp hoang sơ và đáng sợ của biển đêm", "Vẻ đẹp của bầu trời đầy sao"], c: 1 },
+            { q: "Cảm hứng chủ đạo xuyên suốt bài thơ là gì?", a: ["Nỗi buồn man mác của người đi biển", "Sự lo lắng trước những hiểm nguy của biển cả", "Niềm vui, sự lạc quan và hăng say trong lao động", "Sự cô đơn giữa biển trời mênh mông"], c: 2 }
         ];
 
-        /* QUIZ LOGIC */
-        let currentQuestion = 0;
+        let currentQuizQuestions = [];
+        let currentQuestionIdx = 0;
         let score = 0;
         let selectedOption = null;
-        let timeLeft = 1200; // 20 minutes
-        let timerInterval;
-        let userData = {};
+        let studentData = {};
 
-        function startTimer() {
-            userData.startTime = new Date().toISOString();
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                const mins = Math.floor(timeLeft / 60);
-                const secs = timeLeft % 60;
-                document.getElementById('timer').innerText =
-                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    showResults();
-                }
-            }, 1000);
-        }
-
-        const regForm = document.getElementById('regForm');
-        regForm.onsubmit = (e) => {
-            e.preventDefault();
-            const schoolSelect = document.getElementById('schoolSelect');
-            userData = {
-                studentName: document.getElementById('studentName').value,
-                studentClass: document.getElementById('studentClass').value,
-                school: schoolSelect.value === 'other' ? document.getElementById('otherSchool').value : schoolSelect.value
-            };
-            document.getElementById('quiz-registration').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            loadQuestion();
-            startTimer();
-        };
-
-        function checkSchool(select) {
-            const otherSchool = document.getElementById('otherSchool');
-            if (select.value === 'other') {
-                otherSchool.classList.remove('hidden');
-                otherSchool.required = true;
-            } else {
-                otherSchool.classList.add('hidden');
-                otherSchool.required = false;
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
             }
+            return array;
         }
 
-        function loadQuestion() {
-            const q = quizData[currentQuestion];
-            document.getElementById('questionNum').innerText = currentQuestion + 1;
-            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestion + 1}/${quizData.length}`;
-            document.getElementById('questionText').innerText = q.question;
+        function startQuiz() {
+            const shuffled = shuffle([...allQuestions]);
+            currentQuizQuestions = shuffled.slice(0, 5);
+            currentQuestionIdx = 0; score = 0; showQuestion();
+        }
 
-            const optionsArea = document.getElementById('optionsArea');
-            optionsArea.innerHTML = '';
-
-            q.options.forEach((opt, index) => {
+        function showQuestion() {
+            const q = currentQuizQuestions[currentQuestionIdx];
+            document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
+            document.getElementById('progressText').innerText = `Câu ${currentQuestionIdx + 1}/5`;
+            document.getElementById('questionText').innerText = q.q;
+            const area = document.getElementById('optionsArea');
+            area.innerHTML = '';
+            q.a.forEach((opt, i) => {
                 const btn = document.createElement('button');
-                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold transition-all flex items-center';
+                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group border-2 border-transparent bg-gray-50 hover:bg-blue-50 transition-all';
                 btn.innerHTML = `
-                    <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 text-gray-500">${String.fromCharCode(65 + index)}</span>
+                    <span class="w-8 h-8 rounded-lg bg-white flex items-center justify-center mr-4 shadow-sm group-hover:bg-blue-100 transition-colors">${String.fromCharCode(65 + i)}</span>
                     <span class="flex-1">${opt}</span>
                 `;
-                btn.onclick = () => selectOption(index, btn);
-                optionsArea.appendChild(btn);
+                btn.onclick = () => {
+                    document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500', 'bg-blue-50'));
+                    btn.classList.add('selected', 'border-blue-500', 'bg-blue-50');
+                    selectedOption = i;
+                    document.getElementById('nextBtn').disabled = false;
+                };
+                area.appendChild(btn);
             });
-
-            document.getElementById('nextBtn').disabled = true;
-            selectedOption = null;
-        }
-
-        function selectOption(index, btn) {
-            selectedOption = index;
-            document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('nextBtn').disabled = true; selectedOption = null;
         }
 
         document.getElementById('nextBtn').onclick = () => {
-            if (selectedOption === quizData[currentQuestion].answer) {
-                score += (100 / quizData.length);
-            }
-
-            currentQuestion++;
-            if (currentQuestion < quizData.length) {
-                loadQuestion();
-            } else {
-                showResults();
-            }
+            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) score += 20;
+            currentQuestionIdx++;
+            if (currentQuestionIdx < 5) showQuestion();
+            else showResults();
         };
 
         function showResults() {
-            clearInterval(timerInterval);
-            userData.endTime = new Date().toISOString();
             document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('quiz-results').classList.remove('hidden');
-
-            const finalScore = Math.round(score);
-            document.getElementById('scoreText').innerText = finalScore;
-            document.getElementById('scoreCircle').style.strokeDasharray = `${finalScore}, 100`;
-
-            if (finalScore >= 80) {
+            document.getElementById('scoreText').innerText = score;
+            document.getElementById('scoreCircle').setAttribute('stroke-dasharray', `${score}, 100`);
+            if (score >= 80) {
                 document.getElementById('resultTitle').innerText = "Xuất sắc!";
-                document.getElementById('resultMsg').innerText = "Em đã hiểu bài rất tốt, chúc mừng em!";
-            } else if (finalScore >= 50) {
-                document.getElementById('resultTitle').innerText = "Làm tốt lắm!";
-                document.getElementById('resultMsg').innerText = "Em đã nắm được nội dung bài đọc rồi.";
+                document.getElementById('resultMsg').innerText = "Em làm bài rất tuyệt vời!";
+            } else if (score >= 50) {
+                document.getElementById('resultTitle').innerText = "Tốt!";
+                document.getElementById('resultMsg').innerText = "Em có nắm được bài đọc.";
             } else {
-                document.getElementById('resultTitle').innerText = "Cố gắng lên!";
-                document.getElementById('resultMsg').innerText = "Em hãy đọc lại bài và thử lại nhé.";
+                document.getElementById('resultTitle').innerText = "Cố gắng!";
+                document.getElementById('resultMsg').innerText = "Thử lại lần nữa nhé.";
             }
         }
+
+        document.getElementById('regForm').onsubmit = function (e) {
+            e.preventDefault();
+            studentData = {
+                name: document.getElementById('studentName').value,
+                className: document.getElementById('studentClass').value,
+                school: document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
+                startTime: new Date().toISOString()
+            };
+            document.getElementById('quiz-registration').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            startQuiz();
+        };
 
         async function submitResults(e) {
+            const finalData = {
+                studentName: studentData.name, className: studentData.className, school: studentData.school,
+                lessonTitle: "Đoàn thuyền đánh cá", score: score,
+                startTime: studentData.startTime, endTime: new Date().toISOString(),
+                submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            const btn = e.target; btn.disabled = true; btn.innerText = "Đang gửi...";
             try {
-                const finalScore = Math.round(score);
-                await db.collection("diem_tieng_viet_lop5").add({
-                    studentName: userData.studentName,
-                    className: userData.studentClass,
-                    school: userData.school,
-                    score: finalScore,
-                    lessonTitle: "Đoàn thuyền đánh cá",
-                    startTime: userData.startTime,
-                    endTime: userData.endTime,
-                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                alert(`Chúc mừng em ${userData.studentName}!\nKết quả của em đã được gửi thành công đến thầy cô.\nĐiểm: ${finalScore}/100`);
-                // Reset Quiz UI for next time
-                document.getElementById('quiz-results').classList.add('hidden');
-                document.getElementById('quiz-registration').classList.remove('hidden');
-                switchTab('lesson');
-            } catch (error) {
-                console.error("Error submitting results:", error);
-                alert("Có lỗi khi nộp bài. Em hãy thử lại nhé.");
-            }
+                await db.collection("diem_tieng_viet_lop5").add(finalData);
+                alert(`Chúc mừng ${studentData.name}! Đã nộp bài.`);
+                location.reload();
+            } catch (error) { alert("Lỗi!"); } finally { btn.disabled = false; }
         }
 
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            timeLeft = 1200;
-            document.getElementById('quiz-results').classList.add('hidden');
-            document.getElementById('quiz-registration').classList.remove('hidden');
-            document.getElementById('regForm').reset();
-            document.getElementById('otherSchool').classList.add('hidden');
+        function checkSchool(select) {
+            const otherSchool = document.getElementById('otherSchool');
+            if (select.value === 'other') { otherSchool.classList.remove('hidden'); otherSchool.required = true; }
+            else { otherSchool.classList.add('hidden'); otherSchool.required = false; }
         }
+
+        function restartQuiz() { location.reload(); }
     </script>
-</body>
-
-</html>
