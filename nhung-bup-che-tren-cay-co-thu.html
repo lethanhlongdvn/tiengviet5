@@ -115,17 +115,7 @@
     </header>
 
     <main class="container mx-auto px-4 py-4">
-        <!-- Navigation -->
-        <div class="flex items-center justify-between mb-4">
-            <a href="ve-dep-cuoc-song.html"
-                class="flex items-center text-gray-600 hover:text-blue-600 font-bold transition-colors">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                </svg>
-                Chủ điểm: Vẻ đẹp cuộc sống
-            </a>
-        </div>
+
 
         <!-- Tab & Audio Header -->
         <div
@@ -691,15 +681,25 @@
             startQuiz();
         };
 
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
         function startQuiz() {
-            currentQuizQuestions = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 15);
+            currentQuizQuestions = shuffle([...allQuestions]).slice(0, 5);
             currentQuestionIdx = 0; score = 0; showQuestion();
         }
 
         function showQuestion() {
             const q = currentQuizQuestions[currentQuestionIdx];
             document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
-            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/15`;
+            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
             document.getElementById('questionText').innerText = q.q;
             const area = document.getElementById('optionsArea'); area.innerHTML = '';
             q.a.forEach((opt, i) => {
@@ -717,10 +717,9 @@
         }
 
         document.getElementById('nextBtn').onclick = () => {
-            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) score += Math.round(100 / 15);
-            if (currentQuestionIdx === 14 && score > 90) score = 100; // Làm tròn cho đẹp
+            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) score += 20;
             currentQuestionIdx++;
-            if (currentQuestionIdx < 15) showQuestion(); else showResults();
+            if (currentQuestionIdx < 5) showQuestion(); else showResults();
         };
 
         function showResults() {
@@ -747,6 +746,16 @@
             } catch (e) { alert("Lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
         }
     </script>
+    <a href="ve-dep-cuoc-song.html"
+        class="fixed bottom-8 right-8 z-[100] group flex items-center space-x-3 bg-white/80 backdrop-blur-xl p-2 pr-6 rounded-2xl shadow-2xl border border-white/50 hover:scale-105 transition-all active:scale-95">
+        <div
+            class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:rotate-12 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+        </div>
+        <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Trở về</span>
+    </a>
 </body>
 
 </html>
