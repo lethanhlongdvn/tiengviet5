@@ -690,12 +690,12 @@
             }
         }
 
-        let studentData = {};
+        // studentData declared below with other state variables
 
         regForm.onsubmit = function (e) {
             e.preventDefault();
             studentData = {
-                name: document.getElementById('studentName').value,
+                studentName: document.getElementById('studentName').value,
                 className: document.getElementById('studentClass').value,
                 school: document.getElementById('schoolSelect').value === 'other' ?
                     document.getElementById('otherSchool').value :
@@ -726,31 +726,21 @@
             { q: "Chủ đề chính của bài thơ là gì?", a: ["Ca ngợi vẻ đẹp của thiên nhiên miền núi", "Miêu tả quy trình trồng bắp và giã gạo", "Ca ngợi tình yêu con tha thiết gắn liền với tình yêu quê hương, đất nước của người mẹ Tà - ôi", "Kể về tuổi thơ gian khổ của em bé Cu Tai"], c: 2 }
         ];
 
-        let currentQuizQuestions = [];
-        let currentQuestionIdx = 0;
-        let score = 0;
-        let selectedOption = null;
-        let lastUsedQuestions = [];
+        let studentData = {}, currentQuizQuestions = [], currentQuestionIdx = 0, score = 0, selectedOption = null;
+
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
 
         function startQuiz() {
-            let available = [...allQuestions];
-            available.sort(() => Math.random() - 0.5);
-
-            if (lastUsedQuestions.length > 0) {
-                let fresh = available.filter(q => !lastUsedQuestions.includes(q.q));
-                let repeated = available.filter(q => lastUsedQuestions.includes(q.q));
-                currentQuizQuestions = fresh.slice(0, 5);
-                if (currentQuizQuestions.length < 5) {
-                    currentQuizQuestions = currentQuizQuestions.concat(repeated.slice(0, 5 - currentQuizQuestions.length));
-                }
-            } else {
-                currentQuizQuestions = available.slice(0, 5);
-            }
-
-            lastUsedQuestions = currentQuizQuestions.map(q => q.q);
-            currentQuestionIdx = 0;
-            score = 0;
-            showQuestion();
+            currentQuizQuestions = shuffle([...allQuestions]).slice(0, 5);
+            currentQuestionIdx = 0; score = 0; showQuestion();
         }
 
         function showQuestion() {
@@ -764,9 +754,9 @@
 
             q.a.forEach((opt, idx) => {
                 const btn = document.createElement('button');
-                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
+                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group border-2 border-transparent bg-gray-50 hover:bg-blue-50 transition-all';
                 btn.innerHTML = `
-                    <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100 transition-colors">${String.fromCharCode(65 + idx)}</span>
+                    <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 shadow-sm group-hover:bg-blue-100 transition-colors">${String.fromCharCode(65 + idx)}</span>
                     <span class="flex-1">${opt}</span>
                 `;
                 btn.onclick = () => selectOption(idx, btn);
@@ -825,12 +815,9 @@
 
         async function submitResults(e) {
             const finalData = {
-                studentName: studentData.name,
-                className: studentData.className,
-                school: studentData.school,
+                ...studentData,
                 lessonTitle: "Khúc hát ru những em bé lớn trên lưng mẹ",
                 score: score,
-                startTime: studentData.startTime,
                 endTime: new Date().toISOString(),
                 submittedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
@@ -842,7 +829,7 @@
 
             try {
                 await db.collection("diem_tieng_viet_lop5").add(finalData);
-                alert(`Chúc mừng em ${studentData.name}!\nKết quả của em đã được gửi thành công đến thầy cô.\nĐiểm: ${score}/100`);
+                alert(`Chúc mừng em ${studentData.studentName}!\nKết quả của em đã được gửi thành công đến thầy cô.\nĐiểm: ${score}/100`);
                 // Reset Quiz UI for next time
                 document.getElementById('quiz-results').classList.add('hidden');
                 document.getElementById('quiz-registration').classList.remove('hidden');
