@@ -640,11 +640,7 @@
             { q: "Theo nội dung bài đọc, một tình bạn đẹp là tình bạn như thế nào?", a: ["Luôn tặng quà cho nhau vào các dịp lễ", "Dựa trên sự chân thành, thấu hiểu và sẻ chia", "Chỉ cần vui chơi thỏa thích cùng nhau", "Không bao giờ có sự giận dỗi hay hiểu lầm"], c: 1 }
         ];
 
-        let selectedQuestions = [];
-        let currentIdx = 0;
-        let score = 0;
-        let studentData = {};
-        let startTime = null;
+        let studentData = {}, currentQuizQuestions = [], currentQuestionIdx = 0, score = 0, selectedOption = null;
 
         function checkSchool() {
             const select = document.getElementById('schoolSelect');
@@ -669,66 +665,54 @@
         }
 
         const regForm = document.getElementById('regForm');
-        regForm.onsubmit = function (e) {
+        regForm.onsubmit = (e) => {
             e.preventDefault();
-            const schoolVal = document.getElementById('schoolSelect').value;
             studentData = {
                 studentName: document.getElementById('studentName').value,
-                studentClass: document.getElementById('studentClass').value,
-                school: (schoolVal === 'other' || schoolVal === 'Khác') ? document.getElementById('otherSchool').value : schoolVal
+                className: document.getElementById('studentClass').value,
+                school: document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
+                startTime: new Date().toISOString()
             };
-            // Chọn ngẫu nhiên 5 câu từ 15 câu bằng thuật toán Fisher-Yates
-            const shuffled = shuffle([...allQuestions]);
-            selectedQuestions = shuffled.slice(0, 5);
-            currentIdx = 0;
-            score = 0;
-            startTime = new Date();
             document.getElementById('quiz-registration').classList.add('hidden');
             document.getElementById('quiz-container').classList.remove('hidden');
-            showQuestion();
+            startQuiz();
+        };
+
+        function startQuiz() {
+            currentQuizQuestions = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
+            currentQuestionIdx = 0; score = 0; showQuestion();
         }
 
         function showQuestion() {
-            const q = selectedQuestions[currentIdx];
-            document.getElementById('questionNum').innerText = currentIdx + 1;
-            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentIdx + 1}/5`;
+            const q = currentQuizQuestions[currentQuestionIdx];
+            document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
+            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
             document.getElementById('questionText').innerText = q.q;
-
-            const area = document.getElementById('optionsArea');
-            area.innerHTML = '';
+            const area = document.getElementById('optionsArea'); area.innerHTML = '';
             q.a.forEach((opt, i) => {
                 const btn = document.createElement('button');
-                btn.className = "w-full p-4 text-left border-2 border-gray-100 rounded-2xl font-bold transition-all hover:border-blue-200 hover:bg-blue-50/50 flex items-center group";
-                btn.innerHTML = `
-                    <span class="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all text-sm">${String.fromCharCode(65 + i)}</span>
-                    <span class="flex-1">${opt}</span>
-                `;
-                btn.onclick = () => selectOption(i, btn);
+                btn.className = 'w-full p-4 text-left border-2 border-gray-100 rounded-2xl font-bold transition-all hover:border-blue-200 hover:bg-blue-50/50 flex items-center group';
+                btn.innerHTML = `<span class="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all text-sm">${String.fromCharCode(65 + i)}</span><span class="flex-1">${opt}</span>`;
+                btn.onclick = () => {
+                    document.querySelectorAll('#optionsArea button').forEach(b => {
+                        b.classList.remove('border-blue-600', 'bg-blue-50');
+                        b.querySelector('span').classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+                    });
+                    btn.classList.add('border-blue-600', 'bg-blue-50');
+                    btn.querySelector('span').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+                    document.getElementById('nextBtn').disabled = false;
+                    selectedOption = i;
+                };
                 area.appendChild(btn);
             });
-            document.getElementById('nextBtn').disabled = true;
-            document.getElementById('nextBtn').onclick = nextQuestion;
+            document.getElementById('nextBtn').disabled = true; selectedOption = null;
         }
 
-        function selectOption(idx, btn) {
-            document.querySelectorAll('#optionsArea button').forEach(b => {
-                b.classList.remove('border-blue-600', 'bg-blue-50');
-                b.querySelector('span').classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
-            });
-            btn.classList.add('border-blue-600', 'bg-blue-50');
-            btn.querySelector('span').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-            document.getElementById('nextBtn').disabled = false;
-            document.getElementById('nextBtn').dataset.selected = idx;
-        }
-
-        function nextQuestion() {
-            const selected = parseInt(document.getElementById('nextBtn').dataset.selected);
-            if (selected === selectedQuestions[currentIdx].c) score += 20;
-
-            currentIdx++;
-            if (currentIdx < 5) showQuestion();
-            else showResults();
-        }
+        document.getElementById('nextBtn').onclick = () => {
+            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) score += 20;
+            currentQuestionIdx++;
+            if (currentQuestionIdx < 5) showQuestion(); else showResults();
+        };
 
         function showResults() {
             document.getElementById('quiz-container').classList.add('hidden');
@@ -752,12 +736,6 @@
         function restartQuiz() {
             document.getElementById('quiz-results').classList.add('hidden');
             document.getElementById('quiz-registration').classList.remove('hidden');
-            // Reset state
-            selectedQuestions = [];
-            currentIdx = 0;
-            score = 0;
-            studentData = {};
-            startTime = null;
         }
 
         /* FIREBASE CONFIG */
@@ -775,34 +753,14 @@
         const db = firebase.firestore();
 
         async function submitResults(e) {
-            const btn = e.target;
-            btn.disabled = true;
-            btn.innerText = "Đang gửi...";
-            const duration = Math.floor((new Date() - startTime) / 1000);
-            const minutes = Math.floor(duration / 60);
-            const seconds = duration % 60;
-            const timeStr = `${minutes}p ${seconds}s`;
-
+            const btn = e.target; btn.disabled = true; btn.innerText = "Đang gửi...";
             try {
                 await db.collection("diem_tieng_viet_lop5").add({
-                    ...studentData,
-                    lessonTitle: "Giỏ hoa tháng Năm",
-                    score: score,
-                    duration: duration,
-                    timeDisplay: timeStr,
-                    endTime: new Date().toISOString(),
-                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    ...studentData, lessonTitle: "Giỏ hoa tháng Năm", score: score, endTime: new Date().toISOString(), submittedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                alert(`Chúc mừng ${studentData.studentName} đã nộp bài thành công!`);
-                restartQuiz();
-                switchTab('lesson');
-            } catch (err) {
-                console.error(err);
-                alert("Có lỗi khi gửi kết quả. Em vui lòng thử lại nhé!");
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "NỘP KẾT QUẢ";
-            }
+                alert(`Chúc mừng ${studentData.studentName} đã hoàn thành bài tập!`);
+                restartQuiz(); switchTab('lesson');
+            } catch (e) { alert("Lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
         }
 
         /* TEACHER STATS */
@@ -823,65 +781,53 @@
         let currentStatsData = [];
         async function loadStats() {
             const tbody = document.getElementById('statsTableBody');
-            tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-gray-400 font-bold italic">Đang tải dữ liệu...</td></tr>';
-
+            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
             try {
-                const snapshot = await db.collection("diem_tieng_viet_lop5")
-                    .where("lessonTitle", "==", "Giỏ hoa tháng Năm")
-                    .orderBy("submittedAt", "desc")
-                    .get();
-
-                currentStatsData = [];
+                const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Giỏ hoa tháng Năm").get();
                 tbody.innerHTML = '';
-
                 if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-gray-400 font-bold italic">Chưa có dữ liệu học sinh nộp bài.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
                     return;
                 }
+                const results = [];
+                snapshot.forEach(doc => results.push(doc.data()));
+                results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
 
-                snapshot.forEach((doc, index) => {
-                    const data = doc.data();
-                    currentStatsData.push(data);
-                    const row = document.createElement('tr');
-                    row.className = "border-b hover:bg-gray-50 transition-colors bg-white";
-                    row.innerHTML = `
+                results.forEach((data, index) => {
+                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
+                    let duration = '---';
+                    if (data.startTime && data.endTime) {
+                        const diffMs = new Date(data.endTime) - new Date(data.startTime);
+                        duration = `${Math.floor(diffMs / 60000)} phút ${Math.floor((diffMs % 60000) / 1000)} giây`;
+                    }
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50 text-sm bg-white";
+                    tr.innerHTML = `
                         <td class="p-4 font-bold text-gray-400">${index + 1}</td>
-                        <td class="p-4 font-black text-gray-800">${data.studentName}</td>
-                        <td class="p-4"><span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-black">${data.studentClass}</span></td>
-                        <td class="p-4 text-gray-600 font-medium">${data.school}</td>
-                        <td class="p-4 text-center"><span class="text-xl font-black ${data.score >= 80 ? 'text-green-600' : 'text-blue-600'}">${data.score}</span></td>
-                        <td class="p-4 text-center font-bold text-gray-500">${data.timeDisplay || 'N/A'}</td>
-                        <td class="p-4 text-right text-gray-400 text-xs font-bold">${data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : 'N/A'}</td>
+                        <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
+                        <td class="p-4 text-gray-600">${data.className}</td>
+                        <td class="p-4 text-gray-600">${data.school}</td>
+                        <td class="p-4 text-center">
+                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">${data.score}/100</span>
+                        </td>
+                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
+                        <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
                     `;
-                    tbody.appendChild(row);
+                    tbody.appendChild(tr);
                 });
-            } catch (err) {
-                console.error(err);
-                tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-red-500 font-bold">Lỗi khi tải dữ liệu. Hãy thử lại!</td></tr>';
-            }
+            } catch (e) { tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>'; }
         }
 
         function exportToExcel() {
-            if (currentStatsData.length === 0) {
-                alert("Không có dữ liệu để xuất!");
-                return;
+            const table = document.querySelector("#statsModal table");
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true, cellStyles: true });
+            const ws = wb.Sheets["Kết quả"];
+            if (ws['!cols']) {
+                ws['!cols'][2] = { t: 's' }; // Ensure 'Class' column is text
+            } else {
+                ws['!cols'] = [{ wch: 10 }, { wch: 25 }, { t: 's', wch: 10 }, { wch: 25 }, { wch: 10 }, { wch: 20 }, { wch: 20 }];
             }
-
-            const dataToExport = currentStatsData.map((item, index) => ({
-                'STT': index + 1,
-                'Họ và Tên': item.studentName,
-                'Lớp': item.studentClass,
-                'Trường': item.school,
-                'Điểm số': item.score,
-                'Thời gian làm bài': item.timeDisplay || 'N/A',
-                'Ngày nộp': item.submittedAt ? item.submittedAt.toDate().toLocaleString('vi-VN') : 'N/A'
-            }));
-
-            const ws = XLSX.utils.json_to_sheet(dataToExport);
-            ws['!cols'] = [{}, {}, { t: 's' }, {}, {}, {}, {}];
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "KetQua");
-            XLSX.writeFile(wb, "ThongKe_GioHoaThangNam.xlsx");
+            XLSX.writeFile(wb, "KetQua_GioHoaThangNam.xlsx");
         }
     </script>
 </body>
