@@ -13,11 +13,11 @@
         rel="stylesheet">
 
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <!-- SheetJS for Excel Export -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <style>
         body {
@@ -719,7 +719,7 @@
 
         async function loadStats() {
             const tbody = document.getElementById('statsTableBody');
-            tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
 
             try {
                 const snapshot = await db.collection("diem_tieng_viet_lop5")
@@ -728,57 +728,74 @@
 
                 tbody.innerHTML = '';
                 if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
                     return;
                 }
 
-                // Sort in memory to avoid needing Firestore index
                 const results = [];
                 snapshot.forEach(doc => results.push(doc.data()));
                 results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
 
                 results.forEach((data, index) => {
                     const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
-
-                    // Calculate duration
-                    let duration = '---';
-                    if (data.startTime && data.endTime) {
-                        const start = new Date(data.startTime);
-                        const end = new Date(data.endTime);
-                        const diffMs = end - start;
-                        const mins = Math.floor(diffMs / 60000);
-                        const secs = Math.floor((diffMs % 60000) / 1000);
-                        duration = `${mins} phút ${secs} giây`;
-                    }
-
                     const tr = document.createElement('tr');
-                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50";
+                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50 text-sm";
                     tr.innerHTML = `
                         <td class="p-4 font-bold text-gray-400">${index + 1}</td>
                         <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
-                        <td class="p-4 text-gray-600">${data.className}</td>
+                        <td class="p-4 text-gray-600">${data.studentClass || data.className || '---'}</td>
                         <td class="p-4 text-gray-600">${data.school}</td>
                         <td class="p-4 text-center">
-                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">
+                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 60 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">
                                 ${data.score}/100
                             </span>
                         </td>
-                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
+                        <td class="p-4 text-center text-gray-600 font-bold">${data.timeDisplay || '---'}</td>
                         <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
                     `;
                     tbody.appendChild(tr);
                 });
             } catch (error) {
                 console.error("Error loading stats:", error);
-                tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu. Vui lòng thử lại.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>';
             }
         }
 
         function exportToExcel() {
-            const table = document.querySelector("#statsModal table");
-            // raw: true helps preserve text formatting for columns like "Class"
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
-            XLSX.writeFile(wb, "ThongKe_GiaoVien_EduRobot.xlsx");
+            const tbody = document.getElementById('statsTableBody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            if (rows.length === 0 || rows[0].innerText.includes('Đang tải') || rows[0].innerText.includes('Chưa có')) {
+                alert("Không có dữ liệu để xuất!");
+                return;
+            }
+
+            const data = rows.map((row, index) => {
+                const cells = row.querySelectorAll('td');
+                return {
+                    'STT': index + 1,
+                    'Họ và Tên': cells[1].innerText,
+                    'Lớp': cells[2].innerText,
+                    'Trường': cells[3].innerText,
+                    'Điểm số': cells[4].innerText,
+                    'Thời gian': cells[5].innerText,
+                    'Ngày nộp': cells[6].innerText
+                };
+            });
+
+            const ws = XLSX.utils.json_to_sheet(data);
+            ws['!cols'] = [
+                { wch: 5 },  // STT
+                { wch: 25 }, // Họ và Tên
+                { wch: 10, t: 's' }, // Lớp (Force Text)
+                { wch: 30 }, // Trường
+                { wch: 15 }, // Điểm số
+                { wch: 15 }, // Thời gian
+                { wch: 25 }  // Ngày nộp
+            ];
+
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Thống kê");
+            XLSX.writeFile(wb, "ThongKe_HopQuaMauThienThanh.xlsx");
         }
 
         /* TAB LOGIC */
@@ -791,34 +808,36 @@
         }
 
         /* REGISTRATION LOGIC */
-        const regForm = document.getElementById('regForm');
-        const otherSchoolInput = document.getElementById('otherSchool');
-
-        function checkSchool(select) {
+        function checkSchool() {
+            const select = document.getElementById('schoolSelect');
+            const other = document.getElementById('otherSchool');
             if (select.value === 'other') {
-                otherSchoolInput.classList.remove('hidden');
-                otherSchoolInput.required = true;
+                other.classList.remove('hidden');
+                other.required = true;
             } else {
-                otherSchoolInput.classList.add('hidden');
-                otherSchoolInput.required = false;
+                other.classList.add('hidden');
+                other.required = false;
             }
         }
 
-        let studentData = {};
+        let studentData = {}, selectedQuestions = [], currentIdx = 0, score = 0, startTime;
 
-        regForm.onsubmit = function (e) {
+        document.getElementById('regForm').onsubmit = function (e) {
             e.preventDefault();
+            const schoolVal = document.getElementById('schoolSelect').value;
             studentData = {
-                name: document.getElementById('studentName').value,
-                className: document.getElementById('studentClass').value,
-                school: document.getElementById('schoolSelect').value === 'other' ?
-                    document.getElementById('otherSchool').value :
-                    document.getElementById('schoolSelect').value,
-                startTime: new Date().toISOString()
+                studentName: document.getElementById('studentName').value,
+                studentClass: document.getElementById('studentClass').value,
+                school: schoolVal === 'other' ? document.getElementById('otherSchool').value : schoolVal
             };
+            const shuffled = shuffle([...allQuestions]);
+            selectedQuestions = shuffled.slice(0, 5);
+            currentIdx = 0;
+            score = 0;
+            startTime = new Date();
             document.getElementById('quiz-registration').classList.add('hidden');
             document.getElementById('quiz-container').classList.remove('hidden');
-            startQuiz();
+            showQuestion();
         };
 
         /* QUIZ ENGINE */
@@ -840,138 +859,110 @@
             { q: "Nhan đề nào dưới đây có thể thay thế cho câu chuyện này?", a: ["Kỉ niệm đi học muộn.", "Món quà từ trái tim.", "Chiếc hộp màu xanh.", "Lá thư của Tân."], c: 1 }
         ];
 
-        let currentQuizQuestions = [];
-        let currentQuestionIdx = 0;
-        let score = 0;
-        let selectedOption = null;
-        let lastUsedQuestions = [];
-
-        function startQuiz() {
-            // Pick 5 random questions ensuring at least 50% different from last time
-            let available = [...allQuestions];
-            available.sort(() => Math.random() - 0.5);
-
-            // Filter out questions used in the previous session if possible to ensure variety
-            if (lastUsedQuestions.length > 0) {
-                let fresh = available.filter(q => !lastUsedQuestions.includes(q.q));
-                let repeated = available.filter(q => lastUsedQuestions.includes(q.q));
-
-                // We need 5. Let's take as many fresh ones as possible.
-                // Fresh pool is 10, so we can easily get 5 fresh ones (100% variety).
-                currentQuizQuestions = fresh.slice(0, 5);
-                if (currentQuizQuestions.length < 5) {
-                    currentQuizQuestions = currentQuizQuestions.concat(repeated.slice(0, 5 - currentQuizQuestions.length));
-                }
-            } else {
-                currentQuizQuestions = available.slice(0, 5);
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
             }
-
-            lastUsedQuestions = currentQuizQuestions.map(q => q.q);
-            currentQuestionIdx = 0;
-            score = 0;
-            showQuestion();
+            return array;
         }
 
         function showQuestion() {
-            const q = currentQuizQuestions[currentQuestionIdx];
-            document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
-            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
+            const q = selectedQuestions[currentIdx];
+            document.getElementById('questionNum').innerText = currentIdx + 1;
+            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentIdx + 1}/5`;
             document.getElementById('questionText').innerText = q.q;
 
-            const optionsArea = document.getElementById('optionsArea');
-            optionsArea.innerHTML = '';
-
-            q.a.forEach((opt, idx) => {
+            const area = document.getElementById('optionsArea');
+            area.innerHTML = '';
+            q.a.forEach((opt, i) => {
                 const btn = document.createElement('button');
-                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
+                btn.className = "w-full p-4 text-left border-2 border-gray-100 rounded-2xl font-bold transition-all hover:border-blue-200 hover:bg-blue-50/50 flex items-center group";
                 btn.innerHTML = `
-                    <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100 transition-colors">${String.fromCharCode(65 + idx)}</span>
+                    <span class="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all text-sm">${String.fromCharCode(65 + i)}</span>
                     <span class="flex-1">${opt}</span>
                 `;
-                btn.onclick = () => selectOption(idx, btn);
-                optionsArea.appendChild(btn);
+                btn.onclick = () => selectOption(i, btn);
+                area.appendChild(btn);
             });
-
             document.getElementById('nextBtn').disabled = true;
-            selectedOption = null;
+            document.getElementById('nextBtn').onclick = nextQuestion;
         }
 
         function selectOption(idx, btn) {
-            document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500'));
-            btn.classList.add('selected', 'border-blue-500');
-            selectedOption = idx;
+            document.querySelectorAll('#optionsArea button').forEach(b => {
+                b.classList.remove('border-blue-600', 'bg-blue-50');
+                b.querySelector('span').classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+            });
+            btn.classList.add('border-blue-600', 'bg-blue-50');
+            btn.querySelector('span').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
             document.getElementById('nextBtn').disabled = false;
+            document.getElementById('nextBtn').dataset.selected = idx;
         }
 
-        document.getElementById('nextBtn').onclick = function () {
-            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) {
-                score += 20;
-            }
+        function nextQuestion() {
+            const selected = parseInt(document.getElementById('nextBtn').dataset.selected);
+            if (selected === selectedQuestions[currentIdx].c) score += 20;
 
-            currentQuestionIdx++;
-            if (currentQuestionIdx < 5) {
-                showQuestion();
-            } else {
-                showResults();
-            }
-        };
+            currentIdx++;
+            if (currentIdx < 5) showQuestion();
+            else showResults();
+        }
 
         function showResults() {
             document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('quiz-results').classList.remove('hidden');
-
             document.getElementById('scoreText').innerText = score;
             const circle = document.getElementById('scoreCircle');
             circle.setAttribute('stroke-dasharray', `${score}, 100`);
 
             if (score >= 80) {
-                document.getElementById('resultTitle').innerText = "Xuất sắc!";
-                document.getElementById('resultMsg').innerText = "Em rất hiểu nội dung bài học. Phát huy nhé!";
-            } else if (score >= 50) {
-                document.getElementById('resultTitle').innerText = "Khá tốt!";
-                document.getElementById('resultMsg').innerText = "Em đã hiểu cơ bản về bài học rồi đấy.";
+                document.getElementById('resultTitle').innerText = "Rất tuyệt vời!";
+                document.getElementById('resultMsg').innerText = "Em đã hoàn thành bài tập xuất sắc. Tiếp tục phát huy nhé!";
+            } else if (score >= 60) {
+                document.getElementById('resultTitle').innerText = "Làm tốt lắm!";
+                document.getElementById('resultMsg').innerText = "Em đã hiểu bài khá tốt rồi đấy!";
             } else {
-                document.getElementById('resultTitle').innerText = "Cố gắng lên!";
-                document.getElementById('resultMsg').innerText = "Em nên đọc lại bài và thử lại lần nữa nhé.";
+                document.getElementById('resultTitle').innerText = "Cố gắng lên nhé!";
+                document.getElementById('resultMsg').innerText = "Hãy xem lại bài đọc và làm lại bài tập để đạt điểm cao hơn.";
             }
         }
 
         function restartQuiz() {
             document.getElementById('quiz-results').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            startQuiz();
+            document.getElementById('quiz-registration').classList.remove('hidden');
         }
 
         async function submitResults(e) {
-            const finalData = {
-                studentName: studentData.name,
-                className: studentData.className,
-                school: studentData.school,
-                lessonTitle: "Hộp quà màu thiên thanh",
-                score: score,
-                startTime: studentData.startTime,
-                endTime: new Date().toISOString(),
-                submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-            };
-
             const btn = e.target;
-            const originalText = btn.innerText;
             btn.disabled = true;
             btn.innerText = "Đang gửi...";
+            const duration = Math.floor((new Date() - startTime) / 1000);
+            const minutes = Math.floor(duration / 60);
+            const seconds = duration % 60;
+            const timeStr = `${minutes}p ${seconds}s`;
 
             try {
-                await db.collection("diem_tieng_viet_lop5").add(finalData);
-                alert(`Chúc mừng em ${studentData.name}!\nKết quả của em đã được gửi thành công đến thầy cô.\nĐiểm: ${score}/100`);
-                // Reset Quiz UI for next time
-                document.getElementById('quiz-results').classList.add('hidden');
-                document.getElementById('quiz-registration').classList.remove('hidden');
+                await db.collection("diem_tieng_viet_lop5").add({
+                    ...studentData,
+                    lessonTitle: "Hộp quà màu thiên thanh",
+                    score: score,
+                    duration: duration,
+                    timeDisplay: timeStr,
+                    endTime: new Date().toISOString(),
+                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert(`Chúc mừng ${studentData.studentName} đã nộp bài thành công!`);
+                restartQuiz();
                 switchTab('lesson');
-            } catch (error) {
-                console.error("Error submitting quiz:", error);
-                alert("Có lỗi xảy ra khi nộp bài. Em hãy kiểm tra lại kết nối mạng nhé!");
+            } catch (err) {
+                console.error(err);
+                alert("Có lỗi khi gửi kết quả. Em vui lòng thử lại nhé!");
             } finally {
                 btn.disabled = false;
-                btn.innerText = originalText;
+                btn.innerText = "NỘP KẾT QUẢ";
             }
         }
     </script>
