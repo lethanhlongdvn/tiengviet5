@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiên Nhiên Kì Thú - EduRobot</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .tab-active {
+            border-bottom: 4px solid #059669;
+            color: #059669;
+            font-weight: 700;
+        }
+
+        .sidebar-active {
+            background-color: #10b981;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transform: scale(1.05);
+        }
+
+        .hidden-tab {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div
+                        class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white text-xl font-bold">
+                        E</div>
+                    <span class="text-xl font-extrabold text-blue-600 tracking-tight">EduRobot - <span
+                            class="text-yellow-500">Tiếng Việt 5</span> - <span class="text-emerald-600 uppercase">Thiên
+                            nhiên kì thú</span></span>
+                </a>
+            </div>
+            <ul class="hidden md:flex space-x-8 font-semibold text-gray-600">
+                <li><a href="index.html" class="hover:text-blue-500 transition-colors">Trang chủ</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Giới thiệu</a></li>
+                <li><a href="#"
+                        class="hover:text-blue-500 transition-colors text-blue-600 font-bold border-b-2 border-blue-600">Bài
+                        học</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <aside class="w-full lg:w-1/4">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+                    <h2 class="text-xl font-bold border-b pb-4 mb-6 text-blue-900">Danh sách tuần học</h2>
+                    <ul class="space-y-4">
+                        <li>
+                            <button id="week-5" onclick="switchWeek(5)"
+                                class="w-full text-left p-4 rounded-2xl sidebar-active transition-all duration-300 font-bold flex items-center group">
+                                <span
+                                    class="w-10 h-10 rounded-full bg-white bg-opacity-30 inline-flex items-center justify-center mr-3 text-sm">05</span>
+                                Tuần 5
+                            </button>
+                        </li>
+                        <li>
+                            <button id="week-6" onclick="switchWeek(6)"
+                                class="w-full text-left p-4 rounded-2xl bg-gray-50 hover:bg-emerald-50 text-gray-600 hover:text-emerald-600 transition-all duration-300 font-bold flex items-center group">
+                                <span
+                                    class="w-10 h-10 rounded-full bg-gray-200 inline-flex items-center justify-center mr-3 text-sm group-hover:bg-emerald-200">06</span>
+                                Tuần 6
+                            </button>
+                        </li>
+                        <li>
+                            <button id="week-7" onclick="switchWeek(7)"
+                                class="w-full text-left p-4 rounded-2xl bg-gray-50 hover:bg-emerald-50 text-gray-600 hover:text-emerald-600 transition-all duration-300 font-bold flex items-center group">
+                                <span
+                                    class="w-10 h-10 rounded-full bg-gray-200 inline-flex items-center justify-center mr-3 text-sm group-hover:bg-emerald-200">07</span>
+                                Tuần 7
+                            </button>
+                        </li>
+                        <li>
+                            <button id="week-8" onclick="switchWeek(8)"
+                                class="w-full text-left p-4 rounded-2xl bg-gray-50 hover:bg-emerald-50 text-gray-600 hover:text-emerald-600 transition-all duration-300 font-bold flex items-center group">
+                                <span
+                                    class="w-10 h-10 rounded-full bg-gray-200 inline-flex items-center justify-center mr-3 text-sm group-hover:bg-emerald-200">08</span>
+                                Tuần 8
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <section class="w-full lg:w-3/4">
+                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-gray-50 flex border-b">
+                        <button id="tab-explore-btn" onclick="switchTab('explore')"
+                            class="flex-1 py-4 text-center font-bold text-emerald-600 border-b-4 border-emerald-500 transition-all">1.
+                            Khám phá</button>
+                        <button id="tab-practice-btn" onclick="switchTab('practice')"
+                            class="flex-1 py-4 text-center font-bold text-gray-500 hover:text-emerald-600 transition-all">2.
+                            Luyện tập</button>
+                        <button id="tab-apply-btn" onclick="switchTab('apply')"
+                            class="flex-1 py-4 text-center font-bold text-gray-500 hover:text-emerald-600 transition-all">3.
+                            Vận dụng</button>
+                    </div>
+
+                    <div class="p-8 md:p-12">
+                        <div id="tab-explore" class="tab-content transition-opacity duration-300">
+                            <div id="week-content-container">
+                                <!-- Week 5 -->
+                                <div id="week-5-content">
+                                    <h3
+                                        class="flex items-center text-2xl font-extrabold text-blue-900 mb-6 pb-2 border-b-2 border-blue-100">
+                                        <span
+                                            class="bg-emerald-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-3 text-sm">5</span>
+                                        Tuần 5: Thiên nhiên kì thú
+                                    </h3>
+                                    <div class="space-y-6">
+                                        <!-- Bài 9: Trước cổng trời -->
+                                        <div
+                                            class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all">
+                                            <h4 class="text-xl font-bold text-emerald-800 mb-4 flex items-center">
+                                                <span
+                                                    class="w-8 h-8 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mr-3 text-sm">9</span>
+                                                Bài 9: Trước cổng trời
+                                            </h4>
+                                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                                <div
+                                                    class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col">
+                                                    <span
+                                                        class="text-[10px] font-bold text-blue-500 uppercase">Đọc</span>
+                                                    <p class="text-sm font-bold text-gray-800 mt-1">Trước cổng trời</p>
+                                                    <a href="#"
+                                                        class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">Vào
+                                                        học</a>
+                                                </div>
+                                                <div
+                                                    class="p-4 bg-orange-50 rounded-2xl border border-orange-100 flex flex-col">
+                                                    <span class="text-[10px] font-bold text-orange-600 uppercase">Luyện
+                                                        từ & Câu</span>
+                                                    <p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Từ
+                                                        đồng nghĩa</p>
+                                                    <a href="#"
+                                                        class="mt-auto block text-center py-2 bg-orange-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-orange-600">Luyện
+                                                        tập</a>
+                                                </div>
+                                                <div
+                                                    class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col">
+                                                    <span
+                                                        class="text-[10px] font-bold text-emerald-600 uppercase">Viết</span>
+                                                    <p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Cách
+                                                        viết bài văn tả phong cảnh</p>
+                                                    <a href="#"
+                                                        class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">Bắt
+                                                        đầu</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Bài 10: Kì diệu rừng xanh -->
+                                        <div
+                                            class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all border-l-8 border-l-cyan-500">
+                                            <h4 class="text-xl font-bold text-cyan-800 mb-4 flex items-center">
+                                                <span
+                                                    class="w-8 h-8 bg-cyan-100 text-cyan-600 rounded-full flex items-center justify-center mr-3 text-sm">10</span>
+                                                Bài 10: Kì diệu rừng xanh
+                                            </h4>
+                                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                                <div
+                                                    class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col">
+                                                    <span
+                                                        class="text-[10px] font-bold text-blue-500 uppercase">Đọc</span>
+                                                    <p class="text-sm font-bold text-gray-800 mt-1">Kì diệu rừng xanh
+                                                    </p>
+                                                    <a href="#"
+                                                        class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">Vào
+                                                        học</a>
+                                                </div>
+                                                <div
+                                                    class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col">
+                                                    <span
+                                                        class="text-[10px] font-bold text-emerald-600 uppercase">Viết</span>
+                                                    <p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Cách
+                                                        viết văn tả phong cảnh (tiếp)</p>
+                                                    <a href="#"
+                                                        class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">Tiếp
+                                                        tục</a>
+                                                </div>
+                                                <div
+                                                    class="p-4 bg-purple-50 rounded-2xl border border-purple-100 flex flex-col">
+                                                    <span
+                                                        class="text-[10px] font-bold text-purple-600 uppercase">Khác</span>
+                                                    <p class="text-sm font-bold text-gray-800 mt-1">Đọc mở rộng</p>
+                                                    <a href="#"
+                                                        class="mt-auto block text-center py-2 bg-purple-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-purple-700">Khám
+                                                        phá</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab-practice" class="tab-content hidden-tab transition-opacity duration-300">
+                            <h3 class="text-2xl font-bold text-blue-900 mb-8">Kiểm tra kiến thức Tuần <span
+                                    id="practice-week-num">5</span></h3>
+                            <div class="p-20 text-center text-gray-400 font-bold italic">Phần luyện tập đang được cập
+                                nhật...</div>
+                        </div>
+
+                        <div id="tab-apply" class="tab-content hidden-tab transition-opacity duration-300">
+                            <h3 class="text-2xl font-bold text-blue-900 mb-4">Góc sáng tạo</h3>
+                            <p class="text-gray-600 mb-8">Viết một đoạn văn ngắn tả vẻ đẹp của một khu rừng mà em đã
+                                từng thấy hoặc tưởng tượng qua bài học.</p>
+                            <textarea rows="8" placeholder="Viết những cảm nhận của em vào đây nhé..."
+                                class="w-full p-6 border-2 border-gray-100 rounded-2xl focus:border-emerald-500 focus:outline-none transition-all"></textarea>
+                            <div class="mt-6 flex justify-end">
+                                <button
+                                    class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-10 rounded-2xl shadow-md transition-all active:scale-95">Chia
+                                    sẻ bài viết</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-zinc-900 text-zinc-400 py-3 px-4 mt-2">
+        <div class="container mx-auto text-center text-sm">
+            <p>@ 2026 EduRobot - Phát triển bởi Lê Thành Long</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden-tab'); content.style.opacity = '0';
+            });
+            const buttons = [document.getElementById('tab-explore-btn'), document.getElementById('tab-practice-btn'), document.getElementById('tab-apply-btn')];
+            buttons.forEach(btn => {
+                btn.classList.remove('text-emerald-600', 'border-b-4', 'border-emerald-500'); btn.classList.add('text-gray-500');
+            });
+            const activeTab = document.getElementById('tab-' + tabId);
+            activeTab.classList.remove('hidden-tab');
+            setTimeout(() => { activeTab.style.opacity = '1'; }, 50);
+            const activeBtn = document.getElementById('tab-' + tabId + '-btn');
+            activeBtn.classList.remove('text-gray-500'); activeBtn.classList.add('text-emerald-600', 'border-b-4', 'border-emerald-500');
+        }
+
+        function switchWeek(weekNum) {
+            const ids = [5, 6, 7, 8];
+            ids.forEach(id => {
+                const btn = document.getElementById('week-' + id); if (!btn) return;
+                const circle = btn.querySelector('span'); btn.classList.remove('sidebar-active');
+                btn.classList.add('bg-gray-50', 'text-gray-600', 'hover:bg-emerald-50', 'hover:text-emerald-600');
+                circle.classList.remove('bg-white', 'bg-opacity-30'); circle.classList.add('bg-gray-200');
+            });
+            const activeBtn = document.getElementById('week-' + weekNum); const activeCircle = activeBtn.querySelector('span');
+            activeBtn.classList.add('sidebar-active'); activeBtn.classList.remove('bg-gray-50', 'text-gray-600', 'hover:bg-emerald-50', 'hover:text-emerald-600');
+            activeCircle.classList.add('bg-white', 'bg-opacity-30'); activeCircle.classList.remove('bg-gray-200');
+
+            document.querySelectorAll('[id$="-content"]').forEach(el => el.classList.add('hidden'));
+            const content = document.getElementById('week-' + weekNum + '-content');
+            if (content) { content.classList.remove('hidden'); } else { fetchWeekContent(weekNum); }
+            const practiceWeekNum = document.getElementById('practice-week-num'); if (practiceWeekNum) practiceWeekNum.innerText = weekNum;
+        }
+
+        function fetchWeekContent(weekNum) {
+            const container = document.getElementById('week-content-container');
+            const placeholder = document.createElement('div');
+            placeholder.id = 'week-' + weekNum + '-content';
+            let html = '';
+            if (weekNum == 6) {
+                html = `<h3 class="flex items-center text-2xl font-extrabold text-blue-900 mb-6 pb-2 border-b-2 border-blue-100"><span class="bg-emerald-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-3 text-sm">${weekNum}</span>Tuần 6: Thiên nhiên kì thú</h3>
+                <div class="space-y-6">
+                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+                        <h4 class="text-xl font-bold text-emerald-800 mb-4 flex items-center"><span class="w-8 h-8 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mr-3 text-sm">11</span>Bài 11: Hang Sơn Đoòng – những điều kì thú</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">Đọc</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Hang Sơn Đoòng – những điều kì thú</p><a href="#" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">Vào học</a></div>
+                            <div class="p-4 bg-orange-50 rounded-2xl border border-orange-100 flex flex-col"><span class="text-[10px] font-bold text-orange-600 uppercase">Luyện từ & Câu</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Luyện tập về từ đồng nghĩa</p><a href="#" class="mt-auto block text-center py-2 bg-orange-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-orange-600">Luyện tập</a></div>
+                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Viết</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Viết mở bài và kết bài văn tả phong cảnh</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">Bắt đầu</a></div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm border-l-8 border-l-indigo-500">
+                        <h4 class="text-xl font-bold text-indigo-800 mb-4 flex items-center"><span class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mr-3 text-sm">12</span>Bài 12: Những hòn đảo trên vịnh Hạ Long</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">Đọc</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Những hòn đảo trên vịnh Hạ Long</p><a href="#" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">Vào học</a></div>
+                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Viết</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Quan sát phong cảnh</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">Bắt đầu</a></div>
+                            <div class="p-4 bg-rose-50 rounded-2xl border border-rose-100 flex flex-col"><span class="text-[10px] font-bold text-rose-600 uppercase">Nói & nghe</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Bảo tồn động vật hoang dã</p><a href="#" class="mt-auto block text-center py-2 bg-rose-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-rose-600">Vào học</a></div>
+                        </div>
+                    </div>
+                </div>`;
+            } else if (weekNum == 7) {
+                html = `<h3 class="flex items-center text-2xl font-extrabold text-blue-900 mb-6 pb-2 border-b-2 border-blue-100"><span class="bg-emerald-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-3 text-sm">${weekNum}</span>Tuần 7: Thiên nhiên kì thú</h3>
+                <div class="space-y-6">
+                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+                        <h4 class="text-xl font-bold text-emerald-800 mb-4 flex items-center"><span class="w-8 h-8 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mr-3 text-sm">13</span>Bài 13: Mầm non</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">Đọc</span><p class="text-sm font-bold text-gray-800 mt-1">Mầm non</p><a href="#" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">Vào học</a></div>
+                            <div class="p-4 bg-orange-50 rounded-2xl border border-orange-100 flex flex-col"><span class="text-[10px] font-bold text-orange-600 uppercase">Luyện từ & Câu</span><p class="text-sm font-bold text-gray-800 mt-1">Từ đa nghĩa</p><a href="#" class="mt-auto block text-center py-2 bg-orange-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-orange-600">Luyện tập</a></div>
+                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Viết</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Lập dàn ý bài văn tả phong cảnh</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">Bắt đầu</a></div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm border-l-8 border-l-indigo-500">
+                        <h4 class="text-xl font-bold text-indigo-800 mb-4 flex items-center"><span class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mr-3 text-sm">14</span>Bài 14: Những ngọn núi nóng rẫy</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">Đọc</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Những ngọn núi nóng rẫy</p><a href="#" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">Vào học</a></div>
+                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Viết</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Viết đoạn văn tả phong cảnh</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">Bắt đầu</a></div>
+                            <div class="p-4 bg-purple-50 rounded-2xl border border-purple-100 flex flex-col"><span class="text-[10px] font-bold text-purple-600 uppercase">Khác</span><p class="text-sm font-bold text-gray-800 mt-1">Đọc mở rộng</p><a href="#" class="mt-auto block text-center py-2 bg-purple-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-purple-700">Khám phá</a></div>
+                        </div>
+                    </div>
+                </div>`;
+            } else if (weekNum == 8) {
+                html = `<h3 class="flex items-center text-2xl font-extrabold text-blue-900 mb-6 pb-2 border-b-2 border-blue-100"><span class="bg-emerald-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-3 text-sm">${weekNum}</span>Tuần 8: Thiên nhiên kì thú</h3>
+                <div class="space-y-6">
+                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+                        <h4 class="text-xl font-bold text-emerald-800 mb-4 flex items-center"><span class="w-8 h-8 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mr-3 text-sm">15</span>Bài 15: Bài ca về mặt trời</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">Đọc</span><p class="text-sm font-bold text-gray-800 mt-1">Bài ca về mặt trời</p><a href="#" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">Vào học</a></div>
+                            <div class="p-4 bg-orange-50 rounded-2xl border border-orange-100 flex flex-col"><span class="text-[10px] font-bold text-orange-600 uppercase">Luyện từ & Câu</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Luyện tập về từ đa nghĩa</p><a href="#" class="mt-auto block text-center py-2 bg-orange-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-orange-600">Luyện tập</a></div>
+                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Viết</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Bài văn tả phong cảnh</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">Bắt đầu</a></div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm border-l-8 border-l-indigo-500">
+                        <h4 class="text-xl font-bold text-indigo-800 mb-4 flex items-center"><span class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mr-3 text-sm">16</span>Bài 16: Xin chào, Xa-ha-ra</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">Đọc</span><p class="text-sm font-bold text-gray-800 mt-1">Xin chào, Xa-ha-ra</p><a href="#" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">Vào học</a></div>
+                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Viết</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Chỉnh sửa bài văn tả phong cảnh</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">Bắt đầu</a></div>
+                            <div class="p-4 bg-rose-50 rounded-2xl border border-rose-100 flex flex-col"><span class="text-[10px] font-bold text-rose-600 uppercase">Nói & nghe</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Cảnh đẹp thiên nhiên</p><a href="#" class="mt-auto block text-center py-2 bg-rose-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-rose-600">Vào học</a></div>
+                        </div>
+                    </div>
+                </div>`;
+            } else {
+                html = `<div class="p-20 text-center text-gray-400 font-bold italic">Nội dung đang được cập nhật...</div>`;
+            }
+            placeholder.innerHTML = html; container.appendChild(placeholder);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const week = urlParams.get('week');
+            if (week) {
+                switchWeek(parseInt(week));
+            }
+        });
+    </script>
+    <a href="index.html"
+        class="fixed bottom-8 right-8 z-[100] group flex items-center space-x-3 bg-white/80 backdrop-blur-xl p-2 pr-6 rounded-2xl shadow-2xl border border-white/50 hover:scale-105 transition-all active:scale-95">
+        <div
+            class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:rotate-12 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+        </div>
+        <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Trở về</span>
+    </a>
+</body>
+
+</html>
