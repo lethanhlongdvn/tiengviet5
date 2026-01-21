@@ -598,22 +598,23 @@
         const db = firebase.firestore();
 
         function openTeacherStats() {
-            const pin = prompt("Vui lòng nhập mã PIN:");
+            const pin = prompt("Vui lòng nhập mã PIN giáo viên:");
             if (pin === 'dvn') {
                 document.getElementById('statsModal').classList.add('active');
                 loadStats();
-            } else if (pin !== null) alert("Mã PIN sai!");
+            } else if (pin !== null) alert("Mã PIN không chính xác!");
         }
+
         function closeModal() { document.getElementById('statsModal').classList.remove('active'); }
 
         async function loadStats() {
             const tbody = document.getElementById('statsTableBody');
-            tbody.innerHTML = '<tr><td colspan="7" class="p-12 text-center text-gray-400 font-bold">Đang tải dữ liệu...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
             try {
                 const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Đoàn thuyền đánh cá").get();
                 tbody.innerHTML = '';
                 if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="p-12 text-center text-gray-400 font-bold italic">Chưa có dữ liệu.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
                     return;
                 }
                 const results = [];
@@ -621,44 +622,40 @@
                 results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
 
                 results.forEach((data, index) => {
-                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '---';
+                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
                     let duration = '---';
                     if (data.startTime && data.endTime) {
                         const diffMs = new Date(data.endTime) - new Date(data.startTime);
-                        const mins = Math.floor(diffMs / 60000);
-                        const secs = Math.floor((diffMs % 60000) / 1000);
-                        duration = `${mins}:${secs.toString().padStart(2, '0')}`;
+                        duration = `${Math.floor(diffMs / 60000)} phút ${Math.floor((diffMs % 60000) / 1000)} giây`;
                     }
                     const tr = document.createElement('tr');
-                    tr.className = "bg-white hover:bg-blue-50/50 transition-all shadow-sm";
+                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50 text-sm bg-white";
                     tr.innerHTML = `
-                        <td class="px-6 py-4 rounded-l-2xl font-black text-gray-400 text-xs">${index + 1}</td>
-                        <td class="px-6 py-4 font-black text-gray-800 text-sm">${data.studentName}</td>
-                        <td class="px-6 py-4 font-bold text-blue-600 text-sm">${data.className}</td>
-                        <td class="px-6 py-4 font-bold text-gray-500 text-sm">${data.school}</td>
-                        <td class="px-6 py-4 text-center">
-                            <span class="px-3 py-1 rounded-lg font-black text-sm ${data.score >= 80 ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}">${data.score}</span>
+                        <td class="p-4 font-bold text-gray-400">${index + 1}</td>
+                        <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
+                        <td class="p-4 text-gray-600">${data.className}</td>
+                        <td class="p-4 text-gray-600">${data.school}</td>
+                        <td class="p-4 text-center">
+                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">${data.score}/100</span>
                         </td>
-                        <td class="px-6 py-4 text-center font-bold text-gray-400 text-sm">${duration}</td>
-                        <td class="px-6 py-4 text-right rounded-r-2xl font-bold text-gray-400 text-[10px]">${date}</td>
+                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
+                        <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
                     `;
                     tbody.appendChild(tr);
                 });
-            } catch (error) {
-                tbody.innerHTML = '<tr><td colspan="7" class="p-12 text-center text-red-500 font-bold">Lỗi.</td></tr>';
-            }
+            } catch (e) { tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>'; }
         }
 
         function exportToExcel() {
             const table = document.querySelector("#statsModal table");
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true, cellStyles: true });
             const ws = wb.Sheets["Kết quả"];
-            const range = XLSX.utils.decode_range(ws['!ref']);
-            for (let R = range.s.r + 1; R <= range.e.r; ++R) {
-                const cell = ws[XLSX.utils.encode_cell({ r: R, c: 2 })];
-                if (cell) cell.t = 's';
+            if (ws['!cols']) {
+                ws['!cols'][2] = { t: 's' }; // Ensure 'Class' column is text
+            } else {
+                ws['!cols'] = [{ wch: 10 }, { wch: 25 }, { t: 's', wch: 10 }, { wch: 25 }, { wch: 10 }, { wch: 20 }, { wch: 20 }];
             }
-            XLSX.writeFile(wb, "ThongKe_DoanThuyenDanhCa.xlsx");
+            XLSX.writeFile(wb, "KetQua_DoanThuyenDanhCa.xlsx");
         }
 
         function switchTab(tabId) {
@@ -686,47 +683,45 @@
             { q: "Cảm hứng chủ đạo xuyên suốt bài thơ là gì?", a: ["Nỗi buồn man mác của người đi biển", "Sự lo lắng trước những hiểm nguy của biển cả", "Niềm vui, sự lạc quan và hăng say trong lao động", "Sự cô đơn giữa biển trời mênh mông"], c: 2 }
         ];
 
-        let currentQuizQuestions = [];
-        let currentQuestionIdx = 0;
-        let score = 0;
-        let selectedOption = null;
-        let studentData = {};
+        let studentData = {}, currentQuizQuestions = [], currentQuestionIdx = 0, score = 0, selectedOption = null;
 
-        function shuffle(array) {
-            let currentIndex = array.length, randomIndex;
-            while (currentIndex != 0) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex--;
-                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-            }
-            return array;
-        }
+        document.getElementById('regForm').onsubmit = (e) => {
+            e.preventDefault();
+            studentData = {
+                studentName: document.getElementById('studentName').value,
+                className: document.getElementById('studentClass').value,
+                school: document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
+                startTime: new Date().toISOString()
+            };
+            document.getElementById('quiz-registration').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            startQuiz();
+        };
 
         function startQuiz() {
-            const shuffled = shuffle([...allQuestions]);
-            currentQuizQuestions = shuffled.slice(0, 5);
+            currentQuizQuestions = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
             currentQuestionIdx = 0; score = 0; showQuestion();
         }
 
         function showQuestion() {
             const q = currentQuizQuestions[currentQuestionIdx];
             document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
-            document.getElementById('progressText').innerText = `Câu ${currentQuestionIdx + 1}/5`;
+            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
             document.getElementById('questionText').innerText = q.q;
-            const area = document.getElementById('optionsArea');
-            area.innerHTML = '';
+            const area = document.getElementById('optionsArea'); area.innerHTML = '';
             q.a.forEach((opt, i) => {
                 const btn = document.createElement('button');
-                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group border-2 border-transparent bg-gray-50 hover:bg-blue-50 transition-all';
-                btn.innerHTML = `
-                    <span class="w-8 h-8 rounded-lg bg-white flex items-center justify-center mr-4 shadow-sm group-hover:bg-blue-100 transition-colors">${String.fromCharCode(65 + i)}</span>
-                    <span class="flex-1">${opt}</span>
-                `;
+                btn.className = 'w-full p-4 text-left border-2 border-gray-100 rounded-2xl font-bold transition-all hover:border-blue-200 hover:bg-blue-50/50 flex items-center group';
+                btn.innerHTML = `<span class="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all text-sm">${String.fromCharCode(65 + i)}</span><span class="flex-1">${opt}</span>`;
                 btn.onclick = () => {
-                    document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500', 'bg-blue-50'));
-                    btn.classList.add('selected', 'border-blue-500', 'bg-blue-50');
-                    selectedOption = i;
+                    document.querySelectorAll('#optionsArea button').forEach(b => {
+                        b.classList.remove('border-blue-600', 'bg-blue-50');
+                        b.querySelector('span').classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+                    });
+                    btn.classList.add('border-blue-600', 'bg-blue-50');
+                    btn.querySelector('span').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
                     document.getElementById('nextBtn').disabled = false;
+                    selectedOption = i;
                 };
                 area.appendChild(btn);
             });
@@ -736,8 +731,7 @@
         document.getElementById('nextBtn').onclick = () => {
             if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) score += 20;
             currentQuestionIdx++;
-            if (currentQuestionIdx < 5) showQuestion();
-            else showResults();
+            if (currentQuestionIdx < 5) showQuestion(); else showResults();
         };
 
         function showResults() {
@@ -757,39 +751,31 @@
             }
         }
 
-        document.getElementById('regForm').onsubmit = function (e) {
-            e.preventDefault();
-            studentData = {
-                name: document.getElementById('studentName').value,
-                className: document.getElementById('studentClass').value,
-                school: document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
-                startTime: new Date().toISOString()
-            };
-            document.getElementById('quiz-registration').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            startQuiz();
-        };
-
         async function submitResults(e) {
-            const finalData = {
-                studentName: studentData.name, className: studentData.className, school: studentData.school,
-                lessonTitle: "Đoàn thuyền đánh cá", score: score,
-                startTime: studentData.startTime, endTime: new Date().toISOString(),
-                submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-            };
             const btn = e.target; btn.disabled = true; btn.innerText = "Đang gửi...";
             try {
-                await db.collection("diem_tieng_viet_lop5").add(finalData);
-                alert(`Chúc mừng ${studentData.name}! Đã nộp bài.`);
-                location.reload();
-            } catch (error) { alert("Lỗi!"); } finally { btn.disabled = false; }
+                await db.collection("diem_tieng_viet_lop5").add({
+                    ...studentData, lessonTitle: "Đoàn thuyền đánh cá", score: score, endTime: new Date().toISOString(), submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert(`Chúc mừng ${studentData.studentName} đã hoàn thành bài tập!`);
+                restartQuiz(); switchTab('lesson');
+            } catch (e) { alert("Lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
         }
 
-        function checkSchool(select) {
-            const otherSchool = document.getElementById('otherSchool');
-            if (select.value === 'other') { otherSchool.classList.remove('hidden'); otherSchool.required = true; }
-            else { otherSchool.classList.add('hidden'); otherSchool.required = false; }
+        function checkSchool() {
+            const select = document.getElementById('schoolSelect');
+            const other = document.getElementById('otherSchool');
+            if (select.value === 'other') {
+                other.classList.remove('hidden');
+                other.required = true;
+            } else {
+                other.classList.add('hidden');
+                other.required = false;
+            }
         }
 
-        function restartQuiz() { location.reload(); }
+        function restartQuiz() {
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-registration').classList.remove('hidden');
+        }
     </script>
