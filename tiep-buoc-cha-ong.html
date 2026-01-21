@@ -58,13 +58,7 @@
 
     <main class="container mx-auto px-4 py-8">
         <div class="mb-8 flex items-center justify-between">
-            <a href="index.html" class="flex items-center text-gray-600 hover:text-red-600 font-bold transition-colors">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                </svg>
-                Quay lại chủ điểm Tiếp bước cha ông
-            </a>
+            <div></div>
             <div class="hidden md:block">
                 <span class="text-gray-400">Trang chủ / Bài học /</span>
                 <span class="text-red-600 font-bold ml-1 uppercase">Tiếp bước cha ông</span>
@@ -368,6 +362,16 @@
             }
         });
     </script>
+    <a href="index.html"
+        class="fixed bottom-8 right-8 z-[100] group flex items-center space-x-3 bg-white/80 backdrop-blur-xl p-2 pr-6 rounded-2xl shadow-2xl border border-white/50 hover:scale-105 transition-all active:scale-95">
+        <div
+            class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:rotate-12 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+        </div>
+        <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Trở về</span>
+    </a>
 </body>
 
 </html>
