@@ -7,389 +7,371 @@
     <title>Khu rừng của Mát - EduRobot</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
-    <!-- SheetJS for Excel Export -->
-    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --accent: #f59e0b;
+            --glass: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.5);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
         body {
             font-family: 'Nunito', sans-serif;
-            font-size: 18px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
         }
 
         .serif-font {
             font-family: 'Merriweather', serif;
-            font-size: 18px;
-            line-height: 1.8;
         }
 
-        /* Thụt đầu dòng cho văn xuôi */
-        .serif-font p {
-            text-indent: 2em;
-            margin-bottom: 1rem;
-            text-align: justify;
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
 
-        /* Riêng đoạn hội thoại không thụt đầu dòng quá sâu */
-        .serif-font .dialogue {
-            text-indent: 0;
-            padding-left: 1em;
-            font-style: italic;
-            color: #4b5563;
+        .tab-btn.active {
+            color: var(--primary);
+            background: white;
+            box-shadow: inset 0 -3px 0 var(--primary);
+        }
+
+        .tab-content {
+            display: none !important;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-content.active {
+            display: block !important;
+        }
+
+        #tab-quiz.active {
+            display: flex !important;
+        }
+
+        #quiz-container {
+            height: calc(100vh - 180px);
+            max-height: 600px;
+        }
+
+        .option-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1.5px solid #e2e8f0;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            transform: translateX(4px);
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .option-btn.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .accordion-open .accordion-content {
-            max-height: 800px;
+            max-height: 500px;
         }
 
         .accordion-open svg {
             transform: rotate(180deg);
         }
 
-        .bg-paper {
-            background-color: #fdfcf7;
-            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
-        }
-
-        /* Tab Styles */
-        .tab-btn.active {
-            border-bottom: 4px solid #1d4ed8;
-            color: #1d4ed8;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Quiz Styles */
-        .quiz-option {
-            transition: all 0.2s;
-            border: 2px solid #e5e7eb;
-        }
-
-        .quiz-option:hover {
-            border-color: #3b82f6;
-            background-color: #eff6ff;
-        }
-
-        .quiz-option.selected {
-            border-color: #2563eb;
-            background-color: #dbeafe;
-        }
-
-        /* Modal Styles */
-        .modal {
+        .modal,
+        .success-modal {
             display: none;
             position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(8px);
             z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
+            padding: 1rem;
         }
 
-        .modal.active {
-            display: flex;
+        .modal.active,
+        .success-modal.active {
+            display: flex !important;
             align-items: center;
             justify-content: center;
+        }
+
+        .reading-content p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            text-indent: 2em;
+        }
+
+        .reading-content .dialogue {
+            text-indent: 0;
+            padding-left: 1em;
+            font-style: italic;
+            color: #4b5563;
         }
     </style>
 </head>
 
 <body class="bg-blue-50 text-gray-800">
-
-    <!-- Header -->
-    <header class="bg-white sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 py-1 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <a href="index.html" class="flex items-center space-x-2">
-                    <div
-                        class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg font-bold">
-                        E</div>
-                    <span class="text-lg font-extrabold text-blue-600 tracking-tight">EduRobot - <span
-                            class="text-yellow-500">Tiếng Việt 5</span></span>
-                </a>
+    <header class="sticky top-0 z-50 px-4 py-2">
+        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-3">
+                <div
+                    class="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-lg flex items-center justify-center text-white shadow-xl transform hover:rotate-6 transition-transform">
+                    <span class="text-lg font-black">E</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <span
+                            class="text-base font-black bg-gradient-to-r from-blue-600 to-indigo-800 bg-clip-text text-transparent hidden md:block">EduRobot</span>
+                        <span
+                            class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-white animate-pulse uppercase">Tiếng
+                            Việt 5</span>
+                    </div>
+                    <div class="h-4 w-px bg-gray-200 hidden md:block"></div>
+                    <div class="flex items-center space-x-2 overflow-hidden">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-gray-400">Chủ điểm:</span>
+                        <span class="text-sm font-black uppercase tracking-wider text-blue-800">Vẻ đẹp cuộc sống</span>
+                    </div>
+                </div>
             </div>
-
-            <ul class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
-                <li><a href="cd5-ve-dep-cuoc-song.html"
-                        class="hover:text-blue-600 transition-colors font-bold text-blue-700 border-b-2 border-blue-600">Bài
-                        học</a></li>
-                <li><a href="#" onclick="openTeacherStats()" class="hover:text-blue-500 transition-colors">Thống kê</a>
+            <ul class="flex space-x-6 text-xs font-bold items-center">
+                <li><a href="cd5-ve-dep-cuoc-song.html?week=22"
+                        class="flex items-center text-blue-600 hover:text-blue-700"><svg class="w-4 h-4 mr-1"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>Quay lại</a></li>
+                <li class="border-l border-gray-200 pl-6"><a href="index.html"
+                        class="text-gray-500 hover:text-blue-600">Trang chủ</a></li>
+                <li><button onclick="openTeacherStats()"
+                        class="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-100">Giáo viên</button>
                 </li>
-                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
             </ul>
         </nav>
     </header>
-
-    <main class="container mx-auto px-4 py-1">
-
-        <div
-            class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-200 mb-6 bg-white rounded-t-2xl overflow-hidden shadow-sm">
-            <div class="flex-1 flex">
+    <main class="container mx-auto px-4 py-2">
+        <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-lg">
+            <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
-                    class="tab-btn active flex-1 py-3 text-center font-bold text-gray-500 transition-all hover:bg-blue-50 border-r border-gray-100">
-                    1. Câu chuyện
-                </button>
+                    class="tab-btn active flex-1 py-4 text-center font-black text-gray-400 uppercase tracking-wider">1.
+                    Bài học</button>
                 <button onclick="switchTab('quiz')" id="btn-quiz"
-                    class="tab-btn flex-1 py-3 text-center font-bold text-gray-500 transition-all hover:bg-blue-50">
-                    2. Luyện tập
-                </button>
+                    class="tab-btn flex-1 py-4 text-center font-black text-gray-400 uppercase tracking-wider">2. Luyện
+                    tập</button>
             </div>
-
-            <div id="audio-container" class="p-2 md:pr-4">
+            <div id="audio-container"
+                class="p-2 md:px-4 flex items-center bg-blue-50/20 md:border-l border-gray-100/50">
                 <div
-                    class="flex items-center space-x-3 bg-blue-50/50 rounded-full p-1 pr-6 border border-blue-100 shadow-sm transition-all hover:bg-blue-50">
+                    class="flex items-center space-x-3 bg-white/60 backdrop-blur-md rounded-xl p-1.5 pr-4 border border-white shadow-inner">
                     <button id="audioControl" onclick="toggleAudio()"
-                        class="w-11 h-11 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-all shadow-md active:scale-95">
-                        <svg id="playIcon" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                        class="w-9 h-9 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center text-white shadow-md"><svg
+                            id="playIcon" class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M6 4l10 6-10 6V4z"></path>
-                        </svg>
-                        <svg id="pauseIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24">
+                        </svg><svg id="pauseIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M6 4h4v16H6zm8 0h4v16h-4z"></path>
-                        </svg>
-                    </button>
-                    <div class="flex flex-col">
-                        <p class="text-[11px] font-black text-blue-600 uppercase tracking-widest leading-none mb-1">
-                            NGHE ĐỌC MẪU</p>
-                        <p id="audioStatus" class="text-[12px] text-gray-400 font-bold italic leading-none">Đang dừng...
-                        </p>
-                    </div>
+                        </svg></button>
+                    <div class="flex flex-col"><span
+                            class="text-[9px] font-black text-blue-600 uppercase tracking-widest leading-none mb-0.5">ĐỌC
+                            MẪU</span><span id="audioStatus"
+                            class="text-[10px] text-gray-400 font-bold italic leading-none">Đang dừng...</span></div>
                 </div>
                 <audio id="lessonAudio">
                     <source src="am_thanh/khu-rung-cua-mat.mp3" type="audio/mpeg">
                 </audio>
             </div>
         </div>
-
         <div id="tab-lesson" class="tab-content active">
-            <div class="flex flex-col lg:flex-row gap-8">
-
-                <section class="w-full lg:w-[70%] text-center">
-                    <div class="bg-white rounded-[30px] shadow-sm border border-gray-100 p-2 md:p-3">
-
-
-                        <div class="p-1 md:p-2 bg-paper flex flex-col items-center space-y-4">
-                            <div class="serif-font text-gray-800 text-left w-full">
-                                <h1 class="text-3xl font-black mb-6 text-blue-800 text-center uppercase tracking-tight">
-                                    KHU RỪNG CỦA MÁT</h1>
-
-                                <p>
-                                    Mát sống với ông nội ở “Trang trại rừng” – một trang trại rộng lớn, nổi tiếng trong
+            <div class="flex flex-col lg:flex-row gap-6">
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div
+                            class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <h1
+                                class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span
+                                    class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Khu rừng của Mát
+                            </h1>
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content"
+                                id="reading-content-placeholder">
+                                <p>Mát sống với ông nội ở "Trang trại rừng" – một trang trại rộng lớn, nổi tiếng trong
                                     vùng. Đây là cơ nghiệp của tổ tiên để lại. Trang trại trồng nhiều loại cây, trong đó
-                                    có
-                                    những giống cây quý hiếm.
-                                </p>
-
-                                <p>
-                                    Hằng ngày, Mát cùng ông chăm sóc rừng cây. Dưới sự chỉ dạy của ông, Mát nhớ được tên
-                                    và
-                                    đặc tính của nhiều loại cây. Năm Mát tròn mười tám tuổi, ông nội qua đời. Trước khi
-                                    mất,
-                                    ông gửi gắm trang trại cho Mát. Mát cũng hứa với ông sẽ bảo vệ trang trại thật tốt
-                                    và
-                                    gìn giữ hồi ức đẹp đã có cùng ông tại nơi này.
-                                </p>
-
-                                <p>
-                                    Đáng tiếc, một đêm nọ, sấm chớp đùng đùng nổi lên. Một tia sét đánh trúng ngọn cây
-                                    cao
-                                    nhất trong trang trại. Cây bốc cháy, ngọn lửa mau chóng lan khắp rừng. Mọi người hô
-                                    hào,
-                                    cùng nhau dập lửa, nhưng đành bất lực trước ngọn lửa cao cả chục mét. Trang trại
-                                    cháy
-                                    suốt một ngày và một đêm mới dần tắt.
-                                </p>
-
-                                <p>
-                                    Nhìn cảnh hoang tàn của trang trại, Mát đau xót và kiệt sức, ngất lịm đi. Mọi người
-                                    vội
-                                    đưa anh vào bệnh viện. Lúc tỉnh dậy, anh buồn bã và tuyệt vọng. Bà lão cạnh giường
-                                    của
-                                    Mát thấy vậy, liền hỏi:
-                                </p>
-
-                                <p class="dialogue">
-                                    – Chàng trai trẻ, sao trông cậu ủ rũ vậy?
-                                </p>
-                                <p class="dialogue">
-                                    – Cây cối trong trang trại nhà cháu bị cháy sạch rồi bà ạ! – Mát buồn rầu đáp.
-                                </p>
-                                <p class="dialogue">
-                                    – Cây bị thiêu cháy thì trồng lại là được. Cậu còn trẻ mà!
-                                </p>
-
-                                <p>
-                                    Nghe bà cụ nói, Mát bừng tỉnh.
-                                </p>
-
-                                <p>
-                                    Xuất viện trở về, Mát thuê người đến, biến những thân cây bị đốt cháy thành than
-                                    củi,
-                                    đem bán để có tiền mua cây giống. Mát mua cây giống, trồng trong trang trại.
-                                </p>
-
-                                <p>
-                                    Nhiều năm sau, trang trại lại được phủ một màu xanh mướt.
-                                </p>
-
-                                <p class="text-right italic font-bold text-gray-600 mt-6">(Theo Truyện đọc lớp 5)</p>
+                                    có những giống cây quý hiếm.</p>
+                                <p>Hằng ngày, Mát cùng ông chăm sóc rừng cây. Dưới sự chỉ dạy của ông, Mát nhớ được tên
+                                    và đặc tính của nhiều loại cây. Năm Mát tròn mười tám tuổi, ông nội qua đời. Trước
+                                    khi mất, ông gửi gắm trang trại cho Mát. Mát cũng hứa với ông sẽ bảo vệ trang trại
+                                    thật tốt và gìn giữ hồi ức đẹp đã có cùng ông tại nơi này.</p>
+                                <p>Đáng tiếc, một đêm nọ, sấm chớp đùng đùng nổi lên. Một tia sét đánh trúng ngọn cây
+                                    cao nhất trong trang trại. Cây bốc cháy, ngọn lửa mau chóng lan khắp rừng. Mọi người
+                                    hô hào, cùng nhau dập lửa, nhưng đành bất lực trước ngọn lửa cao cả chục mét. Trang
+                                    trại cháy suốt một ngày và một đêm mới dần tắt.</p>
+                                <p>Nhìn cảnh hoang tàn của trang trại, Mát đau xót và kiệt sức, ngất lịm đi. Mọi người
+                                    vội đưa anh vào bệnh viện. Lúc tỉnh dậy, anh buồn bã và tuyệt vọng. Bà lão cạnh
+                                    giường của Mát thấy vậy, liền hỏi:</p>
+                                <p class="dialogue">– Chàng trai trẻ, sao trông cậu ủ rũ vậy?</p>
+                                <p class="dialogue">– Cây cối trong trang trại nhà cháu bị cháy sạch rồi bà ạ! – Mát
+                                    buồn rầu đáp.</p>
+                                <p class="dialogue">– Cây bị thiêu cháy thì trồng lại là được. Cậu còn trẻ mà!</p>
+                                <p>Nghe bà cụ nói, Mát bừng tỉnh.</p>
+                                <p>Xuất viện trở về, Mát thuê người đến, biến những thân cây bị đốt cháy thành than củi,
+                                    đem bán để có tiền mua cây giống. Mát mua cây giống, trồng trong trang trại.</p>
+                                <p>Nhiều năm sau, trang trại lại được phủ một màu xanh mướt.</p>
+                                <p class="text-right font-black text-blue-900 uppercase tracking-widest text-sm mt-12">
+                                    (Theo Truyện đọc lớp 5)</p>
+                            </div>
+                        </div>
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white shadow-xl"
+                            id="summary-placeholder">
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div
+                                    class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">
+                                        Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Ý chí vươn lên và tình yêu thiên nhiên. Mát không bỏ cuộc trước khó khăn mà tìm
+                                        cách khôi phục trang trại, giữ trọn lời hứa với ông nội.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
-
                 <aside class="w-full lg:w-[30%]">
-                    <div class="bg-yellow-50 rounded-[30px] shadow-sm border border-yellow-100 p-4 sticky top-20">
-                        <h2 class="text-xl font-black text-blue-900 mb-4 flex items-center">
-                            <span class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center mr-3">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl">
+                        <div class="mb-6"><img src="hinh_anh/khurungcuamat.png" alt="Minh họa"
+                                class="w-full h-auto rounded-3xl object-contain drop-shadow-xl"></div>
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                         d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
                                     </path>
                                 </svg>
-                            </span>
-                            Tìm hiểu bài
-                        </h2>
-                        <div class="mb-4 overflow-hidden rounded-2xl shadow-sm relative group max-w-full mx-auto">
-                            <img src="C:/Users/Admin/.gemini/antigravity/brain/cbb865b6-a5f3-4a35-b283-692f4fd0abc3/khu_rung_cua_mat_illustration_1768924272333.png"
-                                alt="Khu rừng của Mát" class="w-full h-auto block">
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
                         </div>
-
-                        <div class="space-y-4">
+                        <div class="space-y-4" id="questions-placeholder">
+                            <!-- Câu 1 -->
                             <div
-                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                                class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
                                 <button onclick="toggleAccordion(this)"
                                     class="w-full p-5 text-left flex justify-between items-center group">
-                                    <span
-                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">
-                                        1. Chuyện gì đã xảy ra với khu rừng của Mát?
-                                    </span>
-                                    <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1.
+                                        Chuyện gì đã xảy ra với trang trại của Mát trong một đêm nọ?</span>
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
                                 </button>
                                 <div class="accordion-content">
                                     <div
-                                        class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
-                                        <span class="text-green-600 font-bold block mb-1">Gợi ý:</span>
-                                        <p>Một đêm nọ, <b>sấm sét đã đánh trúng ngọn cây cao nhất</b>, gây ra đám cháy
-                                            lớn
-                                            lan khắp rừng. Dù mọi người cố gắng dập lửa nhưng trang trại vẫn bị thiêu
-                                            rụi,
-                                            chỉ còn lại cảnh hoang tàn.</p>
+                                        class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <div class="flex items-center space-x-2 mb-2"><span
+                                                class="w-1.5 h-1.5 rounded-full bg-green-500"></span><span
+                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">Gợi
+                                                ý trả lời</span></div>
+                                        <p class="font-medium">Một đêm nọ, sấm sét đánh trúng cây cao nhất, gây cháy lan
+                                            khắp trang trại. Dù mọi người cố gắng dập lửa nhưng trang trại vẫn bị thiêu
+                                            rụi suốt một ngày một đêm.</p>
                                     </div>
                                 </div>
                             </div>
-
+                            <!-- Câu 2 -->
                             <div
-                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                                class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
                                 <button onclick="toggleAccordion(this)"
                                     class="w-full p-5 text-left flex justify-between items-center group">
-                                    <span
-                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">
-                                        2. Lời khuyên của bà cụ giúp Mát nhận ra điều gì?
-                                    </span>
-                                    <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2.
+                                        Lời khuyên của bà cụ ở bệnh viện đã giúp Mát thay đổi suy nghĩ như thế
+                                        nào?</span>
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
                                 </button>
                                 <div class="accordion-content">
                                     <div
-                                        class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
-                                        <span class="text-green-600 font-bold block mb-1">Gợi ý:</span>
-                                        <p>Bà cụ nói: <i>“Cây bị thiêu cháy thì trồng lại là được. Cậu còn trẻ mà!”</i>.
-                                        </p>
-                                        <p class="mt-2">Lời khuyên giúp Mát bừng tỉnh vì:</p>
-                                        <ul class="list-disc ml-4 mt-1">
-                                            <li>Bà đã chỉ ra hướng giải quyết: <b>trồng lại cây mới</b>.</li>
-                                            <li>Bà nhắc nhở Mát về lợi thế của mình: <b>tuổi trẻ, sức lực và thời
-                                                    gian</b>
-                                                để bắt đầu lại.</li>
-                                        </ul>
+                                        class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <div class="flex items-center space-x-2 mb-2"><span
+                                                class="w-1.5 h-1.5 rounded-full bg-green-500"></span><span
+                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">Gợi
+                                                ý trả lời</span></div>
+                                        <p class="font-medium">Bà cụ khuyên: "Cây bị thiêu cháy thì trồng lại là được.
+                                            Cậu còn trẻ mà!". Lời này giúp Mát bừng tỉnh, nhận ra mình vẫn còn cơ hội để
+                                            bắt đầu lại thay vì tuyệt vọng.</p>
                                     </div>
                                 </div>
                             </div>
-
+                            <!-- Câu 3 -->
                             <div
-                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
+                                class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
                                 <button onclick="toggleAccordion(this)"
                                     class="w-full p-5 text-left flex justify-between items-center group">
-                                    <span
-                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">
-                                        3. Mát đã làm gì để khôi phục trang trại?
-                                    </span>
-                                    <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </button>
-                                <div class="accordion-content">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3.
+                                        Mát đã làm gì để khôi phục lại trang trại rừng của mình?</span>
                                     <div
-                                        class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
-                                        <span class="text-green-600 font-bold block mb-1">Gợi ý:</span>
-                                        <p>Mát đã thể hiện sự thông minh và nỗ lực:</p>
-                                        <ul class="list-disc ml-4 mt-1">
-                                            <li>Biến đau thương thành hành động: Thuê người làm <b>than củi</b> từ
-                                                những
-                                                thân cây bị cháy đem bán.</li>
-                                            <li>Dùng tiền bán than để <b>mua cây giống mới</b>.</li>
-                                            <li>Kiên trì trồng và chăm sóc cho đến khi khu rừng xanh tốt trở lại.</li>
-                                        </ul>
+                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div
-                                class="accordion-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-50">
-                                <button onclick="toggleAccordion(this)"
-                                    class="w-full p-5 text-left flex justify-between items-center group">
-                                    <span
-                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors text-sm">
-                                        4. Qua câu chuyện, em thấy Mát là người thế nào?
-                                    </span>
-                                    <svg class="w-5 h-5 text-gray-400 transition-transform" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
                                 </button>
                                 <div class="accordion-content">
                                     <div
-                                        class="px-5 pb-5 text-base text-gray-700 leading-relaxed border-t border-gray-50 pt-3">
-                                        <span class="text-green-600 font-bold block mb-1">Gợi ý:</span>
-                                        <p>Mát là một người:</p>
-                                        <ul class="list-disc ml-4 mt-1">
-                                            <li><b>Hiếu thảo, trọng lời hứa:</b> Quyết tâm giữ gìn cơ nghiệp của ông.
-                                            </li>
-                                            <li><b>Yêu thiên nhiên:</b> Đau xót khi rừng bị cháy.</li>
-                                            <li><b>Có ý chí, nghị lực:</b> Biết đứng dậy sau thất bại và tìm cách khắc
-                                                phục
-                                                khó khăn.</li>
-                                        </ul>
+                                        class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <div class="flex items-center space-x-2 mb-2"><span
+                                                class="w-1.5 h-1.5 rounded-full bg-green-500"></span><span
+                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">Gợi
+                                                ý trả lời</span></div>
+                                        <p class="font-medium">Mát cho biến những thân cây cháy thành than củi để bán
+                                            lấy tiền mua cây giống mới, sau đó kiên trì trồng lại trang trại cho đến khi
+                                            nó xanh tươi trở lại.</p>
                                     </div>
                                 </div>
                             </div>
@@ -397,440 +379,311 @@
                     </div>
                 </aside>
             </div>
-
-            <div
-                class="mt-2 bg-white rounded-[30px] shadow-sm border border-blue-100 p-6 md:p-8 overflow-hidden relative">
-                <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-50 rounded-full opacity-50"></div>
-                <div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
-                    <div
-                        class="bg-blue-600 p-8 rounded-3xl text-white shadow-xl shadow-blue-200 shrink-0 text-center md:text-left">
-                        <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-2">Thông điệp</p>
-                        <h3 class="text-2xl font-black uppercase tracking-wider">Nội dung chính</h3>
-                    </div>
-                    <div class="flex-grow">
-                        <p class="text-lg font-semibold leading-relaxed text-blue-900 mb-2">
-                            Ý chí vươn lên và tình yêu thiên nhiên.
-                        </p>
-                        <p class="text-gray-600 leading-relaxed text-base">
-                            Câu chuyện ca ngợi nghị lực của Mát. Dù gặp tai họa khủng khiếp, nhưng nhờ lời khuyên đúng
-                            đắn
-                            và sức trẻ, Mát đã không bỏ cuộc mà tìm cách khôi phục lại trang trại, giữ trọn lời hứa với
-                            ông
-                            nội.
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
-
-        <!-- Quiz Tab Content -->
         <div id="tab-quiz" class="tab-content">
-            <div class="bg-white rounded-[30px] shadow-sm border border-gray-100 p-4 md:p-6 max-w-4xl mx-auto">
-                <div id="quiz-registration">
-                    <div class="text-center mb-4">
-                        <h2 class="text-2xl font-black text-blue-900 mb-1">THÔNG TIN HỌC SINH</h2>
-                        <p class="text-sm text-gray-500">Vui lòng nhập thông tin để bắt đầu luyện tập: <b>Khu rừng của
-                                Mát</b>
-                        </p>
-                    </div>
-                    <form id="regForm" class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">Họ và tên:</label>
-                            <input type="text" id="studentName" required
-                                class="w-full p-3 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all"
-                                placeholder="Nhập đầy đủ họ tên của em">
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1">Lớp:</label>
-                                <select id="studentClass" required
-                                    class="w-full p-3 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all">
-                                    <option value="">-- Chọn lớp --</option>
-                                    <option value="5/1">Lớp 5/1</option>
-                                    <option value="5/2">Lớp 5/2</option>
-                                    <option value="5/3">Lớp 5/3</option>
-                                    <option value="5/4">Lớp 5/4</option>
-                                    <option value="5/5">Lớp 5/5</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1">Trường:</label>
-                                <div class="relative">
-                                    <select id="schoolSelect" onchange="checkSchool(this)"
-                                        class="w-full p-3 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all">
-                                        <option value="Tiểu học Đỗ Văn Nại">Tiểu học Đỗ Văn Nại</option>
-                                        <option value="other">Trường khác...</option>
-                                    </select>
-                                    <input type="text" id="otherSchool"
-                                        class="hidden mt-2 w-full p-3 border-2 border-gray-100 rounded-2xl focus:border-blue-500 outline-none transition-all"
-                                        placeholder="Nhập tên trường của em">
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit"
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-lg uppercase tracking-wider">
-                            Bắt đầu làm bài
-                        </button>
-                    </form>
-                </div>
-
-                <div id="quiz-container" class="hidden">
-                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-100">
-                        <div class="flex items-center space-x-3">
-                            <span id="questionNum"
-                                class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center font-black text-xl">1</span>
-                            <div>
-                                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Câu hỏi</p>
-                                <p class="text-xs text-gray-400 font-bold" id="progressText">Đang thực hiện: 1/5</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Thời gian làm bài
-                            </p>
-                            <p id="timer" class="text-lg font-black text-blue-900">00:00</p>
-                        </div>
-                    </div>
-
-                    <div id="questionArea" class="mb-4">
-                        <h3 id="questionText" class="text-lg font-bold text-gray-800 mb-4 leading-relaxed"></h3>
-                        <div id="optionsArea" class="grid grid-cols-1 gap-3"></div>
-                    </div>
-
-                    <div class="flex justify-end pt-4 border-t border-gray-100">
-                        <button id="nextBtn" disabled
-                            class="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition-all active:scale-95 flex items-center">
-                            Tiếp theo
-                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div id="quiz-results" class="hidden text-center py-6">
-                    <div class="mb-4 relative inline-block">
-                        <svg class="w-32 h-32 mx-auto" viewBox="0 0 36 36">
-                            <path class="text-gray-100" stroke-width="3" fill="none"
-                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            <path id="scoreCircle" class="text-green-500" stroke-width="3" stroke-dasharray="0, 100"
-                                stroke-linecap="round" fill="none"
-                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        </svg>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <span id="scoreText" class="text-3xl font-black text-blue-900">0</span>
-                            <span class="text-[10px] font-bold text-gray-400 uppercase">Điểm</span>
-                        </div>
-                    </div>
-                    <h2 class="text-2xl font-black text-gray-800 mb-1" id="resultTitle">Hoàn thành!</h2>
-                    <p class="text-sm text-gray-500 mb-6" id="resultMsg">Chúc mừng em đã hoàn thành bài luyện tập.</p>
-
-                    <div class="flex flex-col sm:flex-row justify-center gap-4">
-                        <button onclick="restartQuiz()"
-                            class="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-4 px-10 rounded-2xl transition-all active:scale-95">Làm
-                            lại</button>
-                        <button onclick="submitResults(event)"
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition-all active:scale-95">Nộp
-                            bài</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Teacher Statistics Modal -->
-        <div id="statsModal" class="modal">
             <div
-                class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col m-4">
-                <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-blue-600 text-white">
-                    <h2 class="text-2xl font-black">THỐNG KÊ KẾT QUẢ HỌC TẬP</h2>
-                    <div class="flex items-center space-x-2">
-                        <button onclick="exportToExcel()"
-                            class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-xl flex items-center text-sm font-bold shadow-lg transition-all">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 1 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                class="max-w-4xl mx-auto glass-card rounded-[40px] shadow-2xl overflow-hidden flex flex-col min-h-[500px]">
+                <!-- Registration -->
+                <div id="quiz-registration" class="p-4 md:p-8 flex-grow flex flex-col justify-center overflow-auto">
+                    <div class="text-center mb-6">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white mb-4 shadow-xl mx-auto transform -rotate-3">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
                                 </path>
                             </svg>
-                            Xuất Excel
-                        </button>
-                        <button onclick="closeModal()" class="hover:bg-blue-700 p-2 rounded-full transition-colors">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                        </button>
+                        </div>
+                        <h2 class="text-2xl font-black text-gray-800 mb-1 tracking-tight">Đăng ký luyện tập</h2>
+                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Khu rừng của Mát</p>
+                    </div>
+                    <form onsubmit="startQuiz(event)" class="w-full max-w-sm mx-auto space-y-4">
+                        <input type="text" id="studentName" required placeholder="Họ và tên của em"
+                            class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold placeholder:text-gray-300 shadow-sm">
+                        <div class="grid grid-cols-2 gap-4">
+                            <select id="studentClass" required
+                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none cursor-pointer">
+                                <option value="">Chọn Lớp</option>
+                                <option value="5/1">5/1</option>
+                                <option value="5/2">5/2</option>
+                                <option value="5/3">5/3</option>
+                                <option value="5/4">5/4</option>
+                                <option value="5/5">5/5</option>
+                            </select>
+                            <select id="schoolSelect" required onchange="checkSchool()"
+                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none cursor-pointer">
+                                <option value="Tiểu học Đỗ Văn Nại">TH Đỗ Văn Nại</option>
+                                <option value="Khác">Trường khác...</option>
+                            </select>
+                        </div>
+                        <input type="text" id="otherSchool" placeholder="Tên trường của em"
+                            class="hidden w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white transition-all font-bold shadow-sm">
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl transition-all active:scale-95 text-base uppercase tracking-wider">Bắt
+                            đầu luyện tập</button>
+                    </form>
+                </div>
+                <!-- Quiz Engine -->
+                <div id="quiz-container" class="hidden flex-grow flex flex-col">
+                    <div class="bg-blue-600/5 px-6 py-4 flex justify-between items-center border-b border-blue-100">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center font-black mr-4 shadow-lg"
+                                id="questionNum">1</div>
+                            <div class="flex flex-col"><span
+                                    class="text-[10px] font-black text-blue-600 uppercase tracking-widest leading-none mb-1"
+                                    id="progressText">CÂU TRẮC NGHIỆM: 1/5</span><span
+                                    class="text-xs text-gray-400 font-bold leading-none">Khu rừng của Mát</span></div>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-center overflow-auto">
+                        <h3 class="text-xl md:text-2xl font-black text-gray-800 mb-6 leading-tight transition-all"
+                            id="questionText">Nội dung câu hỏi?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="optionsArea"></div>
+                    </div>
+                    <div class="px-6 py-4 border-t border-gray-50 flex justify-between items-center bg-gray-50/50">
+                        <span class="text-xs font-bold text-gray-400 italic">* Chọn đáp án đúng nhất</span>
+                        <button id="nextBtn" disabled
+                            class="bg-blue-600 disabled:opacity-30 hover:bg-blue-700 text-white font-black py-3 px-10 rounded-2xl shadow-lg transition-all active:scale-95 uppercase text-sm tracking-widest">Câu
+                            tiếp theo</button>
                     </div>
                 </div>
-                <div class="p-6 overflow-x-auto flex-1">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-gray-50 text-gray-600 uppercase text-xs font-bold tracking-widest">
-                                <th class="p-4 border-b">STT</th>
-                                <th class="p-4 border-b">Họ và tên</th>
-                                <th class="p-4 border-b">Lớp</th>
-                                <th class="p-4 border-b">Trường</th>
-                                <th class="p-4 border-b text-center">Điểm số</th>
-                                <th class="p-4 border-b text-center">Thời gian làm</th>
-                                <th class="p-4 border-b text-right">Thời gian nộp</th>
-                            </tr>
-                        </thead>
-                        <tbody id="statsTableBody" class="text-sm"></tbody>
-                    </table>
+                <!-- Results -->
+                <div id="quiz-results"
+                    class="hidden p-8 flex-grow flex flex-col items-center justify-center text-center">
+                    <div class="relative w-40 h-40 mb-8">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="80" cy="80" r="74" stroke="currentColor" stroke-width="12" fill="transparent"
+                                class="text-gray-100" />
+                            <circle id="scoreCircle" cx="80" cy="80" r="74" stroke="url(#scoreGrad)" stroke-width="12"
+                                fill="transparent" class="transition-all duration-1000 ease-out"
+                                stroke-dasharray="0, 465" stroke-linecap="round" />
+                            <defs>
+                                <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#3b82f6" />
+                                    <stop offset="100%" stop-color="#818cf8" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center"><span
+                                class="text-5xl font-black text-gray-800" id="scoreText">0</span><span
+                                class="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mt-1">Điểm
+                                số</span></div>
+                    </div>
+                    <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Hoàn thành bài tập!</h2>
+                    <p class="text-gray-500 mb-10 max-w-sm font-bold" id="resultMsg">Em đã nỗ lực hết mình rồi đấy!</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
+                        <button onclick="restartQuiz()"
+                            class="bg-white hover:bg-gray-50 text-gray-700 font-black py-4 rounded-2xl border-2 border-gray-100 transition-all shadow-sm">LÀM
+                            LẠI</button>
+                        <button onclick="submitResults(event)"
+                            class="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl transition-all">NỘP
+                            KẾT QUẢ</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Modals -->
+            <div id="statsModal" class="modal">
+                <div
+                    class="bg-white rounded-[40px] w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl m-4 transform transition-all">
+                    <div class="p-8 border-b flex justify-between items-center bg-gray-50/50 backdrop-blur-xl">
+                        <div class="flex items-center space-x-4">
+                            <div
+                                class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-black text-gray-800 tracking-tight">Bảng kết quả học tập</h2>
+                                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Dành riêng cho
+                                    giáo viên</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3"><button onclick="exportToExcel()"
+                                class="bg-green-600 hover:bg-green-700 text-white font-black py-3 px-6 rounded-2xl text-sm flex items-center shadow-lg transition-all active:scale-95"><svg
+                                    class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg> XUẤT EXCEL</button><button onclick="closeModal()"
+                                class="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-2xl transition-all"><svg
+                                    class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M6 18L18 6M6 6l12 12"></path>
+                                </svg></button></div>
+                    </div>
+                    <div class="flex-grow overflow-auto p-8 bg-gray-50/30">
+                        <table class="w-full">
+                            <thead>
+                                <tr
+                                    class="text-left text-gray-400 uppercase text-[10px] font-black tracking-[0.2em] border-b-2 border-gray-100 pb-4">
+                                    <th class="px-6 py-4">STT</th>
+                                    <th class="px-6 py-4">Họ và Tên</th>
+                                    <th class="px-6 py-4">Lớp</th>
+                                    <th class="px-6 py-4">Trường</th>
+                                    <th class="px-6 py-4 text-center">Điểm</th>
+                                    <th class="px-6 py-4 text-center">Lần</th>
+                                    <th class="px-6 py-4 text-center">Thời gian</th>
+                                    <th class="px-6 py-4 text-right">Hoàn thành</th>
+                                </tr>
+                            </thead>
+                            <tbody id="statsTableBody" class="divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="successModal" class="success-modal">
+                <div
+                    class="glass-card success-card rounded-[40px] p-10 max-w-sm w-full text-center shadow-3xl border-white/50">
+                    <div
+                        class="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 rounded-3xl flex items-center justify-center text-white mx-auto mb-8 shadow-xl transform rotate-6 scale-110">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-black text-gray-800 mb-2 tracking-tight">Nộp bài thành công!</h2>
+                    <p class="text-gray-500 mb-10 font-bold leading-relaxed">Chúc mừng em đã hoàn thành thử thách kiến
+                        thức!</p><button onclick="closeSuccessModal()"
+                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl transition-all active:scale-95 uppercase tracking-widest text-sm">Trở
+                        về bài học</button>
                 </div>
             </div>
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-zinc-900 text-zinc-400 py-2 px-4 mt-2">
-        <div class="container mx-auto text-center text-xs">
-            <p>@ 2026 EduRobot - Phát triển bởi Lê Thành Long</p>
-        </div>
+    <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50 text-center">
+        <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">@ 2026 EduRobot - Hệ thống học tập
+            thông minh</p>
+        <p class="text-xs font-bold text-blue-600 mt-2">Phát triển bởi Lê Thành Long</p>
     </footer>
-
-    <script>
+    <script id="script-placeholder">
         function toggleAccordion(button) {
             const item = button.parentElement;
             const isOpen = item.classList.contains('accordion-open');
             document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-open'));
-            if (!isOpen) {
-                item.classList.add('accordion-open');
-            }
+            if (!isOpen) item.classList.add('accordion-open');
         }
-
         const audio = document.getElementById('lessonAudio');
         const playIcon = document.getElementById('playIcon');
         const pauseIcon = document.getElementById('pauseIcon');
         const audioStatus = document.getElementById('audioStatus');
-
         function toggleAudio() {
-            if (audio.paused) {
-                audio.play();
-                playIcon.classList.add('hidden');
-                pauseIcon.classList.remove('hidden');
-                audioStatus.innerText = "Đang phát...";
-                audioStatus.classList.replace('text-gray-400', 'text-green-500');
-            } else {
-                audio.pause();
-                playIcon.classList.remove('hidden');
-                pauseIcon.classList.add('hidden');
-                audioStatus.innerText = "Đang dừng...";
-                audioStatus.classList.replace('text-green-500', 'text-gray-400');
-            }
+            if (audio.paused) { audio.play(); playIcon.classList.add('hidden'); pauseIcon.classList.remove('hidden'); audioStatus.innerText = "Đang phát..."; audioStatus.classList.replace('text-gray-400', 'text-green-500'); }
+            else { audio.pause(); playIcon.classList.remove('hidden'); pauseIcon.classList.add('hidden'); audioStatus.innerText = "Đang dừng..."; audioStatus.classList.replace('text-green-500', 'text-gray-400'); }
         }
-
-        audio.onended = () => {
-            playIcon.classList.remove('hidden');
-            pauseIcon.classList.add('hidden');
-            audioStatus.innerText = "Đang dừng...";
-            audioStatus.classList.replace('text-green-500', 'text-gray-400');
-        };
-
-        /* FIREBASE CONFIG */
-        const firebaseConfig = {
-            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
-            authDomain: "gamhoctap.firebaseapp.com",
-            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "gamhoctap",
-            storageBucket: "gamhoctap.firebasestorage.app",
-            messagingSenderId: "833329613932",
-            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
-            measurementId: "G-YT1PKCYS67"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        /* TEACHER STATS LOGIC */
-        function openTeacherStats() {
-            const pin = prompt("Vui lòng nhập mã PIN giáo viên:");
-            if (pin === 'dvn') {
-                document.getElementById('statsModal').classList.add('active');
-                loadStats();
-            } else if (pin !== null) {
-                alert("Mã PIN không chính xác!");
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('statsModal').classList.remove('active');
-        }
-
-        async function loadStats() {
-            const tbody = document.getElementById('statsTableBody');
-            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
-            try {
-                const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Khu rừng của Mát").get();
-                tbody.innerHTML = '';
-                if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
-                    return;
-                }
-                const results = [];
-                snapshot.forEach(doc => results.push(doc.data()));
-                results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
-
-                results.forEach((data, index) => {
-                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
-                    let duration = '---';
-                    if (data.startTime && data.endTime) {
-                        const diffMs = new Date(data.endTime) - new Date(data.startTime);
-                        duration = `${Math.floor(diffMs / 60000)} phút ${Math.floor((diffMs % 60000) / 1000)} giây`;
-                    }
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50 text-sm bg-white";
-                    tr.innerHTML = `
-                        <td class="p-4 font-bold text-gray-400">${index + 1}</td>
-                        <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
-                        <td class="p-4 text-gray-600">${data.className}</td>
-                        <td class="p-4 text-gray-600">${data.school}</td>
-                        <td class="p-4 text-center">
-                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">${data.score}/100</span>
-                        </td>
-                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
-                        <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            } catch (e) { tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>'; }
-        }
-
-        function exportToExcel() {
-            const table = document.querySelector("#statsModal table");
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true, cellStyles: true });
-            const ws = wb.Sheets["Kết quả"];
-            if (ws['!cols']) {
-                ws['!cols'][2] = { t: 's' }; // Ensure 'Class' column is text
-            } else {
-                ws['!cols'] = [{ wch: 10 }, { wch: 25 }, { t: 's', wch: 10 }, { wch: 25 }, { wch: 10 }, { wch: 20 }, { wch: 20 }];
-            }
-            XLSX.writeFile(wb, "KetQua_KhuRungCuaMat.xlsx");
-        }
-
-        /* TAB LOGIC */
+        audio.onended = () => { playIcon.classList.remove('hidden'); pauseIcon.classList.add('hidden'); audioStatus.innerText = "Đang dừng..."; audioStatus.classList.replace('text-green-500', 'text-gray-400'); };
         function switchTab(tabId) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-blue-600'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.getElementById('btn-' + tabId).classList.add('active', 'text-blue-600');
+            document.getElementById('btn-' + tabId).classList.add('active');
             document.getElementById('tab-' + tabId).classList.add('active');
         }
-
-        let studentData = {}, currentQuizQuestions = [], currentQuestionIdx = 0, score = 0, selectedOption = null;
-
+        const allQuestions = [
+            { q: "Trang trại của Mát tên gọi là gì?", a: ["Trang trại cây", "Trang trại rừng", "Trang trại xanh", "Trang trại ông nội"], c: 1 },
+            { q: "Mát thừa kế trang trại khi bao nhiêu tuổi?", a: ["16 tuổi", "17 tuổi", "18 tuổi", "19 tuổi"], c: 2 },
+            { q: "Nguyên nhân gây cháy trang trại là gì?", a: ["Do người đốt rừng", "Do sét đánh trúng cây cao nhất", "Do lửa từ nhà bếp lan ra", "Do trẻ em nghịch lửa"], c: 1 },
+            { q: "Đám cháy trang trại kéo dài trong bao lâu?", a: ["Một ngày", "Một đêm", "Một ngày một đêm", "Hai ngày"], c: 2 },
+            { q: "Khi thấy trang trại bị thiêu rụi, phản ứng của Mát như thế nào?", a: ["Bình tĩnh tìm cách dập lửa", "Đau xót, kiệt sức và ngất lịm", "Bỏ chạy khỏi trang trại", "Lập tức lên kế hoạch trồng lại"], c: 1 },
+            { q: "Ai đã đưa ra lời khuyên giúp Mát bừng tỉnh khi ở bệnh viện?", a: ["Ông nội hiện về", "Bác sĩ điều trị", "Bà lão cạnh giường bệnh", "Bạn thân của Mát"], c: 2 },
+            { q: "Lời khuyên \"Cây bị thiêu cháy thì trồng lại là được\" có ý nghĩa gì?", a: ["Khuyên Mát nên đi mua cây khác", "Nhắc Mát vẫn còn trẻ và có thể bắt đầu lại", "Chê bai sự yếu đuối của Mát", "Xúi giục Mát đi làm nghề khác"], c: 1 },
+            { q: "Mát đã làm gì để có tiền mua cây giống trồng lại rừng?", a: ["Vay tiền ngân hàng", "Biến thân cây cháy thành than củi để bán", "Bán đất trang trại", "Xin sự trợ giúp của chính phủ"], c: 1 },
+            { q: "Trang trại của Mát nổi tiếng trong vùng vì điều gì?", a: ["Có nhiều thú dữ", "Gần trung tâm thành phố", "Cơ nghiệp tổ tiên và có nhiều giống cây quý", "Có nhiều vàng bạc"], c: 2 },
+            { q: "Mát hứa với ông nội điều gì trước khi ông mất?", a: ["Sẽ trở nên thật giàu có", "Bảo vệ trang trại và gìn giữ hồi ức về ông", "Sẽ đi du học nước ngoài", "Sẽ bán trang trại lấy tiền chia cho mọi người"], c: 1 },
+            { q: "Nhiều năm sau khi trồng lại, trang trại của Mát ra sao?", a: ["Vẫn là một đống tro tàn", "Được chuyển đổi thành khu công nghiệp", "Lại được phủ một màu xanh mướt", "Bị bỏ hoang vì Mát đi xa"], c: 2 },
+            { q: "Qua câu chuyện, em thấy Mát là người như thế nào?", a: ["Yếu đuối và dễ bỏ cuộc", "Có ý chí vươn lên và yêu thiên nhiên", "Chỉ biết nghe lời người khác", "Hay mơ mộng hão huyền"], c: 1 },
+            { q: "Biện pháp nào giúp Mát khôi phục rừng nhanh nhất?", a: ["Chờ đợi rừng tự tái sinh", "Mua cây giống và trồng lại trên đất cũ", "Thuê thợ về xây tường bao quanh", "Đốt sạch phần còn lại"], c: 1 },
+            { q: "Thông điệp chính của câu chuyện là gì?", a: ["Luôn cẩn thận với sấm sét", "Không bỏ cuộc trước khó khăn, nghịch cảnh", "Trồng rừng rất tốn kém", "Than củi là mặt hàng dễ bán"], c: 1 },
+            { q: "Cảm hứng chủ đạo của bài đọc \"Khu rừng của Mát\" là gì?", a: ["Sự hoang tàn, u tối", "Ca ngợi nghị lực sống và niềm tin vào tương lai", "Sự hối tiếc về quá khứ", "Sự sợ hãi trước thiên nhiên"], c: 1 }
+        ];
+        let selectedQuestions = [], currentIdx = 0, score = 0, studentData = {}, startTime = null;
         function checkSchool() {
-            const select = document.getElementById('schoolSelect');
-            const other = document.getElementById('otherSchool');
-            if (select.value === 'other') {
-                other.classList.remove('hidden');
-                other.required = true;
-            } else {
-                other.classList.add('hidden');
-                other.required = false;
-            }
+            const select = document.getElementById('schoolSelect'), other = document.getElementById('otherSchool');
+            if (select.value === 'Khác') { other.classList.remove('hidden'); other.required = true; }
+            else { other.classList.add('hidden'); other.required = false; }
         }
-
-        document.getElementById('regForm').onsubmit = (e) => {
-            e.preventDefault();
-            studentData = {
-                studentName: document.getElementById('studentName').value,
-                className: document.getElementById('studentClass').value,
-                school: document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
-                startTime: new Date().toISOString()
-            };
-            document.getElementById('quiz-registration').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            startQuiz();
-        };
-
         function shuffle(array) {
             let currentIndex = array.length, randomIndex;
-            while (currentIndex != 0) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex--;
-                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-            }
+            while (currentIndex != 0) { randomIndex = Math.floor(Math.random() * currentIndex); currentIndex--;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]; }
             return array;
         }
-
-        function startQuiz() {
-            currentQuizQuestions = shuffle([...allQuestions]).slice(0, 5);
-            currentQuestionIdx = 0; score = 0; showQuestion();
+        function startQuiz(e) {
+            e.preventDefault();
+            const schoolVal = document.getElementById('schoolSelect').value;
+            studentData = { studentName: document.getElementById('studentName').value, studentClass: document.getElementById('studentClass').value, school: schoolVal === 'Khác' ? document.getElementById('otherSchool').value : schoolVal };
+            selectedQuestions = shuffle([...allQuestions]).slice(0, 5); currentIdx = 0; score = 0; startTime = new Date();
+            document.getElementById('quiz-registration').classList.add('hidden'); document.getElementById('quiz-container').classList.remove('hidden'); showQuestion();
         }
-
         function showQuestion() {
-            const q = currentQuizQuestions[currentQuestionIdx];
-            document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
-            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
+            const q = selectedQuestions[currentIdx];
+            document.getElementById('questionNum').innerText = currentIdx + 1;
+            document.getElementById('progressText').innerText = `CÂU TRẮC NGHIỆM: ${currentIdx + 1}/5`;
             document.getElementById('questionText').innerText = q.q;
             const area = document.getElementById('optionsArea'); area.innerHTML = '';
             q.a.forEach((opt, i) => {
-                const btn = document.createElement('button');
-                btn.className = 'w-full p-4 text-left border-2 border-gray-100 rounded-2xl font-bold transition-all hover:border-blue-200 hover:bg-blue-50/50 flex items-center group';
-                btn.innerHTML = `<span class="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all text-sm">${String.fromCharCode(65 + i)}</span><span class="flex-1">${opt}</span>`;
-                btn.onclick = () => {
-                    document.querySelectorAll('#optionsArea button').forEach(b => {
-                        b.classList.remove('border-blue-600', 'bg-blue-50');
-                        b.querySelector('span').classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
-                    });
-                    btn.classList.add('border-blue-600', 'bg-blue-50');
-                    btn.querySelector('span').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-                    document.getElementById('nextBtn').disabled = false;
-                    selectedOption = i;
-                };
-                area.appendChild(btn);
+                const btn = document.createElement('button'); btn.className = "option-btn w-full p-4 text-left bg-white rounded-2xl font-bold flex items-center group shadow-sm";
+                btn.innerHTML = `<div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-600 group-hover:text-white transition-all text-xs font-black shadow-inner">${String.fromCharCode(65 + i)}</div><span class="flex-1 text-sm md:text-base text-gray-700">${opt}</span>`;
+                btn.onclick = () => selectOption(i, btn); area.appendChild(btn);
             });
-            document.getElementById('nextBtn').disabled = true; selectedOption = null;
+            document.getElementById('nextBtn').disabled = true; document.getElementById('nextBtn').onclick = nextQuestion;
         }
-
-        document.getElementById('nextBtn').onclick = () => {
-            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) score += 20;
-            currentQuestionIdx++;
-            if (currentQuestionIdx < 5) showQuestion(); else showResults();
-        };
-
+        function selectOption(idx, btn) {
+            document.querySelectorAll('#optionsArea button').forEach(b => { b.classList.remove('selected'); b.querySelector('div').classList.remove('bg-blue-600', 'text-white'); });
+            btn.classList.add('selected'); btn.querySelector('div').classList.add('bg-blue-600', 'text-white');
+            document.getElementById('nextBtn').disabled = false; document.getElementById('nextBtn').dataset.selected = idx;
+        }
+        function nextQuestion() {
+            const selected = parseInt(document.getElementById('nextBtn').dataset.selected);
+            if (selected === selectedQuestions[currentIdx].c) score += 20;
+            currentIdx++; if (currentIdx < 5) showQuestion(); else showResults();
+        }
         function showResults() {
-            document.getElementById('quiz-container').classList.add('hidden');
-            document.getElementById('quiz-results').classList.remove('hidden');
-            document.getElementById('scoreText').innerText = Math.round(score);
-            const circle = document.getElementById('scoreCircle');
-            circle.setAttribute('stroke-dasharray', `${Math.round(score)}, 100`);
-            if (score >= 80) {
-                document.getElementById('resultTitle').innerText = "Xuất sắc!";
-                document.getElementById('resultMsg').innerText = "Em rất hiểu nội dung bài học. Phát huy nhé!";
-            } else if (score >= 50) {
-                document.getElementById('resultTitle').innerText = "Rất tốt!";
-                document.getElementById('resultMsg').innerText = "Em đã cảm nhận được ý nghĩa của câu chuyện.";
-            } else {
-                document.getElementById('resultTitle').innerText = "Cố gắng lên!";
-                document.getElementById('resultMsg').innerText = "Em nên đọc lại bài và thử lại lần nữa nhé.";
-            }
+            document.getElementById('quiz-container').classList.add('hidden'); document.getElementById('quiz-results').classList.remove('hidden');
+            document.getElementById('scoreText').innerText = score;
+            document.getElementById('scoreCircle').style.strokeDasharray = `${(score / 100) * 465}, 465`;
+            if (score >= 80) { document.getElementById('resultTitle').innerText = "Rất tuyệt vời!"; document.getElementById('resultMsg').innerText = "Em đã hoàn thành bài tập xuất sắc. Tiếp tục phát huy nhé!"; }
+            else if (score >= 60) { document.getElementById('resultTitle').innerText = "Làm tốt lắm!"; document.getElementById('resultMsg').innerText = "Em đã hiểu bài khá tốt rồi đấy!"; }
+            else { document.getElementById('resultTitle').innerText = "Cố gắng lên nhé!"; document.getElementById('resultMsg').innerText = "Hãy xem lại bài đọc và làm lại bài tập để đạt điểm cao hơn."; }
         }
-
+        function restartQuiz() { document.getElementById('quiz-results').classList.add('hidden'); document.getElementById('quiz-registration').classList.remove('hidden'); }
+        const firebaseConfig = { apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc", authDomain: "gamhoctap.firebaseapp.com", projectId: "gamhoctap", storageBucket: "gamhoctap.firebasestorage.app", messagingSenderId: "833329613932", appId: "1:833329613932:web:0d8574827bcfe50b535c49", measurementId: "G-YT1PKCYS67" };
+        firebase.initializeApp(firebaseConfig); const db = firebase.firestore();
+        function closeSuccessModal() { document.getElementById('successModal').classList.remove('active'); restartQuiz(); switchTab('lesson'); }
         async function submitResults(e) {
             const btn = e.target; btn.disabled = true; btn.innerText = "Đang gửi...";
+            const duration = Math.floor((new Date() - startTime) / 1000);
+            const timeStr = `${Math.floor(duration / 60)}p ${duration % 60}s`;
             try {
-                await db.collection("diem_tieng_viet_lop5").add({
-                    ...studentData, lessonTitle: "Khu rừng của Mát", score: score, endTime: new Date().toISOString(), submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                alert(`Chúc mừng ${studentData.studentName} đã hoàn thành bài tập!`);
-                restartQuiz(); switchTab('lesson');
-            } catch (e) { alert("Lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
+                await db.collection("diem_tieng_viet_lop5").add({ ...studentData, lessonTitle: "Khu rừng của Mát", score: score, duration: duration, timeDisplay: timeStr, submittedAt: firebase.firestore.FieldValue.serverTimestamp() });
+                document.getElementById('successModal').classList.add('active');
+            } catch (err) { console.error(err); alert("Có lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
         }
-
-        function restartQuiz() {
-            document.getElementById('quiz-results').classList.add('hidden');
-            document.getElementById('quiz-registration').classList.remove('hidden');
+        function openTeacherStats() { const pin = prompt("Mã PIN:"); if (pin === "dvn") { document.getElementById('statsModal').classList.add('active'); loadStats(); } }
+        function closeModal() { document.getElementById('statsModal').classList.remove('active'); }
+        let currentStatsData = [];
+        async function loadStats() {
+            const tbody = document.getElementById('statsTableBody'); tbody.innerHTML = '<tr><td colspan="8" class="text-center p-10">Đang tải...</td></tr>';
+            try {
+                const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Khu rừng của Mát").get();
+                if (snapshot.empty) { tbody.innerHTML = '<tr><td colspan="8" class="text-center p-10">Chưa có dữ liệu.</td></tr>'; return; }
+                const groups = {};
+                snapshot.forEach(doc => {
+                    const d = doc.data(), key = `${d.studentName}_${d.studentClass}`.toLowerCase();
+                    if (!groups[key] || d.score > groups[key].score) groups[key] = { ...d, attempts: (groups[key]?.attempts || 0) + 1 };
+                    else groups[key].attempts++;
+                });
+                currentStatsData = Object.values(groups).sort((a, b) => b.score - a.score);
+                tbody.innerHTML = currentStatsData.map((d, i) => `<tr class="border-b text-sm"><td class="p-4">${i + 1}</td><td class="p-4 font-bold">${d.studentName}</td><td class="p-4 font-bold text-center">${d.studentClass}</td><td class="p-4 text-xs">${d.school}</td><td class="p-4 text-center font-bold text-blue-600">${d.score}</td><td class="p-4 text-center">${d.attempts}</td><td class="p-4 text-center">${d.timeDisplay}</td><td class="p-4 text-right text-[10px]">${d.submittedAt ? d.submittedAt.toDate().toLocaleString() : 'N/A'}</td></tr>`).join('');
+            } catch (err) { console.error(err); tbody.innerHTML = '<tr><td colspan="8" class="text-center p-10 text-red-500">Lỗi tải dữ liệu.</td></tr>'; }
+        }
+        function exportToExcel() {
+            if (!currentStatsData.length) return;
+            const ws = XLSX.utils.json_to_sheet(currentStatsData.map((d, i) => ({ 'STT': i + 1, 'Họ Tên': d.studentName, 'Lớp': d.studentClass, 'Trường': d.school, 'Điểm': d.score, 'Số lần': d.attempts, 'Thời gian': d.timeDisplay, 'Ngày nộp': d.submittedAt ? d.submittedAt.toDate().toLocaleString() : '' })));
+            ws['!cols'] = [{ wch: 5 }, { wch: 25 }, { wch: 10 }, { wch: 30 }, { wch: 10 }, { wch: 10 }, { wch: 15 }, { wch: 20 }];
+            const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Diem");
+            XLSX.writeFile(wb, "KetQua_KhuRungCuaMat.xlsx");
         }
     </script>
-    <a href="cd5-ve-dep-cuoc-song.html?week=22"
-        class="fixed bottom-8 right-8 z-[100] group flex items-center space-x-3 bg-white/80 backdrop-blur-xl p-2 pr-6 rounded-2xl shadow-2xl border border-white/50 hover:scale-105 transition-all active:scale-95">
-        <div
-            class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:rotate-12 transition-transform">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-        </div>
-        <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Trở về</span>
-    </a>
 </body>
 
 </html>
