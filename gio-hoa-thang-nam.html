@@ -4,98 +4,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giỏ hoa tháng Năm - EduRobot</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Giỏ hoa tháng Năm - Giáo án điện tử Tiếng Việt 5</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Nunito & Merriweather -->
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
-    <!-- SheetJS for Excel Export -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         body {
             font-family: 'Nunito', sans-serif;
             font-size: 18px;
+            scroll-behavior: smooth;
         }
 
         .serif-font {
             font-family: 'Merriweather', serif;
-            font-size: 18px;
-            line-height: 1.8;
-        }
-
-        .serif-font p {
-            text-indent: 2em;
+            line-height: 2;
         }
 
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            transition: all 0.5s cubic-bezier(0, 1, 0, 1);
         }
 
         .accordion-open .accordion-content {
             max-height: 1000px;
-        }
-
-        .accordion-open svg {
-            transform: rotate(180deg);
+            transition: all 0.5s cubic-bezier(1, 0, 1, 0);
         }
 
         .bg-paper {
-            background-color: #fdfcf7;
+            background: #fdfcf7;
             background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
+            background-size: 24px 24px;
         }
 
-        /* Tab Styles */
         .tab-btn.active {
-            border-bottom: 4px solid #1d4ed8;
-            color: #1d4ed8;
+            background: #eff6ff;
+            color: #2563eb;
+            border-color: #2563eb;
         }
 
         .tab-content {
             display: none;
+            transition: all 0.3s ease;
         }
 
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.5s ease;
         }
 
-        /* Quiz Styles */
-        .quiz-option {
-            transition: all 0.2s;
-            border: 2px solid #e5e7eb;
-        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
 
-        .quiz-option:hover {
-            border-color: #3b82f6;
-            background-color: #eff6ff;
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .quiz-option.selected {
-            border-color: #2563eb;
-            background-color: #dbeafe;
+            background: #eff6ff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 1px #3b82f6;
         }
 
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
+            inset: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
         }
 
         .modal.active {
@@ -109,43 +95,40 @@
 <body class="bg-blue-50 text-gray-800">
 
     <!-- Header -->
-    <header class="bg-white sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 py-1 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <a href="index.html" class="flex items-center space-x-2">
-                    <div
-                        class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg font-bold">
-                        E</div>
-                    <span class="text-lg font-extrabold text-blue-600 tracking-tight">EduRobot - <span
-                            class="text-yellow-500">Tiếng Việt 5</span></span>
-                </a>
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center group">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:rotate-12 transition-transform">
+                    <span class="text-xl font-black">D</span>
+                </div>
+                <div class="ml-3">
+                    <h1 class="text-lg font-black text-slate-800 leading-none">EduRobot</h1>
+                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Tiếng Việt 5</p>
+                </div>
+            </a>
+            <div class="flex items-center space-x-6">
+                <a href="index.html" class="text-sm font-bold text-gray-500 hover:text-blue-600 transition-colors">Trang
+                    chủ</a>
+                <a href="#" onclick="openTeacherStats()"
+                    class="bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-700 transition-all shadow-lg active:scale-95">Dành
+                    cho Giáo viên</a>
             </div>
-
-            <ul class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
-                <li><a href="index.html" class="hover:text-blue-500 transition-colors">Trang chủ</a></li>
-                <li><a href="ve-dep-cuoc-song.html"
-                        class="hover:text-blue-500 transition-colors font-bold text-blue-600 border-b-2 border-blue-600">Bài
-                        học</a></li>
-                <li><a href="#" onclick="openTeacherStats()" class="hover:text-blue-500 transition-colors">Thống kê</a>
-                </li>
-                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
-            </ul>
         </nav>
     </header>
 
     <main class="container mx-auto px-4 py-1">
 
-        <!-- Navigation & Audio Player Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-2 gap-4">
-            <div>
-                <a href="ve-dep-cuoc-song.html?week=21"
-                    class="flex items-center text-gray-600 hover:text-blue-600 font-bold transition-colors">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
-                </a>
-            </div>
+        <div class="flex items-center justify-between mb-4">
+            <a href="ve-dep-cuoc-song.html?week=21"
+                class="group flex items-center space-x-2 bg-white/50 hover:bg-white px-4 py-2 rounded-xl transition-all border border-transparent hover:border-blue-100 shadow-sm">
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="text-sm font-bold text-gray-500 group-hover:text-blue-600 transition-colors">Trở về</span>
+            </a>
         </div>
 
         <!-- Tab & Audio Header -->
@@ -251,16 +234,16 @@
                 <!-- Cột phải (30%) - Tìm hiểu bài -->
                 <aside class="w-full lg:w-[30%]">
                     <div class="bg-yellow-50 rounded-[30px] shadow-sm border border-yellow-100 p-4 sticky top-20">
-                        <div class="mb-4 overflow-hidden rounded-2xl shadow-sm relative group max-w-full mx-auto">
+                        <div class="mb-4 overflow-hidden rounded-2xl shadow-md border-4 border-white">
                             <img src="C:/Users/Admin/.gemini/antigravity/brain/cbb865b6-a5f3-4a35-b283-692f4fd0abc3/gio_hoa_thang_nam_illustration_1768924393346.png"
-                                alt="Giỏ hoa tháng Năm" class="w-full h-auto block">
+                                alt="Giỏ hoa tháng Năm" class="w-full h-auto">
                         </div>
                         <h2 class="text-xl font-black text-blue-900 mb-4 flex items-center">
-                            <span class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center mr-3">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <span
+                                class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center mr-3 text-white shadow-lg shadow-blue-100">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                    </path>
+                                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </span>
                             Tìm hiểu bài
@@ -530,33 +513,58 @@
             </div>
         </div>
 
-        <!-- Teacher Statistics Modal -->
-        <div id="statsModal" class="modal">
+        <a href="ve-dep-cuoc-song.html?week=21"
+            class="fixed bottom-8 right-8 z-[100] group flex items-center space-x-3 bg-white/80 backdrop-blur-xl p-2 pr-6 rounded-2xl shadow-2xl border border-white/50 hover:scale-105 transition-all active:scale-95">
             <div
-                class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col m-4">
-                <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-blue-600 text-white">
-                    <h2 class="text-2xl font-black">THỐNG KÊ KẾT QUẢ HỌC TẬP</h2>
-                    <button onclick="closeModal()" class="hover:bg-blue-700 p-2 rounded-full transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
+                class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:rotate-12 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </div>
+            <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Trở về</span>
+        </a>
+
+        <div id="statsModal" class="modal px-4">
+            <div
+                class="bg-slate-50 rounded-[40px] shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col animate-modal">
+                <div class="p-8 border-b border-gray-100 flex justify-between items-center bg-white">
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-800 tracking-tight">Thống kê kết quả</h2>
+                        <p class="text-blue-600 font-bold mt-1">Lớp 5 - Bài đọc: Giỏ hoa tháng Năm</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button onclick="exportToExcel()"
+                            class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-2xl font-black text-sm transition-all hover:shadow-lg active:scale-95 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            XUẤT EXCEL
+                        </button>
+                        <button onclick="closeModal()"
+                            class="w-12 h-12 bg-gray-100 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-2xl transition-all flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <div class="p-6 overflow-x-auto flex-1">
-                    <table class="w-full text-left border-collapse">
+                <div class="p-8 overflow-x-auto">
+                    <table class="w-full border-separate border-spacing-y-3">
                         <thead>
-                            <tr class="bg-gray-50 text-gray-600 uppercase text-xs font-bold tracking-widest">
-                                <th class="p-4 border-b">STT</th>
-                                <th class="p-4 border-b">Họ và tên</th>
-                                <th class="p-4 border-b">Lớp</th>
-                                <th class="p-4 border-b">Trường</th>
-                                <th class="p-4 border-b text-center">Điểm số</th>
-                                <th class="p-4 border-b text-center">Thời gian làm</th>
-                                <th class="p-4 border-b text-right">Thời gian nộp</th>
+                            <tr class="text-gray-400 text-xs font-black uppercase tracking-widest">
+                                <th class="px-6 pb-2 text-left">STT</th>
+                                <th class="px-6 pb-2 text-left">Học sinh</th>
+                                <th class="px-6 pb-2 text-left">Lớp</th>
+                                <th class="px-6 pb-2 text-left">Trường</th>
+                                <th class="px-6 pb-2 text-center">Điểm số</th>
+                                <th class="px-6 pb-2 text-center">Thời gian</th>
+                                <th class="px-6 pb-2 text-right">Ngày nộp</th>
                             </tr>
                         </thead>
-                        <tbody id="statsTableBody" class="text-sm"></tbody>
+                        <tbody id="statsTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -574,12 +582,8 @@
         function toggleAccordion(button) {
             const item = button.parentElement;
             const isOpen = item.classList.contains('accordion-open');
-            document.querySelectorAll('.accordion-item').forEach(el => {
-                el.classList.remove('accordion-open');
-            });
-            if (!isOpen) {
-                item.classList.add('accordion-open');
-            }
+            document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-open'));
+            if (!isOpen) item.classList.add('accordion-open');
         }
 
         const audio = document.getElementById('lessonAudio');
@@ -610,135 +614,12 @@
             audioStatus.classList.replace('text-green-500', 'text-gray-400');
         };
 
-        /* FIREBASE CONFIG */
-        const firebaseConfig = {
-            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
-            authDomain: "gamhoctap.firebaseapp.com",
-            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "gamhoctap",
-            storageBucket: "gamhoctap.firebasestorage.app",
-            messagingSenderId: "833329613932",
-            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
-            measurementId: "G-YT1PKCYS67"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        /* TEACHER STATS LOGIC */
-        function openTeacherStats() {
-            const pin = prompt("Vui lòng nhập mã PIN giáo viên:");
-            if (pin === 'dvn') {
-                document.getElementById('statsModal').classList.add('active');
-                loadStats();
-            } else if (pin !== null) {
-                alert("Mã PIN không chính xác!");
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('statsModal').classList.remove('active');
-        }
-
-        async function loadStats() {
-            const tbody = document.getElementById('statsTableBody');
-            tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
-
-            try {
-                const snapshot = await db.collection("diem_tieng_viet_lop5")
-                    .where("lessonTitle", "==", "Giỏ hoa tháng Năm")
-                    .get();
-
-                tbody.innerHTML = '';
-                if (snapshot.empty) {
-                    tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
-                    return;
-                }
-
-                const results = [];
-                snapshot.forEach(doc => results.push(doc.data()));
-                results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
-
-                results.forEach((data, index) => {
-                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
-
-                    let duration = '---';
-                    if (data.startTime && data.endTime) {
-                        const start = new Date(data.startTime);
-                        const end = new Date(data.endTime);
-                        const diffMs = end - start;
-                        const mins = Math.floor(diffMs / 60000);
-                        const secs = Math.floor((diffMs % 60000) / 1000);
-                        duration = `${mins} phút ${secs} giây`;
-                    }
-
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50";
-                    tr.innerHTML = `
-                        <td class="p-4 font-bold text-gray-400">${index + 1}</td>
-                        <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
-                        <td class="p-4 text-gray-600">${data.className}</td>
-                        <td class="p-4 text-gray-600">${data.school}</td>
-                        <td class="p-4 text-center">
-                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">
-                                ${data.score}/100
-                            </span>
-                        </td>
-                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
-                        <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            } catch (error) {
-                console.error("Error loading stats:", error);
-                tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu. Vui lòng thử lại.</td></tr>';
-            }
-        }
-
-        function exportToExcel() {
-            const table = document.querySelector("#statsModal table");
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
-            XLSX.writeFile(wb, "ThongKe_GiaoVien_EduRobot.xlsx");
-        }
-
-        /* TAB LOGIC */
         function switchTab(tabId) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-blue-600'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-            document.getElementById('btn-' + tabId).classList.add('active', 'text-blue-600');
+            document.getElementById('btn-' + tabId).classList.add('active');
             document.getElementById('tab-' + tabId).classList.add('active');
         }
-
-        /* REGISTRATION LOGIC */
-        const regForm = document.getElementById('regForm');
-        const otherSchoolInput = document.getElementById('otherSchool');
-
-        function checkSchool(select) {
-            if (select.value === 'other') {
-                otherSchoolInput.classList.remove('hidden');
-                otherSchoolInput.required = true;
-            } else {
-                otherSchoolInput.classList.add('hidden');
-                otherSchoolInput.required = false;
-            }
-        }
-
-        let studentData = {};
-
-        regForm.onsubmit = function (e) {
-            e.preventDefault();
-            studentData = {
-                name: document.getElementById('studentName').value,
-                className: document.getElementById('studentClass').value,
-                school: document.getElementById('schoolSelect').value === 'other' ?
-                    document.getElementById('otherSchool').value :
-                    document.getElementById('schoolSelect').value,
-                startTime: new Date().toISOString()
-            };
-            document.getElementById('quiz-registration').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            startQuiz();
-        };
 
         /* QUIZ ENGINE */
         const allQuestions = [
@@ -759,134 +640,248 @@
             { q: "Theo nội dung bài đọc, một tình bạn đẹp là tình bạn như thế nào?", a: ["Luôn tặng quà cho nhau vào các dịp lễ", "Dựa trên sự chân thành, thấu hiểu và sẻ chia", "Chỉ cần vui chơi thỏa thích cùng nhau", "Không bao giờ có sự giận dỗi hay hiểu lầm"], c: 1 }
         ];
 
-        let currentQuizQuestions = [];
-        let currentQuestionIdx = 0;
+        let selectedQuestions = [];
+        let currentIdx = 0;
         let score = 0;
-        let selectedOption = null;
-        let lastUsedQuestions = [];
+        let studentData = {};
+        let startTime = null;
 
-        function startQuiz() {
-            let available = [...allQuestions];
-            available.sort(() => Math.random() - 0.5);
-
-            if (lastUsedQuestions.length > 0) {
-                let fresh = available.filter(q => !lastUsedQuestions.includes(q.q));
-                let repeated = available.filter(q => lastUsedQuestions.includes(q.q));
-                currentQuizQuestions = fresh.slice(0, 5);
-                if (currentQuizQuestions.length < 5) {
-                    currentQuizQuestions = currentQuizQuestions.concat(repeated.slice(0, 5 - currentQuizQuestions.length));
-                }
+        function checkSchool() {
+            const select = document.getElementById('schoolSelect');
+            const other = document.getElementById('otherSchool');
+            if (select.value === 'other' || select.value === 'Khác') {
+                other.classList.remove('hidden');
+                other.required = true;
             } else {
-                currentQuizQuestions = available.slice(0, 5);
+                other.classList.add('hidden');
+                other.required = false;
             }
+        }
 
-            lastUsedQuestions = currentQuizQuestions.map(q => q.q);
-            currentQuestionIdx = 0;
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        const regForm = document.getElementById('regForm');
+        regForm.onsubmit = function (e) {
+            e.preventDefault();
+            const schoolVal = document.getElementById('schoolSelect').value;
+            studentData = {
+                studentName: document.getElementById('studentName').value,
+                studentClass: document.getElementById('studentClass').value,
+                school: (schoolVal === 'other' || schoolVal === 'Khác') ? document.getElementById('otherSchool').value : schoolVal
+            };
+            // Chọn ngẫu nhiên 5 câu từ 15 câu bằng thuật toán Fisher-Yates
+            const shuffled = shuffle([...allQuestions]);
+            selectedQuestions = shuffled.slice(0, 5);
+            currentIdx = 0;
             score = 0;
+            startTime = new Date();
+            document.getElementById('quiz-registration').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
             showQuestion();
         }
 
         function showQuestion() {
-            const q = currentQuizQuestions[currentQuestionIdx];
-            document.getElementById('questionNum').innerText = currentQuestionIdx + 1;
-            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentQuestionIdx + 1}/5`;
+            const q = selectedQuestions[currentIdx];
+            document.getElementById('questionNum').innerText = currentIdx + 1;
+            document.getElementById('progressText').innerText = `Đang thực hiện: ${currentIdx + 1}/5`;
             document.getElementById('questionText').innerText = q.q;
 
-            const optionsArea = document.getElementById('optionsArea');
-            optionsArea.innerHTML = '';
-
-            q.a.forEach((opt, idx) => {
+            const area = document.getElementById('optionsArea');
+            area.innerHTML = '';
+            q.a.forEach((opt, i) => {
                 const btn = document.createElement('button');
-                btn.className = 'quiz-option w-full p-4 rounded-2xl text-left font-bold text-gray-700 flex items-center group';
+                btn.className = "w-full p-4 text-left border-2 border-gray-100 rounded-2xl font-bold transition-all hover:border-blue-200 hover:bg-blue-50/50 flex items-center group";
                 btn.innerHTML = `
-                    <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-100 transition-colors">${String.fromCharCode(65 + idx)}</span>
+                    <span class="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all text-sm">${String.fromCharCode(65 + i)}</span>
                     <span class="flex-1">${opt}</span>
                 `;
-                btn.onclick = () => selectOption(idx, btn);
-                optionsArea.appendChild(btn);
+                btn.onclick = () => selectOption(i, btn);
+                area.appendChild(btn);
             });
-
             document.getElementById('nextBtn').disabled = true;
-            selectedOption = null;
+            document.getElementById('nextBtn').onclick = nextQuestion;
         }
 
         function selectOption(idx, btn) {
-            document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected', 'border-blue-500'));
-            btn.classList.add('selected', 'border-blue-500');
-            selectedOption = idx;
+            document.querySelectorAll('#optionsArea button').forEach(b => {
+                b.classList.remove('border-blue-600', 'bg-blue-50');
+                b.querySelector('span').classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+            });
+            btn.classList.add('border-blue-600', 'bg-blue-50');
+            btn.querySelector('span').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
             document.getElementById('nextBtn').disabled = false;
+            document.getElementById('nextBtn').dataset.selected = idx;
         }
 
-        document.getElementById('nextBtn').onclick = function () {
-            if (selectedOption === currentQuizQuestions[currentQuestionIdx].c) {
-                score += 20;
-            }
+        function nextQuestion() {
+            const selected = parseInt(document.getElementById('nextBtn').dataset.selected);
+            if (selected === selectedQuestions[currentIdx].c) score += 20;
 
-            currentQuestionIdx++;
-            if (currentQuestionIdx < 5) {
-                showQuestion();
-            } else {
-                showResults();
-            }
-        };
+            currentIdx++;
+            if (currentIdx < 5) showQuestion();
+            else showResults();
+        }
 
         function showResults() {
             document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('quiz-results').classList.remove('hidden');
-
             document.getElementById('scoreText').innerText = score;
-            const circle = document.getElementById('scoreCircle');
-            circle.setAttribute('stroke-dasharray', `${score}, 100`);
+            const dash = (score / 100) * 100; // Stroke-dasharray format used in this file
+            document.getElementById('scoreCircle').style.strokeDasharray = `${dash}, 100`;
 
             if (score >= 80) {
-                document.getElementById('resultTitle').innerText = "Thật tuyệt vời!";
-                document.getElementById('resultMsg').innerText = "Em hiểu rất rõ về ý nghĩa của tình bạn.";
-            } else if (score >= 50) {
-                document.getElementById('resultTitle').innerText = "Rất tốt!";
-                document.getElementById('resultMsg').innerText = "Em đã cảm nhận được tình cảm chân thành trong bài học.";
+                document.getElementById('resultTitle').innerText = "Rất tuyệt vời!";
+                document.getElementById('resultMsg').innerText = "Em đã hoàn thành bài tập xuất sắc. Tiếp tục phát huy nhé!";
+            } else if (score >= 60) {
+                document.getElementById('resultTitle').innerText = "Làm tốt lắm!";
+                document.getElementById('resultMsg').innerText = "Em đã hiểu bài khá tốt rồi đấy!";
             } else {
-                document.getElementById('resultTitle').innerText = "Cố gắng lên!";
-                document.getElementById('resultMsg').innerText = "Em hãy đọc lại câu chuyện và thử lại nhé.";
+                document.getElementById('resultTitle').innerText = "Cố gắng lên nhé!";
+                document.getElementById('resultMsg').innerText = "Hãy xem lại bài đọc và làm lại bài tập để đạt điểm cao hơn.";
             }
         }
 
         function restartQuiz() {
             document.getElementById('quiz-results').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            startQuiz();
+            document.getElementById('quiz-registration').classList.remove('hidden');
+            // Reset state
+            selectedQuestions = [];
+            currentIdx = 0;
+            score = 0;
+            studentData = {};
+            startTime = null;
         }
 
-        async function submitResults(e) {
-            const finalData = {
-                studentName: studentData.name,
-                className: studentData.className,
-                school: studentData.school,
-                lessonTitle: "Giỏ hoa tháng Năm",
-                score: score,
-                startTime: studentData.startTime,
-                endTime: new Date().toISOString(),
-                submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-            };
+        /* FIREBASE CONFIG */
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
+            authDomain: "gamhoctap.firebaseapp.com",
+            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "gamhoctap",
+            storageBucket: "gamhoctap.firebasestorage.app",
+            messagingSenderId: "833329613932",
+            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
+            measurementId: "G-YT1PKCYS67"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
+        async function submitResults(e) {
             const btn = e.target;
-            const originalText = btn.innerText;
             btn.disabled = true;
             btn.innerText = "Đang gửi...";
+            const duration = Math.floor((new Date() - startTime) / 1000);
+            const minutes = Math.floor(duration / 60);
+            const seconds = duration % 60;
+            const timeStr = `${minutes}p ${seconds}s`;
 
             try {
-                await db.collection("diem_tieng_viet_lop5").add(finalData);
-                alert(`Chúc mừng em ${studentData.name}!\nKết quả của em đã được gửi thành công đến thầy cô.\nĐiểm: ${score}/100`);
-                // Reset Quiz UI for next time
-                document.getElementById('quiz-results').classList.add('hidden');
-                document.getElementById('quiz-registration').classList.remove('hidden');
+                await db.collection("diem_tieng_viet_lop5").add({
+                    ...studentData,
+                    lessonTitle: "Giỏ hoa tháng Năm",
+                    score: score,
+                    duration: duration,
+                    timeDisplay: timeStr,
+                    endTime: new Date().toISOString(),
+                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert(`Chúc mừng ${studentData.studentName} đã nộp bài thành công!`);
+                restartQuiz();
                 switchTab('lesson');
-            } catch (error) {
-                console.error("Error submitting quiz:", error);
-                alert("Có lỗi xảy ra khi nộp bài. Em hãy kiểm tra lại kết nối mạng nhé!");
+            } catch (err) {
+                console.error(err);
+                alert("Có lỗi khi gửi kết quả. Em vui lòng thử lại nhé!");
             } finally {
                 btn.disabled = false;
-                btn.innerText = originalText;
+                btn.innerText = "NỘP KẾT QUẢ";
             }
+        }
+
+        /* TEACHER STATS */
+        function openTeacherStats() {
+            const pin = prompt("Vui lòng nhập mã PIN bảo mật:");
+            if (pin === "dvn") {
+                document.getElementById('statsModal').classList.add('active');
+                loadStats();
+            } else if (pin !== null) {
+                alert("Mã PIN không chính xác!");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('statsModal').classList.remove('active');
+        }
+
+        let currentStatsData = [];
+        async function loadStats() {
+            const tbody = document.getElementById('statsTableBody');
+            tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-gray-400 font-bold italic">Đang tải dữ liệu...</td></tr>';
+
+            try {
+                const snapshot = await db.collection("diem_tieng_viet_lop5")
+                    .where("lessonTitle", "==", "Giỏ hoa tháng Năm")
+                    .orderBy("submittedAt", "desc")
+                    .get();
+
+                currentStatsData = [];
+                tbody.innerHTML = '';
+
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-gray-400 font-bold italic">Chưa có dữ liệu học sinh nộp bài.</td></tr>';
+                    return;
+                }
+
+                snapshot.forEach((doc, index) => {
+                    const data = doc.data();
+                    currentStatsData.push(data);
+                    const row = document.createElement('tr');
+                    row.className = "border-b hover:bg-gray-50 transition-colors bg-white";
+                    row.innerHTML = `
+                        <td class="p-4 font-bold text-gray-400">${index + 1}</td>
+                        <td class="p-4 font-black text-gray-800">${data.studentName}</td>
+                        <td class="p-4"><span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-black">${data.studentClass}</span></td>
+                        <td class="p-4 text-gray-600 font-medium">${data.school}</td>
+                        <td class="p-4 text-center"><span class="text-xl font-black ${data.score >= 80 ? 'text-green-600' : 'text-blue-600'}">${data.score}</span></td>
+                        <td class="p-4 text-center font-bold text-gray-500">${data.timeDisplay || 'N/A'}</td>
+                        <td class="p-4 text-right text-gray-400 text-xs font-bold">${data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : 'N/A'}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } catch (err) {
+                console.error(err);
+                tbody.innerHTML = '<tr><td colspan="7" class="p-10 text-center text-red-500 font-bold">Lỗi khi tải dữ liệu. Hãy thử lại!</td></tr>';
+            }
+        }
+
+        function exportToExcel() {
+            if (currentStatsData.length === 0) {
+                alert("Không có dữ liệu để xuất!");
+                return;
+            }
+
+            const dataToExport = currentStatsData.map((item, index) => ({
+                'STT': index + 1,
+                'Họ và Tên': item.studentName,
+                'Lớp': item.studentClass,
+                'Trường': item.school,
+                'Điểm số': item.score,
+                'Thời gian làm bài': item.timeDisplay || 'N/A',
+                'Ngày nộp': item.submittedAt ? item.submittedAt.toDate().toLocaleString('vi-VN') : 'N/A'
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(dataToExport);
+            ws['!cols'] = [{}, {}, { t: 's' }, {}, {}, {}, {}];
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "KetQua");
+            XLSX.writeFile(wb, "ThongKe_GioHoaThangNam.xlsx");
         }
     </script>
 </body>
