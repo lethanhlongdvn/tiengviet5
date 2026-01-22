@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Điện thoại di động - EduRobot</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- SheetJS for Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --accent: #f59e0b;
+            --glass: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.5);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+
+        .serif-font {
+            font-family: 'Merriweather', serif;
+        }
+
+        .bg-paper {
+            background-color: #fdfbf7;
+            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background: white;
+            box-shadow: inset 0 -3px 0 var(--primary);
+        }
+
+        .tab-content {
+            display: none !important;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-content.active {
+            display: block !important;
+        }
+
+        #tab-quiz.active {
+            display: flex !important;
+        }
+
+        /* Compact Quiz styles */
+        #quiz-container {
+            height: calc(100vh - 180px);
+            /* Adjust based on header/footer */
+            max-height: 600px;
+        }
+
+        .option-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1.5px solid #e2e8f0;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            transform: translateX(4px);
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .option-btn.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Accordion Custom */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-open .accordion-content {
+            max-height: 500px;
+        }
+
+        .accordion-open svg {
+            transform: rotate(180deg);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .reading-content p {
+            text-indent: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        /* Success Modal Styles */
+        .success-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            padding: 1rem;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .success-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-card {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .success-modal.active .success-card {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 px-4 py-2">
+        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-4">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                    <span class="text-xl font-black">E</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl font-black text-blue-700">EduRobot</span>
+                        <span
+                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TIẾNG
+                            VIỆT 5</span>
+                    </div>
+
+                    <div class="flex items-center space-x-2 overflow-hidden">
+                        <span
+                            class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ
+                            ĐIỂM:</span>
+                        <span
+                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">THẾ
+                            GIỚI CỦA CHÚNG TA</span>
+                    </div>
+                </div>
+            </div>
+            <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
+                <!-- Home -->
+                <li>
+                    <a href="index.html"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Trang chủ
+                    </a>
+                </li>
+
+                <!-- Lessons Dropdown -->
+                <li class="relative group">
+                    <button id="top-menu-lesson-btn"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
+                        Bài học
+                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <!-- Dropdown Content (Hidden by default) -->
+                    <div id="top-menu-lessons-dropdown"
+                        class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
+                        <!-- Content rendered by floating-menu.js -->
+                    </div>
+                </li>
+
+                <!-- Teacher -->
+                <li>
+                    <button onclick="openTeacherStats()"
+                        class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Giáo viên
+                    </button>
+                </li>
+
+                <!-- Contact -->
+                <li>
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Liên hệ
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-2">
+
+        <!-- Tab & Audio Header -->
+        <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
+            <div class="flex-1 flex bg-white/40">
+                <button onclick="switchTab('lesson')" id="btn-lesson"
+                    class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">
+                    1. Bài học
+                </button>
+                <button onclick="switchTab('quiz')" id="btn-quiz"
+                    class="tab-btn flex-1 py-4 text-center font-black text-base text-gray-400 transition-all uppercase tracking-wider">
+                    2. Luyện tập
+                </button>
+            </div>
+
+            <div id="audio-container"
+                class="p-2 md:px-4 flex items-center bg-blue-50/20 border-t md:border-t-0 md:border-l border-gray-100/50">
+                <div
+                    class="flex items-center space-x-3 bg-white/60 backdrop-blur-md rounded-xl p-1.5 pr-4 border border-white shadow-inner">
+                    <button id="audioControl" onclick="toggleAudio()"
+                        class="w-9 h-9 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-all shadow-md shadow-blue-200">
+                        <svg id="playIcon" class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M6 4l10 6-10 6V4z"></path>
+                        </svg>
+                        <svg id="pauseIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 4h4v16H6zm8 0h4v16h-4z"></path>
+                        </svg>
+                    </button>
+                    <div class="flex flex-col">
+                        <span
+                            class="text-[9px] font-black text-blue-600 uppercase tracking-widest leading-none mb-0.5 whitespace-nowrap">ĐỌC
+                            MẪU</span>
+                        <span id="audioStatus"
+                            class="text-[10px] text-gray-400 font-bold italic leading-none whitespace-nowrap">Đang
+                            dừng...</span>
+                    </div>
+                </div>
+                <audio id="lessonAudio">
+                    <source src="am_thanh/341-dien-thoai-di-dong.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+        <!-- TAB 1: BÀI HỌC -->
+        <div id="tab-lesson" class="tab-content active">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div
+                            class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <!-- Trang trí góc -->
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl">
+                            </div>
+
+                            <h1
+                                class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span
+                                    class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Điện thoại di động
+                            </h1>
+
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                <p>
+                                    Điện thoại di động là một vật dụng không thể thiếu trong cuộc sống của con người,
+                                    nhất là trong cuộc sống hiện đại ngày nay. Thật khó hình dung khi thế giới này không
+                                    có nó.
+                                </p>
+                                <p>
+                                    Ngày 3 tháng 4 năm 1973, nhà phát minh Mác-tin Cúp-pơ thực hiện cuộc gọi với phiên
+                                    bản đầu tiên của điện thoại di động “cục gạch” vì nó nặng tới 1,1 ki-lô-gam. Chiếc
+                                    điện thoại này có màn hình chỉ hiển thị chữ, pin thì dùng được có hai mươi phút. Hẳn
+                                    là bạn không muốn đi khắp nơi với một cục gạch to tướng như thế.
+                                </p>
+                                <p>
+                                    Ngày nay, công nghệ cải tiến đã giúp kích thước của điện thoại di động nhỏ lại và
+                                    nặng chưa đến 85 gam, bỏ vừa trong túi áo. Điện thoại di động có nhiều chức năng,
+                                    chẳng khác gì một cái hộp chứa hàng loạt dụng cụ: chúng ta có thể gọi điện cho nhau
+                                    bao gồm cả tiếng và hình ảnh, nhắn tin văn bản và nhắn tin thoại, chụp ảnh, nghe
+                                    nhạc, chơi trò chơi điện tử, xem phim,...
+                                </p>
+                                <p>
+                                    Điện thoại di động ngày càng thông minh hơn. Nó giúp mọi người mua sắm, giao dịch
+                                    trực tuyến, phát, nhận video,... Hệ thống định vị toàn cầu cho phép điện thoại di
+                                    động có thể xác định vị trí của bạn ở bất cứ đâu trên hành tinh này. Thật tuyệt vời!
+                                </p>
+                                <p class="text-right italic font-bold text-sm text-gray-500">
+                                    (Theo Gim Píp, Nguyễn Hoàng dịch)
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div
+                            class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div
+                                class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl">
+                            </div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div
+                                    class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">
+                                        Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Điện thoại di động là một trong những phương tiện thông tin hiện đại mà con
+                                        người đã phát minh được. Nhờ nó, con người có một cuộc sống tiện lợi, phát triển
+                                        tinh thần, tiết kiệm sức lực và thời gian đi rất nhiều. Điện thoại ngày nay đã
+                                        có nhiều cải tiến thông minh đáng kể so với những chiếc điện thoại phát minh từ
+                                        đời đầu.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <!-- Ảnh minh họa -->
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/dien_thoai_di_dong.png" alt="Minh họa Điện thoại di động"
+                                class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div
+                                class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">
+                                        1. Ai là người thực hiện cuộc gọi đầu tiên bằng điện thoại di động và vào thời
+                                        điểm nào?
+                                    </span>
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div
+                                        class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <div class="flex items-center space-x-2 mb-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                            <span
+                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">Gợi
+                                                ý trả lời</span>
+                                        </div>
+                                        <p class="font-medium">Cuộc gọi đầu tiên bằng điện thoại di động do nhà phát
+                                            minh Mác-tin Cúp-pơ thực hiện vào ngày 3 tháng 4 năm 1973.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 2 -->
+                            <div
+                                class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">
+                                        2. So sánh sự khác biệt về khối lượng và kích thước giữa chiếc điện thoại đầu
+                                        tiên và điện thoại ngày nay.
+                                    </span>
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div
+                                        class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <div class="flex items-center space-x-2 mb-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                            <span
+                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">Gợi
+                                                ý trả lời</span>
+                                        </div>
+                                        <p class="font-medium">
+                                            • Điện thoại đầu tiên: Được gọi là "cục gạch" vì nặng tới 1,1 ki-lô-gam, rất
+                                            to và nặng.<br>
+                                            • Điện thoại ngày nay: Nhỏ gọn, bỏ vừa trong túi áo, nặng chưa đến 85 gam.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 3 -->
+                            <div
+                                class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">
+                                        3. Điện thoại di động ngày nay có những chức năng gì nổi bật?
+                                    </span>
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div
+                                        class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <div class="flex items-center space-x-2 mb-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                            <span
+                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">Gợi
+                                                ý trả lời</span>
+                                        </div>
+                                        <p class="font-medium">Điện thoại ngày nay như một hộp dụng cụ đa năng: có thể
+                                            gọi điện (cả tiếng và hình), nhắn tin (văn bản, thoại), chụp ảnh, nghe nhạc,
+                                            chơi trò chơi, xem phim, mua sắm, giao dịch trực tuyến và định vị toàn cầu.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 4 -->
+                            <div
+                                class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)"
+                                    class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">
+                                        4. Theo em, nếu không có điện thoại di động, con người ngày nay sẽ gặp khó khăn
+                                        gì?
+                                    </span>
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div
+                                        class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <div class="flex items-center space-x-2 mb-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                            <span
+                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">Gợi
+                                                ý trả lời</span>
+                                        </div>
+                                        <p class="font-medium">Nếu không có điện thoại di động, việc liên lạc, chia sẻ
+                                            thông tin nhanh chóng sẽ rất khó khăn và tốn nhiều thời gian. Ngoài ra, các
+                                            tiện ích như xác định vị trí, dẫn đường, cứu nạn hoặc làm việc từ xa cũng
+                                            khó thực hiện được.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- TAB 2: LUYỆN TẬP -->
+        <div id="tab-quiz" class="tab-content">
+            <div
+                class="max-w-4xl mx-auto glass-card rounded-[40px] shadow-2xl overflow-hidden flex flex-col min-h-[500px]">
+                <!-- Registration -->
+                <div id="quiz-registration" class="p-4 md:p-8 flex-grow flex flex-col justify-center overflow-auto">
+                    <div class="text-center mb-6">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white mb-4 shadow-xl shadow-blue-200 mx-auto transform -rotate-3">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-black text-gray-800 mb-1 tracking-tight">Đăng ký luyện tập</h2>
+                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Điện thoại di động</p>
+                    </div>
+
+                    <form onsubmit="startQuiz(event)" class="w-full max-w-sm mx-auto space-y-4">
+                        <div class="relative group">
+                            <input type="text" id="studentName" required placeholder="Họ và tên của em"
+                                class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold placeholder:text-gray-300 shadow-sm">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <select id="studentClass" required
+                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none cursor-pointer">
+                                <option value="">Chọn Lớp</option>
+                                <option value="5/1">5/1</option>
+                                <option value="5/2">5/2</option>
+                                <option value="5/3">5/3</option>
+                                <option value="5/4">5/4</option>
+                                <option value="5/5">5/5</option>
+                            </select>
+
+                            <select id="schoolSelect" required onchange="checkSchool()"
+                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none cursor-pointer">
+                                <option value="Tiểu học Đỗ Văn Nại">TH Đỗ Văn Nại</option>
+                                <option value="Khác">Trường khác...</option>
+                            </select>
+                        </div>
+
+                        <input type="text" id="otherSchool" placeholder="Tên trường của em"
+                            class="hidden w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white transition-all font-bold shadow-sm">
+
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-base uppercase tracking-wider">
+                            Bắt đầu luyện tập
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Quiz Engine - COMPACT VERSION -->
+                <div id="quiz-container" class="hidden flex-grow flex flex-col">
+                    <div class="bg-blue-600/5 px-6 py-4 flex justify-between items-center border-b border-blue-100">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center font-black mr-4 shadow-lg shadow-blue-200"
+                                id="questionNum">1</div>
+                            <div class="flex flex-col">
+                                <span
+                                    class="text-[10px] font-black text-blue-600 uppercase tracking-widest leading-none mb-1"
+                                    id="progressText">CÂU TRẮC NGHIỆM: 1/5</span>
+                                <span class="text-xs text-gray-400 font-bold leading-none">Điện thoại di động</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 flex-grow flex flex-col justify-center overflow-auto">
+                        <h3 class="text-xl md:text-2xl font-black text-gray-800 mb-6 leading-tight transition-all"
+                            id="questionText">Nội dung câu hỏi?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="optionsArea">
+                            <!-- Options rendered by JS -->
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-4 border-t border-gray-50 flex justify-between items-center bg-gray-50/50">
+                        <span class="text-xs font-bold text-gray-400 italic">* Chọn đáp án đúng nhất</span>
+                        <button id="nextBtn" disabled
+                            class="bg-blue-600 disabled:opacity-30 hover:bg-blue-700 text-white font-black py-3 px-10 rounded-2xl shadow-lg shadow-blue-100 transition-all active:scale-95 uppercase text-sm tracking-widest">
+                            Câu tiếp theo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div id="quiz-results"
+                    class="hidden p-8 flex-grow flex flex-col items-center justify-center text-center">
+                    <div class="relative w-40 h-40 mb-8">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="80" cy="80" r="74" stroke="currentColor" stroke-width="12" fill="transparent"
+                                class="text-gray-100" />
+                            <circle id="scoreCircle" cx="80" cy="80" r="74" stroke="url(#scoreGrad)" stroke-width="12"
+                                fill="transparent" class="transition-all duration-1000 ease-out"
+                                stroke-dasharray="0, 465" stroke-linecap="round" />
+                            <defs>
+                                <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#3b82f6" />
+                                    <stop offset="100%" stop-color="#818cf8" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-5xl font-black text-gray-800" id="scoreText">0</span>
+                            <span class="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mt-1">Điểm
+                                số</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Hoàn thành bài tập!</h2>
+                    <p class="text-gray-500 mb-10 max-w-sm font-bold" id="resultMsg">Em đã nỗ lực hết mình rồi đấy!</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
+                        <button onclick="restartQuiz()"
+                            class="bg-white hover:bg-gray-50 text-gray-700 font-black py-4 rounded-2xl border-2 border-gray-100 transition-all shadow-sm">LÀM
+                            LẠI</button>
+                        <button onclick="submitResults(event)"
+                            class="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-100 transition-all">NỘP
+                            KẾT QUẢ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <!-- Modal Teacher Stats -->
+    <div id="statsModal" class="modal">
+        <div
+            class="bg-white rounded-[40px] w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl m-4 transform transition-all">
+            <div class="p-8 border-b flex justify-between items-center bg-gray-50/50 backdrop-blur-xl">
+                <div class="flex items-center space-x-4">
+                    <div
+                        class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black text-gray-800 tracking-tight">Bảng kết quả học tập</h2>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Dành riêng cho giáo
+                            viên</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="exportToExcel()"
+                        class="bg-green-600 hover:bg-green-700 text-white font-black py-3 px-6 rounded-2xl text-sm flex items-center shadow-lg shadow-green-100 transition-all active:scale-95">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg> XUẤT EXCEL
+                    </button>
+                    <button onclick="closeModal()"
+                        class="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-2xl transition-all">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-grow overflow-auto p-8 bg-gray-50/30">
+                <table class="w-full">
+                    <thead>
+                        <tr
+                            class="text-left text-gray-400 uppercase text-[10px] font-black tracking-[0.2em] border-b-2 border-gray-100 pb-4">
+                            <th class="px-6 py-4">STT</th>
+                            <th class="px-6 py-4">Họ và Tên</th>
+                            <th class="px-6 py-4">Lớp</th>
+                            <th class="px-6 py-4">Trường</th>
+                            <th class="px-6 py-4 text-center">Điểm</th>
+                            <th class="px-6 py-4 text-center">Lần</th>
+                            <th class="px-6 py-4 text-center">Thời gian</th>
+                            <th class="px-6 py-4 text-right">Hoàn thành</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statsTableBody" class="divide-y divide-gray-100">
+                        <!-- Data rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="glass-card success-card rounded-[40px] p-10 max-w-sm w-full text-center shadow-3xl border-white/50">
+            <div
+                class="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 rounded-3xl flex items-center justify-center text-white mx-auto mb-8 shadow-xl shadow-green-100 transform rotate-6 scale-110">
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h2 class="text-3xl font-black text-gray-800 mb-2 tracking-tight">Nộp bài thành công!</h2>
+            <p class="text-gray-500 mb-10 font-bold leading-relaxed">Chúc mừng em đã hoàn thành thử thách kiến thức!</p>
+            <button onclick="closeSuccessModal()"
+                class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 uppercase tracking-widest text-sm">
+                Trở về bài học
+            </button>
+        </div>
+    </div>
+
+        <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
+        <div class="container mx-auto text-center">
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">@ 2026 EduRobot - Hệ thống học
+                tập thông minh</p>
+            <p class="text-xs font-bold text-blue-600 mt-2">Phát triển bởi Lê Thành Long</p>
+        </div>
+    </footer>
+
+    <script>
+        /* UI LOGIC */
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isOpen = item.classList.contains('accordion-open');
+            document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-open'));
+            if (!isOpen) item.classList.add('accordion-open');
+        }
+
+        const audio = document.getElementById('lessonAudio');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const audioStatus = document.getElementById('audioStatus');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                audioStatus.innerText = "Đang phát...";
+                audioStatus.classList.replace('text-gray-400', 'text-green-500');
+            } else {
+                audio.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                audioStatus.innerText = "Đang dừng...";
+                audioStatus.classList.replace('text-green-500', 'text-gray-400');
+            }
+        }
+
+        audio.onended = () => {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            audioStatus.innerText = "Đang dừng...";
+            audioStatus.classList.replace('text-green-500', 'text-gray-400');
+        };
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('btn-' + tabId).classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        /* QUIZ ENGINE */
+        const allQuestions = [
+            { q: "Cuộc gọi đầu tiên bằng điện thoại di động được thực hiện vào năm nào?", a: ["1937", "1973", "1983", "2003"], c: 1 },
+            { q: "Ai là người thực hiện cuộc gọi di động đầu tiên?", a: ["A-lếch-xan-đơ Gra-ham Bell", "Xti-vơ Gióp", "Mác-tin Cúp-pơ", "Tô-mát Ê-đi-xơn"], c: 2 },
+            { q: "Phiên bản đầu tiên của điện thoại di động có biệt danh là gì?", a: ["Cục đá", "Cục gạch", "Hộp sắt", "Cái búa"], c: 1 },
+            { q: "Khối lượng của chiếc điện thoại di động đầu tiên là bao nhiêu?", a: ["0,5 kg", "85 gam", "1,1 kg", "2 kg"], c: 2 },
+            { q: "Pin của chiếc điện thoại đầu tiên dùng được trong bao lâu?", a: ["Một ngày", "Một giờ", "Hai mươi phút", "Mười phút"], c: 2 },
+            { q: "Màn hình của chiếc điện thoại đầu tiên hiển thị được những gì?", a: ["Hình ảnh màu", "Video", "Chỉ hiển thị chữ", "Bản đồ"], c: 2 },
+            { q: "Điện thoại di động ngày nay thường có trọng lượng khoảng bao nhiêu?", a: ["Chưa đến 85 gam", "Khoảng 500 gam", "Khoảng 1 kg", "Khoảng 200 gam"], c: 0 },
+            { q: "Hình ảnh so sánh nào được dùng để nói về sự đa năng của điện thoại di động ngày nay?", a: ["Như một người bạn", "Như một cái hộp chứa hàng loạt dụng cụ", "Như một cuốn bách khoa toàn thư", "Như một chiếc máy tính khổng lồ"], c: 1 },
+            { q: "Chức năng nào sau đây KHÔNG được nhắc đến khi nói về điện thoại di động ngày nay trong bài?", a: ["Chụp ảnh, nghe nhạc", "Mua sắm trực tuyến", "Nấu ăn", "Xác định vị trí"], c: 2 },
+            { q: "Hệ thống định vị toàn cầu trên điện thoại giúp chúng ta làm gì?", a: ["Xem phim nhanh hơn", "Nghe nhạc rõ hơn", "Xác định vị trí ở bất cứ đâu", "Sạc pin nhanh hơn"], c: 2 },
+            { q: "Bài đọc nhận định vai trò của điện thoại di động trong cuộc sống hiện đại như thế nào?", a: ["Là vật dụng xa xỉ", "Là vật dụng không thể thiếu", "Là vật dụng gây hại", "Là vật dụng ít người dùng"], c: 1 },
+            { q: "Theo bài đọc, điện thoại di động giúp con người tiết kiệm điều gì?", a: ["Tiền bạc", "Sức lực và thời gian", "Năng lượng điện", "Tài nguyên nước"], c: 1 },
+            { q: "Ngoài nhắn tin văn bản, điện thoại ngày nay còn có thể nhắn tin dạng nào?", a: ["Nhắn tin bằng mùi hương", "Nhắn tin thoại", "Nhắn tin bằng suy nghĩ", "Nhắn tin giấy"], c: 1 },
+            { q: "Sự khác biệt lớn nhất về kích thước của điện thoại ngày nay so với trước kia là gì?", a: ["To hơn để xem phim", "Nhỏ lại, bỏ vừa trong túi áo", "Dài hơn", "Hình tròn"], c: 1 },
+            { q: "Nội dung chính của bài là gì?", a: ["Hướng dẫn cách sử dụng điện thoại", "Kể chuyện về nhà phát minh Mác-tin Cúp-pơ", "Sự ra đời, cải tiến và vai trò quan trọng của điện thoại di động trong đời sống", "Quảng cáo các loại điện thoại mới"], c: 2 },
+        ];
+
+        let selectedQuestions = [];
+        let currentIdx = 0;
+        let score = 0;
+        let studentData = {};
+        let startTime = null;
+
+        function checkSchool() {
+            const select = document.getElementById('schoolSelect');
+            const other = document.getElementById('otherSchool');
+            if (select.value === 'Khác') {
+                other.classList.remove('hidden');
+                other.required = true;
+            } else {
+                other.classList.add('hidden');
+                other.required = false;
+            }
+        }
+
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function startQuiz(e) {
+            e.preventDefault();
+            const schoolVal = document.getElementById('schoolSelect').value;
+            studentData = {
+                studentName: document.getElementById('studentName').value,
+                studentClass: document.getElementById('studentClass').value,
+                school: schoolVal === 'Khác' ? document.getElementById('otherSchool').value : schoolVal
+            };
+            const shuffled = shuffle([...allQuestions]);
+            selectedQuestions = shuffled.slice(0, 5);
+            currentIdx = 0;
+            score = 0;
+            startTime = new Date();
+            document.getElementById('quiz-registration').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = selectedQuestions[currentIdx];
+            document.getElementById('questionNum').innerText = currentIdx + 1;
+            document.getElementById('progressText').innerText = `CÂU TRẮC NGHIỆM: ${currentIdx + 1}/5`;
+            document.getElementById('questionText').innerText = q.q;
+
+            const area = document.getElementById('optionsArea');
+            area.innerHTML = '';
+            q.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = "option-btn w-full p-4 text-left bg-white rounded-2xl font-bold flex items-center group shadow-sm";
+                btn.innerHTML = `
+                    <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-600 group-hover:text-white transition-all text-xs font-black shadow-inner">${String.fromCharCode(65 + i)}</div>
+                    <span class="flex-1 text-sm md:text-base text-gray-700">${opt}</span>
+                `;
+                btn.onclick = () => selectOption(i, btn);
+                area.appendChild(btn);
+            });
+            document.getElementById('nextBtn').disabled = true;
+            document.getElementById('nextBtn').onclick = nextQuestion;
+        }
+
+        function selectOption(idx, btn) {
+            document.querySelectorAll('#optionsArea button').forEach(b => {
+                b.classList.remove('selected', 'border-blue-600', 'bg-blue-50/50');
+                b.querySelector('div').classList.remove('bg-blue-600', 'text-white');
+            });
+            btn.classList.add('selected');
+            btn.querySelector('div').classList.add('bg-blue-600', 'text-white');
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('nextBtn').dataset.selected = idx;
+        }
+
+        function nextQuestion() {
+            const selected = parseInt(document.getElementById('nextBtn').dataset.selected);
+            if (selected === selectedQuestions[currentIdx].c) score += 20;
+
+            currentIdx++;
+            if (currentIdx < 5) showQuestion();
+            else showResults();
+        }
+
+        function showResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            document.getElementById('scoreText').innerText = score;
+
+            const dash = (score / 100) * 465;
+            document.getElementById('scoreCircle').style.strokeDasharray = `${dash}, 465`;
+
+            if (score >= 80) {
+                document.getElementById('resultTitle').innerText = "Rất tuyệt vời!";
+                document.getElementById('resultMsg').innerText = "Em đã hoàn thành bài tập xuất sắc. Tiếp tục phát huy nhé!";
+            } else if (score >= 60) {
+                document.getElementById('resultTitle').innerText = "Làm tốt lắm!";
+                document.getElementById('resultMsg').innerText = "Em đã hiểu bài khá tốt rồi đấy!";
+            } else {
+                document.getElementById('resultTitle').innerText = "Cố gắng lên nhé!";
+                document.getElementById('resultMsg').innerText = "Hãy xem lại bài đọc và làm lại bài tập để đạt điểm cao hơn.";
+            }
+        }
+
+        function restartQuiz() {
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-registration').classList.remove('hidden');
+        }
+
+        /* FIREBASE CONFIG */
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
+            authDomain: "gamhoctap.firebaseapp.com",
+            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "gamhoctap",
+            storageBucket: "gamhoctap.firebasestorage.app",
+            messagingSenderId: "833329613932",
+            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
+            measurementId: "G-YT1PKCYS67"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+            restartQuiz();
+            switchTab('lesson');
+        }
+
+        async function submitResults(e) {
+            const btn = e.target;
+            btn.disabled = true;
+            btn.innerText = "Đang gửi...";
+            const duration = Math.floor((new Date() - startTime) / 1000);
+            const minutes = Math.floor(duration / 60);
+            const seconds = duration % 60;
+            const timeStr = `${minutes}p ${seconds}s`;
+
+            try {
+                await db.collection("diem_tieng_viet_lop5").add({
+                    ...studentData,
+                    lessonTitle: "Điện thoại di động",
+                    score: score,
+                    duration: duration,
+                    timeDisplay: timeStr,
+                    endTime: new Date().toISOString(),
+                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                document.getElementById('successModal').classList.add('active');
+            } catch (err) {
+                console.error(err);
+                alert("Có lỗi khi gửi kết quả. Em vui lòng thử lại nhé!");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "NỘP KẾT QUẢ";
+            }
+        }
+
+        /* TEACHER STATS */
+        function openTeacherStats() {
+            const pin = prompt("Vui lòng nhập mã PIN bảo mật:");
+            if (pin === "dvn") {
+                document.getElementById('statsModal').classList.add('active');
+                loadStats();
+            } else if (pin !== null) {
+                alert("Mã PIN không chính xác!");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('statsModal').classList.remove('active');
+        }
+
+        let currentStatsData = [];
+        async function loadStats() {
+            const tbody = document.getElementById('statsTableBody');
+            tbody.innerHTML = '<tr><td colspan="8" class="p-20 text-center"><div class="flex flex-col items-center"><div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div><p class="text-gray-400 font-black uppercase tracking-widest text-xs">Đang xử lý dữ liệu...</p></div></td></tr>';
+
+            try {
+                const snapshot = await db.collection("diem_tieng_viet_lop5")
+                    .where("lessonTitle", "==", "Điện thoại di động")
+                    .get();
+
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="p-20 text-center text-gray-400 font-bold italic">Chưa có dữ liệu học sinh nộp bài.</td></tr>';
+                    return;
+                }
+
+                const studentGroups = {};
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const key = `${data.studentName}_${data.studentClass}_${data.school}`.toLowerCase().trim();
+
+                    if (!studentGroups[key]) {
+                        studentGroups[key] = {
+                            ...data,
+                            attempts: 1,
+                            bestScore: data.score,
+                            latestSubmitted: data.submittedAt ? data.submittedAt.toDate() : new Date(0)
+                        };
+                    } else {
+                        studentGroups[key].attempts++;
+                        if (data.score > studentGroups[key].bestScore) {
+                            studentGroups[key].bestScore = data.score;
+                            studentGroups[key].timeDisplay = data.timeDisplay;
+                        }
+                        const currentSubmitted = data.submittedAt ? data.submittedAt.toDate() : new Date(0);
+                        if (currentSubmitted > studentGroups[key].latestSubmitted) {
+                            studentGroups[key].latestSubmitted = currentSubmitted;
+                        }
+                    }
+                });
+
+                currentStatsData = Object.values(studentGroups).sort((a, b) => b.bestScore - a.bestScore);
+
+                tbody.innerHTML = '';
+                currentStatsData.forEach((data, index) => {
+                    const row = document.createElement('tr');
+                    row.className = "hover:bg-blue-50/30 transition-colors group";
+                    row.innerHTML = `
+                        <td class="px-6 py-5 font-black text-gray-300 group-hover:text-blue-600 transition-colors">${index + 1}</td>
+                        <td class="px-6 py-5">
+                            <div class="font-black text-gray-800">${data.studentName}</div>
+                        </td>
+                        <td class="px-6 py-5">
+                            <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider group-hover:bg-blue-100 group-hover:text-blue-700 transition-colors">${data.studentClass}</span>
+                        </td>
+                        <td class="px-6 py-5 text-gray-500 font-bold text-sm">${data.school}</td>
+                        <td class="px-6 py-5 text-center">
+                            <span class="text-xl font-black ${data.bestScore >= 80 ? 'text-green-600' : 'text-blue-600'}">${data.bestScore}</span>
+                        </td>
+                        <td class="px-6 py-5 text-center">
+                            <span class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mx-auto text-xs font-black border border-amber-100">${data.attempts}</span>
+                        </td>
+                        <td class="px-6 py-5 text-center font-bold text-gray-500 text-sm italic">${data.timeDisplay || 'N/A'}</td>
+                        <td class="px-6 py-5 text-right">
+                            <div class="text-[10px] font-black text-gray-400 uppercase tracking-tighter">${data.latestSubmitted.toLocaleDateString('vi-VN')}</div>
+                            <div class="text-xs font-bold text-gray-800">${data.latestSubmitted.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}</div>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } catch (err) {
+                console.error(err);
+                tbody.innerHTML = '<tr><td colspan="8" class="p-20 text-center text-red-500 font-bold">Lỗi khi tải dữ liệu. Hãy thử lại!</td></tr>';
+            }
+        }
+
+        function exportToExcel() {
+            if (currentStatsData.length === 0) {
+                alert("Không có dữ liệu để xuất!");
+                return;
+            }
+
+            const dataToExport = currentStatsData.map((item, index) => ({
+                'STT': index + 1,
+                'Họ và Tên': item.studentName,
+                'Lớp': item.studentClass,
+                'Trường': item.school,
+                'Điểm cao nhất': item.bestScore,
+                'Số lần làm': item.attempts,
+                'Thời gian làm bài (Lần tốt nhất)': item.timeDisplay || 'N/A',
+                'Lần nộp cuối': item.latestSubmitted.toLocaleString('vi-VN')
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(dataToExport);
+            ws['!cols'] = [{}, {}, { t: 's' }, {}, {}, {}, {}];
+
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "KetQua");
+            XLSX.writeFile(wb, "KetQua_DienThoaiDiDong.xlsx");
+        }
+    </script>
+
+    <script src="js/floating-menu.js"></script>
+</body>
+
+</html>
