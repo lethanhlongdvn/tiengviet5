@@ -10,8 +10,25 @@
     <!-- Google Fonts: Nunito -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #dc2626;
+            --primary-light: #fef2f2;
+            --accent: #f59e0b;
+            --glass: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.5);
+        }
+
         body {
             font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
 
         .tab-active {
@@ -35,24 +52,73 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-    <header class="bg-white sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <a href="index.html" class="flex items-center space-x-2">
-                    <div
-                        class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white text-xl font-bold">
-                        E</div>
-                    <span class="text-xl font-extrabold text-blue-600 tracking-tight">EduRobot - <span
-                            class="text-yellow-500">Tiếng Việt 5</span> - <span class="text-red-600 uppercase">Tiếp bước
-                            cha ông</span></span>
-                </a>
+    <!-- Header -->
+    <header class="sticky top-0 z-50 px-4 py-2">
+        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-4">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                    <span class="text-xl font-black">E</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl font-black text-blue-700">EduRobot</span>
+                        <span
+                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TIẾNG
+                            VIỆT 5</span>
+                    </div>
+
+                    <div class="flex items-center space-x-2 overflow-hidden">
+                        <span
+                            class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ
+                            ĐIỂM:</span>
+                        <span
+                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">Tiếp
+                            bước cha ông</span>
+                    </div>
+                </div>
             </div>
-            <ul class="hidden md:flex space-x-8 font-semibold text-gray-600">
-                <li><a href="index.html" class="hover:text-blue-500 transition-colors">Trang chủ</a></li>
-                <li><a href="#"
-                        class="hover:text-blue-500 transition-colors text-blue-600 font-bold border-b-2 border-blue-600">Bài
-                        học</a></li>
-                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên hệ</a></li>
+            <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
+                <!-- Home -->
+                <li>
+                    <a href="index.html"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Trang chủ
+                    </a>
+                </li>
+
+                <!-- Lessons Dropdown -->
+                <li class="relative group">
+                    <button id="top-menu-lesson-btn"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
+                        Bài học
+                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <!-- Dropdown Content (Hidden by default) -->
+                    <div id="top-menu-lessons-dropdown"
+                        class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
+                        <!-- Content rendered by floating-menu.js -->
+                    </div>
+                </li>
+
+                <!-- Teacher -->
+                <li>
+                    <button onclick="typeof openTeacherStats === 'function' && openTeacherStats()"
+                        class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Giáo viên
+                    </button>
+                </li>
+
+                <!-- Contact -->
+                <li>
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Liên hệ
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -239,9 +305,11 @@
         </div>
     </main>
 
-    <footer class="bg-zinc-900 text-zinc-400 py-3 px-4 mt-2">
-        <div class="container mx-auto text-center text-sm">
-            <p>@ 2026 EduRobot - Phát triển bởi Lê Thành Long</p>
+    <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
+        <div class="container mx-auto text-center">
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">@ 2026 EduRobot - Hệ thống học
+                tập thông minh</p>
+            <p class="text-xs font-bold text-blue-600 mt-2">Phát triển bởi Lê Thành Long</p>
         </div>
     </footer>
 
@@ -357,16 +425,7 @@
             }
         });
     </script>
-    <a href="index.html"
-        class="fixed bottom-8 right-8 z-[100] group flex items-center space-x-3 bg-white/80 backdrop-blur-xl p-2 pr-6 rounded-2xl shadow-2xl border border-white/50 hover:scale-105 transition-all active:scale-95">
-        <div
-            class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:rotate-12 transition-transform">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-        </div>
-        <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Trở về</span>
-    </a>
+    <script src="js/floating-menu.js"></script>
 </body>
 
 </html>
