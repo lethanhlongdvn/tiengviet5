@@ -172,42 +172,56 @@
 
     <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
-        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
-            <div class="flex items-center space-x-3">
-                <div
-                    class="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-lg flex items-center justify-center text-white shadow-xl transform hover:rotate-6 transition-transform">
-                    <span class="text-lg font-black">E</span>
+                                <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                    <span class="text-xl font-black">E</span>
                 </div>
-                <div class="flex flex-col md:flex-row md:items-center md:space-x-4">
-                    <div class="flex items-center space-x-2">
-                        <span
-                            class="text-base font-black bg-gradient-to-r from-blue-600 to-indigo-800 bg-clip-text text-transparent hidden md:block">EduRobot</span>
-                        <span
-                            class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-sm shadow-amber-200">TIẾNG
-                            VIỆT 5</span>
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl font-black text-blue-700">EduRobot</span>
+                        <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TIẾNG VIỆT 5</span>
                     </div>
-                    <div class="h-4 w-px bg-gray-200 hidden md:block"></div>
+                
                     <div class="flex items-center space-x-2 overflow-hidden">
-                        <span class="text-[10px] font-black uppercase tracking-widest text-gray-400">Chủ điểm:</span>
-                        <span
-                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">HƯƠNG
-                            SẮC TRĂM MIỀN</span>
+                        <span class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ ĐIỂM:</span>
+                        <span class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">HƯƠNG SẮC TRĂM MIỀN</span>
                     </div>
                 </div>
             </div>
-            <ul class="flex space-x-6 text-xs font-bold items-center">
-                <li><a href="index.html" class="flex items-center text-blue-600 hover:text-blue-700 transition-colors">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                        </svg>
-                        Quay lại
-                    </a></li>
-                <li class="border-l border-gray-200 pl-6"><a href="index.html"
-                        class="text-gray-500 hover:text-blue-600 transition-colors">Trang chủ</a></li>
-                <li><button onclick="openTeacherStats()"
-                        class="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-all">Giáo
-                        viên</button></li>
+            <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
+                <!-- Home -->
+                <li>
+                    <a href="index.html" class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Trang chủ
+                    </a>
+                </li>
+                
+                <!-- Lessons Dropdown -->
+                <li class="relative group">
+                    <button id="top-menu-lesson-btn" class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
+                        Bài học
+                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <!-- Dropdown Content (Hidden by default) -->
+                     <div id="top-menu-lessons-dropdown" class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
+                        <!-- Content rendered by floating-menu.js -->
+                    </div>
+                </li>
+
+                <!-- Teacher -->
+                <li>
+                    <button onclick="openTeacherStats()" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Giáo viên
+                    </button>
+                </li>
+                
+                <!-- Contact -->
+                <li>
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Liên hệ
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -716,7 +730,7 @@
         </div>
     </div>
 
-    <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
+        <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
         <div class="container mx-auto text-center">
             <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">@ 2026 EduRobot - Hệ thống học
                 tập thông minh</p>
@@ -852,14 +866,8 @@
             XLSX.writeFile(wb, "KetQua_DuongQueDongThapMuoi.xlsx");
         }
     </script>
-    <a href="cd6-huong-sac-tram-mien.html"
-        class="fixed bottom-8 right-8 z-[100] group flex items-center space-x-3 bg-white/80 backdrop-blur-xl p-2 pr-6 rounded-2xl shadow-2xl border border-white/50 hover:scale-105 transition-all active:scale-95">
-        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white"><svg class="w-6 h-6"
-                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg></div>
-        <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Trở về</span>
-    </a>
+    
+<script src="js/floating-menu.js"></script>
 </body>
 
 </html>
