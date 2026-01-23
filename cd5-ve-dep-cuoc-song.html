@@ -1,476 +1,148 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V? –?p Cu?c S?ng - EduRobot</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Ch·ªß ƒëi·ªÉm 5: V·∫ª ƒë·∫πp cu·ªôc s·ªëng - EduRobot</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Nunito -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #16a34a;
-            --primary-light: #f0fdf4;
-            --accent: #f59e0b;
-            --glass: rgba(255, 255, 255, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.5);
-        }
-
-        body {
-            font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-        }
-
-        .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-        }
-
-        .tab-active {
-            border-bottom: 4px solid #16a34a;
-            color: #16a34a;
-            font-weight: 700;
-        }
-
-        .sidebar-active {
-            background-color: #22c55e;
-            color: white;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            transform: scale(1.05);
-        }
-
-        .hidden-tab {
-            display: none;
-        }
+        body { font-family: 'Nunito', sans-serif; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); min-height: 100vh; }
+        .glass-header { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
     </style>
 </head>
-
-<body class="bg-blue-50 text-gray-800">
-
-    <!-- Header -->
-    <header class="sticky top-0 z-50 px-4 py-2">
-        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
-            <div class="flex items-center space-x-4">
-                <div
-                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
-                    <span class="text-xl font-black">E</span>
+<body>
+    <header class="fixed w-full top-0 z-50 glass-header shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-200">E</div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-black text-gray-800 leading-none">EduRobot</span>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Ti·∫øng Vi·ªát L·ªõp 5</span>
                 </div>
-                <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
-                    <div class="flex items-center space-x-3">
-                        <span class="text-2xl font-black text-blue-700">EduRobot</span>
-                        <span
-                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TI?NG
-                            VI?T 5</span>
-                    </div>
-
-                    <div class="flex items-center space-x-2 overflow-hidden">
-                        <span
-                            class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CH?
-                            –I?M:</span>
-                        <span
-                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">V?
-                            d?p cu?c s?ng</span>
-                    </div>
-                </div>
-            </div>
-            <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
-                <!-- Home -->
-                <li>
-                    <a href="index.html"
-                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
-                        Trang ch?
-                    </a>
-                </li>
-
-                <!-- Lessons Dropdown -->
-                <li class="relative group">
-                    <button id="top-menu-lesson-btn"
-                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
-                        B‡i h?c
-                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <!-- Dropdown Content (Hidden by default) -->
-                    <div id="top-menu-lessons-dropdown"
-                        class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
-                        <!-- Content rendered by floating-menu.js -->
-                    </div>
-                </li>
-
-                <!-- Teacher -->
-                <li>
-                    <button onclick="typeof openTeacherStats === 'function' && openTeacherStats()"
-                        class="text-gray-500 hover:text-blue-600 transition-colors py-2">
-                        Gi·o viÍn
-                    </button>
-                </li>
-
-                <!-- Contact -->
-                <li>
-                    <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
-                        LiÍn h?
-                    </a>
-                </li>
-            </ul>
-        </nav>
+            </a>
+            <a href="index.html" class="px-4 py-2 rounded-xl text-sm font-bold text-gray-500 hover:text-gray-800 hover:bg-gray-50 transition-colors">Trang ch·ªß</a>
+        </div>
     </header>
 
-    <main class="container mx-auto px-4 py-8">
+    <main class="container mx-auto px-4 pt-24 pb-12">
+        <section class="relative rounded-[40px] overflow-hidden bg-white shadow-xl p-8 md:p-12 mb-8">
+            <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-bl from-blue-100 to-purple-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3"></div>
+            <div class="relative z-10">
+                <span class="inline-block bg-blue-50 text-blue-600 text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest mb-4 border border-blue-100">Ch·ªß ƒëi·ªÉm</span>
+                <h1 class="text-3xl md:text-5xl font-black text-gray-900 mb-4">Ch·ªß ƒëi·ªÉm 5: V·∫ª ƒë·∫πp cu·ªôc s·ªëng</h1>
+            </div>
+        </section>
 
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-
-        <div class="flex flex-col lg:flex-row gap-8">
-
-            <!-- C?t tr·i (Sidebar - 25%) -->
-            <aside class="w-full lg:w-1/4">
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-                    <h2 class="text-xl font-bold border-b pb-4 mb-6 text-blue-900">Danh s·ch tu?n h?c</h2>
-                    <ul class="space-y-4">
-                        <li>
-                            <button id="week-19" onclick="switchWeek(19)"
-                                class="w-full text-left p-4 rounded-2xl sidebar-active transition-all duration-300 font-bold flex items-center group">
-                                <span
-                                    class="w-10 h-10 rounded-full bg-white bg-opacity-30 inline-flex items-center justify-center mr-3 text-sm">19</span>
-                                Tu?n 19
-                            </button>
-                        </li>
-                        <li>
-                            <button id="week-20" onclick="switchWeek(20)"
-                                class="w-full text-left p-4 rounded-2xl bg-gray-50 hover:bg-green-50 text-gray-600 hover:text-green-600 transition-all duration-300 font-bold flex items-center group">
-                                <span
-                                    class="w-10 h-10 rounded-full bg-gray-200 inline-flex items-center justify-center mr-3 text-sm group-hover:bg-green-200">20</span>
-                                Tu?n 20
-                            </button>
-                        </li>
-                        <li>
-                            <button id="week-21" onclick="switchWeek(21)"
-                                class="w-full text-left p-4 rounded-2xl bg-gray-50 hover:bg-green-50 text-gray-600 hover:text-green-600 transition-all duration-300 font-bold flex items-center group">
-                                <span
-                                    class="w-10 h-10 rounded-full bg-gray-200 inline-flex items-center justify-center mr-3 text-sm group-hover:bg-green-200">21</span>
-                                Tu?n 21
-                            </button>
-                        </li>
-                        <li>
-                            <button id="week-22" onclick="switchWeek(22)"
-                                class="w-full text-left p-4 rounded-2xl bg-gray-50 hover:bg-green-50 text-gray-600 hover:text-green-600 transition-all duration-300 font-bold flex items-center group">
-                                <span
-                                    class="w-10 h-10 rounded-full bg-gray-200 inline-flex items-center justify-center mr-3 text-sm group-hover:bg-green-200">22</span>
-                                Tu?n 22
-                            </button>
-                        </li>
-
-                    </ul>
-                </div>
-            </aside>
-
-            <!-- C?t ph?i (Content - 75%) -->
-            <section class="w-full lg:w-3/4">
-                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-
-                    <!-- Tab Interface -->
-                    <div class="bg-gray-50 flex border-b">
-                        <button id="tab-explore-btn" onclick="switchTab('explore')"
-                            class="flex-1 py-4 text-center font-bold text-green-600 border-b-4 border-green-500 transition-all">1.
-                            Kh·m ph·</button>
-                        <button id="tab-practice-btn" onclick="switchTab('practice')"
-                            class="flex-1 py-4 text-center font-bold text-gray-500 hover:text-green-600 transition-all">2.
-                            Luy?n t?p</button>
-                        <button id="tab-apply-btn" onclick="switchTab('apply')"
-                            class="flex-1 py-4 text-center font-bold text-gray-500 hover:text-green-600 transition-all">3.
-                            V?n d?ng</button>
+            <div class="bg-white/60 backdrop-blur-md rounded-[32px] p-6 border border-white shadow-lg hover:shadow-xl transition-all">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-black text-sm">
+                        19
                     </div>
-
-                    <div class="p-8 md:p-12">
-
-                        <!-- Tab 1: Kh·m ph· -->
-                        <div id="tab-explore" class="tab-content transition-opacity duration-300">
-                            <!-- Container for dynamic content -->
-                            <div id="week-content-container">
-                                <!-- Week 19 Content -->
-                                <div id="week-19-content" class="active-week-content">
-                                    <h3
-                                        class="flex items-center text-2xl font-extrabold text-blue-900 mb-6 pb-2 border-b-2 border-green-100">
-                                        <span
-                                            class="bg-green-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-3 text-sm">19</span>
-                                        Tu?n 19: V? d?p cu?c s?ng
-                                    </h3>
-                                    <div class="space-y-6">
-                                        <!-- B‡i 1: Ti?ng h·t c?a ngu?i d· -->
-                                        <div
-                                            class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all">
-                                            <h4 class="text-xl font-bold text-green-800 mb-4 flex items-center">
-                                                <span
-                                                    class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
-                                                B‡i 1: Ti?ng h·t c?a ngu?i d·
-                                            </h4>
-                                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                                <div
-                                                    class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col">
-                                                    <span
-                                                        class="text-[10px] font-bold text-blue-500 uppercase">–?c</span>
-                                                    <p class="text-sm font-bold text-gray-800 mt-1">Ti?ng h·t c?a ngu?i
-                                                        d·</p>
-                                                    <a href="191-tieng-hat-nguoi-da.html"
-                                                        class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">V‡o
-                                                        h?c</a>
-                                                </div>
-                                                <div
-                                                    class="p-4 bg-orange-50 rounded-2xl border border-orange-100 flex flex-col">
-                                                    <span class="text-[10px] font-bold text-orange-600 uppercase">Luy?n
-                                                        t? & C‚u</span>
-                                                    <p class="text-sm font-bold text-gray-800 mt-1">C‚u don v‡ c‚u ghÈp
-                                                    </p>
-                                                    <a href="#"
-                                                        class="mt-auto block text-center py-2 bg-orange-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-orange-600">Luy?n
-                                                        t?p</a>
-                                                </div>
-                                                <div
-                                                    class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col">
-                                                    <span
-                                                        class="text-[10px] font-bold text-emerald-600 uppercase">Vi?t</span>
-                                                    <p class="text-sm font-bold text-gray-800 mt-1 leading-tight">TÏm
-                                                        hi?u c·ch vi?t b‡i van t? ngu?i</p>
-                                                    <a href="#"
-                                                        class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">B?t
-                                                        d?u</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- B‡i 2: Kh˙c h·t ru... -->
-                                        <div
-                                            class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all border-l-8 border-l-green-500">
-                                            <h4 class="text-xl font-bold text-green-800 mb-4 flex items-center">
-                                                <span
-                                                    class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
-                                                B‡i 2: Kh˙c h·t ru nh?ng em bÈ l?n trÍn lung m?
-                                            </h4>
-                                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                                <div
-                                                    class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col">
-                                                    <span
-                                                        class="text-[10px] font-bold text-blue-500 uppercase">–?c</span>
-                                                    <p class="text-sm font-bold text-gray-800 mt-1">Kh˙c h·t ru nh?ng em
-                                                        bÈ l?n trÍn lung m?</p>
-                                                    <a href="192-khuc-hat-ru-nhung-em-be-tren-lung-me.html"
-                                                        class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">V‡o
-                                                        h?c</a>
-                                                </div>
-                                                <div
-                                                    class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col">
-                                                    <span
-                                                        class="text-[10px] font-bold text-emerald-600 uppercase">Vi?t</span>
-                                                    <p class="text-sm font-bold text-gray-800 mt-1">Vi?t m? b‡i v‡ k?t
-                                                        b‡i cho b‡i van t? ngu?i</p>
-                                                    <a href="#"
-                                                        class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">B?t
-                                                        d?u</a>
-                                                </div>
-                                                <div
-                                                    class="p-4 bg-purple-50 rounded-2xl border border-purple-100 flex flex-col">
-                                                    <span
-                                                        class="text-[10px] font-bold text-purple-600 uppercase">Kh·c</span>
-                                                    <p class="text-sm font-bold text-gray-800 mt-1">–?c m? r?ng</p>
-                                                    <a href="#"
-                                                        class="mt-auto block text-center py-2 bg-purple-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-purple-700">Kh·m
-                                                        ph·</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Week 20-22 Content will be loaded dynamically -->
-
-
-
-
-
-
-                            </div>
-                        </div>
-
-                        <!-- Tab 2: Luy?n t?p -->
-                        <div id="tab-practice" class="tab-content hidden-tab transition-opacity duration-300">
-                            <h3 class="text-2xl font-bold text-blue-900 mb-8">Ki?m tra ki?n th?c Tu?n <span
-                                    id="practice-week-num">19</span></h3>
-                            <div class="p-20 text-center text-gray-400 font-bold italic">Ph?n luy?n t?p dang du?c c?p
-                                nh?t...</div>
-                        </div>
-
-                        <!-- Tab 3: V?n d?ng -->
-                        <div id="tab-apply" class="tab-content hidden-tab transition-opacity duration-300">
-                            <h3 class="text-2xl font-bold text-blue-900 mb-4">GÛc s·ng t?o</h3>
-                            <p class="text-gray-600 mb-8">Chia s? nh?ng suy nghi c?a em v? c·c b‡i h?c trong tu?n n‡y.
-                            </p>
-                            <textarea rows="8" placeholder="Vi?t nh?ng c?m nh?n c?a em v‡o d‚y nhÈ..."
-                                class="w-full p-6 border-2 border-gray-100 rounded-2xl focus:border-green-500 focus:outline-none transition-all"></textarea>
-                            <div class="mt-6 flex justify-end">
-                                <button
-                                    class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-10 rounded-2xl shadow-md transition-all active:scale-95">
-                                    Chia s? b‡i vi?t
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Tu·∫ßn 19</h3>
                 </div>
-            </section>
+                <div class="space-y-3">
+        
+                    <div class="group">
+                        <div class="font-bold text-gray-700 mb-1">B√†i 1: Ti·∫øng h√°t c·ªßa ng∆∞·ªùi ƒë√°</div>
+                        <div class="flex flex-wrap gap-2">
+            <a href="191-tieng-hat-nguoi-da.html" class="text-xs font-bold text-blue-500 bg-blue-50 hover:bg-blue-600 hover:text-white px-2 py-1 rounded-lg transition-colors">ƒê·ªçc</a>
+                        </div>
+                    </div>
+            
+                    <div class="group">
+                        <div class="font-bold text-gray-700 mb-1">B√†i 2: Kh√∫c h√°t ru nh·ªØng em b√© l·ªõn tr√™n l∆∞ng m·∫π</div>
+                        <div class="flex flex-wrap gap-2">
+            <a href="192-khuc-hat-ru-nhung-em-be-tren-lung-me.html" class="text-xs font-bold text-blue-500 bg-blue-50 hover:bg-blue-600 hover:text-white px-2 py-1 rounded-lg transition-colors">ƒê·ªçc</a>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+        
+            <div class="bg-white/60 backdrop-blur-md rounded-[32px] p-6 border border-white shadow-lg hover:shadow-xl transition-all">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-black text-sm">
+                        20
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Tu·∫ßn 20</h3>
+                </div>
+                <div class="space-y-3">
+        
+                    <div class="group">
+                        <div class="font-bold text-gray-700 mb-1">B√†i 3: H·∫°t g·∫°o l√†ng ta</div>
+                        <div class="flex flex-wrap gap-2">
+            <a href="201-hat-gao-lang-ta.html" class="text-xs font-bold text-blue-500 bg-blue-50 hover:bg-blue-600 hover:text-white px-2 py-1 rounded-lg transition-colors">ƒê·ªçc</a>
+                        </div>
+                    </div>
+            
+                    <div class="group">
+                        <div class="font-bold text-gray-700 mb-1">B√†i 4: H·ªôp qu√† m√†u thi√™n thanh</div>
+                        <div class="flex flex-wrap gap-2">
+            <a href="202-hop-qua-mau-thien-thanh.html" class="text-xs font-bold text-blue-500 bg-blue-50 hover:bg-blue-600 hover:text-white px-2 py-1 rounded-lg transition-colors">ƒê·ªçc</a>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+        
+            <div class="bg-white/60 backdrop-blur-md rounded-[32px] p-6 border border-white shadow-lg hover:shadow-xl transition-all">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-black text-sm">
+                        21
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Tu·∫ßn 21</h3>
+                </div>
+                <div class="space-y-3">
+        
+                    <div class="group">
+                        <div class="font-bold text-gray-700 mb-1">B√†i 5: Gi·ªè hoa th√°ng NƒÉm</div>
+                        <div class="flex flex-wrap gap-2">
+            <a href="211-gio-hoa-thang-nam.html" class="text-xs font-bold text-blue-500 bg-blue-50 hover:bg-blue-600 hover:text-white px-2 py-1 rounded-lg transition-colors">ƒê·ªçc</a>
+                        </div>
+                    </div>
+            
+                    <div class="group">
+                        <div class="font-bold text-gray-700 mb-1">B√†i 6: Th∆∞ c·ªßa b·ªë</div>
+                        <div class="flex flex-wrap gap-2">
+            <a href="212-thu-cua-bo.html" class="text-xs font-bold text-blue-500 bg-blue-50 hover:bg-blue-600 hover:text-white px-2 py-1 rounded-lg transition-colors">ƒê·ªçc</a>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+        
+            <div class="bg-white/60 backdrop-blur-md rounded-[32px] p-6 border border-white shadow-lg hover:shadow-xl transition-all">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-black text-sm">
+                        22
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Tu·∫ßn 22</h3>
+                </div>
+                <div class="space-y-3">
+        
+                    <div class="group">
+                        <div class="font-bold text-gray-700 mb-1">B√†i 7: ƒêo√†n thuy·ªÅn ƒë√°nh c√°</div>
+                        <div class="flex flex-wrap gap-2">
+            <a href="221-doan-thuyen-danh-ca.html" class="text-xs font-bold text-blue-500 bg-blue-50 hover:bg-blue-600 hover:text-white px-2 py-1 rounded-lg transition-colors">ƒê·ªçc</a>
+                        </div>
+                    </div>
+            
+                    <div class="group">
+                        <div class="font-bold text-gray-700 mb-1">B√†i 8: Khu r·ª´ng c·ªßa M√°t</div>
+                        <div class="flex flex-wrap gap-2">
+            <a href="222-khu-rung-cua-mat.html" class="text-xs font-bold text-blue-500 bg-blue-50 hover:bg-blue-600 hover:text-white px-2 py-1 rounded-lg transition-colors">ƒê·ªçc</a>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+        
         </div>
     </main>
 
-    <!-- Footer (Synced from index.html) -->
-    <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
-        <div class="container mx-auto text-center">
-            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">@ 2026 EduRobot - H? th?ng h?c
-                t?p thÙng minh</p>
-            <p class="text-xs font-bold text-blue-600 mt-2">Ph·t tri?n b?i LÍ Th‡nh Long</p>
-        </div>
-    </footer>
-
-    <script>
-        // Tab switching logic
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden-tab');
-                content.style.opacity = '0';
-            });
-            const buttons = [document.getElementById('tab-explore-btn'), document.getElementById('tab-practice-btn'), document.getElementById('tab-apply-btn')];
-            buttons.forEach(btn => {
-                btn.classList.remove('text-green-600', 'border-b-4', 'border-green-500');
-                btn.classList.add('text-gray-500');
-            });
-            const activeTab = document.getElementById('tab-' + tabId);
-            activeTab.classList.remove('hidden-tab');
-            setTimeout(() => { activeTab.style.opacity = '1'; }, 50);
-            const activeBtn = document.getElementById('tab-' + tabId + '-btn');
-            activeBtn.classList.remove('text-gray-500');
-            activeBtn.classList.add('text-green-600', 'border-b-4', 'border-green-500');
-        }
-
-        // Sidebar week selection logic
-        function switchWeek(weekNum) {
-            const ids = [19, 20, 21, 22];
-            ids.forEach(id => {
-                const btn = document.getElementById('week-' + id);
-                if (!btn) return;
-                const circle = btn.querySelector('span');
-                btn.classList.remove('sidebar-active');
-                btn.classList.add('bg-gray-50', 'text-gray-600', 'hover:bg-green-50', 'hover:text-green-600');
-                circle.classList.remove('bg-white', 'bg-opacity-30');
-                circle.classList.add('bg-gray-200');
-            });
-            const activeBtn = document.getElementById('week-' + weekNum);
-            const activeCircle = activeBtn.querySelector('span');
-            activeBtn.classList.add('sidebar-active');
-            activeBtn.classList.remove('bg-gray-50', 'text-gray-600', 'hover:bg-green-50', 'hover:text-green-600');
-            activeCircle.classList.add('bg-white', 'bg-opacity-30');
-            activeCircle.classList.remove('bg-gray-200');
-
-            document.querySelectorAll('[id$="-content"]').forEach(el => {
-                el.classList.add('hidden');
-            });
-            const content = document.getElementById('week-' + weekNum + '-content');
-            if (content) {
-                content.classList.remove('hidden');
-            } else {
-                fetchWeekContent(weekNum);
-            }
-            const practiceWeekNum = document.getElementById('practice-week-num');
-            if (practiceWeekNum) practiceWeekNum.innerText = weekNum;
-            const breadcrumb = document.querySelector('.ml-1.uppercase');
-            if (breadcrumb) breadcrumb.innerText = "V? d?p cu?c s?ng - Tu?n " + weekNum;
-        }
-
-        function fetchWeekContent(weekNum) {
-            const container = document.getElementById('week-content-container');
-            const placeholder = document.createElement('div');
-            placeholder.id = 'week-' + weekNum + '-content';
-            let html = '';
-            if (weekNum == 20) {
-                html = `<h3 class="flex items-center text-2xl font-extrabold text-blue-900 mb-6 pb-2 border-b-2 border-green-100"><span class="bg-green-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-3 text-sm">${weekNum}</span>Tu?n 20: V? d?p cu?c s?ng</h3>
-                <div class="space-y-6">
-                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all">
-                        <h4 class="text-xl font-bold text-green-800 mb-4 flex items-center"><span class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 text-sm">3</span>B‡i 3: H?t g?o l‡ng ta</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">–?c</span><p class="text-sm font-bold text-gray-800 mt-1">H?t g?o l‡ng ta</p><a href="201-hat-gao-lang-ta.html" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">V‡o h?c</a></div>
-                            <div class="p-4 bg-orange-50 rounded-2xl border border-orange-100 flex flex-col"><span class="text-[10px] font-bold text-orange-600 uppercase">Luy?n t? & C‚u</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">C·ch n?i c·c v? c‚u ghÈp</p><a href="#" class="mt-auto block text-center py-2 bg-orange-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-orange-600">Luy?n t?p</a></div>
-                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Vi?t</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Quan s·t d? vi?t b‡i van t? ngu?i</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">B?t d?u</a></div>
-                        </div>
-                    </div>
-                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all border-l-8 border-l-green-500">
-                        <h4 class="text-xl font-bold text-green-800 mb-4 flex items-center"><span class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 text-sm">4</span>B‡i 4: H?p qu‡ m‡u thiÍn thanh</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">–?c</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">H?p qu‡ m‡u thiÍn thanh</p><a href="202-hop-qua-mau-thien-thanh.html" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">V‡o h?c</a></div>
-                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Vi?t</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">L?p d‡n ˝ cho b‡i van t? ngu?i</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">Ti?p t?c</a></div>
-                            <div class="p-4 bg-rose-50 rounded-2xl border border-rose-100 flex flex-col"><span class="text-[10px] font-bold text-rose-600 uppercase">NÛi v‡ nghe</span><p class="text-sm font-bold text-gray-800 mt-1">NÈt d?p h?c du?ng</p><a href="#" class="mt-auto block text-center py-2 bg-rose-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-rose-600">Kh·m ph·</a></div>
-                        </div>
-                    </div>
-                </div>`;
-            } else if (weekNum == 21) {
-                html = `<h3 class="flex items-center text-2xl font-extrabold text-blue-900 mb-6 pb-2 border-b-2 border-green-100"><span class="bg-green-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-3 text-sm">${weekNum}</span>Tu?n 21: V? d?p cu?c s?ng</h3>
-                <div class="space-y-6">
-                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all">
-                        <h4 class="text-xl font-bold text-green-800 mb-4 flex items-center"><span class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 text-sm">5</span>B‡i 5: Gi? hoa th·ng Nam</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">–?c</span><p class="text-sm font-bold text-gray-800 mt-1">Gi? hoa th·ng Nam</p><a href="211-gio-hoa-thang-nam.html" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">V‡o h?c</a></div>
-                            <div class="p-4 bg-orange-50 rounded-2xl border border-orange-100 flex flex-col"><span class="text-[10px] font-bold text-orange-600 uppercase">Luy?n t? & C‚u</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">C·ch n?i c·c v? c‚u ghÈp (Ti?p theo)</p><a href="#" class="mt-auto block text-center py-2 bg-orange-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-orange-600">Luy?n t?p</a></div>
-                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Vi?t</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Vi?t do?n van t? ngu?i</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">B?t d?u</a></div>
-                        </div>
-                    </div>
-                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all border-l-8 border-l-green-500">
-                        <h4 class="text-xl font-bold text-green-800 mb-4 flex items-center"><span class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 text-sm">6</span>B‡i 6: Thu c?a b?</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">–?c</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Thu c?a b?</p><a href="212-thu-cua-bo.html" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">V‡o h?c</a></div>
-                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Vi?t</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Vi?t b‡i van t? ngu?i (B‡i vi?t s? 1)</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">B?t d?u</a></div>
-                            <div class="p-4 bg-purple-50 rounded-2xl border border-purple-100 flex flex-col"><span class="text-[10px] font-bold text-purple-600 uppercase">Kh·c</span><p class="text-sm font-bold text-gray-800 mt-1">–?c m? r?ng</p><a href="#" class="mt-auto block text-center py-2 bg-purple-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-purple-700">Kh·m ph·</a></div>
-                        </div>
-                    </div>
-                </div>`;
-            } else if (weekNum == 22) {
-                html = `<h3 class="flex items-center text-2xl font-extrabold text-blue-900 mb-6 pb-2 border-b-2 border-green-100"><span class="bg-green-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-3 text-sm">${weekNum}</span>Tu?n 22: V? d?p cu?c s?ng</h3>
-                <div class="space-y-6">
-                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all">
-                        <h4 class="text-xl font-bold text-green-800 mb-4 flex items-center"><span class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 text-sm">7</span>B‡i 7: –o‡n thuy?n d·nh c·</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">–?c</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">–o‡n thuy?n d·nh c·</p><a href="221-doan-thuyen-danh-ca.html" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">V‡o h?c</a></div>
-                            <div class="p-4 bg-orange-50 rounded-2xl border border-orange-100 flex flex-col"><span class="text-[10px] font-bold text-orange-600 uppercase">Luy?n t? & C‚u</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Luy?n t?p v? c‚u ghÈp</p><a href="#" class="mt-auto block text-center py-2 bg-orange-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-orange-600">Luy?n t?p</a></div>
-                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Vi?t</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">–·nh gi·, ch?nh s?a b‡i van t? ngu?i</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">Ti?p t?c</a></div>
-                        </div>
-                    </div>
-                    <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all border-l-8 border-l-green-500">
-                        <h4 class="text-xl font-bold text-green-800 mb-4 flex items-center"><span class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 text-sm">8</span>B‡i 8: Khu r?ng c?a M·t</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col"><span class="text-[10px] font-bold text-blue-500 uppercase">–?c</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Khu r?ng c?a M·t</p><a href="222-khu-rung-cua-mat.html" class="mt-auto block text-center py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-blue-700">V‡o h?c</a></div>
-                            <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col"><span class="text-[10px] font-bold text-emerald-600 uppercase">Vi?t</span><p class="text-sm font-bold text-gray-800 mt-1 leading-tight">Vi?t b‡i van t? ngu?i (B‡i vi?t s? 2)</p><a href="#" class="mt-auto block text-center py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold transition-all hover:bg-emerald-700">TÏm hi?u</a></div>
-                            <div class="p-4 bg-rose-50 rounded-2xl border border-rose-100 flex flex-col"><span class="text-[10px] font-bold text-rose-600 uppercase">NÛi v‡ nghe</span><p class="text-sm font-bold text-gray-800 mt-1">Nh?ng ˝ ki?n kh·c bi?t</p><a href="#" class="mt-auto block text-center py-2 bg-rose-500 text-white rounded-xl text-xs font-bold transition-all hover:bg-rose-600">B?t d?u</a></div>
-                        </div>
-                    </div>
-                </div>`;
-
-            } else {
-                html = `<div class="p-20 text-center text-gray-400 font-bold italic">N?i dung dang du?c c?p nh?t...</div>`;
-            }
-            placeholder.innerHTML = html;
-            container.appendChild(placeholder);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const week = urlParams.get('week');
-            if (week) {
-                switchWeek(parseInt(week));
-            }
-        });
-    </script>
     <script src="js/floating-menu.js"></script>
 </body>
-
 </html>
