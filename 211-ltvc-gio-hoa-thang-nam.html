@@ -230,13 +230,42 @@
     }
 
     // Giả lập AI (Kết nối backend sau)
-    function askAI(id) {
-        const val = document.getElementById('ai-' + id).value;
-        const fb = document.getElementById('fb-' + id);
-        if(!val) return alert("Em hãy viết câu trước khi nhờ EduRobot chấm nhé!");
-        fb.style.display = "block";
-        fb.innerHTML = "⌛ <b>EduRobot:</b> Đang phân tích câu của em... (Vui lòng kết nối Gemini API để nhận phản hồi thật)";
+    async function askAI(id) {
+    const inputElem = document.getElementById('ai-' + id);
+    const fbElem = document.getElementById('fb-' + id);
+    const val = inputElem.value;
+    
+    // Tự động lấy nội dung yêu cầu đề bài từ thẻ <p> hoặc <b> phía trên
+    const promptText = inputElem.parentElement.querySelector('p').innerText;
+
+    if(!val) return alert("Em hãy viết câu trước khi nhờ EduRobot chấm bài nhé!");
+
+    fbElem.style.display = "block";
+    fbElem.innerHTML = "⌛ <b>EduRobot:</b> Đang đọc bài của em...";
+
+    try {
+        // Gọi đến Netlify Function đã tạo ở trên
+        const response = await fetch('/.netlify/functions/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                prompt: promptText,
+                studentInput: val 
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.feedback) {
+            fbElem.innerHTML = `🤖 <b>EduRobot nhận xét:</b> ${data.feedback}`;
+        } else {
+            fbElem.innerHTML = `🤖 <b>EduRobot:</b> Có chút trục trặc, em thử lại sau nhé!`;
+        }
+    } catch (error) {
+        console.error("Lỗi:", error);
+        fbElem.innerHTML = "🤖 <b>EduRobot:</b> Không thể kết nối với máy chủ AI rồi!";
     }
+}
 </script>
 </body>
 </html>
