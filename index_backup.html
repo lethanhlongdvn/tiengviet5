@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduRobot - Ti?ng Vi?t L?p 5 Online</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .bg-yellow-bright {
+            background-color: #facc15;
+        }
+
+        .text-blue-primary {
+            color: #3b82f6;
+        }
+
+        .card-shadow:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+
+    <!-- Header (Thanh di?u hu?ng) -->
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-1.5 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div
+                        class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg font-bold">
+                        E</div>
+                    <span class="text-lg font-bold text-blue-600 tracking-tight">EduRobot - <span
+                            class="text-yellow-500">Ti?ng Vi?t 5</span></span>
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
+                <li><a href="index.html" class="text-blue-500 font-bold border-b-2 border-blue-500">Trang ch?</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Gi?i thi?u</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">B?ng x?p h?ng</a></li>
+                <li><a href="#" class="hover:text-blue-500 transition-colors">Liên h?</a></li>
+            </ul>
+
+            <!-- Mobile Menu Toggle (Simplified) -->
+            <button class="md:hidden text-gray-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section (Ph?n m? d?u) -->
+    <section
+        class="relative bg-gradient-to-r from-blue-500 via-blue-400 to-blue-500 text-white py-6 px-4 overflow-hidden">
+        <!-- Abstract Shapes for Decoration -->
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-400 rounded-full opacity-20 blur-2xl"></div>
+        <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-green-400 rounded-full opacity-20 blur-3xl"></div>
+
+        <div class="container mx-auto text-center relative z-10">
+            <h1 class="text-2xl md:text-3xl font-extrabold mb-2 leading-tight">
+                Cùng <span class="text-yellow-300">EduRobot</span> khám phá <br> Ti?ng Vi?t 5
+            </h1>
+            <p class="text-sm md:text-base font-medium mb-4 opacity-90 max-w-2xl mx-auto">
+                H?c vui, nh? lâu v?i các bài h?c tuong tác và trò choi thú v?. Khám phá kho tàng ki?n th?c thông qua
+                nh?ng câu chuy?n và bài h?c d?y s?c màu!
+            </p>
+            <button
+                class="bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold py-2 px-6 rounded-full text-base shadow-lg transition-transform transform hover:scale-105 focus:outline-none">
+                B?t d?u h?c ngay
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Content (L? trình h?c t?p) -->
+    <main class="container mx-auto px-4 py-6">
+
+        <div class="flex flex-col items-center mb-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-blue-800 mb-2 text-center">L? trình h?c t?p Ti?ng Vi?t 5</h2>
+            <div class="w-24 h-1.5 bg-yellow-400 rounded-full"></div>
+        </div>
+
+        <!-- H?c K? 1 -->
+        <div class="mb-12">
+            <h3 class="text-xl font-bold text-gray-700 mb-6 flex items-center">
+                <span
+                    class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
+                H?c K? 1
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Th?: Th? gi?i tu?i tho -->
+                <div
+                    class="bg-white rounded-2xl overflow-hidden shadow-md border-b-8 border-cyan-500 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                    <img src="https://placehold.co/600x400/06b6d4/ffffff?text=Th?+gi?i+tu?i+tho" alt="Th? gi?i tu?i tho"
+                        class="w-full h-32 object-cover">
+                    <div class="p-4 flex flex-col flex-grow">
+                        <span class="text-cyan-600 font-bold text-[10px] uppercase tracking-wider mb-1">Tu?n 1 -
+                            4</span>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1 leading-tight">Th? gi?i tu?i tho</h3>
+                        <p class="text-gray-600 text-xs mb-4 flex-grow">B?t d?u hành trình khám phá nh?ng âm thanh, màu
+                            s?c c?a tu?i tho di?u k?.</p>
+                        <a href="cd1-the-gioi-tuoi-tho.html"
+                            class="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 rounded-xl transition-colors text-center block text-sm">Vào
+                            h?c</a>
+                    </div>
+                </div>
+
+                <!-- Th?: Thiên nhiên kì thú -->
+                <div
+                    class="bg-white rounded-2xl overflow-hidden shadow-md border-b-8 border-emerald-500 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                    <img src="https://placehold.co/600x400/10b981/ffffff?text=Thiên+nhiên+kì+thú"
+                        alt="Thiên nhiên kì thú" class="w-full h-32 object-cover">
+                    <div class="p-4 flex flex-col flex-grow">
+                        <span class="text-emerald-600 font-bold text-[10px] uppercase tracking-wider mb-1">Tu?n 5 -
+                            8</span>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1 leading-tight">Thiên nhiên kì thú</h3>
+                        <p class="text-gray-600 text-xs mb-4 flex-grow">Khám phá v? d?p hùng vi và nh?ng bí ?n c?a th?
+                            gi?i t? nhiên.</p>
+                        <a href="cd2-thien-nhien-ki-thu.html"
+                            class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 rounded-xl transition-colors text-center block text-sm">Vào
+                            h?c</a>
+                    </div>
+                </div>
+
+                <!-- Th?: Trên con du?ng h?c t?p -->
+                <div
+                    class="bg-white rounded-2xl overflow-hidden shadow-md border-b-8 border-indigo-500 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                    <img src="https://placehold.co/600x400/6366f1/ffffff?text=Trên+con+du?ng+h?c+t?p"
+                        alt="Trên con du?ng h?c t?p" class="w-full h-32 object-cover">
+                    <div class="p-4 flex flex-col flex-grow">
+                        <span class="text-indigo-600 font-bold text-[10px] uppercase tracking-wider mb-1">Tu?n 10 -
+                            13</span>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1 leading-tight">Trên con du?ng h?c t?p</h3>
+                        <p class="text-gray-600 text-xs mb-4 flex-grow">Rèn luy?n tri th?c và b?i du?ng tâm h?n qua
+                            nh?ng trang sách b? ích.</p>
+                        <a href="cd3-tren-con-duong-hoc-tap.html"
+                            class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 rounded-xl transition-colors text-center block text-sm">Vào
+                            h?c</a>
+                    </div>
+                </div>
+
+                <!-- Th?: Ngh? thu?t muôn màu -->
+                <div
+                    class="bg-white rounded-2xl overflow-hidden shadow-md border-b-8 border-fuchsia-500 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                    <img src="https://placehold.co/600x400/d946ef/ffffff?text=Ngh?+thu?t+muôn+màu"
+                        alt="Ngh? thu?t muôn màu" class="w-full h-32 object-cover">
+                    <div class="p-4 flex flex-col flex-grow">
+                        <span class="text-fuchsia-600 font-bold text-[10px] uppercase tracking-wider mb-1">Tu?n 14 -
+                            17</span>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1 leading-tight">Ngh? thu?t muôn màu</h3>
+                        <p class="text-gray-600 text-xs mb-4 flex-grow">Ð?m mình trong không gian van hóa, ngh? thu?t
+                            truy?n th?ng và hi?n d?i.</p>
+                        <a href="cd4-nghe-thuat-muon-mau.html"
+                            class="w-full bg-fuchsia-500 hover:bg-fuchsia-600 text-white font-bold py-2 rounded-xl transition-colors text-center block text-sm">Vào
+                            h?c</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- H?c K? 2 -->
+        <div class="mb-12">
+            <h3 class="text-xl font-bold text-gray-700 mb-6 flex items-center">
+                <span
+                    class="bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
+                H?c K? 2
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Th?: V? d?p cu?c s?ng -->
+                <div
+                    class="bg-white rounded-2xl overflow-hidden shadow-md border-b-8 border-green-500 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                    <img src="https://placehold.co/600x400/22c55e/ffffff?text=V?+d?p+cu?c+s?ng" alt="V? d?p cu?c s?ng"
+                        class="w-full h-32 object-cover">
+                    <div class="p-4 flex flex-col flex-grow">
+                        <span class="text-green-600 font-bold text-[10px] uppercase tracking-wider mb-1">Tu?n 19 -
+                            22</span>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1 leading-tight">V? d?p cu?c s?ng</h3>
+                        <p class="text-gray-600 text-xs mb-4 flex-grow">Khám phá nh?ng nét d?p bình d? quanh ta và ý
+                            nghia c?a lòng nhân ái.</p>
+                        <a href="cd5-ve-dep-cuoc-song.html"
+                            class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded-xl transition-colors text-center block text-sm">Vào
+                            h?c</a>
+                    </div>
+                </div>
+
+                <!-- Th?: Huong s?c tram mi?n -->
+                <div
+                    class="bg-white rounded-2xl overflow-hidden shadow-md border-b-8 border-orange-500 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                    <img src="https://placehold.co/600x400/f97316/ffffff?text=Huong+s?c+tram+mi?n"
+                        alt="Huong s?c tram mi?n" class="w-full h-32 object-cover">
+                    <div class="p-4 flex flex-col flex-grow">
+                        <span class="text-orange-600 font-bold text-[10px] uppercase tracking-wider mb-1">Tu?n 23 -
+                            26</span>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1 leading-tight">Huong s?c tram mi?n</h3>
+                        <p class="text-gray-600 text-xs mb-4 flex-grow">Hành trình du ngo?n qua các vùng mi?n d? ng?m
+                            nhìn v? d?p Vi?t Nam.</p>
+                        <a href="cd6-huong-sac-tram-mien.html"
+                            class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 rounded-xl transition-colors text-center block text-sm">Vào
+                            h?c</a>
+                    </div>
+                </div>
+
+                <!-- Th?: Ti?p bu?c cha ông -->
+                <div
+                    class="bg-white rounded-2xl overflow-hidden shadow-md border-b-8 border-red-500 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                    <img src="https://placehold.co/600x400/ef4444/ffffff?text=Ti?p+bu?c+cha+ông" alt="Ti?p bu?c cha ông"
+                        class="w-full h-32 object-cover">
+                    <div class="p-4 flex flex-col flex-grow">
+                        <span class="text-red-600 font-bold text-[10px] uppercase tracking-wider mb-1">Tu?n 28 -
+                            31</span>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1 leading-tight">Ti?p bu?c cha ông</h3>
+                        <p class="text-gray-600 text-xs mb-4 flex-grow">T? hào v? truy?n th?ng dân t?c, h?c h?i t? guong
+                            sáng c?a ti?n nhân.</p>
+                        <a href="cd7-tiep-buoc-cha-ong.html"
+                            class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-xl transition-colors text-center block text-sm">Vào
+                            h?c</a>
+                    </div>
+                </div>
+
+                <!-- Th?: Th? gi?i c?a chúng ta -->
+                <div
+                    class="bg-white rounded-2xl overflow-hidden shadow-md border-b-8 border-blue-700 transition-all duration-300 transform hover:scale-105 card-shadow flex flex-col h-full">
+                    <img src="https://placehold.co/600x400/1d4ed8/ffffff?text=Th?+gi?i+c?a+chúng+ta"
+                        alt="Th? gi?i c?a chúng ta" class="w-full h-32 object-cover">
+                    <div class="p-4 flex flex-col flex-grow">
+                        <span class="text-blue-700 font-bold text-[10px] uppercase tracking-wider mb-1">Tu?n 32 -
+                            34</span>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1 leading-tight">Th? gi?i c?a chúng ta</h3>
+                        <p class="text-gray-600 text-xs mb-4 flex-grow">M? r?ng t?m nhìn ra th? gi?i, hi?u v? tình h?u
+                            ngh? và tuong lai toàn c?u.</p>
+                        <a href="cd8-the-gioi-cua-chung-ta.html"
+                            class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 rounded-xl transition-colors text-center block text-sm">Vào
+                            h?c</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Ôn t?p & Ðánh giá Section -->
+        <div class="mt-8">
+            <div
+                class="bg-yellow-50 rounded-[32px] p-4 md:p-6 border-2 border-dashed border-yellow-300 relative overflow-hidden">
+                <div class="absolute -right-4 -bottom-4 opacity-10">
+                    <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10.394 2.827a1 1 0 00-.788 0l-7 3a1 1 0 000 1.848l7 3a1 1 0 00.788 0l7-3a1 1 0 000-1.848l-7-3zM14 9.581L14 9.581l4.606-1.974a1 1 0 011.394.91v4.5a1 1 0 01-.606.91l-7 3a1 1 0 01-.788 0l-7-3A1 1 0 011 13.017V8.517a1 1 0 011.394-.91L7 9.581v3.394l3.394 1.455a1 1 0 00.788 0L14 12.975V9.581zM11 11.27l3.106-1.332L11 8.606 7.894 9.938 11 11.27z" />
+                    </svg>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+                    <div class="max-w-xl text-center md:text-left">
+                        <span
+                            class="inline-block bg-yellow-400 text-blue-900 text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-2">Giai
+                            do?n quan tr?ng</span>
+                        <h2 class="text-xl font-bold text-blue-900 mb-2">Ôn t?p & Ðánh giá</h2>
+                        <p class="text-gray-700 text-sm">H? th?ng l?i toàn b? ki?n th?c qua các bài ki?m tra d?nh k?
+                            (Tu?n 27 & 35) d? chu?n b? t?t cho kì thi cu?i kì nhé!</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full md:w-auto">
+                        <a href="on-tap-hk1-giua.html"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded-2xl text-center transition-all shadow-md active:scale-95 text-xs">ÔN
+                            T?P GI?A K? 1</a>
+                        <a href="on-tap-hk1-cuoi.html"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded-2xl text-center transition-all shadow-md active:scale-95 text-xs">ÔN
+                            T?P CU?I K? 1</a>
+                        <a href="on-tap-hk2-giua.html"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded-2xl text-center transition-all shadow-md active:scale-95 text-xs">ÔN
+                            T?P GI?A K? 2</a>
+                        <a href="on-tap-hk2-cuoi.html"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded-2xl text-center transition-all shadow-md active:scale-95 text-xs">ÔN
+                            T?P CU?I NAM</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer (Chân trang) -->
+    <footer class="bg-zinc-900 text-zinc-400 py-2 px-4 mt-2">
+        <div class="container mx-auto text-center text-xs">
+            <p>@ 2026 EduRobot - Phát tri?n b?i Lê Thành Long</p>
+        </div>
+    </footer>
+
+    <!-- Simple JavaScript for Interactivity (Optional) -->
+    <script>
+        // Smooth scroll for anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle logic could be added here
+    </script>
+</body>
+
+</html>
