@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+Ôªø<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>292. C? –? Chi?u - EduRobot</title>
+    <title>C·ª• ƒê·ªì Chi·ªÉu - EduRobot</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -87,6 +87,7 @@
         /* Compact Quiz styles */
         #quiz-container {
             height: calc(100vh - 180px);
+            /* Adjust based on header/footer */
             max-height: 600px;
         }
 
@@ -107,6 +108,7 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
+        /* Accordion Custom */
         .accordion-content {
             max-height: 0;
             overflow: hidden;
@@ -137,6 +139,7 @@
             justify-content: center;
         }
 
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -160,6 +163,7 @@
             text-align: justify;
         }
 
+        /* Success Modal Styles */
         .success-modal {
             display: none;
             position: fixed;
@@ -214,41 +218,61 @@
                     <div class="flex items-center space-x-3">
                         <span class="text-2xl font-black text-blue-700">EduRobot</span>
                         <span
-                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TI?NG
-                            VI?T 5</span>
+                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TI·∫æNG
+                            VI·ªÜT 5</span>
                     </div>
 
                     <div class="flex items-center space-x-2 overflow-hidden">
                         <span
-                            class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CH?
-                            –I?M:</span>
+                            class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CH·ª¶
+                            ƒêI·ªÇM:</span>
                         <span
-                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">TI?P
-                            BU?C CHA ‘NG</span>
+                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">T√äN
+                            CH·ª¶ ƒêI·ªÇM</span>
                     </div>
                 </div>
             </div>
             <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
-                <li><a href="index.html"
-                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">Trang ch?</a>
+                <!-- Home -->
+                <li>
+                    <a href="index.html"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Trang ch·ªß
+                    </a>
                 </li>
+
+                <!-- Lessons Dropdown -->
                 <li class="relative group">
                     <button id="top-menu-lesson-btn"
-                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
-                        B‡i h?c
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
+                        B√†i h·ªçc
                         <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
                     </button>
+                    <!-- Dropdown Content (Hidden by default) -->
                     <div id="top-menu-lessons-dropdown"
                         class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
+                        <!-- Content rendered by floating-menu.js -->
                     </div>
                 </li>
-                <li><button onclick="openTeacherStats()"
-                        class="text-gray-500 hover:text-blue-600 transition-colors py-2">Gi·o viÍn</button></li>
-                <li><a href="#" class="text-gray-500 hover:text-blue-600 transition-colors py-2">LiÍn h?</a></li>
+
+                <!-- Teacher -->
+                <li>
+                    <button onclick="openTeacherStats()"
+                        class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Gi√°o vi√™n
+                    </button>
+                </li>
+
+                <!-- Contact -->
+                <li>
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Li√™n h·ªá
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -259,11 +283,13 @@
         <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
             <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
-                    class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">1.
-                    B‡i h?c</button>
+                    class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">
+                    1. B√†i h·ªçc
+                </button>
                 <button onclick="switchTab('quiz')" id="btn-quiz"
-                    class="tab-btn flex-1 py-4 text-center font-black text-base text-gray-400 transition-all uppercase tracking-wider">2.
-                    Luy?n t?p</button>
+                    class="tab-btn flex-1 py-4 text-center font-black text-base text-gray-400 transition-all uppercase tracking-wider">
+                    2. Luy·ªán t·∫≠p
+                </button>
             </div>
 
             <div id="audio-container"
@@ -281,72 +307,63 @@
                     </button>
                     <div class="flex flex-col">
                         <span
-                            class="text-[9px] font-black text-blue-600 uppercase tracking-widest leading-none mb-0.5 whitespace-nowrap">–?C
-                            M?U</span>
+                            class="text-[9px] font-black text-blue-600 uppercase tracking-widest leading-none mb-0.5 whitespace-nowrap">ƒê·ªåC
+                            M·∫™U</span>
                         <span id="audioStatus"
-                            class="text-[10px] text-gray-400 font-bold italic leading-none whitespace-nowrap">–ang
-                            d?ng...</span>
+                            class="text-[10px] text-gray-400 font-bold italic leading-none whitespace-nowrap">ƒêang
+                            d·ª´ng...</span>
                     </div>
                 </div>
                 <audio id="lessonAudio">
-                    <source src="am_thanh/dochieu.mp3" type="audio/mpeg">
+                    <source src="am_thanh/lesson.mp3" type="audio/mpeg">
                 </audio>
             </div>
         </div>
 
-        <!-- TAB 1: B¿I H?C -->
+        <!-- TAB 1: B√ÄI H·ªåC -->
         <div id="tab-lesson" class="tab-content active">
             <div class="flex flex-col lg:flex-row gap-6">
+                <!-- C·ªôt tr√°i (70%) - B√†i ƒë·ªçc -->
                 <section class="w-full lg:w-[70%]">
                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
                         <div
                             class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <!-- Trang tr√≠ g√≥c -->
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl">
+                            </div>
+
                             <h1
                                 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
                                 <span
                                     class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
-                                C? –? Chi?u
+                                C·ª• ƒê·ªì Chi·ªÉu
                             </h1>
 
                             <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
-                                <p>Nguy?n –Ïnh Chi?u (1822 ñ 1888) sinh ra trong m?t gia dÏnh nh‡ nho ? l‡ng T‚n Th?i,
-                                    huy?n BÏnh Duong, ph? T‚n BÏnh, t?nh Gia –?nh (nay l‡ Th‡nh ph? H? ChÌ Minh).</p>
-                                <p>Nam 1833, do cu?c binh bi?n trong tri?u dÏnh, cha b? m?t ch?c, gia dÏnh li t·n, c?u
-                                    bÈ Chi?u m?i mu?i hai tu?i d„ ph?i xa cha m?, ra Hu? ? nh? nh‡ m?t ngu?i b?n c?a cha
-                                    d? an h?c.</p>
-                                <p>Nam 1843, Nguy?n –Ïnh Chi?u tr? v? quÍ m?, d? t˙ t‡i t?i tru?ng thi Gia –?nh. Hai nam
-                                    sau, Ùng l?i tr? ra Hu? h?c t?p, ch? kÏ thi nam K? D?u, 1849. Nhung cu?i nam 1848,
-                                    m? m?t, Nguy?n –Ïnh Chi?u ph?i b? thi v? Nam ch?u tang m?. TrÍn du?ng v?, Ùng b? ?m
-                                    n?ng, m˘ c? hai m?t, ch?y ch?a m„i khÙng kh?i. Cu?i nam 1849, Nguy?n –Ïnh Chi?u m?i
-                                    v? d?n Gia –?nh ìl? b? b·o hi?u, l? du?ng l?p th‚nî.</p>
-                                <p>KhÙng g?c ng„ tru?c nh?ng th? th·ch n?ng n? liÍn ti?p c?a s? ph?n, sau th?i gian ch?u
-                                    tang m?, Ùng m? tru?ng d?y h?c v‡ l‡m thu?c ch?a b?nh cho d‚n. H?c trÚ g?n xa nghe
-                                    danh, m?n d?c xin h?c r?t dÙng. Ti?ng tho chan ch?a tinh th?n nghia hi?p c?a –?
-                                    Chi?u cung b?t d?u vang kh?p mi?n L?c t?nh.</p>
-                                <p>Nam 1858, gi?c Ph·p x‚m lu?c nu?c ta. Nguy?n –Ïnh Chi?u c˘ng c·c l„nh t? nghia qu‚n
-                                    b‡n muu tÌnh k? d·nh gi?c. ‘ng s·ng t·c tho van b‡y t? ni?m ti?c thuong, c?m ph?c
-                                    d?i v?i nh?ng ngu?i d„ hi sinh vÏ d?t nu?c; khÌch l? m?nh m? tinh th?n chi?n d?u c?a
-                                    nh‚n d‚n. Tr·i tim nh‚n h?u c?a Ùng luÙn g?n bÛ s?t son v?i v?n m?nh c?a d?t nu?c.
-                                    ‘ng du?c nh‚n d‚n L?c t?nh g?i b?ng c·i tÍn trÏu m?n ìc? –? Chi?uî nhu m?t c·ch tri
-                                    ‚n v?i ngu?i th?y d·ng kÌnh c?a ìlÚng d‚nî.</p>
+                                <p>
+                                    N·ªôi dung b√†i h·ªçc s·∫Ω ƒë∆∞·ª£c vi·∫øt ·ªü ƒë√¢y. S·ª≠ d·ª•ng ph√¥ng ch·ªØ c√≥ ch√¢n ƒë·ªÉ tƒÉng t√≠nh th·∫©m m·ªπ
+                                    v√† d·ªÖ ƒë·ªçc cho c√°c b√†i vƒÉn d√†i.
+                                </p>
                             </div>
                         </div>
 
+                        <!-- N·ªôi dung ch√≠nh -->
                         <div
-                            class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white shadow-xl">
+                            class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div
+                                class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl">
+                            </div>
                             <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
                                 <div
                                     class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
                                     <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">
-                                        ThÙng di?p</p>
-                                    <h3 class="text-2xl font-black uppercase tracking-tight">› NGHIA</h3>
+                                        Th√¥ng ƒëi·ªáp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">√ù NGHƒ®A</h3>
                                 </div>
                                 <div class="flex-grow">
                                     <p class="text-lg font-bold leading-relaxed text-blue-50">
-                                        B‡i d?c ca ng?i c? Nguy?n –Ïnh Chi?u ñ ngu?i d„ nÍu cao ngh? l?c phi thu?ng vu?t
-                                        lÍn s? ph?n. –?ng th?i b‡y t? ni?m kh‚m ph?c tru?c t?m lÚng nh‚n h?u, h?t lÚng
-                                        b?o v? chÌnh nghia, tinh th?n yÍu nu?c v‡ s? g?n bÛ s?t son v?i d‚n, v?i nu?c
-                                        c?a c? –? Chi?u.
+                                        T√≥m t·∫Øt n·ªôi dung ch√≠nh v√† √Ω nghƒ©a c·ªßa b√†i h·ªçc m·ªôt c√°ch s√∫c t√≠ch v√† d·ªÖ nh·ªõ.
                                     </p>
                                 </div>
                             </div>
@@ -354,11 +371,15 @@
                     </div>
                 </section>
 
+                <!-- C·ªôt ph·∫£i (30%) - T√¨m hi·ªÉu b√†i -->
                 <aside class="w-full lg:w-[30%]">
                     <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
-                        <div class="mb-6 -mt-2"><img src="hinh_anh/292-dochieu-digital.png" alt="Minh h?a"
+                        <!-- ·∫¢nh minh h·ªça -->
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/illustration.png" alt="Minh h·ªça"
                                 class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
                         </div>
+
                         <div class="flex items-center space-x-4 mb-8">
                             <div
                                 class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
@@ -368,145 +389,37 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">TÏm hi?u b‡i</h2>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">T√¨m hi·ªÉu b√†i</h2>
                         </div>
+
                         <div class="space-y-4">
-                            <!-- Questions and Answers -->
+                            <!-- C√¢u 1 -->
                             <div
                                 class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
                                 <button onclick="toggleAccordion(this)"
-                                    class="w-full p-5 text-left flex justify-between items-center group"><span
-                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1.
-                                        H„y gi?i thi?u dÙi nÈt v? ti?u s? Nguy?n –Ïnh Chi?u.</span>
+                                    class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">
+                                        1. C√¢u h·ªèi s·ªë 1?
+                                    </span>
                                     <div
                                         class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
                                         <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
                                                 d="M19 9l-7 7-7-7"></path>
-                                        </svg></div>
-                                </button>
-                                <div class="accordion-content">
-                                    <div
-                                        class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                        <div class="flex items-center space-x-2 mb-2"><span
-                                                class="w-1.5 h-1.5 rounded-full bg-green-500"></span><span
-                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">G?i
-                                                ˝ tr? l?i</span></div>
-                                        <p class="font-medium">Nguy?n –Ïnh Chi?u (1822 ñ 1888) sinh ra trong m?t gia
-                                            dÏnh nh‡ nho ? l‡ng T‚n Th?i, t?nh Gia –?nh. ‘ng cÛ ch?ng du?ng h?c h‡nh
-                                            gian nan: nam 12 tu?i ph?i xa cha m? ra Hu? an h?c; nam 1843 d? T˙ t‡i; nam
-                                            1849 chu?n b? thi ti?p thÏ ph?i b? d? v? ch?u tang m?.</p>
+                                        </svg>
                                     </div>
-                                </div>
-                            </div>
-                            <div
-                                class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-                                <button onclick="toggleAccordion(this)"
-                                    class="w-full p-5 text-left flex justify-between items-center group"><span
-                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2.
-                                        Nguy?n –Ïnh Chi?u d„ g?p nh?ng bi?n c? dau thuong n‡o trong cu?c d?i?</span>
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
-                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
-                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M19 9l-7 7-7-7"></path>
-                                        </svg></div>
                                 </button>
                                 <div class="accordion-content">
                                     <div
                                         class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                        <div class="flex items-center space-x-2 mb-2"><span
-                                                class="w-1.5 h-1.5 rounded-full bg-green-500"></span><span
-                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">G?i
-                                                ˝ tr? l?i</span></div>
-                                        <p class="font-medium">Bi?n c? l?n nh?t l‡ khi dang ch? thi thÏ m? m?t. TrÍn
-                                            du?ng v? ch?u tang, Ùng b? ?m n?ng d?n d?n m˘ c? hai m?t, cÙng danh d? dang
-                                            ("l? b? b·o hi?u, l? du?ng l?p th‚n").</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-                                <button onclick="toggleAccordion(this)"
-                                    class="w-full p-5 text-left flex justify-between items-center group"><span
-                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3.
-                                        Nguy?n –Ïnh Chi?u d„ l‡m gÏ d? s?ng cÛ Ìch cho d?i sau khi g?p ho?n n?n?</span>
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
-                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
-                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M19 9l-7 7-7-7"></path>
-                                        </svg></div>
-                                </button>
-                                <div class="accordion-content">
-                                    <div
-                                        class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                        <div class="flex items-center space-x-2 mb-2"><span
-                                                class="w-1.5 h-1.5 rounded-full bg-green-500"></span><span
-                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">G?i
-                                                ˝ tr? l?i</span></div>
-                                        <p class="font-medium">KhÙng g?c ng„ tru?c s? ph?n, Ùng d„ m? tru?ng d?y h?c,
-                                            l‡m thu?c ch?a b?nh cho d‚n v‡ s·ng t·c tho van khÌch l? tinh th?n nghia
-                                            hi?p.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-                                <button onclick="toggleAccordion(this)"
-                                    class="w-full p-5 text-left flex justify-between items-center group"><span
-                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4.
-                                        Cu?c chi?n d?u ch?ng gi?c Ph·p c?a c? –? Chi?u di?n ra nhu th? n‡o?</span>
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
-                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
-                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M19 9l-7 7-7-7"></path>
-                                        </svg></div>
-                                </button>
-                                <div class="accordion-content">
-                                    <div
-                                        class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                        <div class="flex items-center space-x-2 mb-2"><span
-                                                class="w-1.5 h-1.5 rounded-full bg-green-500"></span><span
-                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">G?i
-                                                ˝ tr? l?i</span></div>
-                                        <p class="font-medium">Khi gi?c Ph·p x‚m lu?c (1858), Ùng c˘ng c·c l„nh t? nghia
-                                            qu‚n b‡n muu tÌnh k? d·nh gi?c. ‘ng d˘ng tho van l‡m vu khÌ d? ca ng?i ngu?i
-                                            hi sinh vÏ nu?c v‡ khÌch l? tinh th?n chi?n d?u c?a nh‚n d‚n.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-                                <button onclick="toggleAccordion(this)"
-                                    class="w-full p-5 text-left flex justify-between items-center group"><span
-                                        class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5.
-                                        VÏ sao Nguy?n –Ïnh Chi?u du?c nh‚n d‚n L?c t?nh g?i b?ng c·i tÍn th‚n m?t ìc? –?
-                                        Chi?uî?</span>
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
-                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform"
-                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M19 9l-7 7-7-7"></path>
-                                        </svg></div>
-                                </button>
-                                <div class="accordion-content">
-                                    <div
-                                        class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                        <div class="flex items-center space-x-2 mb-2"><span
-                                                class="w-1.5 h-1.5 rounded-full bg-green-500"></span><span
-                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">G?i
-                                                ˝ tr? l?i</span></div>
-                                        <p class="font-medium">VÏ Ùng cÛ nh?ng ph?m ch?t cao qu˝: ngh? l?c phi thu?ng
-                                            vu?t lÍn s? ph?n b?t h?nh, t?m lÚng nh‚n h?u, yÍu nu?c thuong d‚n, h?t lÚng
-                                            b?o v? chÌnh nghia. ‘ng l‡ ngu?i th?y gi·o, th?y thu?c d·ng kÌnh c?a "lÚng
-                                            d‚n".</p>
+                                        <div class="flex items-center space-x-2 mb-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                            <span
+                                                class="text-[11px] font-black uppercase tracking-widest text-green-600">G·ª£i
+                                                √Ω tr·∫£ l·ªùi</span>
+                                        </div>
+                                        <p class="font-medium">N·ªôi dung c√¢u tr·∫£ l·ªùi g·ª£i √Ω chi ti·∫øt cho h·ªçc sinh...</p>
                                     </div>
                                 </div>
                             </div>
@@ -516,69 +429,92 @@
             </div>
         </div>
 
-        <!-- TAB 2: LUY?N T?P -->
+        <!-- TAB 2: LUY·ªÜN T·∫¨P -->
         <div id="tab-quiz" class="tab-content">
-            <div class="max-w-4xl mx-auto glass-card rounded-[40px] shadow-2xl flex flex-col min-h-[500px]">
-                <div id="quiz-registration" class="p-8 flex-grow flex flex-col justify-center">
+            <div
+                class="max-w-4xl mx-auto glass-card rounded-[40px] shadow-2xl overflow-hidden flex flex-col min-h-[500px]">
+                <!-- Registration -->
+                <div id="quiz-registration" class="p-4 md:p-8 flex-grow flex flex-col justify-center overflow-auto">
                     <div class="text-center mb-6">
                         <div
-                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white mb-4 shadow-xl mx-auto transform -rotate-3">
+                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white mb-4 shadow-xl shadow-blue-200 mx-auto transform -rotate-3">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
                                 </path>
-                            </svg></div>
-                        <h2 class="text-2xl font-black text-gray-800 mb-1">–ang k˝ luy?n t?p</h2>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">C? –? Chi?u</p>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-black text-gray-800 mb-1 tracking-tight">ƒêƒÉng k√Ω luy·ªán t·∫≠p</h2>
+                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">C·ª• ƒê·ªì Chi·ªÉu</p>
                     </div>
+
                     <form onsubmit="startQuiz(event)" class="w-full max-w-sm mx-auto space-y-4">
-                        <input type="text" id="studentName" required placeholder="H? v‡ tÍn"
-                            class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:outline-none font-bold">
+                        <div class="relative group">
+                            <input type="text" id="studentName" required placeholder="H·ªç v√† t√™n c·ªßa em"
+                                class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold placeholder:text-gray-300 shadow-sm">
+                        </div>
+
                         <div class="grid grid-cols-2 gap-4">
                             <select id="studentClass" required
-                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:outline-none font-bold">
-                                <option value="">Ch?n L?p</option>
+                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none cursor-pointer">
+                                <option value="">Ch·ªçn L·ªõp</option>
                                 <option value="5/1">5/1</option>
                                 <option value="5/2">5/2</option>
                                 <option value="5/3">5/3</option>
                                 <option value="5/4">5/4</option>
                                 <option value="5/5">5/5</option>
                             </select>
+
                             <select id="schoolSelect" required onchange="checkSchool()"
-                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:outline-none font-bold">
-                                <option value="Ti?u h?c –? Van N?i">TH –? Van N?i</option>
-                                <option value="Kh·c">Tru?ng kh·c...</option>
+                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none cursor-pointer">
+                                <option value="Ti·ªÉu h·ªçc ƒê·ªó VƒÉn N·∫°i">TH ƒê·ªó VƒÉn N·∫°i</option>
+                                <option value="Kh√°c">Tr∆∞·ªùng kh√°c...</option>
                             </select>
                         </div>
-                        <input type="text" id="otherSchool" placeholder="TÍn tru?ng"
-                            class="hidden w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white font-bold">
+
+                        <input type="text" id="otherSchool" placeholder="T√™n tr∆∞·ªùng c·ªßa em"
+                            class="hidden w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white transition-all font-bold shadow-sm">
+
                         <button type="submit"
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl shadow-xl transition-all uppercase tracking-wider">B?t
-                            d?u</button>
+                            class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-base uppercase tracking-wider">
+                            B·∫Øt ƒë·∫ßu luy·ªán t·∫≠p
+                        </button>
                     </form>
                 </div>
+
+                <!-- Quiz Engine - COMPACT VERSION -->
                 <div id="quiz-container" class="hidden flex-grow flex flex-col">
-                    <div class="bg-blue-600/5 px-6 py-4 flex justify-between items-center border-b">
+                    <div class="bg-blue-600/5 px-6 py-4 flex justify-between items-center border-b border-blue-100">
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center font-black mr-4 shadow-lg"
+                            <div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center font-black mr-4 shadow-lg shadow-blue-200"
                                 id="questionNum">1</div>
-                            <div class="flex flex-col"><span
-                                    class="text-[10px] font-black text-blue-600 uppercase tracking-widest"
-                                    id="progressText">C¬U TR?C NGHI?M: 1/5</span><span
-                                    class="text-xs text-gray-400 font-bold">C? –? Chi?u</span></div>
+                            <div class="flex flex-col">
+                                <span
+                                    class="text-[10px] font-black text-blue-600 uppercase tracking-widest leading-none mb-1"
+                                    id="progressText">C√ÇU TR·∫ÆC NGHI·ªÜM: 1/5</span>
+                                <span class="text-xs text-gray-400 font-bold leading-none">C·ª• ƒê·ªì Chi·ªÉu</span>
+                            </div>
                         </div>
                     </div>
+
                     <div class="p-6 flex-grow flex flex-col justify-center overflow-auto">
-                        <h3 class="text-xl md:text-2xl font-black text-gray-800 mb-6" id="questionText">N?i dung c‚u
-                            h?i?</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="optionsArea"></div>
+                        <h3 class="text-xl md:text-2xl font-black text-gray-800 mb-6 leading-tight transition-all"
+                            id="questionText">N·ªôi dung c√¢u h·ªèi?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="optionsArea">
+                            <!-- Options rendered by JS -->
+                        </div>
                     </div>
-                    <div class="px-6 py-4 border-t flex justify-between items-center bg-gray-50/50"><span
-                            class="text-xs font-bold text-gray-400 italic">* Ch?n d·p ·n d˙ng nh?t</span><button
-                            id="nextBtn" disabled
-                            class="bg-blue-600 disabled:opacity-30 hover:bg-blue-700 text-white font-black py-3 px-10 rounded-2xl shadow-lg uppercase text-sm tracking-widest">Ti?p
-                            theo</button></div>
+
+                    <div class="px-6 py-4 border-t border-gray-50 flex justify-between items-center bg-gray-50/50">
+                        <span class="text-xs font-bold text-gray-400 italic">* Ch·ªçn ƒë√°p √°n ƒë√∫ng nh·∫•t</span>
+                        <button id="nextBtn" disabled
+                            class="bg-blue-600 disabled:opacity-30 hover:bg-blue-700 text-white font-black py-3 px-10 rounded-2xl shadow-lg shadow-blue-100 transition-all active:scale-95 uppercase text-sm tracking-widest">
+                            C√¢u ti·∫øp theo
+                        </button>
+                    </div>
                 </div>
+
+                <!-- Results -->
                 <div id="quiz-results"
                     class="hidden p-8 flex-grow flex flex-col items-center justify-center text-center">
                     <div class="relative w-40 h-40 mb-8">
@@ -586,8 +522,8 @@
                             <circle cx="80" cy="80" r="74" stroke="currentColor" stroke-width="12" fill="transparent"
                                 class="text-gray-100" />
                             <circle id="scoreCircle" cx="80" cy="80" r="74" stroke="url(#scoreGrad)" stroke-width="12"
-                                fill="transparent" class="transition-all duration-1000" stroke-dasharray="0, 465"
-                                stroke-linecap="round" />
+                                fill="transparent" class="transition-all duration-1000 ease-out"
+                                stroke-dasharray="0, 465" stroke-linecap="round" />
                             <defs>
                                 <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" stop-color="#3b82f6" />
@@ -595,50 +531,67 @@
                                 </linearGradient>
                             </defs>
                         </svg>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center"><span
-                                class="text-5xl font-black text-gray-800" id="scoreText">0</span><span
-                                class="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mt-1">–i?m
-                                s?</span></div>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-5xl font-black text-gray-800" id="scoreText">0</span>
+                            <span class="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mt-1">ƒêi·ªÉm
+                                s·ªë</span>
+                        </div>
                     </div>
-                    <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Ho‡n th‡nh!</h2>
-                    <p class="text-gray-500 mb-10 max-w-sm font-bold" id="resultMsg">Em d„ n? l?c h?t mÏnh!</p>
+
+                    <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Ho√†n th√†nh b√†i t·∫≠p!</h2>
+                    <p class="text-gray-500 mb-10 max-w-sm font-bold" id="resultMsg">Em ƒë√£ n·ªó l·ª±c h·∫øt m√¨nh r·ªìi ƒë·∫•y!</p>
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
                         <button onclick="restartQuiz()"
-                            class="bg-white hover:bg-gray-50 text-gray-700 font-black py-4 rounded-2xl border-2 border-gray-100">L¿M
-                            L?I</button>
+                            class="bg-white hover:bg-gray-50 text-gray-700 font-black py-4 rounded-2xl border-2 border-gray-100 transition-all shadow-sm">L√ÄM
+                            L·∫†I</button>
                         <button onclick="submitResults(event)"
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl shadow-xl">N?P
-                            K?T QU?</button>
+                            class="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-100 transition-all">N·ªòP
+                            K·∫æT QU·∫¢</button>
                     </div>
                 </div>
             </div>
         </div>
+
+
     </main>
 
     <!-- Modal Teacher Stats -->
     <div id="statsModal" class="modal">
-        <div class="bg-white rounded-[40px] w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl m-4">
-            <div class="p-8 border-b flex justify-between items-center bg-gray-50/50">
+        <div
+            class="bg-white rounded-[40px] w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl m-4 transform transition-all">
+            <div class="p-8 border-b flex justify-between items-center bg-gray-50/50 backdrop-blur-xl">
                 <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white"><svg
-                            class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div
+                        class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
                             </path>
-                        </svg></div>
+                        </svg>
+                    </div>
                     <div>
-                        <h2 class="text-2xl font-black text-gray-800 tracking-tight">B?ng k?t qu?</h2>
-                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Gi·o viÍn</p>
+                        <h2 class="text-2xl font-black text-gray-800 tracking-tight">B·∫£ng k·∫øt qu·∫£ h·ªçc t·∫≠p</h2>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">D√†nh ri√™ng cho gi√°o
+                            vi√™n</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3"><button onclick="exportToExcel()"
-                        class="bg-green-600 hover:bg-green-700 text-white font-black py-3 px-6 rounded-2xl text-sm flex items-center">XU?T
-                        EXCEL</button><button onclick="closeModal()"
-                        class="w-12 h-12 flex items-center justify-center text-gray-400 hover:bg-gray-100 rounded-2xl"><svg
-                            class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-center space-x-3">
+                    <button onclick="exportToExcel()"
+                        class="bg-green-600 hover:bg-green-700 text-white font-black py-3 px-6 rounded-2xl text-sm flex items-center shadow-lg shadow-green-100 transition-all active:scale-95">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg> XU·∫§T EXCEL
+                    </button>
+                    <button onclick="closeModal()"
+                        class="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-2xl transition-all">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                 d="M6 18L18 6M6 6l12 12"></path>
-                        </svg></button></div>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <div class="flex-grow overflow-auto p-8 bg-gray-50/30">
                 <table class="w-full">
@@ -646,14 +599,18 @@
                         <tr
                             class="text-left text-gray-400 uppercase text-[10px] font-black tracking-[0.2em] border-b-2 border-gray-100 pb-4">
                             <th class="px-6 py-4">STT</th>
-                            <th class="px-6 py-4">H? v‡ TÍn</th>
-                            <th class="px-6 py-4">L?p</th>
-                            <th class="px-6 py-4 text-center">–i?m</th>
-                            <th class="px-6 py-4 text-center">Th?i gian</th>
-                            <th class="px-6 py-4 text-right">Ho‡n th‡nh</th>
+                            <th class="px-6 py-4">H·ªç v√† T√™n</th>
+                            <th class="px-6 py-4">L·ªõp</th>
+                            <th class="px-6 py-4">Tr∆∞·ªùng</th>
+                            <th class="px-6 py-4 text-center">ƒêi·ªÉm</th>
+                            <th class="px-6 py-4 text-center">L·∫ßn</th>
+                            <th class="px-6 py-4 text-center">Th·ªùi gian</th>
+                            <th class="px-6 py-4 text-right">Ho√†n th√†nh</th>
                         </tr>
                     </thead>
-                    <tbody id="statsTableBody" class="divide-y divide-gray-100"></tbody>
+                    <tbody id="statsTableBody" class="divide-y divide-gray-100">
+                        <!-- Data rows -->
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -661,31 +618,32 @@
 
     <!-- Success Modal -->
     <div id="successModal" class="success-modal">
-        <div class="glass-card success-card rounded-[40px] p-10 max-w-sm w-full text-center shadow-3xl">
+        <div class="glass-card success-card rounded-[40px] p-10 max-w-sm w-full text-center shadow-3xl border-white/50">
             <div
-                class="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 rounded-3xl flex items-center justify-center text-white mx-auto mb-8 transform rotate-6 scale-110">
+                class="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 rounded-3xl flex items-center justify-center text-white mx-auto mb-8 shadow-xl shadow-green-100 transform rotate-6 scale-110">
                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
-                </svg></div>
-            <h2 class="text-3xl font-black text-gray-800 mb-2">Th‡nh cÙng!</h2>
-            <p class="text-gray-500 mb-10 font-bold">Ch˙c m?ng em d„ ho‡n th‡nh b‡i t?p!</p>
+                </svg>
+            </div>
+            <h2 class="text-3xl font-black text-gray-800 mb-2 tracking-tight">N·ªôp b√†i th√†nh c√¥ng!</h2>
+            <p class="text-gray-500 mb-10 font-bold leading-relaxed">Ch√∫c m·ª´ng em ƒë√£ ho√†n th√†nh th·ª≠ th√°ch ki·∫øn th·ª©c!</p>
             <button onclick="closeSuccessModal()"
-                class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-xl uppercase tracking-widest text-sm">Tr?
-                v?</button>
+                class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 uppercase tracking-widest text-sm">
+                Tr·ªü v·ªÅ b√†i h·ªçc
+            </button>
         </div>
     </div>
 
-        <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
+    <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
         <div class="container mx-auto text-center">
-            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">@ 2026 EduRobot - H? th?ng h?c
-                t?p thÙng minh</p>
-            <p class="text-xs font-bold text-blue-600 mt-2">Ph·t tri?n b?i LÍ Th‡nh Long</p>
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">@ 2026 EduRobot - H·ªá th·ªëng h·ªçc
+                t·∫≠p th√¥ng minh</p>
+            <p class="text-xs font-bold text-blue-600 mt-2">Ph√°t tri·ªÉn b·ªüi L√™ Th√†nh Long</p>
         </div>
     </footer>
 
-    <script src="js/floating-menu.js"></script>
     <script>
-        const lessonTitle = "C? –? Chi?u";
+        /* UI LOGIC */
         function toggleAccordion(button) {
             const item = button.parentElement;
             const isOpen = item.classList.contains('accordion-open');
@@ -699,9 +657,27 @@
         const audioStatus = document.getElementById('audioStatus');
 
         function toggleAudio() {
-            if (audio.paused) { audio.play(); playIcon.classList.add('hidden'); pauseIcon.classList.remove('hidden'); audioStatus.innerText = "–ang ph·t..."; }
-            else { audio.pause(); playIcon.classList.remove('hidden'); pauseIcon.classList.add('hidden'); audioStatus.innerText = "–ang d?ng..."; }
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                audioStatus.innerText = "ƒêang ph√°t...";
+                audioStatus.classList.replace('text-gray-400', 'text-green-500');
+            } else {
+                audio.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                audioStatus.innerText = "ƒêang d·ª´ng...";
+                audioStatus.classList.replace('text-green-500', 'text-gray-400');
+            }
         }
+
+        audio.onended = () => {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            audioStatus.innerText = "ƒêang d·ª´ng...";
+            audioStatus.classList.replace('text-green-500', 'text-gray-400');
+        };
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -710,35 +686,57 @@
             document.getElementById('tab-' + tabId).classList.add('active');
         }
 
+        /* QUIZ ENGINE */
         const allQuestions = [
-            { q: "Nguy?n –Ïnh Chi?u sinh ra ? d‚u?", a: ["H‡ N?i", "Gia –?nh (TP. H? ChÌ Minh)", "Hu?", "C?n Tho"], c: 1 },
-            { q: "Bi?n c? n‡o khi?n Nguy?n –Ïnh Chi?u ph?i b? thi v? Nam v‡o nam 1848?", a: ["‘ng b? ?m n?ng", "‘ng h?t ti?n", "M? Ùng m?t", "Chi?n tranh n? ra"], c: 2 },
-            { q: "–i?u b?t h?nh x?y ra v?i Ùng trÍn du?ng v? ch?u tang m? l‡ gÏ?", a: ["B? m?t h‡nh l˝", "B? m˘ c? hai m?t", "B? l?c du?ng", "B? gi?c b?t"], c: 1 },
-            { q: "C‚u 'L? b? b·o hi?u, l? du?ng l?p th‚n' nÛi v??", a: ["Khi Ùng d? T˙ t‡i", "Khi b? m˘ v‡ m? m?t, chua k?p d?n d·p v‡ chua th‡nh danh", "Khi d·nh gi?c", "Khi v? gi‡"], c: 1 },
-            { q: "Th·i d? c?a Ùng tru?c th? th·ch s? ph?n?", a: ["BuÙng xuÙi", "S?ng ?n d?t", "KhÙng g?c ng„, kiÍn cu?ng vuon lÍn gi˙p d?i", "Than khÛc"], c: 2 },
-            { q: "Sau khi b? m˘, Ùng d„ l‡m gÏ?", a: ["L‡m ru?ng", "M? tru?ng d?y h?c v‡ l‡m thu?c", "–i tu", "L‡m quan"], c: 1 },
-            { q: "S? ki?n l?ch s? nam 1858 nh?c d?n trong b‡i?", a: ["Gi?c Ph·p x‚m lu?c", "Nguy?n –Ïnh Chi?u qua d?i", "Kh?i nghia T‚y Son", "Nguy?n –Ïnh Chi?u d? d?t"], c: 0 },
-            { q: "‘ng tham gia d·nh gi?c b?ng c·ch n‡o?", a: ["C?m s˙ng", "B‡n muu c˘ng nghia qu‚n v‡ d˘ng tho van c? vu", "QuyÍn gÛp", "L‡m gi·n di?p"], c: 1 },
-            { q: "N?i dung tho van Ùng th?i k? n‡y l‡ gÏ?", a: ["K? d?p thiÍn nhiÍn", "Ti?c thuong ngu?i hi sinh v‡ khÌch l? chi?n d?u", "Than th‚n tr·ch ph?n", "Vi?t chuy?n vui"], c: 1 },
-            { q: "TÏnh c?m h?c trÚ d?i v?i th?y Chi?u?", a: ["S? h„i", "Nghe danh, m?n d?c xin h?c r?t dÙng", "Õt ngu?i theo", "Coi thu?ng"], c: 1 },
-            { q: "Nh‚n d‚n L?c t?nh g?i Ùng l‡?", a: ["Th?y Chi?u", "‘ng lang Nguy?n", "C? –? Chi?u", "Nh‡ tho m˘"], c: 2 },
-            { q: "Tr·i tim Ùng du?c miÍu t? g?n bÛ v?i?", a: ["Danh v?ng", "ThiÍn nhiÍn", "V?n m?nh d?t nu?c", "DÚng h?"], c: 2 },
-            { q: "VÏ sao nÛi Ùng l‡ ngu?i th?y c?a 'lÚng d‚n'?", a: ["VÏ gi‡u cÛ", "VÏ s?ng tr?n tÏnh nghia, yÍu nu?c v‡ du?c tin yÍu", "VÏ phÈp thu?t", "VÏ l‡m quan to"], c: 1 },
-            { q: "Ngh? l?c c?a Ùng th? hi?n rı nh?t qua?", a: ["M˘ m?t v?n d?y h?c, b?c thu?c v‡ l‡m tho d·nh gi?c", "–? T˙ t‡i", "Ch?u tang m?", "–i h?c xa nh‡"], c: 0 },
-            { q: "Ch? d? chÌnh b‡i d?c l‡ gÏ?", a: ["L?ch s? y h?c", "Cu?c kh·ng chi?n Ph·p", "Ca ng?i ngh? l?c, lÚng yÍu nu?c v‡ nh‚n c·ch c?a Ùng", "C·c t·c ph?m van h?c"], c: 2 }
+            { q: "Nguy·ªÖn ƒê√¨nh Chi·ªÉu sinh ra ·ªü ƒë√¢u?", a: ["H√† N·ªôi", "Gia ƒê·ªãnh (TP. H·ªì Ch√≠ Minh)", "Hu·∫ø", "C·∫ßn Th∆°"], c: 1 },
+            { q: "Bi·∫øn c·ªë n√†o khi·∫øn Nguy·ªÖn ƒê√¨nh Chi·ªÉu ph·∫£i b·ªè thi v·ªÅ Nam v√†o nƒÉm 1848?", a: ["√îng b·ªã ·ªëm n·∫∑ng", "√îng h·∫øt ti·ªÅn", "M·∫π √¥ng m·∫•t", "Chi·∫øn tranh n·ªï ra"], c: 2 },
+            { q: "ƒêi·ªÅu b·∫•t h·∫°nh x·∫£y ra v·ªõi √¥ng tr√™n ƒë∆∞·ªùng v·ªÅ ch·ªãu tang m·∫π l√† g√¨?", a: ["B·ªã m·∫•t h√†nh l√Ω", "B·ªã m√π c·∫£ hai m·∫Øt", "B·ªã l·∫°c ƒë∆∞·ªùng", "B·ªã gi·∫∑c b·∫Øt"], c: 1 },
+            { q: "Th√°i ƒë·ªô c·ªßa √¥ng tr∆∞·ªõc th·ª≠ th√°ch s·ªë ph·∫≠n?", a: ["Bu√¥ng xu√¥i", "S·ªëng ·∫©n d·∫≠t", "Kh√¥ng g·ª•c ng√£, ki√™n c∆∞·ªùng v∆∞∆°n l√™n gi√∫p ƒë·ªùi", "Than kh√≥c"], c: 2 },
+            { q: "Sau khi b·ªã m√π, √¥ng ƒë√£ l√†m g√¨?", a: ["L√†m ru·ªông", "M·ªü tr∆∞·ªùng d·∫°y h·ªçc v√† l√†m thu·ªëc", "ƒêi tu", "L√†m quan"], c: 1 }
         ];
 
-        let selectedQuestions = [], currentIdx = 0, score = 0, studentData = {}, startTime = null;
+        let selectedQuestions = [];
+        let currentIdx = 0;
+        let score = 0;
+        let studentData = {};
+        let startTime = null;
 
-        function checkSchool() { const select = document.getElementById('schoolSelect'); const other = document.getElementById('otherSchool'); if (select.value === 'Kh·c') { other.classList.remove('hidden'); other.required = true; } else { other.classList.add('hidden'); other.required = false; } }
-        function shuffle(array) { let currentIndex = array.length, randomIndex; while (currentIndex != 0) { randomIndex = Math.floor(Math.random() * currentIndex); currentIndex--;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]; } return array; }
+        function checkSchool() {
+            const select = document.getElementById('schoolSelect');
+            const other = document.getElementById('otherSchool');
+            if (select.value === 'Kh√°c') {
+                other.classList.remove('hidden');
+                other.required = true;
+            } else {
+                other.classList.add('hidden');
+                other.required = false;
+            }
+        }
+
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
 
         function startQuiz(e) {
             e.preventDefault();
             const schoolVal = document.getElementById('schoolSelect').value;
-            studentData = { studentName: document.getElementById('studentName').value, studentClass: document.getElementById('studentClass').value, school: schoolVal === 'Kh·c' ? document.getElementById('otherSchool').value : schoolVal };
-            selectedQuestions = shuffle([...allQuestions]).slice(0, 5);
-            currentIdx = 0; score = 0; startTime = new Date();
+            studentData = {
+                studentName: document.getElementById('studentName').value,
+                studentClass: document.getElementById('studentClass').value,
+                school: schoolVal === 'Kh√°c' ? document.getElementById('otherSchool').value : schoolVal
+            };
+            // Ch·ªçn ng·∫´u nhi√™n 5 c√¢u t·ª´ 15 c√¢u b·∫±ng thu·∫≠t to√°n Fisher-Yates ƒë·ªÉ ƒë·∫£m b·∫£o t√≠nh ng·∫´u nhi√™n cao
+            const shuffled = shuffle([...allQuestions]);
+            selectedQuestions = shuffled.slice(0, 5);
+            currentIdx = 0;
+            score = 0;
+            startTime = new Date();
             document.getElementById('quiz-registration').classList.add('hidden');
             document.getElementById('quiz-container').classList.remove('hidden');
             showQuestion();
@@ -747,36 +745,240 @@
         function showQuestion() {
             const q = selectedQuestions[currentIdx];
             document.getElementById('questionNum').innerText = currentIdx + 1;
-            document.getElementById('progressText').innerText = `C¬U TR?C NGHI?M: ${currentIdx + 1}/5`;
+            document.getElementById('progressText').innerText = `C√ÇU TR·∫ÆC NGHI·ªÜM: ${currentIdx + 1}/5`;
             document.getElementById('questionText').innerText = q.q;
-            const area = document.getElementById('optionsArea'); area.innerHTML = '';
+
+            const area = document.getElementById('optionsArea');
+            area.innerHTML = '';
             q.a.forEach((opt, i) => {
-                const btn = document.createElement('button'); btn.className = "option-btn w-full p-4 text-left bg-white rounded-2xl font-bold flex items-center group shadow-sm";
-                btn.innerHTML = `<div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-600 group-hover:text-white transition-all text-xs font-black shadow-inner">${String.fromCharCode(65 + i)}</div><span class="flex-1 text-sm md:text-base text-gray-700">${opt}</span>`;
-                btn.onclick = () => selectOption(i, btn); area.appendChild(btn);
+                const btn = document.createElement('button');
+                btn.className = "option-btn w-full p-4 text-left bg-white rounded-2xl font-bold flex items-center group shadow-sm";
+                btn.innerHTML = `
+                    <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-600 group-hover:text-white transition-all text-xs font-black shadow-inner">${String.fromCharCode(65 + i)}</div>
+                    <span class="flex-1 text-sm md:text-base text-gray-700">${opt}</span>
+                `;
+                btn.onclick = () => selectOption(i, btn);
+                area.appendChild(btn);
             });
             document.getElementById('nextBtn').disabled = true;
+            document.getElementById('nextBtn').onclick = nextQuestion;
         }
 
         function selectOption(idx, btn) {
-            document.querySelectorAll('#optionsArea button').forEach(b => { b.classList.remove('selected'); b.querySelector('div').classList.remove('bg-blue-600', 'text-white'); });
-            btn.classList.add('selected'); btn.querySelector('div').classList.add('bg-blue-600', 'text-white');
-            document.getElementById('nextBtn').disabled = false; document.getElementById('nextBtn').dataset.selected = idx;
+            document.querySelectorAll('#optionsArea button').forEach(b => {
+                b.classList.remove('selected', 'border-blue-600', 'bg-blue-50/50');
+                b.querySelector('div').classList.remove('bg-blue-600', 'text-white');
+            });
+            btn.classList.add('selected');
+            btn.querySelector('div').classList.add('bg-blue-600', 'text-white');
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('nextBtn').dataset.selected = idx;
         }
 
-        document.getElementById('nextBtn').onclick = () => {
-            if (parseInt(document.getElementById('nextBtn').dataset.selected) === selectedQuestions[currentIdx].c) score += 20;
+        function nextQuestion() {
+            const selected = parseInt(document.getElementById('nextBtn').dataset.selected);
+            if (selected === selectedQuestions[currentIdx].c) score += 20;
+
             currentIdx++;
-            if (currentIdx < 5) showQuestion(); else showResults();
-        };
+            if (currentIdx < 5) showQuestion();
+            else showResults();
+        }
 
         function showResults() {
             document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('quiz-results').classList.remove('hidden');
             document.getElementById('scoreText').innerText = score;
-            const circle = document.getElementById('scoreCircle'); circle.style.strokeDasharray = `${(score / 100) * 465}, 465`;
+            const dash = (score / 100) * 364.4; // 2 * PI * 58
+            document.getElementById('scoreCircle').style.strokeDasharray = `${dash}, 364.4`;
+
+            if (score >= 80) {
+                document.getElementById('resultTitle').innerText = "R·∫•t tuy·ªát v·ªùi!";
+                document.getElementById('resultMsg').innerText = "Em ƒë√£ ho√†n th√†nh b√†i t·∫≠p xu·∫•t s·∫Øc. Ti·∫øp t·ª•c ph√°t huy nh√©!";
+            } else if (score >= 60) {
+                document.getElementById('resultTitle').innerText = "L√†m t·ªët l·∫Øm!";
+                document.getElementById('resultMsg').innerText = "Em ƒë√£ hi·ªÉu b√†i kh√° t·ªët r·ªìi ƒë·∫•y!";
+            } else {
+                document.getElementById('resultTitle').innerText = "C·ªë g·∫Øng l√™n nh√©!";
+                document.getElementById('resultMsg').innerText = "H√£y xem l·∫°i b√†i ƒë·ªçc v√† l√†m l·∫°i b√†i t·∫≠p ƒë·ªÉ ƒë·∫°t ƒëi·ªÉm cao h∆°n.";
+            }
+        }
+
+        function restartQuiz() {
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-registration').classList.remove('hidden');
+        }
+
+        /* FIREBASE CONFIG */
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
+            authDomain: "gamhoctap.firebaseapp.com",
+            databaseURL: "https://gamhoctap-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "gamhoctap",
+            storageBucket: "gamhoctap.firebasestorage.app",
+            messagingSenderId: "833329613932",
+            appId: "1:833329613932:web:0d8574827bcfe50b535c49",
+            measurementId: "G-YT1PKCYS67"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+            restartQuiz();
+            switchTab('lesson');
+        }
+
+        async function submitResults(e) {
+            const btn = e.target;
+            btn.disabled = true;
+            btn.innerText = "ƒêang g·ª≠i...";
+            const duration = Math.floor((new Date() - startTime) / 1000);
+            const minutes = Math.floor(duration / 60);
+            const seconds = duration % 60;
+            const timeStr = `${minutes}p ${seconds}s`;
+
+            try {
+                await db.collection("diem_tieng_viet_lop5").add({
+                    ...studentData,
+                    lessonTitle: "C·ª• ƒê·ªì Chi·ªÉu", // Thay b·∫±ng C·ª• ƒê·ªì Chi·ªÉu c·ª• th·ªÉ
+                    score: score,
+                    duration: duration,
+                    timeDisplay: timeStr,
+                    endTime: new Date().toISOString(),
+                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                document.getElementById('successModal').classList.add('active');
+            } catch (err) {
+                console.error(err);
+                alert("C√≥ l·ªói khi g·ª≠i k·∫øt qu·∫£. Em vui l√≤ng th·ª≠ l·∫°i nh√©!");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "N·ªòP K·∫æT QU·∫¢";
+            }
+        }
+
+        /* TEACHER STATS */
+        function openTeacherStats() {
+            const pin = prompt("Vui l√≤ng nh·∫≠p m√£ PIN b·∫£o m·∫≠t:");
+            if (pin === "dvn") {
+                document.getElementById('statsModal').classList.add('active');
+                loadStats();
+            } else if (pin !== null) {
+                alert("M√£ PIN kh√¥ng ch√≠nh x√°c!");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('statsModal').classList.remove('active');
+        }
+
+        let currentStatsData = [];
+        async function loadStats() {
+            const tbody = document.getElementById('statsTableBody');
+            tbody.innerHTML = '<tr><td colspan="8" class="p-20 text-center"><div class="flex flex-col items-center"><div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div><p class="text-gray-400 font-black uppercase tracking-widest text-xs">ƒêang x·ª≠ l√Ω d·ªØ li·ªáu...</p></div></td></tr>';
+
+            try {
+                const snapshot = await db.collection("diem_tieng_viet_lop5")
+                    .where("lessonTitle", "==", "C·ª• ƒê·ªì Chi·ªÉu")
+                    .get();
+
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="p-20 text-center text-gray-400 font-bold italic">Ch∆∞a c√≥ d·ªØ li·ªáu h·ªçc sinh n·ªôp b√†i.</td></tr>';
+                    return;
+                }
+
+                // Aggregating logic: Highest score per student
+                const studentGroups = {};
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const key = `${data.studentName}_${data.studentClass}_${data.school}`.toLowerCase().trim();
+
+                    if (!studentGroups[key]) {
+                        studentGroups[key] = {
+                            ...data,
+                            attempts: 1,
+                            bestScore: data.score,
+                            latestSubmitted: data.submittedAt ? data.submittedAt.toDate() : new Date(0)
+                        };
+                    } else {
+                        studentGroups[key].attempts++;
+                        if (data.score > studentGroups[key].bestScore) {
+                            studentGroups[key].bestScore = data.score;
+                            studentGroups[key].timeDisplay = data.timeDisplay; // Use time from best attempt
+                        }
+                        const currentSubmitted = data.submittedAt ? data.submittedAt.toDate() : new Date(0);
+                        if (currentSubmitted > studentGroups[key].latestSubmitted) {
+                            studentGroups[key].latestSubmitted = currentSubmitted;
+                        }
+                    }
+                });
+
+                // Convert to array and sort by bestScore DESC
+                currentStatsData = Object.values(studentGroups).sort((a, b) => b.bestScore - a.bestScore);
+
+                tbody.innerHTML = '';
+                currentStatsData.forEach((data, index) => {
+                    const row = document.createElement('tr');
+                    row.className = "hover:bg-blue-50/30 transition-colors group";
+                    row.innerHTML = `
+                        <td class="px-6 py-5 font-black text-gray-300 group-hover:text-blue-600 transition-colors">${index + 1}</td>
+                        <td class="px-6 py-5">
+                            <div class="font-black text-gray-800">${data.studentName}</div>
+                        </td>
+                        <td class="px-6 py-5">
+                            <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider group-hover:bg-blue-100 group-hover:text-blue-700 transition-colors">${data.studentClass}</span>
+                        </td>
+                        <td class="px-6 py-5 text-gray-500 font-bold text-sm">${data.school}</td>
+                        <td class="px-6 py-5 text-center">
+                            <span class="text-xl font-black ${data.bestScore >= 80 ? 'text-green-600' : 'text-blue-600'}">${data.bestScore}</span>
+                        </td>
+                        <td class="px-6 py-5 text-center">
+                            <span class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mx-auto text-xs font-black border border-amber-100">${data.attempts}</span>
+                        </td>
+                        <td class="px-6 py-5 text-center font-bold text-gray-500 text-sm italic">${data.timeDisplay || 'N/A'}</td>
+                        <td class="px-6 py-5 text-right">
+                            <div class="text-[10px] font-black text-gray-400 uppercase tracking-tighter">${data.latestSubmitted.toLocaleDateString('vi-VN')}</div>
+                            <div class="text-xs font-bold text-gray-800">${data.latestSubmitted.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}</div>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } catch (err) {
+                console.error(err);
+                tbody.innerHTML = '<tr><td colspan="8" class="p-20 text-center text-red-500 font-bold">L·ªói khi t·∫£i d·ªØ li·ªáu. H√£y th·ª≠ l·∫°i!</td></tr>';
+            }
+        }
+
+        function exportToExcel() {
+            if (currentStatsData.length === 0) {
+                alert("Kh√¥ng c√≥ d·ªØ li·ªáu ƒë·ªÉ xu·∫•t!");
+                return;
+            }
+
+            const dataToExport = currentStatsData.map((item, index) => ({
+                'STT': index + 1,
+                'H·ªç v√† T√™n': item.studentName,
+                'L·ªõp': item.studentClass,
+                'Tr∆∞·ªùng': item.school,
+                'ƒêi·ªÉm cao nh·∫•t': item.bestScore,
+                'S·ªë l·∫ßn l√†m': item.attempts,
+                'Th·ªùi gian l√†m b√†i (L·∫ßn t·ªët nh·∫•t)': item.timeDisplay || 'N/A',
+                'L·∫ßn n·ªôp cu·ªëi': item.latestSubmitted.toLocaleString('vi-VN')
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(dataToExport);
+
+            // Force Class column to be text
+            ws['!cols'] = [{}, {}, { t: 's' }, {}, {}, {}, {}];
+
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "KetQua");
+            XLSX.writeFile(wb, "KetQua_BaiHoc.xlsx");
         }
     </script>
+
+    <script src="js/floating-menu.js"></script>
 </body>
 
 </html>
+
