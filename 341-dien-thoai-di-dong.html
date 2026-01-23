@@ -764,7 +764,7 @@
         </div>
     </div>
 
-        <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
+    <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
         <div class="container mx-auto text-center">
             <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">@ 2026 EduRobot - Hệ thống học
                 tập thông minh</p>
@@ -978,15 +978,48 @@
             const timeStr = `${minutes}p ${seconds}s`;
 
             try {
-                await db.collection("diem_tieng_viet_lop5").add({
-                    ...studentData,
-                    lessonTitle: "Điện thoại di động",
-                    score: score,
-                    duration: duration,
-                    timeDisplay: timeStr,
-                    endTime: new Date().toISOString(),
-                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
+                // Check if user exists
+                const snapshot = await db.collection("diem_tieng_viet_lop5")
+                    .where("studentName", "==", studentData.studentName)
+                    .where("studentClass", "==", studentData.studentClass)
+                    .where("school", "==", studentData.school)
+                    .where("lessonTitle", "==", "Điện thoại di động")
+                    .get();
+
+                if (!snapshot.empty) {
+                    // Update existing
+                    const doc = snapshot.docs[0];
+                    const data = doc.data();
+                    const newAttempts = (data.attempts || 1) + 1;
+                    const currentBestScore = data.score || 0;
+
+                    let updateData = {
+                        attempts: newAttempts,
+                        submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    };
+
+                    // Only update score/time if new score is higher
+                    if (score > currentBestScore) {
+                        updateData.score = score;
+                        updateData.duration = duration;
+                        updateData.timeDisplay = timeStr;
+                    }
+
+                    await db.collection("diem_tieng_viet_lop5").doc(doc.id).update(updateData);
+                } else {
+                    // Create new
+                    await db.collection("diem_tieng_viet_lop5").add({
+                        ...studentData,
+                        lessonTitle: "Điện thoại di động",
+                        score: score,
+                        attempts: 1,
+                        duration: duration,
+                        timeDisplay: timeStr,
+                        endTime: new Date().toISOString(),
+                        submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
+
                 document.getElementById('successModal').classList.add('active');
             } catch (err) {
                 console.error(err);
