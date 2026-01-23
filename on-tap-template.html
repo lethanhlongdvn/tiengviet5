@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ôn tập & Đánh giá - EduRobot</title>
+    <title>�n t?p & ��nh gi� - EduRobot</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Nunito -->
@@ -18,21 +18,57 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-    <header class="bg-white sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <a href="index.html" class="flex items-center space-x-2">
-                    <div
-                        class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white text-xl font-bold">
-                        E</div>
-                    <span class="text-xl font-extrabold text-blue-600 tracking-tight">EduRobot - <span
-                            class="text-yellow-500">Tiếng Việt 5</span></span>
-                </a>
+    <header class="sticky top-0 z-50 px-4 py-2">
+        <nav
+            class="container mx-auto bg-white/75 backdrop-blur-xl rounded-xl px-5 py-2 flex justify-between items-center shadow-lg border border-white/50">
+            <div class="flex items-center space-x-4">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                    <span class="text-xl font-black">E</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl font-black text-blue-700">EduRobot</span>
+                        <span
+                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TI?NG
+                            VI?T 5</span>
+                    </div>
+                    <div class="flex items-center space-x-2 overflow-hidden">
+                        <span
+                            class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">�N
+                            T?P:</span>
+                        <span
+                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">[T�N
+                            K? �N T?P]</span>
+                    </div>
+                </div>
             </div>
-            <ul class="hidden md:flex space-x-8 font-semibold text-gray-600">
-                <li><a href="index.html" class="hover:text-blue-500 transition-colors">Trang chủ</a></li>
-                <li><a href="#" class="hover:text-blue-500 transition-colors">Giới thiệu</a></li>
-                <li><a href="#" class="hover:text-blue-500 transition-colors">Phản hồi</a></li>
+            <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
+                <li>
+                    <a href="index.html"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Trang ch?
+                    </a>
+                </li>
+                <li class="relative group">
+                    <button id="top-menu-lesson-btn"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
+                        B�i h?c
+                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div id="top-menu-lessons-dropdown"
+                        class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Li�n h?
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -46,17 +82,17 @@
                 <div class="relative z-10">
                     <div
                         class="inline-block bg-yellow-400 text-blue-900 font-bold px-6 py-2 rounded-full uppercase text-sm mb-6 shadow-sm">
-                        Hoàn thành chặng đường!
+                        Ho�n th�nh ch?ng du?ng!
                     </div>
 
                     <h1 class="text-4xl md:text-5xl font-black text-blue-900 mb-6 leading-tight">
-                        Ôn tập giữa & cuối học kì
+                        �n t?p gi?a & cu?i h?c k�
                     </h1>
 
                     <p class="text-xl text-gray-600 mb-10 leading-relaxed">
-                        Chào mừng em đến với khu vực <span class="text-blue-600 font-bold italic">Ôn tập & Đánh
-                            giá</span>. Tại đây, chúng mình sẽ cùng nhau hệ thống lại các kiến thức quan trọng đã học để
-                        chuẩn bị thật tốt cho các kì thi sắp tới nhé!
+                        Ch�o m?ng em d?n v?i khu v?c <span class="text-blue-600 font-bold italic">�n t?p & ��nh
+                            gi�</span>. T?i d�y, ch�ng m�nh s? c�ng nhau h? th?ng l?i c�c ki?n th?c quan tr?ng d� h?c d?
+                        chu?n b? th?t t?t cho c�c k� thi s?p t?i nh�!
                     </p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -70,11 +106,11 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-2xl font-bold text-blue-900 mb-3">Hệ thống kiến thức</h3>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-6">Ôn lại các quy tắc ngữ pháp, từ vựng
-                                và các bài đọc hiểu trọng tâm của các tuần vừa qua.</p>
-                            <a href="#" class="inline-flex items-center text-blue-600 font-bold hover:underline">Xem sơ
-                                đồ tư duy →</a>
+                            <h3 class="text-2xl font-bold text-blue-900 mb-3">H? th?ng ki?n th?c</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6">�n l?i c�c quy t?c ng? ph�p, t? v?ng
+                                v� c�c b�i d?c hi?u tr?ng t�m c?a c�c tu?n v?a qua.</p>
+                            <a href="#" class="inline-flex items-center text-blue-600 font-bold hover:underline">Xem so
+                                d? tu duy ?</a>
                         </div>
 
                         <div
@@ -87,12 +123,12 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-2xl font-bold text-green-900 mb-3">Đề thi thử</h3>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-6">Thử sức với bộ đề mô phỏng cấu trúc
-                                thi thật để rèn luyện kĩ năng làm bài và quản lý thời gian.</p>
+                            <h3 class="text-2xl font-bold text-green-900 mb-3">�? thi th?</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6">Th? s?c v?i b? d? m� ph?ng c?u tr�c
+                                thi th?t d? r�n luy?n ki nang l�m b�i v� qu?n l� th?i gian.</p>
                             <button
-                                class="bg-green-600 text-white font-bold py-3 px-8 rounded-2xl shadow-md hover:bg-green-700 transition-colors active:scale-95">Bắt
-                                đầu làm bài</button>
+                                class="bg-green-600 text-white font-bold py-3 px-8 rounded-2xl shadow-md hover:bg-green-700 transition-colors active:scale-95">B?t
+                                d?u l�m b�i</button>
                         </div>
                     </div>
 
@@ -100,21 +136,21 @@
                         <div></div>
                         <button
                             class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-black py-5 px-12 rounded-[24px] shadow-xl transition-all active:scale-95 text-lg order-1 sm:order-2">
-                            Xem tài liệu ôn tập
+                            Xem t�i li?u �n t?p
                         </button>
                     </div>
                 </div>
             </div>
 
             <div class="mt-12 text-center text-gray-400 text-sm italic">
-                "Học thầy không tày học bạn, nhưng ôn bài là cách tự học tốt nhất!"
+                "H?c th?y kh�ng t�y h?c b?n, nhung �n b�i l� c�ch t? h?c t?t nh?t!"
             </div>
         </div>
     </main>
 
     <footer class="bg-zinc-900 text-zinc-400 py-3 px-4 mt-12">
         <div class="container mx-auto text-center text-sm">
-            <p>@ 2026 EduRobot - Phát triển bởi Lê Thành Long</p>
+            <p>@ 2026 EduRobot - Ph�t tri?n b?i L� Th�nh Long</p>
         </div>
     </footer>
 
@@ -126,8 +162,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
         </div>
-        <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Trở về</span>
+        <span class="text-sm font-black text-slate-700 uppercase tracking-wider">Tr? v?</span>
     </a>
+    <script src="js/floating-menu.js"></script>
 </body>
 
 </html>
