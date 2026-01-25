@@ -42,19 +42,33 @@ async function askAI(id, prefix = "", mode = "single") {
             body: JSON.stringify({ sentence })
         });
 
-        if (!response.ok) throw new Error('Network response was not ok');
+        if (!response.ok) {
+            let errorMsg = `Lỗi ${response.status}`;
+            try {
+                const errorData = await response.json();
+                errorMsg = errorData.error || errorMsg;
+            } catch (e) { }
+            throw new Error(errorMsg);
+        }
 
         const data = await response.json();
         renderFeedback(feedback, data);
 
-        if (typeof celebrate === 'function' && data.grade >= 8) {
+        if (typeof celebrate === 'function' && (data.grade >= 8 || data.diem?.includes('8') || data.diem?.includes('9') || data.diem?.includes('10'))) {
             celebrate();
         }
     } catch (error) {
         console.error('AI Grading Error:', error);
         feedback.innerHTML = `
-            <div class="p-4 bg-red-50 text-red-700 rounded-xl border border-red-200 font-bold">
-                🤖 <b>Lỗi:</b> EduRobot gặp sự cố khi kết nối bộ não. Em hãy thử lại sau nhé!
+            <div class="p-5 bg-red-50 text-red-700 rounded-2xl border-2 border-red-100 shadow-sm">
+                <div class="flex items-center mb-3">
+                    <span class="text-2xl mr-3">⚠️</span>
+                    <h5 class="font-black uppercase text-[10px] tracking-widest">EduRobot gặp sự cố</h5>
+                </div>
+                <p class="text-sm font-bold leading-relaxed mb-3">Chi tiết: "${error.message}"</p>
+                <div class="p-3 bg-white/50 rounded-xl text-[11px] leading-relaxed italic">
+                    <b>💡 Gợi ý cho bạn:</b> Nếu bạn vừa thay đổi khóa trên Netlify, hãy vào mục <b>Deploys</b> và nhấn <b>Trigger deploy > Deploy site</b> để hệ thống cập nhật mã mới nhé!
+                </div>
             </div>
         `;
     }
