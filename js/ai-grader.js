@@ -15,9 +15,16 @@ async function askAI(id, prefix = "") {
 
     // Auto-detect prefix if possible (more robust against cache)
     if (!prefix) {
-        const questionText = input.closest('div.flex-col')?.querySelector('p')?.innerText || "";
+        // Find the p tag in the same exercise box (p-4)
+        const box = input.closest('.p-4');
+        const questionText = box?.querySelector('p')?.innerText || "";
+
         if (questionText.includes('...') || questionText.endsWith('mà') || questionText.endsWith('nhưng')) {
-            prefix = questionText.replace(/\.\.\.*$/, "").replace(/^[a-z]\.\s+/, "").trim();
+            // Remove lesson index like "a. " or "b. ", remove dots, then trim
+            prefix = questionText
+                .replace(/^[a-z]\.\s+/i, "")
+                .replace(/\.\.\.*$/, "")
+                .trim();
         }
     }
 
