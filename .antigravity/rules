@@ -4,3 +4,7 @@
 - Phân tích: Kiểm tra tính logic của quan hệ từ (Vì...nên, Mặc dù...nhưng).
 - Tone: Nhẹ nhàng, khích lệ học sinh.
 - Format: Ưu tiên phản hồi JSON cho các file trong thư mục functions.
+- Đối với bài tập "Viết tiếp vế câu": 
+  + AI phải ghép [Đề bài] + [Bài làm] để đánh giá.
+  + Kiểm tra xem vế học sinh viết có khớp với cặp quan hệ từ ở vế trước không (ví dụ: Chẳng những... thì phải đi với ...mà còn).
+  + Nếu khớp và đủ CN-VN, phải chấm điểm tuyệt đối (9-10đ).
