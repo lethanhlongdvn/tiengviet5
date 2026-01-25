@@ -5,7 +5,7 @@
 
 // Placeholder Configuration - PLEASE UPDATE WITH REAL CREDENTIALS IN NETLIFY/LOCAL
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
+    apiKey: "AIzaSyBY4M5SZPxKGzhiaXeghTBYEe_7KFSVNe8",
     authDomain: "projectId.firebaseapp.com",
     projectId: "projectId",
     storageBucket: "projectId.appspot.com",
@@ -84,7 +84,7 @@ async function submitProject(projectId, projectTitle) {
     try {
         // Upload file if exists
         if (fileInput && fileInput.files[0]) {
-            const file = fileInput.files[0];
+            const apiKey = "AIzaSyBY4M5SZPxKGzhiaXeghTBYEe_7KFSVNe8";
             const storageRef = storage.ref(`projects/${Date.now()}_${file.name}`);
             const snapshot = await storageRef.put(file);
             fileUrl = await snapshot.ref.getDownloadURL();
