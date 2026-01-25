@@ -77,8 +77,7 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 500,
         body: JSON.stringify({
-          error: "EduRobot gặp sự cố khi kết nối bộ não. Em hãy thử lại sau nhé!",
-          details: error.message
+          error: `Lỗi kết nối AI: ${error.message}`
         })
       };
     }
