@@ -3,15 +3,17 @@
  * Handles communication between the frontend and the Netlify grading function.
  */
 
-async function askAI(id) {
+async function askAI(id, prefix = "") {
     const input = document.getElementById('ai-' + id);
     const feedback = document.getElementById('fb-' + id);
-    const sentence = input.value.trim();
+    const userInput = input.value.trim();
 
-    if (!sentence) {
+    if (!userInput) {
         alert("Em hãy viết câu trước nhé!");
         return;
     }
+
+    const sentence = prefix + " " + userInput;
 
     // UI: Loading state
     feedback.classList.remove('hidden');
