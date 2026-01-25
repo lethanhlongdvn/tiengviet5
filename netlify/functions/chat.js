@@ -9,16 +9,18 @@ exports.handler = async (event, context) => {
       return { statusCode: 400, body: JSON.stringify({ error: "No sentence provided" }) };
     }
 
-    // Quy tắc 1 (Isolation): Loại bỏ text chỉ dẫn đề bài nếu có
+    // Quy tắc 1 (Isolation - V3): Loại bỏ triệt để các đoạn text hướng dẫn
     const noise = [
       /bài\s+\d+[:.]?/gi,
-      /sử\s+dụng\s+cặp\s+kết\s+từ[:.]?/gi,
-      /sử\s+dụng\s+cặp\s+từ\s+hô\s+ứng[:.]?/gi,
+      /sử\s+dụng\s+cặp\s+(kết\s+từ|từ\s+hô\s+ứng)[:.]?/gi,
       /viết\s+tiếp\s+vế\s+câu[:.]?/gi,
-      /^[a-z]\.?\s+/i
+      /đặt\s+câu\s+ghép[:.]?/gi,
+      /viết\s+tiếp\s+vào\s+đây[:.]?/gi,
+      /^[a-z]\.?\s+/i,
+      /\(hoặc\s+.*?\)/gi
     ];
     noise.forEach(n => sentence = sentence.replace(n, ""));
-    sentence = sentence.trim();
+    sentence = sentence.trim().replace(/^[:.]\s*/, "");
 
     const analysis = analyzeSentence(sentence);
 
@@ -143,65 +145,77 @@ function analyzeSentence(sentence) {
     }
   }
 
-  // Tính điểm và Feedback
-  const validClauses = result.clauses.filter(c => c.subject !== "Chưa xác định" && c.subject.length > 1);
+  // Chấm điểm tuyệt đối (Quy tắc V3)
+  const validClauses = result.clauses.filter(c => c.subject !== "Ẩn (đối tượng ở vế 1)" && c.subject !== "Chưa xác định" && c.subject.length > 1);
 
   if (result.clauses.length >= 2) {
-    result.grade = validClauses.length >= 2 ? 10 : 9; // Tối thiểu 9 nếu đã tách đúng vế theo Quy tắc mới
-    result.feedback = `Tuyệt vời! EduRobot đã chấm bài của em. Câu văn của em đã thể hiện rất tốt cấu trúc của một câu ghép với quan hệ "${result.relationship}". Vế câu rành mạch, CN-VN rõ ràng.`;
+    // Nếu bóc tách chuẩn CN-VN và đúng cặp từ
+    result.grade = 10;
+    result.feedback = `Tuyệt vời! EduRobot đánh giá rất cao câu ghép này. Em đã sử dụng đúng quan hệ "${result.relationship}", bóc tách Chủ ngữ - Vị ngữ cực kỳ chính xác.`;
 
-    if (validClauses.length < 2) {
-      result.feedback = `Chào em! Câu văn của em rất hay và đúng cấu trúc câu ghép. Tuy nhiên, em chú ý hơn một chút ở phần bóc tách Chủ - Vị để câu văn hoàn hảo hơn nhé!`;
+    // Nếu có vế bị "Chưa xác định" hoặc quá ngắn
+    const hasError = result.clauses.some(c => c.subject === "Chưa xác định" || (c.subject !== "Ẩn (đối tượng ở vế 1)" && c.subject.length < 2));
+    if (hasError) {
+      result.grade = 9;
+      result.feedback = `Câu văn của em rất tốt và đúng cấu trúc. Em hãy lưu ý hơn cách trình bày để phần bóc tách Chủ - Vị trở nên hoàn hảo hơn nữa nhé!`;
     }
   } else {
     result.grade = 5;
-    result.feedback = "Câu này dường như vẫn chưa đủ 2 vế của một câu ghép hoàn chỉnh em ạ. Hãy thử sử dụng các cặp từ như 'Vì... nên...', 'Tuy... nhưng...' để câu văn rõ nghĩa hơn nhé!";
+    result.feedback = "Câu này dường như vẫn chưa đủ 2 vế của một câu ghép hoàn chỉnh lớp 5 em ạ. Em hãy thử ghép thêm một vế nữa bằng các cặp từ nối nhé!";
   }
 
   return result;
 }
 
 /**
- * Bóc tách CN - VN cơ bản (Rule-based)
+ * Bóc tách CN - VN (EduRobot V3 - Strict Connective Safety)
  * @param {string} text 
  */
 function deconstructClause(text) {
   const words = text.split(/\s+/);
 
-  // Danh sách từ nối/động từ/tính từ làm mốc phân chia VN
-  // TUYỆT ĐỐI: Quan hệ từ và từ hô ứng thuộc về Vị ngữ (Quy tắc EduRobot V2)
+  // V3: TUYỆT ĐỐI các từ này không được là Chủ ngữ
+  const connectives = [
+    "càng", "nhưng", "mà", "thì", "nên", "vì", "tuy", "còn",
+    "vừa", "đã", "mới", "đâu", "nào", "ấy", "sao", "vậy",
+    "mặc", "dù", "hễ", "giá", "nếu", "bởi"
+  ];
+
+  // Danh sách động từ/tính từ mốc
   const commonVerbs = [
     "là", "đang", "đi", "học", "mưa", "nắng", "làm", "chơi",
     "rất", "đã", "sẽ", "cũng", "đều", "vẫn", "được", "bị",
     "xinh", "đẹp", "giỏi", "ngoan", "chăm", "không", "chưa",
     "chẳng", "hừng", "gặt", "trồng", "ra", "vào", "lên", "xuống",
-    "vừa", "mới", "hãy", "đừng", "chớ", "còn", "lại", "thì", "mà",
-    "càng", "nhưng", "tuy", "nên", "vì", "nếu", "hễ", "giá", "mặc"
+    "hãy", "đừng", "chớ", "lại"
   ];
 
   let splitIdx = -1;
-  // Ưu tiên tìm mốc phân chia (động từ/tính từ/trạng từ)
+
   for (let i = 0; i < words.length; i++) {
-    if (commonVerbs.includes(words[i].toLowerCase())) {
+    const w = words[i].toLowerCase();
+    // Quy tắc V3: Nếu gặp từ nối -> đây chắc chắn là điểm bắt đầu của VN
+    if (connectives.includes(w)) {
+      splitIdx = i;
+      break;
+    }
+    // Nếu gặp động từ/tính từ mốc
+    if (commonVerbs.includes(w)) {
       splitIdx = i;
       break;
     }
   }
 
-  // Nếu không thấy mốc, mặc định tách ở giữa
+  // Default split logic
   if (splitIdx === -1) {
-    if (words.length > 1) {
-      splitIdx = 1; // Ưu tiên từ đầu tiên là CN nếu không rõ
-    } else {
-      splitIdx = 0;
-    }
+    splitIdx = words.length > 1 ? 1 : 0;
   }
 
   let subject = words.slice(0, splitIdx).join(" ").trim();
   let predicate = words.slice(splitIdx).join(" ").trim();
 
-  // Quy tắc 3: Xử lý chủ ngữ ẩn
-  if (!subject) {
+  // Quy tắc 3 (V3): Xử lý chủ ngữ ẩn (Chỉ dùng khi vế câu thực sự khuyết)
+  if (!subject && predicate) {
     subject = "Ẩn (đối tượng ở vế 1)";
   }
 
