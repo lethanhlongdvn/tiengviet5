@@ -45,6 +45,7 @@ function analyzeSentence(sentence) {
     { type: "Giả thiết - Kết quả", pair: ["hễ", "thì"], regex: /.*?hễ\s+(.*?)\s+thì\s+(.*)/i },
     { type: "Tăng tiến", pair: ["chẳng những", "mà"], regex: /.*?chẳng những\s+(.*?)\s+mà\s+(.*)/i },
     { type: "Tăng tiến", pair: ["không những", "mà"], regex: /.*?không những\s+(.*?)\s+mà\s+(.*)/i },
+    { type: "Tăng tiến", pair: ["không chỉ", "mà"], regex: /.*?không chỉ\s+(.*?)\s+mà\s+(.*)/i },
     { type: "Tăng tiến", pair: ["càng", "càng"], regex: /(.*?)\s+càng\s+(.*?)[,;\s]+càng\s+(.*)/i }
   ];
 
@@ -63,19 +64,23 @@ function analyzeSentence(sentence) {
       } else {
         const v1 = match[1].trim();
         const v2 = match[2].trim().replace(/[.!?]$/, "");
-        result.clauses.push(deconstructClause(v1));
-        result.clauses.push(deconstructClause(v2));
+        if (v1 && v2) {
+          result.clauses.push(deconstructClause(v1));
+          result.clauses.push(deconstructClause(v2));
+        } else {
+          matched = false; // Một vế bị trống -> coi như không khớp pattern
+        }
       }
-      break;
+      if (matched) break;
     }
   }
 
   if (!matched) {
     // Thử tách theo quan hệ từ đơn: và, nhưng, rồi, thì... hoặc dấu phẩy
-    const singleConnectives = [" và ", " nhưng ", " rồi ", " thì ", " hay ", " hoặc "];
+    const singleConnectives = [" và ", " nhưng ", " rồi ", " thì ", " hay ", " hoặc ", " mà còn ", " mà "];
     let splitWord = "";
     for (const conn of singleConnectives) {
-      if (sentence.includes(conn)) {
+      if (sentence.toLowerCase().includes(conn)) {
         splitWord = conn;
         break;
       }
@@ -83,7 +88,7 @@ function analyzeSentence(sentence) {
 
     if (splitWord) {
       result.relationship = `Nối bằng quan hệ từ '${splitWord.trim()}'`;
-      const parts = sentence.split(splitWord);
+      const parts = sentence.split(new RegExp(splitWord, "i"));
       parts.forEach(p => {
         if (p.trim()) result.clauses.push(deconstructClause(p.trim()));
       });
@@ -101,14 +106,15 @@ function analyzeSentence(sentence) {
   }
 
   // Tính điểm và Feedback
-  const validClauses = result.clauses.filter(c => c.subject !== "Chưa xác định" && c.predicate !== "Chưa xác định");
+  const validClauses = result.clauses.filter(c => c.subject !== "Chưa xác định" && c.subject.length > 1);
 
   if (result.clauses.length >= 2) {
-    result.grade = validClauses.length >= 1 ? 10 : 8; // Cho phép linh hoạt hơn cho HS lớp 5
-    result.feedback = `Chào em! EduRobot đã xem bài làm của em. Câu văn của em đã thể hiện rõ cấu trúc của một câu ghép với quan hệ "${result.relationship}". Em đã bóc tách được các vế câu rất tốt, hãy tiếp tục phát huy nhé!`;
+    result.grade = validClauses.length >= 2 ? 10 : 8;
+    result.feedback = "Câu văn của em có cấu trúc tốt, thầy cô đã nhận ra các vế câu và quan hệ từ em sử dụng. Em chú ý diễn đạt gãy gọn hơn nhé!";
+    if (result.grade === 10) result.feedback = `Chào em! EduRobot rất thích câu này. Em đã sử dụng đúng quan hệ "${result.relationship}" và chia vế câu rất chuẩn xác.`;
   } else {
     result.grade = 5;
-    result.feedback = "Câu này dường như chưa đủ các vế của một câu ghép hoàn chỉnh em ạ. Hãy thử thêm một vế câu nữa bằng cách sử dụng các từ nối như 'và', 'nên', 'nhưng' để câu văn hay hơn nhé!";
+    result.feedback = "Câu này dường như vẫn thiếu một vế hoặc chưa rõ các thành phần em ạ. Em hãy thử sử dụng 'Vì... nên...', 'Tuy... nhưng...' hoặc ghép hai vế bằng các từ như 'và', 'mà' xem sao.";
   }
 
   return result;
