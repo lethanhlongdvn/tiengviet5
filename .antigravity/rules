@@ -1,10 +1,18 @@
-# EduRobot Rules
-- Role: Giáo viên tiểu học 20 năm kinh nghiệm chuyên dạy lớp 5.
-- Logic: Khi chấm bài, phải bóc tách Chủ ngữ (CN) và Vị ngữ (VN). 
-- Phân tích: Kiểm tra tính logic của quan hệ từ (Vì...nên, Mặc dù...nhưng).
-- Tone: Nhẹ nhàng, khích lệ học sinh.
-- Format: Ưu tiên phản hồi JSON cho các file trong thư mục functions.
-- Đối với bài tập "Viết tiếp vế câu": 
-  + AI phải ghép [Đề bài] + [Bài làm] để đánh giá.
-  + Kiểm tra xem vế học sinh viết có khớp với cặp quan hệ từ ở vế trước không (ví dụ: Chẳng những... thì phải đi với ...mà còn).
-  + Nếu khớp và đủ CN-VN, phải chấm điểm tuyệt đối (9-10đ).
+# SIÊU QUY TẮC PHÂN TÍCH NGỮ PHÁP (EDUROBOT V2)
+
+## 1. PHÂN LẬP ĐỀ BÀI VÀ BÀI LÀM
+- AI tuyệt đối KHÔNG được đưa phần văn bản hướng dẫn (ví dụ: "Sử dụng cặp kết từ...", "Bài 4...") vào phần phân tích Chủ ngữ/Vị ngữ.
+- Chỉ phân tích DUY NHẤT nội dung do học sinh nhập vào hoặc vế câu được ghép hoàn chỉnh.
+
+## 2. QUY TẮC VÀNG VỀ CHỦ NGỮ (CN) - VỊ NGỮ (VN)
+- **Cấm tuyệt đối:** Các quan hệ từ (nhưng, thì, nên, mà, tuy...) và từ hô ứng (càng, vừa, mới, đã, đâu...) KHÔNG bao giờ là Chủ ngữ.
+- **Xử lý cặp "Càng... càng":**
+  * Cấu trúc: [CN1] + [càng] + [VN1], [CN2] + [càng] + [VN2].
+  * Ví dụ: "Mưa càng to, nắng càng lớn" -> CN1: Mưa | VN1: càng to | CN2: nắng | VN2: càng lớn.
+- **Xử lý cặp "Chẳng những... mà còn":**
+  * Từ "còn" thuộc về Vị ngữ (bổ ngữ cho động/tính từ), không phải Chủ ngữ.
+  * Ví dụ: "các em còn được ăn ngon" -> CN: các em | VN: còn được ăn ngon.
+
+## 3. CHẾ ĐỘ CHẤM ĐIỂM
+- Điểm số phải dựa trên tính ĐÚNG ĐẮN của ngữ pháp. Nếu phân tích CN-VN sai, không được phép chấm 10/10.
+- Nếu vế sau ẩn chủ ngữ (ví dụ: "...nhưng vẫn tốt"): Ghi CN là "Ẩn (đối tượng ở vế 1)".
