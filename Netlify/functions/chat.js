@@ -39,9 +39,9 @@ exports.handler = async (event, context) => {
     `;
 
     try {
-      // 3. Gọi Gemini 3 Flash Preview theo tài liệu mới
+      // 3. Gọi Gemini 1.5 Flash theo yêu cầu mới
       const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: "gemini-1.5-flash",
         systemInstruction: systemInstruction,
         contents: [{ role: 'user', parts: [{ text: `Phân tích bài tập sau và trả về JSON: "${sentence}"\n\nYêu cầu cấu trúc JSON:\n{\n  "diem": "điểm/10",\n  "uu_diem": "...",\n  "loi_sai": "...",\n  "huong_dan": "...",\n  "loi_nhan": "..."\n}` }] }]
       });
@@ -59,11 +59,11 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(analysis)
       };
     } catch (error) {
-      console.error("AI 3.0 Error:", error);
+      console.error("AI Grading Error:", error);
       return {
         statusCode: 500,
         body: JSON.stringify({
-          error: `Lỗi kết nối AI 3.0: ${error.message}`
+          error: `Lỗi kết nối AI: ${error.message}`
         })
       };
     }
