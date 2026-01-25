@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
     }
 
     // 1. Cấu hình Gemini API
-    const apiKey = "AIzaSyDfZUL60zirsFSpVZ9Lq1AwG7gwQL034W4";
+    const apiKey = "AIzaSyAXbN4-DsD-6-wOr-j2qcj5R5V2PAgqhaQ";
     if (!apiKey) {
       return {
         statusCode: 500,
