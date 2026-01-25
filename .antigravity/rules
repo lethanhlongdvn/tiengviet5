@@ -1,18 +1,17 @@
-# SIÊU QUY TẮC PHÂN TÍCH NGỮ PHÁP (EDUROBOT V2)
+# SIÊU QUY TẮC PHÂN TÍCH NGỮ PHÁP (EDUROBOT V3)
 
-## 1. PHÂN LẬP ĐỀ BÀI VÀ BÀI LÀM
-- AI tuyệt đối KHÔNG được đưa phần văn bản hướng dẫn (ví dụ: "Sử dụng cặp kết từ...", "Bài 4...") vào phần phân tích Chủ ngữ/Vị ngữ.
-- Chỉ phân tích DUY NHẤT nội dung do học sinh nhập vào hoặc vế câu được ghép hoàn chỉnh.
+## 1. KHÔNG ĐƯA ĐỀ BÀI VÀO PHÂN TÍCH
+- Tuyệt đối loại bỏ các đoạn text hướng dẫn (ví dụ: "Sử dụng cặp kết từ...", "Bài 4...", "Viết tiếp vào đây...") ra khỏi phần phân tích Chủ ngữ (CN) - Vị ngữ (VN).
+- Chỉ phân tích DUY NHẤT nội dung học sinh đã nhập và vế câu tương ứng.
 
-## 2. QUY TẮC VÀNG VỀ CHỦ NGỮ (CN) - VỊ NGỮ (VN)
-- **Cấm tuyệt đối:** Các quan hệ từ (nhưng, thì, nên, mà, tuy...) và từ hô ứng (càng, vừa, mới, đã, đâu...) KHÔNG bao giờ là Chủ ngữ.
-- **Xử lý cặp "Càng... càng":**
-  * Cấu trúc: [CN1] + [càng] + [VN1], [CN2] + [càng] + [VN2].
-  * Ví dụ: "Mưa càng to, nắng càng lớn" -> CN1: Mưa | VN1: càng to | CN2: nắng | VN2: càng lớn.
-- **Xử lý cặp "Chẳng những... mà còn":**
-  * Từ "còn" thuộc về Vị ngữ (bổ ngữ cho động/tính từ), không phải Chủ ngữ.
-  * Ví dụ: "các em còn được ăn ngon" -> CN: các em | VN: còn được ăn ngon.
+## 2. KHÔNG NHẦM TỪ NỐI LÀ CHỦ NGỮ
+- CẤM các từ sau đây xuất hiện trong ô "Chủ ngữ": càng, nhưng, mà, thì, nên, vì, tuy, còn.
+- Nếu học sinh viết: "gió càng lớn" -> CN: gió | VN: càng lớn. (KHÔNG ĐƯỢC coi "càng" là CN).
+- Nếu học sinh viết: "các em còn được ăn ngon" -> CN: các em | VN: còn được ăn ngon. (KHÔNG ĐƯỢC coi "còn" là CN).
 
-## 3. CHẾ ĐỘ CHẤM ĐIỂM
-- Điểm số phải dựa trên tính ĐÚNG ĐẮN của ngữ pháp. Nếu phân tích CN-VN sai, không được phép chấm 10/10.
-- Nếu vế sau ẩn chủ ngữ (ví dụ: "...nhưng vẫn tốt"): Ghi CN là "Ẩn (đối tượng ở vế 1)".
+## 3. KHÔNG BÁO "ẨN" SAI NGỮ CẢNH
+- Với câu "Mưa càng to...", Chủ ngữ 1 là "Mưa", không được báo là "Ẩn". 
+- Chỉ dùng "Chủ ngữ ẩn" khi vế sau thực sự khuyết (ví dụ: "Tuy mệt nhưng (em) vẫn đi học").
+
+## ĐỊNH DẠNG TRẢ VỀ:
+Trả về JSON sạch sẽ, không kèm theo rác từ đề bài.
