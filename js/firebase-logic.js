@@ -5,7 +5,7 @@
 
 // Placeholder Configuration - PLEASE UPDATE WITH REAL CREDENTIALS IN NETLIFY/LOCAL
 const firebaseConfig = {
-    apiKey: "AIzaSyDfZUL60zirsFSpVZ9Lq1AwG7gwQL034W4",
+    apiKey: "AIzaSyAXbN4-DsD-6-wOr-j2qcj5R5V2PAgqhaQ",
     authDomain: "projectId.firebaseapp.com",
     projectId: "projectId",
     storageBucket: "projectId.appspot.com",
