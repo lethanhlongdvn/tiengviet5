@@ -19,7 +19,10 @@ async function askAI(id, prefix = "") {
         const box = input.closest('.p-4');
         const questionText = box?.querySelector('p')?.innerText || "";
 
-        if (questionText.includes('...') || questionText.endsWith('mà') || questionText.endsWith('nhưng')) {
+        // Check if it's actually a prefix or just an instruction
+        const isInstruction = /sử\s+dụng|đặt\s+câu|tìm|điền/i.test(questionText);
+
+        if (!isInstruction && (questionText.includes('...') || questionText.endsWith('mà') || questionText.endsWith('nhưng'))) {
             // Remove lesson index like "a. " or "b. ", remove dots, then trim
             prefix = questionText
                 .replace(/^[a-z]\.\s+/i, "")
