@@ -110,16 +110,37 @@ function analyzeSentence(sentence) {
     }
   }
 
+  // Kiểm tra lỗi "Râu ông nọ cắm cằm bà kia"
+  const mismatched = [
+    { start: "vì", wrong: "nhưng", correct: "nên" },
+    { start: "tuy", wrong: "nên", correct: "nhưng" },
+    { start: "mặc", wrong: "nên", correct: "nhưng" }
+  ];
+
+  if (matched) {
+    const sLow = sentence.toLowerCase();
+    for (const m of mismatched) {
+      if (sLow.includes(m.start) && sLow.includes(m.wrong)) {
+        result.grade = 6;
+        result.feedback = `Em đã bóc tách được các vế câu, nhưng cặp từ "${m.start}... ${m.wrong}" chưa đúng quan hệ ngữ pháp. Em nên dùng "${m.start}... ${m.correct}" nhé!`;
+        return result;
+      }
+    }
+  }
+
   // Tính điểm và Feedback
   const validClauses = result.clauses.filter(c => c.subject !== "Chưa xác định" && c.subject.length > 1);
 
   if (result.clauses.length >= 2) {
-    result.grade = validClauses.length >= 2 ? 10 : 8;
-    result.feedback = "Câu văn của em có cấu trúc tốt, thầy cô đã nhận ra các vế câu và quan hệ từ em sử dụng. Em chú ý diễn đạt gãy gọn hơn nhé!";
-    if (result.grade === 10) result.feedback = `Chào em! EduRobot rất thích câu này. Em đã sử dụng đúng quan hệ "${result.relationship}" và chia vế câu rất chuẩn xác.`;
+    result.grade = validClauses.length >= 2 ? 10 : 9; // Tối thiểu 9 nếu đã tách đúng vế theo Quy tắc mới
+    result.feedback = `Tuyệt vời! EduRobot đã chấm bài của em. Câu văn của em đã thể hiện rất tốt cấu trúc của một câu ghép với quan hệ "${result.relationship}". Vế câu rành mạch, CN-VN rõ ràng.`;
+
+    if (validClauses.length < 2) {
+      result.feedback = `Chào em! Câu văn của em rất hay và đúng cấu trúc câu ghép. Tuy nhiên, em chú ý hơn một chút ở phần bóc tách Chủ - Vị để câu văn hoàn hảo hơn nhé!`;
+    }
   } else {
     result.grade = 5;
-    result.feedback = "Câu này dường như vẫn thiếu một vế hoặc chưa rõ các thành phần em ạ. Em hãy thử sử dụng 'Vì... nên...', 'Tuy... nhưng...' hoặc ghép hai vế bằng các từ như 'và', 'mà' xem sao.";
+    result.feedback = "Câu này dường như vẫn chưa đủ 2 vế của một câu ghép hoàn chỉnh em ạ. Hãy thử sử dụng các cặp từ như 'Vì... nên...', 'Tuy... nhưng...' để câu văn rõ nghĩa hơn nhé!";
   }
 
   return result;
@@ -139,7 +160,7 @@ function deconstructClause(text) {
     "rất", "đã", "sẽ", "cũng", "đều", "vẫn", "được", "bị",
     "xinh", "đẹp", "giỏi", "ngoan", "chăm", "không", "chưa",
     "chẳng", "hừng", "gặt", "trồng", "ra", "vào", "lên", "xuống",
-    "vừa", "mới", "hãy", "đừng", "chớ"
+    "vừa", "mới", "hãy", "đừng", "chớ", "còn", "lại", "thì", "mà"
   ];
 
   let splitIdx = -1;
