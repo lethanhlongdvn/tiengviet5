@@ -239,7 +239,38 @@
         <div id="tab-lesson" class="tab-content active">
             <div class="max-w-5xl mx-auto space-y-4">
                 <!-- Theory & Instruction -->
-                <section class="w-full space-y-3">
+                <section class="w-full space-y-4">
+                    <!-- Ghi nhớ Section -->
+                    <div
+                        class="glass-card rounded-[24px] p-6 bg-orange-50/50 border-l-8 border-orange-400 relative overflow-hidden shadow-lg">
+                        <div class="absolute -top-2 left-4 text-gray-400">
+                            <svg class="w-10 h-10 transform rotate-12" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+                                </path>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-black text-orange-700 mb-4 ml-8">Ghi nhớ</h2>
+                        <div class="serif-font text-gray-800 text-lg leading-relaxed space-y-4">
+                            <p>Các vế của câu ghép có thể nối với nhau bằng các cặp từ:</p>
+                            <ul class="list-none space-y-3 pl-4">
+                                <li class="flex items-start">
+                                    <span class="mr-2">–</span>
+                                    <span>Các cặp kết từ: <em>vì ... nên ..., bởi ... nên ..., nhờ ... nên (mà) ..., nếu
+                                            ... thì ..., hễ ... thì ..., giá ... thì ..., tuy ... nhưng ..., mặc dù ...
+                                            nhưng ..., dù ... nhưng ..., chẳng những ... mà ..., không chỉ ... mà
+                                            ...,...</em></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="mr-2">–</span>
+                                    <span>Các cặp từ hô ứng: <em>vừa ... đã ..., chưa ... đã ..., càng ... càng ..., đâu
+                                            ... đó ..., bao nhiêu ... bấy nhiêu ...,...</em></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="glass-card rounded-[32px] p-5 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-full blur-3xl -mr-16 -mt-16">
                         </div>
@@ -262,118 +293,116 @@
                             </ul>
                         </div>
                     </div>
+                </section>
 
-                    <!-- Interactive Exercise 1 -->
-                    <div class="glass-card rounded-[24px] p-4 shadow-lg border-l-8 border-blue-500">
-                        <h3 class="font-black text-xl text-gray-800 mb-2 flex items-center"><span
-                                class="bg-blue-100 text-blue-600 rounded-lg px-3 py-1 text-sm mr-3">Bài 1</span> Tìm cặp
-                            kết từ (Quan hệ từ)</h3>
-                        <p class="text-sm text-gray-500 mb-4 italic">Em hãy bấm chọn vào các từ nối trong câu.</p>
+                <!-- Interactive Exercise 1 -->
+                <div class="glass-card rounded-[24px] p-4 shadow-lg border-l-8 border-blue-500">
+                    <h3 class="font-black text-xl text-gray-800 mb-2 flex items-center"><span
+                            class="bg-blue-100 text-blue-600 rounded-lg px-3 py-1 text-sm mr-3">Bài 1</span> Tìm cặp
+                        kết từ (Quan hệ từ)</h3>
+                    <p class="text-sm text-gray-500 mb-4 italic">Em hãy bấm chọn vào các từ nối trong câu.</p>
 
-                        <div class="space-y-2">
-                            <div class="p-4 bg-white/60 rounded-xl flex items-start sm:items-center justify-between gap-4"
-                                id="q1a" data-ans="Bởi,nên">
-                                <p class="text-lg leading-loose font-medium select-none sentence-content flex-1">
-                                    <span>a.</span> <span class="word">Bởi</span> <span class="word">tôi</span> <span
-                                        class="word">ăn</span> <span class="word">uống</span> <span
-                                        class="word">điều</span> <span class="word">độ</span> <span
-                                        class="word">và</span> <span class="word">làm</span> <span
-                                        class="word">việc</span> <span class="word">có</span> <span
-                                        class="word">chừng</span> <span class="word">mực</span> <span
-                                        class="word">nên</span> <span class="word">tôi</span> <span
-                                        class="word">chóng</span> <span class="word">lớn</span> <span
-                                        class="word">lắm.</span>
-                                </p>
-                                <div class="flex gap-2 shrink-0">
-                                    <button onclick="check1('q1a')"
-                                        class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
-                                        title="Kiểm tra">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </button>
-                                    <button onclick="reset1('q1a')"
-                                        class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
-                                        title="Làm lại">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
-                                            </path>
-                                        </svg>
-                                    </button>
-                                </div>
+                    <div class="space-y-2">
+                        <div class="p-4 bg-white/60 rounded-xl flex items-start sm:items-center justify-between gap-4"
+                            id="q1a" data-ans="Bởi,nên">
+                            <p class="text-lg leading-loose font-medium select-none sentence-content flex-1">
+                                <span>a.</span> <span class="word">Bởi</span> <span class="word">tôi</span> <span
+                                    class="word">ăn</span> <span class="word">uống</span> <span class="word">điều</span>
+                                <span class="word">độ</span> <span class="word">và</span> <span class="word">làm</span>
+                                <span class="word">việc</span> <span class="word">có</span> <span
+                                    class="word">chừng</span> <span class="word">mực</span> <span
+                                    class="word">nên</span> <span class="word">tôi</span> <span
+                                    class="word">chóng</span> <span class="word">lớn</span> <span
+                                    class="word">lắm.</span>
+                            </p>
+                            <div class="flex gap-2 shrink-0">
+                                <button onclick="check1('q1a')"
+                                    class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
+                                    title="Kiểm tra">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </button>
+                                <button onclick="reset1('q1a')"
+                                    class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
+                                    title="Làm lại">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                        </path>
+                                    </svg>
+                                </button>
                             </div>
+                        </div>
 
-                            <div class="p-4 bg-white/60 rounded-xl flex items-start sm:items-center justify-between gap-4"
-                                id="q1b" data-ans="Mặc dù,nhưng">
-                                <p class="text-lg leading-loose font-medium select-none sentence-content flex-1">
-                                    <span>b.</span> <span class="word">Mặc dù</span> <span class="word">chúng</span>
-                                    <span class="word">tôi</span> <span class="word">vẫn</span> <span
-                                        class="word">chơi</span> <span class="word">với</span> <span
-                                        class="word">nhau</span> <span class="word">nhưng</span> <span
-                                        class="word">thời</span> <span class="word">gian</span> <span
-                                        class="word">Pam</span> <span class="word">dành</span> <span
-                                        class="word">cho</span> <span class="word">tôi</span> <span
-                                        class="word">không</span> <span class="word">còn</span> <span
-                                        class="word">nhiều.</span>
-                                </p>
-                                <div class="flex gap-2 shrink-0">
-                                    <button onclick="check1('q1b')"
-                                        class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
-                                        title="Kiểm tra">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </button>
-                                    <button onclick="reset1('q1b')"
-                                        class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
-                                        title="Làm lại">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
-                                            </path>
-                                        </svg>
-                                    </button>
-                                </div>
+                        <div class="p-4 bg-white/60 rounded-xl flex items-start sm:items-center justify-between gap-4"
+                            id="q1b" data-ans="Mặc dù,nhưng">
+                            <p class="text-lg leading-loose font-medium select-none sentence-content flex-1">
+                                <span>b.</span> <span class="word">Mặc dù</span> <span class="word">chúng</span>
+                                <span class="word">tôi</span> <span class="word">vẫn</span> <span
+                                    class="word">chơi</span> <span class="word">với</span> <span
+                                    class="word">nhau</span> <span class="word">nhưng</span> <span
+                                    class="word">thời</span> <span class="word">gian</span> <span
+                                    class="word">Pam</span> <span class="word">dành</span> <span class="word">cho</span>
+                                <span class="word">tôi</span> <span class="word">không</span> <span
+                                    class="word">còn</span> <span class="word">nhiều.</span>
+                            </p>
+                            <div class="flex gap-2 shrink-0">
+                                <button onclick="check1('q1b')"
+                                    class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
+                                    title="Kiểm tra">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </button>
+                                <button onclick="reset1('q1b')"
+                                    class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
+                                    title="Làm lại">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                        </path>
+                                    </svg>
+                                </button>
                             </div>
+                        </div>
 
-                            <div class="p-4 bg-white/60 rounded-xl flex items-start sm:items-center justify-between gap-4"
-                                id="q1c" data-ans="Nếu,thì">
-                                <p class="text-lg leading-loose font-medium select-none sentence-content flex-1">
-                                    <span>c.</span> <span class="word">Nếu</span> <span class="word">hoa</span> <span
-                                        class="word">mua</span> <span class="word">có</span> <span
-                                        class="word">màu</span> <span class="word">tím</span> <span
-                                        class="word">hồng</span> <span class="word">thì</span> <span
-                                        class="word">hoa</span> <span class="word">sim</span> <span
-                                        class="word">tím</span> <span class="word">nhạt,</span> <span
-                                        class="word">phơn</span> <span class="word">phớt</span> <span
-                                        class="word">như</span> <span class="word">má</span> <span
-                                        class="word">con</span> <span class="word">gái.</span>
-                                </p>
-                                <div class="flex gap-2 shrink-0">
-                                    <button onclick="check1('q1c')"
-                                        class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
-                                        title="Kiểm tra">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </button>
-                                    <button onclick="reset1('q1c')"
-                                        class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
-                                        title="Làm lại">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
-                                            </path>
-                                        </svg>
-                                    </button>
-                                </div>
+                        <div class="p-4 bg-white/60 rounded-xl flex items-start sm:items-center justify-between gap-4"
+                            id="q1c" data-ans="Nếu,thì">
+                            <p class="text-lg leading-loose font-medium select-none sentence-content flex-1">
+                                <span>c.</span> <span class="word">Nếu</span> <span class="word">hoa</span> <span
+                                    class="word">mua</span> <span class="word">có</span> <span class="word">màu</span>
+                                <span class="word">tím</span> <span class="word">hồng</span> <span
+                                    class="word">thì</span> <span class="word">hoa</span> <span class="word">sim</span>
+                                <span class="word">tím</span> <span class="word">nhạt,</span> <span
+                                    class="word">phơn</span> <span class="word">phớt</span> <span
+                                    class="word">như</span> <span class="word">má</span> <span class="word">con</span>
+                                <span class="word">gái.</span>
+                            </p>
+                            <div class="flex gap-2 shrink-0">
+                                <button onclick="check1('q1c')"
+                                    class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
+                                    title="Kiểm tra">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </button>
+                                <button onclick="reset1('q1c')"
+                                    class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
+                                    title="Làm lại">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                        </path>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                     </div>
+                </div>
                 </section>
 
                 <!-- Exercise 2, 3, 4 -->
@@ -388,7 +417,8 @@
                             <div class="p-4 border border-orange-100 rounded-xl bg-orange-50/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
                                 id="q2a" data-ans="chưa-đã">
                                 <p class="flex-1 text-lg">a. Ngày <span class="slot mx-1">...</span> tắt hẳn, trăng
-                                    <span class="slot mx-1">...</span> lên rồi.</p>
+                                    <span class="slot mx-1">...</span> lên rồi.
+                                </p>
                                 <div class="flex gap-2 shrink-0 w-full sm:w-auto">
                                     <select
                                         class="flex-1 sm:w-48 p-3 rounded-lg border border-gray-200 text-base font-bold bg-white focus:ring-2 focus:ring-orange-400 focus:outline-none"
