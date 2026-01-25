@@ -13,7 +13,15 @@ async function askAI(id, prefix = "") {
         return;
     }
 
-    const sentence = prefix + " " + userInput;
+    // Auto-detect prefix if possible (more robust against cache)
+    if (!prefix) {
+        const questionText = input.closest('div.flex-col')?.querySelector('p')?.innerText || "";
+        if (questionText.includes('...') || questionText.endsWith('mà') || questionText.endsWith('nhưng')) {
+            prefix = questionText.replace(/\.\.\.*$/, "").replace(/^[a-z]\.\s+/, "").trim();
+        }
+    }
+
+    const sentence = (prefix + " " + userInput).trim();
 
     // UI: Loading state
     feedback.classList.remove('hidden');
