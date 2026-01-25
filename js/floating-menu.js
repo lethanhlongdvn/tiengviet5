@@ -395,7 +395,7 @@ const curriculumData = {
                             "title": "Bài 5: Giỏ hoa tháng Năm", "sections": [
                                 { "title": "Đọc: Giỏ hoa tháng Năm", "url": "211-gio-hoa-thang-nam.html" },
                                 { "title": "Luyện từ & Câu: Cách nối các vế câu ghép (Tiếp theo)", "url": "211-ltvc-gio-hoa-thang-nam.html" },
-                                { "title": "Viết: Viết đoạn văn tả người", "url": "#" }
+                                { "title": "Viết: Viết đoạn văn tả người", "url": "211-viet-doan-van-ta-nguoi.html" }
                             ]
                         },
                         {
