@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
     }
 
     // 1. Cấu hình Gemini API (Sử dụng biến môi trường GEMINI_API_KEY trên Netlify)
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = "gen-lang-client-0774900281";
     if (!apiKey) {
       console.error("Missing GEMINI_API_KEY environment variable");
       return {
