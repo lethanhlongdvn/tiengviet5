@@ -1,4 +1,4 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { GoogleGenAI } = require("@google/genai");
 
 exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
       return { statusCode: 400, body: JSON.stringify({ error: "No sentence or content provided" }) };
     }
 
-    // 1. Cấu hình Gemini API (Lấy từ Environment Variables trên Netlify)
+    // 1. Cấu hình Gemini API
     const apiKey = process.env.API_KEY_TIENGVIET;
     if (!apiKey) {
       return {
@@ -20,9 +20,9 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
+    const ai = new GoogleGenAI({ apiKey });
 
-    // 2. Chế độ Chuyên gia (Dựa trên tư vấn từ Gemini)
+    // 2. Chế độ Chuyên gia
     const systemInstruction = `
       Bạn là Chuyên gia Ngôn ngữ học và Giáo viên Tiểu học tâm huyết với 20 năm kinh nghiệm. 
       Nhiệm vụ: Chấm bài viết đoạn văn tả người cho học sinh lớp 5 (Bài 21).
@@ -39,28 +39,14 @@ exports.handler = async (event, context) => {
     `;
 
     try {
-      // Chuyển sang gemini-pro để đảm bảo tính tương thích cao nhất với API version
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      // 3. Gọi Gemini 3 Flash Preview theo tài liệu mới
+      const response = await ai.models.generateContent({
+        model: "gemini-3-flash-preview",
+        systemInstruction: systemInstruction,
+        contents: [{ role: 'user', parts: [{ text: `Phân tích bài tập sau và trả về JSON: "${sentence}"\n\nYêu cầu cấu trúc JSON:\n{\n  "diem": "điểm/10",\n  "uu_diem": "...",\n  "loi_sai": "...",\n  "huong_dan": "...",\n  "loi_nhan": "..."\n}` }] }]
+      });
 
-      const prompt = `
-        Bối cảnh: ${systemInstruction}
-        
-        Nhiệm vụ: Phân tích bài tập làm văn sau của học sinh và trả về kết quả dưới định dạng JSON thuần túy (không bao gồm Markdown):
-        "${sentence}"
-        
-        Yêu cầu cấu trúc JSON:
-        {
-          "diem": "điểm/10",
-          "uu_diem": "Những lời khen về cách dùng từ, hình ảnh so sánh hoặc tình cảm trong bài",
-          "loi_sai": "Chỉ ra lỗi ngữ pháp, lỗi logic cặp từ (nếu có) hoặc lỗi diễn đạt",
-          "huong_dan": "Gợi ý cách viết lại câu đó cho hay hơn, tình cảm hơn",
-          "loi_nhan": "Một lời nhắn gửi yêu thương, khích lệ từ Cô giáo dành cho em"
-        }
-      `;
-
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      let text = response.text();
+      let text = response.text;
 
       // Làm sạch text nếu AI trả về markdown code block
       text = text.replace(/```json/g, "").replace(/```/g, "").trim();
@@ -73,11 +59,11 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(analysis)
       };
     } catch (error) {
-      console.error("AI Grading Error:", error);
+      console.error("AI 3.0 Error:", error);
       return {
         statusCode: 500,
         body: JSON.stringify({
-          error: `Lỗi kết nối AI: ${error.message}`
+          error: `Lỗi kết nối AI 3.0: ${error.message}`
         })
       };
     }
