@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
     }
 
     // 1. Cấu hình Gemini API (Lấy từ Environment Variables trên Netlify)
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.GOOGLE_API_KEY;
     if (!apiKey) {
       return {
         statusCode: 500,
