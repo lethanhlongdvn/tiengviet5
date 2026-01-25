@@ -17,10 +17,11 @@ exports.handler = async (event, context) => {
       /đặt\s+câu\s+ghép[:.]?/gi,
       /viết\s+tiếp\s+vào\s+đây[:.]?/gi,
       /^[a-z]\.?\s+/i,
-      /\(hoặc\s+.*?\)/gi
+      /\(hoặc\s+.*?\)/gi,
+      /[a-z\s]+\.\.\.\s+[a-z\s]+(?:\.\.\.)?/gi // Catch "abc... xyz..." placeholders
     ];
     noise.forEach(n => sentence = sentence.replace(n, ""));
-    sentence = sentence.trim().replace(/^[:.]\s*/, "");
+    sentence = sentence.trim().replace(/^[:.,]\s*/, ""); // Also catch leading comma
 
     const analysis = analyzeSentence(sentence);
 
