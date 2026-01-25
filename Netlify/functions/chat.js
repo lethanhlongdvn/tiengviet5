@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     // 2. Tiền xử lý dữ liệu (Loại bỏ nhiễu từ đề bài)
     let processedSentence = sentence;
