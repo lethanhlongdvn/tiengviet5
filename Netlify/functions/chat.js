@@ -34,17 +34,18 @@ function analyzeSentence(sentence) {
     feedback: ""
   };
 
-  // Các cặp quan hệ từ phổ biến lớp 5
+  // Các cặp quan hệ từ phổ biến lớp 5 - Linh hoạt hơn với text ở đầu
   const patterns = [
-    { type: "Nguyên nhân - Kết quả", pair: ["vì", "nên"], regex: /vì\s+(.*?)\s+nên\s+(.*)/i },
-    { type: "Nguyên nhân - Kết quả", pair: ["bởi vì", "nên"], regex: /bởi vì\s+(.*?)\s+nên\s+(.*)/i },
-    { type: "Tương phản", pair: ["tuy", "nhưng"], regex: /tuy\s+(.*?)\s+nhưng\s+(.*)/i },
-    { type: "Tương phản", pair: ["mặc dù", "nhưng"], regex: /mặc dù\s+(.*?)\s+nhưng\s+(.*)/i },
-    { type: "Giả thiết - Kết quả", pair: ["nếu", "thì"], regex: /nếu\s+(.*?)\s+thì\s+(.*)/i },
-    { type: "Giả thiết - Kết quả", pair: ["hễ", "thì"], regex: /hễ\s+(.*?)\s+thì\s+(.*)/i },
-    { type: "Tăng tiến", pair: ["chẳng những", "mà"], regex: /chẳng những\s+(.*?)\s+mà\s+(.*)/i },
-    { type: "Tăng tiến", pair: ["không những", "mà"], regex: /không những\s+(.*?)\s+mà\s+(.*)/i },
-    { type: "Tăng tiến", pair: ["càng", "càng"], regex: /(.*?)\s+càng\s+(.*?)\s+càng\s+(.*)/i }
+    { type: "Nguyên nhân - Kết quả", pair: ["vì", "nên"], regex: /.*?vì\s+(.*?)\s+nên\s+(.*)/i },
+    { type: "Nguyên nhân - Kết quả", pair: ["bởi vì", "nên"], regex: /.*?bởi vì\s+(.*?)\s+nên\s+(.*)/i },
+    { type: "Nguyên nhân - Kết quả", pair: ["nhờ", "mà"], regex: /.*?nhờ\s+(.*?)\s+mà\s+(.*)/i },
+    { type: "Tương phản", pair: ["tuy", "nhưng"], regex: /.*?tuy\s+(.*?)\s+nhưng\s+(.*)/i },
+    { type: "Tương phản", pair: ["mặc dù", "nhưng"], regex: /.*?mặc dù\s+(.*?)\s+nhưng\s+(.*)/i },
+    { type: "Giả thiết - Kết quả", pair: ["nếu", "thì"], regex: /.*?nếu\s+(.*?)\s+thì\s+(.*)/i },
+    { type: "Giả thiết - Kết quả", pair: ["hễ", "thì"], regex: /.*?hễ\s+(.*?)\s+thì\s+(.*)/i },
+    { type: "Tăng tiến", pair: ["chẳng những", "mà"], regex: /.*?chẳng những\s+(.*?)\s+mà\s+(.*)/i },
+    { type: "Tăng tiến", pair: ["không những", "mà"], regex: /.*?không những\s+(.*?)\s+mà\s+(.*)/i },
+    { type: "Tăng tiến", pair: ["càng", "càng"], regex: /(.*?)\s+càng\s+(.*?)[,;\s]+càng\s+(.*)/i }
   ];
 
   let matched = false;
