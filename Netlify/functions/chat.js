@@ -41,6 +41,9 @@ function analyzeSentence(sentence) {
     { type: "Tương phản", pair: ["tuy", "nhưng"], regex: /tuy\s+(.*?)\s+nhưng\s+(.*)/i },
     { type: "Tương phản", pair: ["mặc dù", "nhưng"], regex: /mặc dù\s+(.*?)\s+nhưng\s+(.*)/i },
     { type: "Giả thiết - Kết quả", pair: ["nếu", "thì"], regex: /nếu\s+(.*?)\s+thì\s+(.*)/i },
+    { type: "Giả thiết - Kết quả", pair: ["hễ", "thì"], regex: /hễ\s+(.*?)\s+thì\s+(.*)/i },
+    { type: "Tăng tiến", pair: ["chẳng những", "mà"], regex: /chẳng những\s+(.*?)\s+mà\s+(.*)/i },
+    { type: "Tăng tiến", pair: ["không những", "mà"], regex: /không những\s+(.*?)\s+mà\s+(.*)/i },
     { type: "Tăng tiến", pair: ["càng", "càng"], regex: /(.*?)\s+càng\s+(.*?)\s+càng\s+(.*)/i }
   ];
 
@@ -49,43 +52,62 @@ function analyzeSentence(sentence) {
     const match = sentence.match(p.regex);
     if (match) {
       result.relationship = p.type;
+      matched = true;
 
       if (p.pair[0] === "càng") {
-        // Xử lý riêng cho cấu trúc càng... càng...
-        // Tạm thời đơn giản hóa
+        const v1_raw = match[1].trim() + " càng " + match[2].trim();
+        const v2_raw = "càng " + match[3].trim().replace(/[.!?]$/, "");
+        result.clauses.push(deconstructClause(v1_raw));
+        result.clauses.push(deconstructClause(v2_raw));
       } else {
         const v1 = match[1].trim();
         const v2 = match[2].trim().replace(/[.!?]$/, "");
-
         result.clauses.push(deconstructClause(v1));
         result.clauses.push(deconstructClause(v2));
       }
-      matched = true;
       break;
     }
   }
 
   if (!matched) {
-    // Nếu không khớp pattern, thử tách theo dấu phẩy
-    const parts = sentence.split(/[,;]/);
-    if (parts.length >= 2) {
-      result.relationship = "Nối trực tiếp hoặc từ đơn";
+    // Thử tách theo quan hệ từ đơn: và, nhưng, rồi, thì... hoặc dấu phẩy
+    const singleConnectives = [" và ", " nhưng ", " rồi ", " thì ", " hay ", " hoặc "];
+    let splitWord = "";
+    for (const conn of singleConnectives) {
+      if (sentence.includes(conn)) {
+        splitWord = conn;
+        break;
+      }
+    }
+
+    if (splitWord) {
+      result.relationship = `Nối bằng quan hệ từ '${splitWord.trim()}'`;
+      const parts = sentence.split(splitWord);
       parts.forEach(p => {
         if (p.trim()) result.clauses.push(deconstructClause(p.trim()));
       });
     } else {
-      result.clauses.push(deconstructClause(sentence));
+      const parts = sentence.split(/[,;]/);
+      if (parts.length >= 2) {
+        result.relationship = "Nối trực tiếp";
+        parts.forEach(p => {
+          if (p.trim()) result.clauses.push(deconstructClause(p.trim()));
+        });
+      } else {
+        result.clauses.push(deconstructClause(sentence));
+      }
     }
   }
 
-  // Tính điểm và Feedback theo phong cách giáo viên 20 năm kinh nghiệm
+  // Tính điểm và Feedback
+  const validClauses = result.clauses.filter(c => c.subject !== "Chưa xác định" && c.predicate !== "Chưa xác định");
+
   if (result.clauses.length >= 2) {
-    result.grade = 10;
-    result.feedback = `Chào em! Thầy/Cô đã xem bài của em. Câu ghép của em sử dụng rất tốt cặp quan hệ từ "${result.relationship}". ` +
-      `Em đã bóc tách các vế câu rất rõ ràng. Cố gắng phát huy tinh thần học tập này nhé!`;
+    result.grade = validClauses.length >= 1 ? 10 : 8; // Cho phép linh hoạt hơn cho HS lớp 5
+    result.feedback = `Chào em! EduRobot đã xem bài làm của em. Câu văn của em đã thể hiện rõ cấu trúc của một câu ghép với quan hệ "${result.relationship}". Em đã bóc tách được các vế câu rất tốt, hãy tiếp tục phát huy nhé!`;
   } else {
     result.grade = 5;
-    result.feedback = "Câu này dường như chưa phải là một câu ghép hoàn chỉnh có đủ hai vế em ạ. Em hãy thử sử dụng thêm các cặp từ nối như 'Vì... nên...' hay 'Tuy... nhưng...' để câu văn hay hơn nhé!";
+    result.feedback = "Câu này dường như chưa đủ các vế của một câu ghép hoàn chỉnh em ạ. Hãy thử thêm một vế câu nữa bằng cách sử dụng các từ nối như 'và', 'nên', 'nhưng' để câu văn hay hơn nhé!";
   }
 
   return result;
