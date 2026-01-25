@@ -11,8 +11,8 @@ exports.handler = async (event, context) => {
       return { statusCode: 400, body: JSON.stringify({ error: "No sentence or content provided" }) };
     }
 
-    // 1. Cấu hình Gemini API
-    const apiKey = "AIzaSyAXbN4-DsD-6-wOr-j2qcj5R5V2PAgqhaQ";
+    // 1. Cấu hình Gemini API (Lấy từ Environment Variables trên Netlify)
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       return {
         statusCode: 500,
