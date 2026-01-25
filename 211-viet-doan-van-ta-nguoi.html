@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viết đoạn văn tả người - EduRobot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --accent: #f59e0b;
+            --glass: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.5);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+
+        .serif-font {
+            font-family: 'Merriweather', serif;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background: white;
+            box-shadow: inset 0 -3px 0 var(--primary);
+        }
+
+        .tab-content {
+            display: none !important;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-content.active {
+            display: block !important;
+        }
+
+        .notebook-paper {
+            background-color: #fff;
+            background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 100% 2.5rem;
+            line-height: 2.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            min-height: 300px;
+        }
+
+        .highlight-adj {
+            background-color: #fef08a;
+            padding: 0 2px;
+            border-radius: 4px;
+        }
+
+        .highlight-art {
+            background-color: #bfdbfe;
+            padding: 0 2px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+    <header class="sticky top-0 z-50 px-4 py-2">
+        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-4">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                    <span class="text-xl font-black">E</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl font-black text-blue-700">EduRobot</span>
+                        <span
+                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide">TIẾNG
+                            VIỆT 5</span>
+                    </div>
+                    <div class="flex items-center space-x-2 overflow-hidden">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-gray-400">CHỦ ĐIỂM:</span>
+                        <span class="text-sm font-black uppercase tracking-wider text-blue-800">VẺ ĐẸP CUỘC SỐNG</span>
+                    </div>
+                </div>
+            </div>
+            <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center">
+                <li><a href="index.html" class="text-gray-500 hover:text-blue-600">Trang chủ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-4">
+        <div class="glass-card mb-6 rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-lg">
+            <div class="flex-1 flex bg-white/40">
+                <button onclick="switchTab('lesson')" id="btn-lesson"
+                    class="tab-btn active flex-1 py-4 text-center font-black text-base uppercase tracking-wider">1. Bài
+                    học & Luyện tập</button>
+                <button onclick="switchTab('practice')" id="btn-practice"
+                    class="tab-btn flex-1 py-4 text-center font-black text-base uppercase tracking-wider text-gray-400">2.
+                    Vận dụng</button>
+            </div>
+        </div>
+
+        <!-- TAB 1: BÀI HỌC -->
+        <div id="tab-lesson" class="tab-content active space-y-8">
+            <section class="max-w-5xl mx-auto space-y-6">
+                <div class="glass-card rounded-[32px] p-6 shadow-xl border-t-8 border-blue-500">
+                    <h1
+                        class="text-3xl font-black text-blue-800 mb-2 uppercase italic tracking-tight flex items-center">
+                        <span class="bg-blue-600 text-white px-4 py-1 rounded-xl mr-4 not-italic text-lg">VIẾT</span>
+                        Viết đoạn văn tả người
+                    </h1>
+                    <p class="text-gray-500 font-bold ml-16">Hướng dẫn quan sát và chọn lọc chi tiết tiêu biểu.</p>
+                </div>
+
+                <!-- Paragraph A -->
+                <div class="glass-card rounded-[24px] p-6 shadow-lg border-l-8 border-orange-400 space-y-4">
+                    <div class="flex items-start gap-4">
+                        <span
+                            class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-black shrink-0">a</span>
+                        <div class="serif-font text-xl leading-relaxed text-gray-800">
+                            <p>Ông nội của Nhụ đã tám mươi tuổi, nhưng <span class="highlight-adj">vóc người vẫn gọn và
+                                    chắc</span>, <span class="highlight-art">dáng đi dứt khoát như một ngọn sóng</span>.
+                                Ông có <span class="highlight-adj">nước da nâu sẫm</span>, ghi dấu ấn của cả một đời
+                                chèo thuyền trên mặt biển. Mỗi khi kết thúc một câu nói, ông thường dùng <span
+                                    class="highlight-art">tiếng "hầy"</span>. Đó là tiếng hô chèo thuyền của người dân
+                                chài xưa lúc trời sắp có dông. Ông thường ra hiệu bằng mắt và bằng tay. Ở trên biển thì
+                                đó là một điều rất bình thường. Nhưng ở nhà, ông cũng "nói" theo cách đó. Dần dần, con
+                                cháu cũng quen.</p>
+                            <p class="text-right text-sm italic mt-2">(Theo Trần Nhuận Minh)</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/50 rounded-2xl p-4 space-y-3">
+                        <label class="block font-black text-orange-700 uppercase text-xs">Phân tích của em:</label>
+                        <textarea id="ai-1a" placeholder="Em ấn tượng với chi tiết nào ở ông nội? Tại sao?"
+                            class="w-full p-4 rounded-xl border-2 border-orange-100 focus:border-orange-400 focus:outline-none min-h-[100px]"></textarea>
+                        <button onclick="askAI('1a')"
+                            class="bg-orange-500 hover:bg-orange-600 text-white font-black px-6 py-2 rounded-xl shadow-lg transition-all flex items-center">
+                            🤖 EduRobot Kiểm tra
+                        </button>
+                        <div id="fb-1a" class="hidden mt-4"></div>
+                    </div>
+                </div>
+
+                <!-- Paragraph B -->
+                <div class="glass-card rounded-[24px] p-6 shadow-lg border-l-8 border-pink-400 space-y-4">
+                    <div class="flex items-start gap-4">
+                        <span
+                            class="w-10 h-10 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center font-black shrink-0">b</span>
+                        <div class="serif-font text-xl leading-relaxed text-gray-800">
+                            <p>Mẹ dẫn tôi về thăm ngoại. Nghe tiếng tôi từ ngoài ngõ, ngoại <span
+                                    class="highlight-adj">lập cập chạy ra cửa</span>, dang hai tay đón tôi ngả vào.
+                                Ngoại mừng vui đến nỗi không ngăn được những <span class="highlight-art">giọt nước mắt
+                                    rơi trên đôi má nhăn nheo</span>. Ngoại ôm chặt tôi vào lòng, rồi ngoại dẫn tôi ra
+                                sau vườn, cho tôi tự tay hái những trái bưởi, trái xoài vàng ươm trên những cành chỉ la
+                                đà ngang mắt tôi. Tôi biết là ngoại để dành những trái cây sà thấp xuống như thế cho tôi
+                                về hái.</p>
+                            <p class="text-right text-sm italic mt-2">(Theo Lê Văn Trường)</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/50 rounded-2xl p-4 space-y-3">
+                        <label class="block font-black text-pink-700 uppercase text-xs">Phân tích của em:</label>
+                        <textarea id="ai-1b"
+                            placeholder="Em hãy tả lại tình cảm của bà qua một chi tiết ấn tượng nhất..."
+                            class="w-full p-4 rounded-xl border-2 border-pink-100 focus:border-pink-400 focus:outline-none min-h-[100px]"></textarea>
+                        <button onclick="askAI('1b')"
+                            class="bg-pink-500 hover:bg-pink-600 text-white font-black px-6 py-2 rounded-xl shadow-lg transition-all flex items-center">
+                            🤖 EduRobot Kiểm tra
+                        </button>
+                        <div id="fb-1b" class="hidden mt-4"></div>
+                    </div>
+                </div>
+
+                <!-- Paragraph C -->
+                <div class="glass-card rounded-[24px] p-6 shadow-lg border-l-8 border-green-400 space-y-4">
+                    <div class="flex items-start gap-4">
+                        <span
+                            class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-black shrink-0">c</span>
+                        <div class="serif-font text-xl leading-relaxed text-gray-800">
+                            <p>Chị Hà là một thành viên trong đoàn thanh niên của huyện đến giúp xã tôi chống úng ở cánh
+                                đồng chuẩn bị cấy giống lúa mới. Trông chị thật xinh tươi: <span
+                                    class="highlight-adj">nước da trắng, môi hồng</span>, <span
+                                    class="highlight-art">tóc mai dài vắt cong lên như một dấu hỏi lộn ngược</span>.
+                                Trên má chị có vài nốt tàn nhang. Mỗi khi chị cười, nốt tàn nhang lặn đi trên gò má đỏ
+                                ửng. Chị cười nói nhiều, chắc tính chị vốn sôi nổi, cũng có thể là vì hào hứng với
+                                chuyến đi giúp bà con xã tôi nên chị vui như thế.</p>
+                            <p class="text-right text-sm italic mt-2">(Theo Bùi Hiển)</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/50 rounded-2xl p-4 space-y-3">
+                        <label class="block font-black text-green-700 uppercase text-xs">Phân tích của em:</label>
+                        <textarea id="ai-1c" placeholder="Hình ảnh chị Hà hiện lên trong mắt em như thế nào nhỉ?"
+                            class="w-full p-4 rounded-xl border-2 border-green-100 focus:border-green-400 focus:outline-none min-h-[100px]"></textarea>
+                        <button onclick="askAI('1c')"
+                            class="bg-green-500 hover:bg-green-600 text-white font-black px-6 py-2 rounded-xl shadow-lg transition-all flex items-center">
+                            🤖 EduRobot Kiểm tra
+                        </button>
+                        <div id="fb-1c" class="hidden mt-4"></div>
+                    </div>
+                </div>
+
+                <!-- Writing Practice -->
+                <div class="glass-card rounded-[32px] p-8 shadow-2xl relative overflow-hidden bg-white/80">
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full blur-3xl -mr-32 -mt-32 opacity-50">
+                    </div>
+                    <h2 class="text-2xl font-black text-purple-800 mb-6 flex items-center uppercase italic">
+                        <span
+                            class="bg-purple-600 text-white w-10 h-10 rounded-lg flex items-center justify-center mr-3 not-italic shadow-lg shadow-purple-200">2</span>
+                        Luyện tập viết đoạn văn
+                    </h2>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Instructions -->
+                        <div class="lg:col-span-1 space-y-4">
+                            <div class="bg-purple-50 p-6 rounded-2xl border-2 border-dashed border-purple-200">
+                                <h3 class="font-black text-purple-700 mb-4 flex items-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Công thức 3 phần:
+                                </h3>
+                                <ul class="space-y-4 text-sm font-bold text-gray-600">
+                                    <li class="flex gap-3">
+                                        <span class="text-purple-600 shrink-0">❶</span>
+                                        <span><b>Mở đoạn:</b> Giới thiệu nhân vật (Ai? Quan hệ với em?).</span>
+                                    </li>
+                                    <li class="flex gap-3">
+                                        <span class="text-purple-600 shrink-0">❷</span>
+                                        <span><b>Thân đoạn:</b> Tả 1-2 nét ngoại hình & hoạt động đặc trưng.</span>
+                                    </li>
+                                    <li class="flex gap-3">
+                                        <span class="text-purple-600 shrink-0">❸</span>
+                                        <span><b>Kết đoạn:</b> Cảm xúc, ấn tượng của em.</span>
+                                    </li>
+                                </ul>
+                                <div
+                                    class="mt-6 p-4 bg-orange-50 rounded-xl border border-orange-200 text-xs text-orange-800 italic">
+                                    💡 <b>Mẹo sư phạm:</b> Tránh liệt kê khô khan. Hãy dùng câu ghép: "Tuy ngoại đã già
+                                    nhưng nụ cười ngoại vẫn ấm áp vô cùng."
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Writing Box -->
+                        <div class="lg:col-span-2 space-y-4">
+                            <h4 class="font-black text-gray-700 text-lg uppercase tracking-wider mb-2">Bài làm của em:
+                            </h4>
+                            <div class="relative">
+                                <textarea id="ai-final"
+                                    class="notebook-paper w-full font-medium text-lg text-gray-700 focus:outline-none focus:ring-4 focus:ring-purple-200 transition-all transition-shadow"
+                                    placeholder="Viết đoạn văn của em vào đây nhé..."></textarea>
+                                <div class="absolute bottom-4 right-4 flex gap-2">
+                                    <button onclick="askAI('final')"
+                                        class="bg-purple-600 hover:bg-purple-700 text-white font-black px-8 py-3 rounded-2xl shadow-xl transition-all transform hover:scale-105 active:scale-95 flex items-center">
+                                        🚀 Nộp Bài & Chấm Điểm
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="fb-final" class="hidden"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- TAB 2: VẬN DỤNG -->
+        <div id="tab-practice" class="tab-content">
+            <div class="max-w-5xl mx-auto space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Heart of Love Project -->
+                    <div class="glass-card rounded-[32px] p-8 space-y-6 shadow-xl border-t-8 border-red-500">
+                        <div
+                            class="w-16 h-16 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center text-3xl shadow-lg shadow-red-100">
+                            ❤️</div>
+                        <h2 class="text-2xl font-black text-gray-800 uppercase italic tracking-tight">Dự án: Khoảnh khắc
+                            yêu thương</h2>
+                        <p class="text-gray-600 font-medium leading-relaxed">Ghi lại những điều tuyệt vời về người thân
+                            bằng những hành động cụ thể:</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-4 p-4 bg-red-50 rounded-2xl border border-red-100">
+                                <span class="text-2xl">🎨</span>
+                                <span class="font-bold text-gray-700 text-sm">Vẽ một bức tranh hoặc làm bưu thiếp tặng
+                                    người thân.</span>
+                            </li>
+                            <li class="flex items-center gap-4 p-4 bg-red-50 rounded-2xl border border-red-100">
+                                <span class="text-2xl">📹</span>
+                                <span class="font-bold text-gray-700 text-sm">Quay video đọc lại đoạn văn em vừa viết để
+                                    gửi tặng.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Reading Corner -->
+                    <div class="glass-card rounded-[32px] p-8 space-y-6 shadow-xl border-t-8 border-yellow-500">
+                        <div
+                            class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center text-3xl shadow-lg shadow-yellow-100">
+                            📖</div>
+                        <h2 class="text-2xl font-black text-gray-800 uppercase italic tracking-tight">Góc tìm đọc: Vẻ
+                            đẹp cuộc sống</h2>
+                        <p class="text-gray-600 font-medium leading-relaxed">Tìm đọc những bài thơ thể hiện vẻ đẹp của
+                            sự tận tâm, yêu thương:</p>
+                        <div
+                            class="p-6 bg-yellow-50 rounded-3xl border-2 border-dashed border-yellow-200 flex flex-col items-center justify-center text-center space-y-3">
+                            <p class="font-black text-yellow-800 text-sm">Em hãy tìm các bài thơ trong thư viện hoặc
+                                Internet về các chủ đề:</p>
+                            <span
+                                class="px-4 py-2 bg-white rounded-full text-xs font-black text-yellow-600 shadow-sm underline">Sự
+                                tận tâm với công việc</span>
+                            <span
+                                class="px-4 py-2 bg-white rounded-full text-xs font-black text-yellow-600 shadow-sm underline">Tình
+                                cảm gia đình, cộng đồng</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/ai-grader.js"></script>
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active');
+                el.classList.add('text-gray-400');
+            });
+
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.getElementById('btn-' + tab).classList.add('active');
+            document.getElementById('btn-' + tab).classList.remove('text-gray-400');
+        }
+
+        // Handle navigation lessons menu (if needed for index.html integration)
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdown = document.getElementById('top-menu-lessons-dropdown');
+            if (dropdown) {
+                // Sample lessons for the dropdown
+                const lessons = [
+                    { name: 'Gió hòa tháng Năm', url: '211-gio-hoa-thang-nam.html' },
+                    { name: 'LTVC: Cách nối câu ghép', url: '211-ltvc-gio-hoa-thang-nam.html' },
+                    { name: 'Viết: Đoạn văn tả người', url: '211-viet-doan-van-ta-nguoi.html' }
+                ];
+                dropdown.innerHTML = lessons.map(l => `<a href="${l.url}" class="block px-4 py-3 hover:bg-blue-50 rounded-xl transition-all font-bold text-gray-600">${l.name}</a>`).join('');
+            }
+        });
+    </script>
+</body>
+
+</html>
