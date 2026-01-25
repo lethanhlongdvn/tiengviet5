@@ -719,7 +719,7 @@
             else { document.getElementById('resultTitle').innerText = "Cố gắng lên nhé!"; document.getElementById('resultMsg').innerText = "Hãy xem lại bài đọc và làm lại bài tập để đạt điểm cao hơn."; }
         }
         function restartQuiz() { document.getElementById('quiz-results').classList.add('hidden'); document.getElementById('quiz-registration').classList.remove('hidden'); }
-        const firebaseConfig = { apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc", authDomain: "gamhoctap.firebaseapp.com", projectId: "gamhoctap", storageBucket: "gamhoctap.firebasestorage.app", messagingSenderId: "833329613932", appId: "1:833329613932:web:0d8574827bcfe50b535c49", measurementId: "G-YT1PKCYS67" };
+        const firebaseConfig = { apiKey: "YOUR_FIREBASE_API_KEY", authDomain: "gamhoctap.firebaseapp.com", projectId: "gamhoctap", storageBucket: "gamhoctap.firebasestorage.app", messagingSenderId: "833329613932", appId: "1:833329613932:web:0d8574827bcfe50b535c49", measurementId: "G-YT1PKCYS67" };
         firebase.initializeApp(firebaseConfig); const db = firebase.firestore();
         function closeSuccessModal() { document.getElementById('successModal').classList.remove('active'); restartQuiz(); switchTab('lesson'); }
         async function submitResults(e) {
