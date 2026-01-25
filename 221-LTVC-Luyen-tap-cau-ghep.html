@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện tập về Câu Ghép - EduRobot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --accent: #f59e0b;
+            --glass: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.5);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+
+        .serif-font {
+            font-family: 'Merriweather', serif;
+        }
+
+        .bg-paper {
+            background-color: #fdfbf7;
+            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background: white;
+            box-shadow: inset 0 -3px 0 var(--primary);
+        }
+
+        .tab-content {
+            display: none !important;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-content.active {
+            display: block !important;
+        }
+
+        #tab-quiz.active {
+            display: flex !important;
+        }
+
+        #quiz-container {
+            height: calc(100vh - 180px);
+            max-height: 600px;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            transform: translateX(4px);
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .option-btn.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-open .accordion-content {
+            max-height: 1000px;
+        }
+
+        .accordion-open svg {
+            transform: rotate(180deg);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .word {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 0 2px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .word:hover {
+            background-color: #e0f2fe;
+        }
+
+        .word.selected {
+            background-color: #fef3c7;
+            border-color: #f59e0b;
+        }
+
+        .word.is-correct {
+            background-color: #86efac !important;
+            color: #064e3b;
+            border-color: #22c55e;
+        }
+
+        .word.is-wrong {
+            background-color: #fca5a5 !important;
+            color: #7f1d1d;
+            border-color: #ef4444;
+        }
+
+        .slot {
+            border-bottom: 2px dashed #f59e0b;
+            color: #f59e0b;
+            font-weight: bold;
+            padding: 0 5px;
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+    <header class="sticky top-0 z-50 px-4 py-2">
+        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-4">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                    <span class="text-xl font-black">E</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+                    <div class="flex items-center space-x-3"><span
+                            class="text-2xl font-black text-blue-700">EduRobot</span><span
+                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TIẾNG
+                            VIỆT 5</span></div>
+                    <div class="flex items-center space-x-2 overflow-hidden"><span
+                            class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ
+                            ĐIỂM:</span><span
+                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">LUYỆN
+                            TẬP VỀ CÂU GHÉP</span></div>
+                </div>
+            </div>
+            <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
+                <li><a href="index.html"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">Trang chủ</a>
+                </li>
+                <li class="relative group">
+                    <button id="top-menu-lesson-btn"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">Bài
+                        học <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg></button>
+                    <div id="top-menu-lessons-dropdown"
+                        class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
+                    </div>
+                </li>
+                <li><button onclick="openTeacherStats()"
+                        class="text-gray-500 hover:text-blue-600 transition-colors py-2">Giáo viên</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-2">
+        <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
+            <div class="flex-1 flex bg-white/40">
+                <button onclick="switchTab('lesson')" id="btn-lesson"
+                    class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">1.
+                    Bài tập & Vận dụng</button>
+                <button onclick="switchTab('quiz')" id="btn-quiz"
+                    class="tab-btn flex-1 py-4 text-center font-black text-base text-gray-400 transition-all uppercase tracking-wider">2.
+                    Trắc nghiệm</button>
+            </div>
+        </div>
+
+        <!-- TAB 1: BÀI HỌC -->
+        <div id="tab-lesson" class="tab-content active">
+            <div class="max-w-5xl mx-auto space-y-4">
+                <!-- Theory & Instruction -->
+                <section class="w-full space-y-3">
+                    <div class="glass-card rounded-[32px] p-5 shadow-xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-full blur-3xl -mr-16 -mt-16">
+                        </div>
+                        <h1 class="text-xl font-black text-blue-800 mb-3 uppercase tracking-tight relative z-10">
+                            <span class="border-b-4 border-orange-400">Luyện tập về Câu Ghép</span>
+                        </h1>
+                        <div class="serif-font text-gray-700 text-base leading-relaxed space-y-2">
+                            <p>Hãy thực hiện các bài tập dưới đây để kiểm tra hiểu biết của em về câu ghép:</p>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li><strong>Bài 1:</strong> Tìm cặp kết từ trong câu ghép</li>
+                                <li><strong>Bài 2:</strong> Tìm cặp kết từ phù hợp</li>
+                                <li><strong>Bài 3:</strong> Viết tiếp vế câu</li>
+                                <li><strong>Bài 4:</strong> Đặt câu ghép theo yêu cầu</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 1: Tìm cặp kết từ -->
+                    <div class="glass-card rounded-[24px] p-4 shadow-lg border-l-8 border-blue-500">
+                        <h3 class="font-black text-lg text-gray-800 mb-2 flex items-center"><span
+                                class="bg-blue-100 text-blue-600 rounded-lg px-3 py-1 text-xs mr-3">Bài 1</span> Tìm cặp
+                            kết từ (Quan hệ từ)</h3>
+                        <p class="text-xs text-gray-500 mb-3 italic">Em hãy bấm chọn vào các từ nối trong câu.</p>
+
+                        <div class="space-y-2">
+                            <div class="p-4 bg-white/60 rounded-xl flex items-start sm:items-center justify-between gap-4"
+                                id="q1a" data-ans="và,nhưng">
+                                <p class="text-lg leading-loose font-medium select-none sentence-content flex-1">
+                                    <span>a.</span> <span class="word">Làng</span> <span class="word">Tày,</span> <span
+                                        class="word">làng</span> <span class="word">Dao</span> <span
+                                        class="word">ven</span> <span class="word">suối</span> <span
+                                        class="word">và</span> <span class="word">trong</span> <span
+                                        class="word">rừng,</span> <span class="word">nhưng</span> <span
+                                        class="word">làng</span> <span class="word">người</span> <span
+                                        class="word">Mông</span> <span class="word">ở</span> <span
+                                        class="word">chơ</span> <span class="word">vơ</span> <span
+                                        class="word">đỉnh</span> <span class="word">núi,</span> <span
+                                        class="word">giữa</span> <span class="word">cỏ</span> <span
+                                        class="word">tranh</span> <span class="word">mênh</span> <span
+                                        class="word">mông.</span>
+                                </p>
+                                <div class="flex gap-2 shrink-0">
+                                    <button onclick="check1('q1a')"
+                                        class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
+                                        title="Kiểm tra">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </button>
+                                    <button onclick="reset1('q1a')"
+                                        class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
+                                        title="Làm lại">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-white/60 rounded-xl flex items-start sm:items-center justify-between gap-4"
+                                id="q1b" data-ans="mặc dù,nhưng">
+                                <p class="text-lg leading-loose font-medium select-none sentence-content flex-1">
+                                    <span>b.</span> <span class="word">Mặc</span> <span class="word">dù</span> <span
+                                        class="word">nước</span> <span class="word">dâng</span> <span
+                                        class="word">lên</span> <span class="word">cao</span> <span
+                                        class="word">nhưng</span> <span class="word">Sơn</span> <span
+                                        class="word">Tinh</span> <span class="word">lại</span> <span
+                                        class="word">làm</span> <span class="word">cho</span> <span
+                                        class="word">đồi,</span> <span class="word">núi</span> <span
+                                        class="word">mọc</span> <span class="word">cao</span> <span
+                                        class="word">lên.</span>
+                                </p>
+                                <div class="flex gap-2 shrink-0">
+                                    <button onclick="check1('q1b')"
+                                        class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
+                                        title="Kiểm tra">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </button>
+                                    <button onclick="reset1('q1b')"
+                                        class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
+                                        title="Làm lại">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-white/60 rounded-xl flex items-start sm:items-center justify-between gap-4"
+                                id="q1c" data-ans="nếu,thì">
+                                <p class="text-lg leading-loose font-medium select-none sentence-content flex-1">
+                                    <span>c.</span> <span class="word">Nếu</span> <span class="word">em</span> <span
+                                        class="word">hoàn</span> <span class="word">thành</span> <span
+                                        class="word">bài</span> <span class="word">tập</span> <span
+                                        class="word">tốt</span> <span class="word">thì</span> <span
+                                        class="word">em</span> <span class="word">sẽ</span> <span
+                                        class="word">được</span> <span class="word">điểm</span> <span
+                                        class="word">cao.</span>
+                                </p>
+                                <div class="flex gap-2 shrink-0">
+                                    <button onclick="check1('q1c')"
+                                        class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
+                                        title="Kiểm tra">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </button>
+                                    <button onclick="reset1('q1c')"
+                                        class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
+                                        title="Làm lại">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2: Tìm cặp từ hô ứng -->
+                    <div class="glass-card rounded-[24px] p-4 shadow-lg border-l-8 border-orange-400">
+                        <h3 class="font-black text-lg text-gray-800 mb-2 flex items-center"><span
+                                class="bg-orange-100 text-orange-600 rounded-lg px-3 py-1 text-xs mr-3">Bài 2</span>
+                            Tìm cặp kết từ phù hợp</h3>
+
+                        <div class="space-y-2 text-gray-700">
+                            <div class="p-3 border border-orange-100 rounded-xl bg-orange-50/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                                id="q2a" data-ans="và-và">
+                                <p class="flex-1">a. Em có một khu vườn rộng <span class="slot mx-1">...</span> em sẽ
+                                    trong thật nhiều loại cây để tạo câu ghép.</p>
+                                <div class="flex gap-2 shrink-0 w-full sm:w-auto">
+                                    <select
+                                        class="flex-1 sm:w-40 p-2 rounded-lg border border-gray-200 text-sm font-bold bg-white focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                                        onchange="update2('q2a', this.value)">
+                                        <option value="">-- Chọn --</option>
+                                        <option value="và-và">và... và...</option>
+                                        <option value="mặc dù-nhưng">mặc dù... nhưng...</option>
+                                        <option value="nếu-thì">nếu... thì...</option>
+                                    </select>
+                                    <button onclick="check2('q2a')"
+                                        class="bg-orange-500 text-white px-4 py-2 rounded-lg font-bold shadow hover:bg-orange-600 transition-all">✓</button>
+                                </div>
+                            </div>
+
+                            <div class="p-3 border border-orange-100 rounded-xl bg-orange-50/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                                id="q2b" data-ans="mặc dù-nhưng">
+                                <p class="flex-1">b. <span class="slot mx-1">...</span> thành phố ngày nay không sâm
+                                    uất, <span class="slot mx-1">...</span> nó rất hấp dẫn du khách.</p>
+                                <div class="flex gap-2 shrink-0 w-full sm:w-auto">
+                                    <select
+                                        class="flex-1 sm:w-40 p-2 rounded-lg border border-gray-200 text-sm font-bold bg-white focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                                        onchange="update2('q2b', this.value)">
+                                        <option value="">-- Chọn --</option>
+                                        <option value="và-và">và... và...</option>
+                                        <option value="mặc dù-nhưng">mặc dù... nhưng...</option>
+                                        <option value="nếu-thì">nếu... thì...</option>
+                                    </select>
+                                    <button onclick="check2('q2b')"
+                                        class="bg-orange-500 text-white px-4 py-2 rounded-lg font-bold shadow hover:bg-orange-600 transition-all">✓</button>
+                                </div>
+                            </div>
+
+                            <div class="p-3 border border-orange-100 rounded-xl bg-orange-50/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                                id="q2c" data-ans="nếu-thì">
+                                <p class="flex-1">c. <span class="slot mx-1">...</span> em hoàn thành bài tập tốt <span
+                                        class="slot mx-1">...</span> em sẽ được điểm cao.</p>
+                                <div class="flex gap-2 shrink-0 w-full sm:w-auto">
+                                    <select
+                                        class="flex-1 sm:w-40 p-2 rounded-lg border border-gray-200 text-sm font-bold bg-white focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                                        onchange="update2('q2c', this.value)">
+                                        <option value="">-- Chọn --</option>
+                                        <option value="và-và">và... và...</option>
+                                        <option value="mặc dù-nhưng">mặc dù... nhưng...</option>
+                                        <option value="nếu-thì">nếu... thì...</option>
+                                    </select>
+                                    <button onclick="check2('q2c')"
+                                        class="bg-orange-500 text-white px-4 py-2 rounded-lg font-bold shadow hover:bg-orange-600 transition-all">✓</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 3: Viết tiếp vế câu -->
+                    <div class="glass-card rounded-[24px] p-4 shadow-lg border-l-8 border-purple-500 API-box">
+                        <h3 class="font-black text-lg text-gray-800 mb-2 flex items-center"><span
+                                class="bg-purple-100 text-purple-600 rounded-lg px-3 py-1 text-xs mr-3">Bài 3</span>
+                            Viết tiếp vế câu</h3>
+                        <div class="space-y-2">
+                            <div
+                                class="p-4 bg-white/60 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative">
+                                <p class="text-sm font-bold text-gray-700 flex-1">a. Em có một khu vườn rộng và...</p>
+                                <div class="flex gap-2 w-full sm:w-auto items-center">
+                                    <input type="text" id="ai-3a" placeholder="Viết tiếp..."
+                                        class="flex-1 sm:w-64 px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-500 focus:outline-none text-sm">
+                                    <button onclick="askAI('3a')"
+                                        class="bg-purple-600 text-white w-9 h-9 flex items-center justify-center rounded-lg text-xs hover:bg-purple-700 transition-all font-bold shadow-md">✓</button>
+                                </div>
+                                <div class="ai-feedback hidden absolute top-full left-0 right-0 z-10 mt-2 p-3 bg-purple-50 text-purple-800 text-sm rounded-lg"
+                                    id="fb-3a"></div>
+                            </div>
+                            <div
+                                class="p-4 bg-white/60 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative">
+                                <p class="text-sm font-bold text-gray-700 flex-1">b. Mặc dù thành phố ngày nay không sâm
+                                    uất nhưng...</p>
+                                <div class="flex gap-2 w-full sm:w-auto items-center">
+                                    <input type="text" id="ai-3b" placeholder="Viết tiếp..."
+                                        class="flex-1 sm:w-64 px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-500 focus:outline-none text-sm">
+                                    <button onclick="askAI('3b')"
+                                        class="bg-purple-600 text-white w-9 h-9 flex items-center justify-center rounded-lg text-xs hover:bg-purple-700 transition-all font-bold shadow-md">✓</button>
+                                </div>
+                                <div class="ai-feedback hidden absolute top-full left-0 right-0 z-10 mt-2 p-3 bg-purple-50 text-purple-800 text-sm rounded-lg"
+                                    id="fb-3b"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 4: Đặt câu ghép -->
+                    <div class="glass-card rounded-[24px] p-4 shadow-lg border-l-8 border-green-500 API-box">
+                        <h3 class="font-black text-lg text-gray-800 mb-2 flex items-center"><span
+                                class="bg-green-100 text-green-600 rounded-lg px-3 py-1 text-xs mr-3">Bài 4</span> Đặt
+                            câu ghép</h3>
+                        <div class="space-y-2">
+                            <div
+                                class="p-4 bg-white/60 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative">
+                                <p class="text-sm font-bold text-gray-700 flex-1">a. Sử dụng cặp kết từ: <b>Vì...
+                                        nên...</b> (hoặc Bởi... nên..., Nhờ... mà...)</p>
+                                <div class="flex gap-2 w-full sm:w-auto items-center">
+                                    <input type="text" id="ai-4a" placeholder="Đặt câu..."
+                                        class="flex-1 sm:w-64 px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:outline-none text-sm">
+                                    <button onclick="askAI('4a')"
+                                        class="bg-green-600 text-white w-9 h-9 flex items-center justify-center rounded-lg text-xs hover:bg-green-700 transition-all font-bold shadow-md">✓</button>
+                                </div>
+                                <div class="ai-feedback hidden absolute top-full left-0 right-0 z-10 mt-2 p-3 bg-green-50 text-green-800 text-sm rounded-lg"
+                                    id="fb-4a"></div>
+                            </div>
+                            <div
+                                class="p-4 bg-white/60 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative">
+                                <p class="text-sm font-bold text-gray-700 flex-1">b. Sử dụng cặp từ hô ứng: <b>vừa...
+                                        đã...</b> hoặc <b>càng... càng...</b></p>
+                                <div class="flex gap-2 w-full sm:w-auto items-center">
+                                    <input type="text" id="ai-4b" placeholder="Đặt câu..."
+                                        class="flex-1 sm:w-64 px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:outline-none text-sm">
+                                    <button onclick="askAI('4b')"
+                                        class="bg-green-600 text-white w-9 h-9 flex items-center justify-center rounded-lg text-xs hover:bg-green-700 transition-all font-bold shadow-md">✓</button>
+                                </div>
+                                <div class="ai-feedback hidden absolute top-full left-0 right-0 z-10 mt-2 p-3 bg-green-50 text-green-800 text-sm rounded-lg"
+                                    id="fb-4b"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- TAB 2: TRẮC NGHIỆM -->
+        <div id="tab-quiz" class="tab-content">
+            <div
+                class="max-w-4xl mx-auto glass-card rounded-[40px] shadow-2xl overflow-hidden flex flex-col min-h-[500px] w-full">
+                <!-- Registration -->
+                <div id="quiz-registration" class="p-4 md:p-8 flex-grow flex flex-col justify-center overflow-auto">
+                    <div class="text-center mb-6">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white mb-4 shadow-xl shadow-blue-200 mx-auto transform -rotate-3">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-black text-gray-800 mb-1 tracking-tight">Đăng ký luyện tập</h2>
+                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Luyện tập về Câu Ghép
+                        </p>
+                    </div>
+                    <form onsubmit="startQuiz(event)" class="w-full max-w-sm mx-auto space-y-4">
+                        <input type="text" id="studentName" required placeholder="Họ và tên của em"
+                            class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold placeholder:text-gray-300 shadow-sm">
+                        <div class="grid grid-cols-2 gap-4">
+                            <select id="studentClass" required
+                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm cursor-pointer">
+                                <option value="">Chọn Lớp</option>
+                                <option value="5/1">5/1</option>
+                                <option value="5/2">5/2</option>
+                                <option value="5/3">5/3</option>
+                                <option value="5/4">5/4</option>
+                                <option value="5/5">5/5</option>
+                            </select>
+                            <select id="schoolSelect" required onchange="checkSchool()"
+                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm cursor-pointer">
+                                <option value="Tiểu học Đỗ Văn Nại">TH Đỗ Văn Nại</option>
+                                <option value="Khác">Trường khác...</option>
+                            </select>
+                        </div>
+                        <input type="text" id="otherSchool" placeholder="Tên trường của em"
+                            class="hidden w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white transition-all font-bold shadow-sm">
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-base uppercase tracking-wider">Bắt
+                            đầu luyện tập</button>
+                    </form>
+                </div>
+
+                <!-- Quiz Engine -->
+                <div id="quiz-container" class="hidden flex-grow flex flex-col">
+                    <div class="bg-blue-600/5 px-6 py-4 flex justify-between items-center border-b border-blue-100">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center font-black mr-4 shadow-lg shadow-blue-200"
+                                id="questionNum">1</div>
+                            <div class="flex flex-col"><span
+                                    class="text-[10px] font-black text-blue-600 uppercase tracking-widest leading-none mb-1"
+                                    id="progressText">CÂU TRẮC NGHIỆM: 1/5</span><span
+                                    class="text-xs text-gray-400 font-bold leading-none">Luyện tập về Câu Ghép</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-center overflow-auto">
+                        <h3 class="text-xl md:text-2xl font-black text-gray-800 mb-6 leading-tight transition-all"
+                            id="questionText">Nội dung?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="optionsArea"></div>
+                    </div>
+                    <div class="px-6 py-4 border-t border-gray-50 flex justify-between items-center bg-gray-50/50">
+                        <span class="text-xs font-bold text-gray-400 italic">* Chọn đáp án đúng nhất</span>
+                        <button id="nextBtn" disabled
+                            class="bg-blue-600 disabled:opacity-30 hover:bg-blue-700 text-white font-black py-3 px-10 rounded-2xl shadow-lg shadow-blue-100 transition-all active:scale-95 uppercase text-sm tracking-widest">Câu
+                            tiếp theo</button>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div id="quiz-results"
+                    class="hidden p-8 flex-grow flex flex-col items-center justify-center text-center">
+                    <div class="relative w-40 h-40 mb-8"><svg class="w-full h-full transform -rotate-90">
+                            <circle cx="80" cy="80" r="74" stroke="currentColor" stroke-width="12" fill="transparent"
+                                class="text-gray-100" />
+                            <circle id="scoreCircle" cx="80" cy="80" r="74" stroke="blue" stroke-width="12"
+                                fill="transparent" class="transition-all duration-1000 ease-out"
+                                stroke-dasharray="0, 465" stroke-linecap="round" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center"><span
+                                class="text-5xl font-black text-gray-800" id="scoreText">0</span><span
+                                class="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mt-1">Điểm
+                                số</span></div>
+                    </div>
+                    <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Hoàn thành!</h2>
+                    <p class="text-gray-500 mb-10 max-w-sm font-bold" id="resultMsg">Em đã nỗ lực hết mình!</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md"><button onclick="restartQuiz()"
+                            class="bg-white hover:bg-gray-50 text-gray-700 font-black py-4 rounded-2xl border-2 border-gray-100 transition-all shadow-sm">LÀM
+                            LẠI</button><button onclick="submitResults(event)"
+                            class="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-100 transition-all">NỘP
+                            KẾT QUẢ</button></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Teacher Stats -->
+    <div id="statsModal" class="modal">
+        <div
+            class="bg-white rounded-[40px] w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl m-4 transform transition-all">
+            <div class="p-8 border-b flex justify-between items-center bg-gray-50/50 backdrop-blur-xl">
+                <div class="flex items-center space-x-4">
+                    <div
+                        class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black text-gray-800 tracking-tight">Bảng kết quả</h2>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Dành riêng cho giáo
+                            viên</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3"><button onclick="exportToExcel()"
+                        class="bg-green-600 hover:bg-green-700 text-white font-black py-3 px-6 rounded-2xl text-sm flex items-center shadow-lg shadow-green-100 transition-all active:scale-95">XUẤT
+                        EXCEL</button><button onclick="closeModal()"
+                        class="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-2xl transition-all">X</button>
+                </div>
+            </div>
+            <div class="flex-grow overflow-auto p-8 bg-gray-50/30">
+                <table class="w-full">
+                    <thead>
+                        <tr
+                            class="text-left text-gray-400 uppercase text-[10px] font-black tracking-[0.2em] border-b-2 border-gray-100 pb-4">
+                            <th class="px-6 py-4">STT</th>
+                            <th class="px-6 py-4">Họ và Tên</th>
+                            <th class="px-6 py-4">Lớp</th>
+                            <th class="px-6 py-4">Trường</th>
+                            <th class="px-6 py-4 text-center">Điểm</th>
+                            <th class="px-6 py-4 text-center">Lần</th>
+                            <th class="px-6 py-4 text-center">Thời gian</th>
+                            <th class="px-6 py-4 text-right">Hoàn thành</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statsTableBody" class="divide-y divide-gray-100"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal"
+        class="success-modal hidden fixed inset-0 z-[200] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
+        <div
+            class="success-card glass-card rounded-[40px] p-10 max-w-sm w-full text-center shadow-3xl border-white/50 relative">
+            <div
+                class="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 rounded-3xl flex items-center justify-center text-white mx-auto mb-8 shadow-xl shadow-green-100 transform rotate-6 scale-110">
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h2 class="text-3xl font-black text-gray-800 mb-2 tracking-tight">Thành công!</h2>
+            <p class="text-gray-500 mb-10 font-bold leading-relaxed">Em đã hoàn thành xuất sắc!</p>
+            <button onclick="closeSuccessModal()"
+                class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 uppercase tracking-widest text-sm">Đóng</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-3 px-4 bg-white/30 backdrop-blur-md border-t border-white/50 w-full z-10 flex-none mt-6">
+        <div class="container mx-auto text-center">
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">@ 2026 EduRobot - Hệ thống
+                học tập thông minh</p>
+            <p class="text-xs font-bold text-blue-600 flex items-center justify-center">
+                Phát triển bởi Lê Thành Long
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/floating-menu.js"></script>
+    <script src="js/ai-grader.js"></script>
+    <script>
+        function celebrate() { confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); }
+        function switchTab(t) { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active')); document.getElementById('btn-' + t).classList.add('active'); document.getElementById('tab-' + t).classList.add('active'); }
+
+        // Exercise 1 Logic
+        document.querySelectorAll('.word').forEach(s => {
+            s.onclick = function () { if (!this.closest('.locked')) this.classList.toggle('selected'); }
+        });
+        function check1(id) {
+            const row = document.getElementById(id);
+            const ans = row.getAttribute('data-ans').split(',');
+            const words = row.querySelectorAll('.word');
+            let right = 0, error = false;
+            words.forEach(w => {
+                const txt = w.innerText.replace(/[.,]/g, "");
+                if (w.classList.contains('selected')) { if (ans.includes(txt)) { w.classList.add('is-correct'); right++; } else { w.classList.add('is-wrong'); error = true; } }
+            });
+            if (!error && right === ans.length) { celebrate(); row.classList.add('locked'); }
+        }
+        function reset1(id) {
+            const row = document.getElementById(id);
+            row.classList.remove('locked');
+            row.querySelectorAll('.word').forEach(w => w.classList.remove('selected', 'is-correct', 'is-wrong'));
+        }
+
+        // Exercise 2 Logic - Fill in connective words
+        function update2(id, val) {
+            const slots = document.getElementById(id).querySelectorAll('.slot');
+            if (!val) { slots[0].innerText = "..."; slots[1].innerText = "..."; return; }
+            const p = val.split('-');
+            slots[0].innerText = p[0]; slots[1].innerText = p[1];
+            slots.forEach(s => { s.style.color = "#f59e0b"; s.style.borderBottomColor = "#f59e0b"; });
+        }
+        function check2(id) {
+            const row = document.getElementById(id);
+            const sel = row.querySelector('select').value;
+            const slots = row.querySelectorAll('.slot');
+            if (sel === row.getAttribute('data-ans')) {
+                slots.forEach(s => { s.style.color = "#22c55e"; s.style.borderBottomColor = "#22c55e"; });
+                celebrate();
+            } else {
+                slots.forEach(s => { s.style.color = "#ef4444"; s.style.borderBottomColor = "#ef4444"; });
+            }
+        }
+
+        // Quiz Logic
+        const allQuestions = [
+            { q: "Câu ghép là gì?", a: ["Câu có 1 cụm C-V", "Câu có nhiều vế câu ghép lại", "Câu chỉ có chủ ngữ", "Câu chỉ có vị ngữ"], c: 1 },
+            { q: "Các vế câu ghép nối với nhau bằng cách nào?", a: ["Chỉ dùng từ nối", "Chỉ dùng dấu câu", "Dùng từ nối hoặc dấu câu", "Không nối gì cả"], c: 2 },
+            { q: "Cặp từ 'Vì... nên...' biểu thị quan hệ gì?", a: ["Nguyên nhân - Kết quả", "Điều kiện - Kết quả", "Tương phản", "Tăng tiến"], c: 0 },
+            { q: "Trong câu 'Tuy trời mưa nhưng Lan vẫn đi học', cặp từ nối là?", a: ["Tuy... nhưng...", "Vì... nên...", "Nếu... thì...", "Hễ... thì..."], c: 0 },
+            { q: "Câu nào dưới đây là câu ghép?", a: ["Trời mưa to.", "Lan đi học.", "Trời mưa to và Lan nghỉ học.", "Lan là học sinh giỏi."], c: 2 },
+            { q: "Cặp từ 'Nếu... thì...' biểu thị quan hệ gì?", a: ["Tương phản", "Giả thiết - Kết quả", "Nguyên nhân - Kết quả", "Tăng tiến"], c: 1 },
+            { q: "Điền từ: '... trời rét ... Lan vẫn đi học.'", a: ["Vì... nên...", "Tuy... nhưng...", "Nếu... thì...", "Hễ... thì..."], c: 1 },
+            { q: "Cặp từ 'Chẳng những... mà còn...' biểu thị quan hệ gì?", a: ["Tương phản", "Tăng tiến", "Nguyên nhân", "Điều kiện"], c: 1 },
+            { q: "Từ nào có thể nối các vế câu ghép?", a: ["Và", "Nhưng", "Hoặc", "Tất cả các ý trên"], c: 3 },
+            { q: "Cặp từ 'càng... càng...' là loại từ gì?", a: ["Quan hệ từ", "Cặp từ hô ứng", "Đại từ", "Tính từ"], c: 1 }
+        ];
+        let selectedQuestions = [], score = 0, currentIdx = 0;
+        function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
+        function checkSchool() { document.getElementById('otherSchool').classList.toggle('hidden', document.getElementById('schoolSelect').value !== 'Khác'); }
+        function startQuiz(e) { e.preventDefault(); selectedQuestions = shuffle([...allQuestions]).slice(0, 5); currentIdx = 0; score = 0; document.getElementById('quiz-registration').classList.add('hidden'); document.getElementById('quiz-container').classList.remove('hidden'); showQuestion(); }
+        function showQuestion() {
+            const q = selectedQuestions[currentIdx];
+            document.getElementById('questionNum').innerText = currentIdx + 1;
+            document.getElementById('progressText').innerText = `Câu ${currentIdx + 1}/5`;
+            document.getElementById('questionText').innerText = q.q;
+            const area = document.getElementById('optionsArea'); area.innerHTML = '';
+            q.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = "option-btn w-full p-4 text-left bg-white rounded-2xl font-bold flex items-center group shadow-sm border border-gray-100";
+                btn.innerHTML = `<div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-600 group-hover:text-white transition-all text-xs font-black shadow-inner">${String.fromCharCode(65 + i)}</div><span class="flex-1 text-sm md:text-base text-gray-700">${opt}</span>`;
+                btn.onclick = () => selectOption(i, btn);
+                area.appendChild(btn);
+            });
+            document.getElementById('nextBtn').disabled = true; document.getElementById('nextBtn').onclick = nextQuestion;
+        }
+        function selectOption(i, btn) {
+            document.querySelectorAll('#optionsArea button').forEach(b => { b.classList.remove('selected'); b.querySelector('div').classList.remove('bg-blue-600', 'text-white'); });
+            btn.classList.add('selected'); btn.querySelector('div').classList.add('bg-blue-600', 'text-white');
+            document.getElementById('nextBtn').disabled = false; document.getElementById('nextBtn').dataset.selected = i;
+        }
+        function nextQuestion() {
+            if (parseInt(document.getElementById('nextBtn').dataset.selected) === selectedQuestions[currentIdx].c) score += 20;
+            currentIdx++; (currentIdx < 5) ? showQuestion() : showResults();
+        }
+        function showResults() {
+            document.getElementById('quiz-container').classList.add('hidden'); document.getElementById('quiz-results').classList.remove('hidden');
+            const circle = document.getElementById('scoreCircle'); const offset = 465 - (465 * score) / 100; circle.style.strokeDashoffset = offset;
+            document.getElementById('scoreText').innerText = score;
+        }
+        function restartQuiz() { document.getElementById('quiz-results').classList.add('hidden'); document.getElementById('quiz-registration').classList.remove('hidden'); }
+
+        // Firestore Config (Placeholder)
+        const firebaseConfig = { apiKey: "API_KEY", authDomain: "projectId.firebaseapp.com", projectId: "projectId", storageBucket: "projectId.appspot.com", messagingSenderId: "SENDER_ID", appId: "APP_ID" };
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        function submitResults(e) {
+            e.preventDefault();
+            const btn = e.target; btn.innerHTML = "Đang nộp..."; btn.disabled = true;
+            const data = {
+                studentName: document.getElementById('studentName').value,
+                studentClass: document.getElementById('studentClass').value,
+                school: document.getElementById('schoolSelect').value === 'Khác' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
+                lessonTitle: "Luyện tập về Câu Ghép",
+                score: score,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            db.collection("quiz_results").add(data).then(() => {
+                document.getElementById('successModal').classList.remove('hidden');
+                btn.innerHTML = "NỘP KẾT QUẢ"; btn.disabled = false;
+            }).catch((err) => { console.error(err); alert("Lỗi khi nộp bài. Vui lòng thử lại!"); btn.innerHTML = "NỘP KẾT QUẢ"; btn.disabled = false; });
+        }
+        function closeSuccessModal() { document.getElementById('successModal').classList.add('hidden'); restartQuiz(); }
+
+        function openTeacherStats() { const p = prompt("Nhập mật khẩu giáo viên:"); if (p === '123456') { document.getElementById('statsModal').classList.add('active'); loadStats(); } else alert("Sai mật khẩu!"); }
+        function closeModal() { document.getElementById('statsModal').classList.remove('active'); }
+        function loadStats() {
+            db.collection("quiz_results").where("lessonTitle", "==", "Luyện tập về Câu Ghép").orderBy("timestamp", "desc").limit(50).get().then((q) => {
+                const b = document.getElementById('statsTableBody'); b.innerHTML = "";
+                q.forEach((doc, i) => {
+                    const d = doc.data();
+                    b.innerHTML += `<tr class="hover:bg-blue-50/50 transition-colors"><td class="px-6 py-4 font-bold text-gray-400">${i + 1}</td><td class="px-6 py-4 font-bold text-gray-800">${d.studentName}</td><td class="px-6 py-4 font-bold text-blue-600">${d.studentClass}</td><td class="px-6 py-4 font-bold text-gray-500">${d.school}</td><td class="px-6 py-4 text-center"><span class="inline-block px-3 py-1 rounded-lg font-black ${d.score >= 80 ? 'bg-green-100 text-green-600' : d.score >= 50 ? 'bg-yellow-100 text-yellow-600' : 'bg-red-100 text-red-600'}">${d.score}</span></td><td class="px-6 py-4 text-center font-bold text-gray-400">1</td><td class="px-6 py-4 text-center font-bold text-gray-400 text-xs">${d.timestamp ? new Date(d.timestamp.toDate()).toLocaleDateString('vi-VN') : ''}</td><td class="px-6 py-4 text-right"><span class="text-green-500 font-bold">✓</span></td></tr>`;
+                });
+            });
+        }
+        function exportToExcel() {
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.table_to_sheet(document.querySelector("table"));
+            XLSX.utils.book_append_sheet(wb, ws, "KetQua");
+            XLSX.writeFile(wb, "KetQua_LTVC_LuyenTapCauGhep.xlsx");
+        }
+    </script>
+</body>
+
+</html>
