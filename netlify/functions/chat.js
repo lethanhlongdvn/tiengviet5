@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
     }
 
     // 1. Cấu hình Gemini API
-    const apiKey = process.env.API_KEY_TIENGVIET;
+    const apiKey = process.env.GOOGLE_API_KEY;
     if (!apiKey) {
       return {
         statusCode: 500,
