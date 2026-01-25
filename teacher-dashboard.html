@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển Giáo viên - EduRobot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: #f8fafc;
+        }
+
+        .dashboard-card {
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-8">
+    <div class="max-w-6xl mx-auto">
+        <header class="flex justify-between items-center mb-8 bg-white p-6 rounded-3xl shadow-sm border border-blue-50">
+            <div class="flex items-center space-x-4">
+                <div
+                    class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl font-black shadow-lg">
+                    T</div>
+                <div>
+                    <h1 class="text-2xl font-black text-gray-800">Quản lý Lớp học</h1>
+                    <p class="text-gray-400 font-bold text-xs uppercase tracking-widest leading-none mt-1">Hệ thống chấm
+                        bài EduRobot</p>
+                </div>
+            </div>
+            <button onclick="location.reload()"
+                class="bg-blue-50 text-blue-600 font-bold px-4 py-2 rounded-xl hover:bg-blue-100 transition-colors">Làm
+                mới dữ liệu</button>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Sidebar: Stats -->
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 p-6 rounded-[32px] text-white shadow-xl">
+                    <h2 class="text-xl font-black mb-4">Tổng quan</h2>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b border-white/20 pb-3">
+                            <span class="font-bold">Bài chưa chấm:</span>
+                            <span id="stat-pending" class="text-2xl font-black text-yellow-300">0</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/20 pb-3">
+                            <span class="font-bold">Dự án sáng tạo:</span>
+                            <span id="stat-projects" class="text-2xl font-black text-green-300">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm">
+                    <h3 class="font-black text-gray-800 mb-4 uppercase text-xs tracking-widest">Hướng dẫn nhanh</h3>
+                    <ul class="text-sm font-bold text-gray-500 space-y-3">
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-500">1.</span> Xem nội dung bài viết/dự án của học sinh.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-500">2.</span> Nhập điểm (0-10) và lời phê của Cô.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-500">3.</span> Nhấn "Lưu & Đăng" để học sinh thấy kết quả.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content: List -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="flex space-x-2 mb-4 bg-white p-1 rounded-2xl shadow-sm border border-gray-100 w-fit">
+                    <button id="tab-essays" onclick="switchView('essays')"
+                        class="px-6 py-2 rounded-xl font-black text-sm transition-all bg-blue-600 text-white">Bài Tập
+                        Làm Văn</button>
+                    <button id="tab-projects" onclick="switchView('projects')"
+                        class="px-6 py-2 rounded-xl font-black text-sm transition-all text-gray-400 hover:bg-gray-50">Dự
+                        Án Sáng Tạo</button>
+                </div>
+
+                <div id="loading" class="text-center py-20">
+                    <div
+                        class="animate-spin h-10 w-10 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4">
+                    </div>
+                    <p class="font-black text-gray-400 uppercase tracking-widest text-xs">Đang tải dữ liệu học sinh...
+                    </p>
+                </div>
+
+                <div id="content-list" class="space-y-6">
+                    <!-- Cards will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Grading -->
+    <div id="grade-modal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-[40px] p-8 max-w-lg w-full shadow-2xl animate-in fade-in zoom-in duration-300">
+            <h3 class="text-2xl font-black text-gray-800 mb-2">Chấm điểm & Lời phê</h3>
+            <p id="modal-student-info" class="text-blue-600 font-bold mb-6 italic"></p>
+
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-[10px] font-black text-gray-400 uppercase mb-2">Lời phê của Cô</label>
+                    <textarea id="teacher-comment"
+                        placeholder="Ví dụ: Bài viết rất sinh động, có nhiều hình ảnh nhân hóa..."
+                        class="w-full p-4 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-blue-200 font-bold min-h-[120px]"></textarea>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black text-gray-400 uppercase mb-2">Điểm số (0-10)</label>
+                    <input type="number" id="teacher-grade" min="0" max="10" step="0.5"
+                        class="w-full p-4 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-blue-200 font-black text-2xl text-blue-600">
+                </div>
+                <div class="flex gap-4">
+                    <button onclick="closeModal()"
+                        class="flex-1 py-4 font-black border-2 border-gray-100 rounded-2xl hover:bg-gray-50 transition-all text-gray-400">ĐÓNG</button>
+                    <button onclick="saveGrade()"
+                        class="flex-2 bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-8 rounded-2x2 shadow-lg shadow-blue-100 transition-all flex-1">LƯU
+                        & ĐĂNG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Placeholder - Update with your credentials
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "projectId.firebaseapp.com",
+            projectId: "projectId",
+            storageBucket: "projectId.appspot.com",
+            messagingSenderId: "SENDER_ID",
+            appId: "APP_ID"
+        };
+
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        let currentMode = 'essays';
+        let currentDocId = null;
+
+        function switchView(mode) {
+            currentMode = mode;
+            document.getElementById('tab-essays').className = mode === 'essays' ? 'px-6 py-2 rounded-xl font-black text-sm transition-all bg-blue-600 text-white' : 'px-6 py-2 rounded-xl font-black text-sm transition-all text-gray-400 hover:bg-gray-50';
+            document.getElementById('tab-projects').className = mode === 'projects' ? 'px-6 py-2 rounded-xl font-black text-sm transition-all bg-blue-600 text-white' : 'px-6 py-2 rounded-xl font-black text-sm transition-all text-gray-400 hover:bg-gray-50';
+            loadData();
+        }
+
+        async function loadData() {
+            const list = document.getElementById('content-list');
+            const loading = document.getElementById('loading');
+            list.innerHTML = "";
+            loading.classList.remove('hidden');
+
+            try {
+                const snapshot = await db.collection(currentMode).orderBy("timestamp", "desc").get();
+                loading.classList.add('hidden');
+
+                let pendingCount = 0;
+                let projectCount = 0;
+
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    if (data.status === "Chưa chấm") pendingCount++;
+                    if (currentMode === 'projects') projectCount++;
+
+                    const card = document.createElement('div');
+                    card.className = "dashboard-card bg-white p-6 rounded-[32px] shadow-sm border border-gray-100 space-y-4";
+
+                    let mediaHtml = data.fileUrl ? `<div class="bg-gray-100 p-2 rounded-2xl"><img src="${data.fileUrl}" class="w-full max-h-[300px] object-contain rounded-xl shadow-sm"></div>` : "";
+
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-lg font-black text-gray-800">${data.studentName}</h4>
+                                <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Lớp: ${data.studentClass}</span>
+                            </div>
+                            <span class="px-3 py-1 rounded-lg text-[10px] font-black uppercase ${data.status === 'Chưa chấm' ? 'bg-yellow-100 text-yellow-600' : 'bg-green-100 text-green-600'}">
+                                ${data.status}
+                            </span>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-2xl text-sm font-medium text-gray-600 leading-relaxed max-h-40 overflow-y-auto italic">
+                            "${data.content}"
+                        </div>
+                        ${mediaHtml}
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-[10px] text-gray-400 font-bold">${data.timestamp ? new Date(data.timestamp.toDate()).toLocaleString('vi-VN') : ''}</span>
+                            <button onclick="openGrading('${doc.id}', '${data.studentName}', '${data.studentClass}')" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl font-bold text-sm transition-all">
+                                Chấm bài
+                            </button>
+                        </div>
+                        ${data.teacherFeedback ? `
+                            <div class="mt-4 p-4 border-t-2 border-dashed border-blue-50 pt-4">
+                                <p class="text-[10px] font-black text-blue-400 uppercase mb-1">Lời phê cũ:</p>
+                                <p class="text-xs font-bold text-gray-500 italic">"${data.teacherFeedback}" - <b>Điểm: ${data.teacherGrade}</b></p>
+                            </div>
+                        ` : ''}
+                    `;
+                    list.appendChild(card);
+                });
+
+                document.getElementById('stat-pending').innerText = pendingCount;
+                document.getElementById('stat-projects').innerText = projectCount;
+
+            } catch (error) {
+                console.error("Error loading data:", error);
+                loading.innerHTML = `<p class="text-red-500">Lỗi kết nối Firebase. Em hãy kiểm tra cấu hình nhé!</p>`;
+            }
+        }
+
+        function openGrading(id, name, cls) {
+            currentDocId = id;
+            document.getElementById('modal-student-info').innerText = `Học sinh: ${name} - Lớp: ${cls}`;
+            document.getElementById('grade-modal').classList.remove('hidden');
+            document.getElementById('grade-modal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('grade-modal').classList.add('hidden');
+            document.getElementById('grade-modal').classList.remove('flex');
+        }
+
+        async function saveGrade() {
+            const comment = document.getElementById('teacher-comment').value.trim();
+            const grade = document.getElementById('teacher-grade').value.trim();
+
+            if (!comment || !grade) {
+                alert("Cô hãy nhập đủ Điểm và Lời phê nhé!");
+                return;
+            }
+
+            try {
+                await db.collection(currentMode).doc(currentDocId).update({
+                    teacherFeedback: comment,
+                    teacherGrade: grade,
+                    status: "Đã chấm"
+                });
+                alert("Đã đăng kết quả thành công cho học sinh!");
+                closeModal();
+                loadData();
+            } catch (error) {
+                console.error("Error updating grade:", error);
+                alert("Lỗi khi lưu điểm. Cô hãy thử lại nhé!");
+            }
+        }
+
+        // Initial Load
+        loadData();
+    </script>
+</body>
+
+</html>
