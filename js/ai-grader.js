@@ -63,67 +63,46 @@ async function askAI(id, prefix = "", mode = "single") {
 function renderFeedback(container, data) {
     let html = `
         <div class="space-y-4 animate-in fade-in duration-500">
-            <!-- Lời nhận xét chung -->
-            <div class="p-5 bg-gradient-to-br from-purple-50 to-white rounded-2xl border-2 border-purple-100 shadow-sm relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-2 opacity-10">
-                    <svg class="w-20 h-20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.45l8.28 14.1H3.72L12 5.45zM11 16h2v2h-2v-2zm0-7h2v5h-2V9z"/></svg>
+            <!-- Lời nhắn yêu thương từ Cô giáo -->
+            <div class="p-6 bg-gradient-to-br from-blue-50 to-white rounded-[32px] border-2 border-blue-100 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-2 opacity-5">
+                    <span class="text-6xl">👩‍🏫</span>
                 </div>
-                <p class="serif-font text-lg text-gray-800 italic leading-relaxed relative z-10">"${data.feedback}"</p>
+                <h5 class="font-black text-blue-700 uppercase text-[10px] mb-2 tracking-widest flex items-center">
+                    <span class="mr-2">💌</span> Lời nhắn từ Cô giáo
+                </h5>
+                <p class="serif-font text-lg text-gray-800 italic font-bold leading-relaxed relative z-10">"${data.loi_nhan || "Cô rất khen ngợi tinh thần học tập của em!"}"</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Ưu điểm & Điểm sáng -->
-                <div class="p-4 bg-green-50 rounded-2xl border border-green-100">
-                    <h5 class="font-black text-green-700 uppercase text-xs mb-3 flex items-center">
-                        <span class="mr-2 text-base">✨</span> Ưu điểm & Điểm sáng
+                <!-- Ưu điểm -->
+                <div class="p-5 bg-green-50 rounded-2xl border border-green-100">
+                    <h5 class="font-black text-green-700 uppercase text-[10px] mb-3 tracking-widest flex items-center">
+                        <span class="mr-2 text-base">✨</span> Điểm sáng trong bài
                     </h5>
-                    <p class="text-sm text-gray-700 font-medium">${data.uu_diem || "Chưa có nhận xét cụ thể."}</p>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">${data.uu_diem || "Bài làm có nhiều hình ảnh sinh động."}</p>
                 </div>
 
-                <!-- Lỗi cần sửa -->
-                <div class="p-4 bg-orange-50 rounded-2xl border border-orange-100">
-                    <h5 class="font-black text-orange-700 uppercase text-xs mb-3 flex items-center">
+                <!-- Lỗi sai -->
+                <div class="p-5 bg-orange-50 rounded-2xl border border-orange-100">
+                    <h5 class="font-black text-orange-700 uppercase text-[10px] mb-3 tracking-widest flex items-center">
                         <span class="mr-2 text-base">🔧</span> Gợi ý hoàn thiện
                     </h5>
-                    <p class="text-sm text-gray-700 font-medium">${data.loi_can_sua || "Rất tuyệt! Không có lỗi gì đáng kể."}</p>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">${data.loi_sai || "Bài viết của em đã khá hoàn chỉnh rồi."}</p>
                 </div>
             </div>
 
-            <!-- Phân tích cú pháp (CN-VN) -->
-            <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100">
-                <h5 class="font-black text-blue-700 uppercase text-xs mb-3">Phân tích cấu trúc câu</h5>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-    `;
-
-    if (data.clauses && Array.isArray(data.clauses)) {
-        data.clauses.forEach((clause, index) => {
-            html += `
-                <div class="p-3 bg-white/60 rounded-xl border border-blue-50">
-                    <div class="font-black text-blue-600 text-[10px] uppercase mb-1">Vế ${index + 1}</div>
-                    <div class="text-xs space-y-1">
-                        <div><span class="font-bold text-gray-400 uppercase text-[9px]">Chủ ngữ:</span> ${clause.subject}</div>
-                        <div><span class="font-bold text-gray-400 uppercase text-[9px]">Vị ngữ:</span> ${clause.predicate}</div>
-                    </div>
-                </div>
-            `;
-        });
-    }
-
-    html += `
-                </div>
+            <!-- Hướng dẫn chi tiết -->
+            <div class="p-5 bg-purple-50 rounded-2xl border border-purple-100">
+                <h5 class="font-black text-purple-700 uppercase text-[10px] mb-3 tracking-widest">💡 Cô hướng dẫn em viết hay hơn</h5>
+                <p class="text-sm text-gray-700 font-bold italic leading-relaxed">"${data.huong_dan || "Em có thể thêm một vài hình ảnh so sánh để bài viết sinh động hơn nhé."}"</p>
             </div>
 
-            <!-- Phụ lục điểm số -->
-            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-xl border border-gray-200">
-                <div class="flex flex-col">
-                    <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Kiểu câu</span>
-                    <span class="text-xs font-black text-gray-600">${data.relationship || "Câu văn tự do"}</span>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <div class="text-right">
-                        <span class="text-[9px] font-black text-gray-400 uppercase block leading-none mb-1">Điểm EduRobot</span>
-                        <span class="text-2xl font-black text-purple-600">${data.grade}/10</span>
-                    </div>
+            <!-- Điểm số -->
+            <div class="flex justify-end pt-2">
+                <div class="bg-blue-600 text-white px-6 py-3 rounded-2xl shadow-xl shadow-blue-100 flex items-center space-x-4">
+                    <span class="text-xs font-black uppercase tracking-widest opacity-80">Điểm số của em:</span>
+                    <span class="text-3xl font-black">${data.diem || "8/10"}</span>
                 </div>
             </div>
         </div>
