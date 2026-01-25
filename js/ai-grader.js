@@ -1,11 +1,24 @@
-async function askAI(id, prefix = "") {
-    const input = document.getElementById('ai-' + id);
+async function askAI(id, prefix = "", mode = "single") {
     const feedback = document.getElementById('fb-' + id);
-    const userInput = input.value.trim();
+    let userInput = "";
 
-    if (!userInput) {
-        alert("Em hãy viết câu trước nhé!");
-        return;
+    if (mode === "table") {
+        const q1 = document.getElementById(`ai-${id}-q1`).value.trim();
+        const q2 = document.getElementById(`ai-${id}-q2`).value.trim();
+        const q3 = document.getElementById(`ai-${id}-q3`).value.trim();
+
+        if (!q1 && !q2 && !q3) {
+            alert("Em hãy điền thông tin vào bảng trước nhé!");
+            return;
+        }
+        userInput = `1. Nhân vật: ${q1}\n2. Từ ngữ nổi bật: ${q2}\n3. Chi tiết ấn tượng: ${q3}`;
+    } else {
+        const input = document.getElementById('ai-' + id);
+        userInput = input.value.trim();
+        if (!userInput) {
+            alert("Em hãy viết câu trước nhé!");
+            return;
+        }
     }
 
     const sentence = (prefix + " " + userInput).trim();
