@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
       return { statusCode: 400, body: JSON.stringify({ error: "No sentence provided" }) };
     }
 
-    // Quy tắc 1 (Isolation - V3): Loại bỏ triệt để các đoạn text hướng dẫn
+    // Quy tắc 1 (Isolation - V4): Loại bỏ triệt để các đoạn text hướng dẫn
     const noise = [
       /bài\s+\d+[:.]?/gi,
       /sử\s+dụng\s+cặp\s+(kết\s+từ|từ\s+hô\s+ứng)[:.]?/gi,
@@ -47,15 +47,17 @@ function analyzeSentence(sentence) {
     feedback: ""
   };
 
-  // Các cặp quan hệ từ phổ biến lớp 5 - Linh hoạt hơn với text ở đầu
+  // Các cặp quan hệ từ phổ biến lớp 5 - Linh hoạt hơn
   const patterns = [
     { type: "Nguyên nhân - Kết quả", pair: ["vì", "nên"], regex: /.*?vì\s+(.*?)\s+nên\s+(.*)/i },
     { type: "Nguyên nhân - Kết quả", pair: ["bởi vì", "nên"], regex: /.*?bởi vì\s+(.*?)\s+nên\s+(.*)/i },
+    { type: "Nguyên nhân - Kết quả", pair: ["bởi", "nên"], regex: /.*?bởi\s+(.*?)\s+nên\s+(.*)/i }, // Added "Bởi... nên..."
     { type: "Nguyên nhân - Kết quả", pair: ["nhờ", "mà"], regex: /.*?nhờ\s+(.*?)\s+mà\s+(.*)/i },
     { type: "Tương phản", pair: ["tuy", "nhưng"], regex: /.*?tuy\s+(.*?)\s+nhưng\s+(.*)/i },
     { type: "Tương phản", pair: ["mặc dù", "nhưng"], regex: /.*?mặc dù\s+(.*?)\s+nhưng\s+(.*)/i },
     { type: "Giả thiết - Kết quả", pair: ["nếu", "thì"], regex: /.*?nếu\s+(.*?)\s+thì\s+(.*)/i },
     { type: "Giả thiết - Kết quả", pair: ["hễ", "thì"], regex: /.*?hễ\s+(.*?)\s+thì\s+(.*)/i },
+    { type: "Giả thiết - Kết quả", pair: ["giá", "thì"], regex: /.*?giá\s+(.*?)\s+thì\s+(.*)/i }, // Added "Giá... thì..."
     { type: "Tăng tiến", pair: ["chẳng những", "mà"], regex: /.*?chẳng những\s+(.*?)\s+mà\s+(.*)/i },
     { type: "Tăng tiến", pair: ["không những", "mà"], regex: /.*?không những\s+(.*?)\s+mà\s+(.*)/i },
     { type: "Tăng tiến", pair: ["không chỉ", "mà"], regex: /.*?không chỉ\s+(.*?)\s+mà\s+(.*)/i },
@@ -77,8 +79,6 @@ function analyzeSentence(sentence) {
       matched = true;
 
       if (p.pair[0] === "càng" || p.type === "Cặp từ hô ứng") {
-        // match[1]: CN1, match[2]: VN1, match[3]: CN2, match[4]: VN2
-        // Theo Quy tắc V2: "càng", "vừa", "đã" thuộc về Vị ngữ
         const v1_raw = (match[1].trim() + " " + p.pair[0] + " " + match[2].trim()).trim();
         const v2_raw = (match[3].trim() + " " + p.pair[1] + " " + match[4].trim().replace(/[.!?]$/, "")).trim();
         result.clauses.push(deconstructClause(v1_raw));
@@ -90,16 +90,16 @@ function analyzeSentence(sentence) {
           result.clauses.push(deconstructClause(v1));
           result.clauses.push(deconstructClause(v2));
         } else {
-          matched = false; // Một vế bị trống -> coi như không khớp pattern
+          matched = false;
         }
       }
       if (matched) break;
     }
   }
 
+  // Nếu không khớp pattern cặp, thử tách theo từ nối đơn hoặc dấu phẩy
   if (!matched) {
-    // Thử tách theo quan hệ từ đơn: và, nhưng, rồi, thì... hoặc dấu phẩy
-    const singleConnectives = [" và ", " nhưng ", " rồi ", " thì ", " hay ", " hoặc ", " mà còn ", " mà "];
+    const singleConnectives = [" và ", " nhưng ", " rồi ", " thì ", " nên ", " hay ", " hoặc ", " mà còn ", " mà "];
     let splitWord = "";
     for (const conn of singleConnectives) {
       if (sentence.toLowerCase().includes(conn)) {
@@ -111,9 +111,12 @@ function analyzeSentence(sentence) {
     if (splitWord) {
       result.relationship = `Nối bằng quan hệ từ '${splitWord.trim()}'`;
       const parts = sentence.split(new RegExp(splitWord, "i"));
-      parts.forEach(p => {
-        if (p.trim()) result.clauses.push(deconstructClause(p.trim()));
-      });
+      if (parts.length >= 2) {
+        result.clauses.push(deconstructClause(parts[0].trim()));
+        // Đối với từ nối đơn, từ nối thường thuộc về vế sau
+        result.clauses.push(deconstructClause((splitWord.trim() + " " + parts.slice(1).join(splitWord).trim()).trim()));
+        matched = true;
+      }
     } else {
       const parts = sentence.split(/[,;]/);
       if (parts.length >= 2) {
@@ -121,13 +124,14 @@ function analyzeSentence(sentence) {
         parts.forEach(p => {
           if (p.trim()) result.clauses.push(deconstructClause(p.trim()));
         });
+        matched = true;
       } else {
         result.clauses.push(deconstructClause(sentence));
       }
     }
   }
 
-  // Kiểm tra lỗi "Râu ông nọ cắm cằm bà kia"
+  // Kiểm tra lỗi cặp từ nối sai logic
   const mismatched = [
     { start: "vì", wrong: "nhưng", correct: "nên" },
     { start: "tuy", wrong: "nên", correct: "nhưng" },
@@ -145,17 +149,16 @@ function analyzeSentence(sentence) {
     }
   }
 
-  // Chấm điểm tuyệt đối (Quy tắc V3)
-  const validClauses = result.clauses.filter(c => c.subject !== "Ẩn (đối tượng ở vế 1)" && c.subject !== "Chưa xác định" && c.subject.length > 1);
-
+  // Chấm điểm tuyệt đối (Quy tắc V4)
   if (result.clauses.length >= 2) {
-    // Nếu bóc tách chuẩn CN-VN và đúng cặp từ
-    result.grade = 10;
-    result.feedback = `Tuyệt vời! EduRobot đánh giá rất cao câu ghép này. Em đã sử dụng đúng quan hệ "${result.relationship}", bóc tách Chủ ngữ - Vị ngữ cực kỳ chính xác.`;
+    const sub1 = result.clauses[0].subject;
+    const sub2 = result.clauses[1].subject;
 
-    // Nếu có vế bị "Chưa xác định" hoặc quá ngắn
-    const hasError = result.clauses.some(c => c.subject === "Chưa xác định" || (c.subject !== "Ẩn (đối tượng ở vế 1)" && c.subject.length < 2));
-    if (hasError) {
+    // Nếu cả 2 vế đều bóc tách được CN-VN ổn định
+    if (sub1 !== "Chưa xác định" && sub2 !== "Chưa xác định" && sub1.length > 1) {
+      result.grade = 10;
+      result.feedback = `Tuyệt vời! EduRobot đánh giá rất cao câu ghép này. Em đã sử dụng đúng quan hệ "${result.relationship}", bóc tách Chủ ngữ - Vị ngữ cực kỳ chính xác.`;
+    } else {
       result.grade = 9;
       result.feedback = `Câu văn của em rất tốt và đúng cấu trúc. Em hãy lưu ý hơn cách trình bày để phần bóc tách Chủ - Vị trở nên hoàn hảo hơn nữa nhé!`;
     }
@@ -168,53 +171,52 @@ function analyzeSentence(sentence) {
 }
 
 /**
- * Bóc tách CN - VN (EduRobot V3 - Strict Connective Safety)
+ * Bóc tách CN - VN (EduRobot V4 - Strict Logic)
  * @param {string} text 
  */
 function deconstructClause(text) {
-  const words = text.split(/\s+/);
+  if (!text) return { clause: "", subject: "Chưa xác định", predicate: "Chưa xác định" };
 
-  // V3: TUYỆT ĐỐI các từ này không được là Chủ ngữ
+  const words = text.split(/\s+/);
+  if (words.length <= 1) return { clause: text, subject: "Chưa xác định", predicate: text };
+
+  // V4: Danh sách từ nối CẤM làm Chủ ngữ
   const connectives = [
     "càng", "nhưng", "mà", "thì", "nên", "vì", "tuy", "còn",
     "vừa", "đã", "mới", "đâu", "nào", "ấy", "sao", "vậy",
-    "mặc", "dù", "hễ", "giá", "nếu", "bởi"
+    "mặc", "dù", "hễ", "giá", "nếu", "bởi", "tại", "do", "nhờ"
   ];
 
-  // Danh sách động từ/tính từ mốc
-  const commonVerbs = [
+  // Danh sách mốc bắt đầu Vị ngữ (Động từ, Tính từ, Quan hệ từ, ...)
+  const predicateMarkers = [
     "là", "đang", "đi", "học", "mưa", "nắng", "làm", "chơi",
     "rất", "đã", "sẽ", "cũng", "đều", "vẫn", "được", "bị",
     "xinh", "đẹp", "giỏi", "ngoan", "chăm", "không", "chưa",
     "chẳng", "hừng", "gặt", "trồng", "ra", "vào", "lên", "xuống",
-    "hãy", "đừng", "chớ", "lại"
+    "hãy", "đừng", "chớ", "lại", "thấy", "muốn", "biết", "đã", "có"
   ];
 
   let splitIdx = -1;
 
   for (let i = 0; i < words.length; i++) {
-    const w = words[i].toLowerCase();
-    // Quy tắc V3: Nếu gặp từ nối -> đây chắc chắn là điểm bắt đầu của VN
-    if (connectives.includes(w)) {
-      splitIdx = i;
-      break;
-    }
-    // Nếu gặp động từ/tính từ mốc
-    if (commonVerbs.includes(w)) {
+    const w = words[i].toLowerCase().replace(/[.,!?;]$/, "");
+    // Nếu là từ nối hoặc mốc VN -> Cắt tại đây
+    if (connectives.includes(w) || predicateMarkers.includes(w)) {
       splitIdx = i;
       break;
     }
   }
 
-  // Default split logic
+  // Trường hợp đặc biệt: Nếu từ đầu tiên là từ nối (vd: "nên tôi..."), VN bắt đầu từ đó
+  // Nếu không tìm thấy splitIdx, mặc định coi từ đầu là CN
   if (splitIdx === -1) {
-    splitIdx = words.length > 1 ? 1 : 0;
+    splitIdx = 1;
   }
 
   let subject = words.slice(0, splitIdx).join(" ").trim();
   let predicate = words.slice(splitIdx).join(" ").trim();
 
-  // Quy tắc 3 (V3): Xử lý chủ ngữ ẩn (Chỉ dùng khi vế câu thực sự khuyết)
+  // Xử lý chủ ngữ ẩn
   if (!subject && predicate) {
     subject = "Ẩn (đối tượng ở vế 1)";
   }
