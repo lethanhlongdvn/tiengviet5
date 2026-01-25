@@ -1,4 +1,4 @@
-const { GoogleGenAI } = require("@google/genai");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
@@ -20,7 +20,8 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const ai = new GoogleGenAI({ apiKey });
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     // 2. Tiền xử lý dữ liệu (Loại bỏ nhiễu từ đề bài)
     let processedSentence = sentence;
@@ -58,18 +59,11 @@ exports.handler = async (event, context) => {
 
     try {
       // 4. Gọi Gemini 1.5 Flash
-      const response = await ai.models.generateContent({
-        model: "gemini-1.5-flash",
-        systemInstruction: systemInstruction,
-        contents: [{
-          role: 'user',
-          parts: [{
-            text: `Phân tích bài tập sau: "${processedSentence}"\n\nTrả về JSON:\n{\n  "diem": "điểm/10",\n  "uu_diem": "...",\n  "loi_sai": "...",\n  "huong_dan": "...",\n  "loi_nhan": "...",\n  "analysis": { "ve1": {"CN": "...", "VN": "..."}, "ve2": {"CN": "...", "VN": "..."} }\n}`
-          }]
-        }]
-      });
+      const prompt = `${systemInstruction}\n\nPhân tích bài tập sau: "${processedSentence}"\n\nTrả về JSON:\n{\n  "diem": "điểm/10",\n  "uu_diem": "...",\n  "loi_sai": "...",\n  "huong_dan": "...",\n  "loi_nhan": "...",\n  "analysis": { "ve1": {"CN": "...", "VN": "..."}, "ve2": {"CN": "...", "VN": "..."} }\n}`;
 
-      let text = response.text;
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      let text = response.text();
 
       // Làm sạch text nếu AI trả về markdown code block
       text = text.replace(/```json/g, "").replace(/```/g, "").trim();
