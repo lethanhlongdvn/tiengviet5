@@ -39,8 +39,9 @@ exports.handler = async (event, context) => {
     `;
 
     try {
+      // Sử dụng model gemini-1.5-flash-latest (bản ổn định nhất)
       const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-flash",
+        model: "gemini-1.5-flash-latest",
         systemInstruction: systemInstruction
       });
 
