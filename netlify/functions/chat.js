@@ -39,14 +39,13 @@ exports.handler = async (event, context) => {
     `;
 
     try {
-      // Sử dụng model gemini-1.5-flash-latest (bản ổn định nhất)
-      const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-flash-latest",
-        systemInstruction: systemInstruction
-      });
+      // Chuyển sang gemini-pro để đảm bảo tính tương thích cao nhất với API version
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
       const prompt = `
-        Phân tích bài tập làm văn sau của học sinh và trả về kết quả dưới định dạng JSON thuần túy (không bao gồm Markdown):
+        Bối cảnh: ${systemInstruction}
+        
+        Nhiệm vụ: Phân tích bài tập làm văn sau của học sinh và trả về kết quả dưới định dạng JSON thuần túy (không bao gồm Markdown):
         "${sentence}"
         
         Yêu cầu cấu trúc JSON:
