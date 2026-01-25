@@ -46,7 +46,11 @@ function analyzeSentence(sentence) {
     { type: "Tăng tiến", pair: ["chẳng những", "mà"], regex: /.*?chẳng những\s+(.*?)\s+mà\s+(.*)/i },
     { type: "Tăng tiến", pair: ["không những", "mà"], regex: /.*?không những\s+(.*?)\s+mà\s+(.*)/i },
     { type: "Tăng tiến", pair: ["không chỉ", "mà"], regex: /.*?không chỉ\s+(.*?)\s+mà\s+(.*)/i },
-    { type: "Tăng tiến", pair: ["càng", "càng"], regex: /(.*?)\s+càng\s+(.*?)[,;\s]+càng\s+(.*)/i }
+    { type: "Tăng tiến", pair: ["càng", "càng"], regex: /(.*?)\s+càng\s+(.*?)[,;\s]+càng\s+(.*)/i },
+    { type: "Cặp từ hô ứng", pair: ["vừa", "đã"], regex: /(.*?)\s+vừa\s+(.*?)[,;\s]+đã\s+(.*)/i },
+    { type: "Cặp từ hô ứng", pair: ["mới", "đã"], regex: /(.*?)\s+mới\s+(.*?)[,;\s]+đã\s+(.*)/i },
+    { type: "Cặp từ hô ứng", pair: ["đâu", "đấy"], regex: /(.*?)\s+đâu\s+(.*?)[,;\s]+đấy\s+(.*)/i },
+    { type: "Cặp từ hô ứng", pair: ["bao nhiêu", "bấy nhiêu"], regex: /(.*?)\s+bao nhiêu\s+(.*?)[,;\s]+bấy nhiêu\s+(.*)/i }
   ];
 
   let matched = false;
@@ -56,9 +60,10 @@ function analyzeSentence(sentence) {
       result.relationship = p.type;
       matched = true;
 
-      if (p.pair[0] === "càng") {
-        const v1_raw = match[1].trim() + " càng " + match[2].trim();
-        const v2_raw = "càng " + match[3].trim().replace(/[.!?]$/, "");
+      if (p.pair[0] === "càng" || p.type === "Cặp từ hô ứng") {
+        // match[1]: text trước từ thứ 1, match[2]: text giữa, match[3]: text sau từ thứ 2
+        const v1_raw = (match[1].trim() + " " + p.pair[0] + " " + match[2].trim()).trim();
+        const v2_raw = (p.pair[1] + " " + match[3].trim().replace(/[.!?]$/, "")).trim();
         result.clauses.push(deconstructClause(v1_raw));
         result.clauses.push(deconstructClause(v2_raw));
       } else {
@@ -125,26 +130,30 @@ function analyzeSentence(sentence) {
  * @param {string} text 
  */
 function deconstructClause(text) {
-  const words = text.split(" ");
+  const words = text.split(/\s+/);
 
   // Danh sách từ nối/động từ/tính từ làm mốc phân chia VN
+  // Bổ sung từ phủ định và các động từ phổ biến lớp 5
   const commonVerbs = [
     "là", "đang", "đi", "học", "mưa", "nắng", "làm", "chơi",
     "rất", "đã", "sẽ", "cũng", "đều", "vẫn", "được", "bị",
-    "xinh", "đẹp", "giỏi", "ngoan", "chăm"
+    "xinh", "đẹp", "giỏi", "ngoan", "chăm", "không", "chưa",
+    "chẳng", "hừng", "gặt", "trồng", "ra", "vào", "lên", "xuống",
+    "vừa", "mới", "hãy", "đừng", "chớ"
   ];
 
   let splitIdx = -1;
-  // Ưu tiên tìm từ làm mốc phân chia đầu tiên
+  // Ưu tiên tìm mốc phân chia (động từ/tính từ/trạng từ)
   for (let i = 0; i < words.length; i++) {
+    // Nếu gặp từ phủ định (chưa, không, chẳng) đứng cạnh một từ trong list thì ưu tiên tách tại đó
     if (commonVerbs.includes(words[i].toLowerCase())) {
-      // Nếu từ đó là "rất", "đang", "đã", "sẽ" thì chắc chắn là bắt đầu VN
+      // Trường hợp đặc biệt: "Lan chưa chăm chỉ" -> splitIdx nên là vị trí "chưa"
       splitIdx = i;
       break;
     }
   }
 
-  // Nếu không thấy mốc, thử tìm động từ/tính từ khác (giả định đơn giản cho Grade 5)
+  // Nếu không thấy mốc, mặc định tách ở giữa (nhưng tránh tách ngay từ đầu)
   if (splitIdx === -1) {
     splitIdx = Math.max(1, Math.floor(words.length / 2));
   }
