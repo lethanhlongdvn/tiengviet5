@@ -161,6 +161,18 @@
 
             <!-- Features Sidebar (Right - 25%) -->
             <div class="lg:col-span-1 flex flex-col gap-3 h-full">
+                <!-- Education News Card (New) -->
+                <div onclick="openNewsModal()"
+                    class="bg-green-100/80 p-4 rounded-[24px] border border-green-200 hover:bg-green-200 transition-colors flex-1 flex flex-col justify-center shadow-sm hover:shadow-md cursor-pointer group">
+                    <div
+                        class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-green-600 mb-3 shadow-inner group-hover:scale-110 transition-transform">
+                        <span class="text-xl">📰</span>
+                    </div>
+                    <h3 class="text-base font-black text-green-900 mb-1">Tin Tức Giáo Dục</h3>
+                    <p class="text-xs text-green-700 font-semibold line-clamp-2">Cập nhật những tin tức giáo dục mới
+                        nhất mỗi ngày.</p>
+                </div>
+
                 <!-- Video Card -->
                 <div
                     class="bg-blue-100/80 p-4 rounded-[24px] border border-blue-200 hover:bg-blue-200 transition-colors flex-1 flex flex-col justify-center shadow-sm hover:shadow-md">
@@ -193,23 +205,6 @@
                     <p class="text-xs text-amber-800 font-semibold line-clamp-2">Câu hỏi tương tác giúp củng cố kiến
                         thức
                         ngay sau bài học.</p>
-                </div>
-
-                <!-- Progress Card -->
-                <div
-                    class="bg-green-100/80 p-4 rounded-[24px] border border-green-200 hover:bg-green-200 transition-colors flex-1 flex flex-col justify-center shadow-sm hover:shadow-md">
-                    <div
-                        class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-green-600 mb-3 shadow-inner">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="text-base font-black text-green-900 mb-1">Theo Dõi Tiến Độ</h3>
-                    <p class="text-xs text-green-800 font-semibold line-clamp-2">Dễ dàng theo dõi kết quả và sự tiến bộ
-                        của
-                        học sinh.</p>
                 </div>
             </div>
         </div>
