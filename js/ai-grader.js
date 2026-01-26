@@ -141,7 +141,7 @@ function renderFeedback(container, data) {
             <!-- Teacher Note & Action -->
             <div class="p-6 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-[32px] text-white shadow-xl relative overflow-hidden">
                 <div class="relative z-10">
-                    <h5 class="font-black uppercase text-[10px] mb-3 tracking-widest opacity-80">💡 Hướng dẫn từ Cô giáo</h5>
+                    <h5 class="font-black uppercase text-[10px] mb-3 tracking-widest opacity-80">💡 Hướng dẫn từ Thầy/Cô</h5>
                     <p class="serif-font text-lg italic font-bold leading-relaxed mb-6">"${data.huong_dan || data.loi_nhan || "Cố gắng lên em nhé!"}"</p>
                     
                     ${!isComplete ? `
@@ -183,7 +183,7 @@ function continueWriting(hint) {
                 hintBox.className = "mt-2 p-3 bg-blue-50 border-2 border-blue-200 rounded-xl text-blue-700 text-xs font-bold animate-pulse";
                 textarea.parentNode.appendChild(hintBox);
             }
-            hintBox.innerHTML = `🌟 <b>Gợi ý của Cô:</b> ${hint}`;
+            hintBox.innerHTML = `🌟 <b>Gợi ý của Thầy/Cô:</b> ${hint}`;
         }
     }, 500);
 }
