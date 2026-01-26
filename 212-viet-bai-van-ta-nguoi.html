@@ -108,9 +108,8 @@
 
     <main class="container mx-auto px-4 py-6 max-w-5xl flex-1">
         <!-- Student Info -->
-        <div
-            class="mb-8 bg-white border-2 border-blue-100 rounded-3xl p-6 shadow-sm flex flex-col md:flex-row items-center gap-6">
-            <div class="flex items-center space-x-4 flex-1 w-full">
+        <div class="mb-8 bg-white border-2 border-blue-100 rounded-3xl p-6 shadow-sm flex flex-col items-center gap-4">
+            <div class="flex items-center space-x-4 w-full">
                 <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg">
                     <span>👤</span>
                 </div>
@@ -122,21 +121,35 @@
                         class="w-full text-lg font-black text-gray-800 bg-transparent border-none focus:outline-none focus:ring-0 p-0">
                 </div>
             </div>
-            <div class="flex items-center space-x-4 w-full md:w-32 bg-gray-50 p-3 rounded-2xl">
-                <div class="flex-1 text-center">
-                    <label class="block text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Lớp</label>
-                    <input type="text" id="studentClass" placeholder="..."
-                        class="w-full text-center font-black text-gray-800 bg-transparent border-none focus:outline-none p-0">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                <div
+                    class="flex items-center space-x-3 bg-gray-50 p-3 rounded-2xl border border-gray-100 focus-within:border-blue-300 transition-all">
+                    <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-2">Lớp:</label>
+                    <select id="studentClass"
+                        class="flex-1 bg-transparent border-none focus:outline-none font-black text-gray-700 text-sm cursor-pointer">
+                        <option value="">Chọn Lớp</option>
+                        <option value="5/1">5/1</option>
+                        <option value="5/2">5/2</option>
+                        <option value="5/3">5/3</option>
+                        <option value="5/4">5/4</option>
+                        <option value="5/5">5/5</option>
+                    </select>
+                </div>
+
+                <div
+                    class="flex items-center space-x-3 bg-gray-50 p-3 rounded-2xl border border-gray-100 focus-within:border-blue-300 transition-all">
+                    <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-2">Trường:</label>
+                    <select id="schoolSelect" onchange="checkSchool()"
+                        class="flex-1 bg-transparent border-none focus:outline-none font-black text-gray-700 text-sm cursor-pointer">
+                        <option value="Tiểu học Đỗ Văn Nại">Tiểu học Đỗ Văn Nại</option>
+                        <option value="Khác">Trường khác...</option>
+                    </select>
                 </div>
             </div>
-            <div class="flex items-center space-x-4 w-full md:w-48 bg-gray-50 p-3 rounded-2xl">
-                <div class="flex-1 text-center">
-                    <label
-                        class="block text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Trường</label>
-                    <input type="text" id="studentSchool" placeholder="Tên trường..."
-                        class="w-full text-center font-black text-gray-800 bg-transparent border-none focus:outline-none p-0">
-                </div>
-            </div>
+
+            <input type="text" id="otherSchool" placeholder="Nhập tên trường của em..."
+                class="hidden w-full p-4 rounded-2xl bg-orange-50 border-2 border-orange-100 focus:border-orange-300 focus:outline-none font-black text-sm transition-all">
         </div>
 
         <!-- Title -->
@@ -208,7 +221,7 @@
                     class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-black py-4 px-8 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 flex items-center justify-center">
                     <span class="text-xl mr-2">🤖</span> EduRobot Chấm Bài
                 </button>
-                <button onclick="submitEssayWithUpload()"
+                <button onclick="submitEssayWithUpload(event)"
                     class="flex-1 bg-white hover:bg-green-50 text-green-600 border-4 border-green-600 font-black py-4 px-8 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 flex items-center justify-center">
                     <span class="text-xl mr-2">🚀</span> Nộp Bài Cho Cô
                 </button>
@@ -250,6 +263,21 @@
     <script src="js/firebase-logic.js"></script>
     <script src="js/floating-menu.js"></script>
     <script>
+        // Firebase Config (Placeholder)
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
+            authDomain: "gamhoctap.firebaseapp.com",
+            projectId: "gamhoctap",
+            storageBucket: "gamhoctap.firebasestorage.app",
+            messagingSenderId: "833329613932",
+            appId: "1:833329613932:web:0d8574827bcfe50b535c49"
+        };
+
+        // Initialize Firebase if not already
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
         // Word counter logic
         const textarea = document.getElementById('ai-main-essay');
         const countDisplay = document.getElementById('word-count');
@@ -265,11 +293,20 @@
             }
         });
 
+        function checkSchool() {
+            const select = document.getElementById('schoolSelect');
+            const otherInput = document.getElementById('otherSchool');
+            if (select.value === 'Khác') {
+                otherInput.classList.remove('hidden');
+            } else {
+                otherInput.classList.add('hidden');
+            }
+        }
+
         function updateUploadLabel(inputId) {
             const input = document.getElementById(inputId);
             const statusLabel = document.getElementById('upload-status-label');
 
-            // If one is picked, clear the other to avoid confusion
             if (inputId === 'photo-upload') {
                 document.getElementById('camera-capture').value = "";
             } else {
@@ -282,13 +319,15 @@
             }
         }
 
-        async function submitEssayWithUpload() {
+        async function submitEssayWithUpload(event) {
             const name = document.getElementById('studentName').value.trim();
-            const cls = document.getElementById('studentClass').value.trim();
-            const school = document.getElementById('studentSchool').value.trim();
+            const cls = document.getElementById('studentClass').value;
+            const schoolSelect = document.getElementById('schoolSelect').value;
+            const otherSchool = document.getElementById('otherSchool').value.trim();
+            const school = schoolSelect === 'Khác' ? otherSchool : schoolSelect;
+
             const content = textarea.value.trim();
 
-            // Check both inputs
             const fileInputStd = document.getElementById('photo-upload');
             const fileInputCam = document.getElementById('camera-capture');
             const file = fileInputStd.files[0] || fileInputCam.files[0];
@@ -303,7 +342,7 @@
                 return;
             }
 
-            const btn = event.currentTarget;
+            const btn = event ? event.currentTarget : document.querySelector('button[onclick*="submitEssayWithUpload"]');
             const originalText = btn.innerHTML;
             btn.disabled = true;
             btn.innerHTML = " đang gửi bài...";
@@ -311,12 +350,12 @@
             try {
                 let fileUrl = "";
                 if (file) {
-                    const storageRef = firebase.storage().ref(`essays_v2/${Date.now()}_${file.name}`);
-                    const snapshot = await storageRef.put(file);
-                    fileUrl = await snapshot.ref.getDownloadURL();
+                    const storageRef = storage.ref(`essays_v2/${Date.now()}_${file.name}`);
+                    const uploadTask = await storageRef.put(file);
+                    fileUrl = await uploadTask.ref.getDownloadURL();
                 }
 
-                await firebase.firestore().collection("essays_v2").add({
+                await db.collection("essays_v2").add({
                     studentName: name,
                     studentClass: cls,
                     studentSchool: school,
@@ -332,8 +371,8 @@
                 alert("Chúc mừng! Bài làm của em đã được gửi thành công.");
                 if (typeof confetti === 'function') confetti();
             } catch (e) {
-                console.error(e);
-                alert("Lỗi khi gửi bài. Em hãy thử lại nhé!");
+                console.error("Submission error:", e);
+                alert("Lỗi khi gửi bài: " + e.message + "\nEm hãy kiểm tra mạng và thử lại nhé!");
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = originalText;
