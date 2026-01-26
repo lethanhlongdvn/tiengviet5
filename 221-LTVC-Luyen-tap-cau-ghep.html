@@ -772,10 +772,8 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="optionsArea"></div>
                     </div>
                     <div class="px-6 py-4 border-t border-gray-50 flex justify-between items-center bg-gray-50/50">
-                        <span class="text-xs font-bold text-gray-400 italic">* Chọn đáp án đúng nhất</span>
-                        <button id="nextBtn" disabled
-                            class="bg-blue-600 disabled:opacity-30 hover:bg-blue-700 text-white font-black py-3 px-10 rounded-2xl shadow-lg shadow-blue-100 transition-all active:scale-95 uppercase text-sm tracking-widest">Câu
-                            tiếp theo</button>
+                        <span class="text-xs font-bold text-gray-400 italic">* Chọn đáp án đúng nhất để tiếp tục</span>
+                        <div id="quiz-feedback" class="text-sm font-black transition-all opacity-0"></div>
                     </div>
                 </div>
 
@@ -865,7 +863,9 @@
                 </svg>
             </div>
             <h2 class="text-3xl font-black text-gray-800 mb-2 tracking-tight">Thành công!</h2>
-            <p class="text-gray-500 mb-10 font-bold leading-relaxed">Em đã hoàn thành xuất sắc!</p>
+            <p class="text-gray-500 mb-6 font-bold leading-relaxed">Em đã hoàn thành xuất sắc!</p>
+            <div class="mb-8 text-blue-600 font-black text-sm uppercase tracking-widest">Tự động quay lại sau <span
+                    id="countdown">5</span> giây</div>
             <button onclick="closeSuccessModal()"
                 class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 uppercase tracking-widest text-sm">Đóng</button>
         </div>
@@ -1010,21 +1010,45 @@
             const area = document.getElementById('optionsArea'); area.innerHTML = '';
             q.a.forEach((opt, i) => {
                 const btn = document.createElement('button');
-                btn.className = "option-btn w-full p-4 text-left bg-white rounded-2xl font-bold flex items-center group shadow-sm border border-gray-100";
+                btn.className = "option-btn w-full p-4 text-left bg-white rounded-2xl font-bold flex items-center group shadow-sm border border-gray-100 transition-all";
                 btn.innerHTML = `<div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 group-hover:bg-blue-600 group-hover:text-white transition-all text-xs font-black shadow-inner">${String.fromCharCode(65 + i)}</div><span class="flex-1 text-sm md:text-base text-gray-700">${opt}</span>`;
                 btn.onclick = () => selectOption(i, btn);
                 area.appendChild(btn);
             });
-            document.getElementById('nextBtn').disabled = true; document.getElementById('nextBtn').onclick = nextQuestion;
+            document.getElementById('quiz-feedback').style.opacity = '0';
         }
         function selectOption(i, btn) {
-            document.querySelectorAll('#optionsArea button').forEach(b => { b.classList.remove('selected'); b.querySelector('div').classList.remove('bg-blue-600', 'text-white'); });
-            btn.classList.add('selected'); btn.querySelector('div').classList.add('bg-blue-600', 'text-white');
-            document.getElementById('nextBtn').disabled = false; document.getElementById('nextBtn').dataset.selected = i;
-        }
-        function nextQuestion() {
-            if (parseInt(document.getElementById('nextBtn').dataset.selected) === selectedQuestions[currentIdx].c) score += 20;
-            currentIdx++; (currentIdx < 5) ? showQuestion() : showResults();
+            const currentQ = selectedQuestions[currentIdx];
+            const isCorrect = i === currentQ.c;
+            const feedback = document.getElementById('quiz-feedback');
+
+            // Disable all buttons
+            document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+
+            if (isCorrect) {
+                btn.classList.add('bg-green-50', 'border-green-500');
+                btn.querySelector('div').classList.add('bg-green-600', 'text-white');
+                feedback.innerText = "CHÍNH XÁC! 🎉";
+                feedback.classList.add('text-green-600');
+                score += 20;
+            } else {
+                btn.classList.add('bg-red-50', 'border-red-500');
+                btn.querySelector('div').classList.add('bg-red-600', 'text-white');
+                feedback.innerText = "SAI RỒI! ❌";
+                feedback.classList.add('text-red-600');
+
+                // Show correct answer
+                const correctBtn = document.querySelectorAll('.option-btn')[currentQ.c];
+                if (correctBtn) {
+                    correctBtn.classList.add('bg-green-50', 'border-green-500');
+                }
+            }
+            feedback.style.opacity = '1';
+
+            setTimeout(() => {
+                currentIdx++;
+                (currentIdx < 5) ? showQuestion() : showResults();
+            }, 1000);
         }
         function showResults() {
             document.getElementById('quiz-container').classList.add('hidden'); document.getElementById('quiz-results').classList.remove('hidden');
@@ -1068,27 +1092,59 @@
             };
 
             // Fallback: Always show success modal even if database fails
+            let successShown = false;
             const showSuccess = () => {
+                if (successShown) return;
+                successShown = true;
                 document.getElementById('successModal').classList.remove('hidden');
                 celebrate();
                 if (btn) {
                     btn.innerHTML = "NỘP KẾT QUẢ";
                     btn.disabled = false;
                 }
+
+                // Auto redirect after 5s
+                let timeLeft = 5;
+                const countdownEl = document.getElementById('countdown');
+                const timer = setInterval(() => {
+                    timeLeft--;
+                    if (countdownEl) countdownEl.innerText = timeLeft;
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        closeSuccessModal();
+                    }
+                }, 1000);
             };
+
+            // Set a timeout of 3 seconds for database submission
+            const dbTimeout = setTimeout(() => {
+                if (!successShown) {
+                    console.log("Database submission timed out, triggering fallback.");
+                    showSuccess();
+                }
+            }, 3000);
 
             if (window.db && firebaseConfig.apiKey !== "API_KEY") {
                 db.collection("quiz_results").add(data)
-                    .then(showSuccess)
+                    .then(() => {
+                        clearTimeout(dbTimeout);
+                        showSuccess();
+                    })
                     .catch((err) => {
                         console.error("Database Error:", err);
-                        showSuccess(); // Still show success for user experience
+                        clearTimeout(dbTimeout);
+                        showSuccess();
                     });
             } else {
+                clearTimeout(dbTimeout);
                 showSuccess();
             }
         }
-        function closeSuccessModal() { document.getElementById('successModal').classList.add('hidden'); restartQuiz(); }
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+            restartQuiz();
+            switchTab('exercises'); // Return to lesson
+        }
 
         function openTeacherStats() { const p = prompt("Nhập mật khẩu giáo viên:"); if (p === '123456') { document.getElementById('statsModal').classList.add('active'); loadStats(); } else alert("Sai mật khẩu!"); }
         function closeModal() { document.getElementById('statsModal').classList.remove('active'); }
