@@ -512,7 +512,8 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="optionsArea"></div>
                     </div>
                     <div class="px-6 py-4 border-t border-gray-50 flex justify-between items-center bg-gray-50/50">
-                        <span class="text-xs font-bold text-gray-400 italic">* Chọn đáp án đúng nhất</span>
+                        <span class="text-xs font-bold text-gray-400 italic">* Chọn đáp án đúng nhất để tiếp tục</span>
+                        <div id="quiz-feedback" class="text-sm font-black transition-all opacity-0"></div>
                         <button id="nextBtn" disabled
                             class="bg-blue-600 disabled:opacity-30 hover:bg-blue-700 text-white font-black py-3 px-10 rounded-2xl shadow-lg transition-all active:scale-95 uppercase text-sm tracking-widest">Câu
                             tiếp theo</button>
@@ -616,7 +617,8 @@
                     </div>
                     <h2 class="text-3xl font-black text-gray-800 mb-2 tracking-tight">Nộp bài thành công!</h2>
                     <p class="text-gray-500 mb-10 font-bold leading-relaxed">Chúc mừng em đã hoàn thành thử thách kiến
-                        thức!</p><button onclick="closeSuccessModal()"
+                        thức!</p>
+            <div class="mb-8 text-blue-600 font-black text-sm uppercase tracking-widest">Tự động quay lại sau <span id="countdown">5</span> giây</div><button onclick="closeSuccessModal()"
                         class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl transition-all active:scale-95 uppercase tracking-widest text-sm">Trở
                         về bài học</button>
                 </div>
@@ -688,6 +690,7 @@
             document.getElementById('quiz-registration').classList.add('hidden'); document.getElementById('quiz-container').classList.remove('hidden'); showQuestion();
         }
         function showQuestion() {
+            if(document.getElementById('quiz-feedback')) document.getElementById('quiz-feedback').style.opacity = '0';
             const q = selectedQuestions[currentIdx];
             document.getElementById('questionNum').innerText = currentIdx + 1;
             document.getElementById('progressText').innerText = `CÂU TRẮC NGHIỆM: ${currentIdx + 1}/5`;
@@ -700,10 +703,28 @@
             });
             document.getElementById('nextBtn').disabled = true; document.getElementById('nextBtn').onclick = nextQuestion;
         }
-        function selectOption(idx, btn) {
-            document.querySelectorAll('#optionsArea button').forEach(b => { b.classList.remove('selected'); b.querySelector('div').classList.remove('bg-blue-600', 'text-white'); });
-            btn.classList.add('selected'); btn.querySelector('div').classList.add('bg-blue-600', 'text-white');
-            document.getElementById('nextBtn').disabled = false; document.getElementById('nextBtn').dataset.selected = idx;
+        function selectOption(i, btn) {
+            const currentQ = selectedQuestions[currentIdx];
+            const isCorrect = i === currentQ.c;
+            const feedback = document.getElementById('quiz-feedback');
+            document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+            if (isCorrect) {
+                btn.classList.add('bg-green-50', 'border-green-500');
+                btn.querySelector('div').classList.add('bg-green-600', 'text-white');
+                if (feedback) { feedback.innerText = "CHÍNH XÁC! 🎉"; feedback.classList.add('text-green-600'); }
+                score += 20;
+            } else {
+                btn.classList.add('bg-red-50', 'border-red-500');
+                btn.querySelector('div').classList.add('bg-red-600', 'text-white');
+                if (feedback) { feedback.innerText = "SAI RỒI! ❌"; feedback.classList.add('text-red-600'); }
+                const correctBtn = document.querySelectorAll('.option-btn')[currentQ.c];
+                if (correctBtn) correctBtn.classList.add('bg-green-50', 'border-green-500');
+            }
+            if (feedback) feedback.style.opacity = '1';
+            setTimeout(() => {
+                currentIdx++;
+                (currentIdx < 5) ? showQuestion() : showResults();
+            }, 1000);
         }
         function nextQuestion() {
             const selected = parseInt(document.getElementById('nextBtn').dataset.selected);
@@ -721,15 +742,45 @@
         function restartQuiz() { document.getElementById('quiz-results').classList.add('hidden'); document.getElementById('quiz-registration').classList.remove('hidden'); }
         const firebaseConfig = { apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc", authDomain: "gamhoctap.firebaseapp.com", projectId: "gamhoctap", storageBucket: "gamhoctap.firebasestorage.app", messagingSenderId: "833329613932", appId: "1:833329613932:web:0d8574827bcfe50b535c49", measurementId: "G-YT1PKCYS67" };
         firebase.initializeApp(firebaseConfig); const db = firebase.firestore();
-        function closeSuccessModal() { document.getElementById('successModal').classList.remove('active'); restartQuiz(); switchTab('lesson'); }
-        async function submitResults(e) {
-            const btn = e.target; btn.disabled = true; btn.innerText = "Đang gửi...";
-            const duration = Math.floor((new Date() - startTime) / 1000);
-            const timeStr = `${Math.floor(duration / 60)}p ${duration % 60}s`;
-            try {
-                await db.collection("diem_tieng_viet_lop5").add({ ...studentData, lessonTitle: "Vũ điệu trên nền thổ cẩm", score: score, duration: duration, timeDisplay: timeStr, submittedAt: firebase.firestore.FieldValue.serverTimestamp() });
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+            document.getElementById('successModal').classList.add('hidden');
+            restartQuiz();
+            if (typeof switchTab === 'function') switchTab('lesson');
+        }
+        function submitResults(e) {
+            if (e) e.preventDefault();
+            const btn = document.querySelector('#quiz-results button:last-child');
+            if (btn) { btn.innerHTML = "Đang nộp..."; btn.disabled = true; }
+            const data = {
+                studentName: document.getElementById('studentName').value,
+                studentClass: document.getElementById('studentClass').value,
+                school: document.getElementById('schoolSelect').value === 'Khác' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
+                lessonTitle: document.title.replace(' - EduRobot', ''),
+                score: score,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            let successShown = false;
+            const showSuccess = () => {
+                if (successShown) return;
+                successShown = true;
                 document.getElementById('successModal').classList.add('active');
-            } catch (err) { console.error(err); alert("Có lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
+                document.getElementById('successModal').classList.remove('hidden');
+                celebrate();
+                if (btn) { btn.innerHTML = "NỘP KẾT QUẢ"; btn.disabled = false; }
+                let timeLeft = 5;
+                const countdownEl = document.getElementById('countdown');
+                const timer = setInterval(() => {
+                    timeLeft--;
+                    if (countdownEl) countdownEl.innerText = timeLeft;
+                    if (timeLeft <= 0) { clearInterval(timer); closeSuccessModal(); }
+                }, 1000);
+            };
+            const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
+            if (window.db || firebase.apps.length) {
+                const database = window.db || firebase.firestore();
+                database.collection("quiz_results").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch((err) => { console.error(err); clearTimeout(dbTimeout); showSuccess(); });
+            } else { clearTimeout(dbTimeout); showSuccess(); }
         }
         function openTeacherStats() { const pin = prompt("Mã PIN:"); if (pin === "dvn") { document.getElementById('statsModal').classList.add('active'); loadStats(); } }
         function closeModal() { document.getElementById('statsModal').classList.remove('active'); }
@@ -756,6 +807,9 @@
             XLSX.writeFile(wb, "KetQua_VuDieuThoCam.xlsx");
         }
     </script>
+
+    <!-- Audio Celebration -->
+    <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
 <script src="js/floating-menu.js"></script>
 </body>
 
