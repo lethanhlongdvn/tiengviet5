@@ -59,7 +59,7 @@ exports.handler = async (event, context) => {
       - uu_diem: Các điểm hay trong bài
       - loi_sai: Các lỗi diễn đạt, chính tả (nếu có)
       - huong_dan: Lời khuyên cụ thể để bài hay hơn hoặc để hoàn thiện phần thiếu
-      - loi_nhan: Lời nhắn tình cảm từ cô giáo
+      - loi_nhan: Lời nhắn tình cảm từ Thầy/Cô
       - analysis: { "mo_bai": "...", "than_bai": "...", "ket_bai": "..." } (Phân tích nội dung từng phần)
     `;
 
