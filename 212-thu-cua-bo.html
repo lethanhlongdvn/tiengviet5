@@ -582,30 +582,23 @@
         <div id="tab-quiz" class="tab-content">
             <div
                 class="max-w-4xl mx-auto glass-card rounded-[40px] shadow-2xl overflow-hidden flex flex-col min-h-[500px]">
-                <!-- Registration -->
-                <div id="quiz-registration" class="p-4 md:p-8 flex-grow flex flex-col justify-center overflow-auto">
-                    <div class="text-center mb-6">
-                        <div
-                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white mb-4 shadow-xl shadow-blue-200 mx-auto transform -rotate-3">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h2 class="text-2xl font-black text-gray-800 mb-1 tracking-tight">Đăng ký luyện tập</h2>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Thư của bố</p>
+                                                <!-- Registration -->
+                <div id="quiz-registration" class="p-8 md:p-12 flex flex-col items-center justify-center flex-grow text-center">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl flex items-center justify-center text-white mb-6 shadow-xl shadow-blue-200 transform -rotate-3">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
                     </div>
+                    <h2 class="text-3xl font-black text-gray-800 mb-3 tracking-tight">Đăng ký luyện tập</h2>
+                    <p class="text-gray-500 mb-10 max-w-sm font-bold">Hãy điền thông tin để bắt đầu thử thách kiến thức nhé!</p>
 
-                    <form onsubmit="startQuiz(event)" class="w-full max-w-sm mx-auto space-y-4">
+                    <form onsubmit="startQuiz(event)" class="w-full max-w-sm space-y-5">
                         <div class="relative group">
-                            <input type="text" id="studentName" required placeholder="Họ và tên của em"
-                                class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold placeholder:text-gray-300 shadow-sm">
+                            <input type="text" id="studentName" required placeholder="Họ và tên của em" class="w-full px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold placeholder:text-gray-300 shadow-sm">
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
-                            <select id="studentClass" required
-                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none cursor-pointer">
+                            <select id="studentClass" required class="px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none">
                                 <option value="">Chọn Lớp</option>
                                 <option value="5/1">5/1</option>
                                 <option value="5/2">5/2</option>
@@ -614,19 +607,16 @@
                                 <option value="5/5">5/5</option>
                             </select>
 
-                            <select id="schoolSelect" required onchange="checkSchool()"
-                                class="px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none cursor-pointer">
+                            <select id="schoolSelect" required onchange="checkSchool()" class="px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none">
                                 <option value="Tiểu học Đỗ Văn Nại">TH Đỗ Văn Nại</option>
                                 <option value="Khác">Trường khác...</option>
                             </select>
                         </div>
 
-                        <input type="text" id="otherSchool" placeholder="Tên trường của em"
-                            class="hidden w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white transition-all font-bold shadow-sm">
+                        <input type="text" id="otherSchool" placeholder="Tên trường của em" class="hidden w-full px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white transition-all font-bold shadow-sm">
 
-                        <button type="submit"
-                            class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-base uppercase tracking-wider">
-                            Bắt đầu luyện tập
+                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-lg uppercase tracking-wider">
+                            Bắt đầu ngay
                         </button>
                     </form>
                 </div>
