@@ -1,4 +1,4 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const fetch = require('node-fetch');
 
 exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
@@ -11,17 +11,14 @@ exports.handler = async (event, context) => {
       return { statusCode: 400, body: JSON.stringify({ error: "No sentence or content provided" }) };
     }
 
-    // 1. Cấu hình Gemini API
-    const apiKey = process.env.GOOGLE_API_KEY;
+    // 1. Cấu hình Groq API
+    const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: "Chưa cấu hình API Key." })
+        body: JSON.stringify({ error: "Chưa cấu hình GROQ_API_KEY trên Netlify." })
       };
     }
-
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     // 2. Tiền xử lý dữ liệu (Loại bỏ nhiễu từ đề bài)
     let processedSentence = sentence;
@@ -45,8 +42,7 @@ exports.handler = async (event, context) => {
       SIÊU QUY TẮC PHÂN TÍCH (EDUROBOT V3):
       1. KHÔNG ĐƯA ĐỀ BÀI VÀO PHÂN TÍCH: Chỉ phân tích nội dung học sinh viết.
       2. KHÔNG NHẦM TỪ NỐI LÀ CHỦ NGỮ: CẤM "càng, nhưng, mà, thì, nên, vì, tuy, còn" làm Chủ ngữ.
-         Ví dụ: "gió càng lớn" -> CN: gió, VN: càng lớn.
-      3. KHÔNG BÁO "ẨN" SAI NGỮ CẢNH: Chỉ báo "Ẩn" khi vế thực sự khuyết (Ví dụ: "Tuy mệt nhưng (em) vẫn đi học").
+      3. KHÔNG BÁO "ẨN" SAI NGỮ CẢNH: Chỉ báo "Ẩn" khi vế thực sự khuyết.
 
       Nội dung cần chú trọng:
       - Tả người (nếu là đoạn văn): ngoại hình, hoạt động, so sánh.
@@ -58,17 +54,35 @@ exports.handler = async (event, context) => {
     `;
 
     try {
-      // 4. Gọi Gemini 1.5 Flash
-      const prompt = `${systemInstruction}\n\nPhân tích bài tập sau: "${processedSentence}"\n\nTrả về JSON:\n{\n  "diem": "điểm/10",\n  "uu_diem": "...",\n  "loi_sai": "...",\n  "huong_dan": "...",\n  "loi_nhan": "...",\n  "analysis": { "ve1": {"CN": "...", "VN": "..."}, "ve2": {"CN": "...", "VN": "..."} }\n}`;
+      // 4. Gọi Groq Cloud (Llama 3.3 70B)
+      const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${apiKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "llama-3.3-70b-versatile",
+          messages: [
+            { role: "system", content: systemInstruction },
+            {
+              role: "user",
+              content: `Phân tích bài tập sau: "${processedSentence}"\n\nTrả về JSON:\n{\n  "diem": "điểm/10",\n  "uu_diem": "...",\n  "loi_sai": "...",\n  "huong_dan": "...",\n  "loi_nhan": "...",\n  "analysis": { "ve1": {"CN": "...", "VN": "..."}, "ve2": {"CN": "...", "VN": "..."} }\n}`
+            }
+          ],
+          response_format: { type: "json_object" },
+          temperature: 0.7
+        })
+      });
 
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      let text = response.text();
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || `API Error: ${response.status}`);
+      }
 
-      // Làm sạch text nếu AI trả về markdown code block
-      text = text.replace(/```json/g, "").replace(/```/g, "").trim();
-
-      const analysis = JSON.parse(text);
+      const rawData = await response.json();
+      const content = rawData.choices[0].message.content;
+      const analysis = JSON.parse(content);
 
       return {
         statusCode: 200,
@@ -76,11 +90,11 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(analysis)
       };
     } catch (error) {
-      console.error("AI Grading Error:", error);
+      console.error("Groq Grading Error:", error);
       return {
         statusCode: 500,
         body: JSON.stringify({
-          error: `Lỗi kết nối AI: ${error.message}`
+          error: `Lỗi kết nối AI (Groq): ${error.message}`
         })
       };
     }
