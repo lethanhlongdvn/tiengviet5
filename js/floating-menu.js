@@ -413,7 +413,7 @@ const curriculumData = {
                         {
                             "title": "Bài 7: Đoàn thuyền đánh cá", "sections": [
                                 { "title": "Đọc: Đoàn thuyền đánh cá", "url": "221-doan-thuyen-danh-ca.html" },
-                                { "title": "Luyện từ & Câu: Luyện tập về câu ghép", "url": "#" },
+                                { "title": "Luyện từ & Câu: Luyện tập về câu ghép", "url": "221-LTVC-Luyen-tap-cau-ghep.html" },
                                 { "title": "Viết: Đánh giá, chỉnh sửa bài văn tả người", "url": "#" }
                             ]
                         },
