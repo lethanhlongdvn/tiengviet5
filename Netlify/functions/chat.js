@@ -34,23 +34,33 @@ exports.handler = async (event, context) => {
     noisePatterns.forEach(p => processedSentence = processedSentence.replace(p, ""));
     processedSentence = processedSentence.trim().replace(/^[:.]\s*/, "").trim();
 
-    // 3. Chế độ Chuyên gia + Quy tắc nghiêm ngặt
+    // 3. Chế độ Chuyên gia + Quy tắc nghiêm ngặt (V4 - Chấm văn 3 phần)
     const systemInstruction = `
-      Bạn là Chuyên gia Ngôn ngữ học và Giáo viên Tiểu học tâm huyết với 20 năm kinh nghiệm. 
-      Nhiệm vụ: Chấm bài viết (câu ghép hoặc đoạn văn) cho học sinh lớp 5.
+      Bạn là Chuyên gia Ngôn ngữ học và Giáo viên Tiểu học tâm huyết. 
+      Nhiệm vụ: Chấm bài văn tả người cho học sinh lớp 5.
 
-      SIÊU QUY TẮC PHÂN TÍCH (EDUROBOT V3):
-      1. KHÔNG ĐƯA ĐỀ BÀI VÀO PHÂN TÍCH: Chỉ phân tích nội dung học sinh viết.
-      2. KHÔNG NHẦM TỪ NỐI LÀ CHỦ NGỮ: CẤM "càng, nhưng, mà, thì, nên, vì, tuy, còn" làm Chủ ngữ.
-      3. KHÔNG BÁO "ẨN" SAI NGỮ CẢNH: Chỉ báo "Ẩn" khi vế thực sự khuyết.
+      SIÊU QUY TẮC PHÂN TÍCH (EDUROBOT V4):
+      1. KIỂM TRA CẤU TRÚC 3 PHẦN:
+         - Mở bài: Dẫn dắt, giới thiệu người định tả.
+         - Thân bài: Tả ngoại hình (vóc dáng, khuôn mặt, trang phục...) và hoạt động (tính cách, thói quen...).
+         - Kết bài: Nêu cảm nghĩ, tình cảm với người đó.
+      2. KIỂM TRA ĐỘ DÀI: Bài văn phải đạt trên 100 từ mới coi là hoàn thành.
+      3. PHÂN LOẠI TRẠNG THÁI (status):
+         - "incomplete": Nếu bài thiếu ít nhất 1 trong 3 phần HOẶC dưới 100 từ.
+         - "complete": Nếu đủ 3 phần VÀ từ 100 từ trở lên.
+      4. PHẢN HỒI (loi_nhan, huong_dan): 
+         - Nếu "incomplete": Chỉ rõ phần nào thiếu, cần viết thêm gì, động viên học sinh bấm nút "Tiếp tục".
+         - Nếu "complete": Khen ngợi, chấm điểm cao nếu viết hay.
 
-      Nội dung cần chú trọng:
-      - Tả người (nếu là đoạn văn): ngoại hình, hoạt động, so sánh.
-      - Câu ghép: cặp từ quan hệ, logic vế câu.
-
-      Quy tắc chấm:
-      - Khen ngợi sự sáng tạo. Gợi ý sửa lỗi nhẹ nhàng.
-      - Trả về JSON sạch sẽ.
+      Trả về JSON với các trường:
+      - diem: (Ví dụ: "8/10")
+      - status: "complete" hoặc "incomplete"
+      - missing_parts: Mảng các phần còn thiếu (ví dụ: ["Kết bài"])
+      - uu_diem: Các điểm hay trong bài
+      - loi_sai: Các lỗi diễn đạt, chính tả (nếu có)
+      - huong_dan: Lời khuyên cụ thể để bài hay hơn hoặc để hoàn thiện phần thiếu
+      - loi_nhan: Lời nhắn tình cảm từ cô giáo
+      - analysis: { "mo_bai": "...", "than_bai": "...", "ket_bai": "..." } (Phân tích nội dung từng phần)
     `;
 
     try {
@@ -67,7 +77,7 @@ exports.handler = async (event, context) => {
             { role: "system", content: systemInstruction },
             {
               role: "user",
-              content: `Phân tích bài tập sau: "${processedSentence}"\n\nTrả về JSON:\n{\n  "diem": "điểm/10",\n  "uu_diem": "...",\n  "loi_sai": "...",\n  "huong_dan": "...",\n  "loi_nhan": "...",\n  "analysis": { "ve1": {"CN": "...", "VN": "..."}, "ve2": {"CN": "...", "VN": "..."} }\n}`
+              content: `Hãy phân tích bài văn sau của học sinh lớp 5: "${processedSentence}"`
             }
           ],
           response_format: { type: "json_object" },
@@ -83,6 +93,10 @@ exports.handler = async (event, context) => {
       const rawData = await response.json();
       const content = rawData.choices[0].message.content;
       const analysis = JSON.parse(content);
+
+      // Thêm đếm từ phía server để chắc chắn
+      const wordCount = processedSentence.split(/\s+/).filter(word => word.length > 0).length;
+      analysis.word_count = wordCount;
 
       return {
         statusCode: 200,
