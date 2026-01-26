@@ -266,7 +266,7 @@
                         </h3>
                         <p
                             class="text-sm text-gray-500 mb-6 italic bg-blue-50/50 p-3 rounded-xl border border-blue-100">
-                            Em hãy đọc đoạn văn, chọn các câu ghép và bấm vào những từ dùng để nối các vế (nếu có).
+                            Em hãy đọc đoạn văn, bấm vào các câu để chọn từ nối (nếu có).
                         </p>
 
                         <div class="space-y-6">
@@ -274,12 +274,19 @@
                             <div class="p-5 bg-white/60 rounded-2xl border border-blue-100 shadow-sm">
                                 <p class="text-sm font-black text-blue-600 mb-3 uppercase tracking-wider">Đoạn văn a (Tô
                                     Hoài)</p>
-                                <div class="space-y-4" id="p1a">
+                                <div class="space-y-3" id="p1a">
                                     <!-- Câu 1 -->
-                                    <div class="sentence-item p-3 hover:bg-white/80 rounded-xl transition-all"
-                                        data-is-compound="true" data-connectors="nhưng">
-                                        <p class="text-lg leading-relaxed select-none">
-                                            <span class="font-bold text-gray-400 mr-2">(1)</span>
+                                    <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true"
+                                        data-connectors="nhưng">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(1)</span>
+                                            <p class="text-base md:text-lg font-medium leading-relaxed">Làng Tày, làng
+                                                Dao ven suối và trong rừng, nhưng làng người Mông ở chơ vơ đỉnh núi,
+                                                giữa cỏ tranh mênh mông.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
                                             <span class="word">Làng</span> <span class="word">Tày,</span> <span
                                                 class="word">làng</span> <span class="word">Dao</span> <span
                                                 class="word">ven</span> <span class="word">suối</span> <span
@@ -292,13 +299,20 @@
                                                 class="word">giữa</span> <span class="word">cỏ</span> <span
                                                 class="word">tranh</span> <span class="word">mênh</span> <span
                                                 class="word">mông.</span>
-                                        </p>
+                                        </div>
                                     </div>
                                     <!-- Câu 2 -->
-                                    <div class="sentence-item p-3 hover:bg-white/80 rounded-xl transition-all"
-                                        data-is-compound="true" data-connectors="">
-                                        <p class="text-lg leading-relaxed select-none">
-                                            <span class="font-bold text-gray-400 mr-2">(2)</span>
+                                    <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true"
+                                        data-connectors="">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(2)</span>
+                                            <p class="text-base md:text-lg font-medium leading-relaxed">Vách và mái nhà
+                                                đều ghép bằng những miếng gỗ pơ-mu, nhà nhà ám khói sạm đen tưởng như
+                                                làng xóm liền với trời xanh.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
                                             <span class="word">Vách</span> <span class="word">và</span> <span
                                                 class="word">mái</span> <span class="word">nhà</span> <span
                                                 class="word">đều</span> <span class="word">ghép</span> <span
@@ -312,24 +326,75 @@
                                                 class="word">xóm</span> <span class="word">liền</span> <span
                                                 class="word">với</span> <span class="word">trời</span> <span
                                                 class="word">xanh.</span>
-                                        </p>
-                                        <div
-                                            class="ml-8 mt-1 text-xs text-blue-500 font-bold italic hidden direct-connect-msg">
-                                            Nối trực tiếp bằng dấu phẩy</div>
+                                            <div
+                                                class="w-full mt-1 text-xs text-blue-500 font-bold italic hidden direct-connect-msg">
+                                                Nối trực tiếp bằng dấu phẩy</div>
+                                        </div>
                                     </div>
-                                    <!-- Các câu khác -->
-                                    <div class="sentence-item p-3 opacity-60" data-is-compound="false">
-                                        <p class="text-lg leading-relaxed select-none">
-                                            <span class="font-bold text-gray-400 mr-2">(3)</span> Xung quanh nhà nào
-                                            cũng sum sê những đào, những lê. (4) Giữa mùa đông, hoa lê trắng ngần. (5)
-                                            Vào đầu xuân, hoa đào nở hồng cả trời.
-                                        </p>
+                                    <!-- Câu 3 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2"
+                                        data-is-compound="false" data-connectors="">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(3)</span>
+                                            <p class="text-base md:text-lg font-medium leading-relaxed">Xung quanh nhà
+                                                nào cũng sum sê những đào, những lê.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
+                                            <span class="word">Xung</span> <span class="word">quanh</span> <span
+                                                class="word">nhà</span> <span class="word">nào</span> <span
+                                                class="word">cũng</span> <span class="word">sum</span> <span
+                                                class="word">sê</span> <span class="word">những</span> <span
+                                                class="word">đào,</span> <span class="word">những</span> <span
+                                                class="word">lê.</span>
+                                        </div>
+                                    </div>
+                                    <!-- Câu 4 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2"
+                                        data-is-compound="false" data-connectors="">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(4)</span>
+                                            <p class="text-base md:text-lg font-medium leading-relaxed">Giữa mùa đông,
+                                                hoa lê trắng ngần.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
+                                            <span class="word">Giữa</span> <span class="word">mùa</span> <span
+                                                class="word">đông,</span> <span class="word">hoa</span> <span
+                                                class="word">lê</span> <span class="word">trắng</span> <span
+                                                class="word">ngần.</span>
+                                        </div>
+                                    </div>
+                                    <!-- Câu 5 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2"
+                                        data-is-compound="false" data-connectors="">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(5)</span>
+                                            <p class="text-base md:text-lg font-medium leading-relaxed">Vào đầu xuân,
+                                                hoa đào nở hồng cả trời.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
+                                            <span class="word">Vào</span> <span class="word">đầu</span> <span
+                                                class="word">xuân,</span> <span class="word">hoa</span> <span
+                                                class="word">đào</span> <span class="word">nở</span> <span
+                                                class="word">hồng</span> <span class="word">cả</span> <span
+                                                class="word">trời.</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mt-4 flex justify-end">
                                     <button onclick="checkParagraph('p1a')"
-                                        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl font-black shadow-lg shadow-blue-200 transition-all active:scale-95">KIỂM
-                                        TRA ĐOẠN A</button>
+                                        class="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg shadow-blue-200 transition-all active:scale-95"
+                                        title="Kiểm tra">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
 
@@ -337,17 +402,91 @@
                             <div class="p-5 bg-white/60 rounded-2xl border border-blue-100 shadow-sm">
                                 <p class="text-sm font-black text-blue-600 mb-3 uppercase tracking-wider">Đoạn văn b (Võ
                                     Quảng)</p>
-                                <div class="space-y-4" id="p1b">
-                                    <div class="sentence-item p-2 opacity-60" data-is-compound="false">
-                                        <p class="text-base leading-relaxed select-none">(1) Gió bấc thổi ào ào qua khu
-                                            rừng vắng. (2) Những cành cây khẳng khiu chốc chốc run lên bần bật. (3) Mưa
-                                            phùn lất phất... (4) Bên gốc đa, một chú thỏ bước ra, tay cầm một tấm vải
-                                            dệt bằng rong.</p>
+                                <div class="space-y-3" id="p1b">
+                                    <!-- Câu 1 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2"
+                                        data-is-compound="false" data-connectors="">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(1)</span>
+                                            <p class="text-base leading-relaxed">Gió bấc thổi ào ào qua khu rừng vắng.
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
+                                            <span class="word">Gió</span> <span class="word">bấc</span> <span
+                                                class="word">thổi</span> <span class="word">ào</span> <span
+                                                class="word">ào</span> <span class="word">qua</span> <span
+                                                class="word">khu</span> <span class="word">rừng</span> <span
+                                                class="word">vắng.</span>
+                                        </div>
                                     </div>
-                                    <div class="sentence-item p-3 hover:bg-white/80 rounded-xl transition-all"
-                                        data-is-compound="true" data-connectors="nhưng">
-                                        <p class="text-lg leading-relaxed select-none">
-                                            <span class="font-bold text-gray-400 mr-2">(5)</span>
+                                    <!-- Câu 2 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2"
+                                        data-is-compound="false" data-connectors="">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(2)</span>
+                                            <p class="text-base leading-relaxed">Những cành cây khẳng khiu chốc chốc run
+                                                lên bần bật.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
+                                            <span class="word">Những</span> <span class="word">cành</span> <span
+                                                class="word">cây</span> <span class="word">khẳng</span> <span
+                                                class="word">khiu</span> <span class="word">chốc</span> <span
+                                                class="word">chốc</span> <span class="word">run</span> <span
+                                                class="word">lên</span> <span class="word">bần</span> <span
+                                                class="word">bật.</span>
+                                        </div>
+                                    </div>
+                                    <!-- Câu 3 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2"
+                                        data-is-compound="false" data-connectors="">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(3)</span>
+                                            <p class="text-base leading-relaxed">Mưa phùn lất phất...</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
+                                            <span class="word">Mưa</span> <span class="word">phùn</span> <span
+                                                class="word">lất</span> <span class="word">phất...</span>
+                                        </div>
+                                    </div>
+                                    <!-- Câu 4 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2"
+                                        data-is-compound="false" data-connectors="">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(4)</span>
+                                            <p class="text-base leading-relaxed">Bên gốc đa, một chú thỏ bước ra, tay
+                                                cầm một tấm vải dệt bằng rong.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
+                                            <span class="word">Bên</span> <span class="word">gốc</span> <span
+                                                class="word">đa,</span> <span class="word">một</span> <span
+                                                class="word">chú</span> <span class="word">thỏ</span> <span
+                                                class="word">bước</span> <span class="word">ra,</span> <span
+                                                class="word">tay</span> <span class="word">cầm</span> <span
+                                                class="word">một</span> <span class="word">tấm</span> <span
+                                                class="word">vải</span> <span class="word">dệt</span> <span
+                                                class="word">bằng</span> <span class="word">rong.</span>
+                                        </div>
+                                    </div>
+                                    <!-- Câu 5 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true"
+                                        data-connectors="nhưng">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(5)</span>
+                                            <p class="text-base md:text-lg font-medium leading-relaxed">Thỏ tìm cách
+                                                quấn tấm vải lên người cho đỡ rét, nhưng tấm vải bị gió lật tung, bay đi
+                                                vun vút.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
                                             <span class="word">Thỏ</span> <span class="word">tìm</span> <span
                                                 class="word">cách</span> <span class="word">quấn</span> <span
                                                 class="word">tấm</span> <span class="word">vải</span> <span
@@ -359,39 +498,83 @@
                                                 class="word">lật</span> <span class="word">tung,</span> <span
                                                 class="word">bay</span> <span class="word">đi</span> <span
                                                 class="word">vun</span> <span class="word">vút.</span>
-                                        </p>
+                                        </div>
                                     </div>
-                                    <div class="sentence-item p-2 opacity-60" data-is-compound="false">
-                                        <p class="text-base leading-relaxed select-none">(6) Thỏ đuổi theo. (7) Tấm vải
-                                            tròng trành trên ao.</p>
+                                    <!-- Câu 6 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2"
+                                        data-is-compound="false" data-connectors="">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(6)</span>
+                                            <p class="text-base leading-relaxed">Thỏ đuổi theo.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
+                                            <span class="word">Thỏ</span> <span class="word">đuổi</span> <span
+                                                class="word">theo.</span>
+                                        </div>
                                     </div>
-                                    <div class="sentence-item p-3 hover:bg-white/80 rounded-xl transition-all"
-                                        data-is-compound="true" data-connectors="vừa,đã">
-                                        <p class="text-lg leading-relaxed select-none">
-                                            <span class="font-bold text-gray-400 mr-2">(8)</span>
+                                    <!-- Câu 7 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2"
+                                        data-is-compound="false" data-connectors="">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(7)</span>
+                                            <p class="text-base leading-relaxed">Tấm vải tròng trành trên ao.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
+                                            <span class="word">Tấm</span> <span class="word">vải</span> <span
+                                                class="word">tròng</span> <span class="word">trành</span> <span
+                                                class="word">trên</span> <span class="word">ao.</span>
+                                        </div>
+                                    </div>
+                                    <!-- Câu 8 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true"
+                                        data-connectors="vừa,đã">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(8)</span>
+                                            <p class="text-base md:text-lg font-medium leading-relaxed">Thỏ vừa đặt chân
+                                                xuống nước đã vội co chân lên.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
                                             <span class="word">Thỏ</span> <span class="word">vừa</span> <span
                                                 class="word">đặt</span> <span class="word">chân</span> <span
                                                 class="word">xuống</span> <span class="word">nước</span> <span
                                                 class="word">đã</span> <span class="word">vội</span> <span
                                                 class="word">co</span> <span class="word">chân</span> <span
                                                 class="word">lên.</span>
-                                        </p>
+                                        </div>
                                     </div>
-                                    <div class="sentence-item p-3 hover:bg-white/80 rounded-xl transition-all"
-                                        data-is-compound="true" data-connectors="nhưng">
-                                        <p class="text-lg leading-relaxed select-none">
-                                            <span class="font-bold text-gray-400 mr-2">(9)</span>
+                                    <!-- Câu 9 -->
+                                    <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true"
+                                        data-connectors="nhưng">
+                                        <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3"
+                                            onclick="toggleWords(this)">
+                                            <span class="font-bold text-blue-400 shrink-0">(9)</span>
+                                            <p class="text-base md:text-lg font-medium leading-relaxed">Thỏ cố khều
+                                                nhưng đưa chân không tới.</p>
+                                        </div>
+                                        <div
+                                            class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
                                             <span class="word">Thỏ</span> <span class="word">cố</span> <span
                                                 class="word">khều</span> <span class="word">nhưng</span> <span
                                                 class="word">đưa</span> <span class="word">chân</span> <span
                                                 class="word">không</span> <span class="word">tới.</span>
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mt-4 flex justify-end">
                                     <button onclick="checkParagraph('p1b')"
-                                        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl font-black shadow-lg shadow-blue-200 transition-all active:scale-95">KIỂM
-                                        TRA ĐOẠN B</button>
+                                        class="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg shadow-blue-200 transition-all active:scale-95"
+                                        title="Kiểm tra">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -428,7 +611,7 @@
                                         <option value="Hễ-là">Hễ... là...</option>
                                     </select>
                                     <button onclick="check2('q2a')"
-                                        class="bg-orange-500 text-white w-12 h-12 flex items-center justify-center rounded-xl font-black shadow-lg shadow-orange-100 hover:bg-orange-600 hover:-translate-y-0.5 transition-all active:scale-95">✓</button>
+                                        class="bg-orange-500 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg shadow-orange-100 hover:bg-orange-600 hover:-translate-y-0.5 transition-all active:scale-95">✓</button>
                                 </div>
                             </div>
 
@@ -450,7 +633,7 @@
                                         <option value="Chẳng những-mà">Chẳng những... mà...</option>
                                     </select>
                                     <button onclick="check2('q2b')"
-                                        class="bg-orange-500 text-white w-12 h-12 flex items-center justify-center rounded-xl font-black shadow-lg shadow-orange-100 hover:bg-orange-600 hover:-translate-y-0.5 transition-all active:scale-95">✓</button>
+                                        class="bg-orange-500 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg shadow-orange-100 hover:bg-orange-600 hover:-translate-y-0.5 transition-all active:scale-95">✓</button>
                                 </div>
                             </div>
 
@@ -472,7 +655,7 @@
                                         <option value="mới-đã">mới... đã...</option>
                                     </select>
                                     <button onclick="check2('q2c')"
-                                        class="bg-orange-500 text-white w-12 h-12 flex items-center justify-center rounded-xl font-black shadow-lg shadow-orange-100 hover:bg-orange-600 hover:-translate-y-0.5 transition-all active:scale-95">✓</button>
+                                        class="bg-orange-500 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg shadow-orange-100 hover:bg-orange-600 hover:-translate-y-0.5 transition-all active:scale-95">✓</button>
                                 </div>
                             </div>
                         </div>
@@ -706,6 +889,13 @@
         function switchTab(t) { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active')); document.getElementById('btn-' + t).classList.add('active'); document.getElementById('tab-' + t).classList.add('active'); }
 
         // Exercise 1 Logic
+        function toggleWords(el) {
+            const container = el.nextElementSibling;
+            if (container && container.classList.contains('words-container')) {
+                container.classList.toggle('hidden');
+            }
+        }
+
         document.addEventListener('click', function (e) {
             if (e.target.classList.contains('word')) {
                 const item = e.target.closest('.locked');
@@ -715,7 +905,7 @@
 
         function checkParagraph(id) {
             const container = document.getElementById(id);
-            const items = container.querySelectorAll('.sentence-item');
+            const items = container.querySelectorAll('.sentence-box');
             let totalCorrect = 0, totalCompound = 0;
             let error = false;
 
@@ -745,11 +935,10 @@
                         const directMsg = item.querySelector('.direct-connect-msg');
                         if (directMsg) directMsg.classList.remove('hidden');
                         totalCorrect++;
-                    } else if (foundConnectors === connectors.length && !error) {
+                    } else if (foundConnectors === connectors.length && foundConnectors > 0 && !error) {
                         totalCorrect++;
                     }
                 } else {
-                    // Câu đơn mà chọn từ thì sai
                     words.forEach(w => {
                         if (w.classList.contains('selected')) {
                             w.classList.add('is-wrong');
