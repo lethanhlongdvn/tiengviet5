@@ -78,52 +78,112 @@ async function askAI(id, prefix = "", mode = "single") {
 }
 
 function renderFeedback(container, data) {
+    const isComplete = data.status === "complete";
+    const missingParts = data.missing_parts || [];
+    const wordCount = data.word_count || 0;
+
     let html = `
         <div class="space-y-4 animate-in fade-in duration-500">
-            <!-- Lời nhắn yêu thương từ Cô giáo -->
-            <div class="p-6 bg-gradient-to-br from-blue-50 to-white rounded-[32px] border-2 border-blue-100 shadow-sm relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-2 opacity-5">
-                    <span class="text-6xl">👩‍🏫</span>
+            <!-- Summary Header -->
+            <div class="p-6 ${isComplete ? 'bg-green-50 border-green-200' : 'bg-orange-50 border-orange-200'} rounded-[32px] border-2 shadow-sm relative overflow-hidden">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h5 class="font-black ${isComplete ? 'text-green-700' : 'text-orange-700'} uppercase text-[10px] mb-2 tracking-widest flex items-center">
+                            <span class="mr-2">${isComplete ? '✅' : '⚠️'}</span> Trạng thái bài làm
+                        </h5>
+                        <p class="text-xl font-black ${isComplete ? 'text-green-900' : 'text-orange-900'}">
+                            ${isComplete ? 'Chúc mừng! Bài làm đã đạt yêu cầu.' : 'Bài làm cần hoàn thiện thêm.'}
+                        </p>
+                        <p class="text-sm font-bold opacity-70 mt-1">Độ dài: ${wordCount} từ (Yêu cầu: >100 từ)</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[10px] font-black uppercase opacity-40 block mb-1">Điểm AI tạm tính</span>
+                        <span class="text-4xl font-black ${isComplete ? 'text-green-600' : 'text-orange-600'}">${data.diem || "?/10"}</span>
+                    </div>
                 </div>
-                <h5 class="font-black text-blue-700 uppercase text-[10px] mb-2 tracking-widest flex items-center">
-                    <span class="mr-2">💌</span> Lời nhắn từ Cô giáo
-                </h5>
-                <p class="serif-font text-lg text-gray-800 italic font-bold leading-relaxed relative z-10">"${data.loi_nhan || "Cô rất khen ngợi tinh thần học tập của em!"}"</p>
+                ${!isComplete && missingParts.length > 0 ? `
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="text-xs font-bold text-orange-800">Cần bổ sung:</span>
+                        ${missingParts.map(p => `<span class="px-3 py-1 bg-white/50 rounded-full text-[10px] font-black text-orange-600 border border-orange-200">${p}</span>`).join('')}
+                    </div>
+                ` : ''}
             </div>
 
+            <!-- Detailed Analysis parts -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                ${['mo_bai', 'than_bai', 'ket_bai'].map(part => {
+        const partLabel = part === 'mo_bai' ? 'Mở bài' : part === 'than_bai' ? 'Thân bài' : 'Kết bài';
+        const partContent = data.analysis ? data.analysis[part] : null;
+        const isMissing = missingParts.includes(partLabel);
+        return `
+                        <div class="p-4 rounded-2xl border ${isMissing ? 'bg-gray-50 border-gray-100 opacity-50' : 'bg-white border-blue-100 shadow-sm'}">
+                            <h6 class="text-[10px] font-black ${isMissing ? 'text-gray-400' : 'text-blue-500'} uppercase tracking-widest mb-2">${partLabel}</h6>
+                            <p class="text-xs font-bold leading-relaxed text-gray-600">
+                                ${isMissing ? '<i>Chưa có nội dung...</i>' : partContent || 'Đã ghi nhận.'}
+                            </p>
+                        </div>
+                    `;
+    }).join('')}
+            </div>
+
+            <!-- Feedback Sections -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Ưu điểm -->
-                <div class="p-5 bg-green-50 rounded-2xl border border-green-100">
-                    <h5 class="font-black text-green-700 uppercase text-[10px] mb-3 tracking-widest flex items-center">
-                        <span class="mr-2 text-base">✨</span> Điểm sáng trong bài
-                    </h5>
-                    <p class="text-sm text-gray-700 font-bold leading-relaxed">${data.uu_diem || "Bài làm có nhiều hình ảnh sinh động."}</p>
+                <div class="p-5 bg-blue-50/50 rounded-2xl border border-blue-100">
+                    <h5 class="font-black text-blue-700 uppercase text-[10px] mb-3 tracking-widest">✨ Điểm sáng</h5>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">${data.uu_diem || "Bài làm có cố gắng."}</p>
                 </div>
-
-                <!-- Lỗi sai -->
-                <div class="p-5 bg-orange-50 rounded-2xl border border-orange-100">
-                    <h5 class="font-black text-orange-700 uppercase text-[10px] mb-3 tracking-widest flex items-center">
-                        <span class="mr-2 text-base">🔧</span> Gợi ý hoàn thiện
-                    </h5>
-                    <p class="text-sm text-gray-700 font-bold leading-relaxed">${data.loi_sai || "Bài viết của em đã khá hoàn chỉnh rồi."}</p>
+                <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100">
+                    <h5 class="font-black text-amber-700 uppercase text-[10px] mb-3 tracking-widest">🔧 Cần cải thiện</h5>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">${data.loi_sai || "Chú ý diễn đạt mạch lạc hơn."}</p>
                 </div>
             </div>
 
-            <!-- Hướng dẫn chi tiết -->
-            <div class="p-5 bg-purple-50 rounded-2xl border border-purple-100">
-                <h5 class="font-black text-purple-700 uppercase text-[10px] mb-3 tracking-widest">💡 Cô hướng dẫn em viết hay hơn</h5>
-                <p class="text-sm text-gray-700 font-bold italic leading-relaxed">"${data.huong_dan || "Em có thể thêm một vài hình ảnh so sánh để bài viết sinh động hơn nhé."}"</p>
-            </div>
-
-            <!-- Điểm số -->
-            <div class="flex justify-end pt-2">
-                <div class="bg-blue-600 text-white px-6 py-3 rounded-2xl shadow-xl shadow-blue-100 flex items-center space-x-4">
-                    <span class="text-xs font-black uppercase tracking-widest opacity-80">Điểm số của em:</span>
-                    <span class="text-3xl font-black">${data.diem || "8/10"}</span>
+            <!-- Teacher Note & Action -->
+            <div class="p-6 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-[32px] text-white shadow-xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h5 class="font-black uppercase text-[10px] mb-3 tracking-widest opacity-80">💡 Hướng dẫn từ Cô giáo</h5>
+                    <p class="serif-font text-lg italic font-bold leading-relaxed mb-6">"${data.huong_dan || data.loi_nhan || "Cố gắng lên em nhé!"}"</p>
+                    
+                    ${!isComplete ? `
+                        <button onclick="continueWriting('${data.huong_dan || ''}')" 
+                                class="w-full bg-white text-blue-700 font-black py-4 rounded-2xl shadow-lg hover:bg-blue-50 transition-all flex items-center justify-center gap-3">
+                            <span>✍️</span> TIẾP TỤC LÀM BÀI
+                        </button>
+                    ` : `
+                        <div class="flex items-center gap-3 text-green-300 font-black uppercase text-xs">
+                            <span class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">✓</span>
+                            Bài làm đã hoàn thành, em có thể nộp bài ngay!
+                        </div>
+                    `}
                 </div>
             </div>
         </div>
     `;
 
     container.innerHTML = html;
+}
+
+function continueWriting(hint) {
+    const textarea = document.getElementById('ai-main-essay') || document.getElementById('ai-final');
+    if (!textarea) return;
+
+    // Scroll to textarea
+    textarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Set focus
+    setTimeout(() => {
+        textarea.focus();
+        // Add a visual hint if needed
+        if (hint) {
+            const hintBoxId = 'ai-writing-hint';
+            let hintBox = document.getElementById(hintBoxId);
+            if (!hintBox) {
+                hintBox = document.createElement('div');
+                hintBox.id = hintBoxId;
+                hintBox.className = "mt-2 p-3 bg-blue-50 border-2 border-blue-200 rounded-xl text-blue-700 text-xs font-bold animate-pulse";
+                textarea.parentNode.appendChild(hintBox);
+            }
+            hintBox.innerHTML = `🌟 <b>Gợi ý của Cô:</b> ${hint}`;
+        }
+    }, 500);
 }
