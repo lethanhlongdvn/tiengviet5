@@ -401,7 +401,7 @@ const curriculumData = {
                         {
                             "title": "Bài 6: Thư của bố", "sections": [
                                 { "title": "Đọc: Thư của bố", "url": "212-thu-cua-bo.html" },
-                                { "title": "Viết: Viết bài văn tả người (Bài viết số 1)", "url": "#" },
+                                { "title": "Viết: Viết bài văn tả người (Bài viết số 1)", "url": "212-viet-bai-van-ta-nguoi.html" },
                                 { "title": "Khác: Đọc mở rộng", "url": "#" }
                             ]
                         }
