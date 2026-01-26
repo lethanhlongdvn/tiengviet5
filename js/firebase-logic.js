@@ -21,42 +21,67 @@ const db = firebase.firestore();
 const storage = firebase.storage();
 
 /**
- * Submit main essay to Firestore
+ * Global helper to get common student data
  */
-async function submitEssay() {
-    const name = document.getElementById('studentName').value.trim();
-    const className = document.getElementById('studentClass').value.trim();
-    const content = document.getElementById('ai-main-essay').value.trim();
+function getStudentInfo() {
+    const name = document.getElementById('studentName')?.value.trim();
+    const cls = document.getElementById('studentClass')?.value;
+    const schoolSelect = document.getElementById('schoolSelect')?.value;
+    const otherSchool = document.getElementById('otherSchool')?.value.trim();
+    const school = schoolSelect === 'Khác' ? otherSchool : (schoolSelect || "");
 
-    if (!name || !className || !content) {
-        alert("Em hãy điền đủ Tên, Lớp và nội dung Bài làm trước khi nộp nhé!");
+    return { name, cls, school };
+}
+
+/**
+ * Submit main essay to Firestore (essays_v2)
+ */
+async function submitEssay(event) {
+    const { name, cls, school } = getStudentInfo();
+    const content = document.getElementById('ai-main-essay')?.value.trim();
+    const lessonTitle = document.title.replace(" - EduRobot", "");
+
+    if (!name || !cls) {
+        alert("Em hãy điền Tên và Lớp trước khi nộp nhé!");
         return;
     }
 
-    const btn = event.target;
-    const originalText = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = " đang gửi bài...";
+    if (!content) {
+        alert("Em hãy viết bài làm trước khi nộp nhé!");
+        return;
+    }
+
+    const btn = event ? (event.currentTarget || event.target) : null;
+    let originalText = "";
+    if (btn) {
+        originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = "🚀 Đang gửi bài...";
+    }
 
     try {
-        await db.collection("essays").add({
+        await db.collection("essays_v2").add({
             studentName: name,
-            studentClass: className,
+            studentClass: cls,
+            studentSchool: school,
             content: content,
-            lessonTitle: "Viết đoạn văn tả người",
+            lessonTitle: lessonTitle,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            status: "Chưa chấm", // Teacher status
+            status: "Chưa chấm",
             type: "essay"
         });
 
         alert("Tuyệt vời! Bài làm của em đã được gửi tới Cô thành công.");
         if (typeof celebrate === 'function') celebrate();
+        else if (typeof confetti === 'function') confetti();
     } catch (error) {
         console.error("Error submitting essay:", error);
-        alert("Có lỗi xảy ra khi nộp bài. Em hãy thử lại nhé!");
+        alert("Có lỗi xảy ra khi nộp bài. Em hãy thử lại nhé!\nChi tiết: " + error.message);
     } finally {
-        btn.disabled = false;
-        btn.innerHTML = originalText;
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        }
     }
 }
 
@@ -64,20 +89,23 @@ async function submitEssay() {
  * Submit Project (Tab 2) to Firestore & Storage
  */
 async function submitProject(projectId, projectTitle) {
-    const name = document.getElementById('studentName').value.trim();
-    const className = document.getElementById('studentClass').value.trim();
-    const content = document.getElementById(`project-desc-${projectId}`).value.trim();
+    const { name, cls, school } = getStudentInfo();
+    const content = document.getElementById(`project-desc-${projectId}`)?.value.trim() || "";
     const fileInput = document.getElementById(`project-file-${projectId}`);
+    const lessonTitle = document.title.replace(" - EduRobot", "");
 
-    if (!name || !className) {
+    if (!name || !cls) {
         alert("Em hãy điền Tên và Lớp trước nhé!");
         return;
     }
 
-    const btn = event.target;
-    const originalText = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = "🚀 Đang tải lên...";
+    const btn = event ? (event.currentTarget || event.target) : null;
+    let originalText = "";
+    if (btn) {
+        originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = "🚀 Đang tải lên...";
+    }
 
     let fileUrl = "";
 
@@ -92,37 +120,41 @@ async function submitProject(projectId, projectTitle) {
 
         await db.collection("projects").add({
             studentName: name,
-            studentClass: className,
+            studentClass: cls,
+            studentSchool: school,
             content: content,
             fileUrl: fileUrl,
             projectType: projectTitle,
-            lessonTitle: "Viết đoạn văn tả người",
+            lessonTitle: lessonTitle,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             status: "Đã nộp"
         });
 
         alert("Dự án của em đã được gửi tới Cô thành công! Chờ Cô nhận xét nhé.");
         if (typeof celebrate === 'function') celebrate();
+        else if (typeof confetti === 'function') confetti();
     } catch (error) {
         console.error("Error submitting project:", error);
-        alert("Lỗi khi gửi dự án. Em hãy thử lại nhé!");
+        alert("Lỗi khi gửi dự án. Em hãy thử lại nhé!\nChi tiết: " + error.message);
     } finally {
-        btn.disabled = false;
-        btn.innerHTML = originalText;
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        }
     }
 }
 
 /**
  * Load Teacher Feedback
- * Checks periodically if there's a response for this student
  */
 function checkTeacherFeedback() {
-    const name = document.getElementById('studentName').value.trim();
+    const { name } = getStudentInfo();
+    const lessonTitle = document.title.replace(" - EduRobot", "");
     if (!name) return;
 
-    db.collection("essays")
+    db.collection("essays_v2")
         .where("studentName", "==", name)
-        .where("lessonTitle", "==", "Viết đoạn văn tả người")
+        .where("lessonTitle", "==", lessonTitle)
         .orderBy("timestamp", "desc")
         .limit(1)
         .onSnapshot((snapshot) => {
@@ -154,3 +186,16 @@ function displayTeacherFeedback(message, grade) {
         </div>
     `;
 }
+
+// Global functions for UI interaction (if not inline)
+window.checkSchool = function () {
+    const select = document.getElementById('schoolSelect');
+    const otherInput = document.getElementById('otherSchool');
+    if (select && otherInput) {
+        if (select.value === 'Khác') {
+            otherInput.classList.remove('hidden');
+        } else {
+            otherInput.classList.add('hidden');
+        }
+    }
+};
