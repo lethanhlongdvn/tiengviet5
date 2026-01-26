@@ -94,7 +94,8 @@
             align-items: center;
             justify-content: center;
         }
-            .glass-card {
+
+        .glass-card {
             background: var(--glass);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -108,50 +109,65 @@
 
     <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
-                        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
-                <div class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
                     <span class="text-xl font-black">E</span>
                 </div>
                 <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
                     <div class="flex items-center space-x-3">
                         <span class="text-2xl font-black text-blue-700">EduRobot</span>
-                        <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TIẾNG VIỆT 5</span>
+                        <span
+                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TIẾNG
+                            VIỆT 5</span>
                     </div>
-                
+
                     <div class="flex items-center space-x-2 overflow-hidden">
-                        <span class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ ĐIỂM:</span>
-                        <span class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">HƯƠNG SẮC TRĂM MIỀN</span>
+                        <span
+                            class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ
+                            ĐIỂM:</span>
+                        <span
+                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">HƯƠNG
+                            SẮC TRĂM MIỀN</span>
                     </div>
                 </div>
             </div>
             <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
                 <!-- Home -->
                 <li>
-                    <a href="index.html" class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
+                    <a href="index.html"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
                         Trang chủ
                     </a>
                 </li>
-                
+
                 <!-- Lessons Dropdown -->
                 <li class="relative group">
-                    <button id="top-menu-lesson-btn" class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
+                    <button id="top-menu-lesson-btn"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
                         Bài học
-                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <!-- Dropdown Content (Hidden by default) -->
-                     <div id="top-menu-lessons-dropdown" class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
+                    <div id="top-menu-lessons-dropdown"
+                        class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
                         <!-- Content rendered by floating-menu.js -->
                     </div>
                 </li>
 
                 <!-- Teacher -->
                 <li>
-                    <button onclick="openTeacherStats()" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                    <button onclick="openTeacherStats()"
+                        class="text-gray-500 hover:text-blue-600 transition-colors py-2">
                         Giáo viên
                     </button>
                 </li>
-                
+
                 <!-- Contact -->
                 <li>
                     <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
@@ -437,8 +453,9 @@
                                 class="w-10 h-10 bg-orange-600 text-white rounded-xl flex items-center justify-center font-black mr-3 shadow-md"
                                 id="questionNum">1</span>
                             <p class="font-black text-orange-900 uppercase tracking-wider text-sm" id="progressText">
-                                Đang thực hiện: 1/10</p>
+                                Đang thực hiện: 1/5</p>
                         </div>
+                        <div id="quiz-feedback" class="text-sm font-black transition-all opacity-0"></div>
                         <div
                             class="text-orange-600 font-bold text-sm bg-white px-4 py-2 rounded-full shadow-sm border border-orange-100">
                             Hương sắc trăm miền
@@ -453,11 +470,8 @@
                         </div>
                     </div>
 
-                    <div class="p-8 border-t border-gray-50 flex justify-end">
-                        <button id="nextBtn" disabled
-                            class="bg-orange-600 disabled:opacity-30 hover:bg-orange-700 text-white font-black py-4 px-12 rounded-2xl shadow-lg transition-all active:scale-95">
-                            CÂU TIẾP THEO
-                        </button>
+                    <div class="px-6 py-4 border-t border-gray-50 flex justify-between items-center bg-gray-50/50">
+                        <span class="text-xs font-bold text-gray-400 italic">* Chọn đáp án đúng nhất để tiếp tục</span>
                     </div>
                 </div>
 
@@ -480,8 +494,9 @@
                     </div>
 
                     <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Hoàn thành bài tập!</h2>
-                    <p class="text-gray-500 mb-10 max-w-md font-medium" id="resultMsg">Em đã nỗ lực hết mình rồi đấy!
-                    </p>
+                    <p class="text-gray-500 mb-6 max-w-md font-medium" id="resultMsg">Em đã nỗ lực hết mình rồi đấy!</p>
+                    <div class="mb-8 text-blue-600 font-black text-sm uppercase tracking-widest">Tự động quay lại sau
+                        <span id="countdown">5</span> giây</div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
                         <button onclick="restartQuiz()"
@@ -547,7 +562,7 @@
         </div>
     </div>
 
-        <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
+    <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
         <div class="container mx-auto text-center">
             <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">@ 2026 EduRobot - Hệ thống học
                 tập thông minh</p>
@@ -736,18 +751,38 @@
                 btn.className = 'w-full p-4 text-left border-2 border-gray-100 rounded-2xl font-bold transition-all hover:border-blue-200 hover:bg-blue-50/50 flex items-center group';
                 btn.innerHTML = `<span class="w-8 h-8 rounded-full border-2 border-gray-200 flex items-center justify-center mr-4 group-hover:border-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all text-sm">${String.fromCharCode(65 + i)}</span><span class="flex-1">${opt}</span>`;
                 btn.onclick = () => {
-                    document.querySelectorAll('#optionsArea button').forEach(b => {
-                        b.classList.remove('border-blue-600', 'bg-blue-50');
-                        b.querySelector('span').classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
-                    });
-                    btn.classList.add('border-blue-600', 'bg-blue-50');
-                    btn.querySelector('span').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-                    document.getElementById('nextBtn').disabled = false;
-                    selectedOption = i;
+                    const currentQ = currentQuizQuestions[currentQuestionIdx];
+                    const isCorrect = i === currentQ.c;
+                    const feedback = document.getElementById('quiz-feedback');
+
+                    // Disable all buttons
+                    document.querySelectorAll('#optionsArea button').forEach(b => b.disabled = true);
+
+                    if (isCorrect) {
+                        btn.classList.add('border-green-600', 'bg-green-50');
+                        btn.querySelector('span').classList.add('bg-green-600', 'text-white', 'border-green-600');
+                        if (feedback) { feedback.innerText = "CHÍNH XÁC! 🎉"; feedback.classList.add('text-green-600'); }
+                        score += 20;
+                    } else {
+                        btn.classList.add('border-red-600', 'bg-red-50');
+                        btn.querySelector('span').classList.add('bg-red-600', 'text-white', 'border-red-600');
+                        if (feedback) { feedback.innerText = "SAI RỒI! ❌"; feedback.classList.add('text-red-600'); }
+                        // Show correct
+                        const correctBtn = document.querySelectorAll('#optionsArea button')[currentQ.c];
+                        if (correctBtn) {
+                            correctBtn.classList.add('border-green-600', 'bg-green-50');
+                        }
+                    }
+                    if (feedback) feedback.style.opacity = '1';
+
+                    setTimeout(() => {
+                        currentQuestionIdx++;
+                        if (currentQuestionIdx < 5) showQuestion(); else showResults();
+                    }, 1000);
                 };
                 area.appendChild(btn);
             });
-            document.getElementById('nextBtn').disabled = true; selectedOption = null;
+            if (document.getElementById('quiz-feedback')) document.getElementById('quiz-feedback').style.opacity = '0';
         }
 
         document.getElementById('nextBtn').onclick = () => {
@@ -758,21 +793,66 @@
 
         async function submitResults(e) {
             const btn = e.target; btn.disabled = true; btn.innerText = "Đang gửi...";
+
+            let successShown = false;
+            const showSuccess = () => {
+                if (successShown) return;
+                successShown = true;
+                document.getElementById('successModal').classList.remove('hidden');
+                document.getElementById('successModal').classList.add('active');
+                if (typeof celebrate === 'function') celebrate();
+
+                let timeLeft = 5;
+                const countdownEl = document.getElementById('countdown');
+                const timer = setInterval(() => {
+                    timeLeft--;
+                    if (countdownEl) countdownEl.innerText = timeLeft;
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        closeSuccessModal();
+                    }
+                }, 1000);
+            };
+
+            const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
+
             try {
                 await db.collection("diem_tieng_viet_lop5").add({
                     ...studentData, lessonTitle: "Hội thổi cơm thi ở Đồng Vân", score: score, endTime: new Date().toISOString(), submittedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                alert(`Chúc mừng ${studentData.studentName} đã hoàn thành bài tập!`);
-                restartQuiz(); switchTab('lesson');
-            } catch (e) { alert("Lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
+                clearTimeout(dbTimeout);
+                showSuccess();
+            } catch (e) {
+                console.error(e);
+                clearTimeout(dbTimeout);
+                showSuccess();
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "NỘP KẾT QUẢ";
+            }
         }
 
         function restartQuiz() {
             document.getElementById('quiz-results').classList.add('hidden');
             document.getElementById('quiz-registration').classList.remove('hidden');
         }
+
+        function celebrate() {
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#2563eb', '#f59e0b', '#10b981', '#ef4444'] });
+            const audio = document.getElementById('clapSound');
+            if (audio) { audio.currentTime = 0; audio.play().catch(e => { }); }
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+            document.getElementById('successModal').classList.add('hidden');
+            restartQuiz();
+            switchTab('lesson');
+        }
     </script>
 
+    <!-- Audio Celebration -->
+    <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
     <script src="js/floating-menu.js"></script>
 </body>
 
