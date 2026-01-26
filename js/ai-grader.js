@@ -54,7 +54,10 @@ async function askAI(id, prefix = "", mode = "single") {
         const data = await response.json();
         renderFeedback(feedback, data);
 
-        if (typeof celebrate === 'function' && (data.grade >= 8 || data.diem?.includes('8') || data.diem?.includes('9') || data.diem?.includes('10'))) {
+        const gradeStr = String(data.diem || "");
+        const gradeNum = parseFloat(data.diem) || data.grade || 0;
+
+        if (typeof celebrate === 'function' && (gradeNum >= 8 || gradeStr.includes('8') || gradeStr.includes('9') || gradeStr.includes('10'))) {
             celebrate();
         }
     } catch (error) {
