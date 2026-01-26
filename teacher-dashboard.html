@@ -76,7 +76,7 @@
                             <span class="text-blue-500">1.</span> Xem nội dung bài viết/dự án của học sinh.
                         </li>
                         <li class="flex items-start gap-2">
-                            <span class="text-blue-500">2.</span> Nhập điểm (0-10) và lời phê của Cô.
+                            <span class="text-blue-500">2.</span> Nhập điểm (0-10) và lời phê của Thầy/Cô.
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="text-blue-500">3.</span> Nhấn "Lưu & Đăng" để học sinh thấy kết quả.
@@ -124,7 +124,7 @@
 
             <div class="space-y-6">
                 <div>
-                    <label class="block text-[10px] font-black text-gray-400 uppercase mb-2">Lời phê của Cô</label>
+                    <label class="block text-[10px] font-black text-gray-400 uppercase mb-2">Lời phê của Thầy/Cô</label>
                     <textarea id="teacher-comment"
                         placeholder="Ví dụ: Bài viết rất sinh động, có nhiều hình ảnh nhân hóa..."
                         class="w-full p-4 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-blue-200 font-bold min-h-[120px]"></textarea>
@@ -248,7 +248,7 @@
             const grade = document.getElementById('teacher-grade').value.trim();
 
             if (!comment || !grade) {
-                alert("Cô hãy nhập đủ Điểm và Lời phê nhé!");
+                alert("Thầy/Cô hãy nhập đủ Điểm và Lời phê nhé!");
                 return;
             }
 
@@ -263,7 +263,7 @@
                 loadData();
             } catch (error) {
                 console.error("Error updating grade:", error);
-                alert("Lỗi khi lưu điểm. Cô hãy thử lại nhé!");
+                alert("Lỗi khi lưu điểm. Thầy/Cô hãy thử lại nhé!");
             }
         }
 
