@@ -503,7 +503,7 @@
         }
 
         // --- 1. STUDENT SUBMIT ---
-        function submitToFirebase() {
+        async function submitToFirebase() {
             const name = document.getElementById('studentName').value;
             const stuClass = document.getElementById('studentClass').value;
             const school = document.getElementById('schoolSelect').value === 'Khác' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value;
@@ -520,6 +520,34 @@
                 return;
             }
 
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "Đang chấm điểm AI...";
+            btn.disabled = true;
+
+            let aiResult = null;
+
+            try {
+                // Call AI Grading
+                const aiResp = await fetch('/.netlify/functions/evaluate_reading_card', {
+                    method: 'POST',
+                    body: JSON.stringify({ verses, feelings, poemName: poem })
+                });
+
+                if (aiResp.ok) {
+                    aiResult = await aiResp.json();
+
+                    const confirmMsg = `AI Đã chấm: ${aiResult.score}/10\n\nNhận xét Câu thơ: ${aiResult.feedback_verses}\n\nNhận xét Cảm xúc: ${aiResult.feedback_feelings}\n\nEm có muốn nộp bài này không? (Chọn Cancel để làm lại)`;
+                    if (!confirm(confirmMsg)) {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        return; // Stop submission
+                    }
+                }
+            } catch (e) {
+                console.error("AI Error", e);
+            }
+
             const data = {
                 studentName: name,
                 studentClass: stuClass,
@@ -532,13 +560,11 @@
                 shareContent: share,
                 rating: stars,
                 submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
-                type: "phieu_doc_sach"
+                type: "phieu_doc_sach",
+                aiEvaluation: aiResult || null
             };
 
-            const btn = event.currentTarget;
-            const originalText = btn.innerHTML;
-            btn.innerHTML = "Đang nộp...";
-            btn.disabled = true;
+            btn.innerHTML = "Đang lưu...";
 
             db.collection("phieu_doc_sach_lop5").add(data)
                 .then(() => {
@@ -613,7 +639,7 @@
                 // Load form submissions
                 const snapshot = await db.collection("phieu_doc_sach_lop5")
                     .orderBy("submittedAt", "desc")
-                    .limit(100)
+                    .limit(200)
                     .get();
 
                 const docs = [];
@@ -628,6 +654,8 @@
                 let index = 1;
                 docs.forEach(data => {
                     const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
+                    const aiScore = data.aiEvaluation && data.aiEvaluation.score ? `${data.aiEvaluation.score}/10` : '-';
+
                     const tr = document.createElement('tr');
                     tr.className = "hover:bg-blue-50/50 transition-colors";
                     tr.innerHTML = `
@@ -638,6 +666,7 @@
                         <td class="px-6 py-4 font-medium text-gray-700">${data.poemName || '---'}</td>
                         <td class="px-6 py-4 text-center">
                             <span class="px-3 py-1 rounded-lg bg-yellow-100 text-yellow-700 font-bold text-sm">${data.rating} ★</span>
+                            <br><span class="text-[10px] text-blue-500 font-bold mt-1 block">AI: ${aiScore}</span>
                         </td>
                         <td class="px-6 py-4 text-right font-bold text-gray-400 text-[10px]">${date}</td>
                     `;
