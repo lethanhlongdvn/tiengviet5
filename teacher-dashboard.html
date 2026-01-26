@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- SheetJS for Excel Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         body {
             font-family: 'Nunito', sans-serif;
@@ -21,7 +23,7 @@
 
         .dashboard-card:hover {
             transform: translateY(-2px);
-            shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -39,9 +41,15 @@
                         bài EduRobot</p>
                 </div>
             </div>
-            <button onclick="location.reload()"
-                class="bg-blue-50 text-blue-600 font-bold px-4 py-2 rounded-xl hover:bg-blue-100 transition-colors">Làm
-                mới dữ liệu</button>
+            <div class="flex gap-2">
+                <button onclick="exportToExcel()"
+                    class="bg-green-50 text-green-600 font-black px-4 py-2 rounded-xl hover:bg-green-100 transition-colors flex items-center gap-2">
+                    <span>📊</span> XUẤT EXCEL
+                </button>
+                <button onclick="location.reload()"
+                    class="bg-blue-50 text-blue-600 font-bold px-4 py-2 rounded-xl hover:bg-blue-100 transition-colors">Làm
+                    mới</button>
+            </div>
         </header>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -80,9 +88,13 @@
             <!-- Main Content: List -->
             <div class="lg:col-span-2 space-y-6">
                 <div class="flex space-x-2 mb-4 bg-white p-1 rounded-2xl shadow-sm border border-gray-100 w-fit">
-                    <button id="tab-essays" onclick="switchView('essays')"
-                        class="px-6 py-2 rounded-xl font-black text-sm transition-all bg-blue-600 text-white">Bài Tập
-                        Làm Văn</button>
+                    <button id="tab-essays" onclick="switchView('essays_v2')"
+                        class="px-6 py-2 rounded-xl font-black text-sm transition-all bg-blue-600 text-white">Bài Viết
+                        Văn Tả Người</button>
+                    <button id="tab-old-essays" onclick="switchView('essays')"
+                        class="px-6 py-2 rounded-xl font-black text-sm transition-all text-gray-400 hover:bg-gray-50">Bài
+                        Tập
+                        Làm Văn (Cũ)</button>
                     <button id="tab-projects" onclick="switchView('projects')"
                         class="px-6 py-2 rounded-xl font-black text-sm transition-all text-gray-400 hover:bg-gray-50">Dự
                         Án Sáng Tạo</button>
@@ -255,8 +267,66 @@
             }
         }
 
+        async function exportToExcel() {
+            try {
+                const snapshot = await db.collection(currentMode).orderBy("timestamp", "desc").get();
+                const data = [];
+                let index = 1;
+
+                snapshot.forEach(doc => {
+                    const row = doc.data();
+                    data.push({
+                        "STT": index++,
+                        "Họ tên": row.studentName,
+                        "Lớp": row.studentClass,
+                        "Trường": row.studentSchool || "",
+                        "Điểm AI": row.aiGrade || "",
+                        "Nội dung bài làm": row.content,
+                        "Nhận xét của AI": row.aiFeedback || "",
+                        "Lời phê giáo viên": row.teacherFeedback || "",
+                        "Điểm giáo viên": row.teacherGrade || "",
+                        "Link ảnh nộp": row.fileUrl || "",
+                        "Thời gian": row.timestamp ? new Date(row.timestamp.toDate()).toLocaleString('vi-VN') : ""
+                    });
+                });
+
+                if (data.length === 0) {
+                    alert("Không có dữ liệu để xuất!");
+                    return;
+                }
+
+                const worksheet = XLSX.utils.json_to_sheet(data);
+                const workbook = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(workbook, worksheet, "Báo cáo học sinh");
+
+                // Set column widths
+                const wscols = [
+                    { wch: 5 }, { wch: 20 }, { wch: 10 }, { wch: 20 }, { wch: 10 }, { wch: 50 }, { wch: 30 }, { wch: 30 }, { wch: 15 }, { wch: 30 }, { wch: 20 }
+                ];
+                worksheet['!cols'] = wscols;
+
+                XLSX.writeFile(workbook, `Bao_cao_EduRobot_${currentMode}_${new Date().toLocaleDateString()}.xlsx`);
+            } catch (error) {
+                console.error("Export Error:", error);
+                alert("Lỗi khi xuất file Excel!");
+            }
+        }
+
+        function switchView(mode) {
+            currentMode = mode;
+            document.querySelectorAll('[id^="tab-"]').forEach(btn => {
+                btn.className = 'px-6 py-2 rounded-xl font-black text-sm transition-all text-gray-400 hover:bg-gray-50';
+            });
+            // Fix: active class for correct tab
+            const tabId = mode === 'essays_v2' ? 'tab-essays' : (mode === 'essays' ? 'tab-old-essays' : 'tab-projects');
+            const activeBtn = document.getElementById(tabId);
+            if (activeBtn) activeBtn.className = 'px-6 py-2 rounded-xl font-black text-sm transition-all bg-blue-600 text-white';
+
+            loadData();
+        }
+
         // Initial Load
-        loadData();
+        switchView('essays_v2');
     </script>
 </body>
 
