@@ -721,7 +721,8 @@
                             </div>
                             <h2 class="text-3xl font-black text-gray-800 mb-2 tracking-tight">Thành công!</h2>
                             <p class="text-gray-500 mb-10 font-bold leading-relaxed">Em đã hoàn thành xuất sắc!</p>
-            <div class="mb-8 text-blue-600 font-black text-sm uppercase tracking-widest">Tự động quay lại sau <span id="countdown">5</span> giây</div>
+                            <div class="mb-8 text-blue-600 font-black text-sm uppercase tracking-widest">Tự động quay
+                                lại sau <span id="countdown">5</span> giây</div>
                             <button onclick="closeSuccessModal()"
                                 class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 uppercase tracking-widest text-sm">Đóng</button>
                         </div>
@@ -743,16 +744,16 @@
         </div>
     </footer>
 
-    
+
     <!-- Audio Celebration -->
     <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
-<script src="js/floating-menu.js"></script>
+    <script src="js/floating-menu.js"></script>
     <script src="js/ai-grader.js?v=2"></script>
     <script>
-        function celebrate() { 
-            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#2563eb', '#f59e0b', '#10b981', '#ef4444'] }); 
+        function celebrate() {
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#2563eb', '#f59e0b', '#10b981', '#ef4444'] });
             const audio = document.getElementById('clapSound');
-            if (audio) { audio.currentTime = 0; audio.play().catch(e => {}); }
+            if (audio) { audio.currentTime = 0; audio.play().catch(e => { }); }
         }
         function switchTab(t) { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active')); document.getElementById('btn-' + t).classList.add('active'); document.getElementById('tab-' + t).classList.add('active'); }
 
@@ -847,7 +848,7 @@
             showQuestion();
         }
         function showQuestion() {
-            if(document.getElementById('quiz-feedback')) document.getElementById('quiz-feedback').style.opacity = '0';
+            if (document.getElementById('quiz-feedback')) document.getElementById('quiz-feedback').style.opacity = '0';
             const q = selectedQuestions[currentIdx];
             document.getElementById('questionNum').innerText = currentIdx + 1;
             document.getElementById('progressText').innerText = `CÂU TRẮC NGHIỆM: ${currentIdx + 1}/8`;
@@ -897,7 +898,7 @@
         function restartQuiz() { document.getElementById('quiz-results').classList.add('hidden'); document.getElementById('quiz-registration').classList.remove('hidden'); }
 
         // Firestore Config (Placeholder) and Functions
-        const firebaseConfig = { apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc", authDomain: "projectId.firebaseapp.com", projectId: "projectId", storageBucket: "projectId.appspot.com", messagingSenderId: "SENDER_ID", appId: "APP_ID" };
+        const firebaseConfig = { apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc", authDomain: "gamhoctap.firebaseapp.com", projectId: "gamhoctap", storageBucket: "gamhoctap.firebasestorage.app", messagingSenderId: "833329613932", appId: "1:833329613932:web:0d8574827bcfe50b535c49" };
         if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
