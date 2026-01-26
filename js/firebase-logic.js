@@ -71,7 +71,7 @@ async function submitEssay(event) {
             type: "essay"
         });
 
-        alert("Tuyệt vời! Bài làm của em đã được gửi tới Cô thành công.");
+        alert("Tuyệt vời! Bài làm của em đã được gửi tới Thầy/Cô thành công.");
         if (typeof celebrate === 'function') celebrate();
         else if (typeof confetti === 'function') confetti();
     } catch (error) {
@@ -130,7 +130,7 @@ async function submitProject(projectId, projectTitle) {
             status: "Đã nộp"
         });
 
-        alert("Dự án của em đã được gửi tới Cô thành công! Chờ Cô nhận xét nhé.");
+        alert("Dự án của em đã được gửi tới Thầy/Cô thành công! Chờ Thầy/Cô nhận xét nhé.");
         if (typeof celebrate === 'function') celebrate();
         else if (typeof confetti === 'function') confetti();
     } catch (error) {
@@ -175,12 +175,12 @@ function displayTeacherFeedback(message, grade) {
     container.innerHTML = `
         <div class="p-6 bg-blue-50 border-2 border-blue-200 rounded-[32px] shadow-sm animate-bounce-subtle">
             <h4 class="text-blue-700 font-black text-sm uppercase mb-3 flex items-center">
-                <span class="mr-2">👩‍🏫</span> Lời khen từ Cô giáo
+                <span class="mr-2">👩‍🏫</span> Lời khen từ Thầy/Cô
             </h4>
             <p class="text-gray-700 font-bold serif-font italic text-lg leading-relaxed mb-4">"${message}"</p>
             <div class="flex justify-end">
                 <span class="bg-blue-600 text-white px-4 py-2 rounded-xl font-black text-xl shadow-lg">
-                    Điểm của Cô: ${grade}/10
+                    Điểm của Thầy/Cô: ${grade}/10
                 </span>
             </div>
         </div>
