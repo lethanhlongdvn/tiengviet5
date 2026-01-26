@@ -107,27 +107,22 @@
     </header>
 
     <main class="container mx-auto px-4 py-6 max-w-5xl flex-1">
-        <!-- Student Info -->
+                        <!-- Student Info -->
         <div class="mb-8 bg-white border-2 border-blue-100 rounded-3xl p-6 shadow-sm flex flex-col items-center gap-4">
             <div class="flex items-center space-x-4 w-full">
                 <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg">
                     <span>👤</span>
                 </div>
                 <div class="flex-1">
-                    <label
-                        class="block text-[10px] font-black text-blue-400 uppercase tracking-widest leading-none mb-1">Họ
-                        tên của em</label>
-                    <input type="text" id="studentName" placeholder="Nhập tên em..."
-                        class="w-full text-lg font-black text-gray-800 bg-transparent border-none focus:outline-none focus:ring-0 p-0">
+                    <label class="block text-[10px] font-black text-blue-400 uppercase tracking-widest leading-none mb-1">Họ tên của em</label>
+                    <input type="text" id="studentName" placeholder="Nhập tên em..." class="w-full text-lg font-black text-gray-800 bg-transparent border-none focus:outline-none focus:ring-0 p-0">
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                <div
-                    class="flex items-center space-x-3 bg-gray-50 p-3 rounded-2xl border border-gray-100 focus-within:border-blue-300 transition-all">
+                <div class="flex items-center space-x-3 bg-gray-50 p-3 rounded-2xl border border-gray-100 focus-within:border-blue-300 transition-all">
                     <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-2">Lớp:</label>
-                    <select id="studentClass"
-                        class="flex-1 bg-transparent border-none focus:outline-none font-black text-gray-700 text-sm cursor-pointer">
+                    <select id="studentClass" class="flex-1 bg-transparent border-none focus:outline-none font-black text-gray-700 text-sm cursor-pointer">
                         <option value="">Chọn Lớp</option>
                         <option value="5/1">5/1</option>
                         <option value="5/2">5/2</option>
@@ -137,19 +132,16 @@
                     </select>
                 </div>
 
-                <div
-                    class="flex items-center space-x-3 bg-gray-50 p-3 rounded-2xl border border-gray-100 focus-within:border-blue-300 transition-all">
+                <div class="flex items-center space-x-3 bg-gray-50 p-3 rounded-2xl border border-gray-100 focus-within:border-blue-300 transition-all">
                     <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-2">Trường:</label>
-                    <select id="schoolSelect" onchange="checkSchool()"
-                        class="flex-1 bg-transparent border-none focus:outline-none font-black text-gray-700 text-sm cursor-pointer">
+                    <select id="schoolSelect" onchange="checkSchool()" class="flex-1 bg-transparent border-none focus:outline-none font-black text-gray-700 text-sm cursor-pointer">
                         <option value="Tiểu học Đỗ Văn Nại">Tiểu học Đỗ Văn Nại</option>
                         <option value="Khác">Trường khác...</option>
                     </select>
                 </div>
             </div>
 
-            <input type="text" id="otherSchool" placeholder="Nhập tên trường của em..."
-                class="hidden w-full p-4 rounded-2xl bg-orange-50 border-2 border-orange-100 focus:border-orange-300 focus:outline-none font-black text-sm transition-all">
+            <input type="text" id="otherSchool" placeholder="Nhập tên trường của em..." class="hidden w-full p-4 rounded-2xl bg-orange-50 border-2 border-orange-100 focus:border-orange-300 focus:outline-none font-black text-sm transition-all">
         </div>
 
         <!-- Title -->
