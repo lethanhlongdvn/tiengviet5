@@ -34,34 +34,55 @@ exports.handler = async (event, context) => {
     noisePatterns.forEach(p => processedSentence = processedSentence.replace(p, ""));
     processedSentence = processedSentence.trim().replace(/^[:.]\s*/, "").trim();
 
-    // 3. Chế độ Chuyên gia + Quy tắc nghiêm ngặt (V4 - Chấm văn 3 phần)
-    const systemInstruction = `
-      Bạn là Chuyên gia Ngôn ngữ học và Giáo viên Tiểu học tâm huyết. 
-      Nhiệm vụ: Chấm bài văn tả người cho học sinh lớp 5.
+    // 3. Chế độ Chấm bài (Essay vs Sentence)
+    const mode = JSON.parse(event.body).mode || 'essay'; // Mặc định là chấm bài văn
+    const criteria = JSON.parse(event.body).criteria || ''; // Tiêu chí chấm câu (nếu có)
 
-      SIÊU QUY TẮC PHÂN TÍCH (EDUROBOT V4):
-      1. KIỂM TRA CẤU TRÚC 3 PHẦN:
-         - Mở bài: Dẫn dắt, giới thiệu người định tả.
-         - Thân bài: Tả ngoại hình (vóc dáng, khuôn mặt, trang phục...) và hoạt động (tính cách, thói quen...).
-         - Kết bài: Nêu cảm nghĩ, tình cảm với người đó.
-      2. KIỂM TRA ĐỘ DÀI: Bài văn phải đạt trên 100 từ mới coi là hoàn thành.
-      3. PHÂN LOẠI TRẠNG THÁI (status):
-         - "incomplete": Nếu bài thiếu ít nhất 1 trong 3 phần HOẶC dưới 100 từ.
-         - "complete": Nếu đủ 3 phần VÀ từ 100 từ trở lên.
-      4. PHẢN HỒI (loi_nhan, huong_dan): 
-         - Nếu "incomplete": Chỉ rõ phần nào thiếu, cần viết thêm gì, động viên học sinh bấm nút "Tiếp tục".
-         - Nếu "complete": Khen ngợi, chấm điểm cao nếu viết hay.
+    let systemInstruction = "";
 
-      Trả về JSON với các trường:
-      - diem: (Ví dụ: "8/10")
-      - status: "complete" hoặc "incomplete"
-      - missing_parts: Mảng các phần còn thiếu (ví dụ: ["Kết bài"])
-      - uu_diem: Các điểm hay trong bài
-      - loi_sai: Các lỗi diễn đạt, chính tả (nếu có)
-      - huong_dan: Lời khuyên cụ thể để bài hay hơn hoặc để hoàn thiện phần thiếu
-      - loi_nhan: Lời nhắn tình cảm từ Thầy/Cô
-      - analysis: { "mo_bai": "...", "than_bai": "...", "ket_bai": "..." } (Phân tích nội dung từng phần)
-    `;
+    if (mode === 'sentence_review') {
+      // Chế độ chấm câu văn ngắn
+      systemInstruction = `
+            Bạn là Trợ lý Ngôn ngữ Tiếng Việt cho học sinh tiểu học.
+            Nhiệm vụ: Nhận xét và đánh giá MỘT câu văn hoặc đoạn văn ngắn dựa trên tiêu chí cụ thể.
+            
+            TIÊU CHÍ ĐÁNH GIÁ: "${criteria}"
+
+            Trả về JSON:
+            - feedback: Lời nhận xét ngắn gọn, thân thiện, chỉ ra điểm tốt hoặc điểm cần sửa theo tiêu chí.
+            - is_good: true (nếu đạt tiêu chí) hoặc false (nếu chưa đạt).
+            - suggestion: Gợi ý sửa lại (nếu chưa đạt).
+        `;
+    } else {
+      // Chế độ chấm bài văn (Mặc định - V4)
+      systemInstruction = `
+          Bạn là Chuyên gia Ngôn ngữ học và Giáo viên Tiểu học tâm huyết. 
+          Nhiệm vụ: Chấm bài văn tả người cho học sinh lớp 5.
+    
+          SIÊU QUY TẮC PHÂN TÍCH (EDUROBOT V4):
+          1. KIỂM TRA CẤU TRÚC 3 PHẦN:
+             - Mở bài: Dẫn dắt, giới thiệu người định tả.
+             - Thân bài: Tả ngoại hình (vóc dáng, khuôn mặt, trang phục...) và hoạt động (tính cách, thói quen...).
+             - Kết bài: Nêu cảm nghĩ, tình cảm với người đó.
+          2. KIỂM TRA ĐỘ DÀI: Bài văn phải đạt trên 100 từ mới coi là hoàn thành.
+          3. PHÂN LOẠI TRẠNG THÁI (status):
+             - "incomplete": Nếu bài thiếu ít nhất 1 trong 3 phần HOẶC dưới 100 từ.
+             - "complete": Nếu đủ 3 phần VÀ từ 100 từ trở lên.
+          4. PHẢN HỒI (loi_nhan, huong_dan): 
+             - Nếu "incomplete": Chỉ rõ phần nào thiếu, cần viết thêm gì, động viên học sinh bấm nút "Tiếp tục".
+             - Nếu "complete": Khen ngợi, chấm điểm cao nếu viết hay.
+    
+          Trả về JSON với các trường:
+          - diem: (Ví dụ: "8/10")
+          - status: "complete" hoặc "incomplete"
+          - missing_parts: Mảng các phần còn thiếu (ví dụ: ["Kết bài"])
+          - uu_diem: Các điểm hay trong bài
+          - loi_sai: Các lỗi diễn đạt, chính tả (nếu có)
+          - huong_dan: Lời khuyên cụ thể để bài hay hơn hoặc để hoàn thiện phần thiếu
+          - loi_nhan: Lời nhắn tình cảm từ Thầy/Cô
+          - analysis: { "mo_bai": "...", "than_bai": "...", "ket_bai": "..." } (Phân tích nội dung từng phần)
+        `;
+    }
 
     try {
       // 4. Gọi Groq Cloud (Llama 3.3 70B)
@@ -77,7 +98,9 @@ exports.handler = async (event, context) => {
             { role: "system", content: systemInstruction },
             {
               role: "user",
-              content: `Hãy phân tích bài văn sau của học sinh lớp 5: "${processedSentence}"`
+              content: mode === 'sentence_review'
+                ? `Đánh giá câu văn: "${processedSentence}" theo tiêu chí: "${criteria}"`
+                : `Hãy phân tích bài văn sau của học sinh lớp 5: "${processedSentence}"`
             }
           ],
           response_format: { type: "json_object" },
