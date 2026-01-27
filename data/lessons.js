@@ -1969,22 +1969,21 @@ window.LESSON_DATA = {
                     { "q": "Nội dung chính của bài thơ là gì?", "a": ["Kể lại chuyến đi du lịch của tác giả", "Miêu tả quy trình trồng rừng ngập mặn", "Ca ngợi vẻ đẹp thiên nhiên độc đáo, sức sống mãnh liệt và ý nghĩa thiêng liêng của vùng Đất Mũi", "Giới thiệu các món ăn đặc sản của Cà Mau"], "c": 2 }
                 ]
             }
-        }
-    },
-    "281-nghin-nam-van-hien": {
-        "title": "Nghìn năm văn hiến",
-        "week": 28,
-        "subject": "Đọc",
-        "theme": "Nhớ nguồn",
-        "audio": "am_thanh/nghinnamvanhien.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Nghìn năm văn hiến" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "281-nghin-nam-van-hien": {
+            "title": "Nghìn năm văn hiến",
+            "week": 28,
+            "subject": "Đọc",
+            "theme": "Nhớ nguồn",
+            "audio": "am_thanh/nghinnamvanhien.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Nghìn năm văn hiến" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -2165,45 +2164,45 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
-            },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Văn Miếu - Quốc Tử Giám được xem là công trình gì đầu tiên của Việt Nam?", "a": ["Thư viện đầu tiên", "Trường đại học đầu tiên", "Bảo tàng đầu tiên", "Cung điện đầu tiên"], "c": 1 },
-                    { "q": "Khoa thi tiến sĩ đầu tiên của nước ta được tổ chức vào năm nào?", "a": ["Năm 1010", "Năm 1070", "Năm 1075", "Năm 1442"], "c": 2 },
-                    { "q": "Tính đến năm 1919, nước ta đã tổ chức được tổng cộng bao nhiêu khoa thi?", "a": ["104 khoa", "185 khoa", "82 khoa", "38 khoa"], "c": 1 },
-                    { "q": "Theo bảng thống kê, triều đại nào tổ chức ít khoa thi nhất?", "a": ["Triều Lý", "Triều Trần", "Triều Hồ (2 khoa)", "Triều Mạc"], "c": 2 },
-                    { "q": "Tổng số tiến sĩ đỗ đạt qua các triều đại là bao nhiêu người?", "a": ["1306 người", "1780 người", "2896 người", "3000 người"], "c": 2 },
-                    { "q": "Triều đại nào dưới đây KHÔNG có trạng nguyên theo bảng thống kê?", "a": ["Triều Lê và Triều Mạc", "Triều Lý, Triều Hồ và Triều Nguyễn", "Triều Trần và Triều Lê", "Triều Nguyễn và Triều Mạc"], "c": 1 },
-                    { "q": "Triều đại nào có số lượng trạng nguyên nhiều nhất?", "a": ["Triều Trần (9 người)", "Triều Mạc (11 người)", "Triều Lê (27 người)", "Triều Lý (0 người)"], "c": 2 },
-                    { "q": "Hiện nay tại Văn Miếu - Quốc Tử Giám còn lưu giữ bao nhiêu tấm bia tiến sĩ?", "a": ["185 tấm", "82 tấm", "104 tấm", "38 tấm"], "c": 1 },
-                    { "q": "Các tấm bia đá tại Văn Miếu khắc tên tuổi của bao nhiêu vị tiến sĩ?", "a": ["2896 vị", "1780 vị", "1306 vị", "484 vị"], "c": 2 },
-                    { "q": "Các tấm bia tiến sĩ tại Văn Miếu ghi danh các tiến sĩ đỗ đạt trong khoảng thời gian nào?", "a": ["Từ năm 1075 đến 1919", "Từ khoa thi năm 1442 đến khoa thi năm 1779", "Từ năm 1010 đến 1442", "Chỉ trong triều đại nhà Lê"], "c": 1 },
-                    { "q": "Khu vực nào trong Văn Miếu là nơi đặt các bia tiến sĩ?", "a": ["Khuê Văn Các", "Nhà Thái Học", "Bên giếng Thiền Quang", "Cổng Đại Trung"], "c": 2 },
-                    { "q": "Chi tiết nào cho thấy nền giáo dục xưa cũng mở rộng cửa cho người dân thường?", "a": ["Quốc Tử Giám chỉ dành cho con vua", "Chỉ có người giàu mới được đi thi", "Về sau học trò giỏi là con em dân thường cũng được học ở Quốc Tử Giám", "Các khoa thi chỉ tổ chức trong hoàng cung"], "c": 2 },
-                    { "q": "Bảng số liệu thống kê trong bài có tác dụng gì?", "a": ["Giúp bài văn dài hơn", "Cung cấp thông tin cụ thể, rõ ràng, có sức thuyết phục cao về truyền thống khoa cử", "Để trang trí cho đẹp", "Để thay thế hình ảnh minh họa"], "c": 1 },
-                    { "q": "Cụm từ \"Nghìn năm văn hiến\" muốn nói đến điều gì?", "a": ["Đất nước có nhiều vua chúa", "Đất nước có nhiều tài nguyên khoáng sản", "Đất nước có truyền thống văn hóa, giáo dục lâu đời và tốt đẹp", "Đất nước có nghìn năm tuổi"], "c": 2 },
-                    { "q": "Qua bài đọc, em cảm thấy như thế nào về lịch sử khoa cử của nước nhà?", "a": ["Thấy bình thường", "Thấy lo lắng vì phải học nhiều", "Tự hào về truyền thống hiếu học và trọng nhân tài của cha ông", "Thấy ngạc nhiên về số lượng trạng nguyên"], "c": 2 }
-                ]
+                        }
+                    ]
+                },
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Văn Miếu - Quốc Tử Giám được xem là công trình gì đầu tiên của Việt Nam?", "a": ["Thư viện đầu tiên", "Trường đại học đầu tiên", "Bảo tàng đầu tiên", "Cung điện đầu tiên"], "c": 1 },
+                        { "q": "Khoa thi tiến sĩ đầu tiên của nước ta được tổ chức vào năm nào?", "a": ["Năm 1010", "Năm 1070", "Năm 1075", "Năm 1442"], "c": 2 },
+                        { "q": "Tính đến năm 1919, nước ta đã tổ chức được tổng cộng bao nhiêu khoa thi?", "a": ["104 khoa", "185 khoa", "82 khoa", "38 khoa"], "c": 1 },
+                        { "q": "Theo bảng thống kê, triều đại nào tổ chức ít khoa thi nhất?", "a": ["Triều Lý", "Triều Trần", "Triều Hồ (2 khoa)", "Triều Mạc"], "c": 2 },
+                        { "q": "Tổng số tiến sĩ đỗ đạt qua các triều đại là bao nhiêu người?", "a": ["1306 người", "1780 người", "2896 người", "3000 người"], "c": 2 },
+                        { "q": "Triều đại nào dưới đây KHÔNG có trạng nguyên theo bảng thống kê?", "a": ["Triều Lê và Triều Mạc", "Triều Lý, Triều Hồ và Triều Nguyễn", "Triều Trần và Triều Lê", "Triều Nguyễn và Triều Mạc"], "c": 1 },
+                        { "q": "Triều đại nào có số lượng trạng nguyên nhiều nhất?", "a": ["Triều Trần (9 người)", "Triều Mạc (11 người)", "Triều Lê (27 người)", "Triều Lý (0 người)"], "c": 2 },
+                        { "q": "Hiện nay tại Văn Miếu - Quốc Tử Giám còn lưu giữ bao nhiêu tấm bia tiến sĩ?", "a": ["185 tấm", "82 tấm", "104 tấm", "38 tấm"], "c": 1 },
+                        { "q": "Các tấm bia đá tại Văn Miếu khắc tên tuổi của bao nhiêu vị tiến sĩ?", "a": ["2896 vị", "1780 vị", "1306 vị", "484 vị"], "c": 2 },
+                        { "q": "Các tấm bia tiến sĩ tại Văn Miếu ghi danh các tiến sĩ đỗ đạt trong khoảng thời gian nào?", "a": ["Từ năm 1075 đến 1919", "Từ khoa thi năm 1442 đến khoa thi năm 1779", "Từ năm 1010 đến 1442", "Chỉ trong triều đại nhà Lê"], "c": 1 },
+                        { "q": "Khu vực nào trong Văn Miếu là nơi đặt các bia tiến sĩ?", "a": ["Khuê Văn Các", "Nhà Thái Học", "Bên giếng Thiền Quang", "Cổng Đại Trung"], "c": 2 },
+                        { "q": "Chi tiết nào cho thấy nền giáo dục xưa cũng mở rộng cửa cho người dân thường?", "a": ["Quốc Tử Giám chỉ dành cho con vua", "Chỉ có người giàu mới được đi thi", "Về sau học trò giỏi là con em dân thường cũng được học ở Quốc Tử Giám", "Các khoa thi chỉ tổ chức trong hoàng cung"], "c": 2 },
+                        { "q": "Bảng số liệu thống kê trong bài có tác dụng gì?", "a": ["Giúp bài văn dài hơn", "Cung cấp thông tin cụ thể, rõ ràng, có sức thuyết phục cao về truyền thống khoa cử", "Để trang trí cho đẹp", "Để thay thế hình ảnh minh họa"], "c": 1 },
+                        { "q": "Cụm từ \"Nghìn năm văn hiến\" muốn nói đến điều gì?", "a": ["Đất nước có nhiều vua chúa", "Đất nước có nhiều tài nguyên khoáng sản", "Đất nước có truyền thống văn hóa, giáo dục lâu đời và tốt đẹp", "Đất nước có nghìn năm tuổi"], "c": 2 },
+                        { "q": "Qua bài đọc, em cảm thấy như thế nào về lịch sử khoa cử của nước nhà?", "a": ["Thấy bình thường", "Thấy lo lắng vì phải học nhiều", "Tự hào về truyền thống hiếu học và trọng nhân tài của cha ông", "Thấy ngạc nhiên về số lượng trạng nguyên"], "c": 2 }
+                    ]
+                }
             }
-        }
-    },
-    "282-nguoi-thay-cua-muon-doi": {
-        "title": "Người thầy của muôn đời",
-        "week": 28,
-        "subject": "Đọc",
-        "theme": "Nhớ nguồn",
-        "audio": "am_thanh/282-nguoi-thay-cua-muon-doi.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Người thầy của muôn đời" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "282-nguoi-thay-cua-muon-doi": {
+            "title": "Người thầy của muôn đời",
+            "week": 28,
+            "subject": "Đọc",
+            "theme": "Nhớ nguồn",
+            "audio": "am_thanh/282-nguoi-thay-cua-muon-doi.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Người thầy của muôn đời" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -2337,45 +2336,45 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
-            },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Thầy giáo Chu Văn An sống vào triều đại nào?", "a": ["Triều Lý", "Triều Trần", "Triều Lê", "Triều Nguyễn"], "c": 1 },
-                    { "q": "Sau khi thi đỗ cao, Chu Văn An đã lựa chọn con đường nào?", "a": ["Ra làm quan to trong triều đình ngay lập tức", "Đi du ngoạn khắp nơi", "Không làm quan mà mở trường dạy học ở quê", "Ở ẩn và không gặp gỡ ai"], "c": 2 },
-                    { "q": "Mục đích mở trường dạy học của Chu Văn An là gì?", "a": ["Để kiếm sống", "Nhằm truyền bá đạo lí và đào tạo nhân tài cho đất nước", "Để được nổi tiếng", "Để chuẩn bị thi tiếp"], "c": 1 },
-                    { "q": "Các môn sinh đến nhà cụ giáo Chu để làm gì?", "a": ["Để học bài", "Để xin chữ", "Để mừng thọ thầy", "Để bàn việc nước"], "c": 2 },
-                    { "q": "Món quà mà các môn sinh dâng biếu thầy là gì?", "a": ["Vàng bạc, châu báu", "Lụa là, gấm vóc", "Những cuốn sách quý do họ tự sưu tầm và chép lại", "Những bức tranh quý"], "c": 2 },
-                    { "q": "Thái độ của các môn sinh đối với cụ giáo Chu như thế nào?", "a": ["Sợ hãi và xa lánh", "Kính trọng, yêu mến và biết ơn", "Thờ ơ, không quan tâm", "Coi thường vì thầy không làm quan"], "c": 1 },
-                    { "q": "Chi tiết nào thể hiện sự đồng lòng và lễ phép của các học trò khi nghe thầy đề nghị?", "a": ["Họ im lặng nhìn nhau", "Họ bàn tán xôn xao", "Họ dạ ran và kính cẩn đi theo sau cụ", "Họ xin phép ra về"], "c": 2 },
-                    { "q": "Người mà cụ giáo Chu mời học trò cùng đến thăm là ai?", "a": ["Một người bạn cũ của cụ", "Một vị quan to trong triều", "Người thầy dạy vỡ lòng cho cụ ngày xưa", "Một người học trò giỏi nhất của cụ"], "c": 2 },
-                    { "q": "Hành động dẫn học trò đi thăm thầy cũ của cụ giáo Chu thể hiện truyền thống đạo đức nào?", "a": ["Lá lành đùm lá rách", "Thương người như thể thương thân", "Tôn sư trọng đạo (uống nước nhớ nguồn)", "Đoàn kết tương thân tương ái"], "c": 2 },
-                    { "q": "Vì sao tác giả gọi Chu Văn An là \"Người thầy của muôn đời\"?", "a": ["Vì cụ sống rất lâu", "Vì cụ có rất nhiều học trò", "Vì cụ là tấm gương mẫu mực về đạo đức và nhân cách cho mọi thế hệ học trò noi theo", "Vì cụ dạy học ở nhiều nơi"], "c": 2 },
-                    { "q": "Cụm từ \"dạy vỡ lòng\" có nghĩa là gì?", "a": ["Dạy những kiến thức đầu tiên, cơ bản nhất cho người mới bắt đầu học", "Dạy những kiến thức cao siêu, khó hiểu", "Dạy võ thuật", "Dạy cách làm thơ"], "c": 0 },
-                    { "q": "Theo bài đọc, yếu tố nào giúp cụ Chu Văn An có được thành công và dạy dỗ được nhiều học trò giỏi?", "a": ["Nhờ cụ có nhiều tiền", "Nhờ cụ có quyền lực", "Nhờ công ơn dạy dỗ của người thầy cũ và sự nỗ lực của bản thân", "Nhờ sự may mắn"], "c": 2 },
-                    { "q": "Bài học sâu sắc nhất mà cụ giáo Chu muốn dạy cho các học trò qua buổi mừng thọ là gì?", "a": ["Phải học thật giỏi để làm quan", "Phải tặng quà đắt tiền cho thầy", "Phải biết trân trọng, nhớ ơn và kính trọng những người thầy đã dạy dỗ mình", "Phải giữ gìn sức khỏe"], "c": 2 },
-                    { "q": "Tình cảm của các thế hệ học trò dành cho Chu Văn An được miêu tả như thế nào trong phần kết?", "a": ["Chỉ kính trọng khi thầy còn sống", "Yêu mến, kính trọng và coi ông là tấm gương sáng mãi", "Bình thường như những người thầy khác", "Kính sợ vì thầy rất nghiêm khắc"], "c": 1 },
-                    { "q": "Dòng nào dưới đây nêu đúng nghĩa của từ \"tề tựu\"?", "a": ["Đi lại lộn xộn", "Đứng xếp hàng ngay ngắn", "Tụ họp lại đông đủ tại một nơi", "Giải tán đi nhiều nơi"], "c": 2 }
-                ]
+                        }
+                    ]
+                },
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Thầy giáo Chu Văn An sống vào triều đại nào?", "a": ["Triều Lý", "Triều Trần", "Triều Lê", "Triều Nguyễn"], "c": 1 },
+                        { "q": "Sau khi thi đỗ cao, Chu Văn An đã lựa chọn con đường nào?", "a": ["Ra làm quan to trong triều đình ngay lập tức", "Đi du ngoạn khắp nơi", "Không làm quan mà mở trường dạy học ở quê", "Ở ẩn và không gặp gỡ ai"], "c": 2 },
+                        { "q": "Mục đích mở trường dạy học của Chu Văn An là gì?", "a": ["Để kiếm sống", "Nhằm truyền bá đạo lí và đào tạo nhân tài cho đất nước", "Để được nổi tiếng", "Để chuẩn bị thi tiếp"], "c": 1 },
+                        { "q": "Các môn sinh đến nhà cụ giáo Chu để làm gì?", "a": ["Để học bài", "Để xin chữ", "Để mừng thọ thầy", "Để bàn việc nước"], "c": 2 },
+                        { "q": "Món quà mà các môn sinh dâng biếu thầy là gì?", "a": ["Vàng bạc, châu báu", "Lụa là, gấm vóc", "Những cuốn sách quý do họ tự sưu tầm và chép lại", "Những bức tranh quý"], "c": 2 },
+                        { "q": "Thái độ của các môn sinh đối với cụ giáo Chu như thế nào?", "a": ["Sợ hãi và xa lánh", "Kính trọng, yêu mến và biết ơn", "Thờ ơ, không quan tâm", "Coi thường vì thầy không làm quan"], "c": 1 },
+                        { "q": "Chi tiết nào thể hiện sự đồng lòng và lễ phép của các học trò khi nghe thầy đề nghị?", "a": ["Họ im lặng nhìn nhau", "Họ bàn tán xôn xao", "Họ dạ ran và kính cẩn đi theo sau cụ", "Họ xin phép ra về"], "c": 2 },
+                        { "q": "Người mà cụ giáo Chu mời học trò cùng đến thăm là ai?", "a": ["Một người bạn cũ của cụ", "Một vị quan to trong triều", "Người thầy dạy vỡ lòng cho cụ ngày xưa", "Một người học trò giỏi nhất của cụ"], "c": 2 },
+                        { "q": "Hành động dẫn học trò đi thăm thầy cũ của cụ giáo Chu thể hiện truyền thống đạo đức nào?", "a": ["Lá lành đùm lá rách", "Thương người như thể thương thân", "Tôn sư trọng đạo (uống nước nhớ nguồn)", "Đoàn kết tương thân tương ái"], "c": 2 },
+                        { "q": "Vì sao tác giả gọi Chu Văn An là \"Người thầy của muôn đời\"?", "a": ["Vì cụ sống rất lâu", "Vì cụ có rất nhiều học trò", "Vì cụ là tấm gương mẫu mực về đạo đức và nhân cách cho mọi thế hệ học trò noi theo", "Vì cụ dạy học ở nhiều nơi"], "c": 2 },
+                        { "q": "Cụm từ \"dạy vỡ lòng\" có nghĩa là gì?", "a": ["Dạy những kiến thức đầu tiên, cơ bản nhất cho người mới bắt đầu học", "Dạy những kiến thức cao siêu, khó hiểu", "Dạy võ thuật", "Dạy cách làm thơ"], "c": 0 },
+                        { "q": "Theo bài đọc, yếu tố nào giúp cụ Chu Văn An có được thành công và dạy dỗ được nhiều học trò giỏi?", "a": ["Nhờ cụ có nhiều tiền", "Nhờ cụ có quyền lực", "Nhờ công ơn dạy dỗ của người thầy cũ và sự nỗ lực của bản thân", "Nhờ sự may mắn"], "c": 2 },
+                        { "q": "Bài học sâu sắc nhất mà cụ giáo Chu muốn dạy cho các học trò qua buổi mừng thọ là gì?", "a": ["Phải học thật giỏi để làm quan", "Phải tặng quà đắt tiền cho thầy", "Phải biết trân trọng, nhớ ơn và kính trọng những người thầy đã dạy dỗ mình", "Phải giữ gìn sức khỏe"], "c": 2 },
+                        { "q": "Tình cảm của các thế hệ học trò dành cho Chu Văn An được miêu tả như thế nào trong phần kết?", "a": ["Chỉ kính trọng khi thầy còn sống", "Yêu mến, kính trọng và coi ông là tấm gương sáng mãi", "Bình thường như những người thầy khác", "Kính sợ vì thầy rất nghiêm khắc"], "c": 1 },
+                        { "q": "Dòng nào dưới đây nêu đúng nghĩa của từ \"tề tựu\"?", "a": ["Đi lại lộn xộn", "Đứng xếp hàng ngay ngắn", "Tụ họp lại đông đủ tại một nơi", "Giải tán đi nhiều nơi"], "c": 2 }
+                    ]
+                }
             }
-        }
-    },
-    "291-danh-y-tue-tinh": {
-        "title": "Danh y Tuệ Tĩnh",
-        "week": 29,
-        "subject": "Đọc",
-        "theme": "Tiếp bước cha ông",
-        "audio": "am_thanh/danh-y-tue-tinh.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Danh y Tuệ Tĩnh" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "291-danh-y-tue-tinh": {
+            "title": "Danh y Tuệ Tĩnh",
+            "week": 29,
+            "subject": "Đọc",
+            "theme": "Tiếp bước cha ông",
+            "audio": "am_thanh/danh-y-tue-tinh.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Danh y Tuệ Tĩnh" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -2400,35 +2399,35 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
-            },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Tuệ Tĩnh tên thật là gì?", "a": ["Nguyễn Bá Tĩnh", "Nguyễn Du", "Lê Lợi", "Trần Hưng Đạo"], "c": 0 },
-                    { "q": "Ông quê ở đâu?", "a": ["Tỉnh Hải Dương", "Hà Nội", "Huế", "Nam Định"], "c": 0 },
-                    { "q": "Ông được coi là ông tổ của ngành nào?", "a": ["Thuốc Nam", "Thuốc Bắc", "Thuốc Tây", "Châm cứu"], "c": 0 },
-                    { "q": "Câu nói nổi tiếng của ông là gì?", "a": ["Nam dược trị Nam nhân", "Lương y như từ mẫu", "Thầy thuốc như mẹ hiền", "Vì nước quên thân"], "c": 0 },
-                    { "q": "Ngoài làm thuốc, ông còn là gì?", "a": ["Nhà sư", "Nhà giáo", "Nhà thơ", "Nhà văn"], "c": 0 }
-                ]
+                        }
+                    ]
+                },
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Tuệ Tĩnh tên thật là gì?", "a": ["Nguyễn Bá Tĩnh", "Nguyễn Du", "Lê Lợi", "Trần Hưng Đạo"], "c": 0 },
+                        { "q": "Ông quê ở đâu?", "a": ["Tỉnh Hải Dương", "Hà Nội", "Huế", "Nam Định"], "c": 0 },
+                        { "q": "Ông được coi là ông tổ của ngành nào?", "a": ["Thuốc Nam", "Thuốc Bắc", "Thuốc Tây", "Châm cứu"], "c": 0 },
+                        { "q": "Câu nói nổi tiếng của ông là gì?", "a": ["Nam dược trị Nam nhân", "Lương y như từ mẫu", "Thầy thuốc như mẹ hiền", "Vì nước quên thân"], "c": 0 },
+                        { "q": "Ngoài làm thuốc, ông còn là gì?", "a": ["Nhà sư", "Nhà giáo", "Nhà thơ", "Nhà văn"], "c": 0 }
+                    ]
+                }
             }
-        }
-    },
-    "292-cu-do-chieu": {
-        "title": "Cụ Đồ Chiểu",
-        "week": 29,
-        "subject": "Đọc",
-        "theme": "Tiếp bước cha ông",
-        "audio": "am_thanh/cu-do-chieu.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Cụ Đồ Chiểu" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "292-cu-do-chieu": {
+            "title": "Cụ Đồ Chiểu",
+            "week": 29,
+            "subject": "Đọc",
+            "theme": "Tiếp bước cha ông",
+            "audio": "am_thanh/cu-do-chieu.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Cụ Đồ Chiểu" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -2453,35 +2452,35 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
-            },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Nguyễn Đình Chiểu sinh ra ở đâu?", "a": ["Hà Nội", "Gia Định (TP. Hồ Chí Minh)", "Huế", "Cần Thơ"], "c": 1 },
-                    { "q": "Biến cố nào khiến Nguyễn Đình Chiểu phải bỏ thi về Nam vào nam 1848?", "a": ["Ông bị ốm nặng", "Ông hết tiền", "Mẹ ông mất", "Chiến tranh nổ ra"], "c": 2 },
-                    { "q": "Điều bất hạnh xảy ra với ông trên đường về chịu tang mẹ là gì?", "a": ["Bị mất hành lý", "Bị mù cả hai mắt", "Bị lạc đường", "Bị giặc bắt"], "c": 1 },
-                    { "q": "Thái độ của ông trước thử thách số phận?", "a": ["Buông xuôi", "Sống ẩn dật", "Không gục ngã, kiên cường vươn lên giúp đời", "Than khóc"], "c": 2 },
-                    { "q": "Sau khi bị mù, ông đã làm gì?", "a": ["Làm ruộng", "Mở trường dạy học và làm thuốc", "Đi tu", "Làm quan"], "c": 1 }
-                ]
+                        }
+                    ]
+                },
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Nguyễn Đình Chiểu sinh ra ở đâu?", "a": ["Hà Nội", "Gia Định (TP. Hồ Chí Minh)", "Huế", "Cần Thơ"], "c": 1 },
+                        { "q": "Biến cố nào khiến Nguyễn Đình Chiểu phải bỏ thi về Nam vào nam 1848?", "a": ["Ông bị ốm nặng", "Ông hết tiền", "Mẹ ông mất", "Chiến tranh nổ ra"], "c": 2 },
+                        { "q": "Điều bất hạnh xảy ra với ông trên đường về chịu tang mẹ là gì?", "a": ["Bị mất hành lý", "Bị mù cả hai mắt", "Bị lạc đường", "Bị giặc bắt"], "c": 1 },
+                        { "q": "Thái độ của ông trước thử thách số phận?", "a": ["Buông xuôi", "Sống ẩn dật", "Không gục ngã, kiên cường vươn lên giúp đời", "Than khóc"], "c": 2 },
+                        { "q": "Sau khi bị mù, ông đã làm gì?", "a": ["Làm ruộng", "Mở trường dạy học và làm thuốc", "Đi tu", "Làm quan"], "c": 1 }
+                    ]
+                }
             }
-        }
-    },
-    "301-tran-dai-nghia": {
-        "title": "Anh hùng Lao động Trần Đại Nghĩa",
-        "week": 30,
-        "subject": "Đọc",
-        "theme": "Tiếp bước cha ông",
-        "audio": "am_thanh/anh-hung-lao-dong-tran-dai-nghia.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Anh hùng Lao động Trần Đại Nghĩa" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "301-tran-dai-nghia": {
+            "title": "Anh hùng Lao động Trần Đại Nghĩa",
+            "week": 30,
+            "subject": "Đọc",
+            "theme": "Tiếp bước cha ông",
+            "audio": "am_thanh/anh-hung-lao-dong-tran-dai-nghia.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Anh hùng Lao động Trần Đại Nghĩa" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -2526,45 +2525,45 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
-            },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Tên thật của Anh hùng Lao động Trần Đại Nghĩa là gì?", "a": ["Trần Văn Giàu", "Phạm Quang Lễ", "Tôn Thất Tùng", "Đặng Văn Ngữ"], "c": 1 },
-                    { "q": "Ông theo Bác Hồ về nước vào năm nào?", "a": ["1945", "1946", "1954", "1975"], "c": 1 },
-                    { "q": "Trước khi về nước, cuộc sống của ông ở nước ngoài như thế nào?", "a": ["Rất khó khăn, thiếu thốn", "Bình thường như bao người khác", "Đầy đủ tiện nghi", "Bị quản thúc"], "c": 2 },
-                    { "q": "Động lực nào khiến ông từ bỏ tất cả để về nước?", "a": ["Muốn tìm cơ hội làm giàu", "Lòng yêu nước và mong muốn cống hiến cho sự nghiệp giải phóng dân tộc", "Bị trục xuất khỏi nước ngoài", "Muốn đi du lịch"], "c": 1 },
-                    { "q": "Ông đã cùng đồng nghiệp nghiên cứu và chế tạo thành công loại vũ khí nào dưới đây?", "a": ["Xe tăng", "Máy bay chiến đấu", "Súng ba-dô-ca", "Tàu ngầm"], "c": 2 },
-                    { "q": "Ngoài súng ba-dô-ca, loại súng nào khác được nhắc đến trong bài?", "a": ["Súng lục", "Súng không giật", "Súng trường", "Súng kíp"], "c": 1 },
-                    { "q": "Loại vũ khí nào do ông chế tạo có tên là 'bom bay'?", "a": ["Dùng để thả từ máy bay", "Là một trong những loại vũ khí có sức công phá lớn ông chế tạo", "Dùng để phá cầu cống", "Là tên gọi khác của lựu đạn"], "c": 1 },
-                    { "q": "Các loại vũ khí ông chế tạo dùng để tiêu diệt mục tiêu nào của giặc?", "a": ["Lính bộ binh", "Xe tăng và lô cốt", "Tàu chiến", "Máy bay"], "c": 1 },
-                    { "q": "Ngoài lĩnh vực quân sự, ông còn có công lớn trong việc xây dựng nền tảng nào?", "a": ["Nền văn hóa nghệ thuật", "Nền khoa học trẻ tuổi của nước nhà", "Nền kinh tế thị trường", "Nền giáo dục mầm non"], "c": 1 },
-                    { "q": "Danh hiệu cao quý nào gắn liền với tên tuổi Trần Đại Nghĩa trong bài?", "a": ["Nhà giáo Nhân dân", "Thầy thuốc Nhân dân", "Anh hùng Lao động", "Nghệ sĩ Nhân dân"], "c": 2 },
-                    { "q": "Bài đọc nhận định Trần Đại Nghĩa là một tấm gương lớn về điều gì?", "a": ["Về sự giàu có", "Về lòng yêu nước và tinh thần lao động vì đất nước", "Về khả năng ngoại ngữ", "Về sức khỏe phi thường"], "c": 1 },
-                    { "q": "Cụm từ 'cuộc sống đầy đủ tiện nghi' ở nước ngoài đối lập với điều gì khi ông về nước (theo bối cảnh lịch sử)?", "a": ["Sự gian khổ, thiếu thốn của cuộc kháng chiến trong nước", "Sự giàu có ở Việt Nam", "Cuộc sống an nhàn khi về hưu", "Sự tiện nghi hơn ở trong nước"], "c": 0 },
-                    { "q": "Việc ông chế tạo thành công vũ khí có ý nghĩa gì đối với cuộc kháng chiến?", "a": ["Giúp quân đội ta có thêm vũ khí hiện đại để chống lại kẻ thù mạnh", "Thể hiện trí tuệ của người Việt Nam", "Cả A và B đều đúng", "Chỉ để trưng bày"], "c": 2 },
-                    { "q": "Bài học mà thế hệ sau cần ghi nhớ qua tấm gương của ông là gì?", "a": ["Phải đi nước ngoài định cư", "Chỉ cần học giỏi là đủ", "Ghi nhớ công lao người đi trước và phát huy truyền thống tốt đẹp", "Phải làm việc trong ngành quân sự"], "c": 2 },
-                    { "q": "Nội dung chính của bài đọc là gì?", "a": ["Kể về quá trình đi học của Phạm Quang Lễ", "Ca ngợi tài năng, lòng yêu nước và những cống hiến to lớn của Anh hùng Lao động Trần Đại Nghĩa", "Giới thiệu cách chế tạo súng ba-dô-ca", "Miêu tả cuộc sống ở nước ngoài của ông"], "c": 1 }
-                ]
+                        }
+                    ]
+                },
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Tên thật của Anh hùng Lao động Trần Đại Nghĩa là gì?", "a": ["Trần Văn Giàu", "Phạm Quang Lễ", "Tôn Thất Tùng", "Đặng Văn Ngữ"], "c": 1 },
+                        { "q": "Ông theo Bác Hồ về nước vào năm nào?", "a": ["1945", "1946", "1954", "1975"], "c": 1 },
+                        { "q": "Trước khi về nước, cuộc sống của ông ở nước ngoài như thế nào?", "a": ["Rất khó khăn, thiếu thốn", "Bình thường như bao người khác", "Đầy đủ tiện nghi", "Bị quản thúc"], "c": 2 },
+                        { "q": "Động lực nào khiến ông từ bỏ tất cả để về nước?", "a": ["Muốn tìm cơ hội làm giàu", "Lòng yêu nước và mong muốn cống hiến cho sự nghiệp giải phóng dân tộc", "Bị trục xuất khỏi nước ngoài", "Muốn đi du lịch"], "c": 1 },
+                        { "q": "Ông đã cùng đồng nghiệp nghiên cứu và chế tạo thành công loại vũ khí nào dưới đây?", "a": ["Xe tăng", "Máy bay chiến đấu", "Súng ba-dô-ca", "Tàu ngầm"], "c": 2 },
+                        { "q": "Ngoài súng ba-dô-ca, loại súng nào khác được nhắc đến trong bài?", "a": ["Súng lục", "Súng không giật", "Súng trường", "Súng kíp"], "c": 1 },
+                        { "q": "Loại vũ khí nào do ông chế tạo có tên là 'bom bay'?", "a": ["Dùng để thả từ máy bay", "Là một trong những loại vũ khí có sức công phá lớn ông chế tạo", "Dùng để phá cầu cống", "Là tên gọi khác của lựu đạn"], "c": 1 },
+                        { "q": "Các loại vũ khí ông chế tạo dùng để tiêu diệt mục tiêu nào của giặc?", "a": ["Lính bộ binh", "Xe tăng và lô cốt", "Tàu chiến", "Máy bay"], "c": 1 },
+                        { "q": "Ngoài lĩnh vực quân sự, ông còn có công lớn trong việc xây dựng nền tảng nào?", "a": ["Nền văn hóa nghệ thuật", "Nền khoa học trẻ tuổi của nước nhà", "Nền kinh tế thị trường", "Nền giáo dục mầm non"], "c": 1 },
+                        { "q": "Danh hiệu cao quý nào gắn liền với tên tuổi Trần Đại Nghĩa trong bài?", "a": ["Nhà giáo Nhân dân", "Thầy thuốc Nhân dân", "Anh hùng Lao động", "Nghệ sĩ Nhân dân"], "c": 2 },
+                        { "q": "Bài đọc nhận định Trần Đại Nghĩa là một tấm gương lớn về điều gì?", "a": ["Về sự giàu có", "Về lòng yêu nước và tinh thần lao động vì đất nước", "Về khả năng ngoại ngữ", "Về sức khỏe phi thường"], "c": 1 },
+                        { "q": "Cụm từ 'cuộc sống đầy đủ tiện nghi' ở nước ngoài đối lập với điều gì khi ông về nước (theo bối cảnh lịch sử)?", "a": ["Sự gian khổ, thiếu thốn của cuộc kháng chiến trong nước", "Sự giàu có ở Việt Nam", "Cuộc sống an nhàn khi về hưu", "Sự tiện nghi hơn ở trong nước"], "c": 0 },
+                        { "q": "Việc ông chế tạo thành công vũ khí có ý nghĩa gì đối với cuộc kháng chiến?", "a": ["Giúp quân đội ta có thêm vũ khí hiện đại để chống lại kẻ thù mạnh", "Thể hiện trí tuệ của người Việt Nam", "Cả A và B đều đúng", "Chỉ để trưng bày"], "c": 2 },
+                        { "q": "Bài học mà thế hệ sau cần ghi nhớ qua tấm gương của ông là gì?", "a": ["Phải đi nước ngoài định cư", "Chỉ cần học giỏi là đủ", "Ghi nhớ công lao người đi trước và phát huy truyền thống tốt đẹp", "Phải làm việc trong ngành quân sự"], "c": 2 },
+                        { "q": "Nội dung chính của bài đọc là gì?", "a": ["Kể về quá trình đi học của Phạm Quang Lễ", "Ca ngợi tài năng, lòng yêu nước và những cống hiến to lớn của Anh hùng Lao động Trần Đại Nghĩa", "Giới thiệu cách chế tạo súng ba-dô-ca", "Miêu tả cuộc sống ở nước ngoài của ông"], "c": 1 }
+                    ]
+                }
             }
-        }
-    },
-    "302-bo-doi-ve-lang": {
-        "title": "Bộ đội về làng",
-        "week": 30,
-        "subject": "Đọc",
-        "theme": "Tiếp bước cha ông",
-        "audio": "am_thanh/bo-doi-ve-lang.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Bộ đội về làng" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "302-bo-doi-ve-lang": {
+            "title": "Bộ đội về làng",
+            "week": 30,
+            "subject": "Đọc",
+            "theme": "Tiếp bước cha ông",
+            "audio": "am_thanh/bo-doi-ve-lang.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Bộ đội về làng" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -2612,45 +2611,45 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
-            },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Tác giả của bài thơ 'Bộ đội về làng' là ai?", "a": ["Tố Hữu", "Chính Hữu", "Hoàng Trung Thông", "Phạm Tiến Duật"], "c": 2 },
-                    { "q": "Khi các anh bộ đội đi xa, thái độ của người dân xóm làng như thế nào?", "a": ["Lo lắng và sợ hãi", "Nhớ mãi và vẫn chờ mong", "Buồn bã và tuyệt vọng", "Thờ ơ, không quan tâm"], "c": 1 },
-                    { "q": "Các anh bộ đội trở về làng từ đâu?", "a": ["Từ thành phố lớn", "Từ miền biển xa", "Từ rừng sâu, lưng đèo, dốc núi mù che", "Từ nước ngoài"], "c": 2 },
-                    { "q": "Từ ngữ nào miêu tả không khí 'xóm nhỏ' khi bộ đội về?", "a": ["Vắng lặng", "Rộn ràng", "Ồn ào", "Hỗn loạn"], "c": 1 },
-                    { "q": "Khi thấy các anh bộ đội về, 'lớp lớp đàn em' đã có hành động gì?", "a": ["Đứng nghiêm chào", "Hớn hở theo sau", "Sợ hãi bỏ chạy", "Mang hoa ra tặng"], "c": 1 },
-                    { "q": "Hình ảnh 'Mẹ già bịn rịn áo nâu' gợi lên cảm xúc gì?", "a": ["Sự xúc động, quyến luyến và yêu thương của người mẹ", "Sự nghèo khó của người mẹ", "Sự vội vàng của người mẹ", "Sự lo âu của người mẹ"], "c": 0 },
-                    { "q": "Mẹ già coi các anh bộ đội như thế nào?", "a": ["Khách quý", "Đàn con ở rừng sâu mới về", "Những người hùng", "Những người lạ"], "c": 1 },
-                    { "q": "Cụm từ 'Dốc núi mù che' gợi tả điều gì về nơi các anh đóng quân?", "a": ["Nơi đó rất đẹp và thơ mộng", "Nơi đó xa xôi, hiểm trở và gian khổ", "Nơi đó rất đông vui", "Nơi đó gần ngay xóm làng"], "c": 1 },
-                    { "q": "Ngôi nhà đón các anh về được miêu tả ra sao?", "a": ["Nhà ngói đỏ tươi", "Nhà cao cửa rộng", "Nhà lá đơn sơ", "Biệt thự khang trang"], "c": 2 },
-                    { "q": "Hai hình ảnh 'Nồi cơm nấu dở / Bát nước chè xanh' nói lên điều gì?", "a": ["Sự thiếu thốn vật chất đến cùng cực", "Sự giản dị, mộc mạc, gần gũi trong sinh hoạt đời thường và sự tiếp đón chân tình", "Người dân chưa chuẩn bị kịp thức ăn", "Thức ăn không ngon"], "c": 1 },
-                    { "q": "Câu thơ 'Nhưng tấm lòng rộng mở' muốn nhấn mạnh điều gì?", "a": ["Người dân rất giàu có", "Tình cảm hào phóng, chân thành, bao dung của nhân dân dành cho bộ đội", "Cửa nhà luôn mở toang", "Người dân thích nói chuyện"], "c": 1 },
-                    { "q": "Bộ đội và dân làng đã làm gì khi gặp nhau bên bát nước chè xanh?", "a": ["Tổ chức liên hoan văn nghệ", "Bàn kế hoạch đánh giặc", "Ngồi vui kể chuyện tâm tình bên nhau", "Đi cày cấy giúp dân"], "c": 2 },
-                    { "q": "Từ 'xôn xao' trong câu 'Xôn xao làng tôi bé nhỏ' gợi tả điều gì?", "a": ["Tiếng gió thổi mạnh", "Tiếng súng nổ từ xa", "Tiếng nói cười, bàn tán phấn khởi, vui mừng của dân làng", "Tiếng suối chảy róc rách"], "c": 2 },
-                    { "q": "Chủ đề chính của bài thơ là gì?", "a": ["Ca ngợi vẻ đẹp của thiên nhiên miền núi", "Ca ngợi tình quân dân thắm thiết, sự gắn bó bền chặt giữa tiền tuyến và hậu phương", "Miêu tả sự vất vả của nghề nông", "Kể về chiến công oanh liệt của bộ đội"], "c": 1 },
-                    { "q": "Qua bài thơ, hình ảnh người dân quê hiện lên với phẩm chất gì?", "a": ["Giàu sang và quyền lực", "Khép kín và xa lạ", "Hiền hoà, tình cảm, dù nghèo khó nhưng giàu lòng nhân ái", "Nghiêm khắc và lạnh lùng"], "c": 2 }
-                ]
+                        }
+                    ]
+                },
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Tác giả của bài thơ 'Bộ đội về làng' là ai?", "a": ["Tố Hữu", "Chính Hữu", "Hoàng Trung Thông", "Phạm Tiến Duật"], "c": 2 },
+                        { "q": "Khi các anh bộ đội đi xa, thái độ của người dân xóm làng như thế nào?", "a": ["Lo lắng và sợ hãi", "Nhớ mãi và vẫn chờ mong", "Buồn bã và tuyệt vọng", "Thờ ơ, không quan tâm"], "c": 1 },
+                        { "q": "Các anh bộ đội trở về làng từ đâu?", "a": ["Từ thành phố lớn", "Từ miền biển xa", "Từ rừng sâu, lưng đèo, dốc núi mù che", "Từ nước ngoài"], "c": 2 },
+                        { "q": "Từ ngữ nào miêu tả không khí 'xóm nhỏ' khi bộ đội về?", "a": ["Vắng lặng", "Rộn ràng", "Ồn ào", "Hỗn loạn"], "c": 1 },
+                        { "q": "Khi thấy các anh bộ đội về, 'lớp lớp đàn em' đã có hành động gì?", "a": ["Đứng nghiêm chào", "Hớn hở theo sau", "Sợ hãi bỏ chạy", "Mang hoa ra tặng"], "c": 1 },
+                        { "q": "Hình ảnh 'Mẹ già bịn rịn áo nâu' gợi lên cảm xúc gì?", "a": ["Sự xúc động, quyến luyến và yêu thương của người mẹ", "Sự nghèo khó của người mẹ", "Sự vội vàng của người mẹ", "Sự lo âu của người mẹ"], "c": 0 },
+                        { "q": "Mẹ già coi các anh bộ đội như thế nào?", "a": ["Khách quý", "Đàn con ở rừng sâu mới về", "Những người hùng", "Những người lạ"], "c": 1 },
+                        { "q": "Cụm từ 'Dốc núi mù che' gợi tả điều gì về nơi các anh đóng quân?", "a": ["Nơi đó rất đẹp và thơ mộng", "Nơi đó xa xôi, hiểm trở và gian khổ", "Nơi đó rất đông vui", "Nơi đó gần ngay xóm làng"], "c": 1 },
+                        { "q": "Ngôi nhà đón các anh về được miêu tả ra sao?", "a": ["Nhà ngói đỏ tươi", "Nhà cao cửa rộng", "Nhà lá đơn sơ", "Biệt thự khang trang"], "c": 2 },
+                        { "q": "Hai hình ảnh 'Nồi cơm nấu dở / Bát nước chè xanh' nói lên điều gì?", "a": ["Sự thiếu thốn vật chất đến cùng cực", "Sự giản dị, mộc mạc, gần gũi trong sinh hoạt đời thường và sự tiếp đón chân tình", "Người dân chưa chuẩn bị kịp thức ăn", "Thức ăn không ngon"], "c": 1 },
+                        { "q": "Câu thơ 'Nhưng tấm lòng rộng mở' muốn nhấn mạnh điều gì?", "a": ["Người dân rất giàu có", "Tình cảm hào phóng, chân thành, bao dung của nhân dân dành cho bộ đội", "Cửa nhà luôn mở toang", "Người dân thích nói chuyện"], "c": 1 },
+                        { "q": "Bộ đội và dân làng đã làm gì khi gặp nhau bên bát nước chè xanh?", "a": ["Tổ chức liên hoan văn nghệ", "Bàn kế hoạch đánh giặc", "Ngồi vui kể chuyện tâm tình bên nhau", "Đi cày cấy giúp dân"], "c": 2 },
+                        { "q": "Từ 'xôn xao' trong câu 'Xôn xao làng tôi bé nhỏ' gợi tả điều gì?", "a": ["Tiếng gió thổi mạnh", "Tiếng súng nổ từ xa", "Tiếng nói cười, bàn tán phấn khởi, vui mừng của dân làng", "Tiếng suối chảy róc rách"], "c": 2 },
+                        { "q": "Chủ đề chính của bài thơ là gì?", "a": ["Ca ngợi vẻ đẹp của thiên nhiên miền núi", "Ca ngợi tình quân dân thắm thiết, sự gắn bó bền chặt giữa tiền tuyến và hậu phương", "Miêu tả sự vất vả của nghề nông", "Kể về chiến công oanh liệt của bộ đội"], "c": 1 },
+                        { "q": "Qua bài thơ, hình ảnh người dân quê hiện lên với phẩm chất gì?", "a": ["Giàu sang và quyền lực", "Khép kín và xa lạ", "Hiền hoà, tình cảm, dù nghèo khó nhưng giàu lòng nhân ái", "Nghiêm khắc và lạnh lùng"], "c": 2 }
+                    ]
+                }
             }
-        }
-    },
-    "311-ve-ngoi-nha-dang-xay": {
-        "title": "Về ngôi nhà đang xây",
-        "week": 31,
-        "subject": "Đọc",
-        "theme": "Thế giới của chúng ta",
-        "audio": "am_thanh/ve-ngoi-nha-dang-xay.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Về ngôi nhà đang xây" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "311-ve-ngoi-nha-dang-xay": {
+            "title": "Về ngôi nhà đang xây",
+            "week": 31,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/ve-ngoi-nha-dang-xay.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Về ngôi nhà đang xây" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -2696,45 +2695,45 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
-            },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Tác giả của bài thơ \"Về ngôi nhà đang xây\" là ai?", "a": ["Trần Đăng Khoa", "Đồng Xuân Lan", "Nguyễn Khoa Điềm", "Xuân Quỳnh"], "c": 1 },
-                    { "q": "Hình ảnh \"giàn giáo\" được so sánh với vật gì?", "a": ["Cái thang khổng lồ", "Cái lồng che chở", "Rừng cây", "Bộ xương của ngôi nhà"], "c": 1 },
-                    { "q": "\"Trụ bê tông\" được ví von với hình ảnh nào đầy sức sống?", "a": ["Cây cột điện", "Ngón tay", "Mầm cây nhú lên", "Cây nấm"], "c": 2 },
-                    { "q": "Ngôi nhà đang xây dở được nhân hóa với hành động gì liên quan đến mùi hương?", "a": ["Tỏa hương thơm ngát", "Thở ra mùi vôi vữa nồng hăng", "Hít thở không khí trong lành", "Giữ mùi sơn mới"], "c": 1 },
-                    { "q": "Tác giả so sánh ngôi nhà đang xây với các tác phẩm nghệ thuật nào?", "a": ["Bản nhạc và vần thơ", "Bài thơ sắp làm xong và bức tranh còn nguyên màu vôi gạch", "Pho tượng và bức tranh", "Vở kịch và bài hát"], "c": 1 },
-                    { "q": "Biện pháp nghệ thuật nào được dùng trong câu \"Nắng đứng ngủ quên\"?", "a": ["So sánh", "Nhân hóa", "Ẩn dụ", "Điệp từ"], "c": 1 },
-                    { "q": "Bầy chim đi ăn về đã làm gì bên ô cửa?", "a": ["Làm tổ", "Đậu nghỉ ngơi", "Rót vào ô cửa vài nốt nhạc", "Tìm thức ăn"], "c": 2 },
-                    { "q": "Ở khổ thơ cuối, ngôi nhà được so sánh với hình ảnh nào?", "a": ["Người khổng lồ", "Trẻ nhỏ", "Cây cổ thụ", "Ngọn núi"], "c": 1 },
-                    { "q": "Câu thơ \"Lớn lên với trời xanh\" thể hiện điều gì?", "a": ["Ngôi nhà rất cao", "Sức sống mãnh liệt, sự vươn lên và niềm hy vọng", "Ngôi nhà được sơn màu xanh", "Bầu trời rất đẹp"], "c": 1 },
-                    { "q": "Tác dụng chính của biện pháp nhân hóa trong bài là gì?", "a": ["Làm cho ngôi nhà trở nên to lớn, vĩ đại", "Làm cho bài thơ khó hiểu hơn", "Làm cho ngôi nhà trở nên gần gũi, thân thiện, có hồn như con người", "Để miêu tả chính xác kỹ thuật xây dựng"], "c": 2 },
-                    { "q": "Hình ảnh \"Làn gió mang hương\" gợi cảm giác gì về không gian xung quanh ngôi nhà?", "a": ["Ngột ngạt, bụi bặm", "Thoáng đãng, dễ chịu và nên thơ", "Ồn ào, náo nhiệt", "Lạnh lẽo, vắng vẻ"], "c": 1 },
-                    { "q": "Vì sao nói ngôi nhà \"giống bài thơ sắp làm xong\"?", "a": ["Vì thợ xây hay làm thơ", "Vì ngôi nhà chưa hoàn thiện nhưng đã hé lộ vẻ đẹp hoàn chỉnh trong tương lai", "Vì cấu trúc ngôi nhà giống nhịp điệu bài thơ", "Cả B và C đều có ý đúng"], "c": 1 },
-                    { "q": "Nội dung chính của bài thơ là gì?", "a": ["Miêu tả sự vất vả của bác thợ nề", "Hình ảnh đẹp và sống động của ngôi nhà đang xây, thể hiện sự đổi mới của đất nước", "Kể về trò chơi của trẻ em bên công trường", "Giới thiệu quy trình xây dựng nhà"], "c": 1 },
-                    { "q": "Ý nghĩa câu \"Mỗi bạn nhỏ giống như một ngôi nhà đang xây\" là gì?", "a": ["Các bạn nhỏ cần ăn nhiều để lớn nhanh", "Các bạn nhỏ đang trong quá trình học tập, rèn luyện để dần hoàn thiện nhân cách và trí tuệ", "Các bạn nhỏ thích chơi xây nhà", "Các bạn nhỏ rất cứng cáp"], "c": 1 },
-                    { "q": "Cảm xúc của tác giả đối với ngôi nhà đang xây là gì?", "a": ["Thờ ơ, không quan tâm", "Khó chịu vì bụi bặm", "Yêu mến, thích thú và quan sát tinh tế", "Sợ hãi vì nguy hiểm"], "c": 2 }
-                ]
+                        }
+                    ]
+                },
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Tác giả của bài thơ \"Về ngôi nhà đang xây\" là ai?", "a": ["Trần Đăng Khoa", "Đồng Xuân Lan", "Nguyễn Khoa Điềm", "Xuân Quỳnh"], "c": 1 },
+                        { "q": "Hình ảnh \"giàn giáo\" được so sánh với vật gì?", "a": ["Cái thang khổng lồ", "Cái lồng che chở", "Rừng cây", "Bộ xương của ngôi nhà"], "c": 1 },
+                        { "q": "\"Trụ bê tông\" được ví von với hình ảnh nào đầy sức sống?", "a": ["Cây cột điện", "Ngón tay", "Mầm cây nhú lên", "Cây nấm"], "c": 2 },
+                        { "q": "Ngôi nhà đang xây dở được nhân hóa với hành động gì liên quan đến mùi hương?", "a": ["Tỏa hương thơm ngát", "Thở ra mùi vôi vữa nồng hăng", "Hít thở không khí trong lành", "Giữ mùi sơn mới"], "c": 1 },
+                        { "q": "Tác giả so sánh ngôi nhà đang xây với các tác phẩm nghệ thuật nào?", "a": ["Bản nhạc và vần thơ", "Bài thơ sắp làm xong và bức tranh còn nguyên màu vôi gạch", "Pho tượng và bức tranh", "Vở kịch và bài hát"], "c": 1 },
+                        { "q": "Biện pháp nghệ thuật nào được dùng trong câu \"Nắng đứng ngủ quên\"?", "a": ["So sánh", "Nhân hóa", "Ẩn dụ", "Điệp từ"], "c": 1 },
+                        { "q": "Bầy chim đi ăn về đã làm gì bên ô cửa?", "a": ["Làm tổ", "Đậu nghỉ ngơi", "Rót vào ô cửa vài nốt nhạc", "Tìm thức ăn"], "c": 2 },
+                        { "q": "Ở khổ thơ cuối, ngôi nhà được so sánh với hình ảnh nào?", "a": ["Người khổng lồ", "Trẻ nhỏ", "Cây cổ thụ", "Ngọn núi"], "c": 1 },
+                        { "q": "Câu thơ \"Lớn lên với trời xanh\" thể hiện điều gì?", "a": ["Ngôi nhà rất cao", "Sức sống mãnh liệt, sự vươn lên và niềm hy vọng", "Ngôi nhà được sơn màu xanh", "Bầu trời rất đẹp"], "c": 1 },
+                        { "q": "Tác dụng chính của biện pháp nhân hóa trong bài là gì?", "a": ["Làm cho ngôi nhà trở nên to lớn, vĩ đại", "Làm cho bài thơ khó hiểu hơn", "Làm cho ngôi nhà trở nên gần gũi, thân thiện, có hồn như con người", "Để miêu tả chính xác kỹ thuật xây dựng"], "c": 2 },
+                        { "q": "Hình ảnh \"Làn gió mang hương\" gợi cảm giác gì về không gian xung quanh ngôi nhà?", "a": ["Ngột ngạt, bụi bặm", "Thoáng đãng, dễ chịu và nên thơ", "Ồn ào, náo nhiệt", "Lạnh lẽo, vắng vẻ"], "c": 1 },
+                        { "q": "Vì sao nói ngôi nhà \"giống bài thơ sắp làm xong\"?", "a": ["Vì thợ xây hay làm thơ", "Vì ngôi nhà chưa hoàn thiện nhưng đã hé lộ vẻ đẹp hoàn chỉnh trong tương lai", "Vì cấu trúc ngôi nhà giống nhịp điệu bài thơ", "Cả B và C đều có ý đúng"], "c": 1 },
+                        { "q": "Nội dung chính của bài thơ là gì?", "a": ["Miêu tả sự vất vả của bác thợ nề", "Hình ảnh đẹp và sống động của ngôi nhà đang xây, thể hiện sự đổi mới của đất nước", "Kể về trò chơi của trẻ em bên công trường", "Giới thiệu quy trình xây dựng nhà"], "c": 1 },
+                        { "q": "Ý nghĩa câu \"Mỗi bạn nhỏ giống như một ngôi nhà đang xây\" là gì?", "a": ["Các bạn nhỏ cần ăn nhiều để lớn nhanh", "Các bạn nhỏ đang trong quá trình học tập, rèn luyện để dần hoàn thiện nhân cách và trí tuệ", "Các bạn nhỏ thích chơi xây nhà", "Các bạn nhỏ rất cứng cáp"], "c": 1 },
+                        { "q": "Cảm xúc của tác giả đối với ngôi nhà đang xây là gì?", "a": ["Thờ ơ, không quan tâm", "Khó chịu vì bụi bặm", "Yêu mến, thích thú và quan sát tinh tế", "Sợ hãi vì nguy hiểm"], "c": 2 }
+                    ]
+                }
             }
-        }
-    },
-    "312-viet-nam-que-huong-ta": {
-        "title": "Việt Nam quê hương ta",
-        "week": 31,
-        "subject": "Đọc",
-        "theme": "Thế giới của chúng ta",
-        "audio": "am_thanh/viet-nam-que-huong-ta.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Việt Nam quê hương ta" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "312-viet-nam-que-huong-ta": {
+            "title": "Việt Nam quê hương ta",
+            "week": 31,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/viet-nam-que-huong-ta.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Việt Nam quê hương ta" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -2766,45 +2765,45 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
-            },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Bài thơ 'Việt Nam quê hương ta' được sáng tác bởi nhà thơ nào?", "a": ["Tố Hữu", "Trần Đăng Khoa", "Nguyễn Đình Thi", "Huy Cận"], "c": 2 },
-                    { "q": "Hình ảnh nào được dùng để miêu tả sự trù phú của cánh đồng lúa Việt Nam?", "a": ["Rừng vàng biển bạc", "Mênh mông biển lúa", "Cánh đồng thẳng cánh cò bay", "Lúa vàng trĩu hạt"], "c": 1 },
-                    { "q": "Dãy núi nào được nhắc đến trong câu 'Mây mờ che đỉnh... sớm chiều'?", "a": ["Hoàng Liên Sơn", "Ba Vì", "Trường Sơn", "Bạch Mã"], "c": 2 },
-                    { "q": "Hình ảnh 'Gái trai cũng một áo nâu nhuộm bùn' gợi lên phẩm chất gì của người dân Việt Nam?", "a": ["Sự giản dị và tiết kiệm", "Sự cần cù, chịu thương chịu khó, vất vả lam lũ trong lao động", "Sự mặc áo nâu", "Sự nghèo khó"], "c": 1 },
-                    { "q": "Câu thơ 'Đất nghèo nuôi những anh hùng' có ý nghĩa gì?", "a": ["Đất nước nghèo nên ai cũng phải đi đánh giặc", "Từ mảnh đất gian khó, đau thương đã sinh ra những con người quả cảm, kiên cường", "Anh hùng chỉ xuất thân từ nhà nghèo", "Đất nước không có tài nguyên"], "c": 1 },
-                    { "q": "Sau khi chiến thắng kẻ thù ('Đạp quân thù xuống đất đen'), người Việt Nam có thái độ như thế nào?", "a": ["Kiêu ngạo và hung hăng", "Tiếp tục gây chiến", "Súng gươm vứt bỏ lại hiền như xưa", "Lạnh lùng và xa cách"], "c": 2 },
-                    { "q": "Phẩm chất nào được nhắc đến trong câu 'Yêu ai yêu trọn tấm tình thủy chung'?", "a": ["Sự thông minh", "Sự dũng cảm", "Sự thủy chung, son sắt trong tình cảm", "Sự hiếu khách"], "c": 2 },
-                    { "q": "Câu thơ 'Tay người như có phép tiên' dùng biện pháp nghệ thuật gì?", "a": ["So sánh", "Nhân hóa", "Ẩn dụ", "Hoán dụ"], "c": 0 },
-                    { "q": "Hình ảnh 'Trên tre lá cũng dệt nghìn bài thơ' ca ngợi điều gì?", "a": ["Người Việt Nam rất thích làm thơ", "Sự khéo léo, tài hoa của đôi bàn tay người thợ thủ công làm ra sản phẩm đẹp như thơ", "Cây tre biết làm thơ", "Nghề dệt vải truyền thống"], "c": 1 },
-                    { "q": "Hai khổ thơ cuối muốn nhấn mạnh điều gì về đất nước và con người Việt Nam?", "a": ["Đất nước rộng lớn, người dân đông đúc", "Đất nước có nhiều tài nguyên khoáng sản", "Đất nước tươi đẹp, con người tài hoa, tình nghĩa và thủy chung", "Đất nước có nhiều lễ hội"], "c": 2 },
-                    { "q": "Cụm từ 'Mặt người vất vả in sâu' diễn tả điều gì?", "a": ["Những nỗi gian lao, vất vả của người dân đã hằn in lên dáng vẻ bề ngoài", "Khuôn mặt người dân rất nghiêm khắc", "Người dân hay lo lắng", "Người dân có khuôn mặt giống nhau"], "c": 0 },
-                    { "q": "Tác giả gọi đất nước là 'Việt Nam đất nước ta ơi' thể hiện tình cảm gì?", "a": ["Sự trang trọng, xa cách", "Sự tha thiết, gần gũi, yêu mến và tự hào", "Sự buồn bã", "Sự ngạc nhiên"], "c": 1 },
-                    { "q": " 'Mắt đen cô gái long lanh' gợi vẻ đẹp như thế nào?", "a": ["Vẻ đẹp sắc sảo", "Vẻ đẹp buồn", "Vẻ đẹp tươi sáng, tinh anh và tràn đầy sức sống", "Vẻ đẹp bí ẩn"], c: 2 },
-                    { "q": "Ý nào sau đây KHÔNG đúng khi nói về con người Việt Nam trong bài thơ?", "a": ["Cần cù trong lao động", "Anh hùng trong chiến đấu", "Khuất phục trước kẻ thù", "Hiền lành trong đời thường"], "c": 2 },
-                    { "q": "Bài thơ giúp em cảm nhận được điều gì sâu sắc nhất?", "a": ["Sự giàu có về tiền bạc của đất nước", "Niềm tự hào và tình yêu đối với vẻ đẹp của non sông và phẩm chất con người Việt Nam", "Sự khắc nghiệt của thiên nhiên", "Nỗi buồn về chiến tranh"], "c": 1 }
-                ]
+                        }
+                    ]
+                },
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Bài thơ 'Việt Nam quê hương ta' được sáng tác bởi nhà thơ nào?", "a": ["Tố Hữu", "Trần Đăng Khoa", "Nguyễn Đình Thi", "Huy Cận"], "c": 2 },
+                        { "q": "Hình ảnh nào được dùng để miêu tả sự trù phú của cánh đồng lúa Việt Nam?", "a": ["Rừng vàng biển bạc", "Mênh mông biển lúa", "Cánh đồng thẳng cánh cò bay", "Lúa vàng trĩu hạt"], "c": 1 },
+                        { "q": "Dãy núi nào được nhắc đến trong câu 'Mây mờ che đỉnh... sớm chiều'?", "a": ["Hoàng Liên Sơn", "Ba Vì", "Trường Sơn", "Bạch Mã"], "c": 2 },
+                        { "q": "Hình ảnh 'Gái trai cũng một áo nâu nhuộm bùn' gợi lên phẩm chất gì của người dân Việt Nam?", "a": ["Sự giản dị và tiết kiệm", "Sự cần cù, chịu thương chịu khó, vất vả lam lũ trong lao động", "Sự mặc áo nâu", "Sự nghèo khó"], "c": 1 },
+                        { "q": "Câu thơ 'Đất nghèo nuôi những anh hùng' có ý nghĩa gì?", "a": ["Đất nước nghèo nên ai cũng phải đi đánh giặc", "Từ mảnh đất gian khó, đau thương đã sinh ra những con người quả cảm, kiên cường", "Anh hùng chỉ xuất thân từ nhà nghèo", "Đất nước không có tài nguyên"], "c": 1 },
+                        { "q": "Sau khi chiến thắng kẻ thù ('Đạp quân thù xuống đất đen'), người Việt Nam có thái độ như thế nào?", "a": ["Kiêu ngạo và hung hăng", "Tiếp tục gây chiến", "Súng gươm vứt bỏ lại hiền như xưa", "Lạnh lùng và xa cách"], "c": 2 },
+                        { "q": "Phẩm chất nào được nhắc đến trong câu 'Yêu ai yêu trọn tấm tình thủy chung'?", "a": ["Sự thông minh", "Sự dũng cảm", "Sự thủy chung, son sắt trong tình cảm", "Sự hiếu khách"], "c": 2 },
+                        { "q": "Câu thơ 'Tay người như có phép tiên' dùng biện pháp nghệ thuật gì?", "a": ["So sánh", "Nhân hóa", "Ẩn dụ", "Hoán dụ"], "c": 0 },
+                        { "q": "Hình ảnh 'Trên tre lá cũng dệt nghìn bài thơ' ca ngợi điều gì?", "a": ["Người Việt Nam rất thích làm thơ", "Sự khéo léo, tài hoa của đôi bàn tay người thợ thủ công làm ra sản phẩm đẹp như thơ", "Cây tre biết làm thơ", "Nghề dệt vải truyền thống"], "c": 1 },
+                        { "q": "Hai khổ thơ cuối muốn nhấn mạnh điều gì về đất nước và con người Việt Nam?", "a": ["Đất nước rộng lớn, người dân đông đúc", "Đất nước có nhiều tài nguyên khoáng sản", "Đất nước tươi đẹp, con người tài hoa, tình nghĩa và thủy chung", "Đất nước có nhiều lễ hội"], "c": 2 },
+                        { "q": "Cụm từ 'Mặt người vất vả in sâu' diễn tả điều gì?", "a": ["Những nỗi gian lao, vất vả của người dân đã hằn in lên dáng vẻ bề ngoài", "Khuôn mặt người dân rất nghiêm khắc", "Người dân hay lo lắng", "Người dân có khuôn mặt giống nhau"], "c": 0 },
+                        { "q": "Tác giả gọi đất nước là 'Việt Nam đất nước ta ơi' thể hiện tình cảm gì?", "a": ["Sự trang trọng, xa cách", "Sự tha thiết, gần gũi, yêu mến và tự hào", "Sự buồn bã", "Sự ngạc nhiên"], "c": 1 },
+                        { "q": " 'Mắt đen cô gái long lanh' gợi vẻ đẹp như thế nào?", "a": ["Vẻ đẹp sắc sảo", "Vẻ đẹp buồn", "Vẻ đẹp tươi sáng, tinh anh và tràn đầy sức sống", "Vẻ đẹp bí ẩn"], c: 2 },
+                        { "q": "Ý nào sau đây KHÔNG đúng khi nói về con người Việt Nam trong bài thơ?", "a": ["Cần cù trong lao động", "Anh hùng trong chiến đấu", "Khuất phục trước kẻ thù", "Hiền lành trong đời thường"], "c": 2 },
+                        { "q": "Bài thơ giúp em cảm nhận được điều gì sâu sắc nhất?", "a": ["Sự giàu có về tiền bạc của đất nước", "Niềm tự hào và tình yêu đối với vẻ đẹp của non sông và phẩm chất con người Việt Nam", "Sự khắc nghiệt của thiên nhiên", "Nỗi buồn về chiến tranh"], "c": 1 }
+                    ]
+                }
             }
-        }
-    },
-    "321-bai-ca-trai-dat": {
-        "title": "Bài ca Trái Đất",
-        "week": 32,
-        "subject": "Đọc",
-        "theme": "Thế giới của chúng ta",
-        "audio": "am_thanh/bai-ca-trai-dat.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Bài ca Trái Đất" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "321-bai-ca-trai-dat": {
+            "title": "Bài ca Trái Đất",
+            "week": 32,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/bai-ca-trai-dat.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Bài ca Trái Đất" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -2869,61 +2868,61 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
+                        }
+                    ]
+                },
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Bài thơ \"Bài ca Trái Đất\" do ai sáng tác?", "a": ["Trần Đăng Khoa", "Định Hải", "Tố Hữu", "Phạm Tiến Duật"], "c": 1 },
+                        { "q": "Trong khổ thơ đầu, Trái đất được so sánh với hình ảnh nào?", "a": ["Quả cam vàng", "Ngôi nhà lớn", "Quả bóng xanh bay giữa trời xanh", "Con tàu vũ trụ"], "c": 2 },
+                        { "q": "Loài chim nào được nhắc đến trong bài tượng trưng cho hòa bình với \"tiếng chim gù\"?", "a": ["Chim én", "Chim chích chòe", "Chim bồ câu", "Chim đại bàng"], "c": 2 },
+                        { "q": "Hình ảnh \"Cánh hải âu\" trong bài được miêu tả đang làm gì?", "a": ["Bay về tổ", "Vờn sóng biển", "Đậu trên bãi cát", "Bay trong bão"], "c": 1 },
+                        { "q": "Những hình ảnh ở khổ thơ đầu gợi lên một thế giới như thế nào?", "a": ["Ồn ào và náo nhiệt", "Lạnh lẽo và cô đơn", "Hòa bình, yên vui và tươi đẹp", "Hùng vĩ và dữ dội"], "c": 2 },
+                        { "q": "Câu thơ \"Hành tinh này là của chúng ta\" được lặp lại nhằm mục đích gì?", "a": ["Để bài thơ dài hơn", "Khẳng định quyền làm chủ và trách nhiệm của trẻ em đối với Trái đất", "Để khoe khoang", "Để hỏi mọi người"], "c": 1 },
+                        { "q": "Khổ thơ thứ hai muốn nói lên điều gì về vai trò của trẻ em?", "a": ["Trẻ em cần được vui chơi", "Trẻ em rất đáng yêu", "Trẻ em năm châu là những chủ nhân tương lai của thế giới", "Trẻ em thích ca hát"], "c": 2 },
+                        { "q": "Sự vật nào dưới đây có ý nghĩa \"đối lập với hòa bình\" thường được nhắc đến trong chủ đề này?", "a": ["Hoa thơm", "Nắng vàng", "Bom đạn, chiến tranh", "Tiếng chim hót"], "c": 2 },
+                        { "q": "Màu sắc chủ đạo của Trái đất được nhắc đến trong bài là màu gì?", "a": ["Màu đỏ", "Màu xanh", "Màu vàng", "Màu trắng"], "c": 1 },
+                        { "q": "Ước mơ lớn nhất của các bạn thiếu nhi trong bài thơ là gì?", "a": ["Được đi du lịch vòng quanh thế giới", "Được ăn nhiều bánh kẹo", "Một thế giới hòa bình, đoàn kết, không có chiến tranh", "Được làm phi hành gia"], "c": 2 },
+                        { "q": "Các bạn nhỏ trong bài mong muốn Trái đất tránh xa điều gì?", "a": ["Ánh nắng mặt trời", "Tiếng súng và bom đạn", "Những cơn mưa", "Những đàn chim"], "c": 1 },
+                        { "q": "Cụm từ \"Năm châu\" trong bài ý chỉ điều gì?", "a": ["Năm ngọn núi lớn", "Năm đại dương", "Toàn thể các châu lục trên thế giới", "Năm quốc gia lớn nhất"], "c": 2 },
             },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Bài thơ \"Bài ca Trái Đất\" do ai sáng tác?", "a": ["Trần Đăng Khoa", "Định Hải", "Tố Hữu", "Phạm Tiến Duật"], "c": 1 },
-                    { "q": "Trong khổ thơ đầu, Trái đất được so sánh với hình ảnh nào?", "a": ["Quả cam vàng", "Ngôi nhà lớn", "Quả bóng xanh bay giữa trời xanh", "Con tàu vũ trụ"], "c": 2 },
-                    { "q": "Loài chim nào được nhắc đến trong bài tượng trưng cho hòa bình với \"tiếng chim gù\"?", "a": ["Chim én", "Chim chích chòe", "Chim bồ câu", "Chim đại bàng"], "c": 2 },
-                    { "q": "Hình ảnh \"Cánh hải âu\" trong bài được miêu tả đang làm gì?", "a": ["Bay về tổ", "Vờn sóng biển", "Đậu trên bãi cát", "Bay trong bão"], "c": 1 },
-                    { "q": "Những hình ảnh ở khổ thơ đầu gợi lên một thế giới như thế nào?", "a": ["Ồn ào và náo nhiệt", "Lạnh lẽo và cô đơn", "Hòa bình, yên vui và tươi đẹp", "Hùng vĩ và dữ dội"], "c": 2 },
-                    { "q": "Câu thơ \"Hành tinh này là của chúng ta\" được lặp lại nhằm mục đích gì?", "a": ["Để bài thơ dài hơn", "Khẳng định quyền làm chủ và trách nhiệm của trẻ em đối với Trái đất", "Để khoe khoang", "Để hỏi mọi người"], "c": 1 },
-                    { "q": "Khổ thơ thứ hai muốn nói lên điều gì về vai trò của trẻ em?", "a": ["Trẻ em cần được vui chơi", "Trẻ em rất đáng yêu", "Trẻ em năm châu là những chủ nhân tương lai của thế giới", "Trẻ em thích ca hát"], "c": 2 },
-                    { "q": "Sự vật nào dưới đây có ý nghĩa \"đối lập với hòa bình\" thường được nhắc đến trong chủ đề này?", "a": ["Hoa thơm", "Nắng vàng", "Bom đạn, chiến tranh", "Tiếng chim hót"], "c": 2 },
-                    { "q": "Màu sắc chủ đạo của Trái đất được nhắc đến trong bài là màu gì?", "a": ["Màu đỏ", "Màu xanh", "Màu vàng", "Màu trắng"], "c": 1 },
-                    { "q": "Ước mơ lớn nhất của các bạn thiếu nhi trong bài thơ là gì?", "a": ["Được đi du lịch vòng quanh thế giới", "Được ăn nhiều bánh kẹo", "Một thế giới hòa bình, đoàn kết, không có chiến tranh", "Được làm phi hành gia"], "c": 2 },
-                    { "q": "Các bạn nhỏ trong bài mong muốn Trái đất tránh xa điều gì?", "a": ["Ánh nắng mặt trời", "Tiếng súng và bom đạn", "Những cơn mưa", "Những đàn chim"], "c": 1 },
-                    { "q": "Cụm từ \"Năm châu\" trong bài ý chỉ điều gì?", "a": ["Năm ngọn núi lớn", "Năm đại dương", "Toàn thể các châu lục trên thế giới", "Năm quốc gia lớn nhất"], "c": 2 },
-            },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Bài thơ \"Bài ca Trái Đất\" do ai sáng tác?", "a": ["Trần Đăng Khoa", "Định Hải", "Tố Hữu", "Phạm Tiến Duật"], "c": 1 },
-                    { "q": "Trong khổ thơ đầu, Trái đất được so sánh với hình ảnh nào?", "a": ["Quả cam vàng", "Ngôi nhà lớn", "Quả bóng xanh bay giữa trời xanh", "Con tàu vũ trụ"], "c": 2 },
-                    { "q": "Loài chim nào được nhắc đến trong bài tượng trưng cho hòa bình với \"tiếng chim gù\"?", "a": ["Chim én", "Chim chích chòe", "Chim bồ câu", "Chim đại bàng"], "c": 2 },
-                    { "q": "Hình ảnh \"Cánh hải âu\" trong bài được miêu tả đang làm gì?", "a": ["Bay về tổ", "Vờn sóng biển", "Đậu trên bãi cát", "Bay trong bão"], "c": 1 },
-                    { "q": "Những hình ảnh ở khổ thơ đầu gợi lên một thế giới như thế nào?", "a": ["Ồn ào và náo nhiệt", "Lạnh lẽo và cô đơn", "Hòa bình, yên vui và tươi đẹp", "Hùng vĩ và dữ dội"], "c": 2 },
-                    { "q": "Câu thơ \"Hành tinh này là của chúng ta\" được lặp lại nhằm mục đích gì?", "a": ["Để bài thơ dài hơn", "Khẳng định quyền làm chủ và trách nhiệm của trẻ em đối với Trái đất", "Để khoe khoang", "Để hỏi mọi người"], "c": 1 },
-                    { "q": "Khổ thơ thứ hai muốn nói lên điều gì về vai trò của trẻ em?", "a": ["Trẻ em cần được vui chơi", "Trẻ em rất đáng yêu", "Trẻ em năm châu là những chủ nhân tương lai của thế giới", "Trẻ em thích ca hát"], "c": 2 },
-                    { "q": "Sự vật nào dưới đây có ý nghĩa \"đối lập với hòa bình\" thường được nhắc đến trong chủ đề này?", "a": ["Hoa thơm", "Nắng vàng", "Bom đạn, chiến tranh", "Tiếng chim hót"], "c": 2 },
-                    { "q": "Màu sắc chủ đạo của Trái đất được nhắc đến trong bài là màu gì?", "a": ["Màu đỏ", "Màu xanh", "Màu vàng", "Màu trắng"], "c": 1 },
-                    { "q": "Ước mơ lớn nhất của các bạn thiếu nhi trong bài thơ là gì?", "a": ["Được đi du lịch vòng quanh thế giới", "Được ăn nhiều bánh kẹo", "Một thế giới hòa bình, đoàn kết, không có chiến tranh", "Được làm phi hành gia"], "c": 2 },
-                    { "q": "Các bạn nhỏ trong bài mong muốn Trái đất tránh xa điều gì?", "a": ["Ánh nắng mặt trời", "Tiếng súng và bom đạn", "Những cơn mưa", "Những đàn chim"], "c": 1 },
-                    { "q": "Cụm từ \"Năm châu\" trong bài ý chỉ điều gì?", "a": ["Năm ngọn núi lớn", "Năm đại dương", "Toàn thể các châu lục trên thế giới", "Năm quốc gia lớn nhất"], "c": 2 },
-                    { "q": "Dòng nào dưới đây giải thích đúng từ \"Hành tinh\" trong ngữ cảnh bài thơ?", "a": ["Một ngôi sao sáng", "Chỉ Trái đất - nơi chúng ta đang sinh sống", "Một con tàu", "Một hòn đảo"], "c": 1 },
-                    { "q": "Bài thơ thuộc chủ điểm nào trong chương trình Tiếng Việt lớp 5?", "a": ["Cánh chim hòa bình", "Việt Nam - Tổ quốc em", "Người công dân", "Vì cuộc sống thanh bình"], "c": 0 },
-                    { "q": "Qua bài thơ, em thấy mình cần có trách nhiệm gì?", "a": ["Chỉ cần học giỏi là đủ", "Không quan tâm đến thế giới xung quanh", "Yêu quý, bảo vệ Trái đất và đoàn kết với bạn bè năm châu", "Giữ gìn vệ sinh cá nhân"], "c": 2 }
-                ]
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Bài thơ \"Bài ca Trái Đất\" do ai sáng tác?", "a": ["Trần Đăng Khoa", "Định Hải", "Tố Hữu", "Phạm Tiến Duật"], "c": 1 },
+                        { "q": "Trong khổ thơ đầu, Trái đất được so sánh với hình ảnh nào?", "a": ["Quả cam vàng", "Ngôi nhà lớn", "Quả bóng xanh bay giữa trời xanh", "Con tàu vũ trụ"], "c": 2 },
+                        { "q": "Loài chim nào được nhắc đến trong bài tượng trưng cho hòa bình với \"tiếng chim gù\"?", "a": ["Chim én", "Chim chích chòe", "Chim bồ câu", "Chim đại bàng"], "c": 2 },
+                        { "q": "Hình ảnh \"Cánh hải âu\" trong bài được miêu tả đang làm gì?", "a": ["Bay về tổ", "Vờn sóng biển", "Đậu trên bãi cát", "Bay trong bão"], "c": 1 },
+                        { "q": "Những hình ảnh ở khổ thơ đầu gợi lên một thế giới như thế nào?", "a": ["Ồn ào và náo nhiệt", "Lạnh lẽo và cô đơn", "Hòa bình, yên vui và tươi đẹp", "Hùng vĩ và dữ dội"], "c": 2 },
+                        { "q": "Câu thơ \"Hành tinh này là của chúng ta\" được lặp lại nhằm mục đích gì?", "a": ["Để bài thơ dài hơn", "Khẳng định quyền làm chủ và trách nhiệm của trẻ em đối với Trái đất", "Để khoe khoang", "Để hỏi mọi người"], "c": 1 },
+                        { "q": "Khổ thơ thứ hai muốn nói lên điều gì về vai trò của trẻ em?", "a": ["Trẻ em cần được vui chơi", "Trẻ em rất đáng yêu", "Trẻ em năm châu là những chủ nhân tương lai của thế giới", "Trẻ em thích ca hát"], "c": 2 },
+                        { "q": "Sự vật nào dưới đây có ý nghĩa \"đối lập với hòa bình\" thường được nhắc đến trong chủ đề này?", "a": ["Hoa thơm", "Nắng vàng", "Bom đạn, chiến tranh", "Tiếng chim hót"], "c": 2 },
+                        { "q": "Màu sắc chủ đạo của Trái đất được nhắc đến trong bài là màu gì?", "a": ["Màu đỏ", "Màu xanh", "Màu vàng", "Màu trắng"], "c": 1 },
+                        { "q": "Ước mơ lớn nhất của các bạn thiếu nhi trong bài thơ là gì?", "a": ["Được đi du lịch vòng quanh thế giới", "Được ăn nhiều bánh kẹo", "Một thế giới hòa bình, đoàn kết, không có chiến tranh", "Được làm phi hành gia"], "c": 2 },
+                        { "q": "Các bạn nhỏ trong bài mong muốn Trái đất tránh xa điều gì?", "a": ["Ánh nắng mặt trời", "Tiếng súng và bom đạn", "Những cơn mưa", "Những đàn chim"], "c": 1 },
+                        { "q": "Cụm từ \"Năm châu\" trong bài ý chỉ điều gì?", "a": ["Năm ngọn núi lớn", "Năm đại dương", "Toàn thể các châu lục trên thế giới", "Năm quốc gia lớn nhất"], "c": 2 },
+                        { "q": "Dòng nào dưới đây giải thích đúng từ \"Hành tinh\" trong ngữ cảnh bài thơ?", "a": ["Một ngôi sao sáng", "Chỉ Trái đất - nơi chúng ta đang sinh sống", "Một con tàu", "Một hòn đảo"], "c": 1 },
+                        { "q": "Bài thơ thuộc chủ điểm nào trong chương trình Tiếng Việt lớp 5?", "a": ["Cánh chim hòa bình", "Việt Nam - Tổ quốc em", "Người công dân", "Vì cuộc sống thanh bình"], "c": 0 },
+                        { "q": "Qua bài thơ, em thấy mình cần có trách nhiệm gì?", "a": ["Chỉ cần học giỏi là đủ", "Không quan tâm đến thế giới xung quanh", "Yêu quý, bảo vệ Trái đất và đoàn kết với bạn bè năm châu", "Giữ gìn vệ sinh cá nhân"], "c": 2 }
+                    ]
+                }
             }
-        }
-    },
-    "322-nhung-con-hac-giay": {
-        "title": "Những con hạc giấy",
-        "week": 32,
-        "subject": "Đọc",
-        "theme": "Thế giới của chúng ta",
-        "audio": "am_thanh/nhung-con-hac-giay.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Những con hạc giấy" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "322-nhung-con-hac-giay": {
+            "title": "Những con hạc giấy",
+            "week": 32,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/nhung-con-hac-giay.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Những con hạc giấy" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -2969,45 +2968,45 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
-            },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Mỹ ném hai quả bom nguyên tử xuống Nhật Bản vào năm nào?", "a": ["1939", "1940", "1945", "1954"], "c": 2 },
-                    { "q": "Hai thành phố nào của Nhật Bản đã hứng chịu bom nguyên tử?", "a": ["Tô-ky-ô và Ô-sa-ka", "Hi-rô-si-ma và Na-ga-xa-ki", "Ky-ô-tô và Cô-bê", "Phư-cư-ô-ca và Na-gôi-a"], "c": 1 },
-                    { "q": "Tính đến cuối năm 1945, số người chết và nhiễm phóng xạ là bao nhiêu?", "a": ["Một trăm nghìn người", "Nửa triệu người", "Một triệu người", "Hai trăm nghìn người"], "c": 1 },
-                    { "q": "Khi bom nguyên tử ném xuống Hi-rô-si-ma, Xa-đa-cô bao nhiêu tuổi?", "a": ["10 tuổi", "5 tuổi", "2 tuổi", "12 tuổi"], "c": 2 },
-                    { "q": "Lý do sức khỏe của Xa-đa-cô bị giảm sút nhanh chóng sau 10 năm là gì?", "a": ["Do tai nạn", "Do làm việc quá sức", "Do bị nhiễm phóng xạ nguyên tử", "Do bẩm sinh"], "c": 2 },
-                    { "q": "Xa-đa-cô tin vào truyền thuyết nào để mong khỏi bệnh?", "a": ["Ăn 1000 quả táo", "Gấp đủ 1000 con hạc giấy", "Viết 1000 lá thư", "Đếm đủ 1000 ngôi sao"], "c": 1 },
-                    { "q": "Thái độ của Xa-đa-cô khi nằm viện gấp hạc như thế nào?", "a": ["Vừa gấp vừa khóc lớn", "Tức giận và tuyệt vọng", "Lặng lẽ nén đau, miệt mài gấp", "Chán nản và bỏ cuộc"], "c": 2 },
-                    { "q": "Trẻ em toàn nước Nhật đã làm gì khi biết tin về Xa-đa-cô?", "a": ["Gửi thuốc men đến cho em", " Đến bệnh viện thăm em mỗi ngày", "Tới tấp gửi hàng nghìn con hạc giấy đến cho em", "Viết thư phản đối chiến tranh"], "c": 2 },
-                    { "q": "Theo bài đọc, kết cục của Xa-đa-cô như thế nào?", "a": ["Em đã khỏi bệnh hoàn toàn", "Em vẫn không qua khỏi dù đã gấp được hơn một nghìn con hạc giấy", "Em vẫn sống nhưng sức khỏe yếu", "Em chưa kịp gấp đủ 1000 con hạc thì mất"], "c": 1 },
-                    { "q": "Sau khi Xa-đa-cô mất, học sinh thành phố Hi-rô-si-ma đã làm gì?", "a": ["Quyên góp tiền xây nhà cho em", "Quyên góp tiền xây đài tưởng niệm nạn nhân bom nguyên tử", "Trồng một rừng cây mang tên em", "Viết một cuốn sách về em"], "c": 1 },
-                    { "q": "Tượng đài Hoà bình cho trẻ em được khánh thành vào năm nào?", "a": ["Năm 1958", "Năm 1945", "Năm 1960", "Năm 1955"], "c": 0 },
-                    { "q": "Tượng đài Hoà bình cho trẻ em được đặt ở đâu?", "a": ["Tại trường học của Xa-đa-cô", "Tại bệnh viện nơi em nằm", "Tại công viên Hoà Bình ở thành phố Hi-rô-si-ma", "Tại thủ đô Tô-ky-ô"], "c": 2 },
-                    { "q": "Con hạc giấy trong câu chuyện là biểu tượng của điều gì?", "a": ["Sự giàu sang", "Sự thông minh", "Ước mơ, khát vọng sống và hòa bình", "Tình bạn đơn thuần"], "c": 2 },
-                    { "q": "Câu chuyện \"Những con hạc giấy\" muốn lên án điều gì?", "a": ["Sự nghèo đói", "Sự tàn bạo, tội ác của chiến tranh hạt nhân", "Sự ô nhiễm môi trường", "Sự lãng phí giấy"], "c": 1 },
-                    { "q": "Qua câu chuyện, em thấy trẻ em trên thế giới mong muốn điều gì nhất?", "a": ["Được đi du lịch", "Được ăn ngon mặc đẹp", "Được sống trong một thế giới hòa bình, không có chiến tranh", "Được nổi tiếng"], "c": 2 }
-                ]
+                        }
+                    ]
+                },
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Mỹ ném hai quả bom nguyên tử xuống Nhật Bản vào năm nào?", "a": ["1939", "1940", "1945", "1954"], "c": 2 },
+                        { "q": "Hai thành phố nào của Nhật Bản đã hứng chịu bom nguyên tử?", "a": ["Tô-ky-ô và Ô-sa-ka", "Hi-rô-si-ma và Na-ga-xa-ki", "Ky-ô-tô và Cô-bê", "Phư-cư-ô-ca và Na-gôi-a"], "c": 1 },
+                        { "q": "Tính đến cuối năm 1945, số người chết và nhiễm phóng xạ là bao nhiêu?", "a": ["Một trăm nghìn người", "Nửa triệu người", "Một triệu người", "Hai trăm nghìn người"], "c": 1 },
+                        { "q": "Khi bom nguyên tử ném xuống Hi-rô-si-ma, Xa-đa-cô bao nhiêu tuổi?", "a": ["10 tuổi", "5 tuổi", "2 tuổi", "12 tuổi"], "c": 2 },
+                        { "q": "Lý do sức khỏe của Xa-đa-cô bị giảm sút nhanh chóng sau 10 năm là gì?", "a": ["Do tai nạn", "Do làm việc quá sức", "Do bị nhiễm phóng xạ nguyên tử", "Do bẩm sinh"], "c": 2 },
+                        { "q": "Xa-đa-cô tin vào truyền thuyết nào để mong khỏi bệnh?", "a": ["Ăn 1000 quả táo", "Gấp đủ 1000 con hạc giấy", "Viết 1000 lá thư", "Đếm đủ 1000 ngôi sao"], "c": 1 },
+                        { "q": "Thái độ của Xa-đa-cô khi nằm viện gấp hạc như thế nào?", "a": ["Vừa gấp vừa khóc lớn", "Tức giận và tuyệt vọng", "Lặng lẽ nén đau, miệt mài gấp", "Chán nản và bỏ cuộc"], "c": 2 },
+                        { "q": "Trẻ em toàn nước Nhật đã làm gì khi biết tin về Xa-đa-cô?", "a": ["Gửi thuốc men đến cho em", " Đến bệnh viện thăm em mỗi ngày", "Tới tấp gửi hàng nghìn con hạc giấy đến cho em", "Viết thư phản đối chiến tranh"], "c": 2 },
+                        { "q": "Theo bài đọc, kết cục của Xa-đa-cô như thế nào?", "a": ["Em đã khỏi bệnh hoàn toàn", "Em vẫn không qua khỏi dù đã gấp được hơn một nghìn con hạc giấy", "Em vẫn sống nhưng sức khỏe yếu", "Em chưa kịp gấp đủ 1000 con hạc thì mất"], "c": 1 },
+                        { "q": "Sau khi Xa-đa-cô mất, học sinh thành phố Hi-rô-si-ma đã làm gì?", "a": ["Quyên góp tiền xây nhà cho em", "Quyên góp tiền xây đài tưởng niệm nạn nhân bom nguyên tử", "Trồng một rừng cây mang tên em", "Viết một cuốn sách về em"], "c": 1 },
+                        { "q": "Tượng đài Hoà bình cho trẻ em được khánh thành vào năm nào?", "a": ["Năm 1958", "Năm 1945", "Năm 1960", "Năm 1955"], "c": 0 },
+                        { "q": "Tượng đài Hoà bình cho trẻ em được đặt ở đâu?", "a": ["Tại trường học của Xa-đa-cô", "Tại bệnh viện nơi em nằm", "Tại công viên Hoà Bình ở thành phố Hi-rô-si-ma", "Tại thủ đô Tô-ky-ô"], "c": 2 },
+                        { "q": "Con hạc giấy trong câu chuyện là biểu tượng của điều gì?", "a": ["Sự giàu sang", "Sự thông minh", "Ước mơ, khát vọng sống và hòa bình", "Tình bạn đơn thuần"], "c": 2 },
+                        { "q": "Câu chuyện \"Những con hạc giấy\" muốn lên án điều gì?", "a": ["Sự nghèo đói", "Sự tàn bạo, tội ác của chiến tranh hạt nhân", "Sự ô nhiễm môi trường", "Sự lãng phí giấy"], "c": 1 },
+                        { "q": "Qua câu chuyện, em thấy trẻ em trên thế giới mong muốn điều gì nhất?", "a": ["Được đi du lịch", "Được ăn ngon mặc đẹp", "Được sống trong một thế giới hòa bình, không có chiến tranh", "Được nổi tiếng"], "c": 2 }
+                    ]
+                }
             }
-        }
-    },
-    "331-mot-nguoi-hung-tham-lang": {
-        "title": "Một người hùng thầm lặng",
-        "week": 33,
-        "subject": "Đọc",
-        "theme": "Thế giới của chúng ta",
-        "audio": "am_thanh/mot-nguoi-hung-tham-lang.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Một người hùng thầm lặng" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "331-mot-nguoi-hung-tham-lang": {
+            "title": "Một người hùng thầm lặng",
+            "week": 33,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/mot-nguoi-hung-tham-lang.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Một người hùng thầm lặng" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -3058,45 +3057,45 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
-            },
-            "quiz": {
-                "setting": { "pick": 5 },
-                "questions": [
-                    { "q": "Câu chuyện bắt đầu từ mốc thời gian nào?", "a": ["Tháng 12 năm 1945", "Tháng 12 năm 1938", "Tháng 3 năm 1939", "Tháng 9 năm 1945"], "c": 1 },
-                    { "q": "Ông Uyn-tơn đã thực hiện chiến dịch giải cứu trẻ em tại thành phố nào?", "a": ["Luân Đôn (Anh)", "Béc-lin (Đức)", "Pra-ha (Tiệp Khắc)", "Pa-ri (Pháp)"], "c": 2 },
-                    { "q": "Đối tượng mà ông Uyn-tơn muốn giải cứu là ai?", "a": ["Những người lính bị thương", "Những đứa trẻ người Do Thái", "Những người già neo đơn", "Những nghệ sĩ nổi tiếng"], "c": 1 },
-                    { "q": "Vì sao ông Uyn-tơn phải gấp rút thực hiện việc giải cứu?", "a": ["Vì ông sắp hết tiền", "Vì ông muốn nổi tiếng", "Vì chiến tranh sắp nổ ra, cơ hội trốn thoát rất mong manh", "Vì ông muốn đưa các em đi du lịch"], "c": 2 },
-                    { "q": "Ông Uyn-tơn đã làm gì để có kinh phí đưa trẻ em đi tị nạn?", "a": ["Ông tự bỏ tiền túi ra", "Ông xin tiền chính phủ", "Ông cùng bạn bè đi quyên góp khắp nơi", "Ông bán nhà của mình"], "c": 2 },
-                    { "q": "Ông Uyn-tơn đã tổ chức thành công bao nhiêu chuyến tàu giải cứu?", "a": ["5 chuyến", "10 chuyến", "8 chuyến", "6 chuyến"], "c": 2 },
-                    { "q": "Tổng số trẻ em được ông Uyn-tơn cứu sống là bao nhiêu?", "a": ["1000 em", "500 em", "669 em", "800 em"], "c": 2 },
-                    { "q": "Hoạt động giải cứu buộc phải kết thúc vào ngày 1/9/1939 vì lý do gì?", "a": ["Ông Uyn-tơn bị bắt", "Hết kinh phí", "Biên giới do phát xít Đức kiểm soát bị đóng cửa", "Không còn trẻ em nào cần cứu"], "c": 2 },
-                    { "q": "Sau chiến tranh, ông Uyn-tơn đã có thái độ như thế nào về chiến công của mình?", "a": ["Đi kể cho mọi người nghe", "Viết sách để bán", "Giữ kín bí mật, chưa một lần kể với ai trong suốt 50 năm", "Yêu cầu được khen thưởng"], "c": 2 },
-                    { "q": "Ai là người đã phát hiện ra bí mật về những đứa trẻ được giải cứu?", "a": ["Một nhà báo", "Vợ của ông Uyn-tơn", "Một đứa trẻ được cứu", "Một người bạn cũ"], "c": 1 },
-                    { "q": "Vật chứng nào đã giúp vợ ông biết được sự thật?", "a": ["Một tấm huy chương", "Một bức ảnh cũ", "Cuốn sổ ghi thông tin về những đứa trẻ", "Một bức thư cảm ơn"], "c": 2 },
-                    { "q": "Trong chương trình truyền hình năm 1988, điều gì khiến ông Uyn-tơn xúc động?", "a": ["Được tặng nhiều tiền", "Cả hội trường đứng lên nhận là người được ông cứu sống", "Được gặp lại vợ mình", "Được xem lại thước phim cũ"], "c": 1 },
-                    { "q": "Ông Uyn-tơn qua đời vào năm nào và hưởng thọ bao nhiêu tuổi?", "a": ["Năm 2000, thọ 90 tuổi", "Năm 2010, thọ 100 tuổi", "Năm 2015, thọ 106 tuổi", "Năm 2018, thọ 109 tuổi"], "c": 2 },
-                    { "q": "Người dân Tiệp Khắc đã làm gì để tưởng nhớ ông?", "a": ["Đặt tên ông cho một con đường", "Dựng tượng ông trên sân ga thành phố Pra-ha", "Xây một ngôi trường mang tên ông", "Viết một bài hát về ông"], "c": 1 },
-                    { "q": "Vì sao bài đọc gọi ông là \"Người hùng thầm lặng\"?", "a": ["Vì ông làm việc trong quân đội", "Vì ông làm việc nghĩa cứu người nhưng không khoe khoang, kể công", "Vì ông là người ít nói", "Vì ông hoạt động bí mật trong rừng"], "c": 1 }
-                ]
+                        }
+                    ]
+                },
+                "quiz": {
+                    "setting": { "pick": 5 },
+                    "questions": [
+                        { "q": "Câu chuyện bắt đầu từ mốc thời gian nào?", "a": ["Tháng 12 năm 1945", "Tháng 12 năm 1938", "Tháng 3 năm 1939", "Tháng 9 năm 1945"], "c": 1 },
+                        { "q": "Ông Uyn-tơn đã thực hiện chiến dịch giải cứu trẻ em tại thành phố nào?", "a": ["Luân Đôn (Anh)", "Béc-lin (Đức)", "Pra-ha (Tiệp Khắc)", "Pa-ri (Pháp)"], "c": 2 },
+                        { "q": "Đối tượng mà ông Uyn-tơn muốn giải cứu là ai?", "a": ["Những người lính bị thương", "Những đứa trẻ người Do Thái", "Những người già neo đơn", "Những nghệ sĩ nổi tiếng"], "c": 1 },
+                        { "q": "Vì sao ông Uyn-tơn phải gấp rút thực hiện việc giải cứu?", "a": ["Vì ông sắp hết tiền", "Vì ông muốn nổi tiếng", "Vì chiến tranh sắp nổ ra, cơ hội trốn thoát rất mong manh", "Vì ông muốn đưa các em đi du lịch"], "c": 2 },
+                        { "q": "Ông Uyn-tơn đã làm gì để có kinh phí đưa trẻ em đi tị nạn?", "a": ["Ông tự bỏ tiền túi ra", "Ông xin tiền chính phủ", "Ông cùng bạn bè đi quyên góp khắp nơi", "Ông bán nhà của mình"], "c": 2 },
+                        { "q": "Ông Uyn-tơn đã tổ chức thành công bao nhiêu chuyến tàu giải cứu?", "a": ["5 chuyến", "10 chuyến", "8 chuyến", "6 chuyến"], "c": 2 },
+                        { "q": "Tổng số trẻ em được ông Uyn-tơn cứu sống là bao nhiêu?", "a": ["1000 em", "500 em", "669 em", "800 em"], "c": 2 },
+                        { "q": "Hoạt động giải cứu buộc phải kết thúc vào ngày 1/9/1939 vì lý do gì?", "a": ["Ông Uyn-tơn bị bắt", "Hết kinh phí", "Biên giới do phát xít Đức kiểm soát bị đóng cửa", "Không còn trẻ em nào cần cứu"], "c": 2 },
+                        { "q": "Sau chiến tranh, ông Uyn-tơn đã có thái độ như thế nào về chiến công của mình?", "a": ["Đi kể cho mọi người nghe", "Viết sách để bán", "Giữ kín bí mật, chưa một lần kể với ai trong suốt 50 năm", "Yêu cầu được khen thưởng"], "c": 2 },
+                        { "q": "Ai là người đã phát hiện ra bí mật về những đứa trẻ được giải cứu?", "a": ["Một nhà báo", "Vợ của ông Uyn-tơn", "Một đứa trẻ được cứu", "Một người bạn cũ"], "c": 1 },
+                        { "q": "Vật chứng nào đã giúp vợ ông biết được sự thật?", "a": ["Một tấm huy chương", "Một bức ảnh cũ", "Cuốn sổ ghi thông tin về những đứa trẻ", "Một bức thư cảm ơn"], "c": 2 },
+                        { "q": "Trong chương trình truyền hình năm 1988, điều gì khiến ông Uyn-tơn xúc động?", "a": ["Được tặng nhiều tiền", "Cả hội trường đứng lên nhận là người được ông cứu sống", "Được gặp lại vợ mình", "Được xem lại thước phim cũ"], "c": 1 },
+                        { "q": "Ông Uyn-tơn qua đời vào năm nào và hưởng thọ bao nhiêu tuổi?", "a": ["Năm 2000, thọ 90 tuổi", "Năm 2010, thọ 100 tuổi", "Năm 2015, thọ 106 tuổi", "Năm 2018, thọ 109 tuổi"], "c": 2 },
+                        { "q": "Người dân Tiệp Khắc đã làm gì để tưởng nhớ ông?", "a": ["Đặt tên ông cho một con đường", "Dựng tượng ông trên sân ga thành phố Pra-ha", "Xây một ngôi trường mang tên ông", "Viết một bài hát về ông"], "c": 1 },
+                        { "q": "Vì sao bài đọc gọi ông là \"Người hùng thầm lặng\"?", "a": ["Vì ông làm việc trong quân đội", "Vì ông làm việc nghĩa cứu người nhưng không khoe khoang, kể công", "Vì ông là người ít nói", "Vì ông hoạt động bí mật trong rừng"], "c": 1 }
+                    ]
+                }
             }
-        }
-    },
-    "332-gio-trai-dat": {
-        "title": "Giờ Trái Đất",
-        "week": 33,
-        "subject": "Đọc",
-        "theme": "Thế giới của chúng ta",
-        "audio": "am_thanh/gio-trai-dat.mp3",
-        "tabs": {
-            "lesson": {
-                "title": "Bài học",
-                "blocks": [
-                    { "type": "header", "text": "Giờ Trái Đất" },
-                    {
-                        "type": "html",
-                        "content": `
+        },
+        "332-gio-trai-dat": {
+            "title": "Giờ Trái Đất",
+            "week": 33,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/gio-trai-dat.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Giờ Trái Đất" },
+                        {
+                            "type": "html",
+                            "content": `
                             <div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
@@ -3145,89 +3144,89 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>
                         `
-                    }
-                ]
+                        }
+                    ]
                             "tabs": {
-                    "lesson": {
-                        "content": `<p>Điện thoại di động là một vật dụng không thể thiếu trong cuộc sống của con người, nhất là trong cuộc sống hiện đại ngày nay. Thật khó hình dung khi thế giới này không có nó.</p>
+                        "lesson": {
+                            "content": `<p>Điện thoại di động là một vật dụng không thể thiếu trong cuộc sống của con người, nhất là trong cuộc sống hiện đại ngày nay. Thật khó hình dung khi thế giới này không có nó.</p>
 <p>Ngày 3 tháng 4 năm 1973, nhà phát minh Mác-tin Cúp-pơ thực hiện cuộc gọi với phiên bản đầu tiên của điện thoại di động "cục gạch" vì nó nặng tới 1,1 ki-lô-gam. Chiếc điện thoại này có màn hình chỉ hiển thị chữ, pin thì dùng được có hai mươi phút. Hẳn là bạn không muốn đi khắp nơi với một cục gạch to tướng như thế.</p>
 <p>Ngày nay, công nghệ cải tiến đã giúp kích thước của điện thoại di động nhỏ lại và nặng chưa đến 85 gam, bỏ vừa trong túi áo. Điện thoại di động có nhiều chức năng, chẳng khác gì một cái hộp chứa hàng loạt dụng cụ: chúng ta có thể gọi điện cho nhau bao gồm cả tiếng và hình ảnh, nhắn tin văn bản và nhắn tin thoại, chụp ảnh, nghe nhạc, chơi trò chơi điện tử, xem phim,...</p>
 <p>Điện thoại di động ngày càng thông minh hơn. Nó giúp mọi người mua sắm, giao dịch trực tuyến, phát, nhận video,... Hệ thống định vị toàn cầu cho phép điện thoại di động có thể xác định vị trí của bạn ở bất cứ đâu trên hành tinh này. Thật tuyệt vời!</p>
 <p class="text-right italic font-bold text-sm text-gray-500">(Theo Gim Píp, Nguyễn Hoàng dịch)</p>`,
-                        "meaning": "Điện thoại di động là một trong những phương tiện thông tin hiện đại mà con người đã phát minh được. Nhờ nó, con người có một cuộc sống tiện lợi, phát triển tinh thần, tiết kiệm sức lực và thời gian đi rất nhiều. Điện thoại ngày nay đã có nhiều cải tiến thông minh đáng kể so với những chiếc điện thoại phát minh từ đời đầu.",
-                        "questions": [
-                            { "q": "Ai là người thực hiện cuộc gọi đầu tiên bằng điện thoại di động và vào thời điểm nào?", "a": "Cuộc gọi đầu tiên bằng điện thoại di động do nhà phát minh Mác-tin Cúp-pơ thực hiện vào ngày 3 tháng 4 năm 1973." },
-                            { "q": "So sánh sự khác biệt về khối lượng và kích thước giữa chiếc điện thoại đầu tiên và điện thoại ngày nay.", "a": "• Điện thoại đầu tiên: Được gọi là \"cục gạch\" vì nặng tới 1,1 ki-lô-gam, rất to và nặng.<br>• Điện thoại ngày nay: Nhỏ gọn, bỏ vừa trong túi áo, nặng chưa đến 85 gam." },
-                            { "q": "Điện thoại di động ngày nay có những chức năng gì nổi bật?", "a": "Điện thoại ngày nay như một hộp dụng cụ đa năng: có thể gọi điện (cả tiếng và hình), nhắn tin (văn bản, thoại), chụp ảnh, nghe nhạc, chơi trò chơi, xem phim, mua sắm, giao dịch trực tuyến và định vị toàn cầu." },
-                            { "q": "Theo em, nếu không có điện thoại di động, con người ngày nay sẽ gặp khó khăn gì?", "a": "Nếu không có điện thoại di động, việc liên lạc, chia sẻ thông tin nhanh chóng sẽ rất khó khăn và tốn nhiều thời gian. Ngoài ra, các tiện ích như xác định vị trí, dẫn đường, cứu nạn hoặc làm việc từ xa cũng khó thực hiện được." }
-                        ]
-                    },
-                    "quiz": {
-                        "setting": { "pick": 5 },
-                        "questions": [
-                            { "q": "Cuộc gọi đầu tiên bằng điện thoại di động được thực hiện vào năm nào?", "a": ["1937", "1973", "1983", "2003"], "c": 1 },
-                            { "q": "Ai là người thực hiện cuộc gọi di động đầu tiên?", "a": ["A-lếch-xan-đơ Gra-ham Bell", "Xti-vơ Gióp", "Mác-tin Cúp-pơ", "Tô-mát Ê-đi-xơn"], "c": 2 },
-                            { "q": "Phiên bản đầu tiên của điện thoại di động có biệt danh là gì?", "a": ["Cục đá", "Cục gạch", "Hộp sắt", "Cái búa"], "c": 1 },
-                            { "q": "Khối lượng của chiếc điện thoại di động đầu tiên là bao nhiêu?", "a": ["0,5 kg", "85 gam", "1,1 kg", "2 kg"], "c": 2 },
-                            { "q": "Pin của chiếc điện thoại đầu tiên dùng được trong bao lâu?", "a": ["Một ngày", "Một giờ", "Hai mươi phút", "Mười phút"], "c": 2 },
-                            { "q": "Màn hình của chiếc điện thoại đầu tiên hiển thị được những gì?", "a": ["Hình ảnh màu", "Video", "Chỉ hiển thị chữ", "Bản đồ"], "c": 2 },
-                            { "q": "Điện thoại di động ngày nay thường có trọng lượng khoảng bao nhiêu?", "a": ["Chưa đến 85 gam", "Khoảng 500 gam", "Khoảng 1 kg", "Khoảng 200 gam"], "c": 0 },
-                            { "q": "Hình ảnh so sánh nào được dùng để nói về sự đa năng của điện thoại di động ngày nay?", "a": ["Như một người bạn", "Như một cái hộp chứa hàng loạt dụng cụ", "Như một cuốn bách khoa toàn thư", "Như một chiếc máy tính khổng lồ"], "c": 1 },
-                            { "q": "Chức năng nào sau đây KHÔNG được nhắc đến khi nói về điện thoại di động ngày nay trong bài?", "a": ["Chụp ảnh, nghe nhạc", "Mua sắm trực tuyến", "Nấu ăn", "Xác định vị trí"], "c": 2 },
-                            { "q": "Hệ thống định vị toàn cầu trên điện thoại giúp chúng ta làm gì?", "a": ["Xem phim nhanh hơn", "Nghe nhạc rõ hơn", "Xác định vị trí ở bất cứ đâu", "Sạc pin nhanh hơn"], "c": 2 },
-                            { "q": "Bài đọc nhận định vai trò của điện thoại di động trong cuộc sống hiện đại như thế nào?", "a": ["Là vật dụng xa xỉ", "Là vật dụng không thể thiếu", "Là vật dụng gây hại", "Là vật dụng ít người dùng"], "c": 1 },
-                            { "q": "Theo bài đọc, điện thoại di động giúp con người tiết kiệm điều gì?", "a": ["Tiền bạc", "Sức lực và thời gian", "Năng lượng điện", "Tài nguyên nước"], "c": 1 },
-                            { "q": "Ngoài nhắn tin văn bản, điện thoại ngày nay còn có thể nhắn tin dạng nào?", "a": ["Nhắn tin bằng mùi hương", "Nhắn tin thoại", "Nhắn tin bằng suy nghĩ", "Nhắn tin giấy"], "c": 1 },
-                            { "q": "Sự khác biệt lớn nhất về kích thước của điện thoại ngày nay so với trước kia là gì?", "a": ["To hơn để xem phim", "Nhỏ lại, bỏ vừa trong túi áo", "Dài hơn", "Hình tròn"], "c": 1 },
-                            { "q": "Nội dung chính của bài là gì?", "a": ["Hướng dẫn cách sử dụng điện thoại", "Kể chuyện về nhà phát minh Mác-tin Cúp-pơ", "Sự ra đời, cải tiến và vai trò quan trọng của điện thoại di động trong đời sống", "Quảng cáo các loại điện thoại mới"], "c": 2 }
-                        ]
-                    }
-                },
-                "342-thanh-pho-thong-minh-mat-xda": {
-                    "title": "Thành phố thông minh Mát-xđa",
-                    "week": 34,
-                    "subject": "Đọc",
-                    "theme": "Thế giới của chúng ta",
-                    "audio": "am_thanh/342-mat-xda.mp3",
-                    "image": "hinh_anh/342-mat-xda.png",
-                    "tabs": {
-                        "lesson": {
-                            "content": `<p>Mát-xđa là một ốc đảo nằm giữa sa mạc, thuộc Các Tiểu vương quốc Ả Rập Thống nhất (viết tắt là UAE). Năm 2008, UAE khởi công xây dựng dự án "Thành phố thông minh Mát-xđa" nhằm biến Mát-xđa trở thành thành phố không các-bô-níc đầu tiên trên thế giới.</p>
-<p>Điểm nhấn trong thiết kế của thành phố là những chiếc ô hình hoa hướng dương. Ban ngày, những chiếc ô này vừa giúp lưu trữ năng lượng mặt trời vừa là những tấm che nắng khổng lồ. Ban đêm, chúng sẽ khép lại, toả nhiệt, cung cấp điện năng lượng mặt trời cho toàn thành phố.</p>
-<p>Để đối phó với tình trạng nóng lên do biến đổi khí hậu, ở Mát-xđa, các toà nhà được thiết kế chụm lại với nhau, có lối đi ở giữa, giúp không khí lưu thông được dễ dàng và giúp giảm nhiệt độ mùa hè. Ngoài ra, một tháp gió được xây dựng nhằm lấy dòng không khí trên cao, mang làn gió mát mẻ vào thành phố, cũng góp phần làm giảm đáng kể nhiệt độ nơi đây so với vùng sa mạc ở xung quanh.</p>
-<p>Các công viên và khu thương mại ở Mát-xđa được xây dựng theo mô hình khu vườn Ả Rập truyền thống, ngập tràn màu xanh, giúp giảm thiểu tối đa lượng khí thải. Chính quyền thành phố cũng khuyến khích người dân đi bộ, đi xe đạp hoặc sử dụng các phương tiện giao thông công cộng chạy bằng điện năng lượng mặt trời để bảo vệ môi trường.</p>
-<p>Việc xây dựng thành công thành phố thông minh Mát-xđa đã truyền cảm hứng cho một số dự án phát triển nhà ở Anh, Bồ Đào Nha,.... Đây sẽ là những đô thị sinh thái tiếp theo giúp ngăn chặn ô nhiễm môi trường và biến đổi khí hậu.</p>
-<p class="text-right italic font-bold text-sm text-gray-500">(Lâm Anh tổng hợp)</p>`,
-                            "meaning": "Thành phố thông minh Mát-xđa là giải pháp đối phó với tình trạng nóng lên do biến đổi khí hậu và giúp ngăn chặn ô nhiễm môi trường. Đây là hình mẫu về đô thị sinh thái hiện đại cho thế giới.",
+                            "meaning": "Điện thoại di động là một trong những phương tiện thông tin hiện đại mà con người đã phát minh được. Nhờ nó, con người có một cuộc sống tiện lợi, phát triển tinh thần, tiết kiệm sức lực và thời gian đi rất nhiều. Điện thoại ngày nay đã có nhiều cải tiến thông minh đáng kể so với những chiếc điện thoại phát minh từ đời đầu.",
                             "questions": [
-                                { "q": "Địa điểm, thời gian khởi công, mục đích của dự án?", "a": "<b>Địa điểm:</b> Ốc đảo Mát-xđa (UAE). <b>Thời gian:</b> Năm 2008. <b>Mục đích:</b> Biến Mát-xđa trở thành thành phố không các-bô-níc đầu tiên trên thế giới." },
-                                { "q": "Thiết kế tự vận hành bằng năng lượng mặt trời?", "a": "Sử dụng những chiếc ô hình hoa hướng dương khổng lồ. Ban ngày mở ra lưu trữ năng lượng và che nắng, ban đêm khép lại toả nhiệt và cung cấp điện cho thành phố." },
-                                { "q": "Cách đối phó với tình trạng nóng lên?", "a": "Các tòa nhà chụm lại với nhau tạo lối đi giúp không khí lưu thông; xây tháp gió để lấy không khí mát trên cao mang vào thành phố." },
-                                { "q": "Chi tiết giúp ngăn chặn ô nhiễm môi trường?", "a": "Công viên, khu thương mại ngập tràn màu xanh; khuyến khích đi bộ, xe đạp, phương tiện công cộng chạy bằng điện mặt trời." },
-                                { "q": "Ý nghĩa của việc truyền cảm hứng cho nước khác?", "a": "Mát-xđa là mô hình kiểu mẫu tốt, cho thấy con người rất quan tâm đến việc xây dựng thành phố chống biến đổi khí hậu và bảo vệ môi trường." }
+                                { "q": "Ai là người thực hiện cuộc gọi đầu tiên bằng điện thoại di động và vào thời điểm nào?", "a": "Cuộc gọi đầu tiên bằng điện thoại di động do nhà phát minh Mác-tin Cúp-pơ thực hiện vào ngày 3 tháng 4 năm 1973." },
+                                { "q": "So sánh sự khác biệt về khối lượng và kích thước giữa chiếc điện thoại đầu tiên và điện thoại ngày nay.", "a": "• Điện thoại đầu tiên: Được gọi là \"cục gạch\" vì nặng tới 1,1 ki-lô-gam, rất to và nặng.<br>• Điện thoại ngày nay: Nhỏ gọn, bỏ vừa trong túi áo, nặng chưa đến 85 gam." },
+                                { "q": "Điện thoại di động ngày nay có những chức năng gì nổi bật?", "a": "Điện thoại ngày nay như một hộp dụng cụ đa năng: có thể gọi điện (cả tiếng và hình), nhắn tin (văn bản, thoại), chụp ảnh, nghe nhạc, chơi trò chơi, xem phim, mua sắm, giao dịch trực tuyến và định vị toàn cầu." },
+                                { "q": "Theo em, nếu không có điện thoại di động, con người ngày nay sẽ gặp khó khăn gì?", "a": "Nếu không có điện thoại di động, việc liên lạc, chia sẻ thông tin nhanh chóng sẽ rất khó khăn và tốn nhiều thời gian. Ngoài ra, các tiện ích như xác định vị trí, dẫn đường, cứu nạn hoặc làm việc từ xa cũng khó thực hiện được." }
                             ]
                         },
                         "quiz": {
                             "setting": { "pick": 5 },
                             "questions": [
-                                { "q": "Thành phố thông minh Mát-xđa thuộc quốc gia nào?", "a": ["Ả Rập Xê Út", "Các Tiểu vương quốc Ả Rập Thống nhất (UAE)", "Ca-ta", "I-ran"], "c": 1 },
-                                { "q": "Dự án thành phố Mát-xđa được khởi công vào năm nào?", "a": ["2000", "2005", "2008", "2010"], "c": 2 },
-                                { "q": "Mục tiêu chính của dự án Mát-xđa là gì?", "a": ["Trở thành thành phố giàu nhất thế giới", "Trở thành thành phố không các-bô-níc đầu tiên trên thế giới", "Trở thành thành phố lớn nhất thế giới", "Trở thành trung tâm du lịch của châu Á"], "c": 1 },
-                                { "q": "Điểm nhấn trong thiết kế của thành phố là công trình có hình dạng gì?", "a": ["Hình kim tự tháp", "Hình cánh buồm", "Những chiếc ô hình hoa hướng dương", "Hình những cây cọ"], "c": 2 },
-                                { "q": "Vào ban đêm, những chiếc ô khổng lồ có chức năng gì?", "a": ["Che mưa", "Chiếu sáng bằng đèn LED", "Khép lại, toả nhiệt và cung cấp điện năng lượng mặt trời", "Mở ra để hứng sương"], "c": 2 },
-                                { "q": "Để giảm nhiệt độ mùa hè, các tòa nhà ở Mát-xđa được bố trí như thế nào?", "a": ["Xây cách xa nhau", "Thiết kế chụm lại với nhau, có lối đi ở giữa", "Xây ngầm dưới lòng đất", "Xây rất cao để đón gió"], "c": 1 },
-                                { "q": "Chức năng của 'tháp gió' được xây dựng trong thành phố là gì?", "a": ["Để quan sát toàn cảnh thành phố", "Để phát sóng wifi", "Lấy dòng không khí mát mẻ trên cao mang vào thành phố", "Để trang trí"], "c": 2 },
-                                { "q": "Các công viên và khu thương mại ở đây được xây dựng theo mô hình nào?", "a": ["Khu vườn Châu Âu", "Khu vườn Ả Rập truyền thống", "Khu rừng nhiệt đới", "Công viên nước"], "c": 1 },
-                                { "q": "Phương tiện giao thông nào KHÔNG được khuyến khích sử dụng tại Mát-xđa?", "a": ["Xe đạp", "Đi bộ", "Xe ô tô chạy bằng xăng dầu", "Phương tiện công cộng chạy bằng điện mặt trời"], "c": 2 },
-                                { "q": "Thành phố Mát-xđa được ví như cái gì nằm giữa sa mạc?", "a": ["Một viên ngọc", "Một con tàu", "Một ốc đảo", "Một ngọn núi"], "c": 2 },
-                                { "q": "Mát-xđa đã truyền cảm hứng cho các dự án phát triển nhà ở những nước nào?", "a": ["Mỹ và Pháp", "Anh và Bồ Đào Nha", "Nhật Bản và Hàn Quốc", "Đức và Ý"], "c": 1 },
-                                { "q": "Vì sao gọi Mát-xđa là 'thành phố thông minh'?", "a": ["Vì cư dân ở đây rất thông minh", "Vì có nhiều trường đại học", "Sử dụng công nghệ tiên tiến để tự vận hành năng lượng và bảo vệ môi trường", "Vì có nhiều máy tính"], "c": 2 },
-                                { "q": "Việc các tòa nhà chụm lại với nhau có tác dụng gì về mặt không khí?", "a": ["Ngăn cản gió bão", "Giúp không khí lưu thông dễ dàng", "Giữ nhiệt độ ấm áp", "Tạo ra sương mù"], "c": 1 },
-                                { "q": "Năng lượng chính được sử dụng để vận hành thành phố là gì?", "a": ["Năng lượng gió", "Năng lượng mặt trời", "Năng lượng hạt nhân", "Năng lượng thủy điện"], "c": 1 },
-                                { "q": "Nội dung chính của bài đọc là gì?", "a": ["Giới thiệu về vẻ đẹp của sa mạc", "Quảng cáo du lịch cho UAE", "Giới thiệu về thành phố thông minh Mát-xđa - giải pháp chống biến đổi khí hậu", "Cách xây dựng nhà ở sa mạc"], "c": 2 }
+                                { "q": "Cuộc gọi đầu tiên bằng điện thoại di động được thực hiện vào năm nào?", "a": ["1937", "1973", "1983", "2003"], "c": 1 },
+                                { "q": "Ai là người thực hiện cuộc gọi di động đầu tiên?", "a": ["A-lếch-xan-đơ Gra-ham Bell", "Xti-vơ Gióp", "Mác-tin Cúp-pơ", "Tô-mát Ê-đi-xơn"], "c": 2 },
+                                { "q": "Phiên bản đầu tiên của điện thoại di động có biệt danh là gì?", "a": ["Cục đá", "Cục gạch", "Hộp sắt", "Cái búa"], "c": 1 },
+                                { "q": "Khối lượng của chiếc điện thoại di động đầu tiên là bao nhiêu?", "a": ["0,5 kg", "85 gam", "1,1 kg", "2 kg"], "c": 2 },
+                                { "q": "Pin của chiếc điện thoại đầu tiên dùng được trong bao lâu?", "a": ["Một ngày", "Một giờ", "Hai mươi phút", "Mười phút"], "c": 2 },
+                                { "q": "Màn hình của chiếc điện thoại đầu tiên hiển thị được những gì?", "a": ["Hình ảnh màu", "Video", "Chỉ hiển thị chữ", "Bản đồ"], "c": 2 },
+                                { "q": "Điện thoại di động ngày nay thường có trọng lượng khoảng bao nhiêu?", "a": ["Chưa đến 85 gam", "Khoảng 500 gam", "Khoảng 1 kg", "Khoảng 200 gam"], "c": 0 },
+                                { "q": "Hình ảnh so sánh nào được dùng để nói về sự đa năng của điện thoại di động ngày nay?", "a": ["Như một người bạn", "Như một cái hộp chứa hàng loạt dụng cụ", "Như một cuốn bách khoa toàn thư", "Như một chiếc máy tính khổng lồ"], "c": 1 },
+                                { "q": "Chức năng nào sau đây KHÔNG được nhắc đến khi nói về điện thoại di động ngày nay trong bài?", "a": ["Chụp ảnh, nghe nhạc", "Mua sắm trực tuyến", "Nấu ăn", "Xác định vị trí"], "c": 2 },
+                                { "q": "Hệ thống định vị toàn cầu trên điện thoại giúp chúng ta làm gì?", "a": ["Xem phim nhanh hơn", "Nghe nhạc rõ hơn", "Xác định vị trí ở bất cứ đâu", "Sạc pin nhanh hơn"], "c": 2 },
+                                { "q": "Bài đọc nhận định vai trò của điện thoại di động trong cuộc sống hiện đại như thế nào?", "a": ["Là vật dụng xa xỉ", "Là vật dụng không thể thiếu", "Là vật dụng gây hại", "Là vật dụng ít người dùng"], "c": 1 },
+                                { "q": "Theo bài đọc, điện thoại di động giúp con người tiết kiệm điều gì?", "a": ["Tiền bạc", "Sức lực và thời gian", "Năng lượng điện", "Tài nguyên nước"], "c": 1 },
+                                { "q": "Ngoài nhắn tin văn bản, điện thoại ngày nay còn có thể nhắn tin dạng nào?", "a": ["Nhắn tin bằng mùi hương", "Nhắn tin thoại", "Nhắn tin bằng suy nghĩ", "Nhắn tin giấy"], "c": 1 },
+                                { "q": "Sự khác biệt lớn nhất về kích thước của điện thoại ngày nay so với trước kia là gì?", "a": ["To hơn để xem phim", "Nhỏ lại, bỏ vừa trong túi áo", "Dài hơn", "Hình tròn"], "c": 1 },
+                                { "q": "Nội dung chính của bài là gì?", "a": ["Hướng dẫn cách sử dụng điện thoại", "Kể chuyện về nhà phát minh Mác-tin Cúp-pơ", "Sự ra đời, cải tiến và vai trò quan trọng của điện thoại di động trong đời sống", "Quảng cáo các loại điện thoại mới"], "c": 2 }
                             ]
+                        }
+                    },
+                    "342-thanh-pho-thong-minh-mat-xda": {
+                        "title": "Thành phố thông minh Mát-xđa",
+                        "week": 34,
+                        "subject": "Đọc",
+                        "theme": "Thế giới của chúng ta",
+                        "audio": "am_thanh/342-mat-xda.mp3",
+                        "image": "hinh_anh/342-mat-xda.png",
+                        "tabs": {
+                            "lesson": {
+                                "content": `<p>Mát-xđa là một ốc đảo nằm giữa sa mạc, thuộc Các Tiểu vương quốc Ả Rập Thống nhất (viết tắt là UAE). Năm 2008, UAE khởi công xây dựng dự án "Thành phố thông minh Mát-xđa" nhằm biến Mát-xđa trở thành thành phố không các-bô-níc đầu tiên trên thế giới.</p>
+<p>Điểm nhấn trong thiết kế của thành phố là những chiếc ô hình hoa hướng dương. Ban ngày, những chiếc ô này vừa giúp lưu trữ năng lượng mặt trời vừa là những tấm che nắng khổng lồ. Ban đêm, chúng sẽ khép lại, toả nhiệt, cung cấp điện năng lượng mặt trời cho toàn thành phố.</p>
+<p>Để đối phó với tình trạng nóng lên do biến đổi khí hậu, ở Mát-xđa, các toà nhà được thiết kế chụm lại với nhau, có lối đi ở giữa, giúp không khí lưu thông được dễ dàng và giúp giảm nhiệt độ mùa hè. Ngoài ra, một tháp gió được xây dựng nhằm lấy dòng không khí trên cao, mang làn gió mát mẻ vào thành phố, cũng góp phần làm giảm đáng kể nhiệt độ nơi đây so với vùng sa mạc ở xung quanh.</p>
+<p>Các công viên và khu thương mại ở Mát-xđa được xây dựng theo mô hình khu vườn Ả Rập truyền thống, ngập tràn màu xanh, giúp giảm thiểu tối đa lượng khí thải. Chính quyền thành phố cũng khuyến khích người dân đi bộ, đi xe đạp hoặc sử dụng các phương tiện giao thông công cộng chạy bằng điện năng lượng mặt trời để bảo vệ môi trường.</p>
+<p>Việc xây dựng thành công thành phố thông minh Mát-xđa đã truyền cảm hứng cho một số dự án phát triển nhà ở Anh, Bồ Đào Nha,.... Đây sẽ là những đô thị sinh thái tiếp theo giúp ngăn chặn ô nhiễm môi trường và biến đổi khí hậu.</p>
+<p class="text-right italic font-bold text-sm text-gray-500">(Lâm Anh tổng hợp)</p>`,
+                                "meaning": "Thành phố thông minh Mát-xđa là giải pháp đối phó với tình trạng nóng lên do biến đổi khí hậu và giúp ngăn chặn ô nhiễm môi trường. Đây là hình mẫu về đô thị sinh thái hiện đại cho thế giới.",
+                                "questions": [
+                                    { "q": "Địa điểm, thời gian khởi công, mục đích của dự án?", "a": "<b>Địa điểm:</b> Ốc đảo Mát-xđa (UAE). <b>Thời gian:</b> Năm 2008. <b>Mục đích:</b> Biến Mát-xđa trở thành thành phố không các-bô-níc đầu tiên trên thế giới." },
+                                    { "q": "Thiết kế tự vận hành bằng năng lượng mặt trời?", "a": "Sử dụng những chiếc ô hình hoa hướng dương khổng lồ. Ban ngày mở ra lưu trữ năng lượng và che nắng, ban đêm khép lại toả nhiệt và cung cấp điện cho thành phố." },
+                                    { "q": "Cách đối phó với tình trạng nóng lên?", "a": "Các tòa nhà chụm lại với nhau tạo lối đi giúp không khí lưu thông; xây tháp gió để lấy không khí mát trên cao mang vào thành phố." },
+                                    { "q": "Chi tiết giúp ngăn chặn ô nhiễm môi trường?", "a": "Công viên, khu thương mại ngập tràn màu xanh; khuyến khích đi bộ, xe đạp, phương tiện công cộng chạy bằng điện mặt trời." },
+                                    { "q": "Ý nghĩa của việc truyền cảm hứng cho nước khác?", "a": "Mát-xđa là mô hình kiểu mẫu tốt, cho thấy con người rất quan tâm đến việc xây dựng thành phố chống biến đổi khí hậu và bảo vệ môi trường." }
+                                ]
+                            },
+                            "quiz": {
+                                "setting": { "pick": 5 },
+                                "questions": [
+                                    { "q": "Thành phố thông minh Mát-xđa thuộc quốc gia nào?", "a": ["Ả Rập Xê Út", "Các Tiểu vương quốc Ả Rập Thống nhất (UAE)", "Ca-ta", "I-ran"], "c": 1 },
+                                    { "q": "Dự án thành phố Mát-xđa được khởi công vào năm nào?", "a": ["2000", "2005", "2008", "2010"], "c": 2 },
+                                    { "q": "Mục tiêu chính của dự án Mát-xđa là gì?", "a": ["Trở thành thành phố giàu nhất thế giới", "Trở thành thành phố không các-bô-níc đầu tiên trên thế giới", "Trở thành thành phố lớn nhất thế giới", "Trở thành trung tâm du lịch của châu Á"], "c": 1 },
+                                    { "q": "Điểm nhấn trong thiết kế của thành phố là công trình có hình dạng gì?", "a": ["Hình kim tự tháp", "Hình cánh buồm", "Những chiếc ô hình hoa hướng dương", "Hình những cây cọ"], "c": 2 },
+                                    { "q": "Vào ban đêm, những chiếc ô khổng lồ có chức năng gì?", "a": ["Che mưa", "Chiếu sáng bằng đèn LED", "Khép lại, toả nhiệt và cung cấp điện năng lượng mặt trời", "Mở ra để hứng sương"], "c": 2 },
+                                    { "q": "Để giảm nhiệt độ mùa hè, các tòa nhà ở Mát-xđa được bố trí như thế nào?", "a": ["Xây cách xa nhau", "Thiết kế chụm lại với nhau, có lối đi ở giữa", "Xây ngầm dưới lòng đất", "Xây rất cao để đón gió"], "c": 1 },
+                                    { "q": "Chức năng của 'tháp gió' được xây dựng trong thành phố là gì?", "a": ["Để quan sát toàn cảnh thành phố", "Để phát sóng wifi", "Lấy dòng không khí mát mẻ trên cao mang vào thành phố", "Để trang trí"], "c": 2 },
+                                    { "q": "Các công viên và khu thương mại ở đây được xây dựng theo mô hình nào?", "a": ["Khu vườn Châu Âu", "Khu vườn Ả Rập truyền thống", "Khu rừng nhiệt đới", "Công viên nước"], "c": 1 },
+                                    { "q": "Phương tiện giao thông nào KHÔNG được khuyến khích sử dụng tại Mát-xđa?", "a": ["Xe đạp", "Đi bộ", "Xe ô tô chạy bằng xăng dầu", "Phương tiện công cộng chạy bằng điện mặt trời"], "c": 2 },
+                                    { "q": "Thành phố Mát-xđa được ví như cái gì nằm giữa sa mạc?", "a": ["Một viên ngọc", "Một con tàu", "Một ốc đảo", "Một ngọn núi"], "c": 2 },
+                                    { "q": "Mát-xđa đã truyền cảm hứng cho các dự án phát triển nhà ở những nước nào?", "a": ["Mỹ và Pháp", "Anh và Bồ Đào Nha", "Nhật Bản và Hàn Quốc", "Đức và Ý"], "c": 1 },
+                                    { "q": "Vì sao gọi Mát-xđa là 'thành phố thông minh'?", "a": ["Vì cư dân ở đây rất thông minh", "Vì có nhiều trường đại học", "Sử dụng công nghệ tiên tiến để tự vận hành năng lượng và bảo vệ môi trường", "Vì có nhiều máy tính"], "c": 2 },
+                                    { "q": "Việc các tòa nhà chụm lại với nhau có tác dụng gì về mặt không khí?", "a": ["Ngăn cản gió bão", "Giúp không khí lưu thông dễ dàng", "Giữ nhiệt độ ấm áp", "Tạo ra sương mù"], "c": 1 },
+                                    { "q": "Năng lượng chính được sử dụng để vận hành thành phố là gì?", "a": ["Năng lượng gió", "Năng lượng mặt trời", "Năng lượng hạt nhân", "Năng lượng thủy điện"], "c": 1 },
+                                    { "q": "Nội dung chính của bài đọc là gì?", "a": ["Giới thiệu về vẻ đẹp của sa mạc", "Quảng cáo du lịch cho UAE", "Giới thiệu về thành phố thông minh Mát-xđa - giải pháp chống biến đổi khí hậu", "Cách xây dựng nhà ở sa mạc"], "c": 2 }
+                                ]
+                            }
                         }
                     }
                 }
-            }
-        };
+            };
