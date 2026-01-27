@@ -99,7 +99,7 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-    <!-- Header -->
+        <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -121,35 +121,50 @@
                             ĐIỂM:</span>
                         <span
                             class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">VẺ
-                            ĐẸP CUỘC SỐNG</span>
+                                ĐẸP CUỘC SỐNG</span>
                     </div>
                 </div>
             </div>
             <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
+                <!-- Home -->
                 <li>
                     <a href="index.html"
-                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">Trang chủ</a>
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Trang chủ
+                    </a>
                 </li>
+
+                <!-- Lessons Dropdown -->
                 <li class="relative group">
                     <button id="top-menu-lesson-btn"
                         class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
                         Bài học
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
                     </button>
+                    <!-- Dropdown Content (Hidden by default) -->
                     <div id="top-menu-lessons-dropdown"
-                        class="absolute top-full right-0 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
-                        <!-- Menu content -->
+                        class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
+                        <!-- Content rendered by floating-menu.js -->
                     </div>
                 </li>
+
                 <!-- Teacher -->
                 <li>
                     <button onclick="openTeacherStats()"
                         class="text-gray-500 hover:text-blue-600 transition-colors py-2">
                         Giáo viên
                     </button>
+                </li>
+
+                <!-- Contact -->
+                <li>
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                        Liên hệ
+                    </a>
                 </li>
             </ul>
         </nav>
