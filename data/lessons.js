@@ -3248,5 +3248,4 @@ window.LESSON_DATA = {
                                         }
                                     }
                                 }
-                            }
-                        };
+                            };
