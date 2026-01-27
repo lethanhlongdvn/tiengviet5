@@ -150,9 +150,9 @@
         }
 
         .reading-content p {
-            text-indent: 2rem;
+            text-indent: 0;
             margin-bottom: 1.5rem;
-            text-align: justify;
+            text-align: left;
         }
 
         /* Success Modal Styles */
@@ -198,52 +198,67 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-    <!-- Header -->
+            <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
-                                <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
-                <div class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
                     <span class="text-xl font-black">E</span>
                 </div>
                 <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
                     <div class="flex items-center space-x-3">
                         <span class="text-2xl font-black text-blue-700">EduRobot</span>
-                        <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TIẾNG VIỆT 5</span>
+                        <span
+                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TIẾNG
+                            VIỆT 5</span>
                     </div>
-                
+
                     <div class="flex items-center space-x-2 overflow-hidden">
-                        <span class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ ĐIỂM:</span>
-                        <span class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">VẺ ĐẸP CUỘC SỐNG</span>
+                        <span
+                            class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ
+                            ĐIỂM:</span>
+                        <span
+                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">VẺ
+                            ĐẸP CUỘC SỐNG</span>
                     </div>
                 </div>
             </div>
             <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
                 <!-- Home -->
                 <li>
-                    <a href="index.html" class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
+                    <a href="index.html"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
                         Trang chủ
                     </a>
                 </li>
-                
+
                 <!-- Lessons Dropdown -->
                 <li class="relative group">
-                    <button id="top-menu-lesson-btn" class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
+                    <button id="top-menu-lesson-btn"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
                         Bài học
-                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <!-- Dropdown Content (Hidden by default) -->
-                     <div id="top-menu-lessons-dropdown" class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
+                    <div id="top-menu-lessons-dropdown"
+                        class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
                         <!-- Content rendered by floating-menu.js -->
                     </div>
                 </li>
 
                 <!-- Teacher -->
                 <li>
-                    <button onclick="openTeacherStats()" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                    <button onclick="openTeacherStats()"
+                        class="text-gray-500 hover:text-blue-600 transition-colors py-2">
                         Giáo viên
                     </button>
                 </li>
-                
+
                 <!-- Contact -->
                 <li>
                     <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
@@ -258,12 +273,12 @@
 
     <main class="container mx-auto px-4 py-2">
 
-        <!-- Tab & Audio Header -->
+                <!-- Tab & Audio Header -->
         <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
             <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
                     class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">
-                    1. Bài học
+                    1. Đọc và tìm hiểu bài
                 </button>
                 <button onclick="switchTab('quiz')" id="btn-quiz"
                     class="tab-btn flex-1 py-4 text-center font-black text-base text-gray-400 transition-all uppercase tracking-wider">
@@ -294,12 +309,11 @@
                     </div>
                 </div>
                 <audio id="lessonAudio">
-                    <source src="am_thanh/khuchatrunhungemlontrenlungme.wav" type="audio/wav">
+                    <source src="am_thanh/khuchatrunhungemlontrenlungme.wav" type="audio/mpeg">
                 </audio>
             </div>
         </div>
-
-        <!-- TAB 1: BÀI HỌC -->
+        <!-- TAB 1: 1. Đọc và tìm hiểu bài -->
         <div id="tab-lesson" class="tab-content active">
             <div class="flex flex-col lg:flex-row gap-6">
                 <!-- Cột trái (70%) - Bài đọc -->
@@ -320,27 +334,45 @@
 
                             <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
                                 <p class="mb-4">
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Em cu Tai ngủ trên lưng mẹ ơi</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Em ngủ cho ngoan đừng rời lưng mẹ</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Me giã gạo mẹ nuôi bộ đội</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Nhịp chày nghiêng giấc ngủ em nghiêng</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mồ hôi mẹ rơi má em nóng hổi</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Vai mẹ gầy nhấp nhô làm gối</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Lưng đưa nôi và tim hát thành lời:</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">– Ngủ ngoan a-kay ơi, ngủ ngoan a-kay hỡi</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mẹ thương a-kay, mẹ thương bộ đội</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Con mơ cho mẹ hạt gạo trắng ngần</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mai sau con lớn vung chày lún sân...</span>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Em cu Tai ngủ
+                                        trên lưng mẹ ơi</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Em ngủ cho ngoan
+                                        đừng rời lưng mẹ</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Me giã gạo mẹ
+                                        nuôi bộ đội</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Nhịp chày nghiêng
+                                        giấc ngủ em nghiêng</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mồ hôi mẹ rơi má
+                                        em nóng hổi</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Vai mẹ gầy nhấp
+                                        nhô làm gối</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Lưng đưa nôi và
+                                        tim hát thành lời:</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">– Ngủ ngoan a-kay
+                                        ơi, ngủ ngoan a-kay hỡi</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mẹ thương a-kay,
+                                        mẹ thương bộ đội</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Con mơ cho mẹ hạt
+                                        gạo trắng ngần</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mai sau con lớn
+                                        vung chày lún sân...</span>
                                 </p>
 
                                 <p class="mb-4">
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Em cu Tai ngủ trên lưng mẹ ơi</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Em ngủ cho ngoan đừng rời lưng mẹ</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mẹ đang tỉa bắp trên núi Ka-lưi</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Lưng núi thì to mà lưng mẹ nhỏ</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Em ngủ ngoan em đừng làm mẹ mỏi</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mặt trời của bắp thì nằm trên đồi</span><br>
-                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mặt trời của mẹ, em nằm trên lưng</span>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Em cu Tai ngủ
+                                        trên lưng mẹ ơi</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Em ngủ cho ngoan
+                                        đừng rời lưng mẹ</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mẹ đang tỉa bắp
+                                        trên núi Ka-lưi</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Lưng núi thì to
+                                        mà lưng mẹ nhỏ</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Em ngủ ngoan em
+                                        đừng làm mẹ mỏi</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mặt trời của bắp
+                                        thì nằm trên đồi</span><br>
+                                    <span class="inline-block" style="text-indent: 0; margin-left: 0;">Mặt trời của mẹ,
+                                        em nằm trên lưng</span>
                                 </p>
 
                                 <p class="text-right italic font-bold text-gray-600 mt-6 md:col-start-2">– Ngủ ngoan
@@ -540,23 +572,30 @@
         <div id="tab-quiz" class="tab-content">
             <div
                 class="max-w-4xl mx-auto glass-card rounded-[40px] shadow-2xl overflow-hidden flex flex-col min-h-[500px]">
-                                                <!-- Registration -->
-                <div id="quiz-registration" class="p-8 md:p-12 flex flex-col items-center justify-center flex-grow text-center">
-                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl flex items-center justify-center text-white mb-6 shadow-xl shadow-blue-200 transform -rotate-3">
+                <!-- Registration -->
+                <div id="quiz-registration"
+                    class="p-8 md:p-12 flex flex-col items-center justify-center flex-grow text-center">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl flex items-center justify-center text-white mb-6 shadow-xl shadow-blue-200 transform -rotate-3">
                         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                            </path>
                         </svg>
                     </div>
                     <h2 class="text-3xl font-black text-gray-800 mb-3 tracking-tight">Đăng ký luyện tập</h2>
-                    <p class="text-gray-500 mb-10 max-w-sm font-bold">Hãy điền thông tin để bắt đầu thử thách kiến thức nhé!</p>
+                    <p class="text-gray-500 mb-10 max-w-sm font-bold">Hãy điền thông tin để bắt đầu thử thách kiến thức
+                        nhé!</p>
 
                     <form onsubmit="startQuiz(event)" class="w-full max-w-sm space-y-5">
                         <div class="relative group">
-                            <input type="text" id="studentName" required placeholder="Họ và tên của em" class="w-full px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold placeholder:text-gray-300 shadow-sm">
+                            <input type="text" id="studentName" required placeholder="Họ và tên của em"
+                                class="w-full px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold placeholder:text-gray-300 shadow-sm">
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
-                            <select id="studentClass" required class="px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none">
+                            <select id="studentClass" required
+                                class="px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none">
                                 <option value="">Chọn Lớp</option>
                                 <option value="5/1">5/1</option>
                                 <option value="5/2">5/2</option>
@@ -565,15 +604,18 @@
                                 <option value="5/5">5/5</option>
                             </select>
 
-                            <select id="schoolSelect" required onchange="checkSchool()" class="px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none">
+                            <select id="schoolSelect" required onchange="checkSchool()"
+                                class="px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none">
                                 <option value="Tiểu học Đỗ Văn Nại">TH Đỗ Văn Nại</option>
                                 <option value="Khác">Trường khác...</option>
                             </select>
                         </div>
 
-                        <input type="text" id="otherSchool" placeholder="Tên trường của em" class="hidden w-full px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white transition-all font-bold shadow-sm">
+                        <input type="text" id="otherSchool" placeholder="Tên trường của em"
+                            class="hidden w-full px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white transition-all font-bold shadow-sm">
 
-                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-lg uppercase tracking-wider">
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-lg uppercase tracking-wider">
                             Bắt đầu ngay
                         </button>
                     </form>
@@ -726,7 +768,8 @@
             </div>
             <h2 class="text-3xl font-black text-gray-800 mb-2 tracking-tight">Nộp bài thành công!</h2>
             <p class="text-gray-500 mb-10 font-bold leading-relaxed">Chúc mừng em đã hoàn thành thử thách kiến thức!</p>
-            <div class="mb-8 text-blue-600 font-black text-sm uppercase tracking-widest">Tự động quay lại sau <span id="countdown">5</span> giây</div>
+            <div class="mb-8 text-blue-600 font-black text-sm uppercase tracking-widest">Tự động quay lại sau <span
+                    id="countdown">5</span> giây</div>
             <button onclick="closeSuccessModal()"
                 class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 uppercase tracking-widest text-sm">
                 Trở về bài học
@@ -734,7 +777,7 @@
         </div>
     </div>
 
-        <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
+    <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
         <div class="container mx-auto text-center">
             <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">@ 2026 EduRobot - Hệ thống học
                 tập thông minh</p>
@@ -743,10 +786,10 @@
     </footer>
 
     <script>
-        function celebrate() { 
-            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#2563eb', '#f59e0b', '#10b981', '#ef4444'] }); 
+        function celebrate() {
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#2563eb', '#f59e0b', '#10b981', '#ef4444'] });
             const audio = document.getElementById('clapSound');
-            if (audio) { audio.currentTime = 0; audio.play().catch(e => {}); }
+            if (audio) { audio.currentTime = 0; audio.play().catch(e => { }); }
         }
         /* UI LOGIC */
         function toggleAccordion(button) {
@@ -857,7 +900,7 @@
         }
 
         function showQuestion() {
-            if(document.getElementById('quiz-feedback')) document.getElementById('quiz-feedback').style.opacity = '0';
+            if (document.getElementById('quiz-feedback')) document.getElementById('quiz-feedback').style.opacity = '0';
             const q = selectedQuestions[currentIdx];
             document.getElementById('questionNum').innerText = currentIdx + 1;
             document.getElementById('progressText').innerText = `CÂU TRẮC NGHIỆM: ${currentIdx + 1}/5`;
@@ -1103,7 +1146,7 @@
 
     <!-- Audio Celebration -->
     <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
-<script src="js/floating-menu.js"></script>
+    <script src="js/floating-menu.js"></script>
 </body>
 
 </html>
