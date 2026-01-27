@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đánh giá, chỉnh sửa bài văn tả người - EduRobot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --accent: #f59e0b;
+            --glass: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.5);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+
+        .serif-font {
+            font-family: 'Merriweather', serif;
+        }
+
+        .bg-paper {
+            background-color: #fdfbf7;
+            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background: white;
+            box-shadow: inset 0 -3px 0 var(--primary);
+        }
+
+        .tab-content {
+            display: none !important;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-content.active {
+            display: block !important;
+        }
+
+        /* Input specific styles */
+        .input-line {
+            border: none;
+            border-bottom: 2px dashed #9ca3af;
+            width: 100%;
+            padding: 8px 0;
+            outline: none;
+            font-style: italic;
+            color: #374151;
+            background: transparent;
+            transition: border-bottom-color 0.3s;
+        }
+
+        .input-line:focus {
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        /* Label VIẾT */
+        .label-viet {
+            color: #ef4444;
+            /* red-500 */
+            font-weight: 800;
+            border: 2px solid #ef4444;
+            padding: 2px 16px;
+            display: inline-block;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+            background: rgba(254, 226, 226, 0.3);
+        }
+
+        /* Criteria Box */
+        .criteria-box {
+            border: 2px solid #06b6d4;
+            /* cyan-500 */
+            border-radius: 16px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .criteria-icon {
+            background-color: #06b6d4;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 50px;
+            font-weight: 900;
+        }
+
+        .star-rating {
+            color: #d1d5db;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.2s;
+        }
+
+        .star-rating.active {
+            color: #facc15;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+    <header class="sticky top-0 z-50 px-4 py-2">
+        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-4">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                    <span class="text-xl font-black">E</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+                    <div class="flex items-center space-x-3"><span
+                            class="text-2xl font-black text-blue-700">EduRobot</span><span
+                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TIẾNG
+                            VIỆT 5</span></div>
+                    <div
+                        class="flex items-center space-x-3 overflow-hidden border-l-0 md:border-l-2 md:border-gray-100 md:pl-6">
+                        <div class="flex items-center space-x-2">
+                            <span
+                                class="text-[10px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">TUẦN
+                                22</span>
+                            <span
+                                class="text-[11px] font-black uppercase tracking-wider text-blue-800 whitespace-nowrap">BÀI:
+                                ĐOÀN THUYỀN ĐÁNH CÁ</span>
+                        </div>
+                        <div class="h-4 w-px bg-gray-200 hidden md:block"></div>
+                        <div class="flex items-center space-x-2">
+                            <span
+                                class="text-[10px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ
+                                ĐIỂM:</span>
+                            <span
+                                class="text-[11px] font-black uppercase tracking-wider text-blue-800 truncate max-w-[150px] md:max-w-none">VẺ
+                                ĐẸP CUỘC SỐNG</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
+                <li><a href="index.html"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">Trang chủ</a>
+                </li>
+                <li class="relative group">
+                    <button id="top-menu-lesson-btn"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">Bài
+                        học <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg></button>
+                    <div id="top-menu-lessons-dropdown"
+                        class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
+                    </div>
+                </li>
+                <li><button onclick="openTeacherStats()"
+                        class="text-gray-500 hover:text-blue-600 transition-colors py-2 font-bold uppercase tracking-widest text-[10px]">Giáo
+                        viên</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-2">
+        <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
+            <div class="flex-1 flex bg-white/40">
+                <button onclick="switchTab('lesson')" id="btn-lesson"
+                    class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">
+                    Đoàn thuyền đánh cá</button>
+            </div>
+        </div>
+
+        <!-- TAB 1: BÀI HỌC -->
+        <div id="tab-lesson" class="tab-content active">
+            <div class="max-w-4xl mx-auto glass-card rounded-[24px] p-8 md:p-12 shadow-xl bg-white/60 relative">
+
+                <div class="label-viet">VIẾT</div>
+                <h1 class="text-3xl md:text-5xl font-black text-center text-blue-800 mb-8 uppercase tracking-tight">ĐÁNH
+                    GIÁ, CHỈNH SỬA BÀI VĂN TẢ NGƯỜI</h1>
+
+                <!-- Section 1 -->
+                <div class="mb-10 text-gray-800 bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                    <p class="text-lg"><span class="text-red-500 font-extrabold mr-2 text-2xl">1.</span> <span
+                            class="font-bold">Nghe thầy cô giáo nhận xét về bài làm.</span></p>
+                    <p class="mt-2 text-gray-600 ml-8 italic">Em hãy lắng nghe và ghi chép lại những nhận xét chung của
+                        thầy cô về bài văn của cả lớp nhé.</p>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="mb-12">
+                    <p class="text-lg font-bold text-gray-800 mb-6 flex items-baseline">
+                        <span class="text-red-500 font-extrabold mr-2 text-2xl">2.</span>
+                        <span>Đọc lại bài văn của em để biết bài đã đạt được những yêu cầu nào dưới đây:</span>
+                    </p>
+
+                    <div class="criteria-box">
+                        <div class="criteria-icon">?</div>
+                        <div class="flex-1 bg-cyan-50">
+                            <table class="w-full">
+                                <tr class="border-b border-cyan-200 hover:bg-cyan-100/50 transition-colors">
+                                    <td class="p-4 text-gray-700 font-medium">– Có đủ mở bài, thân bài, kết bài.</td>
+                                    <td class="p-4 w-40 text-center">
+                                        <div class="flex gap-1 justify-center" data-row="1">
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 1)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 2)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 3)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 4)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 5)"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-cyan-200 hover:bg-cyan-100/50 transition-colors">
+                                    <td class="p-4 text-gray-700 font-medium">– Miêu tả ngoại hình, hoạt động,... làm
+                                        nổi bật đặc điểm riêng của người được tả.</td>
+                                    <td class="p-4 w-40 text-center">
+                                        <div class="flex gap-1 justify-center" data-row="2">
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 1)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 2)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 3)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 4)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 5)"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-cyan-200 hover:bg-cyan-100/50 transition-colors">
+                                    <td class="p-4 text-gray-700 font-medium">– Thể hiện tình cảm đối với người được tả.
+                                    </td>
+                                    <td class="p-4 w-40 text-center">
+                                        <div class="flex gap-1 justify-center" data-row="3">
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 1)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 2)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 3)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 4)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 5)"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-cyan-100/50 transition-colors">
+                                    <td class="p-4 text-gray-700 font-medium">– Trình bày bài sạch đẹp, không mắc lỗi
+                                        chính tả, lỗi diễn đạt.</td>
+                                    <td class="p-4 w-40 text-center">
+                                        <div class="flex gap-1 justify-center" data-row="4">
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 1)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 2)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 3)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 4)"></i>
+                                            <i class="fas fa-star star-rating hover:text-yellow-400"
+                                                onclick="rate(this, 5)"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="mb-12">
+                    <p class="text-lg font-bold text-gray-800 mb-8 flex items-baseline">
+                        <span class="text-red-500 font-extrabold mr-2 text-2xl">3.</span>
+                        <span>Viết lại một số câu văn hoặc đoạn văn trong bài làm của em cho hay hơn theo gợi ý dưới
+                            đây:</span>
+                    </p>
+
+                    <div class="space-y-10 pl-4 border-l-4 border-blue-100 ml-3">
+                        <!-- 3a -->
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <p class="text-gray-800 font-bold mb-4 text-lg">a. Sử dụng từ ngữ giàu sức gợi tả hoặc hình
+                                ảnh so sánh gây ấn tượng.</p>
+                            <div class="bg-blue-50/50 p-4 rounded-xl mb-4 text-sm text-gray-600 italic">
+                                <p class="mb-2">Ví dụ: <br>"- Giọng nói của bà tôi đặc biệt trầm bổng, nghe <b>như</b>
+                                    tiếng chuông đồng..."</p>
+                                <p>"- A Cháng đẹp người thật... ngực nở vòng cung, da đỏ <b>như</b> lim..."</p>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <div class="flex items-center gap-4">
+                                    <input type="text" id="inputA" class="input-line px-2 text-lg"
+                                        placeholder="Nhập câu văn em đã chỉnh sửa...">
+                                    <button onclick="checkAI('inputA', 'Sử dụng từ ngữ gợi tả hoặc hình ảnh so sánh')"
+                                        class="w-12 h-12 rounded-xl bg-gradient-to-tr from-green-400 to-green-600 text-white shadow-lg shadow-green-200 flex items-center justify-center hover:scale-105 transition-transform"
+                                        title="Nhờ AI nhận xét">
+                                        <i class="fas fa-robot text-xl"></i>
+                                    </button>
+                                </div>
+                                <div id="feedback-inputA"
+                                    class="hidden p-3 rounded-xl bg-green-50 text-green-800 text-sm font-medium border border-green-200">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3b -->
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <p class="text-gray-800 font-bold mb-4 text-lg">b. Bộc lộ suy nghĩ, cảm xúc với người được
+                                tả.</p>
+                            <div class="bg-blue-50/50 p-4 rounded-xl mb-4 text-sm text-gray-600 italic">
+                                <p>Ví dụ: "...tôi sẽ <b>không bao giờ quên</b> đôi mắt của cô giáo nhìn tôi lúc ấy. Ánh
+                                    mắt cô cũng <b>âu yếm, trìu mến</b> như ánh mắt bà nhìn tôi."</p>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <div class="flex items-center gap-4">
+                                    <input type="text" id="inputB" class="input-line px-2 text-lg"
+                                        placeholder="Nhập câu văn em đã chỉnh sửa...">
+                                    <button onclick="checkAI('inputB', 'Bộc lộ suy nghĩ, cảm xúc')"
+                                        class="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-400 to-purple-600 text-white shadow-lg shadow-purple-200 flex items-center justify-center hover:scale-105 transition-transform"
+                                        title="Nhờ AI nhận xét">
+                                        <i class="fas fa-robot text-xl"></i>
+                                    </button>
+                                </div>
+                                <div id="feedback-inputB"
+                                    class="hidden p-3 rounded-xl bg-purple-50 text-purple-800 text-sm font-medium border border-purple-200">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Section -->
+                <div
+                    class="mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center gap-6 bg-orange-50/30 p-6 rounded-2xl">
+                    <div class="bg-orange-100 p-4 rounded-2xl shadow-sm text-orange-500">
+                        <i class="fas fa-home text-2xl"></i>
+                    </div>
+                    <p class="text-gray-700 italic font-medium text-lg text-center md:text-left">Đọc bài văn tả người
+                        của em cho người thân nghe, chia sẻ những điều thầy cô nhận xét về bài làm của em và các bạn.
+                    </p>
+                </div>
+
+                <div class="mt-10 flex justify-center">
+                    <button onclick="submitExercise()"
+                        class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-2xl font-black shadow-lg shadow-green-200 transition-all active:scale-95 flex items-center gap-3 uppercase tracking-wider text-sm">
+                        <i class="fas fa-paper-plane"></i> Nộp bài
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 px-4 bg-white/30 backdrop-blur-md border-t border-white/50 w-full mt-10">
+        <div class="container mx-auto text-center">
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">@ 2026 EduRobot - Hệ thống
+                học tập thông minh</p>
+            <p class="text-xs font-bold text-blue-600 flex items-center justify-center">
+                Phát triển bởi Lê Thành Long
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- Registration Modal -->
+    <div id="registrationModal"
+        class="fixed inset-0 z-[150] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 hidden">
+        <div class="bg-white rounded-[32px] p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in duration-300">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+                        <i class="fas fa-user-edit text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-black text-gray-800 tracking-tight">Thông tin của em</h2>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Đăng ký để lưu bài làm
+                        </p>
+                    </div>
+                </div>
+                <button onclick="document.getElementById('registrationModal').classList.add('hidden')"
+                    class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <form onsubmit="finalSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-black text-blue-600 uppercase tracking-[0.2em] mb-2 ml-1">Họ và
+                        tên của em</label>
+                    <input type="text" id="modalStudentName" required placeholder="Nhập tên em..."
+                        class="w-full px-4 py-2 rounded-xl bg-gray-50 border-2 border-gray-100 focus:border-blue-500 focus:outline-none font-bold text-sm transition-all focus:bg-white focus:shadow-md">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label
+                            class="block text-[10px] font-black text-blue-600 uppercase tracking-[0.2em] mb-2 ml-1">Lớp</label>
+                        <select id="modalStudentClass" required
+                            class="w-full px-4 py-2 rounded-xl bg-gray-50 border-2 border-gray-100 focus:border-blue-500 focus:outline-none font-black text-gray-700 text-sm cursor-pointer appearance-none transition-all">
+                            <option value="">Chọn Lớp</option>
+                            <option value="5/1">5/1</option>
+                            <option value="5/2">5/2</option>
+                            <option value="5/3">5/3</option>
+                            <option value="5/4">5/4</option>
+                            <option value="5/5">5/5</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            class="block text-[10px] font-black text-blue-600 uppercase tracking-[0.2em] mb-2 ml-1">Trường</label>
+                        <select id="modalSchoolSelect" required onchange="checkModalSchool()"
+                            class="w-full px-4 py-2 rounded-xl bg-gray-50 border-2 border-gray-100 focus:border-blue-500 focus:outline-none font-black text-gray-700 text-sm cursor-pointer appearance-none transition-all">
+                            <option value="Tiểu học Đỗ Văn Nại">TH Đỗ Văn Nại</option>
+                            <option value="Khác">Trường khác...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="modalOtherSchoolBox" class="hidden animate-in fade-in slide-in-from-top-2">
+                    <label class="block text-[10px] font-black text-orange-600 uppercase tracking-[0.2em] mb-2 ml-1">Tên
+                        trường khác</label>
+                    <input type="text" id="modalOtherSchool" placeholder="Nhập tên trường..."
+                        class="w-full px-4 py-2 rounded-xl bg-orange-50/50 border-2 border-orange-100 focus:border-orange-500 focus:outline-none font-bold text-sm">
+                </div>
+
+                <button type="submit" id="finalSubmitBtn"
+                    class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-sm uppercase tracking-widest mt-4">
+                    Xác nhận nộp bài
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal"
+        class="fixed inset-0 z-[200] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4 hidden">
+        <div
+            class="bg-white rounded-[40px] p-10 max-w-sm w-full text-center shadow-3xl animate-in zoom-in duration-300">
+            <div
+                class="w-20 h-20 bg-green-500 text-white rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-100">
+                <i class="fas fa-check text-4xl"></i>
+            </div>
+            <h2 class="text-3xl font-black text-gray-800 mb-2">Tuyệt vời!</h2>
+            <p class="text-gray-500 font-bold mb-8 italic">Bài làm của em đã được gửi đi thành công.</p>
+            <div class="text-blue-600 font-black text-sm uppercase tracking-widest mb-6">Tự động quay lại sau <span
+                    id="countdown">5</span> giây</div>
+            <button onclick="location.reload()"
+                class="w-full py-4 bg-gray-100 hover:bg-gray-200 text-gray-600 font-black rounded-2xl transition-all">Đóng</button>
+        </div>
+    </div>
+
+    <!-- Modal Teacher Stats -->
+    <div id="statsModal"
+        class="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div
+            class="bg-white rounded-[40px] w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl m-4 transform transition-all">
+            <div class="p-8 border-b flex justify-between items-center bg-gray-50/50 backdrop-blur-xl">
+                <div class="flex items-center space-x-4">
+                    <div
+                        class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
+                        <i class="fas fa-chart-bar text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black text-gray-800 tracking-tight">Bảng kết quả</h2>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Dành riêng cho giáo
+                            viên</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="exportToExcel()"
+                        class="bg-green-600 hover:bg-green-700 text-white font-black py-3 px-6 rounded-2xl text-sm flex items-center shadow-lg shadow-green-100 transition-all active:scale-95">
+                        <i class="fas fa-file-excel mr-2"></i> XUẤT EXCEL
+                    </button>
+                    <button onclick="closeModal()"
+                        class="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-2xl transition-all">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-grow overflow-auto p-8 bg-gray-50/30">
+                <table class="w-full" id="statsTable">
+                    <thead>
+                        <tr
+                            class="text-left text-gray-400 uppercase text-[10px] font-black tracking-[0.2em] border-b-2 border-gray-100 pb-4">
+                            <th class="px-6 py-4">STT</th>
+                            <th class="px-6 py-4">Họ và Tên</th>
+                            <th class="px-6 py-4">Lớp</th>
+                            <th class="px-6 py-4">Câu 3a</th>
+                            <th class="px-6 py-4 text-center">Câu 3b</th>
+                            <th class="px-6 py-4 text-center">Đánh giá sao</th>
+                            <th class="px-6 py-4 text-center">Thời gian</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statsTableBody" class="divide-y divide-gray-100"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
+    <script src="js/floating-menu.js"></script>
+    <script>
+        // Firebase Config
+        const firebaseConfig = { apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc", authDomain: "gamhoctap.firebaseapp.com", projectId: "gamhoctap", storageBucket: "gamhoctap.firebasestorage.app", messagingSenderId: "833329613932", appId: "1:833329613932:web:0d8574827bcfe50b535c49" };
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Init Confetti
+        function celebrate() {
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#2563eb', '#f59e0b', '#10b981', '#ef4444'] });
+            const audio = document.getElementById('clapSound');
+            if (audio) { audio.currentTime = 0; audio.play().catch(e => { }); }
+        }
+
+        function switchTab(t) {
+            // Only one tab here, but keeping function for compat
+            console.log("Switching tab to " + t);
+        }
+
+        function checkSchool() {
+            document.getElementById('otherSchoolDiv').classList.toggle('hidden', document.getElementById('schoolSelect').value !== 'Khác');
+        }
+
+        // Hàm đánh giá sao
+        function rate(starElement, count) {
+            const parent = starElement.parentElement;
+            const stars = parent.getElementsByClassName('star-rating');
+            for (let i = 0; i < stars.length; i++) {
+                if (i < count) stars[i].classList.add('active');
+                else stars[i].classList.remove('active');
+            }
+            if (count === 5) {
+                confetti({ particleCount: 50, spread: 40, origin: { y: 0.7 }, colors: ['#facc15'] });
+            }
+        }
+
+        // AI Nhận xét câu văn (Real API)
+        async function checkAI(inputId, criteria) {
+            const val = document.getElementById(inputId).value.trim();
+            const feedbackBox = document.getElementById('feedback-' + inputId);
+
+            if (!val) {
+                alert("Em ơi, hãy viết câu văn của mình vào chỗ trống trước nhé!");
+                return;
+            }
+
+            feedbackBox.classList.remove('hidden');
+            feedbackBox.innerHTML = '<span class="flex items-center gap-2"><i class="fas fa-spinner fa-spin"></i> EduRobot đang suy nghĩ...</span>';
+
+            try {
+                const response = await fetch('/.netlify/functions/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sentence: val, mode: 'sentence_review', criteria: criteria })
+                });
+
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+
+                const icon = data.is_good ? '🌟' : '💡';
+                const colorClass = data.is_good ? 'text-green-800' : 'text-orange-800';
+
+                feedbackBox.innerHTML = `
+                    <div class="flex flex-col gap-1">
+                        <div class="font-bold ${colorClass}">${icon} ${data.feedback}</div>
+                        ${data.suggestion ? `<div class="text-xs italic text-gray-600 mt-1">Gợi ý: ${data.suggestion}</div>` : ''}
+                    </div>
+                `;
+
+                if (data.is_good) celebrate();
+            } catch (error) {
+                console.error("Error:", error);
+                feedbackBox.innerHTML = '<span class="text-red-500">EduRobot đang bận, em thử lại sau nhé! (Lỗi kết nối)</span>';
+            }
+        }
+
+        // Nộp bài - Mở modal đăng ký
+        function submitExercise() {
+            const a = document.getElementById('inputA').value.trim();
+            const b = document.getElementById('inputB').value.trim();
+
+            if (!a && !b) {
+                alert("Em chưa làm bài tập nào cả. Hãy viết ít nhất một câu nhé!");
+                return;
+            }
+
+            document.getElementById('registrationModal').classList.remove('hidden');
+        }
+
+        function closeRegistrationModal() {
+            document.getElementById('registrationModal').classList.add('hidden');
+        }
+
+        // Thực hiện nộp bài sau khi điền thông tin
+        async function finalSubmit() {
+            const studentName = document.getElementById('studentName').value.trim();
+            const studentClass = document.getElementById('studentClass').value;
+            const school = document.getElementById('schoolSelect').value === 'Khác' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value;
+
+            if (!studentName || !studentClass) {
+                alert("Em hãy điền đầy đủ họ và tên, chọn lớp để EduRobot lưu bài nhé!");
+                return;
+            }
+
+            const a = document.getElementById('inputA').value.trim();
+            const b = document.getElementById('inputB').value.trim();
+
+            let ratings = [];
+            for (let i = 1; i <= 4; i++) {
+                const row = document.querySelector(`div[data-row="${i}"]`);
+                const stars = row.querySelectorAll('.star-rating.active').length;
+                ratings.push(stars);
+            }
+
+            const data = {
+                studentName, studentClass, school,
+                inputA: a, inputB: b,
+                ratings: ratings,
+                lessonTitle: "Bài 221 - Đánh giá, chỉnh sửa bài văn tả người",
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            const btn = document.querySelector("#registrationModal button[onclick='finalSubmit()']");
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ĐANG GỬI...';
+
+            try {
+                await db.collection("writing_results").add(data);
+                closeRegistrationModal();
+                showSuccessModal();
+            } catch (error) {
+                console.error("Save error:", error);
+                alert("Lỗi lưu bài. Em thử lại sau nhé!");
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> XÁC NHẬN NỘP BÀI';
+            }
+        }
+
+        function showSuccessModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('hidden');
+            celebrate();
+            let timeLeft = 5;
+            const cd = document.getElementById('countdown');
+            const timer = setInterval(() => {
+                timeLeft--;
+                cd.innerText = timeLeft;
+                if (timeLeft <= 0) { clearInterval(timer); closeSuccessModal(); }
+            }, 1000);
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+
+        // Teacher Stats
+        function openTeacherStats() {
+            const p = prompt("Nhập mật khẩu giáo viên:");
+            if (p === 'dvn') {
+                document.getElementById('statsModal').classList.remove('hidden');
+                loadStats();
+            } else if (p !== null) {
+                alert("Sai mật khẩu!");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('statsModal').classList.add('hidden');
+        }
+
+        async function loadStats() {
+            const tbody = document.getElementById('statsTableBody');
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center py-10 font-bold text-gray-400">Đang tải dữ liệu...</td></tr>';
+
+            try {
+                const snapshot = await db.collection("writing_results")
+                    .where("lessonTitle", "==", "Bài 221 - Đánh giá, chỉnh sửa bài văn tả người")
+                    .orderBy("timestamp", "desc")
+                    .get();
+
+                tbody.innerHTML = '';
+                snapshot.forEach((doc, i) => {
+                    const d = doc.data();
+                    const date = d.timestamp ? new Date(d.timestamp.toDate()).toLocaleString('vi-VN') : '';
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-blue-50/50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-gray-400">${i + 1}</td>
+                            <td class="px-6 py-4 font-bold text-gray-800">${d.studentName}</td>
+                            <td class="px-6 py-4 font-bold text-blue-600">${d.studentClass}</td>
+                            <td class="px-6 py-4 text-xs italic">${d.inputA || ''}</td>
+                            <td class="px-6 py-4 text-xs italic">${d.inputB || ''}</td>
+                            <td class="px-6 py-4 text-center font-bold text-orange-500">${d.ratings ? d.ratings.join(' | ') : ''}</td>
+                            <td class="px-6 py-4 text-[10px] text-gray-400 font-bold">${date}</td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                console.error("Load stats error:", error);
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center py-10 text-red-500">Lỗi tải dữ liệu!</td></tr>';
+            }
+        }
+
+        function exportToExcel() {
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.table_to_sheet(document.getElementById('statsTable'));
+            XLSX.utils.book_append_sheet(wb, ws, "Bai221_KetQua");
+            XLSX.writeFile(wb, "KetQua_Bai221_Viet.xlsx");
+        }
+    </script>
+</body>
+
+</html>
+```
