@@ -114,9 +114,25 @@
                             class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide">TIẾNG
                             VIỆT 5</span>
                     </div>
-                    <div class="flex items-center space-x-2 overflow-hidden">
-                        <span class="text-[11px] font-black uppercase tracking-widest text-gray-400">CHỦ ĐIỂM:</span>
-                        <span class="text-sm font-black uppercase tracking-wider text-blue-800">VẺ ĐẸP CUỘC SỐNG</span>
+                    <div
+                        class="flex items-center space-x-3 overflow-hidden border-l-0 md:border-l-2 md:border-gray-100 md:pl-6">
+                        <div class="flex items-center space-x-2">
+                            <span
+                                class="text-[10px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">TUẦN
+                                21</span>
+                            <span
+                                class="text-[11px] font-black uppercase tracking-wider text-blue-800 whitespace-nowrap">BÀI:
+                                GIỎ HOA THÁNG NĂM</span>
+                        </div>
+                        <div class="h-4 w-px bg-gray-200 hidden md:block"></div>
+                        <div class="flex items-center space-x-2">
+                            <span
+                                class="text-[10px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ
+                                ĐIỂM:</span>
+                            <span
+                                class="text-[11px] font-black uppercase tracking-wider text-blue-800 truncate max-w-[150px] md:max-w-none">VẺ
+                                ĐẸP CUỘC SỐNG</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -127,22 +143,27 @@
     </header>
 
     <main class="container mx-auto px-4 py-6 max-w-5xl flex-1">
-                                <!-- Student Info -->
+        <!-- Student Info -->
         <div class="mb-8 bg-white border-2 border-blue-100 rounded-3xl p-6 shadow-sm flex flex-col items-center gap-4">
             <div class="flex items-center space-x-4 w-full">
                 <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg">
                     <span>👤</span>
                 </div>
                 <div class="flex-1">
-                    <label class="block text-[10px] font-black text-blue-400 uppercase tracking-widest leading-none mb-1">Họ tên của em</label>
-                    <input type="text" id="studentName" placeholder="Nhập tên em..." class="w-full text-lg font-black text-gray-800 bg-transparent border-none focus:outline-none focus:ring-0 p-0">
+                    <label
+                        class="block text-[10px] font-black text-blue-400 uppercase tracking-widest leading-none mb-1">Họ
+                        tên của em</label>
+                    <input type="text" id="studentName" placeholder="Nhập tên em..."
+                        class="w-full text-lg font-black text-gray-800 bg-transparent border-none focus:outline-none focus:ring-0 p-0">
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                <div class="flex items-center space-x-3 bg-gray-50 p-3 rounded-2xl border border-gray-100 focus-within:border-blue-300 transition-all">
+                <div
+                    class="flex items-center space-x-3 bg-gray-50 p-3 rounded-2xl border border-gray-100 focus-within:border-blue-300 transition-all">
                     <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-2">Lớp:</label>
-                    <select id="studentClass" class="flex-1 bg-transparent border-none focus:outline-none font-black text-gray-700 text-sm cursor-pointer">
+                    <select id="studentClass"
+                        class="flex-1 bg-transparent border-none focus:outline-none font-black text-gray-700 text-sm cursor-pointer">
                         <option value="">Chọn Lớp</option>
                         <option value="5/1">5/1</option>
                         <option value="5/2">5/2</option>
@@ -152,24 +173,27 @@
                     </select>
                 </div>
 
-                <div class="flex items-center space-x-3 bg-gray-50 p-3 rounded-2xl border border-gray-100 focus-within:border-blue-300 transition-all">
+                <div
+                    class="flex items-center space-x-3 bg-gray-50 p-3 rounded-2xl border border-gray-100 focus-within:border-blue-300 transition-all">
                     <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-2">Trường:</label>
-                    <select id="schoolSelect" onchange="checkSchool()" class="flex-1 bg-transparent border-none focus:outline-none font-black text-gray-700 text-sm cursor-pointer">
+                    <select id="schoolSelect" onchange="checkSchool()"
+                        class="flex-1 bg-transparent border-none focus:outline-none font-black text-gray-700 text-sm cursor-pointer">
                         <option value="Tiểu học Đỗ Văn Nại">Tiểu học Đỗ Văn Nại</option>
                         <option value="Khác">Trường khác...</option>
                     </select>
                 </div>
             </div>
 
-            <input type="text" id="otherSchool" placeholder="Nhập tên trường của em..." class="hidden w-full p-4 rounded-2xl bg-orange-50 border-2 border-orange-100 focus:border-orange-300 focus:outline-none font-black text-sm transition-all">
+            <input type="text" id="otherSchool" placeholder="Nhập tên trường của em..."
+                class="hidden w-full p-4 rounded-2xl bg-orange-50 border-2 border-orange-100 focus:border-orange-300 focus:outline-none font-black text-sm transition-all">
         </div>
 
         <!-- Header -->
         <div class="glass-card mb-6 rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-lg">
             <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
-                    class="tab-btn active flex-1 py-4 text-center font-black text-base uppercase tracking-wider">1. Bài
-                    học & Luyện tập</button>
+                    class="tab-btn active flex-1 py-4 text-center font-black text-base uppercase tracking-wider">Giỏ hoa
+                    tháng Năm</button>
                 <button onclick="switchTab('practice')" id="btn-practice"
                     class="tab-btn flex-1 py-4 text-center font-black text-base uppercase tracking-wider text-gray-400">2.
                     Vận dụng</button>
