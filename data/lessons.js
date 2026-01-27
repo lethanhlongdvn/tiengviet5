@@ -3245,4 +3245,5 @@ window.LESSON_DATA = {
             ]
         }
     }
-},
+}
+};
