@@ -3198,51 +3198,51 @@ window.LESSON_DATA = {
                 { "q": "Nội dung chính của bài là gì?", "a": ["Hướng dẫn cách sử dụng điện thoại", "Kể chuyện về nhà phát minh Mác-tin Cúp-pơ", "Sự ra đời, cải tiến và vai trò quan trọng của điện thoại di động trong đời sống", "Quảng cáo các loại điện thoại mới"], "c": 2 }
             ]
         }
-    }
-},
-"342-thanh-pho-thong-minh-mat-xda": {
-    "title": "Thành phố thông minh Mát-xđa",
-        "week": 34,
-            "subject": "Đọc",
-                "theme": "Thế giới của chúng ta",
-                    "audio": "am_thanh/342-mat-xda.mp3",
-                        "image": "hinh_anh/342-mat-xda.png",
-                            "tabs": {
-        "lesson": {
-            "content": `<p>Mát-xđa là một ốc đảo nằm giữa sa mạc, thuộc Các Tiểu vương quốc Ả Rập Thống nhất (viết tắt là UAE). Năm 2008, UAE khởi công xây dựng dự án "Thành phố thông minh Mát-xđa" nhằm biến Mát-xđa trở thành thành phố không các-bô-níc đầu tiên trên thế giới.</p>
+    },
+    "342-thanh-pho-thong-minh-mat-xda": {
+        "title": "Thành phố thông minh Mát-xđa",
+            "week": 34,
+                "subject": "Đọc",
+                    "theme": "Thế giới của chúng ta",
+                        "audio": "am_thanh/342-mat-xda.mp3",
+                            "image": "hinh_anh/342-mat-xda.png",
+                                "tabs": {
+            "lesson": {
+                "content": `<p>Mát-xđa là một ốc đảo nằm giữa sa mạc, thuộc Các Tiểu vương quốc Ả Rập Thống nhất (viết tắt là UAE). Năm 2008, UAE khởi công xây dựng dự án "Thành phố thông minh Mát-xđa" nhằm biến Mát-xđa trở thành thành phố không các-bô-níc đầu tiên trên thế giới.</p>
 <p>Điểm nhấn trong thiết kế của thành phố là những chiếc ô hình hoa hướng dương. Ban ngày, những chiếc ô này vừa giúp lưu trữ năng lượng mặt trời vừa là những tấm che nắng khổng lồ. Ban đêm, chúng sẽ khép lại, toả nhiệt, cung cấp điện năng lượng mặt trời cho toàn thành phố.</p>
 <p>Để đối phó với tình trạng nóng lên do biến đổi khí hậu, ở Mát-xđa, các toà nhà được thiết kế chụm lại với nhau, có lối đi ở giữa, giúp không khí lưu thông được dễ dàng và giúp giảm nhiệt độ mùa hè. Ngoài ra, một tháp gió được xây dựng nhằm lấy dòng không khí trên cao, mang làn gió mát mẻ vào thành phố, cũng góp phần làm giảm đáng kể nhiệt độ nơi đây so với vùng sa mạc ở xung quanh.</p>
 <p>Các công viên và khu thương mại ở Mát-xđa được xây dựng theo mô hình khu vườn Ả Rập truyền thống, ngập tràn màu xanh, giúp giảm thiểu tối đa lượng khí thải. Chính quyền thành phố cũng khuyến khích người dân đi bộ, đi xe đạp hoặc sử dụng các phương tiện giao thông công cộng chạy bằng điện năng lượng mặt trời để bảo vệ môi trường.</p>
 <p>Việc xây dựng thành công thành phố thông minh Mát-xđa đã truyền cảm hứng cho một số dự án phát triển nhà ở Anh, Bồ Đào Nha,.... Đây sẽ là những đô thị sinh thái tiếp theo giúp ngăn chặn ô nhiễm môi trường và biến đổi khí hậu.</p>
 <p class="text-right italic font-bold text-sm text-gray-500">(Lâm Anh tổng hợp)</p>`,
-                "meaning": "Thành phố thông minh Mát-xđa là giải pháp đối phó với tình trạng nóng lên do biến đổi khí hậu và giúp ngăn chặn ô nhiễm môi trường. Đây là hình mẫu về đô thị sinh thái hiện đại cho thế giới.",
-                    "questions": [
-                        { "q": "Địa điểm, thời gian khởi công, mục đích của dự án?", "a": "<b>Địa điểm:</b> Ốc đảo Mát-xđa (UAE). <b>Thời gian:</b> Năm 2008. <b>Mục đích:</b> Biến Mát-xđa trở thành thành phố không các-bô-níc đầu tiên trên thế giới." },
-                        { "q": "Thiết kế tự vận hành bằng năng lượng mặt trời?", "a": "Sử dụng những chiếc ô hình hoa hướng dương khổng lồ. Ban ngày mở ra lưu trữ năng lượng và che nắng, ban đêm khép lại toả nhiệt và cung cấp điện cho thành phố." },
-                        { "q": "Cách đối phó với tình trạng nóng lên?", "a": "Các tòa nhà chụm lại với nhau tạo lối đi giúp không khí lưu thông; xây tháp gió để lấy không khí mát trên cao mang vào thành phố." },
-                        { "q": "Chi tiết giúp ngăn chặn ô nhiễm môi trường?", "a": "Công viên, khu thương mại ngập tràn màu xanh; khuyến khích đi bộ, xe đạp, phương tiện công cộng chạy bằng điện mặt trời." },
-                        { "q": "Ý nghĩa của việc truyền cảm hứng cho nước khác?", "a": "Mát-xđa là mô hình kiểu mẫu tốt, cho thấy con người rất quan tâm đến việc xây dựng thành phố chống biến đổi khí hậu và bảo vệ môi trường." }
-                    ]
-        },
-        "quiz": {
-            "setting": { "pick": 5 },
-            "questions": [
-                { "q": "Thành phố thông minh Mát-xđa thuộc quốc gia nào?", "a": ["Ả Rập Xê Út", "Các Tiểu vương quốc Ả Rập Thống nhất (UAE)", "Ca-ta", "I-ran"], "c": 1 },
-                { "q": "Dự án thành phố Mát-xđa được khởi công vào năm nào?", "a": ["2000", "2005", "2008", "2010"], "c": 2 },
-                { "q": "Mục tiêu chính của dự án Mát-xđa là gì?", "a": ["Trở thành thành phố giàu nhất thế giới", "Trở thành thành phố không các-bô-níc đầu tiên trên thế giới", "Trở thành thành phố lớn nhất thế giới", "Trở thành trung tâm du lịch của châu Á"], "c": 1 },
-                { "q": "Điểm nhấn trong thiết kế của thành phố là công trình có hình dạng gì?", "a": ["Hình kim tự tháp", "Hình cánh buồm", "Những chiếc ô hình hoa hướng dương", "Hình những cây cọ"], "c": 2 },
-                { "q": "Vào ban đêm, những chiếc ô khổng lồ có chức năng gì?", "a": ["Che mưa", "Chiếu sáng bằng đèn LED", "Khép lại, toả nhiệt và cung cấp điện năng lượng mặt trời", "Mở ra để hứng sương"], "c": 2 },
-                { "q": "Để giảm nhiệt độ mùa hè, các tòa nhà ở Mát-xđa được bố trí như thế nào?", "a": ["Xây cách xa nhau", "Thiết kế chụm lại với nhau, có lối đi ở giữa", "Xây ngầm dưới lòng đất", "Xây rất cao để đón gió"], "c": 1 },
-                { "q": "Chức năng của 'tháp gió' được xây dựng trong thành phố là gì?", "a": ["Để quan sát toàn cảnh thành phố", "Để phát sóng wifi", "Lấy dòng không khí mát mẻ trên cao mang vào thành phố", "Để trang trí"], "c": 2 },
-                { "q": "Các công viên và khu thương mại ở đây được xây dựng theo mô hình nào?", "a": ["Khu vườn Châu Âu", "Khu vườn Ả Rập truyền thống", "Khu rừng nhiệt đới", "Công viên nước"], "c": 1 },
-                { "q": "Phương tiện giao thông nào KHÔNG được khuyến khích sử dụng tại Mát-xđa?", "a": ["Xe đạp", "Đi bộ", "Xe ô tô chạy bằng xăng dầu", "Phương tiện công cộng chạy bằng điện mặt trời"], "c": 2 },
-                { "q": "Thành phố Mát-xđa được ví như cái gì nằm giữa sa mạc?", "a": ["Một viên ngọc", "Một con tàu", "Một ốc đảo", "Một ngọn núi"], "c": 2 },
-                { "q": "Mát-xđa đã truyền cảm hứng cho các dự án phát triển nhà ở những nước nào?", "a": ["Mỹ và Pháp", "Anh và Bồ Đào Nha", "Nhật Bản và Hàn Quốc", "Đức và Ý"], "c": 1 },
-                { "q": "Vì sao gọi Mát-xđa là 'thành phố thông minh'?", "a": ["Vì cư dân ở đây rất thông minh", "Vì có nhiều trường đại học", "Sử dụng công nghệ tiên tiến để tự vận hành năng lượng và bảo vệ môi trường", "Vì có nhiều máy tính"], "c": 2 },
-                { "q": "Việc các tòa nhà chụm lại với nhau có tác dụng gì về mặt không khí?", "a": ["Ngăn cản gió bão", "Giúp không khí lưu thông dễ dàng", "Giữ nhiệt độ ấm áp", "Tạo ra sương mù"], "c": 1 },
-                { "q": "Năng lượng chính được sử dụng để vận hành thành phố là gì?", "a": ["Năng lượng gió", "Năng lượng mặt trời", "Năng lượng hạt nhân", "Năng lượng thủy điện"], "c": 1 },
-                { "q": "Nội dung chính của bài đọc là gì?", "a": ["Giới thiệu về vẻ đẹp của sa mạc", "Quảng cáo du lịch cho UAE", "Giới thiệu về thành phố thông minh Mát-xđa - giải pháp chống biến đổi khí hậu", "Cách xây dựng nhà ở sa mạc"], "c": 2 }
-            ]
+                    "meaning": "Thành phố thông minh Mát-xđa là giải pháp đối phó với tình trạng nóng lên do biến đổi khí hậu và giúp ngăn chặn ô nhiễm môi trường. Đây là hình mẫu về đô thị sinh thái hiện đại cho thế giới.",
+                        "questions": [
+                            { "q": "Địa điểm, thời gian khởi công, mục đích của dự án?", "a": "<b>Địa điểm:</b> Ốc đảo Mát-xđa (UAE). <b>Thời gian:</b> Năm 2008. <b>Mục đích:</b> Biến Mát-xđa trở thành thành phố không các-bô-níc đầu tiên trên thế giới." },
+                            { "q": "Thiết kế tự vận hành bằng năng lượng mặt trời?", "a": "Sử dụng những chiếc ô hình hoa hướng dương khổng lồ. Ban ngày mở ra lưu trữ năng lượng và che nắng, ban đêm khép lại toả nhiệt và cung cấp điện cho thành phố." },
+                            { "q": "Cách đối phó với tình trạng nóng lên?", "a": "Các tòa nhà chụm lại với nhau tạo lối đi giúp không khí lưu thông; xây tháp gió để lấy không khí mát trên cao mang vào thành phố." },
+                            { "q": "Chi tiết giúp ngăn chặn ô nhiễm môi trường?", "a": "Công viên, khu thương mại ngập tràn màu xanh; khuyến khích đi bộ, xe đạp, phương tiện công cộng chạy bằng điện mặt trời." },
+                            { "q": "Ý nghĩa của việc truyền cảm hứng cho nước khác?", "a": "Mát-xđa là mô hình kiểu mẫu tốt, cho thấy con người rất quan tâm đến việc xây dựng thành phố chống biến đổi khí hậu và bảo vệ môi trường." }
+                        ]
+            },
+            "quiz": {
+                "setting": { "pick": 5 },
+                "questions": [
+                    { "q": "Thành phố thông minh Mát-xđa thuộc quốc gia nào?", "a": ["Ả Rập Xê Út", "Các Tiểu vương quốc Ả Rập Thống nhất (UAE)", "Ca-ta", "I-ran"], "c": 1 },
+                    { "q": "Dự án thành phố Mát-xđa được khởi công vào năm nào?", "a": ["2000", "2005", "2008", "2010"], "c": 2 },
+                    { "q": "Mục tiêu chính của dự án Mát-xđa là gì?", "a": ["Trở thành thành phố giàu nhất thế giới", "Trở thành thành phố không các-bô-níc đầu tiên trên thế giới", "Trở thành thành phố lớn nhất thế giới", "Trở thành trung tâm du lịch của châu Á"], "c": 1 },
+                    { "q": "Điểm nhấn trong thiết kế của thành phố là công trình có hình dạng gì?", "a": ["Hình kim tự tháp", "Hình cánh buồm", "Những chiếc ô hình hoa hướng dương", "Hình những cây cọ"], "c": 2 },
+                    { "q": "Vào ban đêm, những chiếc ô khổng lồ có chức năng gì?", "a": ["Che mưa", "Chiếu sáng bằng đèn LED", "Khép lại, toả nhiệt và cung cấp điện năng lượng mặt trời", "Mở ra để hứng sương"], "c": 2 },
+                    { "q": "Để giảm nhiệt độ mùa hè, các tòa nhà ở Mát-xđa được bố trí như thế nào?", "a": ["Xây cách xa nhau", "Thiết kế chụm lại với nhau, có lối đi ở giữa", "Xây ngầm dưới lòng đất", "Xây rất cao để đón gió"], "c": 1 },
+                    { "q": "Chức năng của 'tháp gió' được xây dựng trong thành phố là gì?", "a": ["Để quan sát toàn cảnh thành phố", "Để phát sóng wifi", "Lấy dòng không khí mát mẻ trên cao mang vào thành phố", "Để trang trí"], "c": 2 },
+                    { "q": "Các công viên và khu thương mại ở đây được xây dựng theo mô hình nào?", "a": ["Khu vườn Châu Âu", "Khu vườn Ả Rập truyền thống", "Khu rừng nhiệt đới", "Công viên nước"], "c": 1 },
+                    { "q": "Phương tiện giao thông nào KHÔNG được khuyến khích sử dụng tại Mát-xđa?", "a": ["Xe đạp", "Đi bộ", "Xe ô tô chạy bằng xăng dầu", "Phương tiện công cộng chạy bằng điện mặt trời"], "c": 2 },
+                    { "q": "Thành phố Mát-xđa được ví như cái gì nằm giữa sa mạc?", "a": ["Một viên ngọc", "Một con tàu", "Một ốc đảo", "Một ngọn núi"], "c": 2 },
+                    { "q": "Mát-xđa đã truyền cảm hứng cho các dự án phát triển nhà ở những nước nào?", "a": ["Mỹ và Pháp", "Anh và Bồ Đào Nha", "Nhật Bản và Hàn Quốc", "Đức và Ý"], "c": 1 },
+                    { "q": "Vì sao gọi Mát-xđa là 'thành phố thông minh'?", "a": ["Vì cư dân ở đây rất thông minh", "Vì có nhiều trường đại học", "Sử dụng công nghệ tiên tiến để tự vận hành năng lượng và bảo vệ môi trường", "Vì có nhiều máy tính"], "c": 2 },
+                    { "q": "Việc các tòa nhà chụm lại với nhau có tác dụng gì về mặt không khí?", "a": ["Ngăn cản gió bão", "Giúp không khí lưu thông dễ dàng", "Giữ nhiệt độ ấm áp", "Tạo ra sương mù"], "c": 1 },
+                    { "q": "Năng lượng chính được sử dụng để vận hành thành phố là gì?", "a": ["Năng lượng gió", "Năng lượng mặt trời", "Năng lượng hạt nhân", "Năng lượng thủy điện"], "c": 1 },
+                    { "q": "Nội dung chính của bài đọc là gì?", "a": ["Giới thiệu về vẻ đẹp của sa mạc", "Quảng cáo du lịch cho UAE", "Giới thiệu về thành phố thông minh Mát-xđa - giải pháp chống biến đổi khí hậu", "Cách xây dựng nhà ở sa mạc"], "c": 2 }
+                ]
+            }
         }
     }
 }
