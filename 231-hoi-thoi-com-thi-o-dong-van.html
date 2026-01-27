@@ -107,7 +107,7 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-    <!-- Header -->
+            <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -129,7 +129,7 @@
                             ĐIỂM:</span>
                         <span
                             class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">HƯƠNG
-                            SẮC TRĂM MIỀN</span>
+                                SẮC TRĂM MIỀN</span>
                     </div>
                 </div>
             </div>
@@ -181,26 +181,26 @@
     <main class="container mx-auto px-4 py-4">
 
 
-        <!-- Tab & Audio Header -->
-        <div
-            class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-200 mb-4 bg-white rounded-t-2xl overflow-hidden shadow-sm">
-            <div class="flex-1 flex">
+                <!-- Tab & Audio Header -->
+        <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
+            <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
-                    class="tab-btn active flex-1 py-3 text-center font-bold text-gray-500 transition-all hover:bg-orange-50 border-r border-gray-100">
-                    1. Bài học
+                    class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">
+                    1. Đọc và tìm hiểu bài
                 </button>
                 <button onclick="switchTab('quiz')" id="btn-quiz"
-                    class="tab-btn flex-1 py-3 text-center font-bold text-gray-500 transition-all hover:bg-orange-50">
+                    class="tab-btn flex-1 py-4 text-center font-black text-base text-gray-400 transition-all uppercase tracking-wider">
                     2. Luyện tập
                 </button>
             </div>
 
-            <div id="audio-container" class="p-2 md:pr-4">
+            <div id="audio-container"
+                class="p-2 md:px-4 flex items-center bg-blue-50/20 border-t md:border-t-0 md:border-l border-gray-100/50">
                 <div
-                    class="flex items-center space-x-3 bg-blue-50/50 rounded-full p-1 pr-6 border border-blue-100 shadow-sm transition-all hover:bg-blue-50">
+                    class="flex items-center space-x-3 bg-white/60 backdrop-blur-md rounded-xl p-1.5 pr-4 border border-white shadow-inner">
                     <button id="audioControl" onclick="toggleAudio()"
-                        class="w-11 h-11 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-all shadow-md active:scale-95">
-                        <svg id="playIcon" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                        class="w-9 h-9 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-all shadow-md shadow-blue-200">
+                        <svg id="playIcon" class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M6 4l10 6-10 6V4z"></path>
                         </svg>
                         <svg id="pauseIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24">
@@ -208,19 +208,20 @@
                         </svg>
                     </button>
                     <div class="flex flex-col">
-                        <p class="text-[11px] font-black text-blue-600 uppercase tracking-widest leading-none mb-1">
-                            NGHE ĐỌC MẪU</p>
-                        <p id="audioStatus" class="text-[12px] text-gray-400 font-bold italic leading-none">Đang dừng...
-                        </p>
+                        <span
+                            class="text-[9px] font-black text-blue-600 uppercase tracking-widest leading-none mb-0.5 whitespace-nowrap">ĐỌC
+                            MẪU</span>
+                        <span id="audioStatus"
+                            class="text-[10px] text-gray-400 font-bold italic leading-none whitespace-nowrap">Đang
+                            dừng...</span>
                     </div>
                 </div>
                 <audio id="lessonAudio">
-                    <source src="am_thanh/hoithoicomthi.wav" type="audio/wav">
+                    <source src="am_thanh/hoithoicomthi.wav" type="audio/mpeg">
                 </audio>
             </div>
         </div>
-
-        <!-- TAB 1: BÀI HỌC -->
+        <!-- TAB 1: 1. Đọc và tìm hiểu bài -->
         <div id="tab-lesson" class="tab-content active">
 
             <div class="flex flex-col lg:flex-row gap-8">
@@ -230,8 +231,11 @@
                         <div class="p-6 md:p-10 bg-paper rounded-2xl shadow-inner border border-gray-100">
                             <div class="serif-font text-gray-800 text-justify">
                                 <h1
-                                    class="text-3xl font-black mb-6 text-orange-900 text-center uppercase tracking-tight">
-                                    Hội thổi cơm thi ở Đồng Vân</h1>
+                                    class="text-3xl md:text-4xl font-black text-blue-800 mb-6 uppercase italic tracking-tight flex items-center justify-center text-center">
+                                    <span
+                                        class="bg-blue-600 text-white px-4 py-1 rounded-xl mr-4 not-italic text-lg shrink-0">ĐỌC</span>
+                                    <span>Hội thổi cơm thi ở Đồng Vân</span>
+                                </h1>
 
                                 <p class="mb-4">
                                     Hội thổi cơm thi ở làng Đồng Vân bắt nguồn từ các cuộc trẩy quân đánh giặc của người
@@ -404,23 +408,30 @@
         <div id="tab-quiz" class="tab-content">
             <div
                 class="max-w-4xl mx-auto bg-white rounded-[32px] shadow-xl border border-orange-100 overflow-hidden min-h-[500px] flex flex-col">
-                                                <!-- Registration -->
-                <div id="quiz-registration" class="p-8 md:p-12 flex flex-col items-center justify-center flex-grow text-center">
-                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl flex items-center justify-center text-white mb-6 shadow-xl shadow-blue-200 transform -rotate-3">
+                <!-- Registration -->
+                <div id="quiz-registration"
+                    class="p-8 md:p-12 flex flex-col items-center justify-center flex-grow text-center">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl flex items-center justify-center text-white mb-6 shadow-xl shadow-blue-200 transform -rotate-3">
                         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                            </path>
                         </svg>
                     </div>
                     <h2 class="text-3xl font-black text-gray-800 mb-3 tracking-tight">Đăng ký luyện tập</h2>
-                    <p class="text-gray-500 mb-10 max-w-sm font-bold">Hãy điền thông tin để bắt đầu thử thách kiến thức nhé!</p>
+                    <p class="text-gray-500 mb-10 max-w-sm font-bold">Hãy điền thông tin để bắt đầu thử thách kiến thức
+                        nhé!</p>
 
                     <form onsubmit="startQuiz(event)" class="w-full max-w-sm space-y-5">
                         <div class="relative group">
-                            <input type="text" id="studentName" required placeholder="Họ và tên của em" class="w-full px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold placeholder:text-gray-300 shadow-sm">
+                            <input type="text" id="studentName" required placeholder="Họ và tên của em"
+                                class="w-full px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold placeholder:text-gray-300 shadow-sm">
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
-                            <select id="studentClass" required class="px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none">
+                            <select id="studentClass" required
+                                class="px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none">
                                 <option value="">Chọn Lớp</option>
                                 <option value="5/1">5/1</option>
                                 <option value="5/2">5/2</option>
@@ -429,15 +440,18 @@
                                 <option value="5/5">5/5</option>
                             </select>
 
-                            <select id="schoolSelect" required onchange="checkSchool()" class="px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none">
+                            <select id="schoolSelect" required onchange="checkSchool()"
+                                class="px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all font-bold text-gray-700 shadow-sm appearance-none">
                                 <option value="Tiểu học Đỗ Văn Nại">TH Đỗ Văn Nại</option>
                                 <option value="Khác">Trường khác...</option>
                             </select>
                         </div>
 
-                        <input type="text" id="otherSchool" placeholder="Tên trường của em" class="hidden w-full px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white transition-all font-bold shadow-sm">
+                        <input type="text" id="otherSchool" placeholder="Tên trường của em"
+                            class="hidden w-full px-6 py-4 rounded-2xl bg-white/50 border-2 border-transparent focus:border-blue-500 focus:bg-white transition-all font-bold shadow-sm">
 
-                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-lg uppercase tracking-wider">
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 text-lg uppercase tracking-wider">
                             Bắt đầu ngay
                         </button>
                     </form>
@@ -494,7 +508,8 @@
                     <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Hoàn thành bài tập!</h2>
                     <p class="text-gray-500 mb-6 max-w-md font-medium" id="resultMsg">Em đã nỗ lực hết mình rồi đấy!</p>
                     <div class="mb-8 text-blue-600 font-black text-sm uppercase tracking-widest">Tự động quay lại sau
-                        <span id="countdown">5</span> giây</div>
+                        <span id="countdown">5</span> giây
+                    </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
                         <button onclick="restartQuiz()"
