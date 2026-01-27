@@ -160,7 +160,7 @@
         .reading-content p {
             text-indent: 2rem;
             margin-bottom: 1.5rem;
-            text-align: justify;
+            text-align: left;
         }
 
         /* Success Modal Styles */
@@ -206,7 +206,7 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-    <!-- Header -->
+            <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -279,12 +279,12 @@
 
     <main class="container mx-auto px-4 py-2">
 
-        <!-- Tab & Audio Header -->
+                <!-- Tab & Audio Header -->
         <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
             <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
                     class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">
-                    1. Bài học
+                    1. Đọc và tìm hiểu bài
                 </button>
                 <button onclick="switchTab('quiz')" id="btn-quiz"
                     class="tab-btn flex-1 py-4 text-center font-black text-base text-gray-400 transition-all uppercase tracking-wider">
@@ -319,8 +319,7 @@
                 </audio>
             </div>
         </div>
-
-        <!-- TAB 1: BÀI HỌC -->
+        <!-- TAB 1: 1. Đọc và tìm hiểu bài -->
         <div id="tab-lesson" class="tab-content active">
             <div class="flex flex-col lg:flex-row gap-6">
                 <!-- Cột trái (70%) - Bài đọc -->
