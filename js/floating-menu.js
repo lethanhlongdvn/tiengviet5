@@ -464,212 +464,210 @@ const curriculumData = {
                         { "title": "Viết: Viết đoạn văn thuyết minh", "url": "#" },
                         { "title": "Nói và nghe: Thuyết trình: Giới thiệu địa phương em", "url": "#" }
                     ]
+                },
+                {
+                    "id": 25, "name": "Tuần 25",
+                    "lessons": [
+                        {
+                            "title": "Bài 13: Đàn T'rưng - Tiếng ca đại ngàn", "sections": [
+                                { "title": "Đọc: Đàn T'rưng - Tiếng ca đại ngàn", "url": "lesson_viewer.html?id=251-dan-t'rung-tieng-ca-dai-ngan" },
+                                { "title": "Luyện từ & Câu: Luyện tập liên kết câu", "url": "#" },
+                                { "title": "Viết: Viết bài văn thuyết minh", "url": "#" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 14: Đường quê Đồng Tháp Mười", "sections": [
+                                { "title": "Đọc: Đường quê Đồng Tháp Mười", "url": "lesson_viewer.html?id=252-duong-que-dong-thap-muoi" },
+                                { "title": "Viết: Đánh giá, chỉnh sửa bài văn thuyết minh", "url": "#" },
+                                { "title": "Khác: Đọc mở rộng", "url": "#" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 26, "name": "Tuần 26",
+                    "lessons": [
+                        {
+                            "title": "Bài 15: Xuồng ba lá quê tôi", "sections": [
+                                { "title": "Đọc: Xuồng ba lá quê tôi", "url": "lesson_viewer.html?id=261-xuong-ba-la-que-toi" },
+                                { "title": "Luyện từ & Câu: Ôn tập về liên kết câu", "url": "#" },
+                                { "title": "Viết: Tìm hiểu cách viết báo cáo công việc", "url": "#" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 16: Về thăm Đất Mũi", "sections": [
+                                { "title": "Đọc: Về thăm Đất Mũi", "url": "lesson_viewer.html?id=262-ve-tham-dat-mui" },
+                                { "title": "Nói và nghe: Kể chuyện: Về thăm Đất Mũi", "url": "#" },
+                                { "title": "Khác: Đọc mở rộng", "url": "#" }
+                            ]
+                        }
+                    ]
                 }
             ]
         },
         {
-            "id": 25, "name": "Tuần 25",
-            "lessons": [
+            "theme": "Ôn tập giữa học kỳ 2",
+            "weeks": [
                 {
-                    "title": "Bài 13: Đàn T'rưng - Tiếng ca đại ngàn", "sections": [
-                        { "title": "Đọc: Đàn T'rưng - Tiếng ca đại ngàn", "url": "lesson_viewer.html?id=251-dan-t'rung-tieng-ca-dai-ngan" },
-                        { "title": "Luyện từ & Câu: Luyện tập liên kết câu", "url": "#" },
-                        { "title": "Viết: Viết bài văn thuyết minh", "url": "#" }
-                    ]
-                },
-                {
-                    "title": "Bài 14: Đường quê Đồng Tháp Mười", "sections": [
-                        { "title": "Đọc: Đường quê Đồng Tháp Mười", "url": "lesson_viewer.html?id=252-duong-que-dong-thap-muoi" },
-                        { "title": "Viết: Đánh giá, chỉnh sửa bài văn thuyết minh", "url": "#" },
-                        { "title": "Khác: Đọc mở rộng", "url": "#" }
+                    "id": 27, "name": "Tuần 27: Ôn tập", "lessons": [
+                        { "title": "Ôn tập giữa HK2", "url": "on-tap-hk2-giua.html" }
                     ]
                 }
             ]
         },
         {
-            "id": 26, "name": "Tuần 26",
-            "lessons": [
+            "theme": "Chủ điểm 7: Tiếp bước cha ông",
+            "weeks": [
                 {
-                    "title": "Bài 15: Xuồng ba lá quê tôi", "sections": [
-                        { "title": "Đọc: Xuồng ba lá quê tôi", "url": "lesson_viewer.html?id=261-xuong-ba-la-que-toi" },
-                        { "title": "Luyện từ & Câu: Ôn tập về liên kết câu", "url": "#" },
-                        { "title": "Viết: Tìm hiểu cách viết báo cáo công việc", "url": "#" }
+                    "id": 28, "name": "Tuần 28",
+                    "lessons": [
+                        {
+                            "title": "Bài 17: Nghìn năm văn hiến", "sections": [
+                                { "title": "Đọc: Nghìn năm văn hiến", "url": "lesson_viewer.html?id=281-nghin-nam-van-hien" },
+                                { "title": "Luyện từ & Câu: Mở rộng vốn từ: Truyền thống", "url": "#" },
+                                { "title": "Viết: Tìm hiểu cách viết bài văn tả người", "url": "#" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 18: Người thầy của muôn đời", "sections": [
+                                { "title": "Đọc: Người thầy của muôn đời", "url": "lesson_viewer.html?id=282-nguoi-thay-cua-muon-doi" },
+                                { "title": "Nói & Nghe: Kể chuyện về truyền thống tốt đẹp", "url": "#" },
+                                { "title": "Khác: Đọc mở rộng", "url": "#" }
+                            ]
+                        }
                     ]
                 },
                 {
-                    "title": "Bài 16: Về thăm Đất Mũi", "sections": [
-                        { "title": "Đọc: Về thăm Đất Mũi", "url": "lesson_viewer.html?id=262-ve-tham-dat-mui" },
-                        { "title": "Nói và nghe: Kể chuyện: Về thăm Đất Mũi", "url": "#" },
-                        { "title": "Khác: Đọc mở rộng", "url": "#" }
+                    "id": 29, "name": "Tuần 29",
+                    "lessons": [
+                        {
+                            "title": "Bài 19: Danh y Tuệ Tĩnh", "sections": [
+                                { "title": "Đọc: Danh y Tuệ Tĩnh", "url": "lesson_viewer.html?id=291-danh-y-tue-tinh" },
+                                { "title": "Luyện từ & Câu: Thay thế từ ngữ để liên kết câu", "url": "#" },
+                                { "title": "Viết: Viết mở bài và kết bài cho bài văn tả người", "url": "#" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 20: Cụ Đồ Chiểu", "sections": [
+                                { "title": "Đọc: Cụ Đồ Chiểu", "url": "lesson_viewer.html?id=292-cu-do-chieu" },
+                                { "title": "Viết: Lập dàn ý cho báo cáo công việc", "url": "#" },
+                                { "title": "Khác: Đọc mở rộng", "url": "#" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 30, "name": "Tuần 30",
+                    "lessons": [
+                        {
+                            "title": "Bài 21: Anh hùng Lao động Trần Đại Nghĩa", "sections": [
+                                { "title": "Đọc: Anh hùng Lao động Trần Đại Nghĩa", "url": "lesson_viewer.html?id=301-tran-dai-nghia" },
+                                { "title": "Luyện từ & Câu: Sử dụng từ nối để liên kết câu", "url": "#" },
+                                { "title": "Viết: Viết báo cáo công việc", "url": "#" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 22: Bộ đội về làng", "sections": [
+                                { "title": "Đọc: Bộ đội về làng", "url": "lesson_viewer.html?id=302-bo-doi-ve-lang" },
+                                { "title": "Nói & Nghe: Kể chuyện: Bộ đội về làng", "url": "#" },
+                                { "title": "Khác: Đọc mở rộng", "url": "#" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "theme": "Chủ điểm 8: Thế giới của chúng ta",
+            "weeks": [
+                {
+                    "id": 31, "name": "Tuần 31",
+                    "lessons": [
+                        {
+                            "title": "Bài 23: Về ngôi nhà đang xây", "sections": [
+                                { "title": "Đọc: Về ngôi nhà đang xây", "url": "lesson_viewer.html?id=311-ve-ngoi-nha-dang-xay" },
+                                { "title": "Luyện từ & Câu: Ôn tập về dấu câu", "url": "#" },
+                                { "title": "Viết: Tìm hiểu cách viết biên bản họp", "url": "#" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 24: Việt Nam quê hương ta", "sections": [
+                                { "title": "Đọc: Việt Nam quê hương ta", "url": "lesson_viewer.html?id=312-viet-nam-que-huong-ta" },
+                                { "title": "Viết: Lập dàn ý biên bản họp", "url": "#" },
+                                { "title": "Khác: Đọc mở rộng", "url": "#" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 32, "name": "Tuần 32",
+                    "lessons": [
+                        {
+                            "title": "Bài 25: Bài ca Trái Đất", "sections": [
+                                { "title": "Đọc: Bài ca Trái Đất", "url": "lesson_viewer.html?id=321-bai-ca-trai-dat" },
+                                { "title": "Luyện từ & Câu: Ôn tập về dấu câu (tiếp theo)", "url": "#" },
+                                { "title": "Viết: Viết biên bản họp", "url": "#" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 26: Những con hạc giấy", "sections": [
+                                { "title": "Đọc: Những con hạc giấy", "url": "lesson_viewer.html?id=322-nhung-con-hac-giay" },
+                                { "title": "Nói và nghe: Thuyết trình: Bảo vệ môi trường", "url": "#" },
+                                { "title": "Khác: Đọc mở rộng", "url": "#" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 33, "name": "Tuần 33",
+                    "lessons": [
+                        {
+                            "title": "Bài 27: Một người hùng thầm lặng", "sections": [
+                                { "title": "Đọc: Một người hùng thầm lặng", "url": "lesson_viewer.html?id=331-mot-nguoi-hung-tham-lang" },
+                                { "title": "Luyện từ & Câu: Mở rộng vốn từ: Môi trường", "url": "#" },
+                                { "title": "Viết: Chỉnh sửa biên bản họp", "url": "#" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 28: Giờ Trái Đất", "sections": [
+                                { "title": "Đọc: Giờ Trái Đất", "url": "lesson_viewer.html?id=332-gio-trai-dat" },
+                                { "title": "Viết: Tìm hiểu cách viết đoạn văn nghị luận", "url": "#" },
+                                { "title": "Khác: Đọc mở rộng", "url": "#" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 34, "name": "Tuần 34",
+                    "lessons": [
+                        {
+                            "title": "Bài 29: Điện thoại di động", "sections": [
+                                { "title": "Đọc: Điện thoại di động", "url": "lesson_viewer.html?id=341-dien-thoai-di-dong" },
+                                { "title": "Luyện từ & Câu: Ôn tập về câu ghép", "url": "#" },
+                                { "title": "Viết: Viết đoạn văn nghị luận", "url": "#" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 30: Thành phố thông minh Mát-xđa", "sections": [
+                                { "title": "Đọc: Thành phố thông minh Mát-xđa", "url": "lesson_viewer.html?id=342-thanh-pho-thong-minh-mat-xda" },
+                                { "title": "Nói và nghe: Thảo luận về công nghệ", "url": "#" },
+                                { "title": "Khác: Đọc mở rộng", "url": "#" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "theme": "Ôn tập cuối học kỳ 2",
+            "weeks": [
+                {
+                    "id": 35, "name": "Tuần 35: Ôn tập", "lessons": [
+                        { "title": "Ôn tập và kiểm tra HK2", "url": "on-tap-hk2-cuoi.html" }
                     ]
                 }
             ]
         }
-    ]
-},
-    {
-        "theme": "Ôn tập giữa học kỳ 2",
-        "weeks": [
-            {
-                "id": 27, "name": "Tuần 27: Ôn tập", "lessons": [
-                    { "title": "Ôn tập giữa HK2", "url": "on-tap-hk2-giua.html" }
-                ]
-            }
-        ]
-    },
-    {
-        "theme": "Chủ điểm 7: Tiếp bước cha ông",
-        "weeks": [
-            {
-                "id": 28, "name": "Tuần 28",
-                "lessons": [
-                    {
-                        "title": "Bài 17: Nghìn năm văn hiến", "sections": [
-                            { "title": "Đọc: Nghìn năm văn hiến", "url": "lesson_viewer.html?id=281-nghin-nam-van-hien" },
-                            { "title": "Luyện từ & Câu: Mở rộng vốn từ: Truyền thống", "url": "#" },
-                            { "title": "Viết: Tìm hiểu cách viết bài văn tả người", "url": "#" }
-                        ]
-                    },
-                    {
-                        "title": "Bài 18: Người thầy của muôn đời", "sections": [
-                            { "title": "Đọc: Người thầy của muôn đời", "url": "lesson_viewer.html?id=282-nguoi-thay-cua-muon-doi" },
-                            { "title": "Nói & Nghe: Kể chuyện về truyền thống tốt đẹp", "url": "#" },
-                            { "title": "Khác: Đọc mở rộng", "url": "#" }
-                        ]
-                    }
-                ]
-            },
-            {
-                "id": 29, "name": "Tuần 29",
-                "lessons": [
-                    {
-                        "title": "Bài 19: Danh y Tuệ Tĩnh", "sections": [
-                            { "title": "Đọc: Danh y Tuệ Tĩnh", "url": "lesson_viewer.html?id=291-danh-y-tue-tinh" },
-                            { "title": "Luyện từ & Câu: Thay thế từ ngữ để liên kết câu", "url": "#" },
-                            { "title": "Viết: Viết mở bài và kết bài cho bài văn tả người", "url": "#" }
-                        ]
-                    },
-                    {
-                        "title": "Bài 20: Cụ Đồ Chiểu", "sections": [
-                            { "title": "Đọc: Cụ Đồ Chiểu", "url": "lesson_viewer.html?id=292-cu-do-chieu" },
-                            { "title": "Viết: Lập dàn ý cho báo cáo công việc", "url": "#" },
-                            { "title": "Khác: Đọc mở rộng", "url": "#" }
-                        ]
-                    }
-                ]
-            },
-            {
-                "id": 30, "name": "Tuần 30",
-                "lessons": [
-                    {
-                        "title": "Bài 21: Anh hùng Lao động Trần Đại Nghĩa", "sections": [
-                            { "title": "Đọc: Anh hùng Lao động Trần Đại Nghĩa", "url": "lesson_viewer.html?id=301-tran-dai-nghia" },
-                            { "title": "Luyện từ & Câu: Sử dụng từ nối để liên kết câu", "url": "#" },
-                            { "title": "Viết: Viết báo cáo công việc", "url": "#" }
-                        ]
-                    },
-                    {
-                        "title": "Bài 22: Bộ đội về làng", "sections": [
-                            { "title": "Đọc: Bộ đội về làng", "url": "lesson_viewer.html?id=302-bo-doi-ve-lang" },
-                            { "title": "Nói & Nghe: Kể chuyện: Bộ đội về làng", "url": "#" },
-                            { "title": "Khác: Đọc mở rộng", "url": "#" }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "theme": "Chủ điểm 8: Thế giới của chúng ta",
-        "weeks": [
-            {
-                "id": 31, "name": "Tuần 31",
-                "lessons": [
-                    {
-                        "title": "Bài 23: Về ngôi nhà đang xây", "sections": [
-                            { "title": "Đọc: Về ngôi nhà đang xây", "url": "lesson_viewer.html?id=311-ve-ngoi-nha-dang-xay" },
-                            { "title": "Luyện từ & Câu: Ôn tập về dấu câu", "url": "#" },
-                            { "title": "Viết: Tìm hiểu cách viết biên bản họp", "url": "#" }
-                        ]
-                    },
-                    {
-                        "title": "Bài 24: Việt Nam quê hương ta", "sections": [
-                            { "title": "Đọc: Việt Nam quê hương ta", "url": "lesson_viewer.html?id=312-viet-nam-que-huong-ta" },
-                            { "title": "Viết: Lập dàn ý biên bản họp", "url": "#" },
-                            { "title": "Khác: Đọc mở rộng", "url": "#" }
-                        ]
-                    }
-                ]
-            },
-            {
-                "id": 32, "name": "Tuần 32",
-                "lessons": [
-                    {
-                        "title": "Bài 25: Bài ca Trái Đất", "sections": [
-                            { "title": "Đọc: Bài ca Trái Đất", "url": "lesson_viewer.html?id=321-bai-ca-trai-dat" },
-                            { "title": "Luyện từ & Câu: Ôn tập về dấu câu (tiếp theo)", "url": "#" },
-                            { "title": "Viết: Viết biên bản họp", "url": "#" }
-                        ]
-                    },
-                    {
-                        "title": "Bài 26: Những con hạc giấy", "sections": [
-                            { "title": "Đọc: Những con hạc giấy", "url": "lesson_viewer.html?id=322-nhung-con-hac-giay" },
-                            { "title": "Nói và nghe: Thuyết trình: Bảo vệ môi trường", "url": "#" },
-                            { "title": "Khác: Đọc mở rộng", "url": "#" }
-                        ]
-                    }
-                ]
-            },
-            {
-                "id": 33, "name": "Tuần 33",
-                "lessons": [
-                    {
-                        "title": "Bài 27: Một người hùng thầm lặng", "sections": [
-                            { "title": "Đọc: Một người hùng thầm lặng", "url": "lesson_viewer.html?id=331-mot-nguoi-hung-tham-lang" },
-                            { "title": "Luyện từ & Câu: Mở rộng vốn từ: Môi trường", "url": "#" },
-                            { "title": "Viết: Chỉnh sửa biên bản họp", "url": "#" }
-                        ]
-                    },
-                    {
-                        "title": "Bài 28: Giờ Trái Đất", "sections": [
-                            { "title": "Đọc: Giờ Trái Đất", "url": "lesson_viewer.html?id=332-gio-trai-dat" },
-                            { "title": "Viết: Tìm hiểu cách viết đoạn văn nghị luận", "url": "#" },
-                            { "title": "Khác: Đọc mở rộng", "url": "#" }
-                        ]
-                    }
-                ]
-            },
-            {
-                "id": 34, "name": "Tuần 34",
-                "lessons": [
-                    {
-                        "title": "Bài 29: Điện thoại di động", "sections": [
-                            { "title": "Đọc: Điện thoại di động", "url": "lesson_viewer.html?id=341-dien-thoai-di-dong" },
-                            { "title": "Luyện từ & Câu: Ôn tập về câu ghép", "url": "#" },
-                            { "title": "Viết: Viết đoạn văn nghị luận", "url": "#" }
-                        ]
-                    },
-                    {
-                        "title": "Bài 30: Thành phố thông minh Mát-xđa", "sections": [
-                            { "title": "Đọc: Thành phố thông minh Mát-xđa", "url": "lesson_viewer.html?id=342-thanh-pho-thong-minh-mat-xda" },
-                            { "title": "Nói và nghe: Thảo luận về công nghệ", "url": "#" },
-                            { "title": "Khác: Đọc mở rộng", "url": "#" }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "theme": "Ôn tập cuối học kỳ 2",
-        "weeks": [
-            {
-                "id": 35, "name": "Tuần 35: Ôn tập", "lessons": [
-                    { "title": "Ôn tập và kiểm tra HK2", "url": "on-tap-hk2-cuoi.html" }
-                ]
-            }
-        ]
-    }
     ]
 };
 
