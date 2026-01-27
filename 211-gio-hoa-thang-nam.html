@@ -20,9 +20,23 @@
         :root {
             --primary: #2563eb;
             --primary-light: #eff6ff;
+            --primary-dark: #1e40af;
+            --secondary: #7c3aed;
+            --secondary-light: #ede9fe;
             --accent: #f59e0b;
-            --glass: rgba(255, 255, 255, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.5);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.16);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         .hidden {
@@ -31,12 +45,15 @@
 
         body {
             font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #fef3c7 75%, #fff7ed 100%);
             min-height: 100vh;
+            line-height: 1.6;
+            color: #1f2937;
         }
 
         .serif-font {
             font-family: 'Merriweather', serif;
+            line-height: 1.8;
         }
 
         .bg-paper {
@@ -47,33 +64,61 @@
 
         .glass-card {
             background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            box-shadow: var(--shadow-md);
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .tab-btn.active {
             color: var(--primary);
             background: white;
             box-shadow: inset 0 -3px 0 var(--primary);
+            position: relative;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
         }
 
         .tab-content {
             display: none !important;
-            animation: slideUp 0.4s ease-out;
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .tab-content.active {
@@ -87,36 +132,175 @@
         /* Compact Quiz styles */
         #quiz-container {
             height: calc(100vh - 180px);
-            /* Adjust based on header/footer */
             max-height: 600px;
         }
 
         .option-btn {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1.5px solid #e2e8f0;
+            transition: var(--transition);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .option-btn:hover:not(:disabled)::before {
+            left: 100%;
         }
 
         .option-btn:hover:not(:disabled) {
-            transform: translateX(4px);
+            transform: translateX(8px) scale(1.02);
             border-color: var(--primary);
             background: var(--primary-light);
+            box-shadow: var(--shadow-md);
         }
 
         .option-btn.selected {
             border-color: var(--primary);
             background: var(--primary-light);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+            transform: scale(1.02);
         }
 
-        /* Accordion Custom */
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: 0;
+        }
+
+        .btn > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Special styles for small buttons */
+        .btn.w-9, .btn.w-12 {
+            padding: 0;
+            gap: 0;
+        }
+
+        .btn.w-9::before,
+        .btn.w-12::before {
+            display: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), #6d28d9);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            border: 2px solid #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--primary-dark), var(--primary));
+        }
+
+        @media (max-width: 768px) {
+            .glass-card {
+                border-radius: 16px;
+                margin: 8px;
+            }
+            
+            .tab-btn {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+        }
+    </style>
+        <style>
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .accordion-open .accordion-content {
-            max-height: 500px;
+            max-height: 1000px;
         }
 
         .accordion-open svg {
@@ -127,10 +311,11 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             padding: 1rem;
+            animation: fadeIn 0.3s ease-out;
         }
 
         .modal.active {
@@ -139,31 +324,28 @@
             justify-content: center;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .notebook-paper {
+            background-color: #fff;
+            background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 100% 2.5rem;
+            line-height: 2.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
         }
 
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
+        .notebook-paper:hover {
+            box-shadow: var(--shadow-md);
         }
-
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-
+    </style>
+    <style>
         .reading-content p {
             text-indent: 2rem;
             margin-bottom: 1.5rem;
             text-align: left;
         }
 
-        /* Success Modal Styles */
         .success-modal {
             display: none;
             position: fixed;
@@ -180,7 +362,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .success-card {
             transform: scale(0.9);
             opacity: 0;
@@ -191,22 +372,11 @@
             transform: scale(1);
             opacity: 1;
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 
 <body class="bg-blue-50 text-gray-800">
-
-            <!-- Header -->
+    <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -661,10 +831,7 @@
                     <div class="px-6 py-4 border-t border-gray-50 flex justify-between items-center bg-gray-50/50">
                         <span class="text-xs font-bold text-gray-400 italic">* Chọn đáp án đúng nhất để tiếp tục</span>
                         <div id="quiz-feedback" class="text-sm font-black transition-all opacity-0"></div>
-                        <button id="nextBtn" disabled
-                            class="bg-blue-600 disabled:opacity-30 hover:bg-blue-700 text-white font-black py-3 px-10 rounded-2xl shadow-lg shadow-blue-100 transition-all active:scale-95 uppercase text-sm tracking-widest">
-                            Câu tiếp theo
-                        </button>
+                        <div id="processing" class="text-sm font-black text-blue-600 hidden">Đang xử lý...</div>
                     </div>
                 </div>
 
@@ -732,7 +899,7 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <button onclick="exportToExcel()"
-                        class="bg-green-600 hover:bg-green-700 text-white font-black py-3 px-6 rounded-2xl text-sm flex items-center shadow-lg shadow-green-100 transition-all active:scale-95">
+                        class="btn btn-success font-black py-3 px-6 rounded-2xl text-sm flex items-center shadow-lg transition-all">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -805,9 +972,14 @@
             if (audio) { audio.currentTime = 0; audio.play().catch(e => { }); }
         }
         // --- 1. CONFIG & DATA ---
-        const firebaseConfig = {
+        const firebaseConfig = { 
+            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc", 
+            authDomain: "gamhoctap.firebaseapp.com", 
             databaseURL: "https://gamhoctap-default-rtdb.firebaseio.com/",
-            projectId: "gamhoctap",
+            projectId: "gamhoctap", 
+            storageBucket: "gamhoctap.firebasestorage.app", 
+            messagingSenderId: "833329613932", 
+            appId: "1:833329613932:web:0d8574827bcfe50b535c49" 
         };
         if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
@@ -904,8 +1076,11 @@
         function startQuiz(e) {
             e.preventDefault();
             startTime = new Date();
-            currentQuestions = shuffle([...allQuestions]).slice(0, 5);
-            currentQuestionIndex = 0;
+            
+            // Lấy 8 câu ngẫu nhiên từ allQuestions
+            selectedQuestions = shuffle([...allQuestions]).slice(0, 8);
+            
+            currentIdx = 0;
             score = 0;
             document.getElementById('quiz-registration').classList.add('hidden');
             document.getElementById('quiz-container').classList.remove('hidden');
@@ -914,9 +1089,11 @@
 
         function showQuestion() {
             if (document.getElementById('quiz-feedback')) document.getElementById('quiz-feedback').style.opacity = '0';
-            const q = currentQuestions[currentQuestionIndex];
-            document.getElementById('questionNum').innerText = currentQuestionIndex + 1;
-            document.getElementById('progressText').innerText = `CÂU TRẮC NGHIỆM: ${currentQuestionIndex + 1}/5`;
+            if (document.getElementById('processing')) document.getElementById('processing').classList.add('hidden');
+            
+            const q = selectedQuestions[currentIdx];
+            document.getElementById('questionNum').innerText = currentIdx + 1;
+            document.getElementById('progressText').innerText = `CÂU TRẮC NGHIỆM: ${currentIdx + 1}/8`;
             document.getElementById('questionText').innerText = q.q;
             const area = document.getElementById('optionsArea');
             area.innerHTML = '';
@@ -927,54 +1104,59 @@
                     <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-4 text-xs font-black group-hover:bg-blue-600 group-hover:text-white transition-all">${String.fromCharCode(65 + i)}</span>
                     <span class="flex-1">${opt}</span>
                 `;
-                btn.onclick = () => selectOption(i);
+                btn.onclick = () => selectOption(i, btn);
                 area.appendChild(btn);
             });
-            document.getElementById('nextBtn').disabled = true;
-            document.getElementById('nextBtn').onclick = nextQuestion;
         }
 
         function selectOption(i, btn) {
             const currentQ = selectedQuestions[currentIdx];
             const isCorrect = i === currentQ.c;
             const feedback = document.getElementById('quiz-feedback');
+            const processing = document.getElementById('processing');
+            
             document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+            
+            // Hiển thị processing
+            if (processing) {
+                processing.classList.remove('hidden');
+                processing.innerText = "Đang xử lý...";
+            }
+            
             if (isCorrect) {
                 btn.classList.add('bg-green-50', 'border-green-500');
-                btn.querySelector('div').classList.add('bg-green-600', 'text-white');
+                btn.querySelector('span').classList.add('bg-green-600', 'text-white');
                 if (feedback) { feedback.innerText = "CHÍNH XÁC! 🎉"; feedback.classList.add('text-green-600'); }
-                score += 20;
+                score += 12.5; // 100/8 = 12.5 điểm mỗi câu
             } else {
                 btn.classList.add('bg-red-50', 'border-red-500');
-                btn.querySelector('div').classList.add('bg-red-600', 'text-white');
+                btn.querySelector('span').classList.add('bg-red-600', 'text-white');
                 if (feedback) { feedback.innerText = "SAI RỒI! ❌"; feedback.classList.add('text-red-600'); }
                 const correctBtn = document.querySelectorAll('.option-btn')[currentQ.c];
                 if (correctBtn) correctBtn.classList.add('bg-green-50', 'border-green-500');
             }
+            
             if (feedback) feedback.style.opacity = '1';
+            
             setTimeout(() => {
+                // Ẩn processing khi chuyển câu
+                if (processing) {
+                    processing.classList.add('hidden');
+                }
+                
                 currentIdx++;
-                (currentIdx < 5) ? showQuestion() : showResults();
-            }, 1000);
-        }
-
-        function nextQuestion() {
-            const selected = parseInt(document.getElementById('nextBtn').dataset.selected);
-            if (selected === currentQuestions[currentQuestionIndex].c) score += 20;
-
-            currentQuestionIndex++;
-            if (currentQuestionIndex < 5) {
-                showQuestion();
-            } else {
-                showResults();
-            }
+                if (currentIdx < 8) {
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1500);
         }
 
         function showResults() {
-            endTime = new Date();
             document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('quiz-results').classList.remove('hidden');
-            document.getElementById('scoreText').innerText = score;
+            document.getElementById('scoreText').innerText = Math.round(score);
 
             const circle = document.getElementById('scoreCircle');
             const pct = (score / 100) * 465;
@@ -988,8 +1170,19 @@
                 document.getElementById('resultMsg').innerText = "Em chỉ cần chú ý thêm một chút nữa thôi.";
             } else {
                 document.getElementById('resultTitle').innerText = "Cố gắng lên nhé!";
-                document.getElementById('resultMsg').innerText = "Em nên đọc lại bài và luyện tập thêm một lần nữa.";
+                document.getElementById('resultMsg').innerText = "Hãy đọc lại bài và làm lại nhé.";
             }
+            
+            // Tự động nộp kết quả
+            setTimeout(() => {
+                submitResults();
+            }, 2000);
+            
+            // Chuyển về tab bài học sau 5 giây
+            setTimeout(() => {
+                switchTab('lesson');
+                restartQuiz();
+            }, 7000);
         }
 
         function restartQuiz() {
@@ -1001,37 +1194,39 @@
         // --- 4. FIREBASE & STATS ---
         function submitResults(e) {
             if (e) e.preventDefault();
-            const btn = document.querySelector('#quiz-results button:last-child');
-            if (btn) { btn.innerHTML = "Đang nộp..."; btn.disabled = true; }
+            
             const data = {
-                studentName: document.getElementById('studentName').value,
-                studentClass: document.getElementById('studentClass').value,
+                studentName: document.getElementById('studentName').value || 'Học sinh',
+                studentClass: document.getElementById('studentClass').value || '5/1',
                 school: document.getElementById('schoolSelect').value === 'Khác' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
                 lessonTitle: document.title.replace(' - EduRobot', ''),
-                score: score,
+                score: Math.round(score),
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             };
+            
             let successShown = false;
             const showSuccess = () => {
                 if (successShown) return;
                 successShown = true;
-                document.getElementById('successModal').classList.add('active');
-                document.getElementById('successModal').classList.remove('hidden');
-                celebrate();
-                if (btn) { btn.innerHTML = "NỘP KẾT QUẢ"; btn.disabled = false; }
-                let timeLeft = 5;
-                const countdownEl = document.getElementById('countdown');
-                const timer = setInterval(() => {
-                    timeLeft--;
-                    if (countdownEl) countdownEl.innerText = timeLeft;
-                    if (timeLeft <= 0) { clearInterval(timer); closeSuccessModal(); }
-                }, 1000);
+                console.log('Kết quả đã được lưu:', data);
             };
+            
             const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
+            
             if (window.db || firebase.apps.length) {
                 const database = window.db || firebase.firestore();
-                database.collection("quiz_results").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch((err) => { console.error(err); clearTimeout(dbTimeout); showSuccess(); });
-            } else { clearTimeout(dbTimeout); showSuccess(); }
+                database.collection("quiz_results").add(data).then(() => { 
+                    clearTimeout(dbTimeout); 
+                    showSuccess(); 
+                }).catch((err) => { 
+                    console.error(err); 
+                    clearTimeout(dbTimeout); 
+                    showSuccess(); 
+                });
+            } else { 
+                clearTimeout(dbTimeout); 
+                showSuccess(); 
+            }
         }
 
         function closeSuccessModal() {
@@ -1117,6 +1312,17 @@
             XLSX.writeFile(wb, "KetQua_GioHoaThangNam.xlsx");
         }
     </script>
+
+    <!-- Footer -->
+    <footer class="py-3 px-4 bg-white/30 backdrop-blur-md border-t border-white/50 w-full z-10 flex-none mt-6">
+        <div class="container mx-auto text-center">
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">@ 2026 EduRobot - Hệ thống
+                học tập thông minh</p>
+            <p class="text-xs font-bold text-blue-600 flex items-center justify-center">
+                Phát triển bởi Lê Thành Long
+            </p>
+        </div>
+    </footer>
 
     <!-- Audio Celebration -->
     <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>

@@ -114,7 +114,14 @@ exports.handler = async (event, context) => {
       }
 
       const rawData = await response.json();
-      const content = rawData.choices[0].message.content;
+      let content = rawData.choices[0].message.content;
+
+      // Clean up markdown if present
+      const markdownMatch = content.match(/```json\n([\s\S]*?)\n```/) || content.match(/```([\s\S]*?)```/);
+      if (markdownMatch) {
+        content = markdownMatch[1];
+      }
+
       const analysis = JSON.parse(content);
 
       // Thêm đếm từ phía server để chắc chắn

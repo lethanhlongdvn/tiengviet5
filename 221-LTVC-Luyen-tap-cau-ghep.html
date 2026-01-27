@@ -17,9 +17,23 @@
         :root {
             --primary: #2563eb;
             --primary-light: #eff6ff;
+            --primary-dark: #1e40af;
+            --secondary: #7c3aed;
+            --secondary-light: #ede9fe;
             --accent: #f59e0b;
-            --glass: rgba(255, 255, 255, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.5);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.16);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         .hidden {
@@ -28,12 +42,15 @@
 
         body {
             font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #fef3c7 75%, #fff7ed 100%);
             min-height: 100vh;
+            line-height: 1.6;
+            color: #1f2937;
         }
 
         .serif-font {
             font-family: 'Merriweather', serif;
+            line-height: 1.8;
         }
 
         .bg-paper {
@@ -44,33 +61,61 @@
 
         .glass-card {
             background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            box-shadow: var(--shadow-md);
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .tab-btn.active {
             color: var(--primary);
             background: white;
             box-shadow: inset 0 -3px 0 var(--primary);
+            position: relative;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
         }
 
         .tab-content {
             display: none !important;
-            animation: slideUp 0.4s ease-out;
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .tab-content.active {
@@ -86,22 +131,245 @@
             max-height: 600px;
         }
 
+        .option-btn {
+            transition: var(--transition);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .option-btn:hover:not(:disabled)::before {
+            left: 100%;
+        }
+
         .option-btn:hover:not(:disabled) {
-            transform: translateX(4px);
+            transform: translateX(8px) scale(1.02);
             border-color: var(--primary);
             background: var(--primary-light);
+            box-shadow: var(--shadow-md);
         }
 
         .option-btn.selected {
             border-color: var(--primary);
             background: var(--primary-light);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+            transform: scale(1.02);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: 0;
+        }
+
+        .btn > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Special styles for small buttons */
+        .btn.w-9, .btn.w-12 {
+            padding: 0;
+            gap: 0;
+        }
+
+        .btn.w-9::before,
+        .btn.w-12::before {
+            display: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), #6d28d9);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            border: 2px solid #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--primary-dark), var(--primary));
+        }
+
+        @media (max-width: 768px) {
+            .glass-card {
+                border-radius: 16px;
+                margin: 8px;
+            }
+            
+            .tab-btn {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+        }
+    </style>
+        <style>
+        .word {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 2px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .word::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .word:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .word:hover::after {
+            width: 80%;
+        }
+
+        .word.selected {
+            background-color: rgba(245, 158, 11, 0.2);
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: scale(1.05);
+            animation: pulse 0.3s ease-out;
+        }
+
+        .word.is-correct {
+            background: linear-gradient(135deg, #86efac, #22c55e) !important;
+            color: white !important;
+            border-color: var(--success);
+            animation: pulse 0.5s ease-out;
+        }
+
+        .word.is-wrong {
+            background: linear-gradient(135deg, #fca5a5, #ef4444) !important;
+            color: white !important;
+            border-color: var(--error);
+            animation: shake 0.5s ease-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .slot {
+            border-bottom: 3px dashed var(--accent);
+            color: var(--accent);
+            font-weight: 700;
+            padding: 0 8px;
+            min-width: 60px;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .slot.filled {
+            border-bottom-style: solid;
+            color: var(--success);
         }
 
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .accordion-open .accordion-content {
@@ -116,10 +384,11 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             padding: 1rem;
+            animation: fadeIn 0.3s ease-out;
         }
 
         .modal.active {
@@ -128,55 +397,9 @@
             justify-content: center;
         }
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-
-        .word {
-            display: inline-block;
-            padding: 2px 8px;
-            margin: 0 2px;
-            border-radius: 6px;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .word:hover {
-            background-color: #e0f2fe;
-        }
-
-        .word.selected {
-            background-color: #fef3c7;
-            border-color: #f59e0b;
-        }
-
-        .word.is-correct {
-            background-color: #86efac !important;
-            color: #064e3b;
-            border-color: #22c55e;
-        }
-
-        .word.is-wrong {
-            background-color: #fca5a5 !important;
-            color: #7f1d1d;
-            border-color: #ef4444;
-        }
-
-        .slot {
-            border-bottom: 2px dashed #f59e0b;
-            color: #f59e0b;
-            font-weight: bold;
-            padding: 0 5px;
+        .ai-feedback {
+            animation: slideUp 0.5s ease-out;
+            border-left: 4px solid var(--primary);
         }
     </style>
 </head>
@@ -406,7 +629,7 @@
                                 </div>
                                 <div class="mt-4 flex justify-end">
                                     <button onclick="checkParagraph('p1a')"
-                                        class="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg shadow-blue-200 transition-all active:scale-95"
+                                        class="btn btn-primary w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all"
                                         title="Kiểm tra">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
@@ -586,7 +809,7 @@
                                 </div>
                                 <div class="mt-4 flex justify-end">
                                     <button onclick="checkParagraph('p1b')"
-                                        class="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg shadow-blue-200 transition-all active:scale-95"
+                                        class="btn btn-primary w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all"
                                         title="Kiểm tra">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
@@ -629,7 +852,7 @@
                                         <option value="Hễ-là">Hễ... là...</option>
                                     </select>
                                     <button onclick="check2('q2a')"
-                                        class="bg-orange-500 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg shadow-orange-100 hover:bg-orange-600 hover:-translate-y-0.5 transition-all active:scale-95">✓</button>
+                                        class="btn btn-warning w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all">✓</button>
                                 </div>
                             </div>
 
@@ -651,7 +874,7 @@
                                         <option value="Chẳng những-mà">Chẳng những... mà...</option>
                                     </select>
                                     <button onclick="check2('q2b')"
-                                        class="bg-orange-500 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg shadow-orange-100 hover:bg-orange-600 hover:-translate-y-0.5 transition-all active:scale-95">✓</button>
+                                        class="btn btn-warning w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all">✓</button>
                                 </div>
                             </div>
 
@@ -673,7 +896,7 @@
                                         <option value="mới-đã">mới... đã...</option>
                                     </select>
                                     <button onclick="check2('q2c')"
-                                        class="bg-orange-500 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg shadow-orange-100 hover:bg-orange-600 hover:-translate-y-0.5 transition-all active:scale-95">✓</button>
+                                        class="btn btn-warning w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all">✓</button>
                                 </div>
                             </div>
                         </div>
@@ -707,7 +930,7 @@
                                     <span class="text-xs text-gray-400 font-bold italic">* Cô AI sẽ chấm cả nội dung và
                                         ngữ pháp câu ghép nhé!</span>
                                     <button onclick="askAI('3', 'Đoạn văn về Đoàn thuyền đánh cá:')"
-                                        class="bg-purple-600 text-white px-8 py-3 rounded-2xl font-black shadow-xl shadow-purple-200 hover:bg-purple-700 hover:-translate-y-0.5 transition-all active:scale-95 flex items-center group">
+                                        class="btn btn-secondary px-8 py-3 rounded-2xl font-black shadow-xl flex items-center group">
                                         NỘP BÀI CHẤM ĐIỂM
                                         <svg class="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform" fill="none"
                                             stroke="currentColor" viewBox="0 0 24 24">
@@ -814,7 +1037,7 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-3"><button onclick="exportToExcel()"
-                        class="bg-green-600 hover:bg-green-700 text-white font-black py-3 px-6 rounded-2xl text-sm flex items-center shadow-lg shadow-green-100 transition-all active:scale-95">XUẤT
+                        class="btn btn-success py-3 px-6 rounded-2xl text-sm flex items-center shadow-lg transition-all">XUẤT
                         EXCEL</button><button onclick="closeModal()"
                         class="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-2xl transition-all">X</button>
                 </div>
@@ -1247,6 +1470,22 @@
             }
         }
     </script>
+
+    <!-- Footer -->
+    <footer class="py-3 px-4 bg-white/30 backdrop-blur-md border-t border-white/50 w-full z-10 flex-none mt-6">
+        <div class="container mx-auto text-center">
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">@ 2026 EduRobot - Hệ thống
+                học tập thông minh</p>
+            <p class="text-xs font-bold text-blue-600 flex items-center justify-center">
+                Phát triển bởi Lê Thành Long
+            </p>
+        </div>
+    </footer>
+
+    <!-- Audio Celebration -->
+    <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
+    <script src="js/floating-menu.js"></script>
+    <script src="js/ai-grader.js?v=2"></script>
 </body>
 
 </html>

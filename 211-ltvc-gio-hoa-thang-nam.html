@@ -17,9 +17,23 @@
         :root {
             --primary: #2563eb;
             --primary-light: #eff6ff;
+            --primary-dark: #1e40af;
+            --secondary: #7c3aed;
+            --secondary-light: #ede9fe;
             --accent: #f59e0b;
-            --glass: rgba(255, 255, 255, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.5);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.16);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         .hidden {
@@ -28,12 +42,15 @@
 
         body {
             font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #fef3c7 75%, #fff7ed 100%);
             min-height: 100vh;
+            line-height: 1.6;
+            color: #1f2937;
         }
 
         .serif-font {
             font-family: 'Merriweather', serif;
+            line-height: 1.8;
         }
 
         .bg-paper {
@@ -44,33 +61,61 @@
 
         .glass-card {
             background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            box-shadow: var(--shadow-md);
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .tab-btn.active {
             color: var(--primary);
             background: white;
             box-shadow: inset 0 -3px 0 var(--primary);
+            position: relative;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
         }
 
         .tab-content {
             display: none !important;
-            animation: slideUp 0.4s ease-out;
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .tab-content.active {
@@ -86,22 +131,49 @@
             max-height: 600px;
         }
 
+        .option-btn {
+            transition: var(--transition);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .option-btn:hover:not(:disabled)::before {
+            left: 100%;
+        }
+
         .option-btn:hover:not(:disabled) {
-            transform: translateX(4px);
+            transform: translateX(8px) scale(1.02);
             border-color: var(--primary);
             background: var(--primary-light);
+            box-shadow: var(--shadow-md);
         }
 
         .option-btn.selected {
             border-color: var(--primary);
             background: var(--primary-light);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+            transform: scale(1.02);
         }
 
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .accordion-open .accordion-content {
@@ -116,10 +188,11 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             padding: 1rem;
+            animation: fadeIn 0.3s ease-out;
         }
 
         .modal.active {
@@ -129,54 +202,209 @@
         }
 
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
+            border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            border: 2px solid #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--primary-dark), var(--primary));
         }
 
         .word {
             display: inline-block;
-            padding: 2px 8px;
-            margin: 0 2px;
-            border-radius: 6px;
+            padding: 4px 12px;
+            margin: 2px;
+            border-radius: 8px;
             cursor: pointer;
-            border: 1px solid transparent;
-            transition: all 0.2s;
+            border: 2px solid transparent;
+            transition: var(--transition);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .word::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+            transform: translateX(-50%);
         }
 
         .word:hover {
-            background-color: #e0f2fe;
+            background-color: rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .word:hover::after {
+            width: 80%;
         }
 
         .word.selected {
-            background-color: #fef3c7;
-            border-color: #f59e0b;
+            background-color: rgba(245, 158, 11, 0.2);
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: scale(1.05);
+            animation: pulse 0.3s ease-out;
         }
 
         .word.is-correct {
-            background-color: #86efac !important;
-            color: #064e3b;
-            border-color: #22c55e;
+            background: linear-gradient(135deg, #86efac, #22c55e) !important;
+            color: white !important;
+            border-color: var(--success);
+            animation: pulse 0.5s ease-out;
         }
 
         .word.is-wrong {
-            background-color: #fca5a5 !important;
-            color: #7f1d1d;
-            border-color: #ef4444;
+            background: linear-gradient(135deg, #fca5a5, #ef4444) !important;
+            color: white !important;
+            border-color: var(--error);
+            animation: shake 0.5s ease-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         .slot {
-            border-bottom: 2px dashed #f59e0b;
-            color: #f59e0b;
-            font-weight: bold;
-            padding: 0 5px;
+            border-bottom: 3px dashed var(--accent);
+            color: var(--accent);
+            font-weight: 700;
+            padding: 0 8px;
+            min-width: 60px;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .slot.filled {
+            border-bottom-style: solid;
+            color: var(--success);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: 0;
+        }
+
+        .btn > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Special styles for small buttons */
+        .btn.w-9, .btn.w-12 {
+            padding: 0;
+            gap: 0;
+        }
+
+        .btn.w-9::before,
+        .btn.w-12::before {
+            display: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), #6d28d9);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .ai-feedback {
+            animation: slideUp 0.5s ease-out;
+            border-left: 4px solid var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .glass-card {
+                border-radius: 16px;
+                margin: 8px;
+            }
+            
+            .tab-btn {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            .word {
+                padding: 2px 6px;
+                margin: 1px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -198,20 +426,20 @@
                         class="flex items-center space-x-3 overflow-hidden border-l-0 md:border-l-2 md:border-gray-100 md:pl-6">
                         <div class="flex items-center space-x-2">
                             <span
-                                class="text-[10px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">TUẦN
-                                21</span>
-                            <span
-                                class="text-[11px] font-black uppercase tracking-wider text-blue-800 whitespace-nowrap">BÀI:
-                                GIỎ HOA THÁNG NĂM</span>
-                        </div>
-                        <div class="h-4 w-px bg-gray-200 hidden md:block"></div>
-                        <div class="flex items-center space-x-2">
-                            <span
                                 class="text-[10px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ
                                 ĐIỂM:</span>
                             <span
                                 class="text-[11px] font-black uppercase tracking-wider text-blue-800 truncate max-w-[150px] md:max-w-none">VẺ
                                 ĐẸP CUỘC SỐNG</span>
+                        </div>
+                        <div class="h-4 w-px bg-gray-200 hidden md:block"></div>
+                        <div class="flex items-center space-x-2">
+                            <span
+                                class="text-[10px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">TUẦN
+                                21</span>
+                            <span
+                                class="text-[11px] font-black uppercase tracking-wider text-blue-800 whitespace-nowrap">BÀI:
+                                GIỎ HOA THÁNG NĂM</span>
                         </div>
                     </div>
                 </div>
@@ -242,8 +470,8 @@
         <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
             <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
-                    class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">Giỏ
-                    hoa tháng Năm</button>
+                    class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">1.
+                    Bài học và Luyện tập</button>
                 <button onclick="switchTab('quiz')" id="btn-quiz"
                     class="tab-btn flex-1 py-4 text-center font-black text-base text-gray-400 transition-all uppercase tracking-wider">2.
                     Trắc nghiệm</button>
@@ -312,15 +540,15 @@
                             </p>
                             <div class="flex gap-2 shrink-0">
                                 <button onclick="check1('q1a')"
-                                    class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
-                                    title="Kiểm tra">
+                                    class="btn btn-primary w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
+                                    title="Kiểmtra">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M5 13l4 4L19 7"></path>
                                     </svg>
                                 </button>
                                 <button onclick="reset1('q1a')"
-                                    class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
+                                    class="btn btn-outline w-9 h-9 rounded-lg flex items-center justify-center transition-all"
                                     title="Làm lại">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -345,7 +573,7 @@
                             </p>
                             <div class="flex gap-2 shrink-0">
                                 <button onclick="check1('q1b')"
-                                    class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
+                                    class="btn btn-primary w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
                                     title="Kiểm tra">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -353,7 +581,7 @@
                                     </svg>
                                 </button>
                                 <button onclick="reset1('q1b')"
-                                    class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
+                                    class="btn btn-outline w-9 h-9 rounded-lg flex items-center justify-center transition-all"
                                     title="Làm lại">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -378,7 +606,7 @@
                             </p>
                             <div class="flex gap-2 shrink-0">
                                 <button onclick="check1('q1c')"
-                                    class="bg-blue-600 hover:bg-blue-700 text-white w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
+                                    class="btn btn-primary w-9 h-9 rounded-lg flex items-center justify-center shadow-md transition-all"
                                     title="Kiểm tra">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -386,7 +614,7 @@
                                     </svg>
                                 </button>
                                 <button onclick="reset1('q1c')"
-                                    class="bg-gray-200 hover:bg-gray-300 text-gray-600 w-9 h-9 rounded-lg flex items-center justify-center transition-all"
+                                    class="btn btn-outline w-9 h-9 rounded-lg flex items-center justify-center transition-all"
                                     title="Làm lại">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -424,7 +652,7 @@
                                         <option value="bao nhiêu-bấy nhiêu">bao nhiêu... bấy nhiêu</option>
                                     </select>
                                     <button onclick="check2('q2a')"
-                                        class="bg-orange-500 text-white w-12 h-12 flex items-center justify-center rounded-lg font-black shadow hover:bg-orange-600 transition-all">✓</button>
+                                        class="btn btn-warning w-12 h-12 flex items-center justify-center rounded-lg font-black shadow transition-all">✓</button>
                                 </div>
                             </div>
 
@@ -443,7 +671,7 @@
                                         <option value="bao nhiêu-bấy nhiêu">bao nhiêu... bấy nhiêu</option>
                                     </select>
                                     <button onclick="check2('q2b')"
-                                        class="bg-orange-500 text-white w-12 h-12 flex items-center justify-center rounded-lg font-black shadow hover:bg-orange-600 transition-all">✓</button>
+                                        class="btn btn-warning w-12 h-12 flex items-center justify-center rounded-lg font-black shadow transition-all">✓</button>
                                 </div>
                             </div>
 
@@ -462,7 +690,7 @@
                                         <option value="bao nhiêu-bấy nhiêu">bao nhiêu... bấy nhiêu</option>
                                     </select>
                                     <button onclick="check2('q2c')"
-                                        class="bg-orange-500 text-white w-12 h-12 flex items-center justify-center rounded-lg font-black shadow hover:bg-orange-600 transition-all">✓</button>
+                                        class="btn btn-warning w-12 h-12 flex items-center justify-center rounded-lg font-black shadow transition-all">✓</button>
                                 </div>
                             </div>
                         </div>
@@ -485,7 +713,7 @@
                                             class="flex-1 sm:w-72 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-500 focus:outline-none text-base">
                                         <button
                                             onclick="askAI('3a', 'Vào dịp lễ Mừng xuân, chẳng những trẻ em được vui đùa thoả thích mà')"
-                                            class="bg-purple-600 text-white w-12 h-12 flex items-center justify-center rounded-lg text-sm hover:bg-purple-700 transition-all font-black shadow-md">✓</button>
+                                            class="btn btn-secondary w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
                                     </div>
                                 </div>
                                 <div class="ai-feedback hidden p-4 bg-purple-50 text-purple-800 text-base rounded-lg"
@@ -500,7 +728,7 @@
                                         <input type="text" id="ai-3b" placeholder="Viết tiếp..."
                                             class="flex-1 sm:w-72 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-500 focus:outline-none text-base">
                                         <button onclick="askAI('3b', 'Mặc dù thiên nhiên khắc nghiệt nhưng')"
-                                            class="bg-purple-600 text-white w-12 h-12 flex items-center justify-center rounded-lg text-sm hover:bg-purple-700 transition-all font-black shadow-md">✓</button>
+                                            class="btn btn-secondary w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
                                     </div>
                                 </div>
                                 <div class="ai-feedback hidden p-4 bg-purple-50 text-purple-800 text-base rounded-lg"
@@ -515,7 +743,7 @@
                                         <input type="text" id="ai-3c" placeholder="Viết tiếp..."
                                             class="flex-1 sm:w-72 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-500 focus:outline-none text-base">
                                         <button onclick="askAI('3c', 'Nhờ bố kể những câu chuyện cổ tích mà')"
-                                            class="bg-purple-600 text-white w-12 h-12 flex items-center justify-center rounded-lg text-sm hover:bg-purple-700 transition-all font-black shadow-md">✓</button>
+                                            class="btn btn-secondary w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
                                     </div>
                                 </div>
                                 <div class="ai-feedback hidden p-4 bg-purple-50 text-purple-800 text-base rounded-lg"
@@ -539,7 +767,7 @@
                                         <input type="text" id="ai-4a" placeholder="Đặt câu..."
                                             class="flex-1 sm:w-72 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:outline-none text-base">
                                         <button onclick="askAI('4a')"
-                                            class="bg-green-600 text-white w-12 h-12 flex items-center justify-center rounded-lg text-sm hover:bg-green-700 transition-all font-black shadow-md">✓</button>
+                                            class="btn btn-success w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
                                     </div>
                                 </div>
                                 <div class="ai-feedback hidden p-4 bg-green-50 text-green-800 text-base rounded-lg"
@@ -554,7 +782,7 @@
                                         <input type="text" id="ai-4b" placeholder="Đặt câu..."
                                             class="flex-1 sm:w-72 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:outline-none text-base">
                                         <button onclick="askAI('4b')"
-                                            class="bg-green-600 text-white w-12 h-12 flex items-center justify-center rounded-lg text-sm hover:bg-green-700 transition-all font-black shadow-md">✓</button>
+                                            class="btn btn-success w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
                                     </div>
                                 </div>
                                 <div class="ai-feedback hidden p-4 bg-green-50 text-green-800 text-base rounded-lg"
@@ -571,7 +799,7 @@
                                         <input type="text" id="ai-4c" placeholder="Đặt câu..."
                                             class="flex-1 sm:w-72 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:outline-none text-base">
                                         <button onclick="askAI('4c')"
-                                            class="bg-green-600 text-white w-12 h-12 flex items-center justify-center rounded-lg text-sm hover:bg-green-700 transition-all font-black shadow-md">✓</button>
+                                            class="btn btn-success w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
                                     </div>
                                 </div>
                                 <div class="ai-feedback hidden p-4 bg-green-50 text-green-800 text-base rounded-lg"
@@ -657,9 +885,7 @@
                     <div class="px-6 py-4 border-t border-gray-50 flex justify-between items-center bg-gray-50/50">
                         <span class="text-xs font-bold text-gray-400 italic">* Chọn đáp án đúng nhất để tiếp tục</span>
                         <div id="quiz-feedback" class="text-sm font-black transition-all opacity-0"></div>
-                        <button id="nextBtn" disabled
-                            class="bg-blue-600 disabled:opacity-30 hover:bg-blue-700 text-white font-black py-3 px-10 rounded-2xl shadow-lg shadow-blue-100 transition-all active:scale-95 uppercase text-sm tracking-widest">Câu
-                            tiếp theo</button>
+                        <div id="processing" class="text-sm font-black text-blue-600 hidden">Đang xử lý...</div>
                     </div>
                 </div>
 
@@ -874,6 +1100,8 @@
         }
         function showQuestion() {
             if (document.getElementById('quiz-feedback')) document.getElementById('quiz-feedback').style.opacity = '0';
+            if (document.getElementById('processing')) document.getElementById('processing').classList.add('hidden');
+            
             const q = selectedQuestions[currentIdx];
             document.getElementById('questionNum').innerText = currentIdx + 1;
             document.getElementById('progressText').innerText = `CÂU TRẮC NGHIỆM: ${currentIdx + 1}/8`;
@@ -886,18 +1114,26 @@
                 btn.onclick = () => selectOption(i, btn);
                 area.appendChild(btn);
             });
-            document.getElementById('nextBtn').disabled = true; document.getElementById('nextBtn').onclick = nextQuestion;
         }
         function selectOption(i, btn) {
             const currentQ = selectedQuestions[currentIdx];
             const isCorrect = i === currentQ.c;
             const feedback = document.getElementById('quiz-feedback');
+            const processing = document.getElementById('processing');
+            
             document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+            
+            // Hiển thị processing
+            if (processing) {
+                processing.classList.remove('hidden');
+                processing.innerText = "Đang xử lý...";
+            }
+            
             if (isCorrect) {
                 btn.classList.add('bg-green-50', 'border-green-500');
                 btn.querySelector('div').classList.add('bg-green-600', 'text-white');
                 if (feedback) { feedback.innerText = "CHÍNH XÁC! 🎉"; feedback.classList.add('text-green-600'); }
-                score += 20;
+                score += 12.5; // 100/8 = 12.5 điểm mỗi câu
             } else {
                 btn.classList.add('bg-red-50', 'border-red-500');
                 btn.querySelector('div').classList.add('bg-red-600', 'text-white');
@@ -905,20 +1141,42 @@
                 const correctBtn = document.querySelectorAll('.option-btn')[currentQ.c];
                 if (correctBtn) correctBtn.classList.add('bg-green-50', 'border-green-500');
             }
+            
             if (feedback) feedback.style.opacity = '1';
+            
             setTimeout(() => {
+                // Ẩn processing khi chuyển câu
+                if (processing) {
+                    processing.classList.add('hidden');
+                }
+                
                 currentIdx++;
-                (currentIdx < 5) ? showQuestion() : showResults();
-            }, 1000);
-        }
-        function nextQuestion() {
-            if (parseInt(document.getElementById('nextBtn').dataset.selected) === selectedQuestions[currentIdx].c) score += 12.5;
-            currentIdx++; (currentIdx < 8) ? showQuestion() : showResults();
+                if (currentIdx < 8) {
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1500);
         }
         function showResults() {
-            document.getElementById('quiz-container').classList.add('hidden'); document.getElementById('quiz-results').classList.remove('hidden');
-            const circle = document.getElementById('scoreCircle'); const offset = 465 - (465 * score) / 100; circle.style.strokeDashoffset = offset;
-            document.getElementById('scoreText').innerText = score;
+            document.getElementById('quiz-container').classList.add('hidden'); 
+            document.getElementById('quiz-results').classList.remove('hidden');
+            
+            const circle = document.getElementById('scoreCircle'); 
+            const offset = 465 - (465 * score) / 100; 
+            circle.style.strokeDashoffset = offset;
+            document.getElementById('scoreText').innerText = Math.round(score);
+            
+            // Tự động nộp kết quả
+            setTimeout(() => {
+                submitResults();
+            }, 2000);
+            
+            // Chuyển về tab bài học sau 5 giây
+            setTimeout(() => {
+                switchTab('lesson');
+                restartQuiz();
+            }, 7000);
         }
         function restartQuiz() { document.getElementById('quiz-results').classList.add('hidden'); document.getElementById('quiz-registration').classList.remove('hidden'); }
 
@@ -929,37 +1187,39 @@
 
         function submitResults(e) {
             if (e) e.preventDefault();
-            const btn = document.querySelector('#quiz-results button:last-child');
-            if (btn) { btn.innerHTML = "Đang nộp..."; btn.disabled = true; }
+            
             const data = {
-                studentName: document.getElementById('studentName').value,
-                studentClass: document.getElementById('studentClass').value,
+                studentName: document.getElementById('studentName').value || 'Học sinh',
+                studentClass: document.getElementById('studentClass').value || '5/1',
                 school: document.getElementById('schoolSelect').value === 'Khác' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
                 lessonTitle: document.title.replace(' - EduRobot', ''),
-                score: score,
+                score: Math.round(score),
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             };
+            
             let successShown = false;
             const showSuccess = () => {
                 if (successShown) return;
                 successShown = true;
-                document.getElementById('successModal').classList.add('active');
-                document.getElementById('successModal').classList.remove('hidden');
-                celebrate();
-                if (btn) { btn.innerHTML = "NỘP KẾT QUẢ"; btn.disabled = false; }
-                let timeLeft = 5;
-                const countdownEl = document.getElementById('countdown');
-                const timer = setInterval(() => {
-                    timeLeft--;
-                    if (countdownEl) countdownEl.innerText = timeLeft;
-                    if (timeLeft <= 0) { clearInterval(timer); closeSuccessModal(); }
-                }, 1000);
+                console.log('Kết quả đã được lưu:', data);
             };
+            
             const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
+            
             if (window.db || firebase.apps.length) {
                 const database = window.db || firebase.firestore();
-                database.collection("quiz_results").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch((err) => { console.error(err); clearTimeout(dbTimeout); showSuccess(); });
-            } else { clearTimeout(dbTimeout); showSuccess(); }
+                database.collection("quiz_results").add(data).then(() => { 
+                    clearTimeout(dbTimeout); 
+                    showSuccess(); 
+                }).catch((err) => { 
+                    console.error(err); 
+                    clearTimeout(dbTimeout); 
+                    showSuccess(); 
+                });
+            } else { 
+                clearTimeout(dbTimeout); 
+                showSuccess(); 
+            }
         }
         function closeSuccessModal() {
             document.getElementById('successModal').classList.remove('active');
@@ -986,6 +1246,22 @@
             XLSX.writeFile(wb, "KetQua_LTVC_CachNoiCacVeCauGhep.xlsx");
         }
     </script>
+
+    <!-- Footer -->
+    <footer class="py-3 px-4 bg-white/30 backdrop-blur-md border-t border-white/50 w-full z-10 flex-none mt-6">
+        <div class="container mx-auto text-center">
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">@ 2026 EduRobot - Hệ thống
+                học tập thông minh</p>
+            <p class="text-xs font-bold text-blue-600 flex items-center justify-center">
+                Phát triển bởi Lê Thành Long
+            </p>
+        </div>
+    </footer>
+
+    <!-- Audio Celebration -->
+    <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
+    <script src="js/floating-menu.js"></script>
+    <script src="js/ai-grader.js?v=2"></script>
 </body>
 
 </html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đang tải... - EduRobot</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- SheetJS for Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --primary-dark: #1e40af;
+            --secondary: #7c3aed;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --error: #ef4444;
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #fef3c7 75%, #fff7ed 100%);
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        .serif-font {
+            font-family: 'Merriweather', serif;
+            line-height: 1.8;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-md);
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background: white;
+            box-shadow: inset 0 -3px 0 var(--primary);
+            position: relative;
+        }
+
+        .tab-content {
+            display: none !important;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block !important;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Exercise Styles */
+        .word {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 2px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .word:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .word.selected {
+            background-color: rgba(245, 158, 11, 0.2);
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .word.is-correct {
+            background: linear-gradient(135deg, #86efac, #22c55e) !important;
+            color: white !important;
+        }
+
+        .word.is-wrong {
+            background: linear-gradient(135deg, #fca5a5, #ef4444) !important;
+            color: white !important;
+        }
+
+        .slot {
+            border-bottom: 3px dashed var(--accent);
+            color: var(--accent);
+            font-weight: 700;
+            padding: 0 8px;
+            min-width: 60px;
+            display: inline-block;
+        }
+
+        .slot.filled {
+            border-bottom-style: solid;
+            color: var(--success);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-warning {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 px-4 py-2">
+        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-4">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                    <span class="text-xl font-black">E</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl font-black text-blue-700">EduRobot</span>
+                        <span
+                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide">TV5</span>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-3 border-l-2 border-gray-100 pl-6">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-[10px] font-black uppercase text-gray-400">CHỦ ĐIỂM:</span>
+                            <span class="text-[11px] font-black uppercase text-blue-800 lesson-theme">...</span>
+                        </div>
+                        <div class="h-4 w-px bg-gray-200"></div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-[10px] font-black uppercase text-gray-400 lesson-week">TUẦN ...</span>
+                            <span class="text-[11px] font-black uppercase text-blue-800 lesson-subject">BÀI: ...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="flex space-x-4 text-xs font-bold items-center">
+                <li><a href="index.html" class="text-gray-500 hover:text-blue-600 py-2">Trang chủ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-2">
+        <!-- Tab Navigation -->
+        <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
+            <div class="flex-1 flex bg-white/40">
+                <button onclick="switchTab('lesson')" id="btn-lesson"
+                    class="tab-btn active flex-1 py-4 text-center font-black text-gray-400 uppercase tracking-wider">1.
+                    Bài học & Luyện tập</button>
+                <button onclick="switchTab('quiz')" id="btn-quiz"
+                    class="tab-btn flex-1 py-4 text-center font-black text-gray-400 uppercase tracking-wider">2. Trắc
+                    nghiệm</button>
+            </div>
+            <!-- Audio Player -->
+            <div id="audio-container" class="p-2 md:px-4 flex items-center bg-blue-50/20 border-l border-gray-100/50">
+                <div
+                    class="flex items-center space-x-3 bg-white/60 rounded-xl p-1.5 pr-4 border border-white shadow-inner">
+                    <button onclick="toggleAudio()"
+                        class="w-9 h-9 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center text-white shadow-md">
+                        <svg id="playIcon" class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M6 4l10 6-10 6V4z"></path>
+                        </svg>
+                        <svg id="pauseIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 4h4v16H6zm8 0h4v16h-4z"></path>
+                        </svg>
+                    </button>
+                    <div class="flex flex-col">
+                        <span class="text-[9px] font-black text-blue-600 uppercase">ĐỌC MẪU</span>
+                        <span id="audioStatus" class="text-[10px] text-gray-400 font-bold italic">Đang dừng...</span>
+                    </div>
+                </div>
+                <audio id="lessonAudio"></audio>
+            </div>
+        </div>
+
+        <!-- TAB 1: DYNAMIC CONTENT -->
+        <div id="tab-lesson" class="tab-content active">
+            <div class="max-w-5xl mx-auto space-y-4" id="dynamic-content">
+                <!-- Content will be loaded here via JS -->
+                <div class="text-center py-20">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+                    <p class="mt-4 text-gray-500 font-bold">Đang tải bài học...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: QUIZ PLACEHOLDER -->
+        <div id="tab-quiz" class="tab-content">
+            <div class="glass-card p-10 text-center">
+                <h2 class="text-2xl font-black text-gray-400">Chức năng Trắc nghiệm đang được cập nhật...</h2>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 px-4 mt-8 bg-white/40 backdrop-blur-md border-t border-white/50">
+        <div class="container mx-auto text-center">
+            <p class="text-xs font-black text-gray-400 uppercase tracking-[0.3em] mb-2">© 2026 EduRobot - Hệ thống học
+                tập thông minh</p>
+            <p class="text-sm font-bold text-blue-600">Phát triển bởi Lê Thành Long</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="data/lessons.js"></script> <!-- Load Data First -->
+    <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
+
+    <!-- Core Logic Scripts -->
+    <script src="js/firebase-logic.js"></script> <!-- Init Firebase First -->
+    <script src="js/ai-grader.js"></script>
+    <script src="js/lesson-loader.js"></script> <!-- Main logic depends on above -->
+    <script src="js/floating-menu.js"></script> <!-- Reuse existing AI grader -->
+    <style>
+        .bg-paper {
+            background-color: #fdfbf7;
+            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+
+        .reading-content p {
+            text-indent: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        /* Checkbox/Accordion Logic */
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+    <script>
+        // UI Helpers
+        function switchTab(id) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            const btn = document.getElementById('btn-' + id);
+            const tab = document.getElementById('tab-' + id);
+            if (btn) btn.classList.add('active');
+            if (tab) tab.classList.add('active');
+        }
+
+        // Accordion Helpers (Compatible with standard details/summary but supports custom too if needed)
+        // Original file used custom divs. The new data uses <details> which is native.
+        // But if we want the exact animation we might need specific styles or stick to native.
+        // The migrated data in lessons.js uses <details>, so native behavior works. 
+        // We just need to ensure the arrow rotates.
+
+        const audio = document.getElementById('lessonAudio');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const audioStatus = document.getElementById('audioStatus');
+
+        function toggleAudio() {
+            if (!audio) return;
+            if (audio.paused) {
+                audio.play();
+                if (playIcon) playIcon.classList.add('hidden');
+                if (pauseIcon) pauseIcon.classList.remove('hidden');
+                if (audioStatus) {
+                    audioStatus.innerText = "Đang phát...";
+                    audioStatus.className = "text-[10px] text-green-500 font-bold italic";
+                }
+            } else {
+                audio.pause();
+                if (playIcon) playIcon.classList.remove('hidden');
+                if (pauseIcon) pauseIcon.classList.add('hidden');
+                if (audioStatus) {
+                    audioStatus.innerText = "Đang dừng...";
+                    audioStatus.className = "text-[10px] text-gray-400 font-bold italic";
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
