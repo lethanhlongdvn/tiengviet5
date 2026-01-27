@@ -223,52 +223,67 @@
 
 <body class="bg-blue-50 text-gray-800 min-h-screen flex flex-col overflow-x-hidden">
 
-    <!-- Header -->
+            <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
-                                <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
+        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
-                <div class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
                     <span class="text-xl font-black">E</span>
                 </div>
                 <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
                     <div class="flex items-center space-x-3">
                         <span class="text-2xl font-black text-blue-700">EduRobot</span>
-                        <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TIẾNG VIỆT 5</span>
+                        <span
+                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide whitespace-nowrap">TIẾNG
+                            VIỆT 5</span>
                     </div>
-                
+
                     <div class="flex items-center space-x-2 overflow-hidden">
-                        <span class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ ĐIỂM:</span>
-                        <span class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">VẺ ĐẸP CUỘC SỐNG</span>
+                        <span
+                            class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ
+                            ĐIỂM:</span>
+                        <span
+                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">VẺ
+                            ĐẸP CUỘC SỐNG</span>
                     </div>
                 </div>
             </div>
             <ul class="flex space-x-2 md:space-x-6 text-xs font-bold items-center relative">
                 <!-- Home -->
                 <li>
-                    <a href="index.html" class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
+                    <a href="index.html"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors py-2">
                         Trang chủ
                     </a>
                 </li>
-                
+
                 <!-- Lessons Dropdown -->
                 <li class="relative group">
-                    <button id="top-menu-lesson-btn" class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
+                    <button id="top-menu-lesson-btn"
+                        class="flex items-center text-gray-500 hover:text-blue-600 transition-colors focus:outline-none py-2">
                         Bài học
-                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg class="w-4 h-4 ml-1 transition-transform duration-200" id="top-menu-chevron" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <!-- Dropdown Content (Hidden by default) -->
-                     <div id="top-menu-lessons-dropdown" class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
+                    <div id="top-menu-lessons-dropdown"
+                        class="absolute top-full right-[-100px] md:right-auto md:left-1/2 md:-translate-x-1/2 mt-4 w-[320px] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 hidden max-h-[70vh] overflow-y-auto z-[60] p-2">
                         <!-- Content rendered by floating-menu.js -->
                     </div>
                 </li>
 
                 <!-- Teacher -->
                 <li>
-                    <button onclick="openTeacherStats()" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
+                    <button onclick="openTeacherStats()"
+                        class="text-gray-500 hover:text-blue-600 transition-colors py-2">
                         Giáo viên
                     </button>
                 </li>
-                
+
                 <!-- Contact -->
                 <li>
                     <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors py-2">
@@ -314,7 +329,7 @@
             <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
                     class="tab-btn active flex-1 py-4 text-center font-black text-base text-gray-400 transition-all border-r border-gray-100/50 uppercase tracking-wider">
-                    1. Bài học
+                    Hạt gạo làng ta
                 </button>
                 <button onclick="switchTab('quiz')" id="btn-quiz"
                     class="tab-btn flex-1 py-4 text-center font-black text-base text-gray-400 transition-all uppercase tracking-wider">
@@ -362,56 +377,94 @@
                                 <div
                                     class="poem-container py-12 px-10 bg-blue-50/30 rounded-[40px] border border-blue-100/50 shadow-inner max-w-3xl mx-auto">
                                     <div class="poem-stanza">
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt gạo làng ta</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có vị phù sa</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Của sông Kinh Thầy</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có hương sen thơm</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Trong hồ nước đầy</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có lời mẹ hát</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Ngọt bùi đắng cay...</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt gạo
+                                                làng ta</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có vị phù
+                                                sa</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Của sông
+                                                Kinh Thầy</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có hương
+                                                sen thơm</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Trong hồ
+                                                nước đầy</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có lời mẹ
+                                                hát</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Ngọt bùi
+                                                đắng cay...</span></p>
                                     </div>
 
                                     <div class="poem-stanza">
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt gạo làng ta</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có bão tháng Bảy</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có mưa tháng Ba</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Giọt mồ hôi sa</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Những trưa tháng Sáu</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Nước như ai nấu</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Chết cả cá cờ</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Cua ngoi lên bờ</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Mẹ em xuống cấy...</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt gạo
+                                                làng ta</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có bão
+                                                tháng Bảy</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có mưa
+                                                tháng Ba</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Giọt mồ
+                                                hôi sa</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Những trưa
+                                                tháng Sáu</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Nước như
+                                                ai nấu</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Chết cả cá
+                                                cờ</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Cua ngoi
+                                                lên bờ</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Mẹ em
+                                                xuống cấy...</span></p>
                                     </div>
 
                                     <div class="poem-stanza">
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt gạo làng ta</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Những năm bom Mỹ</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Trút trên mái nhà</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Những năm cây súng</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Theo người đi xa</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Những năm băng đạn</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Vàng như lúa đồng</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Bát cơm mùa gặt</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Thơm hào giao thông...</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt gạo
+                                                làng ta</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Những năm
+                                                bom Mỹ</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Trút trên
+                                                mái nhà</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Những năm
+                                                cây súng</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Theo người
+                                                đi xa</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Những năm
+                                                băng đạn</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Vàng như
+                                                lúa đồng</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Bát cơm
+                                                mùa gặt</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Thơm hào
+                                                giao thông...</span></p>
                                     </div>
 
                                     <div class="poem-stanza">
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt gạo làng ta</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có công các bạn</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Sớm nào chống hạn</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Vục mẻ miệng gàu</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Trưa nào bắt sâu</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Lúa cao rát mặt</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Chiều nào gánh phân</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Quang trành quết đất</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt gạo
+                                                làng ta</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Có công
+                                                các bạn</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Sớm nào
+                                                chống hạn</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Vục mẻ
+                                                miệng gàu</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Trưa nào
+                                                bắt sâu</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Lúa cao
+                                                rát mặt</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Chiều nào
+                                                gánh phân</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Quang
+                                                trành quết đất</span></p>
                                     </div>
 
                                     <div class="poem-stanza col-span-1 md:col-span-2 md:mx-auto">
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt gạo làng ta</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Gửi ra tiền tuyến</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Gửi về phương xa</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Em vui em hát</span></p>
-                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt vàng làng ta.</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt gạo
+                                                làng ta</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Gửi ra
+                                                tiền tuyến</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Gửi về
+                                                phương xa</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Em vui em
+                                                hát</span></p>
+                                        <p><span class="inline-block" style="text-indent: 0; margin-left: 0;">Hạt vàng
+                                                làng ta.</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -761,7 +814,8 @@
                     </div>
                     <h2 class="text-3xl font-black text-gray-800 mb-2" id="resultTitle">Hoàn thành!</h2>
                     <p class="text-gray-500 mb-10" id="resultMsg">
-<div class="mb-8 text-blue-600 font-black text-sm uppercase tracking-widest mt-4">Tự động quay lại sau <span id="countdown">5</span> giây</div>Chúc mừng em đã hoàn thành bài luyện tập.</p>
+                    <div class="mb-8 text-blue-600 font-black text-sm uppercase tracking-widest mt-4">Tự động quay lại
+                        sau <span id="countdown">5</span> giây</div>Chúc mừng em đã hoàn thành bài luyện tập.</p>
 
                     <div class="flex flex-col sm:flex-row justify-center gap-4">
                         <button onclick="restartQuiz()"
@@ -820,7 +874,7 @@
     </main>
 
     <!-- Footer -->
-        <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
+    <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
         <div class="container mx-auto text-center">
             <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">@ 2026 EduRobot - Hệ thống học
                 tập thông minh</p>
@@ -830,12 +884,12 @@
 
     <script>
 
-        function celebrate() { 
-            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#2563eb', '#f59e0b', '#10b981', '#ef4444'] }); 
+        function celebrate() {
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#2563eb', '#f59e0b', '#10b981', '#ef4444'] });
             const audio = document.getElementById('clapSound');
-            if (audio) { audio.currentTime = 0; audio.play().catch(e => {}); }
+            if (audio) { audio.currentTime = 0; audio.play().catch(e => { }); }
         }
-        
+
         function toggleAccordion(button) {
             const item = button.parentElement;
             const isOpen = item.classList.contains('accordion-open');
@@ -1029,93 +1083,54 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        
-            function closeSuccessModal() {
-                document.getElementById('successModal').classList.remove('active');
-                document.getElementById('successModal').classList.add('hidden');
-                restartQuiz();
-                switchTab('lesson');
-            }
 
-            
-            function closeSuccessModal() {
-                document.getElementById('successModal').classList.remove('active');
-                document.getElementById('successModal').classList.add('hidden');
-                restartQuiz();
-                switchTab('lesson');
-            }
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+            document.getElementById('successModal').classList.add('hidden');
+            restartQuiz();
+            switchTab('lesson');
+        }
 
-            function submitResults(e) {
-                if (e) e.preventDefault();
-                const btn = e.target || document.querySelector('#quiz-results button:last-child');
-                if (btn) { btn.innerHTML = "Đang nộp..."; btn.disabled = true; }
-                const data = {
-                    studentName: document.getElementById('studentName').value,
-                    studentClass: document.getElementById('studentClass').value || studentData.studentClass || studentData.className,
-                    school: document.getElementById('schoolSelect').value === 'Khác' || document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
-                    lessonTitle: "Hạt gạo làng ta",
-                    score: score,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                };
-                let successShown = false;
-                const showSuccess = () => {
-                    if (successShown) return;
-                    successShown = true;
-                    const modal = document.getElementById('successModal');
-                    if(modal) {
-                        modal.classList.add('active');
-                        modal.classList.remove('hidden');
-                    }
-                    celebrate();
-                    let timeLeft = 5;
-                    const countdownEl = document.getElementById('countdown');
-                    const timer = setInterval(() => {
-                        timeLeft--;
-                        if (countdownEl) countdownEl.innerText = timeLeft;
-                        if (timeLeft <= 0) { clearInterval(timer); closeSuccessModal(); }
-                    }, 1000);
-                };
-                const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
-                db.collection("diem_tieng_viet_lop5").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch(e => { console.error(e); clearTimeout(dbTimeout); showSuccess(); });
-            }
-            
-                const data = {
-                    studentName: document.getElementById('studentName').value,
-                    studentClass: document.getElementById('studentClass').value || studentData.studentClass || studentData.className,
-                    school: document.getElementById('schoolSelect').value === 'Khác' || document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
-                    lessonTitle: "Hạt gạo làng ta",
-                    score: score,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                };
-                let successShown = false;
-                const showSuccess = () => {
-                    if (successShown) return;
-                    successShown = true;
-                    const modal = document.getElementById('successModal');
-                    if(modal) {
-                        modal.classList.add('active');
-                        modal.classList.remove('hidden');
-                    }
-                    celebrate();
-                    let timeLeft = 5;
-                    const countdownEl = document.getElementById('countdown');
-                    const timer = setInterval(() => {
-                        timeLeft--;
-                        if (countdownEl) countdownEl.innerText = timeLeft;
-                        if (timeLeft <= 0) { clearInterval(timer); closeSuccessModal(); }
-                    }, 1000);
-                };
-                const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
-                db.collection("diem_tieng_viet_lop5").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch(e => { console.error(e); clearTimeout(dbTimeout); showSuccess(); });
-            }
-            );
-                document.getElementById('successModal').classList.add('active');
-            } catch (e) {
-                alert("Lỗi khi gửi kết quả: " + e.message);
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Nộp bài";
-            }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+            document.getElementById('successModal').classList.add('hidden');
+            restartQuiz();
+            switchTab('lesson');
+        }
+
+        function submitResults(e) {
+            if (e) e.preventDefault();
+            const btn = e.target || document.querySelector('#quiz-results button:last-child');
+            if (btn) { btn.innerHTML = "Đang nộp..."; btn.disabled = true; }
+            const data = {
+                studentName: document.getElementById('studentName').value,
+                studentClass: document.getElementById('studentClass').value || studentData.className,
+                school: document.getElementById('schoolSelect').value === 'Khác' || document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
+                lessonTitle: "Hạt gạo làng ta",
+                score: score,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            let successShown = false;
+            const showSuccess = () => {
+                if (successShown) return;
+                successShown = true;
+                const modal = document.getElementById('successModal');
+                if (modal) {
+                    modal.classList.add('active');
+                    modal.classList.remove('hidden');
+                }
+                celebrate();
+                let timeLeft = 5;
+                const countdownEl = document.getElementById('countdown');
+                const timer = setInterval(() => {
+                    timeLeft--;
+                    if (countdownEl) countdownEl.innerText = timeLeft;
+                    if (timeLeft <= 0) { clearInterval(timer); closeSuccessModal(); }
+                }, 1000);
+            };
+            const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
+            db.collection("diem_tieng_viet_lop5").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch(e => { console.error(e); clearTimeout(dbTimeout); showSuccess(); });
         }
 
         async function loadStats() {
@@ -1184,8 +1199,8 @@
         }
     </script>
 
-<audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
-<script src="js/floating-menu.js"></script>
+    <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
+    <script src="js/floating-menu.js"></script>
 </body>
 
 </html>
