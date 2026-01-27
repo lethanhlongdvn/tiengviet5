@@ -1971,16 +1971,15 @@ window.LESSON_DATA = {
             }
         }
     },
-},
     "281-nghin-nam-van-hien": {
-    "title": "Nghìn năm văn hiến",
+        "title": "Nghìn năm văn hiến",
         "week": 28,
-            "subject": "Đọc",
-                "theme": "Nhớ nguồn",
-                    "audio": "am_thanh/nghinnamvanhien.mp3",
-                        "tabs": {
-        "lesson": {
-            "title": "Bài học",
+        "subject": "Đọc",
+        "theme": "Nhớ nguồn",
+        "audio": "am_thanh/nghinnamvanhien.mp3",
+        "tabs": {
+            "lesson": {
+                "title": "Bài học",
                 "blocks": [
                     { "type": "header", "text": "Nghìn năm văn hiến" },
                     {
@@ -2168,38 +2167,38 @@ window.LESSON_DATA = {
                         `
                     }
                 ]
-        },
-        "quiz": {
-            "setting": { "pick": 5 },
-            "questions": [
-                { "q": "Văn Miếu - Quốc Tử Giám được xem là công trình gì đầu tiên của Việt Nam?", "a": ["Thư viện đầu tiên", "Trường đại học đầu tiên", "Bảo tàng đầu tiên", "Cung điện đầu tiên"], "c": 1 },
-                { "q": "Khoa thi tiến sĩ đầu tiên của nước ta được tổ chức vào năm nào?", "a": ["Năm 1010", "Năm 1070", "Năm 1075", "Năm 1442"], "c": 2 },
-                { "q": "Tính đến năm 1919, nước ta đã tổ chức được tổng cộng bao nhiêu khoa thi?", "a": ["104 khoa", "185 khoa", "82 khoa", "38 khoa"], "c": 1 },
-                { "q": "Theo bảng thống kê, triều đại nào tổ chức ít khoa thi nhất?", "a": ["Triều Lý", "Triều Trần", "Triều Hồ (2 khoa)", "Triều Mạc"], "c": 2 },
-                { "q": "Tổng số tiến sĩ đỗ đạt qua các triều đại là bao nhiêu người?", "a": ["1306 người", "1780 người", "2896 người", "3000 người"], "c": 2 },
-                { "q": "Triều đại nào dưới đây KHÔNG có trạng nguyên theo bảng thống kê?", "a": ["Triều Lê và Triều Mạc", "Triều Lý, Triều Hồ và Triều Nguyễn", "Triều Trần và Triều Lê", "Triều Nguyễn và Triều Mạc"], "c": 1 },
-                { "q": "Triều đại nào có số lượng trạng nguyên nhiều nhất?", "a": ["Triều Trần (9 người)", "Triều Mạc (11 người)", "Triều Lê (27 người)", "Triều Lý (0 người)"], "c": 2 },
-                { "q": "Hiện nay tại Văn Miếu - Quốc Tử Giám còn lưu giữ bao nhiêu tấm bia tiến sĩ?", "a": ["185 tấm", "82 tấm", "104 tấm", "38 tấm"], "c": 1 },
-                { "q": "Các tấm bia đá tại Văn Miếu khắc tên tuổi của bao nhiêu vị tiến sĩ?", "a": ["2896 vị", "1780 vị", "1306 vị", "484 vị"], "c": 2 },
-                { "q": "Các tấm bia tiến sĩ tại Văn Miếu ghi danh các tiến sĩ đỗ đạt trong khoảng thời gian nào?", "a": ["Từ năm 1075 đến 1919", "Từ khoa thi năm 1442 đến khoa thi năm 1779", "Từ năm 1010 đến 1442", "Chỉ trong triều đại nhà Lê"], "c": 1 },
-                { "q": "Khu vực nào trong Văn Miếu là nơi đặt các bia tiến sĩ?", "a": ["Khuê Văn Các", "Nhà Thái Học", "Bên giếng Thiền Quang", "Cổng Đại Trung"], "c": 2 },
-                { "q": "Chi tiết nào cho thấy nền giáo dục xưa cũng mở rộng cửa cho người dân thường?", "a": ["Quốc Tử Giám chỉ dành cho con vua", "Chỉ có người giàu mới được đi thi", "Về sau học trò giỏi là con em dân thường cũng được học ở Quốc Tử Giám", "Các khoa thi chỉ tổ chức trong hoàng cung"], "c": 2 },
-                { "q": "Bảng số liệu thống kê trong bài có tác dụng gì?", "a": ["Giúp bài văn dài hơn", "Cung cấp thông tin cụ thể, rõ ràng, có sức thuyết phục cao về truyền thống khoa cử", "Để trang trí cho đẹp", "Để thay thế hình ảnh minh họa"], "c": 1 },
-                { "q": "Cụm từ \"Nghìn năm văn hiến\" muốn nói đến điều gì?", "a": ["Đất nước có nhiều vua chúa", "Đất nước có nhiều tài nguyên khoáng sản", "Đất nước có truyền thống văn hóa, giáo dục lâu đời và tốt đẹp", "Đất nước có nghìn năm tuổi"], "c": 2 },
-                { "q": "Qua bài đọc, em cảm thấy như thế nào về lịch sử khoa cử của nước nhà?", "a": ["Thấy bình thường", "Thấy lo lắng vì phải học nhiều", "Tự hào về truyền thống hiếu học và trọng nhân tài của cha ông", "Thấy ngạc nhiên về số lượng trạng nguyên"], "c": 2 }
-            ]
+            },
+            "quiz": {
+                "setting": { "pick": 5 },
+                "questions": [
+                    { "q": "Văn Miếu - Quốc Tử Giám được xem là công trình gì đầu tiên của Việt Nam?", "a": ["Thư viện đầu tiên", "Trường đại học đầu tiên", "Bảo tàng đầu tiên", "Cung điện đầu tiên"], "c": 1 },
+                    { "q": "Khoa thi tiến sĩ đầu tiên của nước ta được tổ chức vào năm nào?", "a": ["Năm 1010", "Năm 1070", "Năm 1075", "Năm 1442"], "c": 2 },
+                    { "q": "Tính đến năm 1919, nước ta đã tổ chức được tổng cộng bao nhiêu khoa thi?", "a": ["104 khoa", "185 khoa", "82 khoa", "38 khoa"], "c": 1 },
+                    { "q": "Theo bảng thống kê, triều đại nào tổ chức ít khoa thi nhất?", "a": ["Triều Lý", "Triều Trần", "Triều Hồ (2 khoa)", "Triều Mạc"], "c": 2 },
+                    { "q": "Tổng số tiến sĩ đỗ đạt qua các triều đại là bao nhiêu người?", "a": ["1306 người", "1780 người", "2896 người", "3000 người"], "c": 2 },
+                    { "q": "Triều đại nào dưới đây KHÔNG có trạng nguyên theo bảng thống kê?", "a": ["Triều Lê và Triều Mạc", "Triều Lý, Triều Hồ và Triều Nguyễn", "Triều Trần và Triều Lê", "Triều Nguyễn và Triều Mạc"], "c": 1 },
+                    { "q": "Triều đại nào có số lượng trạng nguyên nhiều nhất?", "a": ["Triều Trần (9 người)", "Triều Mạc (11 người)", "Triều Lê (27 người)", "Triều Lý (0 người)"], "c": 2 },
+                    { "q": "Hiện nay tại Văn Miếu - Quốc Tử Giám còn lưu giữ bao nhiêu tấm bia tiến sĩ?", "a": ["185 tấm", "82 tấm", "104 tấm", "38 tấm"], "c": 1 },
+                    { "q": "Các tấm bia đá tại Văn Miếu khắc tên tuổi của bao nhiêu vị tiến sĩ?", "a": ["2896 vị", "1780 vị", "1306 vị", "484 vị"], "c": 2 },
+                    { "q": "Các tấm bia tiến sĩ tại Văn Miếu ghi danh các tiến sĩ đỗ đạt trong khoảng thời gian nào?", "a": ["Từ năm 1075 đến 1919", "Từ khoa thi năm 1442 đến khoa thi năm 1779", "Từ năm 1010 đến 1442", "Chỉ trong triều đại nhà Lê"], "c": 1 },
+                    { "q": "Khu vực nào trong Văn Miếu là nơi đặt các bia tiến sĩ?", "a": ["Khuê Văn Các", "Nhà Thái Học", "Bên giếng Thiền Quang", "Cổng Đại Trung"], "c": 2 },
+                    { "q": "Chi tiết nào cho thấy nền giáo dục xưa cũng mở rộng cửa cho người dân thường?", "a": ["Quốc Tử Giám chỉ dành cho con vua", "Chỉ có người giàu mới được đi thi", "Về sau học trò giỏi là con em dân thường cũng được học ở Quốc Tử Giám", "Các khoa thi chỉ tổ chức trong hoàng cung"], "c": 2 },
+                    { "q": "Bảng số liệu thống kê trong bài có tác dụng gì?", "a": ["Giúp bài văn dài hơn", "Cung cấp thông tin cụ thể, rõ ràng, có sức thuyết phục cao về truyền thống khoa cử", "Để trang trí cho đẹp", "Để thay thế hình ảnh minh họa"], "c": 1 },
+                    { "q": "Cụm từ \"Nghìn năm văn hiến\" muốn nói đến điều gì?", "a": ["Đất nước có nhiều vua chúa", "Đất nước có nhiều tài nguyên khoáng sản", "Đất nước có truyền thống văn hóa, giáo dục lâu đời và tốt đẹp", "Đất nước có nghìn năm tuổi"], "c": 2 },
+                    { "q": "Qua bài đọc, em cảm thấy như thế nào về lịch sử khoa cử của nước nhà?", "a": ["Thấy bình thường", "Thấy lo lắng vì phải học nhiều", "Tự hào về truyền thống hiếu học và trọng nhân tài của cha ông", "Thấy ngạc nhiên về số lượng trạng nguyên"], "c": 2 }
+                ]
+            }
         }
-    }
-},
-"282-nguoi-thay-cua-muon-doi": {
-    "title": "Người thầy của muôn đời",
+    },
+    "282-nguoi-thay-cua-muon-doi": {
+        "title": "Người thầy của muôn đời",
         "week": 28,
-            "subject": "Đọc",
-                "theme": "Nhớ nguồn",
-                    "audio": "am_thanh/282-nguoi-thay-cua-muon-doi.mp3",
-                        "tabs": {
-        "lesson": {
-            "title": "Bài học",
+        "subject": "Đọc",
+        "theme": "Nhớ nguồn",
+        "audio": "am_thanh/282-nguoi-thay-cua-muon-doi.mp3",
+        "tabs": {
+            "lesson": {
+                "title": "Bài học",
                 "blocks": [
                     { "type": "header", "text": "Người thầy của muôn đời" },
                     {
@@ -2340,38 +2339,38 @@ window.LESSON_DATA = {
                         `
                     }
                 ]
-        },
-        "quiz": {
-            "setting": { "pick": 5 },
-            "questions": [
-                { "q": "Thầy giáo Chu Văn An sống vào triều đại nào?", "a": ["Triều Lý", "Triều Trần", "Triều Lê", "Triều Nguyễn"], "c": 1 },
-                { "q": "Sau khi thi đỗ cao, Chu Văn An đã lựa chọn con đường nào?", "a": ["Ra làm quan to trong triều đình ngay lập tức", "Đi du ngoạn khắp nơi", "Không làm quan mà mở trường dạy học ở quê", "Ở ẩn và không gặp gỡ ai"], "c": 2 },
-                { "q": "Mục đích mở trường dạy học của Chu Văn An là gì?", "a": ["Để kiếm sống", "Nhằm truyền bá đạo lí và đào tạo nhân tài cho đất nước", "Để được nổi tiếng", "Để chuẩn bị thi tiếp"], "c": 1 },
-                { "q": "Các môn sinh đến nhà cụ giáo Chu để làm gì?", "a": ["Để học bài", "Để xin chữ", "Để mừng thọ thầy", "Để bàn việc nước"], "c": 2 },
-                { "q": "Món quà mà các môn sinh dâng biếu thầy là gì?", "a": ["Vàng bạc, châu báu", "Lụa là, gấm vóc", "Những cuốn sách quý do họ tự sưu tầm và chép lại", "Những bức tranh quý"], "c": 2 },
-                { "q": "Thái độ của các môn sinh đối với cụ giáo Chu như thế nào?", "a": ["Sợ hãi và xa lánh", "Kính trọng, yêu mến và biết ơn", "Thờ ơ, không quan tâm", "Coi thường vì thầy không làm quan"], "c": 1 },
-                { "q": "Chi tiết nào thể hiện sự đồng lòng và lễ phép của các học trò khi nghe thầy đề nghị?", "a": ["Họ im lặng nhìn nhau", "Họ bàn tán xôn xao", "Họ dạ ran và kính cẩn đi theo sau cụ", "Họ xin phép ra về"], "c": 2 },
-                { "q": "Người mà cụ giáo Chu mời học trò cùng đến thăm là ai?", "a": ["Một người bạn cũ của cụ", "Một vị quan to trong triều", "Người thầy dạy vỡ lòng cho cụ ngày xưa", "Một người học trò giỏi nhất của cụ"], "c": 2 },
-                { "q": "Hành động dẫn học trò đi thăm thầy cũ của cụ giáo Chu thể hiện truyền thống đạo đức nào?", "a": ["Lá lành đùm lá rách", "Thương người như thể thương thân", "Tôn sư trọng đạo (uống nước nhớ nguồn)", "Đoàn kết tương thân tương ái"], "c": 2 },
-                { "q": "Vì sao tác giả gọi Chu Văn An là \"Người thầy của muôn đời\"?", "a": ["Vì cụ sống rất lâu", "Vì cụ có rất nhiều học trò", "Vì cụ là tấm gương mẫu mực về đạo đức và nhân cách cho mọi thế hệ học trò noi theo", "Vì cụ dạy học ở nhiều nơi"], "c": 2 },
-                { "q": "Cụm từ \"dạy vỡ lòng\" có nghĩa là gì?", "a": ["Dạy những kiến thức đầu tiên, cơ bản nhất cho người mới bắt đầu học", "Dạy những kiến thức cao siêu, khó hiểu", "Dạy võ thuật", "Dạy cách làm thơ"], "c": 0 },
-                { "q": "Theo bài đọc, yếu tố nào giúp cụ Chu Văn An có được thành công và dạy dỗ được nhiều học trò giỏi?", "a": ["Nhờ cụ có nhiều tiền", "Nhờ cụ có quyền lực", "Nhờ công ơn dạy dỗ của người thầy cũ và sự nỗ lực của bản thân", "Nhờ sự may mắn"], "c": 2 },
-                { "q": "Bài học sâu sắc nhất mà cụ giáo Chu muốn dạy cho các học trò qua buổi mừng thọ là gì?", "a": ["Phải học thật giỏi để làm quan", "Phải tặng quà đắt tiền cho thầy", "Phải biết trân trọng, nhớ ơn và kính trọng những người thầy đã dạy dỗ mình", "Phải giữ gìn sức khỏe"], "c": 2 },
-                { "q": "Tình cảm của các thế hệ học trò dành cho Chu Văn An được miêu tả như thế nào trong phần kết?", "a": ["Chỉ kính trọng khi thầy còn sống", "Yêu mến, kính trọng và coi ông là tấm gương sáng mãi", "Bình thường như những người thầy khác", "Kính sợ vì thầy rất nghiêm khắc"], "c": 1 },
-                { "q": "Dòng nào dưới đây nêu đúng nghĩa của từ \"tề tựu\"?", "a": ["Đi lại lộn xộn", "Đứng xếp hàng ngay ngắn", "Tụ họp lại đông đủ tại một nơi", "Giải tán đi nhiều nơi"], "c": 2 }
-            ]
+            },
+            "quiz": {
+                "setting": { "pick": 5 },
+                "questions": [
+                    { "q": "Thầy giáo Chu Văn An sống vào triều đại nào?", "a": ["Triều Lý", "Triều Trần", "Triều Lê", "Triều Nguyễn"], "c": 1 },
+                    { "q": "Sau khi thi đỗ cao, Chu Văn An đã lựa chọn con đường nào?", "a": ["Ra làm quan to trong triều đình ngay lập tức", "Đi du ngoạn khắp nơi", "Không làm quan mà mở trường dạy học ở quê", "Ở ẩn và không gặp gỡ ai"], "c": 2 },
+                    { "q": "Mục đích mở trường dạy học của Chu Văn An là gì?", "a": ["Để kiếm sống", "Nhằm truyền bá đạo lí và đào tạo nhân tài cho đất nước", "Để được nổi tiếng", "Để chuẩn bị thi tiếp"], "c": 1 },
+                    { "q": "Các môn sinh đến nhà cụ giáo Chu để làm gì?", "a": ["Để học bài", "Để xin chữ", "Để mừng thọ thầy", "Để bàn việc nước"], "c": 2 },
+                    { "q": "Món quà mà các môn sinh dâng biếu thầy là gì?", "a": ["Vàng bạc, châu báu", "Lụa là, gấm vóc", "Những cuốn sách quý do họ tự sưu tầm và chép lại", "Những bức tranh quý"], "c": 2 },
+                    { "q": "Thái độ của các môn sinh đối với cụ giáo Chu như thế nào?", "a": ["Sợ hãi và xa lánh", "Kính trọng, yêu mến và biết ơn", "Thờ ơ, không quan tâm", "Coi thường vì thầy không làm quan"], "c": 1 },
+                    { "q": "Chi tiết nào thể hiện sự đồng lòng và lễ phép của các học trò khi nghe thầy đề nghị?", "a": ["Họ im lặng nhìn nhau", "Họ bàn tán xôn xao", "Họ dạ ran và kính cẩn đi theo sau cụ", "Họ xin phép ra về"], "c": 2 },
+                    { "q": "Người mà cụ giáo Chu mời học trò cùng đến thăm là ai?", "a": ["Một người bạn cũ của cụ", "Một vị quan to trong triều", "Người thầy dạy vỡ lòng cho cụ ngày xưa", "Một người học trò giỏi nhất của cụ"], "c": 2 },
+                    { "q": "Hành động dẫn học trò đi thăm thầy cũ của cụ giáo Chu thể hiện truyền thống đạo đức nào?", "a": ["Lá lành đùm lá rách", "Thương người như thể thương thân", "Tôn sư trọng đạo (uống nước nhớ nguồn)", "Đoàn kết tương thân tương ái"], "c": 2 },
+                    { "q": "Vì sao tác giả gọi Chu Văn An là \"Người thầy của muôn đời\"?", "a": ["Vì cụ sống rất lâu", "Vì cụ có rất nhiều học trò", "Vì cụ là tấm gương mẫu mực về đạo đức và nhân cách cho mọi thế hệ học trò noi theo", "Vì cụ dạy học ở nhiều nơi"], "c": 2 },
+                    { "q": "Cụm từ \"dạy vỡ lòng\" có nghĩa là gì?", "a": ["Dạy những kiến thức đầu tiên, cơ bản nhất cho người mới bắt đầu học", "Dạy những kiến thức cao siêu, khó hiểu", "Dạy võ thuật", "Dạy cách làm thơ"], "c": 0 },
+                    { "q": "Theo bài đọc, yếu tố nào giúp cụ Chu Văn An có được thành công và dạy dỗ được nhiều học trò giỏi?", "a": ["Nhờ cụ có nhiều tiền", "Nhờ cụ có quyền lực", "Nhờ công ơn dạy dỗ của người thầy cũ và sự nỗ lực của bản thân", "Nhờ sự may mắn"], "c": 2 },
+                    { "q": "Bài học sâu sắc nhất mà cụ giáo Chu muốn dạy cho các học trò qua buổi mừng thọ là gì?", "a": ["Phải học thật giỏi để làm quan", "Phải tặng quà đắt tiền cho thầy", "Phải biết trân trọng, nhớ ơn và kính trọng những người thầy đã dạy dỗ mình", "Phải giữ gìn sức khỏe"], "c": 2 },
+                    { "q": "Tình cảm của các thế hệ học trò dành cho Chu Văn An được miêu tả như thế nào trong phần kết?", "a": ["Chỉ kính trọng khi thầy còn sống", "Yêu mến, kính trọng và coi ông là tấm gương sáng mãi", "Bình thường như những người thầy khác", "Kính sợ vì thầy rất nghiêm khắc"], "c": 1 },
+                    { "q": "Dòng nào dưới đây nêu đúng nghĩa của từ \"tề tựu\"?", "a": ["Đi lại lộn xộn", "Đứng xếp hàng ngay ngắn", "Tụ họp lại đông đủ tại một nơi", "Giải tán đi nhiều nơi"], "c": 2 }
+                ]
+            }
         }
-    }
-},
-"291-danh-y-tue-tinh": {
-    "title": "Danh y Tuệ Tĩnh",
+    },
+    "291-danh-y-tue-tinh": {
+        "title": "Danh y Tuệ Tĩnh",
         "week": 29,
-            "subject": "Đọc",
-                "theme": "Tiếp bước cha ông",
-                    "audio": "am_thanh/danh-y-tue-tinh.mp3",
-                        "tabs": {
-        "lesson": {
-            "title": "Bài học",
+        "subject": "Đọc",
+        "theme": "Tiếp bước cha ông",
+        "audio": "am_thanh/danh-y-tue-tinh.mp3",
+        "tabs": {
+            "lesson": {
+                "title": "Bài học",
                 "blocks": [
                     { "type": "header", "text": "Danh y Tuệ Tĩnh" },
                     {
@@ -2403,28 +2402,28 @@ window.LESSON_DATA = {
                         `
                     }
                 ]
-        },
-        "quiz": {
-            "setting": { "pick": 5 },
-            "questions": [
-                { "q": "Tuệ Tĩnh tên thật là gì?", "a": ["Nguyễn Bá Tĩnh", "Nguyễn Du", "Lê Lợi", "Trần Hưng Đạo"], "c": 0 },
-                { "q": "Ông quê ở đâu?", "a": ["Tỉnh Hải Dương", "Hà Nội", "Huế", "Nam Định"], "c": 0 },
-                { "q": "Ông được coi là ông tổ của ngành nào?", "a": ["Thuốc Nam", "Thuốc Bắc", "Thuốc Tây", "Châm cứu"], "c": 0 },
-                { "q": "Câu nói nổi tiếng của ông là gì?", "a": ["Nam dược trị Nam nhân", "Lương y như từ mẫu", "Thầy thuốc như mẹ hiền", "Vì nước quên thân"], "c": 0 },
-                { "q": "Ngoài làm thuốc, ông còn là gì?", "a": ["Nhà sư", "Nhà giáo", "Nhà thơ", "Nhà văn"], "c": 0 }
-            ]
+            },
+            "quiz": {
+                "setting": { "pick": 5 },
+                "questions": [
+                    { "q": "Tuệ Tĩnh tên thật là gì?", "a": ["Nguyễn Bá Tĩnh", "Nguyễn Du", "Lê Lợi", "Trần Hưng Đạo"], "c": 0 },
+                    { "q": "Ông quê ở đâu?", "a": ["Tỉnh Hải Dương", "Hà Nội", "Huế", "Nam Định"], "c": 0 },
+                    { "q": "Ông được coi là ông tổ của ngành nào?", "a": ["Thuốc Nam", "Thuốc Bắc", "Thuốc Tây", "Châm cứu"], "c": 0 },
+                    { "q": "Câu nói nổi tiếng của ông là gì?", "a": ["Nam dược trị Nam nhân", "Lương y như từ mẫu", "Thầy thuốc như mẹ hiền", "Vì nước quên thân"], "c": 0 },
+                    { "q": "Ngoài làm thuốc, ông còn là gì?", "a": ["Nhà sư", "Nhà giáo", "Nhà thơ", "Nhà văn"], "c": 0 }
+                ]
+            }
         }
-    }
-},
-"292-cu-do-chieu": {
-    "title": "Cụ Đồ Chiểu",
+    },
+    "292-cu-do-chieu": {
+        "title": "Cụ Đồ Chiểu",
         "week": 29,
-            "subject": "Đọc",
-                "theme": "Tiếp bước cha ông",
-                    "audio": "am_thanh/cu-do-chieu.mp3",
-                        "tabs": {
-        "lesson": {
-            "title": "Bài học",
+        "subject": "Đọc",
+        "theme": "Tiếp bước cha ông",
+        "audio": "am_thanh/cu-do-chieu.mp3",
+        "tabs": {
+            "lesson": {
+                "title": "Bài học",
                 "blocks": [
                     { "type": "header", "text": "Cụ Đồ Chiểu" },
                     {
@@ -2456,28 +2455,28 @@ window.LESSON_DATA = {
                         `
                     }
                 ]
-        },
-        "quiz": {
-            "setting": { "pick": 5 },
-            "questions": [
-                { "q": "Nguyễn Đình Chiểu sinh ra ở đâu?", "a": ["Hà Nội", "Gia Định (TP. Hồ Chí Minh)", "Huế", "Cần Thơ"], "c": 1 },
-                { "q": "Biến cố nào khiến Nguyễn Đình Chiểu phải bỏ thi về Nam vào nam 1848?", "a": ["Ông bị ốm nặng", "Ông hết tiền", "Mẹ ông mất", "Chiến tranh nổ ra"], "c": 2 },
-                { "q": "Điều bất hạnh xảy ra với ông trên đường về chịu tang mẹ là gì?", "a": ["Bị mất hành lý", "Bị mù cả hai mắt", "Bị lạc đường", "Bị giặc bắt"], "c": 1 },
-                { "q": "Thái độ của ông trước thử thách số phận?", "a": ["Buông xuôi", "Sống ẩn dật", "Không gục ngã, kiên cường vươn lên giúp đời", "Than khóc"], "c": 2 },
-                { "q": "Sau khi bị mù, ông đã làm gì?", "a": ["Làm ruộng", "Mở trường dạy học và làm thuốc", "Đi tu", "Làm quan"], "c": 1 }
-            ]
+            },
+            "quiz": {
+                "setting": { "pick": 5 },
+                "questions": [
+                    { "q": "Nguyễn Đình Chiểu sinh ra ở đâu?", "a": ["Hà Nội", "Gia Định (TP. Hồ Chí Minh)", "Huế", "Cần Thơ"], "c": 1 },
+                    { "q": "Biến cố nào khiến Nguyễn Đình Chiểu phải bỏ thi về Nam vào nam 1848?", "a": ["Ông bị ốm nặng", "Ông hết tiền", "Mẹ ông mất", "Chiến tranh nổ ra"], "c": 2 },
+                    { "q": "Điều bất hạnh xảy ra với ông trên đường về chịu tang mẹ là gì?", "a": ["Bị mất hành lý", "Bị mù cả hai mắt", "Bị lạc đường", "Bị giặc bắt"], "c": 1 },
+                    { "q": "Thái độ của ông trước thử thách số phận?", "a": ["Buông xuôi", "Sống ẩn dật", "Không gục ngã, kiên cường vươn lên giúp đời", "Than khóc"], "c": 2 },
+                    { "q": "Sau khi bị mù, ông đã làm gì?", "a": ["Làm ruộng", "Mở trường dạy học và làm thuốc", "Đi tu", "Làm quan"], "c": 1 }
+                ]
+            }
         }
-    }
-},
-"301-tran-dai-nghia": {
-    "title": "Anh hùng Lao động Trần Đại Nghĩa",
+    },
+    "301-tran-dai-nghia": {
+        "title": "Anh hùng Lao động Trần Đại Nghĩa",
         "week": 30,
-            "subject": "Đọc",
-                "theme": "Tiếp bước cha ông",
-                    "audio": "am_thanh/anh-hung-lao-dong-tran-dai-nghia.mp3",
-                        "tabs": {
-        "lesson": {
-            "title": "Bài học",
+        "subject": "Đọc",
+        "theme": "Tiếp bước cha ông",
+        "audio": "am_thanh/anh-hung-lao-dong-tran-dai-nghia.mp3",
+        "tabs": {
+            "lesson": {
+                "title": "Bài học",
                 "blocks": [
                     { "type": "header", "text": "Anh hùng Lao động Trần Đại Nghĩa" },
                     {
@@ -2529,38 +2528,38 @@ window.LESSON_DATA = {
                         `
                     }
                 ]
-        },
-        "quiz": {
-            "setting": { "pick": 5 },
-            "questions": [
-                { "q": "Tên thật của Anh hùng Lao động Trần Đại Nghĩa là gì?", "a": ["Trần Văn Giàu", "Phạm Quang Lễ", "Tôn Thất Tùng", "Đặng Văn Ngữ"], "c": 1 },
-                { "q": "Ông theo Bác Hồ về nước vào năm nào?", "a": ["1945", "1946", "1954", "1975"], "c": 1 },
-                { "q": "Trước khi về nước, cuộc sống của ông ở nước ngoài như thế nào?", "a": ["Rất khó khăn, thiếu thốn", "Bình thường như bao người khác", "Đầy đủ tiện nghi", "Bị quản thúc"], "c": 2 },
-                { "q": "Động lực nào khiến ông từ bỏ tất cả để về nước?", "a": ["Muốn tìm cơ hội làm giàu", "Lòng yêu nước và mong muốn cống hiến cho sự nghiệp giải phóng dân tộc", "Bị trục xuất khỏi nước ngoài", "Muốn đi du lịch"], "c": 1 },
-                { "q": "Ông đã cùng đồng nghiệp nghiên cứu và chế tạo thành công loại vũ khí nào dưới đây?", "a": ["Xe tăng", "Máy bay chiến đấu", "Súng ba-dô-ca", "Tàu ngầm"], "c": 2 },
-                { "q": "Ngoài súng ba-dô-ca, loại súng nào khác được nhắc đến trong bài?", "a": ["Súng lục", "Súng không giật", "Súng trường", "Súng kíp"], "c": 1 },
-                { "q": "Loại vũ khí nào do ông chế tạo có tên là 'bom bay'?", "a": ["Dùng để thả từ máy bay", "Là một trong những loại vũ khí có sức công phá lớn ông chế tạo", "Dùng để phá cầu cống", "Là tên gọi khác của lựu đạn"], "c": 1 },
-                { "q": "Các loại vũ khí ông chế tạo dùng để tiêu diệt mục tiêu nào của giặc?", "a": ["Lính bộ binh", "Xe tăng và lô cốt", "Tàu chiến", "Máy bay"], "c": 1 },
-                { "q": "Ngoài lĩnh vực quân sự, ông còn có công lớn trong việc xây dựng nền tảng nào?", "a": ["Nền văn hóa nghệ thuật", "Nền khoa học trẻ tuổi của nước nhà", "Nền kinh tế thị trường", "Nền giáo dục mầm non"], "c": 1 },
-                { "q": "Danh hiệu cao quý nào gắn liền với tên tuổi Trần Đại Nghĩa trong bài?", "a": ["Nhà giáo Nhân dân", "Thầy thuốc Nhân dân", "Anh hùng Lao động", "Nghệ sĩ Nhân dân"], "c": 2 },
-                { "q": "Bài đọc nhận định Trần Đại Nghĩa là một tấm gương lớn về điều gì?", "a": ["Về sự giàu có", "Về lòng yêu nước và tinh thần lao động vì đất nước", "Về khả năng ngoại ngữ", "Về sức khỏe phi thường"], "c": 1 },
-                { "q": "Cụm từ 'cuộc sống đầy đủ tiện nghi' ở nước ngoài đối lập với điều gì khi ông về nước (theo bối cảnh lịch sử)?", "a": ["Sự gian khổ, thiếu thốn của cuộc kháng chiến trong nước", "Sự giàu có ở Việt Nam", "Cuộc sống an nhàn khi về hưu", "Sự tiện nghi hơn ở trong nước"], "c": 0 },
-                { "q": "Việc ông chế tạo thành công vũ khí có ý nghĩa gì đối với cuộc kháng chiến?", "a": ["Giúp quân đội ta có thêm vũ khí hiện đại để chống lại kẻ thù mạnh", "Thể hiện trí tuệ của người Việt Nam", "Cả A và B đều đúng", "Chỉ để trưng bày"], "c": 2 },
-                { "q": "Bài học mà thế hệ sau cần ghi nhớ qua tấm gương của ông là gì?", "a": ["Phải đi nước ngoài định cư", "Chỉ cần học giỏi là đủ", "Ghi nhớ công lao người đi trước và phát huy truyền thống tốt đẹp", "Phải làm việc trong ngành quân sự"], "c": 2 },
-                { "q": "Nội dung chính của bài đọc là gì?", "a": ["Kể về quá trình đi học của Phạm Quang Lễ", "Ca ngợi tài năng, lòng yêu nước và những cống hiến to lớn của Anh hùng Lao động Trần Đại Nghĩa", "Giới thiệu cách chế tạo súng ba-dô-ca", "Miêu tả cuộc sống ở nước ngoài của ông"], "c": 1 }
-            ]
+            },
+            "quiz": {
+                "setting": { "pick": 5 },
+                "questions": [
+                    { "q": "Tên thật của Anh hùng Lao động Trần Đại Nghĩa là gì?", "a": ["Trần Văn Giàu", "Phạm Quang Lễ", "Tôn Thất Tùng", "Đặng Văn Ngữ"], "c": 1 },
+                    { "q": "Ông theo Bác Hồ về nước vào năm nào?", "a": ["1945", "1946", "1954", "1975"], "c": 1 },
+                    { "q": "Trước khi về nước, cuộc sống của ông ở nước ngoài như thế nào?", "a": ["Rất khó khăn, thiếu thốn", "Bình thường như bao người khác", "Đầy đủ tiện nghi", "Bị quản thúc"], "c": 2 },
+                    { "q": "Động lực nào khiến ông từ bỏ tất cả để về nước?", "a": ["Muốn tìm cơ hội làm giàu", "Lòng yêu nước và mong muốn cống hiến cho sự nghiệp giải phóng dân tộc", "Bị trục xuất khỏi nước ngoài", "Muốn đi du lịch"], "c": 1 },
+                    { "q": "Ông đã cùng đồng nghiệp nghiên cứu và chế tạo thành công loại vũ khí nào dưới đây?", "a": ["Xe tăng", "Máy bay chiến đấu", "Súng ba-dô-ca", "Tàu ngầm"], "c": 2 },
+                    { "q": "Ngoài súng ba-dô-ca, loại súng nào khác được nhắc đến trong bài?", "a": ["Súng lục", "Súng không giật", "Súng trường", "Súng kíp"], "c": 1 },
+                    { "q": "Loại vũ khí nào do ông chế tạo có tên là 'bom bay'?", "a": ["Dùng để thả từ máy bay", "Là một trong những loại vũ khí có sức công phá lớn ông chế tạo", "Dùng để phá cầu cống", "Là tên gọi khác của lựu đạn"], "c": 1 },
+                    { "q": "Các loại vũ khí ông chế tạo dùng để tiêu diệt mục tiêu nào của giặc?", "a": ["Lính bộ binh", "Xe tăng và lô cốt", "Tàu chiến", "Máy bay"], "c": 1 },
+                    { "q": "Ngoài lĩnh vực quân sự, ông còn có công lớn trong việc xây dựng nền tảng nào?", "a": ["Nền văn hóa nghệ thuật", "Nền khoa học trẻ tuổi của nước nhà", "Nền kinh tế thị trường", "Nền giáo dục mầm non"], "c": 1 },
+                    { "q": "Danh hiệu cao quý nào gắn liền với tên tuổi Trần Đại Nghĩa trong bài?", "a": ["Nhà giáo Nhân dân", "Thầy thuốc Nhân dân", "Anh hùng Lao động", "Nghệ sĩ Nhân dân"], "c": 2 },
+                    { "q": "Bài đọc nhận định Trần Đại Nghĩa là một tấm gương lớn về điều gì?", "a": ["Về sự giàu có", "Về lòng yêu nước và tinh thần lao động vì đất nước", "Về khả năng ngoại ngữ", "Về sức khỏe phi thường"], "c": 1 },
+                    { "q": "Cụm từ 'cuộc sống đầy đủ tiện nghi' ở nước ngoài đối lập với điều gì khi ông về nước (theo bối cảnh lịch sử)?", "a": ["Sự gian khổ, thiếu thốn của cuộc kháng chiến trong nước", "Sự giàu có ở Việt Nam", "Cuộc sống an nhàn khi về hưu", "Sự tiện nghi hơn ở trong nước"], "c": 0 },
+                    { "q": "Việc ông chế tạo thành công vũ khí có ý nghĩa gì đối với cuộc kháng chiến?", "a": ["Giúp quân đội ta có thêm vũ khí hiện đại để chống lại kẻ thù mạnh", "Thể hiện trí tuệ của người Việt Nam", "Cả A và B đều đúng", "Chỉ để trưng bày"], "c": 2 },
+                    { "q": "Bài học mà thế hệ sau cần ghi nhớ qua tấm gương của ông là gì?", "a": ["Phải đi nước ngoài định cư", "Chỉ cần học giỏi là đủ", "Ghi nhớ công lao người đi trước và phát huy truyền thống tốt đẹp", "Phải làm việc trong ngành quân sự"], "c": 2 },
+                    { "q": "Nội dung chính của bài đọc là gì?", "a": ["Kể về quá trình đi học của Phạm Quang Lễ", "Ca ngợi tài năng, lòng yêu nước và những cống hiến to lớn của Anh hùng Lao động Trần Đại Nghĩa", "Giới thiệu cách chế tạo súng ba-dô-ca", "Miêu tả cuộc sống ở nước ngoài của ông"], "c": 1 }
+                ]
+            }
         }
-    }
-},
-"302-bo-doi-ve-lang": {
-    "title": "Bộ đội về làng",
+    },
+    "302-bo-doi-ve-lang": {
+        "title": "Bộ đội về làng",
         "week": 30,
-            "subject": "Đọc",
-                "theme": "Tiếp bước cha ông",
-                    "audio": "am_thanh/bo-doi-ve-lang.mp3",
-                        "tabs": {
-        "lesson": {
-            "title": "Bài học",
+        "subject": "Đọc",
+        "theme": "Tiếp bước cha ông",
+        "audio": "am_thanh/bo-doi-ve-lang.mp3",
+        "tabs": {
+            "lesson": {
+                "title": "Bài học",
                 "blocks": [
                     { "type": "header", "text": "Bộ đội về làng" },
                     {
@@ -2615,38 +2614,38 @@ window.LESSON_DATA = {
                         `
                     }
                 ]
-        },
-        "quiz": {
-            "setting": { "pick": 5 },
-            "questions": [
-                { "q": "Tác giả của bài thơ 'Bộ đội về làng' là ai?", "a": ["Tố Hữu", "Chính Hữu", "Hoàng Trung Thông", "Phạm Tiến Duật"], "c": 2 },
-                { "q": "Khi các anh bộ đội đi xa, thái độ của người dân xóm làng như thế nào?", "a": ["Lo lắng và sợ hãi", "Nhớ mãi và vẫn chờ mong", "Buồn bã và tuyệt vọng", "Thờ ơ, không quan tâm"], "c": 1 },
-                { "q": "Các anh bộ đội trở về làng từ đâu?", "a": ["Từ thành phố lớn", "Từ miền biển xa", "Từ rừng sâu, lưng đèo, dốc núi mù che", "Từ nước ngoài"], "c": 2 },
-                { "q": "Từ ngữ nào miêu tả không khí 'xóm nhỏ' khi bộ đội về?", "a": ["Vắng lặng", "Rộn ràng", "Ồn ào", "Hỗn loạn"], "c": 1 },
-                { "q": "Khi thấy các anh bộ đội về, 'lớp lớp đàn em' đã có hành động gì?", "a": ["Đứng nghiêm chào", "Hớn hở theo sau", "Sợ hãi bỏ chạy", "Mang hoa ra tặng"], "c": 1 },
-                { "q": "Hình ảnh 'Mẹ già bịn rịn áo nâu' gợi lên cảm xúc gì?", "a": ["Sự xúc động, quyến luyến và yêu thương của người mẹ", "Sự nghèo khó của người mẹ", "Sự vội vàng của người mẹ", "Sự lo âu của người mẹ"], "c": 0 },
-                { "q": "Mẹ già coi các anh bộ đội như thế nào?", "a": ["Khách quý", "Đàn con ở rừng sâu mới về", "Những người hùng", "Những người lạ"], "c": 1 },
-                { "q": "Cụm từ 'Dốc núi mù che' gợi tả điều gì về nơi các anh đóng quân?", "a": ["Nơi đó rất đẹp và thơ mộng", "Nơi đó xa xôi, hiểm trở và gian khổ", "Nơi đó rất đông vui", "Nơi đó gần ngay xóm làng"], "c": 1 },
-                { "q": "Ngôi nhà đón các anh về được miêu tả ra sao?", "a": ["Nhà ngói đỏ tươi", "Nhà cao cửa rộng", "Nhà lá đơn sơ", "Biệt thự khang trang"], "c": 2 },
-                { "q": "Hai hình ảnh 'Nồi cơm nấu dở / Bát nước chè xanh' nói lên điều gì?", "a": ["Sự thiếu thốn vật chất đến cùng cực", "Sự giản dị, mộc mạc, gần gũi trong sinh hoạt đời thường và sự tiếp đón chân tình", "Người dân chưa chuẩn bị kịp thức ăn", "Thức ăn không ngon"], "c": 1 },
-                { "q": "Câu thơ 'Nhưng tấm lòng rộng mở' muốn nhấn mạnh điều gì?", "a": ["Người dân rất giàu có", "Tình cảm hào phóng, chân thành, bao dung của nhân dân dành cho bộ đội", "Cửa nhà luôn mở toang", "Người dân thích nói chuyện"], "c": 1 },
-                { "q": "Bộ đội và dân làng đã làm gì khi gặp nhau bên bát nước chè xanh?", "a": ["Tổ chức liên hoan văn nghệ", "Bàn kế hoạch đánh giặc", "Ngồi vui kể chuyện tâm tình bên nhau", "Đi cày cấy giúp dân"], "c": 2 },
-                { "q": "Từ 'xôn xao' trong câu 'Xôn xao làng tôi bé nhỏ' gợi tả điều gì?", "a": ["Tiếng gió thổi mạnh", "Tiếng súng nổ từ xa", "Tiếng nói cười, bàn tán phấn khởi, vui mừng của dân làng", "Tiếng suối chảy róc rách"], "c": 2 },
-                { "q": "Chủ đề chính của bài thơ là gì?", "a": ["Ca ngợi vẻ đẹp của thiên nhiên miền núi", "Ca ngợi tình quân dân thắm thiết, sự gắn bó bền chặt giữa tiền tuyến và hậu phương", "Miêu tả sự vất vả của nghề nông", "Kể về chiến công oanh liệt của bộ đội"], "c": 1 },
-                { "q": "Qua bài thơ, hình ảnh người dân quê hiện lên với phẩm chất gì?", "a": ["Giàu sang và quyền lực", "Khép kín và xa lạ", "Hiền hoà, tình cảm, dù nghèo khó nhưng giàu lòng nhân ái", "Nghiêm khắc và lạnh lùng"], "c": 2 }
-            ]
+            },
+            "quiz": {
+                "setting": { "pick": 5 },
+                "questions": [
+                    { "q": "Tác giả của bài thơ 'Bộ đội về làng' là ai?", "a": ["Tố Hữu", "Chính Hữu", "Hoàng Trung Thông", "Phạm Tiến Duật"], "c": 2 },
+                    { "q": "Khi các anh bộ đội đi xa, thái độ của người dân xóm làng như thế nào?", "a": ["Lo lắng và sợ hãi", "Nhớ mãi và vẫn chờ mong", "Buồn bã và tuyệt vọng", "Thờ ơ, không quan tâm"], "c": 1 },
+                    { "q": "Các anh bộ đội trở về làng từ đâu?", "a": ["Từ thành phố lớn", "Từ miền biển xa", "Từ rừng sâu, lưng đèo, dốc núi mù che", "Từ nước ngoài"], "c": 2 },
+                    { "q": "Từ ngữ nào miêu tả không khí 'xóm nhỏ' khi bộ đội về?", "a": ["Vắng lặng", "Rộn ràng", "Ồn ào", "Hỗn loạn"], "c": 1 },
+                    { "q": "Khi thấy các anh bộ đội về, 'lớp lớp đàn em' đã có hành động gì?", "a": ["Đứng nghiêm chào", "Hớn hở theo sau", "Sợ hãi bỏ chạy", "Mang hoa ra tặng"], "c": 1 },
+                    { "q": "Hình ảnh 'Mẹ già bịn rịn áo nâu' gợi lên cảm xúc gì?", "a": ["Sự xúc động, quyến luyến và yêu thương của người mẹ", "Sự nghèo khó của người mẹ", "Sự vội vàng của người mẹ", "Sự lo âu của người mẹ"], "c": 0 },
+                    { "q": "Mẹ già coi các anh bộ đội như thế nào?", "a": ["Khách quý", "Đàn con ở rừng sâu mới về", "Những người hùng", "Những người lạ"], "c": 1 },
+                    { "q": "Cụm từ 'Dốc núi mù che' gợi tả điều gì về nơi các anh đóng quân?", "a": ["Nơi đó rất đẹp và thơ mộng", "Nơi đó xa xôi, hiểm trở và gian khổ", "Nơi đó rất đông vui", "Nơi đó gần ngay xóm làng"], "c": 1 },
+                    { "q": "Ngôi nhà đón các anh về được miêu tả ra sao?", "a": ["Nhà ngói đỏ tươi", "Nhà cao cửa rộng", "Nhà lá đơn sơ", "Biệt thự khang trang"], "c": 2 },
+                    { "q": "Hai hình ảnh 'Nồi cơm nấu dở / Bát nước chè xanh' nói lên điều gì?", "a": ["Sự thiếu thốn vật chất đến cùng cực", "Sự giản dị, mộc mạc, gần gũi trong sinh hoạt đời thường và sự tiếp đón chân tình", "Người dân chưa chuẩn bị kịp thức ăn", "Thức ăn không ngon"], "c": 1 },
+                    { "q": "Câu thơ 'Nhưng tấm lòng rộng mở' muốn nhấn mạnh điều gì?", "a": ["Người dân rất giàu có", "Tình cảm hào phóng, chân thành, bao dung của nhân dân dành cho bộ đội", "Cửa nhà luôn mở toang", "Người dân thích nói chuyện"], "c": 1 },
+                    { "q": "Bộ đội và dân làng đã làm gì khi gặp nhau bên bát nước chè xanh?", "a": ["Tổ chức liên hoan văn nghệ", "Bàn kế hoạch đánh giặc", "Ngồi vui kể chuyện tâm tình bên nhau", "Đi cày cấy giúp dân"], "c": 2 },
+                    { "q": "Từ 'xôn xao' trong câu 'Xôn xao làng tôi bé nhỏ' gợi tả điều gì?", "a": ["Tiếng gió thổi mạnh", "Tiếng súng nổ từ xa", "Tiếng nói cười, bàn tán phấn khởi, vui mừng của dân làng", "Tiếng suối chảy róc rách"], "c": 2 },
+                    { "q": "Chủ đề chính của bài thơ là gì?", "a": ["Ca ngợi vẻ đẹp của thiên nhiên miền núi", "Ca ngợi tình quân dân thắm thiết, sự gắn bó bền chặt giữa tiền tuyến và hậu phương", "Miêu tả sự vất vả của nghề nông", "Kể về chiến công oanh liệt của bộ đội"], "c": 1 },
+                    { "q": "Qua bài thơ, hình ảnh người dân quê hiện lên với phẩm chất gì?", "a": ["Giàu sang và quyền lực", "Khép kín và xa lạ", "Hiền hoà, tình cảm, dù nghèo khó nhưng giàu lòng nhân ái", "Nghiêm khắc và lạnh lùng"], "c": 2 }
+                ]
+            }
         }
-    }
-},
-"311-ve-ngoi-nha-dang-xay": {
-    "title": "Về ngôi nhà đang xây",
+    },
+    "311-ve-ngoi-nha-dang-xay": {
+        "title": "Về ngôi nhà đang xây",
         "week": 31,
-            "subject": "Đọc",
-                "theme": "Thế giới của chúng ta",
-                    "audio": "am_thanh/ve-ngoi-nha-dang-xay.mp3",
-                        "tabs": {
-        "lesson": {
-            "title": "Bài học",
+        "subject": "Đọc",
+        "theme": "Thế giới của chúng ta",
+        "audio": "am_thanh/ve-ngoi-nha-dang-xay.mp3",
+        "tabs": {
+            "lesson": {
+                "title": "Bài học",
                 "blocks": [
                     { "type": "header", "text": "Về ngôi nhà đang xây" },
                     {
@@ -2699,38 +2698,38 @@ window.LESSON_DATA = {
                         `
                     }
                 ]
-        },
-        "quiz": {
-            "setting": { "pick": 5 },
-            "questions": [
-                { "q": "Tác giả của bài thơ \"Về ngôi nhà đang xây\" là ai?", "a": ["Trần Đăng Khoa", "Đồng Xuân Lan", "Nguyễn Khoa Điềm", "Xuân Quỳnh"], "c": 1 },
-                { "q": "Hình ảnh \"giàn giáo\" được so sánh với vật gì?", "a": ["Cái thang khổng lồ", "Cái lồng che chở", "Rừng cây", "Bộ xương của ngôi nhà"], "c": 1 },
-                { "q": "\"Trụ bê tông\" được ví von với hình ảnh nào đầy sức sống?", "a": ["Cây cột điện", "Ngón tay", "Mầm cây nhú lên", "Cây nấm"], "c": 2 },
-                { "q": "Ngôi nhà đang xây dở được nhân hóa với hành động gì liên quan đến mùi hương?", "a": ["Tỏa hương thơm ngát", "Thở ra mùi vôi vữa nồng hăng", "Hít thở không khí trong lành", "Giữ mùi sơn mới"], "c": 1 },
-                { "q": "Tác giả so sánh ngôi nhà đang xây với các tác phẩm nghệ thuật nào?", "a": ["Bản nhạc và vần thơ", "Bài thơ sắp làm xong và bức tranh còn nguyên màu vôi gạch", "Pho tượng và bức tranh", "Vở kịch và bài hát"], "c": 1 },
-                { "q": "Biện pháp nghệ thuật nào được dùng trong câu \"Nắng đứng ngủ quên\"?", "a": ["So sánh", "Nhân hóa", "Ẩn dụ", "Điệp từ"], "c": 1 },
-                { "q": "Bầy chim đi ăn về đã làm gì bên ô cửa?", "a": ["Làm tổ", "Đậu nghỉ ngơi", "Rót vào ô cửa vài nốt nhạc", "Tìm thức ăn"], "c": 2 },
-                { "q": "Ở khổ thơ cuối, ngôi nhà được so sánh với hình ảnh nào?", "a": ["Người khổng lồ", "Trẻ nhỏ", "Cây cổ thụ", "Ngọn núi"], "c": 1 },
-                { "q": "Câu thơ \"Lớn lên với trời xanh\" thể hiện điều gì?", "a": ["Ngôi nhà rất cao", "Sức sống mãnh liệt, sự vươn lên và niềm hy vọng", "Ngôi nhà được sơn màu xanh", "Bầu trời rất đẹp"], "c": 1 },
-                { "q": "Tác dụng chính của biện pháp nhân hóa trong bài là gì?", "a": ["Làm cho ngôi nhà trở nên to lớn, vĩ đại", "Làm cho bài thơ khó hiểu hơn", "Làm cho ngôi nhà trở nên gần gũi, thân thiện, có hồn như con người", "Để miêu tả chính xác kỹ thuật xây dựng"], "c": 2 },
-                { "q": "Hình ảnh \"Làn gió mang hương\" gợi cảm giác gì về không gian xung quanh ngôi nhà?", "a": ["Ngột ngạt, bụi bặm", "Thoáng đãng, dễ chịu và nên thơ", "Ồn ào, náo nhiệt", "Lạnh lẽo, vắng vẻ"], "c": 1 },
-                { "q": "Vì sao nói ngôi nhà \"giống bài thơ sắp làm xong\"?", "a": ["Vì thợ xây hay làm thơ", "Vì ngôi nhà chưa hoàn thiện nhưng đã hé lộ vẻ đẹp hoàn chỉnh trong tương lai", "Vì cấu trúc ngôi nhà giống nhịp điệu bài thơ", "Cả B và C đều có ý đúng"], "c": 1 },
-                { "q": "Nội dung chính của bài thơ là gì?", "a": ["Miêu tả sự vất vả của bác thợ nề", "Hình ảnh đẹp và sống động của ngôi nhà đang xây, thể hiện sự đổi mới của đất nước", "Kể về trò chơi của trẻ em bên công trường", "Giới thiệu quy trình xây dựng nhà"], "c": 1 },
-                { "q": "Ý nghĩa câu \"Mỗi bạn nhỏ giống như một ngôi nhà đang xây\" là gì?", "a": ["Các bạn nhỏ cần ăn nhiều để lớn nhanh", "Các bạn nhỏ đang trong quá trình học tập, rèn luyện để dần hoàn thiện nhân cách và trí tuệ", "Các bạn nhỏ thích chơi xây nhà", "Các bạn nhỏ rất cứng cáp"], "c": 1 },
-                { "q": "Cảm xúc của tác giả đối với ngôi nhà đang xây là gì?", "a": ["Thờ ơ, không quan tâm", "Khó chịu vì bụi bặm", "Yêu mến, thích thú và quan sát tinh tế", "Sợ hãi vì nguy hiểm"], "c": 2 }
-            ]
+            },
+            "quiz": {
+                "setting": { "pick": 5 },
+                "questions": [
+                    { "q": "Tác giả của bài thơ \"Về ngôi nhà đang xây\" là ai?", "a": ["Trần Đăng Khoa", "Đồng Xuân Lan", "Nguyễn Khoa Điềm", "Xuân Quỳnh"], "c": 1 },
+                    { "q": "Hình ảnh \"giàn giáo\" được so sánh với vật gì?", "a": ["Cái thang khổng lồ", "Cái lồng che chở", "Rừng cây", "Bộ xương của ngôi nhà"], "c": 1 },
+                    { "q": "\"Trụ bê tông\" được ví von với hình ảnh nào đầy sức sống?", "a": ["Cây cột điện", "Ngón tay", "Mầm cây nhú lên", "Cây nấm"], "c": 2 },
+                    { "q": "Ngôi nhà đang xây dở được nhân hóa với hành động gì liên quan đến mùi hương?", "a": ["Tỏa hương thơm ngát", "Thở ra mùi vôi vữa nồng hăng", "Hít thở không khí trong lành", "Giữ mùi sơn mới"], "c": 1 },
+                    { "q": "Tác giả so sánh ngôi nhà đang xây với các tác phẩm nghệ thuật nào?", "a": ["Bản nhạc và vần thơ", "Bài thơ sắp làm xong và bức tranh còn nguyên màu vôi gạch", "Pho tượng và bức tranh", "Vở kịch và bài hát"], "c": 1 },
+                    { "q": "Biện pháp nghệ thuật nào được dùng trong câu \"Nắng đứng ngủ quên\"?", "a": ["So sánh", "Nhân hóa", "Ẩn dụ", "Điệp từ"], "c": 1 },
+                    { "q": "Bầy chim đi ăn về đã làm gì bên ô cửa?", "a": ["Làm tổ", "Đậu nghỉ ngơi", "Rót vào ô cửa vài nốt nhạc", "Tìm thức ăn"], "c": 2 },
+                    { "q": "Ở khổ thơ cuối, ngôi nhà được so sánh với hình ảnh nào?", "a": ["Người khổng lồ", "Trẻ nhỏ", "Cây cổ thụ", "Ngọn núi"], "c": 1 },
+                    { "q": "Câu thơ \"Lớn lên với trời xanh\" thể hiện điều gì?", "a": ["Ngôi nhà rất cao", "Sức sống mãnh liệt, sự vươn lên và niềm hy vọng", "Ngôi nhà được sơn màu xanh", "Bầu trời rất đẹp"], "c": 1 },
+                    { "q": "Tác dụng chính của biện pháp nhân hóa trong bài là gì?", "a": ["Làm cho ngôi nhà trở nên to lớn, vĩ đại", "Làm cho bài thơ khó hiểu hơn", "Làm cho ngôi nhà trở nên gần gũi, thân thiện, có hồn như con người", "Để miêu tả chính xác kỹ thuật xây dựng"], "c": 2 },
+                    { "q": "Hình ảnh \"Làn gió mang hương\" gợi cảm giác gì về không gian xung quanh ngôi nhà?", "a": ["Ngột ngạt, bụi bặm", "Thoáng đãng, dễ chịu và nên thơ", "Ồn ào, náo nhiệt", "Lạnh lẽo, vắng vẻ"], "c": 1 },
+                    { "q": "Vì sao nói ngôi nhà \"giống bài thơ sắp làm xong\"?", "a": ["Vì thợ xây hay làm thơ", "Vì ngôi nhà chưa hoàn thiện nhưng đã hé lộ vẻ đẹp hoàn chỉnh trong tương lai", "Vì cấu trúc ngôi nhà giống nhịp điệu bài thơ", "Cả B và C đều có ý đúng"], "c": 1 },
+                    { "q": "Nội dung chính của bài thơ là gì?", "a": ["Miêu tả sự vất vả của bác thợ nề", "Hình ảnh đẹp và sống động của ngôi nhà đang xây, thể hiện sự đổi mới của đất nước", "Kể về trò chơi của trẻ em bên công trường", "Giới thiệu quy trình xây dựng nhà"], "c": 1 },
+                    { "q": "Ý nghĩa câu \"Mỗi bạn nhỏ giống như một ngôi nhà đang xây\" là gì?", "a": ["Các bạn nhỏ cần ăn nhiều để lớn nhanh", "Các bạn nhỏ đang trong quá trình học tập, rèn luyện để dần hoàn thiện nhân cách và trí tuệ", "Các bạn nhỏ thích chơi xây nhà", "Các bạn nhỏ rất cứng cáp"], "c": 1 },
+                    { "q": "Cảm xúc của tác giả đối với ngôi nhà đang xây là gì?", "a": ["Thờ ơ, không quan tâm", "Khó chịu vì bụi bặm", "Yêu mến, thích thú và quan sát tinh tế", "Sợ hãi vì nguy hiểm"], "c": 2 }
+                ]
+            }
         }
-    }
-},
-"312-viet-nam-que-huong-ta": {
-    "title": "Việt Nam quê hương ta",
+    },
+    "312-viet-nam-que-huong-ta": {
+        "title": "Việt Nam quê hương ta",
         "week": 31,
-            "subject": "Đọc",
-                "theme": "Thế giới của chúng ta",
-                    "audio": "am_thanh/viet-nam-que-huong-ta.mp3",
-                        "tabs": {
-        "lesson": {
-            "title": "Bài học",
+        "subject": "Đọc",
+        "theme": "Thế giới của chúng ta",
+        "audio": "am_thanh/viet-nam-que-huong-ta.mp3",
+        "tabs": {
+            "lesson": {
+                "title": "Bài học",
                 "blocks": [
                     { "type": "header", "text": "Việt Nam quê hương ta" },
                     {
@@ -2769,31 +2768,31 @@ window.LESSON_DATA = {
                         `
                     }
                 ]
-        },
-        "quiz": {
-            "setting": { "pick": 5 },
-            "questions": [
-                { "q": "Bài thơ 'Việt Nam quê hương ta' được sáng tác bởi nhà thơ nào?", "a": ["Tố Hữu", "Trần Đăng Khoa", "Nguyễn Đình Thi", "Huy Cận"], "c": 2 },
-                { "q": "Hình ảnh nào được dùng để miêu tả sự trù phú của cánh đồng lúa Việt Nam?", "a": ["Rừng vàng biển bạc", "Mênh mông biển lúa", "Cánh đồng thẳng cánh cò bay", "Lúa vàng trĩu hạt"], "c": 1 },
-                { "q": "Dãy núi nào được nhắc đến trong câu 'Mây mờ che đỉnh... sớm chiều'?", "a": ["Hoàng Liên Sơn", "Ba Vì", "Trường Sơn", "Bạch Mã"], "c": 2 },
-                { "q": "Hình ảnh 'Gái trai cũng một áo nâu nhuộm bùn' gợi lên phẩm chất gì của người dân Việt Nam?", "a": ["Sự giản dị và tiết kiệm", "Sự cần cù, chịu thương chịu khó, vất vả lam lũ trong lao động", "Sự mặc áo nâu", "Sự nghèo khó"], "c": 1 },
-                { "q": "Câu thơ 'Đất nghèo nuôi những anh hùng' có ý nghĩa gì?", "a": ["Đất nước nghèo nên ai cũng phải đi đánh giặc", "Từ mảnh đất gian khó, đau thương đã sinh ra những con người quả cảm, kiên cường", "Anh hùng chỉ xuất thân từ nhà nghèo", "Đất nước không có tài nguyên"], "c": 1 },
-                { "q": "Sau khi chiến thắng kẻ thù ('Đạp quân thù xuống đất đen'), người Việt Nam có thái độ như thế nào?", "a": ["Kiêu ngạo và hung hăng", "Tiếp tục gây chiến", "Súng gươm vứt bỏ lại hiền như xưa", "Lạnh lùng và xa cách"], "c": 2 },
-                { "q": "Phẩm chất nào được nhắc đến trong câu 'Yêu ai yêu trọn tấm tình thủy chung'?", "a": ["Sự thông minh", "Sự dũng cảm", "Sự thủy chung, son sắt trong tình cảm", "Sự hiếu khách"], "c": 2 },
-                { "q": "Câu thơ 'Tay người như có phép tiên' dùng biện pháp nghệ thuật gì?", "a": ["So sánh", "Nhân hóa", "Ẩn dụ", "Hoán dụ"], "c": 0 },
-                { "q": "Hình ảnh 'Trên tre lá cũng dệt nghìn bài thơ' ca ngợi điều gì?", "a": ["Người Việt Nam rất thích làm thơ", "Sự khéo léo, tài hoa của đôi bàn tay người thợ thủ công làm ra sản phẩm đẹp như thơ", "Cây tre biết làm thơ", "Nghề dệt vải truyền thống"], "c": 1 },
-                { "q": "Hai khổ thơ cuối muốn nhấn mạnh điều gì về đất nước và con người Việt Nam?", "a": ["Đất nước rộng lớn, người dân đông đúc", "Đất nước có nhiều tài nguyên khoáng sản", "Đất nước tươi đẹp, con người tài hoa, tình nghĩa và thủy chung", "Đất nước có nhiều lễ hội"], "c": 2 },
-                { "q": "Cụm từ 'Mặt người vất vả in sâu' diễn tả điều gì?", "a": ["Những nỗi gian lao, vất vả của người dân đã hằn in lên dáng vẻ bề ngoài", "Khuôn mặt người dân rất nghiêm khắc", "Người dân hay lo lắng", "Người dân có khuôn mặt giống nhau"], "c": 0 },
-                { "q": "Tác giả gọi đất nước là 'Việt Nam đất nước ta ơi' thể hiện tình cảm gì?", "a": ["Sự trang trọng, xa cách", "Sự tha thiết, gần gũi, yêu mến và tự hào", "Sự buồn bã", "Sự ngạc nhiên"], "c": 1 },
-                { "q": " 'Mắt đen cô gái long lanh' gợi vẻ đẹp như thế nào?", "a": ["Vẻ đẹp sắc sảo", "Vẻ đẹp buồn", "Vẻ đẹp tươi sáng, tinh anh và tràn đầy sức sống", "Vẻ đẹp bí ẩn"], c: 2 },
-                { "q": "Ý nào sau đây KHÔNG đúng khi nói về con người Việt Nam trong bài thơ?", "a": ["Cần cù trong lao động", "Anh hùng trong chiến đấu", "Khuất phục trước kẻ thù", "Hiền lành trong đời thường"], "c": 2 },
-                { "q": "Bài thơ giúp em cảm nhận được điều gì sâu sắc nhất?", "a": ["Sự giàu có về tiền bạc của đất nước", "Niềm tự hào và tình yêu đối với vẻ đẹp của non sông và phẩm chất con người Việt Nam", "Sự khắc nghiệt của thiên nhiên", "Nỗi buồn về chiến tranh"], "c": 1 }
-            ]
+            },
+            "quiz": {
+                "setting": { "pick": 5 },
+                "questions": [
+                    { "q": "Bài thơ 'Việt Nam quê hương ta' được sáng tác bởi nhà thơ nào?", "a": ["Tố Hữu", "Trần Đăng Khoa", "Nguyễn Đình Thi", "Huy Cận"], "c": 2 },
+                    { "q": "Hình ảnh nào được dùng để miêu tả sự trù phú của cánh đồng lúa Việt Nam?", "a": ["Rừng vàng biển bạc", "Mênh mông biển lúa", "Cánh đồng thẳng cánh cò bay", "Lúa vàng trĩu hạt"], "c": 1 },
+                    { "q": "Dãy núi nào được nhắc đến trong câu 'Mây mờ che đỉnh... sớm chiều'?", "a": ["Hoàng Liên Sơn", "Ba Vì", "Trường Sơn", "Bạch Mã"], "c": 2 },
+                    { "q": "Hình ảnh 'Gái trai cũng một áo nâu nhuộm bùn' gợi lên phẩm chất gì của người dân Việt Nam?", "a": ["Sự giản dị và tiết kiệm", "Sự cần cù, chịu thương chịu khó, vất vả lam lũ trong lao động", "Sự mặc áo nâu", "Sự nghèo khó"], "c": 1 },
+                    { "q": "Câu thơ 'Đất nghèo nuôi những anh hùng' có ý nghĩa gì?", "a": ["Đất nước nghèo nên ai cũng phải đi đánh giặc", "Từ mảnh đất gian khó, đau thương đã sinh ra những con người quả cảm, kiên cường", "Anh hùng chỉ xuất thân từ nhà nghèo", "Đất nước không có tài nguyên"], "c": 1 },
+                    { "q": "Sau khi chiến thắng kẻ thù ('Đạp quân thù xuống đất đen'), người Việt Nam có thái độ như thế nào?", "a": ["Kiêu ngạo và hung hăng", "Tiếp tục gây chiến", "Súng gươm vứt bỏ lại hiền như xưa", "Lạnh lùng và xa cách"], "c": 2 },
+                    { "q": "Phẩm chất nào được nhắc đến trong câu 'Yêu ai yêu trọn tấm tình thủy chung'?", "a": ["Sự thông minh", "Sự dũng cảm", "Sự thủy chung, son sắt trong tình cảm", "Sự hiếu khách"], "c": 2 },
+                    { "q": "Câu thơ 'Tay người như có phép tiên' dùng biện pháp nghệ thuật gì?", "a": ["So sánh", "Nhân hóa", "Ẩn dụ", "Hoán dụ"], "c": 0 },
+                    { "q": "Hình ảnh 'Trên tre lá cũng dệt nghìn bài thơ' ca ngợi điều gì?", "a": ["Người Việt Nam rất thích làm thơ", "Sự khéo léo, tài hoa của đôi bàn tay người thợ thủ công làm ra sản phẩm đẹp như thơ", "Cây tre biết làm thơ", "Nghề dệt vải truyền thống"], "c": 1 },
+                    { "q": "Hai khổ thơ cuối muốn nhấn mạnh điều gì về đất nước và con người Việt Nam?", "a": ["Đất nước rộng lớn, người dân đông đúc", "Đất nước có nhiều tài nguyên khoáng sản", "Đất nước tươi đẹp, con người tài hoa, tình nghĩa và thủy chung", "Đất nước có nhiều lễ hội"], "c": 2 },
+                    { "q": "Cụm từ 'Mặt người vất vả in sâu' diễn tả điều gì?", "a": ["Những nỗi gian lao, vất vả của người dân đã hằn in lên dáng vẻ bề ngoài", "Khuôn mặt người dân rất nghiêm khắc", "Người dân hay lo lắng", "Người dân có khuôn mặt giống nhau"], "c": 0 },
+                    { "q": "Tác giả gọi đất nước là 'Việt Nam đất nước ta ơi' thể hiện tình cảm gì?", "a": ["Sự trang trọng, xa cách", "Sự tha thiết, gần gũi, yêu mến và tự hào", "Sự buồn bã", "Sự ngạc nhiên"], "c": 1 },
+                    { "q": " 'Mắt đen cô gái long lanh' gợi vẻ đẹp như thế nào?", "a": ["Vẻ đẹp sắc sảo", "Vẻ đẹp buồn", "Vẻ đẹp tươi sáng, tinh anh và tràn đầy sức sống", "Vẻ đẹp bí ẩn"], c: 2 },
+                    { "q": "Ý nào sau đây KHÔNG đúng khi nói về con người Việt Nam trong bài thơ?", "a": ["Cần cù trong lao động", "Anh hùng trong chiến đấu", "Khuất phục trước kẻ thù", "Hiền lành trong đời thường"], "c": 2 },
+                    { "q": "Bài thơ giúp em cảm nhận được điều gì sâu sắc nhất?", "a": ["Sự giàu có về tiền bạc của đất nước", "Niềm tự hào và tình yêu đối với vẻ đẹp của non sông và phẩm chất con người Việt Nam", "Sự khắc nghiệt của thiên nhiên", "Nỗi buồn về chiến tranh"], "c": 1 }
+                ]
+            }
         }
     }
-}
 },
-"321-bai-ca-trai-dat": {
+    "321-bai-ca-trai-dat": {
     "title": "Bài ca Trái Đất",
         "week": 32,
             "subject": "Đọc",
