@@ -1655,44 +1655,20 @@ window.LESSON_DATA = {
                                 </aside>
                             </div>`
                         }
-                    ]
-                },
-                "quiz": {
-                    "settings": { "pick": 10 },
-                    "questions": [
-                        { "q": "Bài thơ 'Hương cốm mùa thu' của tác giả nào?", "a": ["Trần Đăng Khoa", "Bảo Ngọc", "Huy Cận", "Xuân Quỳnh"], "c": 1 },
-                        { "q": "Mùa cốm bắt đầu vào tháng mấy?", "a": ["Tháng Tám", "Tháng Chín", "Tháng Mười", "Tháng Mười Một"], "c": 1 },
-                        { "q": "Gió gì thổi về phố mang theo hương cốm?", "a": ["Gió mùa đông bắc", "Gió Lào", "Gió heo may", "Gió nam"], "c": 2 },
-                        { "q": "Trong bài thơ, hạt lúa lúc còn non được ví với điều gì?", "a": ["Hạt ngọc", "Tròn căng hơi sữa", "Màu vàng nắng", "Màu xanh trời"], "c": 1 },
-                        { "q": "Để có hạt cốm, ba và mẹ đã phải làm gì?", "a": ["Gieo hạt", "Cày cấy", "Sàng sẩy", "Tưới nước"], "c": 2 },
-                        { "q": "Hạt cốm được ví mang 'hồn' của những gì?", "a": ["Của nắng và gió", "Của đất và người", "Của trời và mây", "Của hoa và lá"], "c": 1 },
-                        { "q": "Bạn nhỏ thấy màu sắc nào 'ủ trong hạt cốm'?", "a": ["Vàng của nắng, xanh của trời, nâu của đất", "Đỏ của hoa, vàng của lá", "Tím của mây, hồng của nắng", "Trắng của mây, đen của đất"], "c": 0 },
-                        { "q": "Địa danh nào ở Hà Nội được nhắc tới trong bài?", "a": ["Chùa Một Cột", "Hồ Gươm", "Lăng Bác", "Văn Miếu"], "c": 1 },
-                        { "q": "Hình ảnh nào sau đây nói về vẻ đẹp của Hồ Gươm?", "a": ["Mặt nước phẳng lặng", "Chớp đôi mắt biếc", "Lá vàng rơi", "Tháp Rùa rêu phong"], "c": 1 },
-                        { "q": "Hạt cốm là sản phẩm của sự kết hợp giữa điều gì?", "a": ["Chỉ do thiên nhiên ban tặng", "Chỉ do bàn tay con người làm ra", "Tinh túy đất trời và bàn tay lao động cần cù", "Sự may mắn của nhà nông"], "c": 2 },
-                        { "q": "Từ nào mô tả âm thanh xôn xao bên ô cửa?", "a": ["Lặng lẽ", "Xôn xao", "Ồn ào", "Im lìm"], "c": 1 },
-                        { "q": "Câu 'Hạt lúa tròn căng hơi sữa' sử dụng biện pháp nghệ thuật gì?", "a": ["So sánh", "Nhân hóa", "Ẩn dụ", "Điệp từ"], "c": 2 },
-                        { "q": "Khổ thơ cuối bài nhắc nhở chúng ta điều gì về mùa hương cốm?", "a": ["Sắp hết mùa thu", "Mùa hương cốm vừa lên", "Nên đi mua cốm", "Hồ Gươm rất đẹp"], "c": 1 },
-                        { "q": "Cảm xúc chủ đạo của bạn nhỏ trong bài thơ là gì?", "a": ["Buồn bã", "Sợ hãi", "Vui tươi, trân trọng", "Lo lắng"], "c": 2 },
-                        { "q": "Bài thơ nhắc nhở chúng ta cần có thái độ gì với công sức lao động?", "a": ["Quên đi", "Bình thường", "Biết ơn và trân trọng", "Chê bai"], "c": 2 }
-                    ]
-                }
-            }
-        },
         "242-vu-dieu-tren-nen-tho-cam": {
-            "title": "Vũ điệu trên nền thổ cẩm",
-            "week": 24,
-            "subject": "Đọc",
-            "theme": "Hương sắc trăm miền",
-            "audio": "am_thanh/vudieuthocam.mp3",
-            "tabs": {
-                "lesson": {
-                    "title": "Bài học",
-                    "blocks": [
-                        { "type": "header", "text": "Vũ điệu trên nền thổ cẩm" },
-                        {
-                            "type": "html",
-                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                            "title": "Vũ điệu trên nền thổ cẩm",
+                            "week": 24,
+                            "subject": "Đọc",
+                            "theme": "Hương sắc trăm miền",
+                            "audio": "am_thanh/vudieuthocam.mp3",
+                            "tabs": {
+                                "lesson": {
+                                    "title": "Bài học",
+                                    "blocks": [
+                                        { "type": "header", "text": "Vũ điệu trên nền thổ cẩm" },
+                                        {
+                                            "type": "html",
+                                            "content": `<div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
                                         <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
@@ -1788,45 +1764,45 @@ window.LESSON_DATA = {
                                     </div>
                                 </aside>
                             </div>`
-                        }
-                    ]
-                },
-                "quiz": {
-                    "settings": { "pick": 10 },
-                    "questions": [
-                        { "q": "Bài đọc \"Vũ điệu trên nền thổ cẩm\" viết về nét văn hóa độc đáo của dân tộc nào?", "a": ["Dân tộc Thái", "Dân tộc Mường", "Dân tộc Cơ-tu", "Dân tộc Ê-đê"], "c": 2 },
-                        { "q": "Dân tộc Cơ-tu cư trú chủ yếu ở vùng nào?", "a": ["Vùng núi Tây Bắc", "Núi rừng Trường Sơn", "Vùng Tây Nguyên", "Đồng bằng sông Cửu Long"], "c": 1 },
-                        { "q": "Di sản văn hóa độc đáo nào của người Cơ-tu được nhắc đến trong bài?", "a": ["Nghề làm gốm", "Nghề đan lát", "Nghề dệt thổ cẩm", "Nghề rèn đúc"], "c": 2 },
-                        { "q": "Hoa văn trên trang phục cổ truyền của người Cơ-tu được tạo nên từ vật liệu gì?", "a": ["Chỉ thêu ngũ sắc", "Những hạt cườm", "Những viên đá nhỏ", "Những mảnh kim loại"], "c": 1 },
-                        { "q": "Hoa văn nổi bật nhất trên trang phục của người Cơ-tu có tên là gì?", "a": ["Hoa văn mặt trời", "Hoa văn chim hạc", "Hoa văn da dá", "Hoa văn ngọn lửa"], "c": 2 },
-                        { "q": "Hoa văn da dá mô phỏng điều gì trong đời sống của người Cơ-tu?", "a": ["Hình ảnh con thú rừng", "Hình ảnh ngọn núi cao", "Điệu múa Da dá", "Hình ảnh dòng suối"], "c": 2 },
-                        { "q": "Điệu múa Da dá là điệu múa mang ý nghĩa gì?", "a": ["Múa cầu mưa", "Múa cầu mùa", "Múa mừng chiến thắng", "Múa đám cưới"], "c": 1 },
-                        { "q": "Khi múa điệu Da dá, động tác tay của người phụ nữ được miêu tả như thế nào?", "a": ["Đôi tay vỗ vào nhau", "Đôi tay nắm chặt đặt trước ngực", "Đôi tay múa lượn như cánh chim", "Đôi tay xoè lên trời"], "c": 3 },
-                        { "q": "Động tác xoè tay lên trời trong điệu múa thể hiện mong ước gì?", "a": ["Cầu xin mưa thuận gió hòa", "Cầu xin và đón nhận hạt lúa từ thần linh", "Cầu xin sức khỏe cho buôn làng", "Cầu xin bình an, không có thú dữ"], "c": 1 },
-                        { "q": "Người thợ dệt đã tạo ra hoa văn da dá trên chất liệu vải gì?", "a": ["Vải lụa mềm mại", "Nền vải thô rám", "Vải nhung sang trọng", "Vải lanh mỏng"], "c": 1 },
-                        { "q": "Màu sắc của hạt cườm được sử dụng để đính lên nền vải là màu gì?", "a": ["Màu đỏ", "Màu vàng", "Màu xanh", "Màu trắng"], "c": 3 },
-                        { "q": "Hoa văn da dá thường được trang trí trên loại trang phục nào?", "a": ["Khăn đội đầu", "Váy, áo của phụ nữ", "Áo khố của đàn ông", "Túi đeo vai"], "c": 1 },
-                        { "q": "Cụm từ \"Vũ điệu trên nền thổ cẩm\" trong tên bài muốn nói đến điều gì?", "a": ["Người phụ nữ múa trên tấm thảm thổ cẩm", "Một lễ hội múa hát của người Cơ-tu", "Điệu múa Da dá được khắc họa sống động thành hoa văn trên vải thổ cẩm", "Tên một bài hát của người Cơ-tu"], "c": 2 },
-                        { "q": "Theo bài đọc, hoa văn da dá góp phần làm điều gì cho trang phục của người Cơ-tu?", "a": ["Làm cho trang phục bền hơn", "Giúp trang phục bán được giá cao", "Làm cho di sản trang phục thêm giá trị và mang đậm sắc thái tộc người", "Giúp trang phục nhẹ hơn"], "c": 2 },
-                        { "q": "Qua bài đọc, tác giả muốn gửi gắm thông điệp gì?", "a": ["Cần phải học cách múa điệu Da dá", "Nên mua trang phục thổ cẩm để ủng hộ người dân", "Cần trân trọng và lưu giữ những giá trị văn hóa độc đáo của các dân tộc", "Cần phải đi du lịch đến núi rừng Trường Sơn"], "c": 2 }
-                    ]
-                }
-            }
-        },
-        "251-dan-t'rung-tieng-ca-dai-ngan": {
-            "title": "Đàn t'rưng, tiếng ca đại ngàn",
-            "week": 25,
-            "subject": "Đọc",
-            "theme": "Hương sắc trăm miền",
-            "audio": "am_thanh/dantrungtiengcadainan.mp3",
-            "tabs": {
-                "lesson": {
-                    "title": "Bài học",
-                    "blocks": [
-                        { "type": "header", "text": "Đàn t'rưng, tiếng ca đại ngàn" },
-                        {
-                            "type": "html",
-                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                                        }
+                                    ]
+                                },
+                                "quiz": {
+                                    "settings": { "pick": 10 },
+                                    "questions": [
+                                        { "q": "Bài đọc \"Vũ điệu trên nền thổ cẩm\" viết về nét văn hóa độc đáo của dân tộc nào?", "a": ["Dân tộc Thái", "Dân tộc Mường", "Dân tộc Cơ-tu", "Dân tộc Ê-đê"], "c": 2 },
+                                        { "q": "Dân tộc Cơ-tu cư trú chủ yếu ở vùng nào?", "a": ["Vùng núi Tây Bắc", "Núi rừng Trường Sơn", "Vùng Tây Nguyên", "Đồng bằng sông Cửu Long"], "c": 1 },
+                                        { "q": "Di sản văn hóa độc đáo nào của người Cơ-tu được nhắc đến trong bài?", "a": ["Nghề làm gốm", "Nghề đan lát", "Nghề dệt thổ cẩm", "Nghề rèn đúc"], "c": 2 },
+                                        { "q": "Hoa văn trên trang phục cổ truyền của người Cơ-tu được tạo nên từ vật liệu gì?", "a": ["Chỉ thêu ngũ sắc", "Những hạt cườm", "Những viên đá nhỏ", "Những mảnh kim loại"], "c": 1 },
+                                        { "q": "Hoa văn nổi bật nhất trên trang phục của người Cơ-tu có tên là gì?", "a": ["Hoa văn mặt trời", "Hoa văn chim hạc", "Hoa văn da dá", "Hoa văn ngọn lửa"], "c": 2 },
+                                        { "q": "Hoa văn da dá mô phỏng điều gì trong đời sống của người Cơ-tu?", "a": ["Hình ảnh con thú rừng", "Hình ảnh ngọn núi cao", "Điệu múa Da dá", "Hình ảnh dòng suối"], "c": 2 },
+                                        { "q": "Điệu múa Da dá là điệu múa mang ý nghĩa gì?", "a": ["Múa cầu mưa", "Múa cầu mùa", "Múa mừng chiến thắng", "Múa đám cưới"], "c": 1 },
+                                        { "q": "Khi múa điệu Da dá, động tác tay của người phụ nữ được miêu tả như thế nào?", "a": ["Đôi tay vỗ vào nhau", "Đôi tay nắm chặt đặt trước ngực", "Đôi tay múa lượn như cánh chim", "Đôi tay xoè lên trời"], "c": 3 },
+                                        { "q": "Động tác xoè tay lên trời trong điệu múa thể hiện mong ước gì?", "a": ["Cầu xin mưa thuận gió hòa", "Cầu xin và đón nhận hạt lúa từ thần linh", "Cầu xin sức khỏe cho buôn làng", "Cầu xin bình an, không có thú dữ"], "c": 1 },
+                                        { "q": "Người thợ dệt đã tạo ra hoa văn da dá trên chất liệu vải gì?", "a": ["Vải lụa mềm mại", "Nền vải thô rám", "Vải nhung sang trọng", "Vải lanh mỏng"], "c": 1 },
+                                        { "q": "Màu sắc của hạt cườm được sử dụng để đính lên nền vải là màu gì?", "a": ["Màu đỏ", "Màu vàng", "Màu xanh", "Màu trắng"], "c": 3 },
+                                        { "q": "Hoa văn da dá thường được trang trí trên loại trang phục nào?", "a": ["Khăn đội đầu", "Váy, áo của phụ nữ", "Áo khố của đàn ông", "Túi đeo vai"], "c": 1 },
+                                        { "q": "Cụm từ \"Vũ điệu trên nền thổ cẩm\" trong tên bài muốn nói đến điều gì?", "a": ["Người phụ nữ múa trên tấm thảm thổ cẩm", "Một lễ hội múa hát của người Cơ-tu", "Điệu múa Da dá được khắc họa sống động thành hoa văn trên vải thổ cẩm", "Tên một bài hát của người Cơ-tu"], "c": 2 },
+                                        { "q": "Theo bài đọc, hoa văn da dá góp phần làm điều gì cho trang phục của người Cơ-tu?", "a": ["Làm cho trang phục bền hơn", "Giúp trang phục bán được giá cao", "Làm cho di sản trang phục thêm giá trị và mang đậm sắc thái tộc người", "Giúp trang phục nhẹ hơn"], "c": 2 },
+                                        { "q": "Qua bài đọc, tác giả muốn gửi gắm thông điệp gì?", "a": ["Cần phải học cách múa điệu Da dá", "Nên mua trang phục thổ cẩm để ủng hộ người dân", "Cần trân trọng và lưu giữ những giá trị văn hóa độc đáo của các dân tộc", "Cần phải đi du lịch đến núi rừng Trường Sơn"], "c": 2 }
+                                    ]
+                                }
+                            }
+                        },
+                        "251-dan-t'rung-tieng-ca-dai-ngan": {
+                            "title": "Đàn t'rưng, tiếng ca đại ngàn",
+                            "week": 25,
+                            "subject": "Đọc",
+                            "theme": "Hương sắc trăm miền",
+                            "audio": "am_thanh/dantrungtiengcadainan.mp3",
+                            "tabs": {
+                                "lesson": {
+                                    "title": "Bài học",
+                                    "blocks": [
+                                        { "type": "header", "text": "Đàn t'rưng, tiếng ca đại ngàn" },
+                                        {
+                                            "type": "html",
+                                            "content": `<div class="flex flex-col lg:flex-row gap-6">
                                 <section class="w-full lg:w-[70%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
                                         <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
@@ -1923,46 +1899,46 @@ window.LESSON_DATA = {
                                     </div>
                                 </aside>
                             </div>`
-                        }
-                    ]
-                },
-                "quiz": {
-                    "settings": { "pick": 10 },
-                    "questions": [
-                        { "q": "Bài đọc \"Đàn t'rưng - tiếng ca đại ngàn\" viết về vùng đất nào của nước ta?", "a": ["Tây Bắc", "Tây Nguyên", "Đồng bằng sông Cửu Long", "Duyên hải Nam Trung Bộ"], "c": 1 },
-                        { "q": "Tiếng đàn t'rưng thường được nghe thấy ở những không gian nào trong bài?", "a": ["Trong các nhà hát lớn", "Ngân dài theo dòng suối, trên đèo núi, trên nương rẫy", "Trong các trường học", "Trên những con thuyền ngoài biển"], "c": 1 },
-                        { "q": "Âm thanh của đàn t'rưng được so sánh với những âm thanh nào của thiên nhiên?", "a": ["Tiếng sấm và tiếng mưa", "Tiếng chim hót và tiếng lá rơi", "Tiếng thác đổ trầm hùng và tiếng suối reo róc rách", "Tiếng gió thổi và tiếng sóng biển"], "c": 2 },
-                        { "q": "Ngay từ khi còn nhỏ, những đứa trẻ Tây Nguyên đã làm quen với tiếng đàn t'rưng trong hoàn cảnh nào?", "a": ["Khi đi học đánh đàn", "Khi xem tivi", "Khi được địu trên lưng mẹ, nghe cùng điệu hát ru", "Khi tham gia lễ hội"], "c": 2 },
-                        { "q": "Hình dáng của chiếc đàn t'rưng dưới gầm chòi canh được miêu tả như thế nào?", "a": ["Thẳng tắp như cây tre", "Tròn như cái mâm", "Cong cong như chiếc võng đưa em", "Vuông vức như cái hộp"], "c": 2 },
-                        { "q": "Vào mùa lúa chín, đàn t'rưng có tác dụng thực tế gì đối với việc canh tác?", "a": ["Để gọi mưa về tưới lúa", "Để cầu mùa màng bội thu", "Dạo bản nhạc “đánh tiếng” phát đuổi chim muông, thú rừng", "Để báo hiệu giờ nghỉ trưa"], "c": 2 },
-                        { "q": "Tiếng đàn t'rưng trong đêm khuya còn làm gì với các chàng trai canh rẫy?", "a": ["Làm ấm lòng họ trong rừng khuya sương lạnh", "Giúp họ không buồn ngủ", "Giúp họ gọi bạn bè đến chơi", "Giúp họ quên đi cơn đói"], "c": 0 },
-                        { "q": "Trên đỉnh dốc cao, người ta đặt đàn t'rưng để làm gì?", "a": ["Để trang trí", "Để bán", "Để người đi qua gõ vang lên cho thêm yên tâm, vững bước", "Để đánh dấu ranh giới"], "c": 2 },
-                        { "q": "Từ \"u tịch\" trong câu \"quãng đường rừng u tịch\" có nghĩa là gì?", "a": ["Ồn ào náo nhiệt", "Vắng vẻ, yên lặng và có vẻ hơi tối tăm, bí ẩn", "Rực rỡ sắc màu", "Đông đúc người qua"], "c": 1 },
-                        { "q": "Tiếng đàn t'rưng gắn bó với người Tây Nguyên trong hoạt động nào?", "a": ["Chỉ các lễ hội", "Chỉ đi đánh giặc", "Chỉ khi nghỉ ngơi", "Mọi hoạt động: kiếm củi, lấy nước, trỉa lúa, canh rẫy..."], "c": 3 },
-                        { "q": "Cùng với đàn t'rưng, hình ảnh nào khác là biểu tượng thân thương của Tây Nguyên?", "a": ["Con voi", "Cây kơ-nia", "Mái nhà rông cao vút", "Cồng chiêng"], "c": 2 },
-                        { "q": "Biện pháp nghệ thuật nào được sử dụng: \"đàn t’rưng cong cong như chiếc võng\"?", "a": ["So sánh", "Nhân hóa", "Điệp ngữ", "Ẩn dụ"], "c": 0 },
-                        { "q": "Nội dung bài đọc muốn khẳng định điều gì về tiếng đàn t'rưng?", "a": ["Đàn t'rưng là nhạc cụ đắt tiền", "Tiếng đàn t'rưng là niềm thương, nỗi nhớ của người Tây Nguyên", "Đàn t'rưng rất khó sử dụng", "Chỉ dành cho người già"], "c": 1 },
-                        { "q": "Qua bài đọc, em thấy người dân Tây Nguyên có tinh thần như thế nào?", "a": ["Lo lắng và sợ hãi", "Lạc quan, yêu đời, yêu ca hát và gắn bó với thiên nhiên", "Thích cuộc sống hiện đại", "Sống khép kín"], "c": 1 },
-                        { "q": "Cụm từ \"tiếng ca đại ngàn\" trong nhan đề muốn nói điều gì?", "a": ["Tiếng hát người khổng lồ", "Tiếng hót của chim", "Tiếng đàn đại diện cho vẻ đẹp và tâm hồn núi rừng Tây Nguyên", "Tiếng gió thổi qua khe núi"], "c": 2 }
-                    ]
-                }
-            }
-        },
-        "252-duong-que-dong-thap-muoi": {
-            "title": "Đường quê Đồng Tháp Mười",
-            "week": 25,
-            "subject": "Đọc",
-            "theme": "Hương sắc trăm miền",
-            "audio": "am_thanh/duongquedongthapmuoi.mp3",
-            "tabs": {
-                "lesson": {
-                    "title": "Bài học",
-                    "blocks": [
-                        { "type": "header", "text": "Đường quê Đồng Tháp Mười" },
-                        {
-                            "type": "html",
-                            "content": `<div class="flex flex-col lg:flex-row gap-6">
-                                <section class="w-full lg:w-[70%]">
+                                        }
+                                    ]
+                                },
+                                "quiz": {
+                                    "settings": { "pick": 10 },
+                                    "questions": [
+                                        { "q": "Bài đọc \"Đàn t'rưng - tiếng ca đại ngàn\" viết về vùng đất nào của nước ta?", "a": ["Tây Bắc", "Tây Nguyên", "Đồng bằng sông Cửu Long", "Duyên hải Nam Trung Bộ"], "c": 1 },
+                                        { "q": "Tiếng đàn t'rưng thường được nghe thấy ở những không gian nào trong bài?", "a": ["Trong các nhà hát lớn", "Ngân dài theo dòng suối, trên đèo núi, trên nương rẫy", "Trong các trường học", "Trên những con thuyền ngoài biển"], "c": 1 },
+                                        { "q": "Âm thanh của đàn t'rưng được so sánh với những âm thanh nào của thiên nhiên?", "a": ["Tiếng sấm và tiếng mưa", "Tiếng chim hót và tiếng lá rơi", "Tiếng thác đổ trầm hùng và tiếng suối reo róc rách", "Tiếng gió thổi và tiếng sóng biển"], "c": 2 },
+                                        { "q": "Ngay từ khi còn nhỏ, những đứa trẻ Tây Nguyên đã làm quen với tiếng đàn t'rưng trong hoàn cảnh nào?", "a": ["Khi đi học đánh đàn", "Khi xem tivi", "Khi được địu trên lưng mẹ, nghe cùng điệu hát ru", "Khi tham gia lễ hội"], "c": 2 },
+                                        { "q": "Hình dáng của chiếc đàn t'rưng dưới gầm chòi canh được miêu tả như thế nào?", "a": ["Thẳng tắp như cây tre", "Tròn như cái mâm", "Cong cong như chiếc võng đưa em", "Vuông vức như cái hộp"], "c": 2 },
+                                        { "q": "Vào mùa lúa chín, đàn t'rưng có tác dụng thực tế gì đối với việc canh tác?", "a": ["Để gọi mưa về tưới lúa", "Để cầu mùa màng bội thu", "Dạo bản nhạc “đánh tiếng” phát đuổi chim muông, thú rừng", "Để báo hiệu giờ nghỉ trưa"], "c": 2 },
+                                        { "q": "Tiếng đàn t'rưng trong đêm khuya còn làm gì với các chàng trai canh rẫy?", "a": ["Làm ấm lòng họ trong rừng khuya sương lạnh", "Giúp họ không buồn ngủ", "Giúp họ gọi bạn bè đến chơi", "Giúp họ quên đi cơn đói"], "c": 0 },
+                                        { "q": "Trên đỉnh dốc cao, người ta đặt đàn t'rưng để làm gì?", "a": ["Để trang trí", "Để bán", "Để người đi qua gõ vang lên cho thêm yên tâm, vững bước", "Để đánh dấu ranh giới"], "c": 2 },
+                                        { "q": "Từ \"u tịch\" trong câu \"quãng đường rừng u tịch\" có nghĩa là gì?", "a": ["Ồn ào náo nhiệt", "Vắng vẻ, yên lặng và có vẻ hơi tối tăm, bí ẩn", "Rực rỡ sắc màu", "Đông đúc người qua"], "c": 1 },
+                                        { "q": "Tiếng đàn t'rưng gắn bó với người Tây Nguyên trong hoạt động nào?", "a": ["Chỉ các lễ hội", "Chỉ đi đánh giặc", "Chỉ khi nghỉ ngơi", "Mọi hoạt động: kiếm củi, lấy nước, trỉa lúa, canh rẫy..."], "c": 3 },
+                                        { "q": "Cùng với đàn t'rưng, hình ảnh nào khác là biểu tượng thân thương của Tây Nguyên?", "a": ["Con voi", "Cây kơ-nia", "Mái nhà rông cao vút", "Cồng chiêng"], "c": 2 },
+                                        { "q": "Biện pháp nghệ thuật nào được sử dụng: \"đàn t’rưng cong cong như chiếc võng\"?", "a": ["So sánh", "Nhân hóa", "Điệp ngữ", "Ẩn dụ"], "c": 0 },
+                                        { "q": "Nội dung bài đọc muốn khẳng định điều gì về tiếng đàn t'rưng?", "a": ["Đàn t'rưng là nhạc cụ đắt tiền", "Tiếng đàn t'rưng là niềm thương, nỗi nhớ của người Tây Nguyên", "Đàn t'rưng rất khó sử dụng", "Chỉ dành cho người già"], "c": 1 },
+                                        { "q": "Qua bài đọc, em thấy người dân Tây Nguyên có tinh thần như thế nào?", "a": ["Lo lắng và sợ hãi", "Lạc quan, yêu đời, yêu ca hát và gắn bó với thiên nhiên", "Thích cuộc sống hiện đại", "Sống khép kín"], "c": 1 },
+                                        { "q": "Cụm từ \"tiếng ca đại ngàn\" trong nhan đề muốn nói điều gì?", "a": ["Tiếng hát người khổng lồ", "Tiếng hót của chim", "Tiếng đàn đại diện cho vẻ đẹp và tâm hồn núi rừng Tây Nguyên", "Tiếng gió thổi qua khe núi"], "c": 2 }
+                                    ]
+                                }
+                            }
+                        },
+                        "252-duong-que-dong-thap-muoi": {
+                            "title": "Đường quê Đồng Tháp Mười",
+                            "week": 25,
+                            "subject": "Đọc",
+                            "theme": "Hương sắc trăm miền",
+                            "audio": "am_thanh/duongquedongthapmuoi.mp3",
+                            "tabs": {
+                                "lesson": {
+                                    "title": "Bài học",
+                                    "blocks": [
+                                        { "type": "header", "text": "Đường quê Đồng Tháp Mười" },
+                                        {
+                                            "type": "html",
+                                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                                <section class="w-full lg:w-[75%]">
                                     <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
                                         <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
                                             <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
@@ -1995,7 +1971,7 @@ window.LESSON_DATA = {
                                             </div>
                                     </div>
                                 </section>
-                                <aside class="w-full lg:w-[30%]">
+                                <aside class="w-full lg:w-[25%]">
                                     <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl">
                                         <div class="mb-6"><img src="hinh_anh/dong-thap-muoi.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl"></div>
                                         <div class="flex items-center space-x-4 mb-8">
@@ -2064,30 +2040,307 @@ window.LESSON_DATA = {
                                     </div>
                                 </aside>
                             </div>`
-                        }
-                    ]
-                },
-                "quiz": {
-                    "settings": { "pick": 10 },
-                    "questions": [
-                        { "q": "Loài hoa nào được ví như những chiếc 'lồng đèn' thả trên mặt nước trong khổ thơ đầu?", "a": ["Hoa sen", "Hoa phượng", "Bông súng", "Hoa mai"], "c": 2 },
-                        { "q": "Con vật nào được nhân hóa với hành động 'chạy trước dẫn đường' về thăm ông?", "a": ["Con chó mực", "Con trâu", "Cá lòng tong", "Con cò trắng"], "c": 2 },
-                        { "q": "Hình ảnh 'Xuồng lướt như tên bắn' sử dụng biện pháp nghệ thuật gì?", "a": ["Nhân hóa", "So sánh", "Điệp ngữ", "Ẩn dụ"], "c": 1 },
-                        { "q": "Khi chiếc xuồng lướt nhanh, con vật nào đã 'giật mình' bay lẫn vào mây trắng?", "a": ["Con chim sẻ", "Con bướm", "Con cò", "Con chuồn chuồn"], "c": 2 },
-                        { "q": "Trong khổ 3, hình ảnh con trâu đầm được miêu tả với hành động mạnh mẽ nào?", "a": ["Gõ cặp sừng", "Chém cặp sừng loé nắng", "Húc cặp sừng", "Lắc cặp sừng"], "c": 1 },
-                        { "q": "Phương tiện nào phát ra tiếng kêu 'xình xịch' và chở lúa vàng rẽ sóng?", "a": ["Xuồng ba lá", "Ghe bầu", "Thuyền đuôi tôm", "Phà máy"], "c": 2 },
-                        { "q": "Búp sen hồng ở Đồng Tháp Mười nở vào khoảng thời gian nào?", "a": ["Mùa xuân", "Mùa đông", "Nối đầu thu, cuối hạ", "Quanh năm"], "c": 2 },
-                        { "q": "Dòng sông nào được nhắc đến trong câu 'Chơi với sen nghiêng ngả'?", "a": ["Sông Hồng", "Sông Hương", "Sông Cửu Long", "Sông Đồng Nai"], "c": 2 },
-                        { "q": "Cụm từ 'Xứ mười tầng tháp' dùng để chỉ vùng đất nào?", "a": ["Mũi Cà Mau", "Tây Nguyên", "Đồng Tháp Mười", "Thành phố Hồ Chí Minh"], "c": 2 },
-                        { "q": "Chi tiết 'Leo cầu trăm đốt tre' gợi nhớ đến câu chuyện cổ tích nào?", "a": ["Thánh Gióng", "Thạch Sanh", "Cây tre trăm đốt", "Tấm Cám"], "c": 2 },
-                        { "q": "Hình ảnh người ông đứng chờ cháu được so sánh với nhân vật nào?", "a": ["Ông Tiên", "Ông Bụt", "Ông đồ", "Ông lão đánh cá"], "c": 1 },
-                        { "q": "Các từ ngữ: 'lướt như tên bắn', 'xình xịch', 'rẽ sóng' gợi tả điều gì về nhịp sống nơi đây?", "a": ["Nhịp sống chậm rãi, buồn tẻ", "Nhịp sống sôi động, náo nức và khẩn trương", "Nhịp sống yên tĩnh, vắng vẻ", "Nhịp sống lo âu, vất vả"], "c": 1 },
-                        { "q": "Biện pháp nhân hóa được sử dụng trong câu thơ nào dưới đây?", "a": ["Xuồng lướt như tên bắn", "Ông đứng như bụt hiện", "Nước lớn sông Cửu Long / Chơi với sen nghiêng ngả", "Lấm lem con trâu đầm"], "c": 2 },
-                        { "q": "Qua bài thơ, em thấy con người Đồng Tháp Mười hiện lên như thế nào?", "a": ["Giàu sang và xa cách", "Hiền lành, chất phác và đôn hậu (như Bụt)", "Khó tính và nghiêm khắc", "Thích phiêu lưu mạo hiểm"], "c": 1 },
-                        { "q": "Nội dung chính của bài thơ là gì?", "a": ["Miêu tả quy trình thu hoạch lúa", "Kể về chuyến đi thăm ông của bạn nhỏ", "Ca ngợi vẻ đẹp thiên nhiên độc đáo, cuộc sống sôi động và con người đôn hậu của Đồng Tháp Mười", "Giới thiệu các loại phương tiện giao thông đường thủy"], "c": 2 }
-                    ]
-                }
-            }
-        }
+                                        }
+                                    ]
+                                },
+                                "quiz": {
+                                    "settings": { "pick": 10 },
+                                    "questions": [
+                                        { "q": "Loài hoa nào được ví như những chiếc 'lồng đèn' thả trên mặt nước trong khổ thơ đầu?", "a": ["Hoa sen", "Hoa phượng", "Bông súng", "Hoa mai"], "c": 2 },
+                                        { "q": "Con vật nào được nhân hóa với hành động 'chạy trước dẫn đường' về thăm ông?", "a": ["Con chó mực", "Con trâu", "Cá lòng tong", "Con cò trắng"], "c": 2 },
+                                        { "q": "Hình ảnh 'Xuồng lướt như tên bắn' sử dụng biện pháp nghệ thuật gì?", "a": ["Nhân hóa", "So sánh", "Điệp ngữ", "Ẩn dụ"], "c": 1 },
+                                        { "q": "Khi chiếc xuồng lướt nhanh, con vật nào đã 'giật mình' bay lẫn vào mây trắng?", "a": ["Con chim sẻ", "Con bướm", "Con cò", "Con chuồn chuồn"], "c": 2 },
+                                        { "q": "Trong khổ 3, hình ảnh con trâu đầm được miêu tả với hành động mạnh mẽ nào?", "a": ["Gõ cặp sừng", "Chém cặp sừng loé nắng", "Húc cặp sừng", "Lắc cặp sừng"], "c": 1 },
+                                        { "q": "Phương tiện nào phát ra tiếng kêu 'xình xịch' và chở lúa vàng rẽ sóng?", "a": ["Xuồng ba lá", "Ghe bầu", "Thuyền đuôi tôm", "Phà máy"], "c": 2 },
+                                        { "q": "Búp sen hồng ở Đồng Tháp Mười nở vào khoảng thời gian nào?", "a": ["Mùa xuân", "Mùa đông", "Nối đầu thu, cuối hạ", "Quanh năm"], "c": 2 },
+                                        { "q": "Dòng sông nào được nhắc đến trong câu 'Chơi với sen nghiêng ngả'?", "a": ["Sông Hồng", "Sông Hương", "Sông Cửu Long", "Sông Đồng Nai"], "c": 2 },
+                                        { "q": "Cụm từ 'Xứ mười tầng tháp' dùng để chỉ vùng đất nào?", "a": ["Mũi Cà Mau", "Tây Nguyên", "Đồng Tháp Mười", "Thành phố Hồ Chí Minh"], "c": 2 },
+                                        { "q": "Chi tiết 'Leo cầu trăm đốt tre' gợi nhớ đến câu chuyện cổ tích nào?", "a": ["Thánh Gióng", "Thạch Sanh", "Cây tre trăm đốt", "Tấm Cám"], "c": 2 },
+                                        { "q": "Hình ảnh người ông đứng chờ cháu được so sánh với nhân vật nào?", "a": ["Ông Tiên", "Ông Bụt", "Ông đồ", "Ông lão đánh cá"], "c": 1 },
+                                        { "q": "Các từ ngữ: 'lướt như tên bắn', 'xình xịch', 'rẽ sóng' gợi tả điều gì về nhịp sống nơi đây?", "a": ["Nhịp sống chậm rãi, buồn tẻ", "Nhịp sống sôi động, náo nức và khẩn trương", "Nhịp sống yên tĩnh, vắng vẻ", "Nhịp sống lo âu, vất vả"], "c": 1 },
+                                        { "q": "Biện pháp nhân hóa được sử dụng trong câu thơ nào dưới đây?", "a": ["Xuồng lướt như tên bắn", "Ông đứng như bụt hiện", "Nước lớn sông Cửu Long / Chơi với sen nghiêng ngả", "Lấm lem con trâu đầm"], "c": 2 },
+                                        { "q": "Qua bài thơ, em thấy con người Đồng Tháp Mười hiện lên như thế nào?", "a": ["Giàu sang và xa cách", "Hiền lành, chất phác và đôn hậu (như Bụt)", "Khó tính và nghiêm khắc", "Thích phiêu lưu mạo hiểm"], "c": 1 },
+                                        { "q": "Nội dung chính của bài thơ là gì?", "a": ["Miêu tả quy trình thu hoạch lúa", "Kể về chuyến đi thăm ông của bạn nhỏ", "Ca ngợi vẻ đẹp thiên nhiên độc đáo, cuộc sống sôi động và con người đôn hậu của Đồng Tháp Mười", "Giới thiệu các loại phương tiện giao thông đường thủy"], "c": 2 }
+                                    ]
+                                }
+                            }
+                        },
+                        "261-xuong-ba-la-que-toi": {
+                            "title": "Xuồng ba lá quê tôi",
+                            "week": 26,
+                            "subject": "Đọc",
+                            "theme": "Hương sắc trăm miền",
+                            "audio": "am_thanh/xuongbala.mp3",
+                            "tabs": {
+                                "lesson": {
+                                    "title": "Bài học",
+                                    "blocks": [
+                                        { "type": "header", "text": "Xuồng ba lá quê tôi" },
+                                        {
+                                            "type": "html",
+                                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                                <section class="w-full lg:w-[70%]">
+                                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative"><span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>Xuồng ba lá quê tôi</h1>
+                                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                                <p class="mb-4">Gọi là xuồng ba lá vì xuồng được ghép bởi ba tấm ván: hai tấm ván be và một tấm ván đáy. Để xuồng được vững chắc, người ta dùng những chiếc "cong" đóng vào bên trong lòng xuồng, tạo thành bộ khung hình xương cá.</p>
+                                                <p class="mb-4">Xuồng ba lá là phương tiện di chuyển gắn liền với miền sông nước quê tôi. Tôi vẫn nhớ những sáng nội chèo xuồng mang cho tôi mấy cái bánh lá dừa, giỏ cua đồng mà nội vừa bắt được. Nhớ những chiều chị tôi chèo xuồng dọc triền sông, bẻ bông điên điển đầy rổ mang về cho má nấu canh chua. Những chuyến xuồng xuôi ngược đã in đậm trong tiềm thức mỗi người dân Nam Bộ.</p>
+                                                <p class="mb-4">Từ độ cha ông đi mở cõi, xuồng là "đôi chân của người dân Nam Bộ". Những năm tháng quê hương bị bom cày, đạn xới, xuồng cùng nhân dân bám trụ, giữ xóm, giữ làng. Xuồng chở lương thực tiếp tế cho bộ đội. Xuồng đưa du kích qua sông, len sâu vào khu căn cứ kháng chiến…</p>
+                                                <p class="mb-4">Đất nước thanh bình, xuồng ba lá lại trở về cuộc sống đời thường. Xuồng ngược xuôi miền chợ nổi. Xuồng lướt nhanh trên cánh đồng rì rào sóng lúa. Xuồng rộn ràng những đêm giăng câu, thả lưới. Và mỗi sớm mai, trên nhánh sông quê, những chiếc xuồng ba lá theo dòng nước toả đi, chở đầy ước mơ, khát vọng của tình đất, tình người phương Nam.</p>
+                                                <p class="text-right italic text-sm text-gray-400 mt-8">(Theo Nguyễn Chí Ngoan)</p>
+                                            </div>
+                                        </div>
+                                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white shadow-xl">
+                                                <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                                    <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                                        <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                                    </div>
+                                                    <div class="flex-grow">
+                                                        <p class="text-lg font-bold leading-relaxed text-blue-50">Chiếc xuồng là người bạn thân thiết của người dân Nam Bộ. Nó gắn bó với cuộc sống chiến đấu và lao động sản xuất của người dân nơi đây, chở nặng tình đất, tình người phương Nam.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </section>
+                                <aside class="w-full lg:w-[30%]">
+                                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl">
+                                        <div class="mb-6"><img src="hinh_anh/xuongbala.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl"></div>
+                                        <div class="flex items-center space-x-4 mb-8">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            </div>
+                                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                                        </div>
+                                        <div class="space-y-4">
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Tác giả đã giới thiệu thế nào về xuồng ba lá?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Tác giả giới thiệu về tên gọi của xuồng ba lá và giải thích vì sao vật dụng này có tên gọi như vậy: gọi là xuồng ba lá vì xuồng được ghép bởi ba tấm ván (hai tấm ván be và một tấm ván đáy). Người ta dùng những chiếc "cong" đóng vào bên trong lòng xuồng, tạo thành bộ khung hình xương cá.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Xuồng ba lá gợi nhớ những kỉ niệm nào của tác giả với người thân?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Xuồng ba lá gợi nhớ kỉ niệm của tác giả với bà nội (những sáng nội chèo xuồng mang cho bánh lá dừa, giỏ cua đồng) và với chị (những chiều chị chèo xuồng dọc triền sông, bẻ bông điên điển mang về cho má nấu canh chua).</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Từ xưa, chiếc xuồng đã gắn bó thế nào với người dân vùng sông nước?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">• Từ thuở cha ông đi mở cõi: xuồng đã là "đôi chân của người dân Nam Bộ", là phương tiện đi lại rất thiết thân.<br>• Trong những năm tháng chiến tranh: xuồng cùng người dân bám trụ, giữ xóm làng, chở lương thực tiếp tế cho bộ đội, đưa du kích qua sông.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Hình ảnh xuồng ba lá hiện ra như thế nào trong cuộc sống thanh bình hiện nay?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Đất nước thanh bình, xuồng ba lá tiếp tục gắn bó với sinh hoạt hằng ngày và lao động sản xuất: ngược xuôi miền chợ nổi, lướt trên cánh đồng lúa, rộn ràng những đêm giăng câu thả lưới. Xuồng chở đầy ước mơ, khát vọng của tình đất, tình người phương Nam.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5. Bài đọc giúp em hiểu thêm điều gì về cảnh vật và con người phương Nam?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Bài đọc giúp em hiểu thêm về cảnh vật phương Nam đẹp và bình yên; con người phương Nam chăm chỉ, tình cảm, gắn bó, có tình có nghĩa cùng chung sống với nhau.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aside>
+                            </div>`
+                                        }
+                                    ]
+                                },
+                                "quiz": {
+                                    "settings": { "pick": 10 },
+                                    "questions": [
+                                        { "q": "Tác giả của bài văn \"Xuồng ba lá quê tôi\" là ai?", "a": ["Sơn Nam", "Nguyễn Chí Ngoan", "Đoàn Giỏi", "Trần Đăng Khoa"], "c": 1 },
+                                        { "q": "Vì sao loại xuồng này được gọi là \"xuồng ba lá\"?", "a": ["Vì nó nhẹ như ba chiếc lá", "Vì nó thường chở lá dừa", "Vì nó được ghép bởi ba tấm ván (2 ván be, 1 ván đáy)", "Vì nó có hình dáng giống chiếc lá"], "c": 2 },
+                                        { "q": "Bộ khung bên trong lòng xuồng được tạo hình giống cái gì?", "a": ["Hình con thoi", "Hình xương cá", "Hình cánh cung", "Hình chiếc lá"], "c": 1 },
+                                        { "q": "Chiếc \"cong\" được đóng vào lòng xuồng có tác dụng gì?", "a": ["Để trang trí cho đẹp", "Để làm chỗ ngồi", "Để giúp xuồng được vững chắc", "Để gác mái chèo"], "c": 2 },
+                                        { "q": "Hình ảnh người nội chèo xuồng gắn liền với những món quà quê nào?", "a": ["Bánh lá dừa, giỏ cua đồng", "Bánh tét, con cá lóc", "Bông súng, mớ tép", "Trái cây chín, bó rau"], "c": 0 },
+                                        { "q": "Người chị trong kỉ niệm của tác giả thường chèo xuồng đi hái loại hoa nào?", "a": ["Bông súng", "Bông sen", "Bông điên điển", "Bông lục bình"], "c": 2 },
+                                        { "q": "Bông điên điển mang về thường được má dùng để nấu món gì?", "a": ["Kho cá", "Xào tỏi", "Nấu canh chua", "Làm gỏi"], "c": 2 },
+                                        { "q": "Tác giả ví von chiếc xuồng là gì của người dân Nam Bộ từ thuở mở cõi?", "a": ["Ngôi nhà di động", "Đôi chân của người dân Nam Bộ", "Cánh tay phải đắc lực", "Người bạn đường tin cậy"], "c": 1 },
+                                        { "q": "Trong những năm tháng chiến tranh, chiếc xuồng đã thực hiện nhiệm vụ gì?", "a": ["Chở vũ khí hạng nặng", "Chở lương thực tiếp tế, đưa du kích qua sông", "Làm lá chắn đạn", "Chở quân đi xâm lược"], "c": 1 },
+                                        { "q": "Khi đất nước thanh bình, xuồng ba lá xuất hiện ở những hoạt động nào?", "a": ["Chỉ nằm im ở bến sông", "Ngược xuôi miền chợ nổi, lướt trên đồng lúa, đi giăng câu thả lưới", "Được đưa vào bảo tàng", "Chỉ dùng để chở khách du lịch"], "c": 1 },
+                                        { "q": "Bài đọc nhắc đến vùng đất nào của nước ta?", "a": ["Tây Bắc", "Tây Nguyên", "Nam Bộ", "Bắc Bộ"], "c": 2 },
+                                        { "q": "Câu văn \"Xuồng lướt nhanh trên cánh đồng rì rào sóng lúa\" gợi tả cảnh gì?", "a": ["Mùa gặt lúa", "Mùa nước nổi (nước ngập đồng ruộng)", "Mùa cấy lúa", "Mùa hạn hán"], "c": 1 },
+                                        { "q": "Theo bài đọc, mỗi sớm mai, những chiếc xuồng tỏa đi chở theo điều gì mang ý nghĩa tinh thần?", "a": ["Chở đầy tôm cá", "Chở đầy hoa trái", "Chở đầy ước mơ, khát vọng của tình đất, tình người phương Nam", "Chở đầy ánh nắng ban mai"], "c": 2 },
+                                        { "q": "Nhận định nào sau đây đúng nhất về vai trò của xuồng ba lá?", "a": ["Là phương tiện giải trí cuối tuần", "Là vật dụng trang trí trong nhà", "Là phương tiện di chuyển thiết thân, gắn bó với đời sống, chiến đấu và lao động", "Là phương tiện chỉ dùng trong chiến tranh"], "c": 2 },
+                                        { "q": "Qua bài đọc, em cảm nhận được tình cảm gì của tác giả?", "a": ["Nỗi sợ hãi sông nước", "Tình yêu tha thiết, niềm tự hào và sự gắn bó sâu sắc với quê hương miền sông nước", "Sự tiếc nuối về quá khứ", "Mong muốn rời xa quê hương"], "c": 1 }
+                                    ]
+                                }
+                            }
+                        },
+                        "262-ve-tham-dat-mui": {
+                            "title": "Về thăm Đất Mũi",
+                            "week": 26,
+                            "subject": "Đọc",
+                            "theme": "Hương sắc trăm miền",
+                            "audio": "am_thanh/vethamdatmui.mp3",
+                            "tabs": {
+                                "lesson": {
+                                    "title": "Bài học",
+                                    "blocks": [
+                                        { "type": "header", "text": "Về thăm Đất Mũi" },
+                                        {
+                                            "type": "html",
+                                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                                <section class="w-full lg:w-[75%]">
+                                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative md:pl-6 pl-4">
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                                                    <div>
+                                                        <p class="mb-4">Về đây nghe đất thở<br>Phập phồng trước bình minh<br>Về đây trông đước chạy<br>Những bước chân ngập sình.</p>
+                                                        <p class="mb-4">Gặp ngọn gió châu thổ<br>Đang mở hội trên đồng<br>Ca bài ca mở cõi<br>Của bao đời cha ông.</p>
+                                                        <p class="mb-4">Ngút ngàn rừng mắm, đước<br>Xanh đến tận vô cùng<br>Phù sa như dòng sữa<br>Nuôi đất rừng Năm Căn.</p>
+                                                    </div>
+                                                    <div>
+                                                        <p class="mb-4">Rễ mắm thì ăn lên<br>Rễ đước thì cắm xuống<br>Bền bỉ suốt ngày đêm<br>Trong tình yêu của đất.</p>
+                                                        <p class="mb-4">Nơi đây biển gặp rừng<br>Đất và trời gắn lại<br>Cho bãi bồi vươn xa<br>Đất nước mình lớn mãi.</p>
+                                                        <p class="mb-4">Lần đầu về Đất Mũi<br>Như về với nhà mình<br>Nơi địa đầu Tổ quốc<br>Rạng ngời ánh bình minh!</p>
+                                                    </div>
+                                                </div>
+                                                <p class="text-right italic text-sm text-gray-400 mt-8">(Hoài Anh)</p>
+                                            </div>
+                                        </div>
+                                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white shadow-xl">
+                                                <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                                    <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                                        <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                                    </div>
+                                                    <div class="flex-grow">
+                                                        <p class="text-lg font-bold leading-relaxed text-blue-50">Bài thơ ca ngợi vẻ đẹp thiên nhiên hùng vĩ và độc đáo (cây cối, đất, trời, rừng, biển...) của Đất Mũi Cà Mau - vùng đất thiêng liêng nơi cực Nam của Tổ quốc. Qua đó thể hiện tình yêu, niềm tự hào và sự gắn bó của tác giả đối với mảnh đất này.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </section>
+                                <aside class="w-full lg:w-[25%]">
+                                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl">
+                                        <div class="mb-6"><img src="hinh_anh/datmui.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl"></div>
+                                        <div class="flex items-center space-x-4 mb-8">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            </div>
+                                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                                        </div>
+                                        <div class="space-y-4">
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Tìm những hình ảnh cho thấy vẻ đẹp độc đáo của cây cối ở Đất Mũi.</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Cây cối được miêu tả mang đặc trưng của vùng Đất Mũi sình lầy: cây mắm, cây đước mọc thành rừng ngút ngàn, xanh tận vô cùng. Đặc biệt là bộ rễ: "rễ mắm thì ăn lên, rễ đước thì cắm xuống", bền bỉ bám sâu vào đất ngập sình.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Những hình ảnh thiên nhiên ở Đất Mũi (gió, biển, đất trời,...) được miêu tả như thế nào?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Thiên nhiên ở Đất Mũi rất độc đáo và sống động:<br>• Đất: biết "thở", "phập phồng".<br>• Gió: gió châu thổ đang "mở hội" trên đồng, ca bài ca mở cổi.<br>• Biển và rừng: gặp nhau ("biển gặp rừng").<br>• Đất và trời: gắn lại, khiến bãi bồi vươn xa.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Hai dòng thơ "Nơi địa đầu Tổ quốc / Rạng ngời ánh bình minh" gợi cho em suy nghĩ gì về Đất Mũi?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Hai dòng thơ ca ngợi vẻ đẹp rạng rỡ của Đất Mũi. Đồng thời thể hiện niềm tin của nhà thơ vào sự phát triển tốt đẹp, tươi sáng của mảnh đất nơi địa đầu thiêng liêng của Tổ quốc.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Theo em, vì sao "lần đầu về Đất Mũi" tác giả lại có cảm giác "như về với nhà mình"?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Tác giả có cảm giác như vậy vì thấy Đất Mũi vô cùng thân thương, gần gũi và gắn bó; vì tác giả rất yêu cảnh vật thiên nhiên nơi đây và thấy bóng dáng quê hương chung của dân tộc mình ở đó.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5. Dựa vào bài đọc, em hãy giới thiệu Đất Mũi Cà Mau với bạn bè.</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">• Vị trí: Đất Mũi là mảnh đất nhô ra ở điểm cực Nam trên đất liền của Tổ quốc Việt Nam (thuộc huyện Ngọc Hiển, tỉnh Cà Mau).<br>• Vẻ đẹp tự nhiên: Có hệ sinh thái rừng ngập mặn độc đáo với cây mắm, cây đước mọc thành rừng (rễ mắm ăn lên, rễ đước cắm xuống). Đất đai là đất phù sa màu mỡ luôn được bồi đắp lấn ra biển ("đất nước mình lớn mãi").</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aside>
+                            </div>`
+                                        }
+                                    ]
+                                },
+                                "quiz": {
+                                    "settings": { "pick": 10 },
+                                    "questions": [
+                                        { "q": "Bài thơ \"Về thăm Đất Mũi\" viết về vùng đất thuộc tỉnh nào của nước ta?", "a": ["Kiên Giang", "Bạc Liêu", "Cà Mau", "Sóc Trăng"], "c": 2 },
+                                        { "q": "Trong khổ thơ đầu, tác giả nghe thấy đất có hoạt động gì?", "a": ["Đất hát", "Đất thở", "Đất ngủ", "Đất rung chuyển"], "c": 1 },
+                                        { "q": "Hình ảnh \"đước chạy\" được miêu tả gắn liền với đặc điểm địa hình nào?", "a": ["Những đồi núi cao", "Những bãi cát trắng", "Những bước chân ngập sình", "Những cánh đồng lúa chín"], "c": 2 },
+                                        { "q": "Ngọn gió châu thổ đang làm gì trên cánh đồng?", "a": ["Đang ngủ yên", "Đang thổi mạnh gây bão", "Đang mở hội và ca bài ca mở cõi", "Đang đuổi chim"], "c": 2 },
+                                        { "q": " \"Bài ca mở cõi\" được nhắc đến là của ai?", "a": ["Của những người lính biên phòng", "Của bao đời cha ông", "Của những người nông dân", "Của sóng biển"], "c": 1 },
+                                        { "q": "Hai loài cây đặc trưng nào của rừng ngập mặn được nhắc đến trong bài?", "a": ["Cây tràm và cây dừa", "Cây sú và cây vẹt", "Cây mắm và cây đước", "Cây tre và cây lúa"], "c": 2 },
+                                        { "q": "Tác giả so sánh \"phù sa\" với hình ảnh nào?", "a": ["Dòng máu", "Dòng sữa", "Dòng mật", "Dòng sông"], "c": 1 },
+                                        { "q": "Đặc điểm sinh trưởng độc đáo của rễ cây mắm là gì?", "a": ["Cắm sâu xuống lòng đất", "Ăn lên (mọc ngược lên mặt đất)", "Mọc lan ra mặt nước", "Quấn quanh thân cây khác"], "c": 1 },
+                                        { "q": "Ngược lại với rễ mắm, rễ cây đước có đặc điểm gì?", "a": ["Ăn lên", "Cắm xuống", "Bay trong gió", "Nổi trên mặt nước"], "c": 1 },
+                                        { "q": "Sự sinh trưởng bền bỉ của cây cối diễn ra trong điều kiện tình cảm nào?", "a": ["Trong sự khắc nghiệt của bão tố", "Trong tình yêu của đất", "Trong nỗi nhớ của biển", "Trong sự cô đơn của rừng"], "c": 1 },
+                                        { "q": "Nơi Đất Mũi được miêu tả là điểm gặp gỡ của hai yếu tố thiên nhiên nào?", "a": ["Sông và suối", "Núi và đồi", "Biển và rừng", "Mây và gió"], "c": 2 },
+                                        { "q": "Hình ảnh \"Bãi bồi vươn xa\" mang ý nghĩa gì về địa lý của Đất Mũi?", "a": ["Đất đai đang bị biển xâm thực", "Diện tích đất liền đang ngày càng mở rộng ra biển (Đất nước mình lớn mãi)", "Bãi biển rất dài và đẹp", "Người dân đang lấn biển xây nhà"], "c": 1 },
+                                        { "q": "Cảm xúc của tác giả trong lần đầu về Đất Mũi là gì?", "a": ["Xa lạ và bỡ ngỡ", "Thân thương, gần gũi như về với nhà mình", "Lo lắng vì đường xa", "Ngạc nhiên vì cảnh lạ"], "c": 1 },
+                                        { "q": "Cụm từ \"Nơi địa đầu Tổ quốc\" dùng để chỉ vị trí nào của Đất Mũi?", "a": ["Điểm cực Bắc", "Điểm cực Đông", "Điểm cực Nam trên đất liền", "Điểm cực Tây"], "c": 2 },
+                                        { "q": "Nội dung chính của bài thơ là gì?", "a": ["Kể lại chuyến đi du lịch của tác giả", "Miêu tả quy trình trồng rừng ngập mặn", "Ca ngợi vẻ đẹp thiên nhiên độc đáo, sức sống mãnh liệt và ý nghĩa thiêng liêng của vùng Đất Mũi", "Giới thiệu các món ăn đặc sản của Cà Mau"], "c": 2 }
+                                    ]
+                                }
+                            }
+                        },
     }
-};
+            };
