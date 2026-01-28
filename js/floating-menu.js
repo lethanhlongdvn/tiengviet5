@@ -202,6 +202,74 @@ const curriculumData = {
                             ]
                         }
                     ]
+                },
+                {
+                    "id": 31, "name": "Tuần 31",
+                    "lessons": [
+                        {
+                            "title": "Bài 1: Về ngôi nhà đang xây",
+                            "sections": [
+                                { "title": "Đọc: Về ngôi nhà đang xây", "url": "lesson_viewer.html?id=311-ve-ngoi-nha-dang-xay" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 2: Việt Nam quê hương ta",
+                            "sections": [
+                                { "title": "Đọc: Việt Nam quê hương ta", "url": "lesson_viewer.html?id=312-viet-nam-que-huong-ta" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 32, "name": "Tuần 32",
+                    "lessons": [
+                        {
+                            "title": "Bài 1: Bài ca Trái Đất",
+                            "sections": [
+                                { "title": "Đọc: Bài ca Trái Đất", "url": "lesson_viewer.html?id=321-bai-ca-trai-dat" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 2: Những con hạc giấy",
+                            "sections": [
+                                { "title": "Đọc: Những con hạc giấy", "url": "lesson_viewer.html?id=322-nhung-con-hac-giay" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 33, "name": "Tuần 33",
+                    "lessons": [
+                        {
+                            "title": "Bài 1: Một người hùng thầm lặng",
+                            "sections": [
+                                { "title": "Đọc: Một người hùng thầm lặng", "url": "lesson_viewer.html?id=331-mot-nguoi-hung-tham-lang" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 2: Giờ Trái Đất",
+                            "sections": [
+                                { "title": "Đọc: Giờ Trái Đất", "url": "lesson_viewer.html?id=332-gio-trai-dat" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 34, "name": "Tuần 34",
+                    "lessons": [
+                        {
+                            "title": "Bài 1: Điện thoại di động",
+                            "sections": [
+                                { "title": "Đọc: Điện thoại di động", "url": "lesson_viewer.html?id=341-dien-thoai-di-dong" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 2: Thành phố thông minh Mát-xđa",
+                            "sections": [
+                                { "title": "Đọc: Thành phố thông minh Mát-xđa", "url": "lesson_viewer.html?id=342-thanh-pho-thong-minh-mat-xda" }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
