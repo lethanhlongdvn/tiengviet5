@@ -223,7 +223,7 @@
 
 <body class="bg-blue-50 text-gray-800 min-h-screen flex flex-col overflow-x-hidden">
 
-            <!-- Header -->
+    <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -1181,7 +1181,8 @@
             } else {
                 ws['!cols'] = [{ wch: 10 }, { wch: 25 }, { t: 's', wch: 10 }, { wch: 25 }, { wch: 10 }, { wch: 20 }, { wch: 20 }];
             }
-            XLSX.writeFile(wb, "KetQua_HatGaoLangTa.xlsx");
+            const fileName = `KetQua_${document.title.replace(' - EduRobot', '').replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
 
         function openTeacherStats() {
