@@ -206,7 +206,7 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-            <!-- Header -->
+    <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -279,7 +279,7 @@
 
     <main class="container mx-auto px-4 py-2">
 
-                <!-- Tab & Audio Header -->
+        <!-- Tab & Audio Header -->
         <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
             <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
@@ -1030,7 +1030,7 @@
             const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
             if (window.db || firebase.apps.length) {
                 const database = window.db || firebase.firestore();
-                database.collection("quiz_results").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch((err) => { console.error(err); clearTimeout(dbTimeout); showSuccess(); });
+                database.collection("diem_tieng_viet_lop5").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch((err) => { console.error(err); clearTimeout(dbTimeout); showSuccess(); });
             } else { clearTimeout(dbTimeout); showSuccess(); }
         }
 
@@ -1149,8 +1149,9 @@
             ws['!cols'] = [{}, {}, { t: 's' }, {}, {}, {}, {}];
 
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "KetQua");
-            XLSX.writeFile(wb, "KetQua_VietNamQueHuongTa.xlsx");
+            XLSX.utils.book_append_sheet(wb, ws, "Kết quả");
+            const fileName = `KetQua_${document.title.replace(' - EduRobot', '').replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
     </script>
 
