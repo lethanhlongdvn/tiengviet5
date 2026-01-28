@@ -199,6 +199,9 @@
             </div>
             <ul class="flex space-x-4 text-xs font-bold items-center">
                 <li><a href="index.html" class="text-gray-500 hover:text-blue-600 py-2">Trang chủ</a></li>
+                <li><a href="teacher.html"
+                        class="px-3 py-1.5 rounded-lg text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors">Giáo
+                        viên</a></li>
             </ul>
         </nav>
     </header>
@@ -254,6 +257,74 @@
             </div>
         </div>
     </main>
+
+    <!-- Student Info Modal for Quiz Submission -->
+    <div id="studentInfoModal"
+        class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[100] hidden items-center justify-center p-4 transition-all duration-500 opacity-0 pointer-events-none">
+        <div class="bg-white rounded-[40px] p-8 max-w-lg w-full shadow-2xl relative border-4 border-blue-500 transform scale-95 transition-all duration-300"
+            id="studentInfoContent">
+            <div class="text-center mb-8">
+                <div
+                    class="w-20 h-20 bg-blue-100 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-4 shadow-inner">
+                    ✍️</div>
+                <h3 class="text-3xl font-black text-gray-800 tracking-tight">Thông tin học sinh</h3>
+                <p class="text-gray-500 font-bold mt-2">Chúc mừng em đã hoàn thành bài tập! <br> Hãy điền thông tin để
+                    nộp bài nhé.</p>
+            </div>
+
+            <div class="space-y-5">
+                <!-- Name -->
+                <div class="space-y-2">
+                    <label class="block text-xs font-black text-blue-600 uppercase tracking-widest ml-1">Họ và tên của
+                        em</label>
+                    <input type="text" id="studentName" placeholder="Nhập đầy đủ Họ và Tên..."
+                        class="w-full px-6 py-4 rounded-2xl border-2 border-blue-50 bg-blue-50/30 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all outline-none text-lg font-bold text-gray-800">
+                </div>
+
+                <!-- Class -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="block text-xs font-black text-blue-600 uppercase tracking-widest ml-1">Lớp</label>
+                        <select id="studentClass"
+                            class="w-full px-6 py-4 rounded-2xl border-2 border-blue-50 bg-blue-50/30 focus:border-blue-500 focus:bg-white transition-all outline-none font-bold text-gray-700 appearance-none cursor-pointer">
+                            <option value="5/1">Lớp 5/1</option>
+                            <option value="5/2">Lớp 5/2</option>
+                            <option value="5/3">Lớp 5/3</option>
+                            <option value="5/4">Lớp 5/4</option>
+                            <option value="5/5">Lớp 5/5</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- School -->
+                <div class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="block text-xs font-black text-blue-600 uppercase tracking-widest ml-1">Trường
+                            học</label>
+                        <select id="schoolSelect" onchange="checkSchool()"
+                            class="w-full px-6 py-4 rounded-2xl border-2 border-blue-50 bg-blue-50/30 focus:border-blue-500 focus:bg-white transition-all outline-none font-bold text-gray-700 appearance-none cursor-pointer">
+                            <option value="Tiểu học Đỗ Văn Nại">Trường Tiểu học Đỗ Văn Nại</option>
+                            <option value="Khác">Trường khác...</option>
+                        </select>
+                    </div>
+
+                    <input type="text" id="otherSchool" placeholder="Nhập tên trường của em..."
+                        class="hidden w-full px-6 py-4 rounded-2xl border-2 border-orange-100 bg-orange-50/30 focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-100 transition-all outline-none font-bold text-gray-700 animate-in slide-in-from-top-2 duration-300">
+                </div>
+            </div>
+
+            <div class="mt-10">
+                <button onclick="confirmSubmitQuiz()"
+                    class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-200 transform hover:-translate-y-1 active:scale-95 transition-all uppercase tracking-widest text-lg">
+                    🚀 NỘP BÀI NGAY
+                </button>
+                <button onclick="closeStudentModal()"
+                    class="w-full mt-4 text-gray-400 font-bold text-sm hover:text-gray-600 transition-colors uppercase tracking-widest">
+                    Quay lại
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="py-6 px-4 mt-8 bg-white/40 backdrop-blur-md border-t border-white/50">
