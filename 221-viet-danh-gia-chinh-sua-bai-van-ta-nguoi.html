@@ -751,13 +751,23 @@
         }
 
         function exportToExcel() {
+            const dataToExport = currentStatsData.map((item, index) => ({
+                'STT': index + 1,
+                'Họ và Tên': item.studentName,
+                'Lớp': item.studentClass,
+                'Trường': item.school,
+                'Điểm AI': item.aiGrade,
+                'Số lần làm': item.attempts,
+                'Lần nộp cuối': item.latestSubmitted.toLocaleString('vi-VN')
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(dataToExport);
             const wb = XLSX.utils.book_new();
-            const ws = XLSX.utils.table_to_sheet(document.getElementById('statsTable'));
-            XLSX.utils.book_append_sheet(wb, ws, "Bai221_KetQua");
-            XLSX.writeFile(wb, "KetQua_Bai221_Viet.xlsx");
+            XLSX.utils.book_append_sheet(wb, ws, "Kết quả");
+            const fileName = `KetQua_${document.title.replace(' - EduRobot', '').replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
     </script>
 </body>
 
 </html>
-```
