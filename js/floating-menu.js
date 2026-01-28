@@ -123,6 +123,85 @@ const curriculumData = {
                             ]
                         }
                     ]
+                },
+                {
+                    "id": 26, "name": "Tuần 26",
+                    "lessons": [
+                        {
+                            "title": "Bài 1: Xuồng ba lá quê tôi",
+                            "sections": [
+                                { "title": "Đọc: Xuồng ba lá quê tôi", "url": "lesson_viewer.html?id=261-xuong-ba-la-que-toi" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 2: Về thăm Đất Mũi",
+                            "sections": [
+                                { "title": "Đọc: Về thăm Đất Mũi", "url": "lesson_viewer.html?id=262-ve-tham-dat-mui" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 27, "name": "Tuần 27",
+                    "lessons": [
+                        {
+                            "title": "Ôn tập Giữa HK2",
+                            "sections": [
+                                { "title": "Ôn tập Giữa HK2", "url": "on-tap-hk2-giua.html" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 28, "name": "Tuần 28",
+                    "lessons": [
+                        {
+                            "title": "Bài 1: Nghìn năm văn hiến",
+                            "sections": [
+                                { "title": "Đọc: Nghìn năm văn hiến", "url": "lesson_viewer.html?id=281-nghin-nam-van-hien" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 2: Người thầy của muôn đời",
+                            "sections": [
+                                { "title": "Đọc: Người thầy của muôn đời", "url": "lesson_viewer.html?id=282-nguoi-thay-cua-muon-doi" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 29, "name": "Tuần 29",
+                    "lessons": [
+                        {
+                            "title": "Bài 1: Danh y Tuệ Tĩnh",
+                            "sections": [
+                                { "title": "Đọc: Danh y Tuệ Tĩnh", "url": "lesson_viewer.html?id=291-danh-y-tue-tinh" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 2: Cụ Đồ Chiểu",
+                            "sections": [
+                                { "title": "Đọc: Cụ Đồ Chiểu", "url": "lesson_viewer.html?id=292-cu-do-chieu" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 30, "name": "Tuần 30",
+                    "lessons": [
+                        {
+                            "title": "Bài 1: Trần Đại Nghĩa",
+                            "sections": [
+                                { "title": "Đọc: Trần Đại Nghĩa", "url": "lesson_viewer.html?id=301-tran-dai-nghia" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 2: Bộ đội về làng",
+                            "sections": [
+                                { "title": "Đọc: Bộ đội về làng", "url": "lesson_viewer.html?id=302-bo-doi-ve-lang" }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
