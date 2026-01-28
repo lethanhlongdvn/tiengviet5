@@ -91,129 +91,206 @@ function renderQuiz(quizData) {
     }
     // Save current questions for scoring
     window.currentQuizQuestions = questions;
+    window.currentQuizIdx = 0;
+    window.quizScore = 0;
 
-    let html = `<div class="max-w-3xl mx-auto space-y-6" id="quiz-list">`;
+    let html = `
+        <div class="max-w-3xl mx-auto space-y-6">
+            <!-- Progress & Score -->
+            <div class="glass-card p-4 rounded-2xl border-white/50 shadow-sm flex flex-col gap-3">
+                <div class="flex justify-between items-center px-1">
+                    <span id="quiz-progress-text" class="text-[10px] font-black text-indigo-500 uppercase tracking-[0.2em]">CÂU 1 / ${questions.length}</span>
+                    <span id="quiz-score-realtime" class="text-[10px] font-black text-green-600 uppercase tracking-[0.2em]">ĐÚNG: 0</span>
+                </div>
+                <div class="bg-gray-100 h-2 rounded-full overflow-hidden shadow-inner flex">
+                    <div id="quiz-progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-full transition-all duration-500" style="width: ${100 / questions.length}%"></div>
+                </div>
+            </div>
+
+            <div id="quiz-cards-container">
+    `;
 
     questions.forEach((q, index) => {
         let optionsHtml = '';
         q.a.forEach((opt, i) => {
             optionsHtml += `
-                <label class="flex items-center p-4 rounded-xl border-2 border-transparent bg-white/60 hover:bg-blue-50 hover:border-blue-200 cursor-pointer transition-all group">
+                <label class="flex items-center p-4 rounded-xl border-2 border-transparent bg-white/60 hover:bg-blue-50 hover:border-blue-200 cursor-pointer transition-all group relative">
                     <input type="radio" name="q${index}" value="${i}" onclick="checkQuiz(${index}, ${i}, ${q.c})" class="w-5 h-5 text-blue-600 focus:ring-blue-500 border-gray-300">
                     <span class="ml-3 text-lg text-gray-700 font-medium group-hover:text-blue-800">${opt}</span>
-                    <span class="ml-auto hidden status-icon status-${index}-${i}"></span>
+                    <span class="ml-auto hidden status-icon status-${index}-${i} animate-bounce"></span>
                 </label>
             `;
         });
 
         html += `
-            <div class="glass-card p-6 rounded-[24px] shadow-lg border-l-8 border-indigo-400 relative overflow-hidden quiz-card" id="quiz-card-${index}">
-                 <div class="absolute -right-4 -top-4 w-24 h-24 bg-indigo-100 rounded-full opacity-50 blur-xl"></div>
-                 <h3 class="relative text-xl font-bold text-gray-800 mb-4 flex items-start">
-                    <span class="bg-indigo-100 text-indigo-600 rounded-lg px-3 py-1 text-sm mr-3 shrink-0 mt-0.5">Câu ${index + 1}</span>
+            <div class="glass-card p-6 md:p-10 rounded-[40px] shadow-2xl border-l-[12px] border-indigo-500 relative overflow-hidden quiz-card ${index === 0 ? 'animate-in fade-in slide-in-from-bottom-4 duration-500' : 'hidden'}" id="quiz-card-${index}">
+                 <div class="absolute -right-10 -top-10 w-40 h-40 bg-indigo-50 rounded-full opacity-50 blur-3xl"></div>
+                 <h3 class="relative text-2xl font-black text-gray-800 mb-8 leading-tight">
+                    <span class="inline-block bg-indigo-100 text-indigo-600 rounded-2xl px-4 py-1 text-sm mb-4">Câu hỏi ${index + 1}</span><br>
                     ${q.q}
                  </h3>
-                 <div class="space-y-3 relative z-10 grid grid-cols-1 gap-2">
+                 <div class="space-y-4 relative z-10 grid grid-cols-1 gap-2">
                     ${optionsHtml}
                  </div>
-                 <div class="mt-4 hidden p-3 rounded-lg bg-green-100/50 text-green-700 text-sm font-bold" id="quiz-feedback-${index}"></div>
+                 <div class="mt-8 hidden p-5 rounded-2xl text-base font-bold shadow-sm transform transition-all" id="quiz-feedback-${index}"></div>
+                 
+                 <!-- Navigation -->
+                 <div class="mt-10 flex justify-center opacity-0 pointer-events-none transition-all duration-500" id="quiz-nav-${index}">
+                    ${index === questions.length - 1
+                ? `<button onclick="submitQuizResult()" class="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white px-12 py-4 rounded-2xl font-black shadow-2xl shadow-blue-200 transform hover:-translate-y-1 active:scale-95 transition-all uppercase tracking-widest pointer-events-auto">
+                             🚀 Hoàn thành & Nộp bài
+                           </button>`
+                : ''
+            }
+                 </div>
             </div>
         `;
     });
 
     html += `
-        <div class="text-center pt-8 pb-12 flex justify-center gap-4">
-            <button onclick="resetQuiz()" class="btn btn-outline px-8 py-3 rounded-xl bg-white hover:bg-gray-50 text-gray-500 font-bold shadow-sm">Làm lại</button>
-            <button onclick="submitQuizResult()" class="btn btn-success px-8 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">🚀 NỘP BÀI</button>
-        </div>
-    </div>`;
+            </div>
+            <div class="text-center pb-12">
+                <button onclick="resetQuiz()" class="text-xs font-black text-gray-400 uppercase tracking-widest hover:text-red-500 transition-colors">Thiết lập lại bài tập</button>
+            </div>
+        </div>`;
 
     container.innerHTML = html;
 }
 
-// Track score state
-window.quizScore = 0;
-window.quizTotal = 0;
+function updateQuizProgress() {
+    const total = window.currentQuizQuestions.length;
+    const current = window.currentQuizIdx + 1;
+    const pct = (current / total) * 100;
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const progressText = document.getElementById('quiz-progress-text');
+    const scoreText = document.getElementById('quiz-score-realtime');
+
+    if (progressBar) progressBar.style.width = pct + '%';
+    if (progressText) progressText.innerText = `CÂU ${current} / ${total}`;
+    if (scoreText) scoreText.innerText = `ĐÚNG: ${window.quizScore || 0}`;
+}
+
+function nextQuiz(currentIndex) {
+    const currentCard = document.getElementById(`quiz-card-${currentIndex}`);
+    const nextCard = document.getElementById(`quiz-card-${currentIndex + 1}`);
+
+    currentCard.classList.add('hidden');
+    nextCard.classList.remove('hidden');
+    nextCard.classList.add('animate-in', 'fade-in', 'slide-in-from-right-8', 'duration-500');
+
+    window.currentQuizIdx++;
+    updateQuizProgress();
+}
 
 function checkQuiz(qIndex, selectedIndex, correctIndex) {
     const card = document.getElementById(`quiz-card-${qIndex}`);
     const feedback = document.getElementById(`quiz-feedback-${qIndex}`);
+    const nav = document.getElementById(`quiz-nav-${qIndex}`);
     const inputs = card.querySelectorAll('input');
 
-    // Disable all inputs in this question
+    // Disable all inputs
     inputs.forEach(input => input.disabled = true);
 
     const isCorrect = selectedIndex === correctIndex;
     const statusIcon = card.querySelector(`.status-${qIndex}-${selectedIndex}`);
 
-    // Update score
-    if (typeof window.quizScore === 'undefined') window.quizScore = 0;
-    if (isCorrect) window.quizScore++;
-
     if (isCorrect) {
+        window.quizScore = (window.quizScore || 0) + 1;
         statusIcon.classList.remove('hidden');
-        statusIcon.innerHTML = '<svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>';
-        statusIcon.parentElement.classList.add('bg-green-50', 'border-green-400');
-        statusIcon.parentElement.classList.remove('bg-white/60');
+        statusIcon.innerHTML = '<svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>';
+        statusIcon.parentElement.classList.add('bg-green-50', 'border-green-400', 'ring-4', 'ring-green-100');
 
         feedback.classList.remove('hidden');
-        feedback.className = "mt-4 p-3 rounded-lg bg-green-100 text-green-700 text-base font-bold animate-pulse";
-        feedback.innerHTML = "🎉 Chính xác! Bạn giỏi quá!";
+        feedback.className = "mt-8 p-5 rounded-2xl bg-green-100 text-green-700 text-lg font-black text-center shadow-inner border border-green-200 animate-in zoom-in-95 duration-300";
+        feedback.innerHTML = "✨ TUYỆT VỜI! ĐÁP ÁN CHÍNH XÁC 🎉";
 
-        // Confetti effect
         if (typeof confetti === 'function') {
-            confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 }, colors: ['#22c55e', '#86efac'] });
+            confetti({ particleCount: 40, spread: 70, origin: { y: 0.7 }, colors: ['#4f46e5', '#10b981', '#fbbf24'] });
         }
-
     } else {
         statusIcon.classList.remove('hidden');
-        statusIcon.innerHTML = '❌';
+        statusIcon.innerHTML = '<span class="text-2xl">❌</span>';
         statusIcon.parentElement.classList.add('bg-red-50', 'border-red-300');
-        statusIcon.parentElement.classList.remove('bg-white/60');
 
-        // Highlight correct answer
         const correctInput = card.querySelector(`input[value="${correctIndex}"]`);
         if (correctInput) {
-            correctInput.parentElement.classList.add('bg-green-50', 'border-green-300', 'ring-2', 'ring-green-200');
+            correctInput.parentElement.classList.add('bg-green-50', 'border-green-300', 'ring-4', 'ring-green-100');
+            const correctIcon = correctInput.parentElement.querySelector('.status-icon');
+            correctIcon.classList.remove('hidden');
+            correctIcon.innerHTML = '<svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>';
         }
 
         feedback.classList.remove('hidden');
-        feedback.className = "mt-4 p-3 rounded-lg bg-red-100 text-red-700 text-base font-bold";
-        feedback.innerHTML = "😅 Tiếc quá, chưa đúng rồi.";
+        feedback.className = "mt-8 p-5 rounded-2xl bg-red-50 text-red-600 text-lg font-black text-center border border-red-100 animate-in shake duration-500";
+        feedback.innerHTML = "😅 TIẾC QUÁ! HÃY CỐ GẮNG Ở CÂU SAU NHÉ";
+    }
+
+    // Auto-advance logic
+    const total = window.currentQuizQuestions.length;
+    if (qIndex < total - 1) {
+        // Auto go to next question after 1.2s
+        setTimeout(() => {
+            nextQuiz(qIndex);
+        }, 1200);
+    } else {
+        // Last question - show submit button
+        if (nav) {
+            nav.classList.remove('opacity-0', 'pointer-events-none');
+            nav.classList.add('opacity-100', 'translate-y-0');
+        }
+    }
+
+    // Update score in progress bar immediately
+    const scoreText = document.getElementById('quiz-score-realtime');
+    if (scoreText) scoreText.innerText = `ĐÚNG: ${window.quizScore}`;
+}
+
+function submitQuizResult() {
+    // Open the info modal instead of prompt
+    const modal = document.getElementById('studentInfoModal');
+    const content = document.getElementById('studentInfoContent');
+    if (modal) {
+        modal.classList.remove('hidden');
+        void modal.offsetWidth; // force reflow
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.add('flex', 'opacity-100', 'pointer-events-auto');
+        content.classList.remove('scale-95');
+        content.classList.add('scale-100');
     }
 }
 
-async function submitQuizResult() {
-    // Calculate final score
+async function confirmSubmitQuiz() {
     const totalQuestions = window.currentQuizQuestions ? window.currentQuizQuestions.length : 0;
     const correctCount = window.quizScore || 0;
-    const score10 = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 10) : 0;
-    const score100 = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
+    const finalScore = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
 
-    // Get Student Info
-    const name = document.getElementById('studentName')?.value || 'Học sinh'; // Fallback if input missing
-    const cls = document.getElementById('studentClass')?.value || '5/1';
+    // Get info using global helper from firebase-logic.js
+    const { name, cls, school } = getStudentInfo();
 
-    // Check if we have student info inputs available (might be in a modal or hidden)
-    // For now, let's assume we prompt if missing or use defaults for demo
-    // Ideally, we should have a "Start Quiz" screen that asks for name first, like the original.
-    // But since renderQuiz replaced everything, we might have lost the inputs if they were in the previous view.
-    // We'll rely on global getStudentInfo() if available or prompt.
+    if (!name) {
+        alert("Em hãy nhập Họ và Tên của mình nhé!");
+        return;
+    }
 
-    let studentData = { name, cls, school: 'Tiểu học Đỗ Văn Nại' };
+    if (document.getElementById('schoolSelect').value === 'Khác' && !document.getElementById('otherSchool').value) {
+        alert("Em hãy nhập tên Trường của mình nhé!");
+        return;
+    }
 
-    // Attempt to find inputs if they exist elsewhere or prompt
-    if (name === 'Học sinh' && typeof prompt === 'function') {
-        const pName = prompt("Chúc mừng em đã hoàn thành! Hãy nhập tên của em để nộp bài:");
-        if (pName) studentData.name = pName;
+    const btn = event ? (event.currentTarget || event.target) : null;
+    let originalText = "";
+    if (btn) {
+        originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = "🚀 Đang gửi bài...";
     }
 
     const data = {
-        studentName: studentData.name,
-        studentClass: studentData.cls,
-        studentSchool: studentData.school,
+        studentName: name,
+        studentClass: cls,
+        studentSchool: school,
         lessonTitle: document.title.replace(' - EduRobot', ''),
-        score: score100, // Store as 0-100
+        score: finalScore,
         correctCount: correctCount,
         totalQuestions: totalQuestions,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -221,17 +298,39 @@ async function submitQuizResult() {
     };
 
     try {
-        await db.collection("quiz_results").add(data);
-        alert(`Nộp bài thành công!\nĐiểm của em: ${score10}/10 (${correctCount}/${totalQuestions} câu đúng)`);
-        if (typeof celebrate === 'function') celebrate();
+        await db.collection("diem_tieng_viet_lop5").add(data);
+        alert("✨ Tuyệt vời! Kết quả của em đã được gửi thành công.");
+        window.location.reload();
     } catch (error) {
         console.error("Error saving quiz:", error);
         alert("Lỗi khi nộp bài. Vui lòng thử lại!");
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        }
+    }
+}
+
+function closeStudentModal() {
+    const modal = document.getElementById('studentInfoModal');
+    const content = document.getElementById('studentInfoContent');
+    if (modal) {
+        modal.classList.remove('opacity-100', 'pointer-events-auto');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        content.classList.remove('scale-100');
+        content.classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }, 300);
     }
 }
 
 function resetQuiz() {
-    window.location.reload();
+    if (confirm("Em muốn làm lại bài tập này đúng không?")) {
+        window.location.reload();
+    }
 }
 
 function createBlock(block) {
@@ -318,6 +417,13 @@ function createBlock(block) {
     }
     else if (block.type === 'html') {
         div.innerHTML = block.content;
+    }
+    else if (block.type === 'aside') {
+        div.className = "glass-card rounded-[24px] p-6 bg-blue-50/50 border-l-8 border-blue-400 relative overflow-hidden shadow-lg mb-6";
+        div.innerHTML = `
+            <h2 class="text-2xl font-black text-blue-700 mb-4">${block.title}</h2>
+            <div class="space-y-4">${block.content}</div>
+        `;
     }
 
     return div;
