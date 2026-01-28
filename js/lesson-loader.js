@@ -510,5 +510,21 @@ function check2(id) {
     }
 }
 
+// Accordion Logic
+function toggleAccordion(btn) {
+    const item = btn.closest('.accordion-item');
+    const isActive = item.classList.contains('active');
+
+    // Close all other accordions
+    document.querySelectorAll('.accordion-item').forEach(el => {
+        el.classList.remove('active');
+    });
+
+    // Toggle current
+    if (!isActive) {
+        item.classList.add('active');
+    }
+}
+
 // Initialize on Load
 window.addEventListener('DOMContentLoaded', initLesson);
