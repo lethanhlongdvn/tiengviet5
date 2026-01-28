@@ -95,14 +95,14 @@ function renderQuiz(quizData) {
     window.quizScore = 0;
 
     let html = `
-        <div class="max-w-xl mx-auto space-y-3">
+        <div class="max-w-[95%] mx-auto space-y-2">
             <!-- Progress & Score -->
-            <div class="glass-card p-2 rounded-xl border-white/50 shadow-sm flex flex-col gap-1.5">
-                <div class="flex justify-between items-center px-1">
-                    <span id="quiz-progress-text" class="text-[9px] font-black text-indigo-500 uppercase tracking-[0.2em]">CÂU 1 / ${questions.length}</span>
-                    <span id="quiz-score-realtime" class="text-[9px] font-black text-green-600 uppercase tracking-[0.2em]">ĐÚNG: 0</span>
+            <div class="glass-card p-2 rounded-xl border-white/50 shadow-sm flex flex-col gap-1">
+                <div class="flex justify-between items-center px-2">
+                    <span id="quiz-progress-text" class="text-xs font-black text-indigo-500 uppercase tracking-[0.2em]">CÂU 1 / ${questions.length}</span>
+                    <span id="quiz-score-realtime" class="text-xs font-black text-green-600 uppercase tracking-[0.2em]">ĐÚNG: 0</span>
                 </div>
-                <div class="bg-gray-100 h-1 rounded-full overflow-hidden shadow-inner flex">
+                <div class="bg-gray-100 h-2 rounded-full overflow-hidden shadow-inner flex">
                     <div id="quiz-progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-full transition-all duration-500" style="width: ${100 / questions.length}%"></div>
                 </div>
             </div>
@@ -114,31 +114,41 @@ function renderQuiz(quizData) {
         let optionsHtml = '';
         q.a.forEach((opt, i) => {
             optionsHtml += `
-                <label class="flex items-center p-2.5 rounded-lg border border-transparent bg-white/60 hover:bg-blue-50 hover:border-blue-200 cursor-pointer transition-all group relative">
-                    <input type="radio" name="q${index}" value="${i}" onclick="checkQuiz(${index}, ${i}, ${q.c})" class="w-3.5 h-3.5 text-blue-600 focus:ring-blue-500 border-gray-300">
-                    <span class="ml-2.5 text-sm text-gray-700 font-medium group-hover:text-blue-800 leading-snug">${opt}</span>
-                    <span class="ml-auto hidden status-icon status-${index}-${i} animate-bounce"></span>
+                <label class="flex items-center p-3 rounded-xl border-2 border-transparent bg-white/70 hover:bg-blue-50 hover:border-blue-300 cursor-pointer transition-all group relative h-full">
+                    <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full border-2 border-gray-300 group-hover:border-blue-500 mr-3">
+                        <input type="radio" name="q${index}" value="${i}" onclick="checkQuiz(${index}, ${i}, ${q.c})" class="appearance-none w-full h-full rounded-full checked:bg-blue-600 checked:border-transparent cursor-pointer">
+                    </div>
+                    <span class="text-2xl text-gray-800 font-medium group-hover:text-blue-900 leading-snug flex-1">${opt}</span>
+                    <span class="ml-2 hidden status-icon status-${index}-${i} animate-bounce flex-shrink-0"></span>
                 </label>
             `;
         });
 
         html += `
-            <div class="glass-card p-4 md:p-6 rounded-[24px] shadow-lg border-l-[6px] border-indigo-500 relative overflow-hidden quiz-card ${index === 0 ? 'animate-in fade-in slide-in-from-bottom-4 duration-500' : 'hidden'}" id="quiz-card-${index}">
-                 <div class="absolute -right-8 -top-8 w-24 h-24 bg-indigo-50 rounded-full opacity-50 blur-2xl"></div>
-                 <h3 class="relative text-lg font-bold text-gray-800 mb-4 leading-snug pr-2">
-                    <span class="inline-block bg-indigo-100 text-indigo-600 rounded-lg px-2 py-0.5 text-[10px] font-black mb-1.5 uppercase tracking-wide">Câu ${index + 1}</span><br>
-                    ${q.q}
-                 </h3>
-                 <div class="space-y-2 relative z-10 grid grid-cols-1 gap-1">
+            <div class="glass-card p-4 rounded-[24px] shadow-lg border-l-[8px] border-indigo-500 relative overflow-hidden quiz-card ${index === 0 ? 'animate-in fade-in slide-in-from-bottom-4 duration-500' : 'hidden'}" id="quiz-card-${index}">
+                 <div class="absolute -right-8 -top-8 w-32 h-32 bg-indigo-50 rounded-full opacity-50 blur-3xl"></div>
+                 
+                 <!-- Question -->
+                 <div class="relative mb-3">
+                     <span class="inline-block bg-indigo-100 text-indigo-700 rounded-lg px-2 py-1 text-sm font-black mb-1 uppercase tracking-wide border border-indigo-200">Câu ${index + 1}</span>
+                     <h3 class="text-3xl font-bold text-gray-800 leading-tight">
+                        ${q.q}
+                     </h3>
+                 </div>
+
+                 <!-- Options Grid -->
+                 <div class="space-y-0 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-3">
                     ${optionsHtml}
                  </div>
-                 <div class="mt-4 hidden p-3 rounded-xl text-sm font-bold shadow-sm transform transition-all" id="quiz-feedback-${index}"></div>
+
+                 <!-- Feedback -->
+                 <div class="mt-2 hidden p-3 rounded-2xl text-xl font-bold shadow-sm transform transition-all text-center" id="quiz-feedback-${index}"></div>
                  
                  <!-- Navigation -->
-                 <div class="mt-6 flex justify-center opacity-0 pointer-events-none transition-all duration-500" id="quiz-nav-${index}">
+                 <div class="mt-4 flex justify-center opacity-0 pointer-events-none transition-all duration-500" id="quiz-nav-${index}">
                     ${index === questions.length - 1
-                ? `<button onclick="submitQuizResult()" class="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white px-6 py-2.5 rounded-xl font-black shadow-md shadow-blue-200 transform hover:-translate-y-0.5 active:scale-95 transition-all uppercase tracking-wider text-xs pointer-events-auto">
-                             🚀 Hoàn thành
+                ? `<button onclick="submitQuizResult()" class="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white px-8 py-3 rounded-2xl font-black shadow-lg shadow-blue-200/50 transform hover:-translate-y-1 active:scale-95 transition-all uppercase tracking-wider text-lg pointer-events-auto">
+                             🚀 Nộp Bài
                            </button>`
                 : ''
             }
@@ -149,8 +159,8 @@ function renderQuiz(quizData) {
 
     html += `
             </div>
-            <div class="text-center pb-4">
-                <button onclick="resetQuiz()" class="text-[9px] font-black text-gray-400 uppercase tracking-widest hover:text-red-500 transition-colors">Thiết lập lại</button>
+            <div class="text-center pb-2">
+                <button onclick="resetQuiz()" class="text-xs font-black text-gray-400 uppercase tracking-widest hover:text-red-500 transition-colors py-2">Thiết lập lại</button>
             </div>
         </div>`;
 
