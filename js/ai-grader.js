@@ -4,7 +4,12 @@ async function askAI(id, prefix = "", mode = "single", persona = "auto") {
 
     // Determine persona based on checking context if "auto"
     if (persona === "auto") {
-        if (prefix.toLowerCase().includes("câu ghép") || prefix.toLowerCase().includes("từ nối")) {
+        const lowerPrefix = prefix.toLowerCase();
+        if (lowerPrefix.includes("câu ghép") || lowerPrefix.includes("từ nối") ||
+            lowerPrefix.includes("quan hệ từ") || lowerPrefix.includes("vế câu") ||
+            lowerPrefix.includes("dấu câu") || lowerPrefix.includes("kết từ") ||
+            lowerPrefix.includes("thay cho") || lowerPrefix.includes("điền") ||
+            (lowerPrefix.includes("...") && lowerPrefix.length < 100)) {
             persona = "ltvc"; // Grammar Teacher
         } else {
             persona = "tlv";  // Creative Writing Teacher
