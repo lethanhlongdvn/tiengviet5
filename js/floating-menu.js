@@ -8,271 +8,161 @@ const curriculumData = {
                 {
                     "id": 19, "name": "Tuần 19",
                     "lessons": [
-                        {
-                            "title": "Bài 1: Tiếng hát của người đá",
-                            "sections": [
-                                { "title": "Đọc: Tiếng hát của người đá", "url": "lesson_viewer.html?id=191-tieng-hat-nguoi-da" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 2: Khúc hát ru những em bé lớn trên lưng mẹ",
-                            "sections": [
-                                { "title": "Đọc: Khúc hát ru...", "url": "lesson_viewer.html?id=192-khuc-hat-ru" }
-                            ]
-                        }
+                        { "title": "Bài 1: Tiếng hát của người đá", "sections": [{ "title": "Đọc: Tiếng hát của người đá", "url": "lesson_viewer.html?id=191-tieng-hat-nguoi-da" }] },
+                        { "title": "Bài 2: Khúc hát ru những em bé lớn trên lưng mẹ", "sections": [{ "title": "Đọc: Khúc hát ru...", "url": "lesson_viewer.html?id=192-khuc-hat-ru" }] }
                     ]
                 },
                 {
                     "id": 20, "name": "Tuần 20",
                     "lessons": [
-                        {
-                            "title": "Bài 1: Hạt gạo làng ta",
-                            "sections": [
-                                { "title": "Đọc: Hạt gạo làng ta", "url": "lesson_viewer.html?id=201-hat-gao-lang-ta" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 2: Hộp quà màu thiên thanh",
-                            "sections": [
-                                { "title": "Đọc: Hộp quà màu thiên thanh", "url": "lesson_viewer.html?id=202-hop-qua-mau-thien-thanh" }
-                            ]
-                        }
+                        { "title": "Bài 3: Hạt gạo làng ta", "sections": [{ "title": "Đọc: Hạt gạo làng ta", "url": "lesson_viewer.html?id=201-hat-gao-lang-ta" }] },
+                        { "title": "Bài 4: Hộp quà màu thiên thanh", "sections": [{ "title": "Đọc: Hộp quà màu thiên thanh", "url": "lesson_viewer.html?id=202-hop-qua-mau-thien-thanh" }] }
                     ]
                 },
                 {
                     "id": 21, "name": "Tuần 21",
                     "lessons": [
-                        {
-                            "title": "Bài 1: Giỏ hoa tháng Năm",
-                            "sections": [
-                                { "title": "Đọc: Giỏ hoa tháng Năm", "url": "lesson_viewer.html?id=211-gio-hoa-thang-nam" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 2: Thư của bố",
-                            "sections": [
-                                { "title": "Đọc: Thư của bố", "url": "lesson_viewer.html?id=212-thu-cua-bo" }
-                            ]
-                        }
+                        { "title": "Bài 5: Giỏ hoa tháng Năm", "sections": [{ "title": "Đọc: Giỏ hoa tháng Năm", "url": "lesson_viewer.html?id=211-gio-hoa-thang-nam" }] },
+                        { "title": "Bài 6: Thư của bố", "sections": [{ "title": "Đọc: Thư của bố", "url": "lesson_viewer.html?id=212-thu-cua-bo" }] }
                     ]
                 },
                 {
                     "id": 22, "name": "Tuần 22",
                     "lessons": [
-                        {
-                            "title": "Bài 7: Đoàn thuyền đánh cá",
-                            "sections": [
-                                { "title": "Đọc: Đoàn thuyền đánh cá", "url": "lesson_viewer.html?id=221-doan-thuyen-danh-ca" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 8: Khu rừng của Mát",
-                            "sections": [
-                                { "title": "Đọc: Khu rừng của Mát", "url": "lesson_viewer.html?id=222-khu-rung-cua-mat" }
-                            ]
-                        }
+                        { "title": "Bài 7: Đoàn thuyền đánh cá", "sections": [{ "title": "Đọc: Đoàn thuyền đánh cá", "url": "lesson_viewer.html?id=221-doan-thuyen-danh-ca" }] },
+                        { "title": "Bài 8: Khu rừng của Mát", "sections": [{ "title": "Đọc: Khu rừng của Mát", "url": "lesson_viewer.html?id=222-khu-rung-cua-mat" }] }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "theme": "Chủ điểm 6: Hương sắc trăm miền",
+            "weeks": [
                 {
                     "id": 23, "name": "Tuần 23",
                     "lessons": [
-                        {
-                            "title": "Bài 9: Hội thổi cơm thi ở Đồng Vân",
-                            "sections": [
-                                { "title": "Đọc: Hội thổi cơm thi ở Đồng Vân", "url": "lesson_viewer.html?id=231-hoi-thoi-com-thi-o-dong-van" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 10: Những búp chè trên cây cổ thụ",
-                            "sections": [
-                                { "title": "Đọc: Những búp chè trên cây cổ thụ", "url": "lesson_viewer.html?id=232-nhung-bup-che-tren-cay-co-thu" }
-                            ]
-                        }
+                        { "title": "Bài 9: Hội thổi cơm thi ở Đồng Vân", "sections": [{ "title": "Đọc: Hội thổi cơm thi ở Đồng Vân", "url": "lesson_viewer.html?id=231-hoi-thoi-com-thi-o-dong-van" }] },
+                        { "title": "Bài 10: Những búp chè trên cây cổ thụ", "sections": [{ "title": "Đọc: Những búp chè trên cây cổ thụ", "url": "lesson_viewer.html?id=232-nhung-bup-che-tren-cay-co-thu" }] }
                     ]
                 },
                 {
                     "id": 24, "name": "Tuần 24",
                     "lessons": [
-                        {
-                            "title": "Bài 11: Hương cốm mùa thu",
-                            "sections": [
-                                { "title": "Đọc: Hương cốm mùa thu", "url": "lesson_viewer.html?id=241-huong-com-mua-thu" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 12: Vũ điệu trên nền thổ cẩm",
-                            "sections": [
-                                { "title": "Đọc: Vũ điệu trên nền thổ cẩm", "url": "lesson_viewer.html?id=242-vu-dieu-tren-nen-tho-cam" }
-                            ]
-                        }
+                        { "title": "Bài 11: Hương cốm mùa thu", "sections": [{ "title": "Đọc: Hương cốm mùa thu", "url": "lesson_viewer.html?id=241-huong-com-mua-thu" }] },
+                        { "title": "Bài 12: Vũ điệu trên nền thổ cẩm", "sections": [{ "title": "Đọc: Vũ điệu trên nền thổ cẩm", "url": "lesson_viewer.html?id=242-vu-dieu-tren-nen-tho-cam" }] }
                     ]
                 },
                 {
                     "id": 25, "name": "Tuần 25",
                     "lessons": [
-                        {
-                            "title": "Bài 13: Đàn t'rưng, tiếng ca đại ngàn",
-                            "sections": [
-                                { "title": "Đọc: Đàn t'rưng, tiếng ca đại ngàn", "url": "lesson_viewer.html?id=251-dan-t'rung-tieng-ca-dai-ngan" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 14: Đường quê Đồng Tháp Mười",
-                            "sections": [
-                                { "title": "Đọc: Đường quê Đồng Tháp Mười", "url": "lesson_viewer.html?id=252-duong-que-dong-thap-muoi" }
-                            ]
-                        }
+                        { "title": "Bài 13: Đàn t'rưng, tiếng ca đại ngàn", "sections": [{ "title": "Đọc: Đàn t'rưng, tiếng ca đại ngàn", "url": "lesson_viewer.html?id=251-dan-t'rung-tieng-ca-dai-ngan" }] },
+                        { "title": "Bài 14: Đường quê Đồng Tháp Mười", "sections": [{ "title": "Đọc: Đường quê Đồng Tháp Mười", "url": "lesson_viewer.html?id=252-duong-que-dong-thap-muoi" }] }
                     ]
                 },
                 {
                     "id": 26, "name": "Tuần 26",
                     "lessons": [
-                        {
-                            "title": "Bài 1: Xuồng ba lá quê tôi",
-                            "sections": [
-                                { "title": "Đọc: Xuồng ba lá quê tôi", "url": "lesson_viewer.html?id=261-xuong-ba-la-que-toi" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 2: Về thăm Đất Mũi",
-                            "sections": [
-                                { "title": "Đọc: Về thăm Đất Mũi", "url": "lesson_viewer.html?id=262-ve-tham-dat-mui" }
-                            ]
-                        }
+                        { "title": "Bài 15: Xuồng ba lá quê tôi", "sections": [{ "title": "Đọc: Xuồng ba lá quê tôi", "url": "lesson_viewer.html?id=261-xuong-ba-la-que-toi" }] },
+                        { "title": "Bài 16: Về thăm Đất Mũi", "sections": [{ "title": "Đọc: Về thăm Đất Mũi", "url": "lesson_viewer.html?id=262-ve-tham-dat-mui" }] }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "theme": "Ôn tập Giữa Học kỳ 2",
+            "weeks": [
                 {
                     "id": 27, "name": "Tuần 27",
                     "lessons": [
-                        {
-                            "title": "Ôn tập Giữa HK2",
-                            "sections": [
-                                { "title": "Ôn tập Giữa HK2", "url": "on-tap-hk2-giua.html" }
-                            ]
-                        }
+                        { "title": "Ôn tập Giữa HK2", "sections": [{ "title": "Ôn tập Giữa HK2", "url": "on-tap-hk2-giua.html" }] }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "theme": "Chủ điểm 7: Tiếp bước cha ông",
+            "weeks": [
                 {
                     "id": 28, "name": "Tuần 28",
                     "lessons": [
-                        {
-                            "title": "Bài 1: Nghìn năm văn hiến",
-                            "sections": [
-                                { "title": "Đọc: Nghìn năm văn hiến", "url": "lesson_viewer.html?id=281-nghin-nam-van-hien" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 2: Người thầy của muôn đời",
-                            "sections": [
-                                { "title": "Đọc: Người thầy của muôn đời", "url": "lesson_viewer.html?id=282-nguoi-thay-cua-muon-doi" }
-                            ]
-                        }
+                        { "title": "Bài 17: Nghìn năm văn hiến", "sections": [{ "title": "Đọc: Nghìn năm văn hiến", "url": "lesson_viewer.html?id=281-nghin-nam-van-hien" }] },
+                        { "title": "Bài 18: Người thầy của muôn đời", "sections": [{ "title": "Đọc: Người thầy của muôn đời", "url": "lesson_viewer.html?id=282-nguoi-thay-cua-muon-doi" }] }
                     ]
                 },
                 {
                     "id": 29, "name": "Tuần 29",
                     "lessons": [
-                        {
-                            "title": "Bài 1: Danh y Tuệ Tĩnh",
-                            "sections": [
-                                { "title": "Đọc: Danh y Tuệ Tĩnh", "url": "lesson_viewer.html?id=291-danh-y-tue-tinh" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 2: Cụ Đồ Chiểu",
-                            "sections": [
-                                { "title": "Đọc: Cụ Đồ Chiểu", "url": "lesson_viewer.html?id=292-cu-do-chieu" }
-                            ]
-                        }
+                        { "title": "Bài 19: Danh y Tuệ Tĩnh", "sections": [{ "title": "Đọc: Danh y Tuệ Tĩnh", "url": "lesson_viewer.html?id=291-danh-y-tue-tinh" }] },
+                        { "title": "Bài 20: Cụ Đồ Chiểu", "sections": [{ "title": "Đọc: Cụ Đồ Chiểu", "url": "lesson_viewer.html?id=292-cu-do-chieu" }] }
                     ]
                 },
                 {
                     "id": 30, "name": "Tuần 30",
                     "lessons": [
-                        {
-                            "title": "Bài 1: Trần Đại Nghĩa",
-                            "sections": [
-                                { "title": "Đọc: Trần Đại Nghĩa", "url": "lesson_viewer.html?id=301-tran-dai-nghia" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 2: Bộ đội về làng",
-                            "sections": [
-                                { "title": "Đọc: Bộ đội về làng", "url": "lesson_viewer.html?id=302-bo-doi-ve-lang" }
-                            ]
-                        }
+                        { "title": "Bài 21: Anh hùng Lao động Trần Đại Nghĩa", "sections": [{ "title": "Đọc: Trần Đại Nghĩa", "url": "lesson_viewer.html?id=301-tran-dai-nghia" }] },
+                        { "title": "Bài 22: Bộ đội về làng", "sections": [{ "title": "Đọc: Bộ đội về làng", "url": "lesson_viewer.html?id=302-bo-doi-ve-lang" }] }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "theme": "Chủ điểm 8: Thế giới của chúng ta",
+            "weeks": [
                 {
                     "id": 31, "name": "Tuần 31",
                     "lessons": [
-                        {
-                            "title": "Bài 1: Về ngôi nhà đang xây",
-                            "sections": [
-                                { "title": "Đọc: Về ngôi nhà đang xây", "url": "lesson_viewer.html?id=311-ve-ngoi-nha-dang-xay" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 2: Việt Nam quê hương ta",
-                            "sections": [
-                                { "title": "Đọc: Việt Nam quê hương ta", "url": "lesson_viewer.html?id=312-viet-nam-que-huong-ta" }
-                            ]
-                        }
+                        { "title": "Bài 23: Về ngôi nhà đang xây", "sections": [{ "title": "Đọc: Về ngôi nhà đang xây", "url": "lesson_viewer.html?id=311-ve-ngoi-nha-dang-xay" }] },
+                        { "title": "Bài 24: Việt Nam quê hương ta", "sections": [{ "title": "Đọc: Việt Nam quê hương ta", "url": "lesson_viewer.html?id=312-viet-nam-que-huong-ta" }] }
                     ]
                 },
                 {
                     "id": 32, "name": "Tuần 32",
                     "lessons": [
-                        {
-                            "title": "Bài 1: Bài ca Trái Đất",
-                            "sections": [
-                                { "title": "Đọc: Bài ca Trái Đất", "url": "lesson_viewer.html?id=321-bai-ca-trai-dat" }
-                            ]
                         },
-                        {
-                            "title": "Bài 2: Những con hạc giấy",
-                            "sections": [
-                                { "title": "Đọc: Những con hạc giấy", "url": "lesson_viewer.html?id=322-nhung-con-hac-giay" }
-                            ]
-                        }
+                {
+                    "title": "Bài 2: Những con hạc giấy",
+                    "sections": [
+                        { "title": "Đọc: Những con hạc giấy", "url": "lesson_viewer.html?id=322-nhung-con-hac-giay" }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 33, "name": "Tuần 33",
+            "lessons": [
+                {
+                    "title": "Bài 1: Một người hùng thầm lặng",
+                    "sections": [
+                        { "title": "Đọc: Một người hùng thầm lặng", "url": "lesson_viewer.html?id=331-mot-nguoi-hung-tham-lang" }
                     ]
                 },
                 {
-                    "id": 33, "name": "Tuần 33",
-                    "lessons": [
-                        {
-                            "title": "Bài 1: Một người hùng thầm lặng",
-                            "sections": [
-                                { "title": "Đọc: Một người hùng thầm lặng", "url": "lesson_viewer.html?id=331-mot-nguoi-hung-tham-lang" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 2: Giờ Trái Đất",
-                            "sections": [
-                                { "title": "Đọc: Giờ Trái Đất", "url": "lesson_viewer.html?id=332-gio-trai-dat" }
-                            ]
-                        }
+                    "title": "Bài 2: Giờ Trái Đất",
+                    "sections": [
+                        { "title": "Đọc: Giờ Trái Đất", "url": "lesson_viewer.html?id=332-gio-trai-dat" }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 34, "name": "Tuần 34",
+            "lessons": [
+                {
+                    "title": "Bài 1: Điện thoại di động",
+                    "sections": [
+                        { "title": "Đọc: Điện thoại di động", "url": "lesson_viewer.html?id=341-dien-thoai-di-dong" }
                     ]
                 },
                 {
-                    "id": 34, "name": "Tuần 34",
-                    "lessons": [
-                        {
-                            "title": "Bài 1: Điện thoại di động",
-                            "sections": [
-                                { "title": "Đọc: Điện thoại di động", "url": "lesson_viewer.html?id=341-dien-thoai-di-dong" }
-                            ]
-                        },
-                        {
-                            "title": "Bài 2: Thành phố thông minh Mát-xđa",
-                            "sections": [
-                                { "title": "Đọc: Thành phố thông minh Mát-xđa", "url": "lesson_viewer.html?id=342-thanh-pho-thong-minh-mat-xda" }
-                            ]
-                        }
+                    "title": "Bài 2: Thành phố thông minh Mát-xđa",
+                    "sections": [
+                        { "title": "Đọc: Thành phố thông minh Mát-xđa", "url": "lesson_viewer.html?id=342-thanh-pho-thong-minh-mat-xda" }
                     ]
                 }
             ]
         }
+    ]
+}
     ]
 };
 
