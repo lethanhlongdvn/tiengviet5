@@ -9,6 +9,10 @@ window.ltvc21_check2 = ltvc21_check2;
 window.ltvc21_update2 = ltvc21_update2;
 window.toggleWord = toggleWord;
 window.askAI = askAI;
+window.ltvc22_check1 = ltvc22_check1;
+window.ltvc22_update2 = ltvc22_update2;
+window.ltvc22_check2 = ltvc22_check2;
+window.ltvc22_toggle = ltvc22_toggle;
 
 // Global Celebrate Function (Confetti + Sound)
 function celebrate() {
@@ -162,5 +166,108 @@ function ltvc21_check2(id) {
             s.style.borderBottomColor = "#ef4444";
             s.classList.remove('filled');
         });
+    }
+}
+
+// --- Week 22 LTVC Exercises ---
+
+// Exercise 1: Compound sentence detection
+function ltvc22_check1(id, btn) {
+    const container = document.getElementById(id);
+    if (!container) return;
+    const items = container.querySelectorAll('.sentence-box');
+    let totalCorrect = 0, totalCompound = 0;
+    let error = false;
+
+    items.forEach(item => {
+        const isCompound = item.getAttribute('data-is-compound') === 'true';
+        const connectors = (item.getAttribute('data-connectors') || '').split(',').filter(x => x);
+        const words = item.querySelectorAll('.word');
+        let foundConnectors = 0;
+
+        if (isCompound) {
+            totalCompound++;
+            words.forEach(w => {
+                const txt = w.innerText.replace(/[.,]/g, "").toLowerCase().trim();
+                if (w.classList.contains('selected')) {
+                    if (connectors.includes(txt)) {
+                        w.classList.add('is-correct');
+                        foundConnectors++;
+                    } else {
+                        w.classList.add('is-wrong');
+                        error = true;
+                    }
+                }
+            });
+
+            // Nếu là câu không có connector (nối trực tiếp)
+            if (connectors.length === 0) {
+                const directMsg = item.querySelector('.direct-connect-msg');
+                if (directMsg) directMsg.classList.remove('hidden');
+                totalCorrect++;
+            } else if (foundConnectors === connectors.length && foundConnectors > 0 && !error) {
+                totalCorrect++;
+            }
+        } else {
+            words.forEach(w => {
+                if (w.classList.contains('selected')) {
+                    w.classList.add('is-wrong');
+                    error = true;
+                }
+            });
+        }
+    });
+
+    if (!error && totalCorrect === totalCompound) {
+        celebrate();
+        items.forEach(item => item.classList.add('locked'));
+        if (btn) {
+            btn.innerHTML = "🎉";
+            btn.classList.remove('btn-primary');
+            btn.classList.add('bg-green-500', 'text-white', 'scale-110');
+        }
+    } else {
+        if (btn) {
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = "❌";
+            btn.classList.add('bg-red-500', 'text-white', 'shake');
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('bg-red-500', 'text-white', 'shake');
+            }, 1000);
+        }
+    }
+}
+
+// Exercise 2: Fill in blanks
+function ltvc22_update2(id, val) {
+    const row = document.getElementById(id);
+    if (!row) return;
+    const slots = row.querySelectorAll('.slot');
+    if (!val) { slots[0].innerText = "🌸"; slots[1].innerText = "🌸"; return; }
+    const p = val.split('-');
+    if (p.length >= 2) {
+        slots[0].innerText = p[0]; slots[1].innerText = p[1];
+        slots.forEach(s => { s.style.color = "#f59e0b"; });
+    }
+}
+
+function ltvc22_check2(id) {
+    const row = document.getElementById(id);
+    if (!row) return;
+    const sel = row.querySelector('select').value;
+    const slots = row.querySelectorAll('.slot');
+    if (sel === row.getAttribute('data-ans')) {
+        slots.forEach(s => { s.style.color = "#22c55e"; });
+        celebrate();
+    } else {
+        slots.forEach(s => { s.style.color = "#ef4444"; });
+    }
+
+}
+function ltvc22_toggle(el) {
+    const container = el.nextElementSibling;
+    if (container && (container.classList.contains('words-container') || container.classList.contains('hidden'))) {
+        container.classList.toggle('hidden');
     }
 }
