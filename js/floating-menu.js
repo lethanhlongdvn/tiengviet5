@@ -22,7 +22,7 @@ const curriculumData = {
                 {
                     "id": 21, "name": "Tuần 21",
                     "lessons": [
-                        { "title": "Bài 5: Giỏ hoa tháng Năm", "sections": [{ "title": "Đọc: Giỏ hoa tháng Năm", "url": "lesson_viewer.html?id=211-gio-hoa-thang-nam" }] },
+                        { "title": "Bài 5: Giỏ hoa tháng Năm", "sections": [{ "title": "Đọc: Giỏ hoa tháng Năm", "url": "lesson_viewer.html?id=211-gio-hoa-thang-nam" }, { "title": "LTVC: Cách nối các vế câu ghép", "url": "lesson_viewer.html?id=211-ltvc-gio-hoa-thang-nam" }] },
                         { "title": "Bài 6: Thư của bố", "sections": [{ "title": "Đọc: Thư của bố", "url": "lesson_viewer.html?id=212-thu-cua-bo" }] }
                     ]
                 },
