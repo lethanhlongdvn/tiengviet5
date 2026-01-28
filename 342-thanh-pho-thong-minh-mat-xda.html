@@ -205,7 +205,7 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-            <!-- Header -->
+    <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -564,8 +564,85 @@
         </div>
     </main>
 
-    <div id="statsModal" class="modal"></div>
-    <div id="successModal" class="success-modal"></div>
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="glass-card success-card rounded-[40px] p-10 max-w-sm w-full text-center shadow-3xl border-white/50">
+            <div
+                class="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 rounded-3xl flex items-center justify-center text-white mx-auto mb-8 shadow-xl shadow-green-100 transform rotate-6 scale-110">
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h2 class="text-3xl font-black text-gray-800 mb-2 tracking-tight">Thành công!</h2>
+            <p class="text-gray-500 mb-10 font-bold leading-relaxed">Em đã hoàn thành thử thách kiến thức!</p>
+            <div class="mb-8 text-blue-600 font-black text-sm uppercase tracking-widest mt-4">Tự động quay lại sau <span
+                    id="countdown">5</span> giây</div>
+            <button onclick="closeSuccessModal()"
+                class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all active:scale-95 uppercase tracking-widest text-sm">Trở
+                về bài học</button>
+        </div>
+    </div>
+
+    <!-- Modal Stats -->
+    <div id="statsModal" class="modal">
+        <div
+            class="bg-white rounded-[40px] w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl m-4 transform transition-all">
+            <div class="p-8 border-b flex justify-between items-center bg-gray-50/50 backdrop-blur-xl">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black text-gray-800">Kết quả học tập</h2>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Học sinh lớp 5</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="exportToExcel()"
+                        class="bg-green-600 hover:bg-green-700 text-white font-black py-3 px-6 rounded-2xl text-sm flex items-center shadow-lg transition-all active:scale-95">XUẤT
+                        EXCEL</button>
+                    <button onclick="closeModal()"
+                        class="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-gray-800"><svg
+                            class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg></button>
+                </div>
+            </div>
+            <div class="flex-grow overflow-auto p-8 pt-6">
+                <div class="bg-gray-50/50 rounded-3xl border border-gray-100 overflow-hidden shadow-sm">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-gray-100/50">
+                                <th class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">STT
+                                </th>
+                                <th class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">Học
+                                    sinh</th>
+                                <th class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">Lớp
+                                </th>
+                                <th class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                    Trường</th>
+                                <th
+                                    class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">
+                                    Điểm số</th>
+                                <th
+                                    class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">
+                                    Thời gian</th>
+                                <th
+                                    class="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest text-right">
+                                    Ngày nộp</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statsTableBody" class="divide-y divide-gray-100 text-sm"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="py-5 px-4 mt-12 bg-white/30 backdrop-blur-md border-t border-white/50">
         <div class="container mx-auto text-center">
@@ -737,21 +814,167 @@
         const firebaseConfig = { apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc", authDomain: "gamhoctap.firebaseapp.com", projectId: "gamhoctap", storageBucket: "gamhoctap.firebasestorage.app", messagingSenderId: "833329613932", appId: "1:833329613932:web:0d8574827bcfe50b535c49" };
         firebase.initializeApp(firebaseConfig); const db = firebase.firestore();
 
+        let currentStatsData = [];
+
         async function submitResults(btn) {
             btn.disabled = true; btn.innerText = "Đang gửi...";
             const duration = Math.floor((new Date() - startTime) / 1000);
+            const timeDisplay = `${Math.floor(duration / 60)}p ${duration % 60}s`;
+            const data = {
+                ...studentData,
+                lessonTitle: "Thành phố thông minh Mát-xđa",
+                score: score,
+                duration: duration,
+                timeDisplay: timeDisplay,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
             try {
-                await db.collection("diem_tieng_viet_lop5").add({ ...studentData, lessonTitle: "Thành phố thông minh Mát-xđa", score: score, duration: duration, timeDisplay: `${Math.floor(duration / 60)}p ${duration % 60}s`, submittedAt: firebase.firestore.FieldValue.serverTimestamp() });
-                alert("Nộp bài thành công!"); location.reload();
-            } catch (err) { alert("Lỗi gửi bài!"); btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
+                await db.collection("diem_tieng_viet_lop5").add(data);
+                showSuccess();
+            } catch (err) {
+                console.error(err);
+                alert("Lỗi gửi bài!");
+                btn.disabled = false;
+                btn.innerText = "NỘP KẾT QUẢ";
+            }
         }
 
-        function openTeacherStats() { const pin = prompt("Mã PIN:"); if (pin === "dvn") loadStats(); }
+        function showSuccess() {
+            const modal = document.getElementById('successModal');
+            modal.classList.add('active');
+            celebrate();
+            let timeLeft = 5;
+            const countdownEl = document.getElementById('countdown');
+            const timer = setInterval(() => {
+                timeLeft--;
+                if (countdownEl) countdownEl.innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    closeSuccessModal();
+                }
+            }, 1000);
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+            location.reload();
+        }
+
+        function openTeacherStats() {
+            const pin = prompt("Mã PIN:");
+            if (pin === "dvn") {
+                document.getElementById('statsModal').classList.add('active');
+                loadStats();
+            } else if (pin) {
+                alert("Sai PIN");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('statsModal').classList.remove('active');
+        }
+
         async function loadStats() {
-            const snap = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Thành phố thông minh Mát-xđa").get();
-            let msg = "KẾT QUẢ HỌC SINH:\n";
-            snap.forEach(doc => { const d = doc.data(); msg += `${d.studentName} - ${d.studentClass}: ${d.score}đ\n`; });
-            alert(msg);
+            const tbody = document.getElementById('statsTableBody');
+            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
+            try {
+                const snapshot = await db.collection("diem_tieng_viet_lop5")
+                    .where("lessonTitle", "==", "Thành phố thông minh Mát-xđa")
+                    .get();
+
+                tbody.innerHTML = '';
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
+                    return;
+                }
+
+                const results = [];
+                snapshot.forEach(doc => {
+                    const d = doc.data();
+                    results.push({
+                        studentName: d.studentName,
+                        studentClass: d.studentClass || d.className,
+                        school: d.school,
+                        score: d.score,
+                        timeDisplay: d.timeDisplay || '---',
+                        timestamp: d.timestamp ? d.timestamp.toDate() : null
+                    });
+                });
+
+                results.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+                // Process data for export
+                const studentStats = {};
+                results.forEach(r => {
+                    const key = `${r.studentName}_${r.studentClass}_${r.school}`;
+                    if (!studentStats[key]) {
+                        studentStats[key] = {
+                            studentName: r.studentName,
+                            studentClass: r.studentClass,
+                            school: r.school,
+                            bestScore: r.score,
+                            attempts: 1,
+                            timeDisplay: r.timeDisplay,
+                            latestSubmitted: r.timestamp
+                        };
+                    } else {
+                        studentStats[key].attempts++;
+                        if (r.score > studentStats[key].bestScore) {
+                            studentStats[key].bestScore = r.score;
+                            studentStats[key].timeDisplay = r.timeDisplay;
+                        }
+                        if (r.timestamp > studentStats[key].latestSubmitted) {
+                            studentStats[key].latestSubmitted = r.timestamp;
+                        }
+                    }
+                });
+
+                currentStatsData = Object.values(studentStats);
+
+                results.forEach((data, index) => {
+                    const date = data.timestamp ? data.timestamp.toLocaleString('vi-VN') : '---';
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50 text-sm bg-white";
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 font-bold text-gray-400">${index + 1}</td>
+                        <td class="px-6 py-4 font-bold text-gray-800">${data.studentName}</td>
+                        <td class="px-6 py-4 text-gray-600">${data.studentClass}</td>
+                        <td class="px-6 py-4 text-gray-600">${data.school}</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">${data.score}/100</span>
+                        </td>
+                        <td class="px-6 py-4 text-center text-gray-600 font-bold">${data.timeDisplay}</td>
+                        <td class="px-6 py-4 text-right text-xs text-gray-400 font-bold">${date}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (e) {
+                console.error(e);
+                tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>';
+            }
+        }
+
+        function exportToExcel() {
+            if (!currentStatsData.length) {
+                alert("Chưa có dữ liệu để xuất!");
+                return;
+            }
+            const dataToExport = currentStatsData.map((item, index) => ({
+                'STT': index + 1,
+                'Họ và Tên': item.studentName,
+                'Lớp': item.studentClass,
+                'Trường': item.school,
+                'Điểm cao nhất': item.bestScore,
+                'Số lần làm': item.attempts,
+                'Thời gian làm bài (Lần tốt nhất)': item.timeDisplay || 'N/A',
+                'Lần nộp cuối': item.latestSubmitted ? item.latestSubmitted.toLocaleString('vi-VN') : '---'
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(dataToExport);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Kết quả");
+            const fileName = `KetQua_${document.title.replace(' - EduRobot', '').replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
     </script>
     <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
