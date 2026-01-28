@@ -1,6 +1,159 @@
-async function askAI(id, prefix = "", mode = "single", persona = "auto") {
+// ============================================================================
+// DỮ LIỆU GIẢNG DẠY THEO CHƯƠNG TRÌNH KẾT NỐI TRI THỨC LỚP 5
+// ============================================================================
+let curriculumData = null;
+
+async function loadCurriculumData() {
+    if (curriculumData) return curriculumData;
+    try {
+        const response = await fetch('/data/du_lieu_giang_day.json');
+        if (response.ok) {
+            curriculumData = await response.json();
+            console.log('✅ Đã tải dữ liệu giảng dạy thành công');
+        }
+    } catch (e) {
+        console.warn('⚠️ Không tải được dữ liệu giảng dạy:', e);
+    }
+    return curriculumData;
+}
+
+// Tìm kiến thức theo tuần học
+function getCurriculumByWeek(weekNumber) {
+    if (!curriculumData) return null;
+
+    const weekStr = `Tuần ${weekNumber}`;
+
+    // Tìm trong Học kỳ 1
+    for (const [key, value] of Object.entries(curriculumData["Học kỳ 1"] || {})) {
+        if (key.includes(weekStr) || key === weekStr) {
+            return { ...value, tuanHoc: key, hocKy: 1 };
+        }
+    }
+
+    // Tìm trong Học kỳ 2
+    for (const [key, value] of Object.entries(curriculumData["Học kỳ 2"] || {})) {
+        if (key.includes(weekStr) || key === weekStr) {
+            return { ...value, tuanHoc: key, hocKy: 2 };
+        }
+    }
+
+    return null;
+}
+
+// Tạo ngữ cảnh giảng dạy từ curriculum
+function buildCurriculumContext(weekNumber) {
+    const data = getCurriculumByWeek(weekNumber);
+    if (!data) return "";
+
+    return `
+📚 KIẾN THỨC TUẦN ${weekNumber} (Chương trình Kết nối tri thức):
+- Tên bài: ${data["Tên bài"]}
+- Nội dung: ${data["Nội dung"]}
+- Kiến thức cần đánh giá: ${data["Kiến thức"]}
+
+Hãy chấm bài dựa trên kiến thức này.
+`;
+}
+
+// ============================================================================
+// DỮ LIỆU VIẾT VĂN THEO CHƯƠNG TRÌNH KẾT NỐI TRI THỨC LỚP 5
+// ============================================================================
+let writingCurriculumData = null;
+
+async function loadWritingCurriculumData() {
+    if (writingCurriculumData) return writingCurriculumData;
+    try {
+        const response = await fetch('/data/du_lieu_viet_van.json');
+        if (response.ok) {
+            writingCurriculumData = await response.json();
+            console.log('✅ Đã tải dữ liệu Viết văn thành công');
+        }
+    } catch (e) {
+        console.warn('⚠️ Không tải được dữ liệu Viết văn:', e);
+    }
+    return writingCurriculumData;
+}
+
+// Tìm kiến thức Viết văn theo tuần học
+function getWritingCurriculumByWeek(weekNumber) {
+    if (!writingCurriculumData) return null;
+
+    // Tìm trong Học kỳ 1
+    for (const [key, value] of Object.entries(writingCurriculumData["Học_ky_1"] || {})) {
+        const weekRange = key.match(/\d+/g);
+        if (weekRange) {
+            const start = parseInt(weekRange[0]);
+            const end = weekRange[1] ? parseInt(weekRange[1]) : start;
+            if (weekNumber >= start && weekNumber <= end) {
+                return { ...value, tuanHoc: key, hocKy: 1 };
+            }
+        }
+    }
+
+    // Tìm trong Học kỳ 2
+    for (const [key, value] of Object.entries(writingCurriculumData["Học_ky_2"] || {})) {
+        const weekRange = key.match(/\d+/g);
+        if (weekRange) {
+            const start = parseInt(weekRange[0]);
+            const end = weekRange[1] ? parseInt(weekRange[1]) : start;
+            if (weekNumber >= start && weekNumber <= end) {
+                return { ...value, tuanHoc: key, hocKy: 2 };
+            }
+        }
+    }
+
+    return null;
+}
+
+// Xây dựng ngữ cảnh Viết văn cho AI
+function buildWritingContext(weekNumber) {
+    const data = getWritingCurriculumByWeek(weekNumber);
+    if (!data) return "";
+
+    let context = `
+📝 KIẾN THỨC VIẾT VĂN TUẦN ${weekNumber} (Chương trình Kết nối tri thức):
+- Thể loại: ${data["Thể_loại"] || "Không xác định"}`;
+
+    if (data["Đối_tượng"]) context += `\n- Đối tượng: ${data["Đối_tượng"]}`;
+    if (data["Trọng_tâm"]) context += `\n- Trọng tâm: ${data["Trọng_tâm"]}`;
+    if (data["Kỹ_thuật"]) context += `\n- Kỹ thuật: ${data["Kỹ_thuật"]}`;
+    if (data["Bố_cục"]) context += `\n- Bố cục: ${data["Bố_cục"]}`;
+    if (data["Yêu_cầu"]) context += `\n- Yêu cầu: ${data["Yêu_cầu"]}`;
+    if (data["Hình_thức"]) context += `\n- Hình thức: ${data["Hình_thức"]}`;
+
+    context += `
+
+📊 TIÊU CHÍ CHẤM ĐIỂM VĂN:
+1. Đúng thể loại (4đ): Bài viết có đúng yêu cầu không?
+2. Cảm xúc & Hình ảnh (3đ): Có sử dụng biện pháp tu từ (so sánh, nhân hóa) không?
+3. Cấu trúc (2đ): Có đủ Mở - Thân - Kết bài không?
+4. Sáng tạo (1đ): Có chi tiết mới lạ hoặc cách diễn đạt độc đáo không?
+
+📌 PHƯƠNG PHÁP NHẬN XÉT:
+- Không chỉ nói "Sai", hãy gợi ý cách viết tốt hơn.
+- Ví dụ: Thay vì "Cánh đồng xanh", gợi ý "Cánh đồng khoác lên mình chiếc áo màu xanh mướt mải".
+- Kiểm tra tính logic của các đoạn văn và sự liên kết giữa các câu.
+`;
+
+    return context;
+}
+
+// Load curriculum on page load
+document.addEventListener('DOMContentLoaded', () => {
+    loadCurriculumData();
+    loadWritingCurriculumData();
+});
+
+async function askAI(id, prefix = "", mode = "single", persona = "auto", weekNumber = null) {
     const feedback = document.getElementById('fb-' + id);
     let userInput = "";
+
+    // Đảm bảo đã tải dữ liệu giảng dạy
+    await loadCurriculumData();
+    await loadWritingCurriculumData();
+
+    // Lấy ngữ cảnh curriculum nếu có tuần học (sẽ xác định sau khi biết persona)
+    let curriculumContext = "";
 
     // Determine persona based on checking context if "auto"
     if (persona === "auto") {
@@ -13,6 +166,15 @@ async function askAI(id, prefix = "", mode = "single", persona = "auto") {
             persona = "ltvc"; // Grammar Teacher
         } else {
             persona = "tlv";  // Creative Writing Teacher
+        }
+    }
+
+    // Xây dựng ngữ cảnh curriculum dựa trên persona
+    if (weekNumber) {
+        if (persona === "ltvc") {
+            curriculumContext = buildCurriculumContext(weekNumber);
+        } else {
+            curriculumContext = buildWritingContext(weekNumber);
         }
     }
 
@@ -64,10 +226,19 @@ async function askAI(id, prefix = "", mode = "single", persona = "auto") {
     }
 
     try {
+        // Xây dựng prompt với ngữ cảnh curriculum
+        const fullPrompt = curriculumContext
+            ? `${curriculumContext}\n\n📝 BÀI LÀM CỦA HỌC SINH:\n${sentence}`
+            : sentence;
+
         const response = await fetch('/.netlify/functions/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ sentence })
+            body: JSON.stringify({
+                sentence: fullPrompt,
+                weekNumber: weekNumber,
+                persona: persona
+            })
         });
 
         if (!response.ok) {
