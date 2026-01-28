@@ -171,7 +171,7 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-            <!-- Header -->
+    <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -193,7 +193,7 @@
                             ĐIỂM:</span>
                         <span
                             class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">HƯƠNG
-                                SẮC TRĂM MIỀN</span>
+                            SẮC TRĂM MIỀN</span>
                     </div>
                 </div>
             </div>
@@ -244,7 +244,7 @@
 
     <main class="container mx-auto px-4 py-2">
 
-                <!-- Tab & Audio Header -->
+        <!-- Tab & Audio Header -->
         <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
             <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
@@ -961,15 +961,22 @@
         }
 
         function exportToExcel() {
-            const table = document.querySelector("#statsModal table");
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true, cellStyles: true });
-            const ws = wb.Sheets["Kết quả"];
-            const range = XLSX.utils.decode_range(ws['!ref']);
-            for (let R = range.s.r + 1; R <= range.e.r; ++R) {
-                const cellRef = XLSX.utils.encode_cell({ r: R, c: 2 });
-                if (ws[cellRef]) ws[cellRef].t = 's';
-            }
-            XLSX.writeFile(wb, "KetQua_DuongQueDongThapMuoi.xlsx");
+            const dataToExport = currentStatsData.map((item, index) => ({
+                'STT': index + 1,
+                'Họ và Tên': item.studentName,
+                'Lớp': item.studentClass,
+                'Trường': item.school,
+                'Điểm cao nhất': item.bestScore,
+                'Số lần làm': item.attempts,
+                'Thời gian làm bài (Lần tốt nhất)': item.timeDisplay || 'N/A',
+                'Lần nộp cuối': item.latestSubmitted.toLocaleString('vi-VN')
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(dataToExport);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Kết quả");
+            const fileName = `KetQua_${document.title.replace(' - EduRobot', '').replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
     </script>
 
