@@ -212,7 +212,7 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-            <!-- Header -->
+    <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -234,7 +234,7 @@
                             ĐIỂM:</span>
                         <span
                             class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">HƯƠNG
-                                SẮC TRĂM MIỀN</span>
+                            SẮC TRĂM MIỀN</span>
                     </div>
                 </div>
             </div>
@@ -285,7 +285,7 @@
 
     <main class="container mx-auto px-4 py-2">
 
-                <!-- Tab & Audio Header -->
+        <!-- Tab & Audio Header -->
         <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
             <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
@@ -939,42 +939,6 @@
             db.collection("diem_tieng_viet_lop5").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch(e => { console.error(e); clearTimeout(dbTimeout); showSuccess(); });
         }
 
-        const data = {
-            studentName: document.getElementById('studentName').value,
-            studentClass: document.getElementById('studentClass').value || studentData.studentClass || studentData.className,
-            school: document.getElementById('schoolSelect').value === 'Khác' || document.getElementById('schoolSelect').value === 'other' ? document.getElementById('otherSchool').value : document.getElementById('schoolSelect').value,
-            lessonTitle: "Đàn t'rưng - Tiếng ca đại ngàn",
-            score: score,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        };
-        let successShown = false;
-        const showSuccess = () => {
-            if (successShown) return;
-            successShown = true;
-            const modal = document.getElementById('successModal');
-            if (modal) {
-                modal.classList.add('active');
-                modal.classList.remove('hidden');
-            }
-            celebrate();
-            let timeLeft = 5;
-            const countdownEl = document.getElementById('countdown');
-            const timer = setInterval(() => {
-                timeLeft--;
-                if (countdownEl) countdownEl.innerText = timeLeft;
-                if (timeLeft <= 0) { clearInterval(timer); closeSuccessModal(); }
-            }, 1000);
-        };
-        const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
-        db.collection("diem_tieng_viet_lop5").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch(e => { console.error(e); clearTimeout(dbTimeout); showSuccess(); });
-            }
-            p ${ dur % 60 } s`, submittedAt: firebase.firestore.FieldValue.serverTimestamp() });
-                document.getElementById('successModal').classList.add('active');
-            } catch (err) { alert("Lỗi khi gửi kết quả."); } finally { btn.disabled = false; btn.innerText = "NỘP KẾT QUẢ"; }
-        }
-
-        function closeSuccessModal() { document.getElementById('successModal').classList.remove('active'); restartQuiz(); switchTab('lesson'); }
-
         function openTeacherStats() { const p = prompt("PIN:"); if (p === 'dvn') { document.getElementById('statsModal').classList.add('active'); loadStats(); } else if (p) alert("Sai PIN"); }
         function closeModal() { document.getElementById('statsModal').classList.remove('active'); }
 
@@ -990,14 +954,14 @@
                 }
                 const results = [];
                 snapshot.forEach(doc => results.push(doc.data()));
-                results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
+                results.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
 
                 results.forEach((data, index) => {
-                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
+                    const date = data.timestamp ? data.timestamp.toDate().toLocaleString('vi-VN') : '---';
                     const tr = document.createElement('tr');
                     tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50 text-sm bg-white";
                     tr.innerHTML = `
-            < td class="px-6 py-4 font-bold text-gray-400" > ${ index + 1 }</td >
+                        <td class="px-6 py-4 font-bold text-gray-400">${index + 1}</td>
                         <td class="px-6 py-4 font-bold text-gray-800">${data.studentName}</td>
                         <td class="px-6 py-4 text-gray-600">${data.studentClass || data.className}</td>
                         <td class="px-6 py-4 text-gray-600">${data.school}</td>
@@ -1009,20 +973,17 @@
                     `;
                     tbody.appendChild(tr);
                 });
-            } catch (e) { tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>'; }
+            } catch (e) {
+                console.error(e);
+                tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>';
+            }
         }
 
         function exportToExcel() {
             const table = document.querySelector("#statsModal table");
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true, cellStyles: true });
-            const ws = wb.Sheets["Kết quả"];
-            // Fix Class column (index 2) to be text to avoid date formatting
-            const range = XLSX.utils.decode_range(ws['!ref']);
-            for (let R = range.s.r + 1; R <= range.e.r; ++R) {
-                const cellRef = XLSX.utils.encode_cell({ r: R, c: 2 });
-                if (ws[cellRef]) ws[cellRef].t = 's';
-            }
-            XLSX.writeFile(wb, "KetQua_DanTrung.xlsx");
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true });
+            const fileName = `KetQua_${document.title.replace(' - EduRobot', '').replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
     </script>
 
