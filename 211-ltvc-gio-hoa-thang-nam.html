@@ -102,6 +102,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -109,13 +110,25 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         .tab-content.active {
@@ -277,9 +290,19 @@
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
         }
 
         .slot {
@@ -326,7 +349,7 @@
             z-index: 0;
         }
 
-        .btn > * {
+        .btn>* {
             position: relative;
             z-index: 1;
         }
@@ -337,7 +360,8 @@
         }
 
         /* Special styles for small buttons */
-        .btn.w-9, .btn.w-12 {
+        .btn.w-9,
+        .btn.w-12 {
             padding: 0;
             gap: 0;
         }
@@ -394,12 +418,12 @@
                 border-radius: 16px;
                 margin: 8px;
             }
-            
+
             .tab-btn {
                 font-size: 14px;
                 padding: 12px 8px;
             }
-            
+
             .word {
                 padding: 2px 6px;
                 margin: 1px;
@@ -1101,7 +1125,7 @@
         function showQuestion() {
             if (document.getElementById('quiz-feedback')) document.getElementById('quiz-feedback').style.opacity = '0';
             if (document.getElementById('processing')) document.getElementById('processing').classList.add('hidden');
-            
+
             const q = selectedQuestions[currentIdx];
             document.getElementById('questionNum').innerText = currentIdx + 1;
             document.getElementById('progressText').innerText = `CÂU TRẮC NGHIỆM: ${currentIdx + 1}/8`;
@@ -1120,15 +1144,15 @@
             const isCorrect = i === currentQ.c;
             const feedback = document.getElementById('quiz-feedback');
             const processing = document.getElementById('processing');
-            
+
             document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
-            
+
             // Hiển thị processing
             if (processing) {
                 processing.classList.remove('hidden');
                 processing.innerText = "Đang xử lý...";
             }
-            
+
             if (isCorrect) {
                 btn.classList.add('bg-green-50', 'border-green-500');
                 btn.querySelector('div').classList.add('bg-green-600', 'text-white');
@@ -1141,15 +1165,15 @@
                 const correctBtn = document.querySelectorAll('.option-btn')[currentQ.c];
                 if (correctBtn) correctBtn.classList.add('bg-green-50', 'border-green-500');
             }
-            
+
             if (feedback) feedback.style.opacity = '1';
-            
+
             setTimeout(() => {
                 // Ẩn processing khi chuyển câu
                 if (processing) {
                     processing.classList.add('hidden');
                 }
-                
+
                 currentIdx++;
                 if (currentIdx < 8) {
                     showQuestion();
@@ -1159,19 +1183,19 @@
             }, 1500);
         }
         function showResults() {
-            document.getElementById('quiz-container').classList.add('hidden'); 
+            document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('quiz-results').classList.remove('hidden');
-            
-            const circle = document.getElementById('scoreCircle'); 
-            const offset = 465 - (465 * score) / 100; 
+
+            const circle = document.getElementById('scoreCircle');
+            const offset = 465 - (465 * score) / 100;
             circle.style.strokeDashoffset = offset;
             document.getElementById('scoreText').innerText = Math.round(score);
-            
+
             // Tự động nộp kết quả
             setTimeout(() => {
                 submitResults();
             }, 2000);
-            
+
             // Chuyển về tab bài học sau 5 giây
             setTimeout(() => {
                 switchTab('lesson');
@@ -1187,7 +1211,7 @@
 
         function submitResults(e) {
             if (e) e.preventDefault();
-            
+
             const data = {
                 studentName: document.getElementById('studentName').value || 'Học sinh',
                 studentClass: document.getElementById('studentClass').value || '5/1',
@@ -1196,29 +1220,29 @@
                 score: Math.round(score),
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             };
-            
+
             let successShown = false;
             const showSuccess = () => {
                 if (successShown) return;
                 successShown = true;
                 console.log('Kết quả đã được lưu:', data);
             };
-            
+
             const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
-            
+
             if (window.db || firebase.apps.length) {
                 const database = window.db || firebase.firestore();
-                database.collection("quiz_results").add(data).then(() => { 
-                    clearTimeout(dbTimeout); 
-                    showSuccess(); 
-                }).catch((err) => { 
-                    console.error(err); 
-                    clearTimeout(dbTimeout); 
-                    showSuccess(); 
+                database.collection("diem_tieng_viet_lop5").add(data).then(() => {
+                    clearTimeout(dbTimeout);
+                    showSuccess();
+                }).catch((err) => {
+                    console.error(err);
+                    clearTimeout(dbTimeout);
+                    showSuccess();
                 });
-            } else { 
-                clearTimeout(dbTimeout); 
-                showSuccess(); 
+            } else {
+                clearTimeout(dbTimeout);
+                showSuccess();
             }
         }
         function closeSuccessModal() {
@@ -1231,7 +1255,7 @@
         function openTeacherStats() { const p = prompt("Nhập mật khẩu giáo viên:"); if (p === '123456') { document.getElementById('statsModal').classList.add('active'); loadStats(); } else alert("Sai mật khẩu!"); }
         function closeModal() { document.getElementById('statsModal').classList.remove('active'); }
         function loadStats() {
-            db.collection("quiz_results").where("lessonTitle", "==", "Cách nối các vế câu ghép").orderBy("timestamp", "desc").limit(50).get().then((q) => {
+            db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Cách nối các vế câu ghép").orderBy("timestamp", "desc").limit(50).get().then((q) => {
                 const b = document.getElementById('statsTableBody'); b.innerHTML = "";
                 q.forEach((doc, i) => {
                     const d = doc.data();
@@ -1240,10 +1264,22 @@
             });
         }
         function exportToExcel() {
+            const dataToExport = currentStatsData.map((item, index) => ({
+                'STT': index + 1,
+                'Họ và Tên': item.studentName,
+                'Lớp': item.studentClass,
+                'Trường': item.school,
+                'Điểm cao nhất': item.bestScore,
+                'Số lần làm': item.attempts,
+                'Thời gian làm bài (Lần tốt nhất)': item.timeDisplay || 'N/A',
+                'Lần nộp cuối': item.latestSubmitted.toLocaleString('vi-VN')
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(dataToExport);
             const wb = XLSX.utils.book_new();
-            const ws = XLSX.utils.table_to_sheet(document.querySelector("table"));
-            XLSX.utils.book_append_sheet(wb, ws, "KetQua");
-            XLSX.writeFile(wb, "KetQua_LTVC_CachNoiCacVeCauGhep.xlsx");
+            XLSX.utils.book_append_sheet(wb, ws, "Kết quả");
+            const fileName = `KetQua_${document.title.replace(' - EduRobot', '').replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
     </script>
 
