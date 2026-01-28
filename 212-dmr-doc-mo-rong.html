@@ -99,7 +99,7 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-        <!-- Header -->
+    <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -121,7 +121,7 @@
                             ĐIỂM:</span>
                         <span
                             class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">VẺ
-                                ĐẸP CUỘC SỐNG</span>
+                            ĐẸP CUỘC SỐNG</span>
                     </div>
                 </div>
             </div>
@@ -431,8 +431,9 @@
             // Format column widths
             ws['!cols'] = [{ wch: 25 }, { wch: 60 }];
 
-            XLSX.utils.book_append_sheet(wb, ws, "PhieuDocSach");
-            XLSX.writeFile(wb, `Phieu_Doc_Sach_${name.replace(/\s+/g, '_')}.xlsx`);
+            XLSX.utils.book_append_sheet(wb, ws, "Phiếu Đọc Sách");
+            const fileName = `Phieu_Doc_Sach_${name.replace(/\s+/g, '_')}_${new Date().toLocaleDateString('vi-VN').replace(/\//g, '-')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
     </script>
     <!-- Modal Teacher Stats -->
@@ -627,8 +628,9 @@
             const ws = XLSX.utils.aoa_to_sheet(data);
             ws['!cols'] = [{ wch: 25 }, { wch: 60 }];
 
-            XLSX.utils.book_append_sheet(wb, ws, "PhieuDocSach");
-            XLSX.writeFile(wb, `Phieu_Doc_Sach_${name.replace(/\\s+/g, '_')}.xlsx`);
+            XLSX.utils.book_append_sheet(wb, ws, "Phiếu Đọc Sách");
+            const fileName = `Phieu_Doc_Sach_${name.replace(/\s+/g, '_')}_${new Date().toLocaleDateString('vi-VN').replace(/\//g, '-')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
 
         // --- 3. TEACHER MODE ---
@@ -719,8 +721,9 @@
             })));
 
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "TongHopPhieuDocSach");
-            XLSX.writeFile(wb, "TongHop_PhieuDocSach_Lop5.xlsx");
+            const fileName = `Bao_cao_Phieu_Doc_Sach_${new Date().toLocaleDateString('vi-VN').replace(/\//g, '-')}.xlsx`;
+            XLSX.utils.book_append_sheet(wb, ws, "Tổng hợp");
+            XLSX.writeFile(wb, fileName);
         }
     </script>
     <script src="js/floating-menu.js"></script>
