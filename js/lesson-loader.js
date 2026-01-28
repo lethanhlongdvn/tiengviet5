@@ -211,28 +211,23 @@ function checkQuiz(qIndex, selectedIndex, correctIndex) {
         statusIcon.parentElement.classList.add('bg-green-50', 'border-green-400', 'ring-4', 'ring-green-100');
 
         feedback.classList.remove('hidden');
-        feedback.className = "mt-8 p-5 rounded-2xl bg-green-100 text-green-700 text-lg font-black text-center shadow-inner border border-green-200 animate-in zoom-in-95 duration-300";
+        feedback.className = "mt-4 p-4 rounded-2xl bg-green-100 text-green-700 text-xl font-black text-center shadow-inner border border-green-200 animate-in zoom-in-95 duration-300";
         feedback.innerHTML = "✨ TUYỆT VỜI! ĐÁP ÁN CHÍNH XÁC 🎉";
 
         if (typeof confetti === 'function') {
             confetti({ particleCount: 40, spread: 70, origin: { y: 0.7 }, colors: ['#4f46e5', '#10b981', '#fbbf24'] });
         }
     } else {
+        // WRONG ANSWER Logic
         statusIcon.classList.remove('hidden');
         statusIcon.innerHTML = '<span class="text-2xl">❌</span>';
         statusIcon.parentElement.classList.add('bg-red-50', 'border-red-300');
 
-        const correctInput = card.querySelector(`input[value="${correctIndex}"]`);
-        if (correctInput) {
-            correctInput.parentElement.classList.add('bg-green-50', 'border-green-300', 'ring-4', 'ring-green-100');
-            const correctIcon = correctInput.parentElement.querySelector('.status-icon');
-            correctIcon.classList.remove('hidden');
-            correctIcon.innerHTML = '<svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>';
-        }
-
+        // DO NOT SHOW CORRECT ANSWER
+        // Just show feedback
         feedback.classList.remove('hidden');
-        feedback.className = "mt-8 p-5 rounded-2xl bg-red-50 text-red-600 text-lg font-black text-center border border-red-100 animate-in shake duration-500";
-        feedback.innerHTML = "😅 TIẾC QUÁ! HÃY CỐ GẮNG Ở CÂU SAU NHÉ";
+        feedback.className = "mt-4 p-4 rounded-2xl bg-red-50 text-red-600 text-xl font-black text-center border border-red-100 animate-in shake duration-500";
+        feedback.innerHTML = "😅 TIẾC QUÁ! SAI RỒI...";
     }
 
     // Auto-advance logic
@@ -252,7 +247,7 @@ function checkQuiz(qIndex, selectedIndex, correctIndex) {
 
     // Update score in progress bar immediately
     const scoreText = document.getElementById('quiz-score-realtime');
-    if (scoreText) scoreText.innerText = `ĐÚNG: ${window.quizScore}`;
+    if (scoreText) scoreText.innerText = `ĐÚNG: ${window.quizScore || 0}`;
 }
 
 function submitQuizResult() {
