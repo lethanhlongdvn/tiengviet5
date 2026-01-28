@@ -815,7 +815,7 @@
             const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
             if (window.db || firebase.apps.length) {
                 const database = window.db || firebase.firestore();
-                database.collection("quiz_results").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch((err) => { console.error(err); clearTimeout(dbTimeout); showSuccess(); });
+                database.collection("diem_tieng_viet_lop5").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch((err) => { console.error(err); clearTimeout(dbTimeout); showSuccess(); });
             } else { clearTimeout(dbTimeout); showSuccess(); }
         }
         function openTeacherStats() { const pin = prompt("Mã PIN:"); if (pin === "dvn") { document.getElementById('statsModal').classList.add('active'); loadStats(); } }
@@ -838,9 +838,22 @@
         }
         function exportToExcel() {
             if (!currentStatsData.length) return;
-            const ws = XLSX.utils.json_to_sheet(currentStatsData.map((d, i) => ({ 'STT': i + 1, 'Họ Tên': d.studentName, 'Lớp': d.studentClass, 'Trường': d.school, 'Điểm': d.score, 'Số lần': d.attempts, 'Thời gian': d.timeDisplay, 'Ngày nộp': d.submittedAt ? d.submittedAt.toDate().toLocaleString() : '' })));
-            const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Diem");
-            XLSX.writeFile(wb, "KetQua_VuDieuThoCam.xlsx");
+            const dataToExport = currentStatsData.map((item, index) => ({
+                'STT': index + 1,
+                'Họ và Tên': item.studentName,
+                'Lớp': item.studentClass,
+                'Trường': item.school,
+                'Điểm cao nhất': item.bestScore,
+                'Số lần làm': item.attempts,
+                'Thời gian làm bài (Lần tốt nhất)': item.timeDisplay || 'N/A',
+                'Lần nộp cuối': item.latestSubmitted.toLocaleString('vi-VN')
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(dataToExport);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Kết quả");
+            const fileName = `KetQua_${document.title.replace(' - EduRobot', '').replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
     </script>
 
