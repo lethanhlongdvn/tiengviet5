@@ -212,9 +212,9 @@ async function askAI(id, prefix = "", mode = "single", persona = "auto", weekNum
         </div>
     `;
 
-    // SIMULATION MODE: If running locally without Netlify Functions
-    // Check if we are in an exercise that can be checked locally OR if we just want to force simulation
-    const isMockable = mode === "table" || id.includes('q') || id === '3';
+    // SIMULATION MODE: Always use mock mode for now (no real AI backend configured)
+    // TODO: Set to false when Netlify AI function is ready
+    const isMockable = true; // mode === "table" || id.includes('q') || id === '3';
 
     if (isMockable) {
         setTimeout(() => {
@@ -402,12 +402,17 @@ function renderFeedback(container, data) {
         ket_bai: "Kết bài"
     };
 
+    // Yêu cầu độ dài khác nhau theo persona
+    let wordCountRequirement = "";
     if (persona === "ltvc") {
         labels = {
             mo_bai: "Ngữ pháp",
             than_bai: "Thành phần",
             ket_bai: "Kết nối"
         };
+        wordCountRequirement = `Độ dài: ${wordCount} từ (Viết câu hoàn chỉnh)`;
+    } else {
+        wordCountRequirement = `Độ dài: ${wordCount} từ (Yêu cầu: >50 từ)`;
     }
 
     let html = `
@@ -422,7 +427,7 @@ function renderFeedback(container, data) {
                         <p class="text-xl font-black ${isComplete ? 'text-green-900' : 'text-orange-900'}">
                             ${isComplete ? 'Chúc mừng! Bài làm đã đạt yêu cầu.' : 'Bài làm cần hoàn thiện thêm.'}
                         </p>
-                        <p class="text-sm font-bold opacity-70 mt-1">Độ dài: ${wordCount} từ (Yêu cầu: >100 từ)</p>
+                        <p class="text-sm font-bold opacity-70 mt-1">${wordCountRequirement}</p>
                     </div>
                     <div class="text-right">
                         <span class="text-[10px] font-black uppercase opacity-40 block mb-1">Điểm AI tạm tính</span>
