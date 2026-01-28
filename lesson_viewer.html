@@ -27,10 +27,29 @@
             --accent: #f59e0b;
             --success: #10b981;
             --error: #ef4444;
-            --glass: rgba(255, 255, 255, 0.85);
+            --glass: rgba(255, 255, 255, 0.9);
+            /* More opaque for better contrast */
             --glass-border: rgba(255, 255, 255, 0.6);
             --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* Typography Variables */
+            --font-size-base: 1.1rem;
+            /* Default larger */
+            --font-size-reading: 1.5rem;
+            /* ~24px for TV */
+            --font-size-ui: 1.1rem;
+            --line-height-reading: 1.8;
+        }
+
+        /* Mobile Overrides */
+        @media (max-width: 768px) {
+            :root {
+                --font-size-base: 1rem;
+                --font-size-reading: 1.25rem;
+                /* ~20px for Mobile */
+                --font-size-ui: 1rem;
+            }
         }
 
         body {
@@ -38,11 +57,22 @@
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #fef3c7 75%, #fff7ed 100%);
             min-height: 100vh;
             color: #1f2937;
+            font-size: var(--font-size-base);
+            /* Applied globally */
         }
 
         .serif-font {
             font-family: 'Merriweather', serif;
-            line-height: 1.8;
+            line-height: var(--line-height-reading);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            line-height: 1.3;
         }
 
         .glass-card {
@@ -54,10 +84,17 @@
             transition: var(--transition);
         }
 
+        /* Tabs */
+        .tab-btn {
+            font-size: 1.1rem;
+            /* Larger tabs */
+        }
+
         .tab-btn.active {
             color: var(--primary);
             background: white;
-            box-shadow: inset 0 -3px 0 var(--primary);
+            box-shadow: inset 0 -4px 0 var(--primary);
+            /* Thicker indicator */
             position: relative;
         }
 
@@ -82,48 +119,65 @@
             }
         }
 
-        /* Exercise Styles */
+        /* Exercise Styles - High Contrast & Large Touch Targets */
         .word {
             display: inline-block;
-            padding: 4px 12px;
-            margin: 2px;
-            border-radius: 8px;
+            padding: 8px 16px;
+            /* Larger targets */
+            margin: 4px;
+            border-radius: 12px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: var(--transition);
-            font-weight: 600;
+            font-weight: 700;
+            font-size: var(--font-size-reading);
+            /* Match reading size */
             position: relative;
+            background-color: white;
+            /* Card-like for words */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .word:hover {
-            background-color: rgba(37, 99, 235, 0.1);
+            background-color: var(--primary-light);
             transform: translateY(-2px);
+            border-color: var(--primary);
         }
 
         .word.selected {
-            background-color: rgba(245, 158, 11, 0.2);
+            background-color: #fff7ed;
             border-color: var(--accent);
-            color: var(--accent);
+            color: #d97706;
+            /* Darker orange for contrast */
             transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
         }
 
         .word.is-correct {
-            background: linear-gradient(135deg, #86efac, #22c55e) !important;
-            color: white !important;
+            background: #dcfce7 !important;
+            /* Light green bg */
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            /* Dark green text */
+            box-shadow: none;
         }
 
         .word.is-wrong {
-            background: linear-gradient(135deg, #fca5a5, #ef4444) !important;
-            color: white !important;
+            background: #fee2e2 !important;
+            /* Light red bg */
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+            /* Dark red text */
         }
 
         .slot {
             border-bottom: 3px dashed var(--accent);
             color: var(--accent);
             font-weight: 700;
-            padding: 0 8px;
-            min-width: 60px;
+            padding: 4px 12px;
+            min-width: 80px;
             display: inline-block;
+            font-size: var(--font-size-reading);
         }
 
         .slot.filled {
@@ -131,15 +185,26 @@
             color: var(--success);
         }
 
+        /* Buttons - Larger for touch */
         .btn {
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-weight: 800;
             transition: var(--transition);
+            font-size: 1.1rem;
+            min-height: 48px;
+            /* Touch target size */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn:hover {
             transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .btn-primary {
@@ -148,10 +213,11 @@
         }
 
         .btn-outline {
-            border: 2px solid var(--primary);
+            border: 3px solid var(--primary);
             color: var(--primary);
         }
 
+        /* Thicker border */
         .btn-warning {
             background: var(--accent);
             color: white;
@@ -167,23 +233,21 @@
             color: white;
         }
 
-        /* Accordion Styles */
+        /* Accordion Styles - High visibility */
         .accordion-content {
             display: grid;
             grid-template-rows: 0fr;
             transition: grid-template-rows 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s;
-            /* Added opacity and visibility */
             overflow: hidden;
             opacity: 0;
-            /* Hide visually */
             visibility: hidden;
-            /* Remove from access */
         }
 
         .accordion-content>div {
             overflow: hidden;
             min-height: 0;
-            /* Crucial for grid collapse */
+            font-size: var(--font-size-ui);
+            /* Larger UI text */
         }
 
         .accordion-item.active .accordion-content {
@@ -194,6 +258,14 @@
 
         .accordion-item.active button svg {
             transform: rotate(180deg);
+        }
+
+        /* Reading Content Specifics */
+        .reading-content p {
+            text-indent: 3rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            font-size: var(--font-size-reading);
         }
     </style>
 </head>
@@ -363,14 +435,16 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="data/lessons.js?v=week29-30-update"></script> <!-- Load Data First -->
+    <script src="data/lessons.js?v=week29-fix-ids"></script> <!-- Load Data First -->
     <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
 
     <!-- Core Logic Scripts -->
     <script src="js/firebase-logic.js"></script> <!-- Init Firebase First -->
     <script src="js/ai-grader.js"></script>
+    <script src="js/interactive-exercises.js?v=7"></script> <!-- Custom Logic for LTVC -->
     <script src="js/lesson-loader.js"></script> <!-- Main logic depends on above -->
     <script src="js/floating-menu.js"></script> <!-- Reuse existing AI grader -->
+
     <style>
         .bg-paper {
             background-color: #fdfbf7;
