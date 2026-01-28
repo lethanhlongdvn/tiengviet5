@@ -55,6 +55,74 @@ const curriculumData = {
                             ]
                         }
                     ]
+                },
+                {
+                    "id": 22, "name": "Tuần 22",
+                    "lessons": [
+                        {
+                            "title": "Bài 7: Đoàn thuyền đánh cá",
+                            "sections": [
+                                { "title": "Đọc: Đoàn thuyền đánh cá", "url": "lesson_viewer.html?id=221-doan-thuyen-danh-ca" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 8: Khu rừng của Mát",
+                            "sections": [
+                                { "title": "Đọc: Khu rừng của Mát", "url": "lesson_viewer.html?id=222-khu-rung-cua-mat" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 23, "name": "Tuần 23",
+                    "lessons": [
+                        {
+                            "title": "Bài 9: Hội thổi cơm thi ở Đồng Vân",
+                            "sections": [
+                                { "title": "Đọc: Hội thổi cơm thi ở Đồng Vân", "url": "lesson_viewer.html?id=231-hoi-thoi-com-thi-o-dong-van" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 10: Những búp chè trên cây cổ thụ",
+                            "sections": [
+                                { "title": "Đọc: Những búp chè trên cây cổ thụ", "url": "lesson_viewer.html?id=232-nhung-bup-che-tren-cay-co-thu" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 24, "name": "Tuần 24",
+                    "lessons": [
+                        {
+                            "title": "Bài 11: Hương cốm mùa thu",
+                            "sections": [
+                                { "title": "Đọc: Hương cốm mùa thu", "url": "lesson_viewer.html?id=241-huong-com-mua-thu" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 12: Vũ điệu trên nền thổ cẩm",
+                            "sections": [
+                                { "title": "Đọc: Vũ điệu trên nền thổ cẩm", "url": "lesson_viewer.html?id=242-vu-dieu-tren-nen-tho-cam" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 25, "name": "Tuần 25",
+                    "lessons": [
+                        {
+                            "title": "Bài 13: Đàn t'rưng, tiếng ca đại ngàn",
+                            "sections": [
+                                { "title": "Đọc: Đàn t'rưng, tiếng ca đại ngàn", "url": "lesson_viewer.html?id=251-dan-t'rung-tieng-ca-dai-ngan" }
+                            ]
+                        },
+                        {
+                            "title": "Bài 14: Đường quê Đồng Tháp Mười",
+                            "sections": [
+                                { "title": "Đọc: Đường quê Đồng Tháp Mười", "url": "lesson_viewer.html?id=252-duong-que-dong-thap-muoi" }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
