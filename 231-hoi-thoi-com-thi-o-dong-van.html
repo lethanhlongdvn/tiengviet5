@@ -107,7 +107,7 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-            <!-- Header -->
+    <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -129,7 +129,7 @@
                             ĐIỂM:</span>
                         <span
                             class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">HƯƠNG
-                                SẮC TRĂM MIỀN</span>
+                            SẮC TRĂM MIỀN</span>
                     </div>
                 </div>
             </div>
@@ -181,7 +181,7 @@
     <main class="container mx-auto px-4 py-4">
 
 
-                <!-- Tab & Audio Header -->
+        <!-- Tab & Audio Header -->
         <div class="glass-card mb-4 rounded-2xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-lg">
             <div class="flex-1 flex bg-white/40">
                 <button onclick="switchTab('lesson')" id="btn-lesson"
@@ -603,21 +603,20 @@
                 playIcon.classList.add('hidden');
                 pauseIcon.classList.remove('hidden');
                 audioStatus.innerText = "Đang phát...";
-                audioStatus.classList.replace('text-gray-400', 'text-green-500');
+                audioStatus.classList.add('text-blue-600');
             } else {
                 audio.pause();
                 playIcon.classList.remove('hidden');
                 pauseIcon.classList.add('hidden');
                 audioStatus.innerText = "Đang dừng...";
-                audioStatus.classList.replace('text-green-500', 'text-gray-400');
+                audioStatus.classList.remove('text-blue-600');
             }
         }
-
         audio.onended = () => {
             playIcon.classList.remove('hidden');
             pauseIcon.classList.add('hidden');
-            audioStatus.innerText = "Đang dừng...";
-            audioStatus.classList.replace('text-green-500', 'text-gray-400');
+            audioStatus.innerText = "Đã xong!";
+            audioStatus.classList.remove('text-blue-600');
         };
 
         function switchTab(tabId) {
@@ -651,55 +650,89 @@
 
         function closeModal() { document.getElementById('statsModal').classList.remove('active'); }
 
+        let currentStatsData = [];
         async function loadStats() {
             const tbody = document.getElementById('statsTableBody');
             tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Đang tải dữ liệu...</td></tr>';
             try {
                 const snapshot = await db.collection("diem_tieng_viet_lop5").where("lessonTitle", "==", "Hội thổi cơm thi ở Đồng Vân").get();
-                tbody.innerHTML = '';
                 if (snapshot.empty) {
                     tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-400">Chưa có dữ liệu học tập.</td></tr>';
                     return;
                 }
-                const results = [];
-                snapshot.forEach(doc => results.push(doc.data()));
-                results.sort((a, b) => (b.submittedAt?.seconds || 0) - (a.submittedAt?.seconds || 0));
 
-                results.forEach((data, index) => {
-                    const date = data.submittedAt ? data.submittedAt.toDate().toLocaleString('vi-VN') : '---';
-                    let duration = '---';
-                    if (data.startTime && data.endTime) {
-                        const diffMs = new Date(data.endTime) - new Date(data.startTime);
-                        duration = `${Math.floor(diffMs / 60000)} phút ${Math.floor((diffMs % 60000) / 1000)} giây`;
+                const results = [];
+                snapshot.forEach(doc => {
+                    const d = doc.data();
+                    results.push({ ...d, timestamp: d.submittedAt ? d.submittedAt.toDate() : (d.timestamp ? d.timestamp.toDate() : new Date(0)) });
+                });
+
+                results.sort((a, b) => b.timestamp - a.timestamp);
+
+                const studentGroups = {};
+                results.forEach(d => {
+                    const key = `${d.studentName}_${d.className || d.studentClass}_${d.school}`.toLowerCase().trim();
+                    if (!studentGroups[key]) {
+                        studentGroups[key] = {
+                            studentName: d.studentName,
+                            studentClass: d.className || d.studentClass || '---',
+                            school: d.school,
+                            bestScore: d.score,
+                            attempts: 1,
+                            timeDisplay: d.timeDisplay || '---',
+                            latestSubmitted: d.timestamp
+                        };
+                    } else {
+                        studentGroups[key].attempts++;
+                        if (d.score > studentGroups[key].bestScore) {
+                            studentGroups[key].bestScore = d.score;
+                            studentGroups[key].timeDisplay = d.timeDisplay || '---';
+                        }
                     }
+                });
+
+                currentStatsData = Object.values(studentGroups).sort((a, b) => b.bestScore - a.bestScore);
+
+                tbody.innerHTML = '';
+                currentStatsData.forEach((data, index) => {
                     const tr = document.createElement('tr');
                     tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-50 text-sm bg-white";
                     tr.innerHTML = `
                         <td class="p-4 font-bold text-gray-400">${index + 1}</td>
                         <td class="p-4 font-bold text-gray-800">${data.studentName}</td>
-                        <td class="p-4 text-gray-600">${data.className}</td>
-                        <td class="p-4 text-gray-600">${data.school}</td>
+                        <td class="p-4 text-gray-600 text-center font-bold">${data.studentClass}</td>
+                        <td class="p-4 text-gray-600 text-xs">${data.school}</td>
                         <td class="p-4 text-center">
-                            <span class="px-3 py-1 rounded-full font-black ${data.score >= 80 ? 'bg-green-100 text-green-700' : data.score >= 50 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'}">${data.score}/100</span>
+                            <span class="px-3 py-1 rounded-full font-black ${data.bestScore >= 80 ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}">${data.bestScore}/100</span>
                         </td>
-                        <td class="p-4 text-center text-gray-600 font-bold">${duration}</td>
-                        <td class="p-4 text-right text-xs text-gray-400 font-bold">${date}</td>
+                        <td class="p-4 text-center text-gray-600 italic text-xs font-bold">${data.timeDisplay}</td>
+                        <td class="p-4 text-right text-[10px] text-gray-400 font-bold">${data.latestSubmitted.toLocaleString('vi-VN')}</td>
                     `;
                     tbody.appendChild(tr);
                 });
-            } catch (e) { tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Lỗi khi tải dữ liệu.</td></tr>'; }
+            } catch (e) {
+                console.error(e);
+                tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500 font-bold">Lỗi khi tải dữ liệu.</td></tr>';
+            }
         }
 
         function exportToExcel() {
-            const table = document.querySelector("#statsModal table");
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Kết quả", raw: true, cellStyles: true });
-            const ws = wb.Sheets["Kết quả"];
-            if (ws['!cols']) {
-                ws['!cols'][2] = { t: 's' }; // Ensure 'Class' column is text
-            } else {
-                ws['!cols'] = [{ wch: 10 }, { wch: 25 }, { t: 's', wch: 10 }, { wch: 25 }, { wch: 10 }, { wch: 20 }, { wch: 20 }];
-            }
-            XLSX.writeFile(wb, "KetQua_HoiThoiComThi.xlsx");
+            const dataToExport = currentStatsData.map((item, index) => ({
+                'STT': index + 1,
+                'Họ và Tên': item.studentName,
+                'Lớp': item.studentClass,
+                'Trường': item.school,
+                'Điểm cao nhất': item.bestScore,
+                'Số lần làm': item.attempts,
+                'Thời gian làm bài (Lần tốt nhất)': item.timeDisplay || 'N/A',
+                'Lần nộp cuối': item.latestSubmitted.toLocaleString('vi-VN')
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(dataToExport);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Kết quả");
+            const fileName = `KetQua_${document.title.replace(' - EduRobot', '').replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
 
         /* QUIZ ENGINE */
@@ -830,8 +863,18 @@
             const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
 
             try {
+                const startTimeObj = new Date(studentData.startTime);
+                const endTimeObj = new Date();
+                const durationSeconds = Math.floor((endTimeObj - startTimeObj) / 1000);
+                const timeDisplay = `${Math.floor(durationSeconds / 60)}p ${durationSeconds % 60}s`;
+
                 await db.collection("diem_tieng_viet_lop5").add({
-                    ...studentData, lessonTitle: "Hội thổi cơm thi ở Đồng Vân", score: score, endTime: new Date().toISOString(), submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    ...studentData,
+                    lessonTitle: "Hội thổi cơm thi ở Đồng Vân",
+                    score: score,
+                    duration: durationSeconds,
+                    timeDisplay: timeDisplay,
+                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 clearTimeout(dbTimeout);
                 showSuccess();
