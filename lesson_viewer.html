@@ -166,6 +166,35 @@
             background: var(--secondary);
             color: white;
         }
+
+        /* Accordion Styles */
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s;
+            /* Added opacity and visibility */
+            overflow: hidden;
+            opacity: 0;
+            /* Hide visually */
+            visibility: hidden;
+            /* Remove from access */
+        }
+
+        .accordion-content>div {
+            overflow: hidden;
+            min-height: 0;
+            /* Crucial for grid collapse */
+        }
+
+        .accordion-item.active .accordion-content {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .accordion-item.active button svg {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 
@@ -336,7 +365,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="data/lessons.js"></script> <!-- Load Data First -->
+    <script src="data/lessons.js?v=week25-fix-layout"></script> <!-- Load Data First -->
     <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
 
     <!-- Core Logic Scripts -->
