@@ -206,7 +206,7 @@
 
 <body class="bg-blue-50 text-gray-800">
 
-        <!-- Header -->
+    <!-- Header -->
     <header class="sticky top-0 z-50 px-4 py-2">
         <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
             <div class="flex items-center space-x-4">
@@ -227,8 +227,9 @@
                             class="text-[11px] font-black uppercase tracking-widest text-gray-400 whitespace-nowrap">CHỦ
                             ĐIỂM:</span>
                         <span
-                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">THẾ GIỚI CỦA CHÚNG
-                        TA</span>
+                            class="text-sm font-black uppercase tracking-wider text-blue-800 truncate max-w-[180px] md:max-w-none">THẾ
+                            GIỚI CỦA CHÚNG
+                            TA</span>
                     </div>
                 </div>
             </div>
@@ -1028,7 +1029,7 @@
             const dbTimeout = setTimeout(() => { if (!successShown) showSuccess(); }, 3000);
             if (window.db || firebase.apps.length) {
                 const database = window.db || firebase.firestore();
-                database.collection("quiz_results").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch((err) => { console.error(err); clearTimeout(dbTimeout); showSuccess(); });
+                database.collection("diem_tieng_viet_lop5").add(data).then(() => { clearTimeout(dbTimeout); showSuccess(); }).catch((err) => { console.error(err); clearTimeout(dbTimeout); showSuccess(); });
             } else { clearTimeout(dbTimeout); showSuccess(); }
         }
 
@@ -1129,7 +1130,6 @@
                 alert("Không có dữ liệu để xuất!");
                 return;
             }
-
             const dataToExport = currentStatsData.map((item, index) => ({
                 'STT': index + 1,
                 'Họ và Tên': item.studentName,
@@ -1148,7 +1148,8 @@
 
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, "KetQua");
-            XLSX.writeFile(wb, "KetQua_BaiCaTraiDat.xlsx");
+            const fileName = `KetQua_${document.title.replace(' - EduRobot', '').replace(/[^a-zA-Z0-9]/g, '_')}.xlsx`;
+            XLSX.writeFile(wb, fileName);
         }
     </script>
 
