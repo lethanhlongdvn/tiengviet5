@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test AI Thầy Giáo - EduRobot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-orange-50 p-8">
+    <div class="max-w-4xl mx-auto space-y-8">
+        <!-- Header -->
+        <div class="text-center">
+            <h1 class="text-4xl font-black text-blue-700 mb-2">🧪 Test Thầy Giáo AI</h1>
+            <p class="text-gray-500 font-bold">Thử nghiệm chấm bài với dữ liệu chương trình Kết nối tri thức</p>
+        </div>
+
+        <!-- Test 1: LTVC - Ngữ pháp -->
+        <div class="glass-card rounded-3xl p-8">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl">📚</span>
+                <div>
+                    <h2 class="text-xl font-black text-purple-700">Thầy Giáo Ngữ Pháp (LTVC)</h2>
+                    <p class="text-sm text-gray-500 font-bold">Tuần 19 - Kiến thức: Câu đơn và câu ghép</p>
+                </div>
+            </div>
+
+            <div class="bg-purple-50 rounded-2xl p-6 mb-4">
+                <p class="font-bold text-purple-800 mb-2">📝 Đề bài:</p>
+                <p class="text-gray-700">Viết câu ghép có sử dụng cặp quan hệ từ <strong>Vì... nên...</strong> để nói về
+                    việc học tập.</p>
+            </div>
+
+            <div class="space-y-4">
+                <textarea id="ai-ltvc-test" rows="3"
+                    class="w-full p-4 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none font-bold text-gray-800 resize-none"
+                    placeholder="Ví dụ: Vì em chăm chỉ học bài nên em đạt điểm cao."></textarea>
+
+                <button
+                    onclick="askAI('ltvc-test', 'Viết câu ghép có quan hệ từ Vì... nên... về việc học tập:', 'single', 'ltvc', 19)"
+                    class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-black py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+                    🤖 Thầy Ngữ Pháp chấm bài
+                </button>
+
+                <div id="fb-ltvc-test" class="hidden"></div>
+            </div>
+        </div>
+
+        <!-- Test 2: TLV - Viết văn -->
+        <div class="glass-card rounded-3xl p-8">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl">✍️</span>
+                <div>
+                    <h2 class="text-xl font-black text-orange-700">Thầy Giáo Văn (TLV)</h2>
+                    <p class="text-sm text-gray-500 font-bold">Tuần 5-8 - Kiến thức: Bài văn tả phong cảnh</p>
+                </div>
+            </div>
+
+            <div class="bg-orange-50 rounded-2xl p-6 mb-4">
+                <p class="font-bold text-orange-800 mb-2">📝 Đề bài:</p>
+                <p class="text-gray-700">Viết đoạn văn (5-7 câu) tả cảnh <strong>buổi sáng ở quê em</strong>. Sử dụng
+                    biện pháp so sánh, nhân hóa.</p>
+            </div>
+
+            <div class="space-y-4">
+                <textarea id="ai-tlv-test" rows="5"
+                    class="w-full p-4 rounded-xl border-2 border-orange-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-100 outline-none font-bold text-gray-800 resize-none"
+                    placeholder="Ví dụ: Buổi sáng ở quê em thật yên bình. Mặt trời như quả cầu lửa từ từ nhô lên..."></textarea>
+
+                <button
+                    onclick="askAI('tlv-test', 'Viết đoạn văn tả cảnh buổi sáng ở quê em, sử dụng so sánh và nhân hóa:', 'single', 'tlv', 6)"
+                    class="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+                    ✍️ Thầy Giáo Văn chấm bài
+                </button>
+
+                <div id="fb-tlv-test" class="hidden"></div>
+            </div>
+        </div>
+
+        <!-- Debug Info -->
+        <details class="glass-card rounded-2xl overflow-hidden">
+            <summary class="p-4 cursor-pointer font-bold text-gray-600 bg-gray-50 hover:bg-gray-100">
+                🔧 Thông tin Debug (Nhấn để xem)
+            </summary>
+            <div class="p-4 bg-gray-900 text-green-400 font-mono text-sm">
+                <p>✅ ai-grader.js đã tải</p>
+                <p>📚 du_lieu_giang_day.json - Luyện từ và câu (34 tuần)</p>
+                <p>✍️ du_lieu_viet_van.json - Viết văn (Học kỳ 1 & 2)</p>
+                <p id="debug-log"></p>
+            </div>
+        </details>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/ai-grader.js"></script>
+    <script>
+        // Celebration function for high scores
+        function celebrate() {
+            console.log("🎉 Chúc mừng! Điểm cao!");
+        }
+
+        // Log curriculum loading
+        document.addEventListener('DOMContentLoaded', async () => {
+            const log = document.getElementById('debug-log');
+
+            // Wait a bit for data to load
+            setTimeout(() => {
+                if (curriculumData) {
+                    log.innerHTML += '<br>✅ Dữ liệu LTVC đã tải thành công';
+                } else {
+                    log.innerHTML += '<br>⚠️ Dữ liệu LTVC chưa tải được';
+                }
+
+                if (writingCurriculumData) {
+                    log.innerHTML += '<br>✅ Dữ liệu Viết văn đã tải thành công';
+                } else {
+                    log.innerHTML += '<br>⚠️ Dữ liệu Viết văn chưa tải được';
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>
