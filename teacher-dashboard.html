@@ -87,17 +87,30 @@
 
             <!-- Main Content: List -->
             <div class="lg:col-span-2 space-y-6">
-                <div class="flex space-x-2 mb-4 bg-white p-1 rounded-2xl shadow-sm border border-gray-100 w-fit">
-                    <button id="tab-essays" onclick="switchView('essays_v2')"
-                        class="px-6 py-2 rounded-xl font-black text-sm transition-all bg-blue-600 text-white">Bài Viết
-                        Văn Tả Người</button>
-                    <button id="tab-old-essays" onclick="switchView('essays')"
-                        class="px-6 py-2 rounded-xl font-black text-sm transition-all text-gray-400 hover:bg-gray-50">Bài
-                        Tập
-                        Làm Văn (Cũ)</button>
-                    <button id="tab-projects" onclick="switchView('projects')"
-                        class="px-6 py-2 rounded-xl font-black text-sm transition-all text-gray-400 hover:bg-gray-50">Dự
-                        Án Sáng Tạo</button>
+                <div class="flex flex-col sm:flex-row gap-2 mb-4">
+                    <div class="flex space-x-2 bg-white p-1 rounded-2xl shadow-sm border border-gray-100 w-fit">
+                        <button id="tab-essays" onclick="switchView('essays_v2')"
+                            class="px-6 py-2 rounded-xl font-black text-sm transition-all bg-blue-600 text-white">Bài
+                            Viết
+                            Văn</button>
+                        <button id="tab-projects" onclick="switchView('projects')"
+                            class="px-6 py-2 rounded-xl font-black text-sm transition-all text-gray-400 hover:bg-gray-50">Dự
+                            Án</button>
+                    </div>
+
+                    <div class="relative flex-1 max-w-xs">
+                        <select id="lesson-filter" onchange="loadData()"
+                            class="w-full pl-4 pr-10 py-2 rounded-xl border-2 border-blue-50 focus:border-blue-500 outline-none font-bold text-gray-600 appearance-none bg-white cursor-pointer transition-all text-sm shadow-sm">
+                            <option value="">Tất cả bài học</option>
+                        </select>
+                        <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-blue-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="loading" class="text-center py-20">
@@ -169,23 +182,34 @@
             loadData();
         }
 
+        let allDataSnapshot = [];
+
         async function loadData() {
             const list = document.getElementById('content-list');
             const loading = document.getElementById('loading');
+            const lessonFilter = document.getElementById('lesson-filter').value;
             list.innerHTML = "";
             loading.classList.remove('hidden');
 
             try {
-                const snapshot = await db.collection(currentMode).orderBy("timestamp", "desc").get();
+                let query = db.collection(currentMode).orderBy("timestamp", "desc");
+                if (lessonFilter) {
+                    query = query.where("lessonTitle", "==", lessonFilter);
+                }
+                const snapshot = await query.get();
                 loading.classList.add('hidden');
+                allDataSnapshot = [];
 
-                let pendingCount = 0;
-                let projectCount = 0;
+                document.getElementById('stats-title').innerText = lessonFilter ? `DANH SÁCH: ${lessonFilter.toUpperCase()}` : "TẤT CẢ BÀI HỌC";
 
-                snapshot.forEach(doc => {
+                snapshot.forEach((doc, index) => {
                     const data = doc.data();
+                    data.id = doc.id;
+                    allDataSnapshot.push(data);
+
                     if (data.status === "Chưa chấm") pendingCount++;
                     if (currentMode === 'projects') projectCount++;
+                    if (data.lessonTitle) lessonTitles.add(data.lessonTitle);
 
                     const card = document.createElement('div');
                     card.className = "dashboard-card bg-white p-6 rounded-[32px] shadow-sm border border-gray-100 space-y-4";
@@ -194,9 +218,12 @@
 
                     card.innerHTML = `
                         <div class="flex justify-between items-start">
-                            <div>
-                                <h4 class="text-lg font-black text-gray-800">${data.studentName}</h4>
-                                <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Lớp: ${data.studentClass}</span>
+                            <div class="flex gap-4 items-center">
+                                <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center font-black text-gray-400 text-xs">${index + 1}</div>
+                                <div>
+                                    <h4 class="text-lg font-black text-gray-800">${data.studentName}</h4>
+                                    <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Lớp: ${data.studentClass}</span>
+                                </div>
                             </div>
                             <span class="px-3 py-1 rounded-lg text-[10px] font-black uppercase ${data.status === 'Chưa chấm' ? 'bg-yellow-100 text-yellow-600' : 'bg-green-100 text-green-600'}">
                                 ${data.status}
@@ -224,6 +251,20 @@
 
                 document.getElementById('stat-pending').innerText = pendingCount;
                 document.getElementById('stat-projects').innerText = projectCount;
+
+                // Update filter dropdown
+                if (!lessonFilter) {
+                    const filter = document.getElementById('lesson-filter');
+                    const currentVal = filter.value;
+                    filter.innerHTML = '<option value="">Tất cả bài học</option>';
+                    Array.from(lessonTitles).sort().forEach(title => {
+                        const opt = document.createElement('option');
+                        opt.value = title;
+                        opt.innerText = title;
+                        filter.appendChild(opt);
+                    });
+                    filter.value = currentVal;
+                }
 
             } catch (error) {
                 console.error("Error loading data:", error);
@@ -269,12 +310,11 @@
 
         async function exportToExcel() {
             try {
-                const snapshot = await db.collection(currentMode).orderBy("timestamp", "desc").get();
+                const lessonFilter = document.getElementById('lesson-filter').value;
                 const data = [];
                 let index = 1;
 
-                snapshot.forEach(doc => {
-                    const row = doc.data();
+                allDataSnapshot.forEach(row => {
                     data.push({
                         "STT": index++,
                         "Họ tên": row.studentName,
@@ -301,11 +341,12 @@
 
                 // Set column widths
                 const wscols = [
-                    { wch: 5 }, { wch: 20 }, { wch: 10 }, { wch: 20 }, { wch: 10 }, { wch: 50 }, { wch: 30 }, { wch: 30 }, { wch: 15 }, { wch: 30 }, { wch: 20 }
+                    { wch: 5 }, { wch: 20 }, { wch: 10 }, { wch: 20 }, { wch: 25 }, { wch: 10 }, { wch: 50 }, { wch: 30 }, { wch: 30 }, { wch: 15 }, { wch: 30 }, { wch: 20 }
                 ];
                 worksheet['!cols'] = wscols;
 
-                XLSX.writeFile(workbook, `Bao_cao_EduRobot_${currentMode}_${new Date().toLocaleDateString()}.xlsx`);
+                const fileName = lessonFilter ? `Bao_cao_${currentMode}_${lessonFilter.replace(/[^a-zA-Z0-9]/g, '_')}.xlsx` : `Bao_cao_${currentMode}_Tat_Ca.xlsx`;
+                XLSX.writeFile(workbook, fileName);
             } catch (error) {
                 console.error("Export Error:", error);
                 alert("Lỗi khi xuất file Excel!");
