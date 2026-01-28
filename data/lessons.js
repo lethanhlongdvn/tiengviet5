@@ -2659,21 +2659,161 @@ window.LESSON_DATA = {
                 "lesson": {
                     "title": "Bài học",
                     "blocks": [
-                        { "type": "header", "text": "Danh y Tuệ Tĩnh" },
                         {
                             "type": "html",
-                            "content": `<div class="flex flex-col lg:flex-row gap-6"> <section class="w-full lg:w-[70%]"> <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl"> <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden"> <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div> <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div> <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative"><span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>Danh y Tuệ Tĩnh</h1> <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content"> <p>Nội dung bài học sẽ được cập nhật sau.</p> </div> </div> </div> </section> <aside class="w-full lg:w-[30%]"> <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl"><div class="mb-6"><img src="hinh_anh/illustration.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl"></div><div class="flex items-center space-x-4 mb-8"><div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200"><svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div><h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2></div> <div class="space-y-4"> <div class="text-center text-gray-500 italic">Câu hỏi trắc nghiệm bên tab Luyện tập</div> </div> </div> </aside> </div>`
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <!-- Trang trí góc -->
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Danh y Tuệ Tĩnh
+                            </h1>
+
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                <div class="mb-8">
+                                    <img src="hinh_anh/2911-danhytuetinh.jpg" alt="Danh y Tuệ Tĩnh và học trò" class="w-full h-auto rounded-3xl shadow-lg border-4 border-white">
+                                </div>
+
+                                <div class="mb-8">
+                                    <img src="hinh_anh/2912-danhytuetinh.jpg" alt="Vườn thuốc Nam" class="w-full h-auto rounded-3xl shadow-lg border-4 border-white">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Bài đọc ca ngợi danh y Tuệ Tĩnh – người đã có công lớn trong việc khai sáng và xây dựng nền y học cổ truyền Việt Nam. Ông là tấm gương sáng về lòng yêu nước, tinh thần tự lực tự cường và lòng tự hào dân tộc với chủ trương "Nam dược trị Nam nhân".
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <!-- Ảnh minh họa -->
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/291-tue-tinh-digital.png" alt="Danh y Tuệ Tĩnh" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Danh y Tuệ Tĩnh dẫn học trò lên núi để làm gì?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Ông dẫn học trò lên núi Nam Tào, Bắc Đẩu để nói về tâm nguyện ấp ủ bấy lâu của mình, đó là việc xây dựng nền y học dân tộc tự chủ.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 2 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Vì sao vua quan nhà Trần lại lo lắng về vấn đề thuốc men khi có giặc ngoại xâm?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Vì giặc phương Bắc đã cấm vận, ngăn cản việc vận chuyển thuốc men từ Trung Quốc sang nước ta. Nếu chiến tranh xảy ra, binh sĩ bị thương hoặc đau ốm sẽ không có thuốc chữa trị.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 3 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Quân dân nhà Trần đã giải quyết khó khăn về thuốc men như thế nào?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Các thái y đã toả đi khắp các miền quê để học cách chữa bệnh bằng cây cỏ dân gian. Nhờ đó, các vườn thuốc Nam mọc lên khắp nơi, giúp quân dân có thuốc chữa bệnh và bồi bổ sức khỏe.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 4 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Câu nói nổi tiếng nào thể hiện tư tưởng y học của Tuệ Tĩnh?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Đó là câu: "Nam dược trị Nam nhân" (nghĩa là: Dùng thuốc Nam để chữa bệnh cho người Nam).</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
                         }
                     ]
                 },
                 "quiz": {
-                    "settings": { "pick": 5 },
+                    "settings": { "pick": 10 },
                     "questions": [
-                        { "q": "Tuệ Tĩnh tên thật là gì?", "a": ["Nguyễn Bá Tĩnh", "Nguyễn Du", "Lê Lợi", "Trần Hưng Đạo"], "c": 0 },
-                        { "q": "Ông quê ở đâu?", "a": ["Tỉnh Hải Dương", "Hà Nội", "Huế", "Nam Định"], "c": 0 },
-                        { "q": "Ông được coi là ông tổ của ngành nào?", "a": ["Thuốc Nam", "Thuốc Bắc", "Thuốc Tây", "Châm cứu"], "c": 0 },
-                        { "q": "Câu nói nổi tiếng của ông là gì?", "a": ["Nam dược trị Nam nhân", "Lương y như từ mẫu", "Thầy thuốc như mẹ hiền", "Vì nước quên thân"], "c": 0 },
-                        { "q": "Ngoài làm thuốc, ông còn là gì?", "a": ["Nhà sư", "Nhà giáo", "Nhà thơ", "Nhà văn"], "c": 0 }
+                        { "q": "Danh y Tuệ Tĩnh sống vào triều đại nào trong lịch sử Việt Nam?", "a": ["Nhà Lý", "Nhà Trần", "Nhà Lê", "Nhà Nguyễn"], "c": 1 },
+                        { "q": "Địa điểm ông dẫn học trò lên là đâu?", "a": ["Núi Tản Viên", "Núi Yên Tử", "Núi Nam Tào, Bắc Đẩu", "Núi Ngự Bình"], "c": 2 },
+                        { "q": "Khó khăn lớn nhất về y tế mà nước ta gặp phải khi giặc ngoại xâm đe dọa là gì?", "a": ["Thiếu thầy thuốc giỏi", "Dân số quá đông", "Thuốc men từ phương Bắc bị cấm vận chuyển sang", "Không có bệnh viện"], "c": 2 },
+                        { "q": "Để khắc phục tình trạng thiếu thuốc, các thái y đời Trần đã làm gì?", "a": ["Đầu hàng giặc để xin thuốc", "Tìm tòi, học hỏi cách chữa bệnh bằng cây cỏ dân gian (thuốc Nam)", "Mua thuốc từ các nước phương Tây", "Cầu khấn thần linh"], "c": 1 },
+                        { "q": "Theo lời Tuệ Tĩnh, yếu tố nào đã góp phần giúp quân dân nhà Trần chiến thắng kẻ thù?", "a": ["Vũ khí hiện đại", "Cây cỏ nước Nam giúp quân đội hùng mạnh, can trường", "Sự giúp đỡ của nước ngoài", "Thời tiết thuận lợi"], "c": 1 },
+                        { "q": "'Thuốc Nam' được hiểu là gì?", "a": ["Thuốc do người tên Nam chế tạo", "Thuốc nhập khẩu từ phía Nam", "Thuốc được chế biến từ cây cỏ, dược liệu có sẵn tại nước Nam (Việt Nam)", "Thuốc chỉ dành cho nam giới"], "c": 2 },
+                        { "q": "Tư tưởng chủ đạo của Tuệ Tĩnh qua câu 'Nam dược trị Nam nhân' là gì?", "a": ["Bài trừ thuốc nước ngoài hoàn toàn", "Đề cao tinh thần tự chủ, dùng thuốc của nước mình chữa bệnh cho người mình", "Chỉ chữa bệnh cho người nghèo", "Khuyên mọi người không nên uống thuốc"], "c": 1 },
+                        { "q": "Thái độ của Tuệ Tĩnh đối với cây cỏ nước nhà như thế nào?", "a": ["Coi thường, cho là cỏ dại", "Thờ ơ, không quan tâm", "Trân trọng, tin tưởng vào giá trị chữa bệnh của chúng", "Lo lắng vì cây cỏ có độc"], "c": 2 },
+                        { "q": "Việc phát triển vườn thuốc Nam thể hiện truyền thống gì của dân tộc?", "a": ["Truyền thống hiếu học", "Truyền thống tự lực, tự cường và sáng tạo trong lao động", "Truyền thống ngoại giao", "Truyền thống văn nghệ"], "c": 1 },
+                        { "q": "Danh y Tuệ Tĩnh được hậu thế tôn vinh là gì?", "a": ["Ông tổ nghề mộc", "Ông tổ ngành thuốc Nam (Thánh thuốc Nam)", "Trạng nguyên trẻ nhất", "Nhà thơ lớn nhất"], "c": 1 },
+                        { "q": "Ý nguyện của Tuệ Tĩnh nhắn nhủ học trò là gì?", "a": ["Phải đi du học nước ngoài", "Phải làm quan to", "Tiếp nối việc dùng thuốc Nam chữa bệnh cho dân ta", "Viết sách lịch sử"], "c": 2 },
+                        { "q": "Trong câu chuyện, cây cỏ thiên nhiên Việt Nam được ví như điều gì đối với quân đội?", "a": ["Vũ khí sát thương", "Nguồn sức mạnh bảo vệ sức khỏe", "Lương thực dự trữ", "Vật trang trí"], "c": 1 },
+                        { "q": "Bài đọc thuộc chủ điểm nào?", "a": ["Cánh chim hòa bình", "Tiếp bước cha ông", "Vẻ đẹp muôn màu", "Những người quả cảm"], "c": 1 },
+                        { "q": "Qua bài đọc, em học được điều gì từ danh y Tuệ Tĩnh?", "a": ["Cách leo núi giỏi", "Lòng yêu nước và ý thức trân trọng nguồn tài nguyên sẵn có của quê hương", "Cách trồng cây cảnh", "Cách đối phó với người lạ"], "c": 1 },
+                        { "q": "Dòng nào dưới đây giải thích đúng từ 'can trường'?", "a": ["Sợ hãi, bỏ chạy", "Gan dạ, không sợ nguy hiểm, khó khăn", "Yếu đuối, mệt mỏi", "Thông minh, nhanh trí"], "c": 1 }
                     ]
                 }
             }
@@ -2688,21 +2828,177 @@ window.LESSON_DATA = {
                 "lesson": {
                     "title": "Bài học",
                     "blocks": [
-                        { "type": "header", "text": "Cụ Đồ Chiểu" },
                         {
                             "type": "html",
-                            "content": `<div class="flex flex-col lg:flex-row gap-6"> <section class="w-full lg:w-[70%]"> <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl"> <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden"> <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div> <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div> <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative"><span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>Cụ Đồ Chiểu</h1> <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content"> <p>Nội dung bài học sẽ được cập nhật sau.</p> </div> </div> </div> </section> <aside class="w-full lg:w-[30%]"> <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl"><div class="mb-6"><img src="hinh_anh/illustration.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl"></div><div class="flex items-center space-x-4 mb-8"><div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200"><svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div><h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2></div> <div class="space-y-4"> <div class="text-center text-gray-500 italic">Câu hỏi trắc nghiệm bên tab Luyện tập</div> </div> </div> </aside> </div>`
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <!-- Trang trí góc -->
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Cụ Đồ Chiểu
+                            </h1>
+
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                <p>Nguyễn Đình Chiểu (1822 – 1888) sinh ra trong một gia đình nhà nho ở làng Tân Thới, huyện Bình Dương, phủ Tân Bình, tỉnh Gia Định (nay là Thành phố Hồ Chí Minh).</p>
+                                <p>Năm 1833, do cuộc binh biến trong triều đình, cha bị mất chức, gia đình li tán, cậu bé Chiểu mới mười hai tuổi đã phải xa cha mẹ, ra Huế ở nhờ nhà một người bạn của cha để ăn học.</p>
+                                <p>Năm 1843, Nguyễn Đình Chiểu trở về quê mẹ, đỗ tú tài tại trường thi Gia Định. Hai năm sau, ông lại trở ra Huế học tập, chờ kì thi năm Kỷ Dậu, 1849. Nhưng cuối năm 1848, mẹ mất, Nguyễn Đình Chiểu phải bỏ thi về Nam chịu tang mẹ. Trên đường về, ông bị ốm nặng, mù cả hai mắt, chạy chữa mãi không khỏi. Cuối năm 1849, Nguyễn Đình Chiểu mới về đến Gia Định “lỡ bề báo hiếu, lỡ đường lập thân”.</p>
+                                <p>Không gục ngã trước những thử thách nặng nề liên tiếp của số phận, sau thời gian chịu tang mẹ, ông mở trường dạy học và làm thuốc chữa bệnh cho dân. Học trò gần xa nghe danh, mến đức xin học rất đông. Tiếng thơ chan chứa tinh thần nghĩa hiệp của Đồ Chiểu cũng bắt đầu vang khắp miền Lục tỉnh.</p>
+                                <p>Năm 1858, giặc Pháp xâm lược nước ta. Nguyễn Đình Chiểu cùng các lãnh tụ nghĩa quân bàn mưu tính kế đánh giặc. Ông sáng tác thơ văn bày tỏ niềm tiếc thương, cảm phục đối với những người đã hi sinh vì đất nước; khích lệ mạnh mẽ tinh thần chiến đấu của nhân dân. Trái tim nhân hậu của ông luôn gắn bó sắt son với vận mệnh của đất nước. Ông được nhân dân Lục tỉnh gọi bằng cái tên trìu mến “cụ Đỗ Chiểu” như một cách tri ân với người thầy đáng kính của “lòng dân”.</p>
+                                <p class="text-right italic mt-4">(Theo Trần Thị Hoa Lê)</p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Bài đọc ca ngợi cụ Nguyễn Đình Chiểu – người đã nêu cao nghị lực phi thường vượt lên số phận. Đồng thời bày tỏ niềm khâm phục trước tấm lòng nhân hậu, hết lòng bảo vệ chính nghĩa, tinh thần yêu nước và sự gắn bó sắt son với dân, với nước của cụ Đồ Chiểu.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <!-- Ảnh minh họa -->
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/292-dochieu-digital.png" alt="Cụ Đồ Chiểu" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Hãy giới thiệu đôi nét về tiểu sử Nguyễn Đình Chiểu.</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Nguyễn Đình Chiểu (1822 – 1888) sinh ra trong một gia đình nhà nho ở làng Tân Thới, tỉnh Gia Định. Ông có chặng đường học hành gian nan: năm 12 tuổi phải xa cha mẹ ra Huế ăn học; năm 1843 đỗ Tú tài; năm 1849 chuẩn bị thi tiếp thì phải bỏ dở về chịu tang mẹ.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 2 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Nguyễn Đình Chiểu đã gặp những biến cố đau thương nào trong cuộc đời?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Biến cố lớn nhất là khi đang chờ thi thì mẹ mất. Trên đường về chịu tang, ông bị ốm nặng dẫn đến mù cả hai mắt, công danh dở dang ("lỡ bề báo hiếu, lỡ đường lập thân").</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 3 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Nguyễn Đình Chiểu đã làm gì để sống có ích cho đời sau khi gặp hoạn nạn?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Không gục ngã trước số phận, ông đã mở trường dạy học, làm thuốc chữa bệnh cho dân và sáng tác thơ văn khích lệ tinh thần nghĩa hiệp.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 4 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Cuộc chiến đấu chống giặc Pháp của cụ Đồ Chiểu diễn ra như thế nào?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Khi giặc Pháp xâm lược (1858), ông cùng các lãnh tụ nghĩa quân bàn mưu tính kế đánh giặc. Ông dùng thơ văn làm vũ khí để ca ngợi người hi sinh vì nước và khích lệ tinh thần chiến đấu của nhân dân.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 5 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5. Vì sao Nguyễn Đình Chiểu được gọi là “cụ Đồ Chiểu”?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Vì ông có những phẩm chất cao quý: nghị lực phi thường vượt lên số phận bất hạnh, tấm lòng nhân hậu, yêu nước thương dân, hết lòng bảo vệ chính nghĩa. Ông là người thầy giáo, thầy thuốc đáng kính của "lòng dân".</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
                         }
                     ]
                 },
                 "quiz": {
-                    "settings": { "pick": 5 },
+                    "settings": { "pick": 10 },
                     "questions": [
-                        { "q": "Nguyễn Đình Chiểu sinh ra ở đâu?", "a": ["Hà Nội", "Gia Định (TP. Hồ Chí Minh)", "Huế", "Cần Thơ"], "c": 1 },
-                        { "q": "Biến cố nào khiến Nguyễn Đình Chiểu phải bỏ thi về Nam vào nam 1848?", "a": ["Ông bị ốm nặng", "Ông hết tiền", "Mẹ ông mất", "Chiến tranh nổ ra"], "c": 2 },
-                        { "q": "Điều bất hạnh xảy ra với ông trên đường về chịu tang mẹ là gì?", "a": ["Bị mất hành lý", "Bị mù cả hai mắt", "Bị lạc đường", "Bị giặc bắt"], "c": 1 },
-                        { "q": "Thái độ của ông trước thử thách số phận?", "a": ["Buông xuôi", "Sống ẩn dật", "Không gục ngã, kiên cường vươn lên giúp đời", "Than khóc"], "c": 2 },
-                        { "q": "Sau khi bị mù, ông đã làm gì?", "a": ["Làm ruộng", "Mở trường dạy học và làm thuốc", "Đi tu", "Làm quan"], "c": 1 }
+                        { "q": "Nguyễn Đình Chiểu sinh ra ở đâu?", "a": ["Hà Nội", "Gia Định (TP. Hồ Chí Minh ngày nay)", "Huế", "Cần Thơ"], "c": 1 },
+                        { "q": "Biến cố nào khiến Nguyễn Đình Chiểu phải bỏ thi về Nam vào năm 1848?", "a": ["Ông bị ốm nặng", "Ông hết tiền ăn học", "Mẹ ông mất", "Chiến tranh nổ ra"], "c": 2 },
+                        { "q": "Điều bất hạnh lớn nhất xảy ra với ông trên đường về chịu tang mẹ là gì?", "a": ["Bị mất hết hành lý", "Bị ốm nặng và mù cả hai mắt", "Bị lạc đường", "Bị giặc bắt giam"], "c": 1 },
+                        { "q": "Cụm từ \"Lỡ bề báo hiếu, lỡ đường lập thân\" nói về hoàn cảnh nào của ông?", "a": ["Khi ông đỗ Tú tài", "Khi ông bị mù và mẹ mất, chưa kịp đền đáp công ơn cha mẹ và chưa thành danh", "Khi ông tham gia đánh giặc", "Khi ông về già"], "c": 1 },
+                        { "q": "Trước những thử thách nghiệt ngã của số phận, thái độ của ông thế nào?", "a": ["Buông xuôi và tuyệt vọng", "Sống ẩn dật không gặp ai", "Không gục ngã, kiên cường vươn lên giúp đời", "Chỉ biết than khóc"], "c": 2 },
+                        { "q": "Sau khi bị mù, Nguyễn Đình Chiểu đã làm những công việc gì?", "a": ["Làm ruộng và buôn bán", "Mở trường dạy học và làm thuốc chữa bệnh", "Đi tu hành", "Làm quan trong triều đình"], "c": 1 },
+                        { "q": "Sự kiện lịch sử nào diễn ra vào năm 1858 được nhắc đến trong bài?", "a": ["Giặc Pháp xâm lược nước ta", "Nguyễn Đình Chiểu qua đời", "Khởi nghĩa Tây Sơn nổ ra", "Nguyễn Đình Chiểu đỗ đạt"], "c": 0 },
+                        { "q": "Nguyễn Đình Chiểu đã tham gia đánh giặc bằng cách nào?", "a": ["Trực tiếp cầm súng ra trận", "Bàn mưu tính kế cùng nghĩa quân và dùng thơ văn để cổ vũ tinh thần", "Đi quyên góp lương thực", "Làm gián điệp"], "c": 1 },
+                        { "q": "Nội dung chính trong thơ văn của Nguyễn Đình Chiểu thời kỳ này là gì?", "a": ["Ca ngợi vẻ đẹp thiên nhiên", "Bày tỏ niềm tiếc thương người hi sinh và khích lệ tinh thần chiến đấu", "Than thân trách phận", "Viết chuyện vui"], "c": 1 },
+                        { "q": "Tình cảm của học trò đối với thầy giáo Nguyễn Đình Chiểu như thế nào?", "a": ["Sợ hãi sự nghiêm khắc của thầy", "Nghe danh, mến đức xin học rất đông", "Ít người theo học", "Coi thường vì thầy bị mù"], "c": 1 },
+                        { "q": "Nhân dân Lục tỉnh gọi ông với cái tên trìu mến là gì?", "a": ["Thầy giáo Chiểu", "Ông lang Nguyễn", "Cụ Đồ Chiểu", "Nhà thơ mù"], "c": 2 },
+                        { "q": "Trái tim của Nguyễn Đình Chiểu được miêu tả gắn bó với điều gì?", "a": ["Với danh vọng và tiền tài", "Với thiên nhiên cây cỏ", "Gắn bó sắt son với vận mệnh của đất nước", "Với gia đình và dòng họ"], "c": 2 },
+                        { "q": "Vì sao nói ông là người thầy đáng kính của \"lòng dân\"?", "a": ["Vì ông rất giàu có", "Vì ông sống trọn tình nghĩa, yêu nước thương dân và được nhân dân tin yêu", "Vì ông có phép thuật cao cường", "Vì ông làm quan to"], "c": 1 },
+                        { "q": "Nghị lực sống của Nguyễn Đình Chiểu thể hiện rõ nhất qua chi tiết nào?", "a": ["Mù cả hai mắt nhưng vẫn dạy học, bốc thuốc và làm thơ đánh giặc", "Đi thi và đỗ Tú tài", "Chịu tang mẹ", "Đi học xa nhà từ nhỏ"], "c": 0 },
+                        { "q": "Chủ đề chính của bài đọc là gì?", "a": ["Kể về lịch sử y học Việt Nam", "Miêu tả cuộc kháng chiến chống Pháp", "Ca ngợi nghị lực phi thường, lòng yêu nước và nhân cách cao đẹp của Nguyễn Đình Chiểu", "Giới thiệu các tác phẩm văn học"], "c": 2 }
                     ]
                 }
             }
@@ -2717,27 +3013,157 @@ window.LESSON_DATA = {
                 "lesson": {
                     "title": "Bài học",
                     "blocks": [
-                        { "type": "header", "text": "Anh hùng Lao động Trần Đại Nghĩa" },
                         {
                             "type": "html",
-                            "content": `<div class="flex flex-col lg:flex-row gap-6"> <section class="w-full lg:w-[70%]"> <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl"> <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden"> <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div> <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div> <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative"><span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>Anh hùng Lao động Trần Đại Nghĩa</h1> <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content"> <p>Anh hùng Lao động Trần Đại Nghĩa tên khai sinh là Phạm Quang Lễ, quê ở tỉnh Vĩnh Long. Sau khi học xong bậc trung học ở Sài Gòn, năm 1935, ông được cấp học bổng sang Pháp học đại học. Ông đã theo học các ngành kĩ sư cầu cống, kĩ sư điện và kĩ sư hàng không. Ngoài ra, ông còn miệt mài nghiên cứu kĩ thuật chế tạo vũ khí.</p> <p>Năm 1946, nghe theo tiếng gọi thiêng liêng của Tổ quốc, Phạm Quang Lễ đã rời bỏ cuộc sống đầy đủ tiện nghi ở nước ngoài, theo Bác Hồ về nước. Ông được Bác đặt tên mới là Trần Đại Nghĩa và giao nhiệm vụ nghiên cứu chế tạo vũ khí phục vụ cuộc kháng chiến chống thực dân Pháp. Ông đã cùng các đồng nghiệp chế tạo thành công những loại vũ khí có sức công phá lớn như súng ba-dô-ca, súng không giật, bom bay để tiêu diệt xe tăng và lô cốt của giặc. Bên cạnh những cống hiến xuất sắc cho sự nghiệp quốc phòng, Trần Đại Nghĩa còn có công lớn trong việc xây dựng nền khoa học trẻ tuổi của nước nhà.</p> <p>Những cống hiến của Giáo sư Trần Đại Nghĩa được đánh giá cao. Năm 1948, ông được phong quân hàm Thiếu tướng. Năm 1952, ông được tuyên dương Anh hùng Lao động. Ông còn được Nhà nước tặng Giải thưởng Hồ Chí Minh và nhiều huân chương cao quý.</p> </div> </div> </div> </section> <aside class="w-full lg:w-[30%]"> <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl"><div class="mb-6"><img src="hinh_anh/tran-dai-nghia.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl"></div><div class="flex items-center space-x-4 mb-8"><div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200"><svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div><h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2></div> <div class="space-y-4"> <div class="text-center text-gray-500 italic">Câu hỏi trắc nghiệm bên tab Luyện tập</div> </div> </div> </aside> </div>`
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Anh hùng Lao động Trần Đại Nghĩa
+                            </h1>
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                <p>Anh hùng Lao động Trần Đại Nghĩa tên khai sinh là Phạm Quang Lễ, quê ở tỉnh Vĩnh Long. Sau khi học xong bậc trung học ở Sài Gòn, năm 1935, ông được cấp học bổng sang Pháp học đại học. Ông đã theo học các ngành kĩ sư cầu cống, kĩ sư điện và kĩ sư hàng không. Ngoài ra, ông còn miệt mài nghiên cứu kĩ thuật chế tạo vũ khí.</p>
+                                <p>Năm 1946, nghe theo tiếng gọi thiêng liêng của Tổ quốc, Phạm Quang Lễ đã rời bỏ cuộc sống đầy đủ tiện nghi ở nước ngoài, theo Bác Hồ về nước. Ông được Bác đặt tên mới là Trần Đại Nghĩa và giao nhiệm vụ nghiên cứu chế tạo vũ khí phục vụ cuộc kháng chiến chống thực dân Pháp. Ông đã cùng các đồng nghiệp chế tạo thành công những loại vũ khí có sức công phá lớn như súng ba-dô-ca, súng không giật, bom bay để tiêu diệt xe tăng và lô cốt của giặc. Bên cạnh những cống hiến xuất sắc cho sự nghiệp quốc phòng, Trần Đại Nghĩa còn có công lớn trong việc xây dựng nền khoa học trẻ tuổi của nước nhà.</p>
+                                <p>Những cống hiến của Giáo sư Trần Đại Nghĩa được đánh giá cao. Năm 1948, ông được phong quân hàm Thiếu tướng. Năm 1952, ông được tuyên dương Anh hùng Lao động. Ông còn được Nhà nước tặng Giải thưởng Hồ Chí Minh và nhiều huân chương cao quý.</p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Bài đọc ca ngợi Anh hùng Lao động Trần Đại Nghĩa là một nhà khoa học lớn, đã có những đóng góp xuất sắc cho sự nghiệp quốc phòng và xây dựng nền khoa học nước nhà. Ông là tấm gương sáng về lòng yêu nước, tài năng và tinh thần cống hiến quên mình vì Tổ quốc.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/tran-dai-nghia.png" alt="Anh hùng Lao động Trần Đại Nghĩa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Vì sao ông Phạm Quang Lễ lại theo Bác Hồ về nước vào năm 1946?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Năm 1946, ông Phạm Quang Lễ đã rời bỏ cuộc sống đầy đủ tiện nghi ở nước ngoài để theo Bác Hồ về nước vì lòng yêu nước and mong muốn được cống hiến công sức cho sự nghiệp giải phóng đất nước.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 2 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Giáo sư Trần Đại Nghĩa đã có những đóng góp gì to lớn trong quân sự?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Ông đã cùng các đồng nghiệp chế tạo thành công những loại vũ khí có sức công phá lớn như súng ba-dô-ca, súng không giật, bom bay để tiêu diệt xe tăng and lô cốt của giặc.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 3 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Ngoài chế tạo vũ khí, ông còn có công lao gì đối với khoa học nước nhà?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Bên cạnh những cống hiến cho sự nghiệp quốc phòng, ông còn có công lớn trong việc xây dựng nền khoa học trẻ tuổi của nước nhà.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 4 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Những huân chương, danh hiệu cao quý nào mà ông đã được nhận?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap ="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Năm 1948, ông được phong Thiếu tướng. Năm 1952, ông được tuyên dương Anh hùng Lao động. Ngoài ra, ông còn được tặng Giải thưởng Hồ Chí Minh and nhiều huân chương cao quý khác.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
                         }
                     ]
                 },
                 "quiz": {
-                    "settings": { "pick": 5 },
+                    "settings": { "pick": 10 },
                     "questions": [
                         { "q": "Tên thật của Anh hùng Lao động Trần Đại Nghĩa là gì?", "a": ["Trần Văn Giàu", "Phạm Quang Lễ", "Tôn Thất Tùng", "Đặng Văn Ngữ"], "c": 1 },
                         { "q": "Ông theo Bác Hồ về nước vào năm nào?", "a": ["1945", "1946", "1954", "1975"], "c": 1 },
                         { "q": "Trước khi về nước, cuộc sống của ông ở nước ngoài như thế nào?", "a": ["Rất khó khăn, thiếu thốn", "Bình thường như bao người khác", "Đầy đủ tiện nghi", "Bị quản thúc"], "c": 2 },
-                        { "q": "Động lực nào khiến ông từ bỏ tất cả để về nước?", "a": ["Muốn tìm cơ hội làm giàu", "Lòng yêu nước và mong muốn cống hiến cho sự nghiệp giải phóng dân tộc", "Bị trục xuất khỏi nước ngoài", "Muốn đi du lịch"], "c": 1 },
-                        { "q": "Ông đã cùng đồng nghiệp nghiên cứu và chế tạo thành công loại vũ khí nào dưới đây?", "a": ["Xe tăng", "Máy bay chiến đấu", "Súng ba-dô-ca", "Tàu ngầm"], "c": 2 },
+                        { "q": "Động lực nào khiến ông từ bỏ tất cả để về nước?", "a": ["Muốn tìm cơ hội làm giàu", "Lòng yêu nước and mong muốn cống hiến for sự nghiệp giải phóng dân tộc", "Bị trục xuất khỏi nước ngoài", "Muốn đi du lịch"], "c": 1 },
+                        { "q": "Ông đã cùng đồng nghiệp nghiên cứu and chế tạo thành công loại vũ khí nào dưới đây?", "a": ["Xe tăng", "Máy bay chiến đấu", "Súng ba-dô-ca", "Tàu ngầm"], "c": 2 },
                         { "q": "Ngoài súng ba-dô-ca, loại súng nào khác được nhắc đến trong bài?", "a": ["Súng lục", "Súng không giật", "Súng trường", "Súng kíp"], "c": 1 },
-                        { "q": "Bài đọc nhận định Trần Đại Nghĩa là một tấm gương lớn về điều gì?", "a": ["Về sự giàu có", "Về lòng yêu nước và tinh thần lao động vì đất nước", "Về khả năng ngoại ngữ", "Về sức khỏe phi thường"], "c": 1 },
-                        { "q": "Nội dung chính của bài đọc là gì?", "a": ["Kể về quá trình đi học của Phạm Quang Lễ", "Ca ngợi tài năng, lòng yêu nước và những cống hiến to lớn của Anh hùng Lao động Trần Đại Nghĩa", "Giới thiệu cách chế tạo súng ba-dô-ca", "Miêu tả cuộc sống ở nước ngoài của ông"], "c": 1 }
+                        { "q": "Bài đọc nhận định Trần Đại Nghĩa là một tấm gương lớn về điều gì?", "a": ["Về sự giàu có", "Về lòng yêu nước and tinh thần lao động vì đất nước", "Về khả năng ngoại ngữ", "Về sức khỏe phi thường"], "c": 1 },
+                        { "q": "Nội dung chính của bài đọc là gì?", "a": ["Kể về quá trình đi học của Phạm Quang Lễ", "Ca ngợi tài năng, lòng yêu nước and những cống hiến to lớn của Anh hùng Lao động Trần Đại Nghĩa", "Giới thiệu cách chế tạo súng ba-dô-ca", "Miêu tả cuộc sống ở nước ngoài của ông"], "c": 1 },
+                        { "q": "Quê của Trần Đại Nghĩa ở tỉnh nào?", "a": ["Bến Tre", "Vĩnh Long", "Trà Vinh", "Tiền Giang"], "c": 1 },
+                        { "q": "Ông được cấp học bổng đi du học tại nước nào vào năm 1935?", "a": ["Anh", "Pháp", "Đức", "Mỹ"], "c": 1 },
+                        { "q": "Tại Pháp, ông đã theo học những ngành kỹ sư nào?", "a": ["Xây dựng, Kiến trúc", "Cầu cống, Điện, Hàng không", "Hóa chất, Dệt may", "Khai thác mỏ"], "c": 1 },
+                        { "q": "Năm 1948, ông được phong quân hàm gì?", "a": ["Đại tá", "Thiếu tướng", "Trung tướng", "Đại tướng"], "c": 1 },
+                        { "q": "Năm 1952, ông được tuyên dương danh hiệu gì?", "a": ["Chiến sĩ thi đua", "Anh hùng Lao động", "Nhà giáo Ưu tú", "Anh hùng Lực lượng vũ trang"], "c": 1 },
+                        { "q": "Giải thưởng danh giá nào do Nhà nước tặng ông được nhắc đến trong bài?", "a": ["Giải thưởng Lê-nin", "Giải thưởng Hồ Chí Minh", "Giải thưởng Tôn Đức Thắng", "Giải thưởng Nobel"], "c": 1 },
+                        { "q": "Trần Đại Nghĩa có đóng góp gì trong việc xây dựng nền khoa học nước nhà?", "a": ["Ông viết sách giáo khoa", "Ông xây dựng nền khoa học trẻ tuổi của nước nhà", "Ông phát minh ra động cơ hơi nước", "Ông tìm ra nhiều loài cây mới"], "c": 1 }
                     ]
                 }
-            }
+            },
         },
         "302-bo-doi-ve-lang": {
             "title": "Bộ đội về làng",
@@ -2749,27 +3175,1598 @@ window.LESSON_DATA = {
                 "lesson": {
                     "title": "Bài học",
                     "blocks": [
-                        { "type": "header", "text": "Bộ đội về làng" },
                         {
                             "type": "html",
-                            "content": `<div class="flex flex-col lg:flex-row gap-6"> <section class="w-full lg:w-[70%]"> <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl"> <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden"> <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div> <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div> <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative"><span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>Bộ đội về làng</h1> <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content"> <div class="space-y-4"> <p>Các anh đi</p> <p>Ngày ấy đã lâu rồi</p> <p>Xóm làng tôi còn nhớ mãi.</p> <p>Các anh đi</p> <p>Bao giờ trở lại</p> <p>Xóm làng tôi trai gái vẫn chờ mong...</p> <p>Các anh về mái ấm nhà vui</p> <p>Tiếng hát câu cười</p> <p>Rộn ràng xóm nhỏ</p> <p>Các anh về tưng bừng trước ngõ,</p> <p>Lớp lớp đàn em hớn hở theo sau</p> <p>Mẹ già bịn rịn áo nâu</p> <p>Vui đàn con ở rừng sâu mới về.</p> <p>Từ lưng đèo</p> <p>Dốc núi mù che,</p> <p>Các anh về</p> <p>Xôn xao làng tôi bé nhỏ.</p> <p>Nhà lá đơn sơ,</p> <p>Nhưng tấm lòng rộng mở,</p> <p>Nồi cơm nấu dở</p> <p>Bát nước chè xanh</p> <p>Ngôi vui kể chuyện tâm tình bên nhau.</p> </div> </div> </div> </section> <aside class="w-full lg:w-[30%]"> <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl"><div class="mb-6"><img src="hinh_anh/bo-doi-ve-lang.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl"></div><div class="flex items-center space-x-4 mb-8"><div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200"><svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div><h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2></div> <div class="space-y-4"> <div class="text-center text-gray-500 italic">Câu hỏi trắc nghiệm bên tab Luyện tập</div> </div> </div> </aside> </div>`
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Bộ đội về làng
+                            </h1>
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                <div class="space-y-4">
+                                    <p>Các anh đi</p>
+                                    <p>Ngày ấy đã lâu rồi</p>
+                                    <p>Xóm làng tôi còn nhớ mãi.</p>
+                                    <p>Các anh đi</p>
+                                    <p>Bao giờ trở lại</p>
+                                    <p>Xóm làng tôi trai gái vẫn chờ mong...</p>
+                                    <p>Các anh về mái ấm nhà vui</p>
+                                    <p>Tiếng hát câu cười</p>
+                                    <p>Rộn ràng xóm nhỏ</p>
+                                    <p>Các anh về tưng bừng trước ngõ,</p>
+                                    <p>Lớp lớp đàn em hớn hở theo sau</p>
+                                    <p>Mẹ già bịn rịn áo nâu</p>
+                                    <p>Vui đàn con ở rừng sâu mới về.</p>
+                                    <p>Từ lưng đèo</p>
+                                    <p>Dốc núi mù che,</p>
+                                    <p>Các anh về</p>
+                                    <p>Xôn xao làng tôi bé nhỏ.</p>
+                                    <p>Nhà lá đơn sơ,</p>
+                                    <p>Nhưng tấm lòng rộng mở,</p>
+                                    <p>Nồi cơm nấu dở</p>
+                                    <p>Bát nước chè xanh</p>
+                                    <p>Ngồi vui kể chuyện tâm tình bên nhau.</p>
+                                </div>
+                                <p class="text-right italic mt-4">HOÀNG TRUNG THÔNG</p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Bài thơ ca ngợi tình quân dân thắm thiết trong kháng chiến chống thực dân Pháp. Qua đó thể hiện sự gắn bó bền chặt giữa tiền tuyến and hậu phương, tạo nên sức mạnh chiến thắng kẻ thù.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/bo-doi-ve-lang.png" alt="Bộ đội về làng" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Tìm những từ ngữ thể hiện nỗi niềm mong nhớ bộ đội của dân làng.</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Đó là những từ ngữ: "còn nhớ mãi", "bao giờ trở lại", "vẫn chờ mong".</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 2 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Không khí xóm làng thay đổi thế nào khi các anh bộ đội trở về?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Không khí trở nên rộn ràng, tưng bừng: tiếng hát câu cười rộn rã xóm nhỏ, đàn em hớn hở theo sau, người mẹ già xúc động bịn rịn đón đàn con từ rừng sâu về.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 3 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Những dòng thơ cuối gợi cho em cảm xúc, suy nghĩ gì?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap ="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Gợi lên sự ấm áp của tình người; dù nhà lá đơn sơ, nồi cơm nấu dở nhưng tấm lòng dân làng luôn rộng mở, chân thành and yêu quý bộ đội như người thân trong gia đình.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 4 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Người dân dành tình cảm gì for bộ đội?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Người dân dành for bộ đội tình cảm yêu thương nồng hậu, sự tin cậy and gắn bó máu thịt, coi bộ đội như con em ruột thịt của mình.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 5 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5. Chủ đề của bài thơ là gì?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Bài thơ ca ngợi tình quân dân thắm thiết, sự gắn bó bền chặt giữa tiền tuyến and hậu phương trong cuộc kháng chiến của dân tộc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
                         }
                     ]
                 },
                 "quiz": {
-                    "settings": { "pick": 5 },
+                    "settings": { "pick": 10 },
                     "questions": [
                         { "q": "Tác giả của bài thơ 'Bộ đội về làng' là ai?", "a": ["Tố Hữu", "Chính Hữu", "Hoàng Trung Thông", "Phạm Tiến Duật"], "c": 2 },
-                        { "q": "Khi các anh bộ đội đi xa, thái độ của người dân xóm làng như thế nào?", "a": ["Lo lắng và sợ hãi", "Nhớ mãi và vẫn chờ mong", "Buồn bã và tuyệt vọng", "Thờ ơ, không quan tâm"], "c": 1 },
+                        { "q": "Khi các anh bộ đội đi xa, thái độ của người dân xóm làng như thế nào?", "a": ["Lo lắng and sợ hãi", "Nhớ mãi and vẫn chờ mong", "Buồn bã and tuyệt vọng", "Thờ ơ, không quan tâm"], "c": 1 },
                         { "q": "Các anh bộ đội trở về làng từ đâu?", "a": ["Từ thành phố lớn", "Từ miền biển xa", "Từ rừng sâu, lưng đèo, dốc núi mù che", "Từ nước ngoài"], "c": 2 },
                         { "q": "Từ ngữ nào miêu tả không khí 'xóm nhỏ' khi bộ đội về?", "a": ["Vắng lặng", "Rộn ràng", "Ồn ào", "Hỗn loạn"], "c": 1 },
                         { "q": "Mẹ già coi các anh bộ đội như thế nào?", "a": ["Khách quý", "Đàn con ở rừng sâu mới về", "Những người hùng", "Những người lạ"], "c": 1 },
                         { "q": "Ngôi nhà đón các anh về được miêu tả ra sao?", "a": ["Nhà ngói đỏ tươi", "Nhà cao cửa rộng", "Nhà lá đơn sơ", "Biệt thự khang trang"], "c": 2 },
-                        { "q": "Bộ đội và dân làng đã làm gì khi gặp nhau bên bát nước chè xanh?", "a": ["Tổ chức liên hoan văn nghệ", "Bàn kế hoạch đánh giặc", "Ngồi vui kể chuyện tâm tình bên nhau", "Đi cày cấy giúp dân"], "c": 2 },
-                        { "q": "Chủ đề chính của bài thơ là gì?", "a": ["Ca ngợi vẻ đẹp của thiên nhiên miền núi", "Ca ngợi tình quân dân thắm thiết, sự gắn bó bền chặt giữa tiền tuyến và hậu phương", "Miêu tả sự vất vả của nghề nông", "Kể về chiến công oanh liệt của bộ đội"], "c": 1 }
+                        { "q": "Bộ đội and dân làng đã làm gì khi gặp nhau bên bát nước chè xanh?", "a": ["Tổ chức liên hoan văn nghệ", "Bàn kế hoạch đánh giặc", "Ngồi vui kể chuyện tâm tình bên nhau", "Đi cày cấy giúp dân"], "c": 2 },
+                        { "q": "Chủ đề chính của bài thơ là gì?", "a": ["Ca ngợi vẻ đẹp của thiên nhiên miền núi", "Ca ngợi tình quân dân thắm thiết, sự gắn bó bền chặt giữa tiền tuyến and hậu phương", "Miêu tả sự vất vả của nghề nông", "Kể về chiến công oanh liệt của bộ đội"], "c": 1 },
+                        { "q": "Hình ảnh 'đàn em hớn hở theo sau' thể hiện điều gì?", "a": ["Sự sợ hãi của trẻ em", "Sự yêu mến, vui mừng của trẻ em khi bộ đội về", "Trẻ em đang đi học", "Trẻ em đang đi chơi"], "c": 1 },
+                        { "q": "Từ 'bịn rịn' trong câu 'Mẹ già bịn rịn áo nâu' thể hiện tình cảm gì?", "a": ["Sự tức giận", "Sự thờ ơ", "Sự xúc động, yêu thương, không muốn rời xa", "Sự lo lắng"], "c": 2 },
+                        { "q": "'Bát nước chè xanh' trong bài thơ tượng trưng for điều gì?", "a": ["Sự giàu sang", "Sự giản dị, chân thành and ấm áp của tình quân dân", "Sự mệt mỏi", "Sự cầu kỳ"], "c": 1 },
+                        { "q": "Bài thơ được viết theo thể thơ nào?", "a": ["Thơ lục bát", "Thơ bốn chữ", "Thơ tự do", "Thơ thất ngôn"], "c": 2 },
+                        { "q": "Khổ thơ đầu tiên nhắc đến điều gì?", "a": ["Cảnh đẹp của làng quê", "Nỗi nhớ and sự chờ mong của dân làng đối với bộ đội", "Các trận đánh ác liệt", "Việc tăng gia sản xuất"], "c": 1 },
+                        { "q": "Cảnh bộ đội về làng được miêu tác với không khí như thế nào?", "a": ["Vắng lặng, buồn bã", "Tưng bừng, rộn ràng như ngày hội", "Căng thẳng, lo âu", "Bình thường như mọi ngày"], "c": 1 },
+                        { "q": "Tình cảm giữa bộ đội and dân làng được ví như tình cảm gì?", "a": ["Tình bạn xã giao", "Tình cảm ruột thịt trong gia đình", "Tình dồng nghiệp", "Tình hàng xóm"], "c": 1 }
+                    ]
+                }
+            }
+        },
+        "311-ve-ngoi-nha-dang-xay": {
+            "title": "Về ngôi nhà đang xây",
+            "week": 31,
+            "subject": "Đọc",
+            "theme": "Tiếp bước cha ông",
+            "audio": "am_thanh/ve-ngoi-nha-dang-xay.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Về ngôi nhà đang xây
+                            </h1>
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content" style="text-align: left; text-indent: 0;">
+                                <p style="text-indent: 0;">Chiều đi học về<br>
+                                    Chúng em qua ngôi nhà xây dở<br>
+                                    Giàn giáo tựa cái lồng che chở<br>
+                                    Trụ bê tông nhú lên như một mầm cây<br>
+                                    Bác thợ nề ra vẻ còn huơ huơ cái bay:<br>
+                                    Tạm biệt!</p>
+
+                                <p style="text-indent: 0;">Ngôi nhà tựa vào nền trời sẫm biếc<br>
+                                    Thở ra mùi vôi vữa nồng hăng<br>
+                                    Ngôi nhà giống bài thơ sắp làm xong<br>
+                                    Là bức tranh còn nguyên màu vôi, gạch.</p>
+
+                                <p style="text-indent: 0;">Bầy chim đi ăn về<br>
+                                    Rót vào ô cửa chưa sơn vài nốt nhạc.<br>
+                                    Nắng đứng ngủ quên<br>
+                                    Trên những bức tường<br>
+                                    Làn gió nào về mang hương<br>
+                                    Ủ đầy những rãnh tường chưa trát vữa.<br>
+                                    Bao ngôi nhà đã hoàn thành<br>
+                                    Đều qua những ngày xây dở.</p>
+
+                                <p style="text-indent: 0;">Ngôi nhà như trẻ nhỏ<br>
+                                    Lớn lên với trời xanh...<br>
+                                    <span class="font-bold italic">(Đồng Xuân Lan)</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Bài thơ vẽ nên bức tranh đẹp, mộng mơ và sống động về ngôi nhà đang xây. Qua đó ca ngợi sự đổi mới, phát triển hằng ngày của đất nước và gửi gắm niềm tin yêu vào tương lai tươi sáng.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/ve-ngoi-nha-dang-xay.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Theo cảm nhận của các bạn nhỏ, ngôi nhà đang xây hiện ra như thế nào?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Ngôi nhà hiện ra rất sống động: Giàn giáo giống cái lồng che chở; trụ bê tông nhú lên như một mầm cây; ngôi nhà tựa nền trời, thở ra mùi vôi vữa, giống bài thơ sắp xong, bức tranh còn nguyên màu vôi gạch.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 2 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Những hình ảnh so sánh, nhân hoá và tác dụng của chúng?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium"><strong>So sánh:</strong> Giàn giáo - cái lồng; trụ bê tông - mầm cây; ngôi nhà - bài thơ/bức tranh/trẻ nhỏ. <strong>Nhân hoá:</strong> Ngôi nhà thở; bầy chim rót nhạc; nắng ngủ quên; gió mang hương; ngôi nhà lớn lên. <strong>Tác dụng:</strong> Giúp ngôi nhà trở nên gần gũi, có hồn như một người bạn.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 3 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Ý nghĩa hình ảnh "Ngôi nhà như trẻ nhỏ / Lớn lên với trời xanh"?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Hình ảnh thể hiện sức sống mãnh liệt và niềm hy vọng. Ngôi nhà lớn lên cùng đất nước, giống như trẻ em là tương lai của tổ quốc.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 4 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Bài đọc muốn nói với em điều gì?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Những ngôi nhà mới chính là hy vọng về sự phát triển của quê hương. Mỗi bạn nhỏ cũng cần nỗ lực hoàn thiện mình mỗi ngày để trở nên đẹp đẽ hơn.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Tác giả của bài thơ 'Về ngôi nhà đang xây' là ai?", "a": ["Trần Đăng Khoa", "Lâm Thị Mỹ Dạ", "Đồng Xuân Lan", "Xuân Quỳnh"], "c": 2 },
+                        { "q": "Các bạn nhỏ đi qua ngôi nhà xây dở vào thời điểm nào?", "a": ["Sáng sớm đi học", "Chiều đi học về", "Buổi trưa hè", "Đêm khuya"], "c": 1 },
+                        { "q": "Giàn giáo được so sánh với hình ảnh nào?", "a": ["Cái lồng che chở", "Khu rừng rậm", "Mạng nhện khổng lồ", "Cái thang cao"], "c": 0 },
+                        { "q": "Trụ bê tông nhú lên được ví như cái gì?", "a": ["Cây nấm", "Mầm cây", "Ngọn tháp", "Cột cờ"], "c": 1 },
+                        { "q": "Bác thợ nề làm hành động gì với các bạn nhỏ?", "a": ["Vẫy tay chào", "Huơ huơ cái bay chào tạm biệt", "Gọi các bạn lại chơi", "La mắng các bạn"], "c": 1 },
+                        { "q": "Ngôi nhà được miêu tả 'thở' ra mùi gì?", "a": ["Mùi hoa sữa", "Mùi vôi vữa nồng hăng", "Mùi gỗ mới", "Mùi sơn"], "c": 1 },
+                        { "q": "Ngôi nhà đang xây được so sánh với một tác phẩm nghệ thuật nào sắp làm xong?", "a": ["Bức tượng", "Bài thơ", "Khúc nhạc", "Vở kịch"], "c": 1 },
+                        { "q": "Ngôi nhà là bức tranh còn nguyên màu gì?", "a": ["Màu xanh đỏ", "Màu vôi, gạch", "Màu vàng", "Màu đen trắng"], "c": 1 },
+                        { "q": "Bầy chim mang đến điều gì cho ngôi nhà?", "a": ["Rác", "Vài nốt nhạc (tiếng hót)", "Hạt giống", "Lông chim"], "c": 1 },
+                        { "q": "Nắng được nhân hóa đang làm gì trên những bức tường?", "a": ["Nhảy múa", "Ngủ quên", "Chạy trốn", "Soi gương"], "c": 1 },
+                        { "q": "Làn gió mang hương ủ đầy vào đâu?", "a": ["Vào cửa sổ", "Vào rãnh tường chưa trát vữa", "Vào mái nhà", "Vào sân"], "c": 1 },
+                        { "q": "Câu thơ 'Bao ngôi nhà đã hoàn thành / Đều qua những ngày xây dở' có ý nghĩa gì?", "a": ["Mọi thành công đều phải trải qua quá trình lao động vất vả, rèn luyện", "Xây nhà rất lâu", "Không nên xây nhà dở dang", "Nhà nào cũng giống nhau"], "c": 0 },
+                        { "q": "Ở khổ cuối, ngôi nhà được so sánh với hình ảnh nào?", "a": ["Người khổng lồ", "Trẻ nhỏ", "Cây cổ thụ", "Ngọn núi"], "c": 1 },
+                        { "q": "Ngôi nhà 'lớn lên' với điều gì?", "a": ["Với đất nâu", "Với trời xanh", "Với mây trắng", "Với nắng vàng"], "c": 1 },
+                        { "q": "Bài thơ ca ngợi điều gì?", "a": ["Vẻ đẹp của thiên nhiên", "Sự đổi mới, phát triển hằng ngày của đất nước", "Công việc của bác thợ nề", "Sự nghịch ngợm của trẻ em"], "c": 1 }
+                    ]
+                }
+            }
+        },
+        "312-viet-nam-que-huong-ta": {
+            "title": "Việt Nam quê hương ta",
+            "week": 31,
+            "subject": "Đọc",
+            "theme": "Tiếp bước cha ông",
+            "audio": "am_thanh/viet-nam-que-huong-ta.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Việt Nam quê hương ta
+                            </h1>
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content" style="text-align: left; text-indent: 0;">
+                                <div class="space-y-4">
+                                    <p style="text-indent: 0;"><span class="inline-block">Việt Nam đất nước ta ơi</span><br><span class="inline-block">Mênh mông biển lúa đâu trời đẹp hơn</span><br><span class="inline-block">Cánh cò bay lả rập rờn</span><br><span class="inline-block">Mây mờ che đỉnh Trường Sơn sớm chiều.</span></p>
+                                    <p style="text-indent: 0;"><span class="inline-block">Quê hương biết mấy thân yêu</span><br><span class="inline-block">Bao nhiêu đời đã chịu nhiều thương đau</span><br><span class="inline-block">Mặt người vất vả in sâu</span><br><span class="inline-block">Gái trai cũng một áo nâu nhuộm bùn.</span></p>
+                                    <p style="text-indent: 0;"><span class="inline-block">Đất nghèo nuôi những anh hùng</span><br><span class="inline-block">Chìm trong máu lửa lại vùng đứng lên</span><br><span class="inline-block">Đạp quân thù xuống đất đen</span><br><span class="inline-block">Súng gươm vứt bỏ lại hiền như xưa.</span></p>
+                                    <p style="text-indent: 0;"><span class="inline-block">Việt Nam đất nắng chan hoà</span><br><span class="inline-block">Hoa thơm quả ngọt bốn mùa trời xanh</span><br><span class="inline-block">Mắt đen cô gái long lanh</span><br><span class="inline-block">Yêu ai yêu trọn tấm tình thuỷ chung.</span></p>
+                                    <p style="text-indent: 0;"><span class="inline-block">Đất trăm nghề của trăm vùng</span><br><span class="inline-block">Khách phương xa tới lạ lùng bước chân</span><br><span class="inline-block">Tay người như có phép tiên</span><br><span class="inline-block">Trên tre lá cũng dệt nghìn bài thơ.</span></p>
+                                    <p class="text-right italic" style="text-indent: 0;">(Nguyễn Đình Thi)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Bài thơ ca ngợi vẻ đẹp của đất nước Việt Nam với thiên nhiên tươi đẹp, trù phú. Đồng thời ca ngợi con người Việt Nam vất vả, cần cù trong lao động; anh hùng, bất khuất trong chiến đấu; hiền lành, thủy chung trong đời sống tình cảm và rất khéo léo, tài hoa.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/viet-nam-que-huong-ta.png" alt="Việt Nam quê hương ta" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Những hình ảnh nào cho thấy vẻ đẹp của thiên nhiên Việt Nam?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Vẻ đẹp thiên nhiên Việt Nam hiện lên qua những hình ảnh: Biển lúa mênh mông, cánh cò bay lả rập rờn, mây mờ che đỉnh Trường Sơn sớm chiều, đất nắng chan hòa, hoa thơm quả ngọt bốn mùa trời xanh,...</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 2 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Tác giả đã làm nổi bật những phẩm chất đáng quý nào của con người Việt Nam trong lao động và chiến đấu?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <ul class="list-disc pl-5 space-y-2 font-medium">
+                                            <li><strong>Trong lao động:</strong> Cần cù, chịu thương chịu khó, gắn bó với ruộng đồng. Điều này thể hiện qua từ ngữ “vất vả in sâu” và hình ảnh “Gái trai cũng một áo nâu nhuộm bùn” – hình ảnh chân lấm tay bùn của người nông dân,...</li>
+                                            <li><strong>Trong chiến đấu:</strong> Mạnh mẽ, kiên cường, anh hùng, bất khuất. Dù “đất nghèo”, dù phải “chìm trong máu lửa” và chịu nhiều thương đau qua bao nhiêu đời, nhưng người Việt Nam vẫn “vùng đứng lên”, “đạp quân thù xuống đất đen”.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 3 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Vẻ đẹp tâm hồn và tài năng của con người Việt Nam được miêu tả như thế nào?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <ul class="list-disc pl-5 space-y-2 font-medium">
+                                            <li><strong>Tâm hồn:</strong> Hiền lành, yêu chuộng hòa bình (Súng gươm vứt bỏ lại hiền như xưa); sống tình nghĩa, thủy chung son sắt (Yêu ai yêu trọn tấm tình thủy chung),...</li>
+                                            <li><strong>Tài năng:</strong> Khéo léo, tài hoa, sáng tạo. Đôi bàn tay người lao động được ví "như có phép tiên", có thể tạo ra những sản phẩm thủ công mĩ nghệ tinh xảo từ những vật liệu đơn sơ như tre lá ("Trên tre lá cũng dệt nghìn bài thơ").</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 4 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Bài thơ thể hiện tình cảm gì của tác giả đối với quê hương, đất nước?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Bài thơ thể hiện tình cảm tha thiết, gắn bó, niềm tự hào về cảnh đẹp quê hương (qua cách gọi "Việt Nam đất nước ta ơi"). Tác giả cũng bộc lộ lòng yêu thương, sự đồng cảm sâu sắc với những vất vả, hi sinh của người dân và sự khâm phục, ngưỡng mộ đối với những phẩm chất cao đẹp của con người Việt Nam.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Tác giả của bài thơ 'Việt Nam quê hương ta' là ai?", "a": ["Tố Hữu", "Nguyễn Khoa Điềm", "Nguyễn Đình Thi", "Huy Cận"], "c": 2 },
+                        { "q": "Hình ảnh 'Mênh mông biển lúa' gợi lên điều gì?", "a": ["Sự giàu có, trù phú của đồng bằng Việt Nam", "Biển có màu vàng", "Nông dân trồng nhiều lúa", "Cảnh thiếu nước"], "c": 0 },
+                        { "q": "Điền từ còn thiếu: 'Cánh cò bay ____ rập rờn'?", "a": ["cao", "thấp", "lả", "vút"], "c": 2 },
+                        { "q": "Đỉnh núi nào được nhắc đến trong câu 'Mây mờ che đỉnh ____ sớm chiều'?", "a": ["Hoàng Liên Sơn", "Trường Sơn", "Ba Vì", "Bạch Mã"], "c": 1 },
+                        { "q": "Hình ảnh 'Mặt người vất vả in sâu' nói lên phẩm chất gì?", "a": ["Lười biếng", "Cần cù, chịu thương chịu khó", "Vui vẻ", "Giàu sang"], "c": 1 },
+                        { "q": "Trang phục truyền thống của người nông dân được nhắc đến là gì?", "a": ["Áo lụa", "Áo dài", "Áo nâu", "Áo tứ thân"], "c": 2 },
+                        { "q": "'Đất nghèo nuôi những anh hùng' thể hiện truyền thống gì?", "a": ["Truyền thống đánh giặc ngoại xâm", "Truyền thống hiếu học", "Truyền thống tôn sư trọng đạo", "Truyền thống văn hóa"], "c": 0 },
+                        { "q": "Hành động 'Đạp quân thù xuống đất đen' thể hiện điều gì?", "a": ["Sự tàn bạo", "Sức mạnh và ý chí kiên cường chống giặc", "Tập thể dục", "Làm đồng"], "c": 1 },
+                        { "q": "Sau khi chiến tranh kết thúc ('Súng gươm vứt bỏ'), con người Việt Nam trở nên như thế nào?", "a": ["Hung dữ", "Lại hiền như xưa", "Kiêu ngạo", "Buồn bã"], "c": 1 },
+                        { "q": "'Đất nắng chan hòa' gợi tả khí hậu như thế nào?", "a": ["Lạnh giá quanh năm", "Mưa dầm dề", "Nhiều nắng, ấm áp", "Nhiều sương mù"], "c": 2 },
+                        { "q": "Đất nước ta có hoa thơm quả ngọt vào lúc nào?", "a": ["Chỉ mùa xuân", "Chỉ mùa hè", "Bốn mùa", "Khi tết đến"], "c": 2 },
+                        { "q": "Vẻ đẹp của cô gái Việt Nam được miêu tả qua chi tiết nào?", "a": ["Tóc dài", "Da trắng", "Mắt đen long lanh", "Dáng cao"], "c": 2 },
+                        { "q": "Phẩm chất tình cảm nào của người Việt Nam được ca ngợi trong câu 'Yêu ai yêu trọn tấm tình thủy chung'?", "a": ["Hay thay đổi", "Thủy chung, son sắt", "Lạnh lùng", "Dễ dãi"], "c": 1 },
+                        { "q": "Câu 'Tay người như có phép tiên' ca ngợi điều gì?", "a": ["Người Việt Nam biết làm ảo thuật", "Sự khéo léo, tài hoa của đôi bàn tay người lao động", "Người Việt Nam có sức mạnh siêu nhiên", "Tay người rất đẹp"], "c": 1 },
+                        { "q": "Nghệ thuật nổi bật được sử dụng trong bài thơ là gì?", "a": ["So sánh, nhân hóa, thể thơ lục bát uyển chuyển", "Kể chuyện", "Văn xuôi", "Phỏng vấn"], "c": 0 }
+                    ]
+                }
+            },
+        },
+        "331-mot-nguoi-hung-tham-lang": {
+            "title": "Một người hùng thầm lặng",
+            "week": 33,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/mot-nguoi-hung-tham-lang.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Một người hùng thầm lặng
+                            </h1>
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                <p>Câu chuyện bắt đầu vào một ngày của tháng 12 năm 1938 tại nước Anh. Ông Uyn-tơn quyết định bay sang Tiệp Khắc khi một người bạn nhờ ông tìm cách đưa những đứa trẻ Do Thái từ Pra-ha (Tiệp Khắc) sang Anh. Vì chiến tranh chắc chắn sẽ nổ ra, cơ hội cho những người Do Thái trốn thoát khỏi thành phố hầu như không có, đặc biệt là với trẻ em.</p>
+                                <p>Việc đưa trẻ em đi tị nạn cần rất nhiều tiền. Uyn-tơn đã cùng bạn bè đi quyên góp khắp nơi, kêu gọi các gia đình ở Anh nhận nuôi trẻ em Do Thái. Từ tháng 3 đến tháng 8 năm 1939, Uyn-tơn tổ chức thành công tám chuyến tàu, đưa 669 đứa trẻ rời Pra-ha, đi qua Đức, Hà Lan,... rồi đến Luân Đôn. Ngày 16 tháng 9 năm 1939, tất cả biên giới do phát xít Đức kiểm soát bị đóng cửa, Uyn-tơn đành kết thúc hoạt động giải cứu.</p>
+                                <p>Sau này, Uyn-tơn còn làm việc trong hội từ thiện hỗ trợ người già và nhận được nhiều khen thưởng. Nhưng việc giải cứu 669 đứa trẻ năm xưa ông chưa một lần kể với ai. 50 năm sau, vợ ông vô tình tìm thấy cuốn sổ ghi thông tin về những đứa trẻ ấy và đưa cho một nhà sử học. Thế là câu chuyện về tình thương, lòng dũng cảm của Uyn-tơn mới được mọi người biết đến.</p>
+                                <p>Năm 1988, một hãng truyền thông đã làm chương trình về Uyn-tơn. Khi người dẫn chương trình hỏi: “Trong số những người ngồi đây, ai đã được Uyn-tơn cứu sống?”, cả hội trường đứng lên. Uyn-tơn nghẹn ngào, xúc động. Mọi người ở đó đều khóc vì nhớ ơn người đã mang lại sự sống lần thứ hai cho họ.</p>
+                                <p>Năm 2015, Uyn-tơn qua đời, hưởng thọ 106 tuổi. Người dân Tiệp Khắc đã dựng tượng ông trên sân ga thành phố Pra-ha và coi ông như một người hùng thầm lặng đáng kính.</p>
+                                <p class="text-right italic text-base">(Theo Hà Tiến)</p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Bài đọc ca ngợi ông Uyn-tơn – một người hùng thầm lặng với lòng dũng cảm và trái tim nhân hậu đã giải cứu 669 trẻ em Do Thái thoát khỏi sự tàn khốc của chiến tranh.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/mot-nguoi-hung-tham-lang.png" alt="Một người hùng thầm lặng" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Ông Uyn-tơn đã quyết định làm gì vào tháng 12 năm 1938?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Ông quyết định bay sang Tiệp Khắc để tìm cách đưa những đứa trẻ Do Thái từ Pra-ha sang Anh tị nạn trước khi chiến tranh nổ ra.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 2 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Ông Uyn-tơn đã gặp những khó khăn gì và giải quyết ra sao?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Việc đưa trẻ đi tị nạn cần rất nhiều tiền. Ông đã cùng bạn bè đi quyên góp khắp nơi và kêu gọi các gia đình ở Anh nhận nuôi trẻ em Do Thái.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 3 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Kết quả của hoạt động giải cứu đó như thế nào?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Từ tháng 3 đến tháng 8 năm 1939, ông tổ chức thành công 8 chuyến tàu, giải cứu được 669 đứa trẻ đưa về Luân Đôn an toàn.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 4 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Vì sao gọi ông là "người hùng thầm lặng"?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Vì ông cứu sống hàng trăm người nhưng suốt 50 năm sau đó ông không kể với ai, ngay cả vợ mình cũng không biết cho đến khi bà tìm thấy cuốn sổ ghi chép.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 5 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5. Câu chuyện muốn gửi gắm thông điệp gì?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Ca ngợi lòng dũng cảm, tình yêu thương con người và nhắc nhở chúng ta hãy luôn mở rộng tấm lòng giúp đỡ những người gặp khó khăn hoạn nạn.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Ông Uyn-tơn là người nước nào?", "a": ["Anh", "Tiệp Khắc", "Mỹ", "Đức"], "c": 0 },
+                        { "q": "Ông Uyn-tơn thực hiện công việc giải cứu vào thời gian nào?", "a": ["Những năm 1938 - 1939", "Năm 1945", "Năm 1988", "Năm 2015"], "c": 0 },
+                        { "q": "Đối tượng mà ông Uyn-tơn muốn cứu là ai?", "a": ["Những đứa trẻ Do Thái", "Những người lính", "Những người già", "Những nghệ sĩ"], "c": 0 },
+                        { "q": "Địa điểm giải cứu những đứa trẻ là từ đâu?", "a": ["Luân Đôn", "Pra-ha (Tiệp Khắc)", "Hà Lan", "Béc-lin"], "c": 1 },
+                        { "q": "Ông Uyn-tơn đã tổ chức bao nhiêu chuyến tàu giải cứu?", "a": ["5 chuyến", "6 chuyến", "8 chuyến", "10 chuyến"], "c": 2 },
+                        { "q": "Số lượng trẻ em được ông Uyn-tơn cứu sống là bao nhiêu?", "a": ["500 em", "669 em", "1000 em", "Nhiều vô kể"], "c": 1 },
+                        { "q": "Vì sao hoạt động giải cứu phải kết thúc vào tháng 9 năm 1939?", "a": ["Hết tiền", "Chiến tranh nổ ra, biên giới bị đóng cửa", "Ông bị bắt", "Ông bị ốm"], "c": 1 },
+                        { "q": "Ông Uyn-tơn đã giữ bí mật về việc làm của mình trong bao lâu?", "a": ["10 năm", "20 năm", "50 năm", "Mãi mãi"], "c": 2 },
+                        { "q": "Ai là người đã phát hiện ra bí mật của ông Uyn-tơn?", "a": ["Một nhà báo", "Vợ của ông", "Một đứa trẻ được cứu", "Một người bạn"], "c": 1 },
+                        { "q": "Ông Uyn-tơn được mọi người biết đến rộng rãi nhờ sự kiện gì năm 1988?", "a": ["Một chương trình truyền hình", "Ông viết sách", "Ông nhận giải thưởng Nobel", "Ông trả lời phỏng vấn báo chí"], "c": 0 },
+                        { "q": "Khi gặp lại những người mình đã cứu, ông Uyn-tơn có cảm xúc gì?", "a": ["Bình thản", "Tự hào", "Nghẹn ngào, xúc động", "Sợ hãi"], "c": 2 },
+                        { "q": "Người dân Tiệp Khắc đã làm gì để tưởng nhớ ông?", "a": ["Đặt tên đường", "Dựng tượng ông trên sân ga Pra-ha", "Xây trường học", "Làm phim"], "c": 1 },
+                        { "q": "Ông Uyn-tơn qua đời năm bao nhiêu tuổi?", "a": ["90 tuổi", "100 tuổi", "106 tuổi", "88 tuổi"], "c": 2 },
+                        { "q": "Vì sao gọi ông Uyn-tơn là 'người hùng thầm lặng'?", "a": ["Vì ông làm việc tốt mà không khoe khoang", "Vì ông ít nói", "Vì ông làm việc ban đêm", "Vì ông thích sự yên tĩnh"], "c": 0 },
+                        { "q": "Thông điệp chính của câu chuyện là gì?", "a": ["Ca ngợi lòng dũng cảm và nhân hậu", "Thông tin về chiến tranh thế giới", "Kể về lịch sử nước Anh", "Tuyên truyền du lịch Tiệp Khắc"], "c": 0 }
+                    ]
+                }
+            }
+        },
+        "332-gio-trai-dat": {
+            "title": "Giờ Trái Đất",
+            "week": 33,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/gio-trai-dat.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Giờ Trái Đất
+                            </h1>
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                <p>Giờ Trái Đất là một sự kiện được Quỹ Quốc tế Bảo tồn Thiên nhiên tổ chức hằng năm nhằm nâng cao nhận thức về biến đổi khí hậu và khuyến khích mọi người hành động để bảo vệ Trái Đất. Sự kiện này được tổ chức vào thứ Bảy cuối cùng của tháng Ba, khi các thành phố và thị trấn trên toàn cầu tắt đèn trong một giờ, từ 20 giờ 30 phút đến 21 giờ 30 phút giờ địa phương.</p>
+                                <p>Sự kiện Giờ Trái Đất được khởi xướng lần đầu tiên tại Xít-ni (Sydney), Ô-xtrây-li-a (Australia) vào năm 2007. Nhờ các phương tiện truyền thông và sự kêu gọi của các tổ chức quốc tế, sự kiện đã thu hút sự quan tâm của thế giới những năm sau đó. Năm 2022, sự kiện đã ghi nhận sự tham gia của hơn 190 quốc gia và vùng lãnh thổ. Việt Nam chính thức tham gia hưởng ứng Giờ Trái Đất từ năm 2009.</p>
+                                <p>Sự kiện Giờ Trái Đất đã khẳng định mỗi hành động nhỏ của từng cá nhân khi được nhân lên trên diện rộng sẽ lan toả và có thể làm cho môi trường sống tốt hơn. Hành động tắt các thiết bị điện không cần thiết trong 60 phút góp phần không nhỏ vào việc tiết kiệm điện năng, giúp giảm thiểu khí các-bô-níc và chống biến đổi khí hậu.</p>
+                                <p class="text-right italic text-base">(Theo Nguyễn Liêm)</p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Bài đọc cung cấp thông tin về nguồn gốc, ý nghĩa và thông điệp mà chiến dịch Giờ Trái Đất mang lại, nhắc nhở chúng ta cần nâng cao nhận thức và hành động để bảo vệ môi trường.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/gio-trai-dat.png" alt="Giờ Trái Đất" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Sự kiện Giờ Trái Đất được tổ chức hằng năm nhằm mục đích gì?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Sự kiện được tổ chức nhằm nâng cao nhận thức về biến đổi khí hậu và khuyến khích mọi người hành động để bảo vệ Trái Đất.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 2 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Sự kiện Giờ Trái Đất được tổ chức như thế nào?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Sự kiện được tổ chức hằng năm vào thứ Bảy cuối cùng của tháng Ba. Khi đó, các thành phố và thị trấn tắt đèn trong một giờ, từ 20 giờ 30 phút đến 21 giờ 30 phút (giờ địa phương).</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 3 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Những chi tiết nào cho thấy Giờ Trái Đất thu hút sự quan tâm của thế giới?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Năm 2007 khởi xướng tại Sydney; năm 2009 Việt Nam tham gia; đến năm 2022 đã có hơn 190 quốc gia và vùng lãnh thổ tham gia hưởng ứng.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 4 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Giờ Trái Đất mang lại lợi ích gì cho môi trường?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Giúp tiết kiệm điện năng, giảm thiểu khí các-bô-níc và chống biến đổi khí hậu, làm cho môi trường sống của chúng ta tốt đẹp hơn.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 5 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5. Những việc em có thể làm để bảo vệ Trái Đất là gì?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Sử dụng sản phẩm tự nhiên, hạn chế nhựa, trồng cây xanh, phân loại và tái chế rác, tham gia tắt đèn hưởng ứng Giờ Trái Đất hằng năm.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Giờ Trái Đất là sự kiện được tổ chức bởi tổ chức nào?", "a": ["Liên Hợp Quốc", "Quỹ Quốc tế Bảo tồn Thiên nhiên (WWF)", "UNESCO", "Tổ chức Y tế Thế giới (WHO)"], "c": 1 },
+                        { "q": "Sự kiện được tổ chức vào thời gian nào hàng năm?", "a": ["Thứ Bảy cuối cùng của tháng Ba", "Chủ nhật đầu tiên của tháng Tư", "Ngày 1 tháng 1", "Ngày 22 tháng 4"], "c": 0 },
+                        { "q": "Khung giờ tắt đèn của Giờ Trái Đất là khi nào?", "a": ["19:00 - 20:00", "20:00 - 21:00", "20:30 - 21:30", "21:00 - 22:00"], "c": 2 },
+                        { "q": "Sự kiện Giờ Trái Đất được khởi xướng lần đầu tiên tại đâu?", "a": ["Niu-y-oóc (Mỹ)", "Luân Đôn (Anh)", "Xít-ni (Ô-xtrây-li-a)", "Pa-ri (Pháp)"], "c": 2 },
+                        { "q": "Sự kiện diễn ra lần đầu tiên vào năm nào?", "a": ["2005", "2007", "2009", "2010"], "c": 1 },
+                        { "q": "Việt Nam tham gia hưởng ứng Giờ Trái Đất từ năm nào?", "a": ["2007", "2008", "2009", "2010"], "c": 2 },
+                        { "q": "Mục đích chính của Giờ Trái Đất là gì?", "a": ["Tiết kiệm tiền", "Vui chơi giải trí", "Nâng cao nhận thức về biến đổi khí hậu", "Để ngắm sao"], "c": 2 },
+                        { "q": "Hành động chính của mọi người trong Giờ Trái Đất là gì?", "a": ["Đốt lửa trại", "Tắt các thiết bị điện không cần thiết", "Chạy bộ", "Trồng cây"], "c": 1 },
+                        { "q": "Năm 2022, có khoảng bao nhiêu quốc gia và vùng lãnh thổ tham gia?", "a": ["100", "150", "Hơn 190", "200"], "c": 2 },
+                        { "q": "Việc tắt điên trong 60 phút giúp giảm thiểu loại khí nào?", "a": ["Khí Ô-xi", "Khí Các-bô-níc", "Khí Ni-tơ", "Khí Hi-đrô"], "c": 1 },
+                        { "q": "Ngoài tiết kiệm điện, Giờ Trái Đất còn giúp gì?", "a": ["Chống biến đổi khí hậu", "Tăng nhiệt độ Trái Đất", "Làm ô nhiễm môi trường", "Gây lãng phí"], "c": 0 },
+                        { "q": "Thông điệp của Giờ Trái Đất là gì?", "a": ["Hành động nhỏ của cá nhân tạo nên thay đổi lớn", "Không cần làm gì cả", "Chỉ cần tắt đèn là đủ", "Điện là vô tận"], "c": 0 },
+                        { "q": "Để bảo vệ Trái Đất, ngoài việc tắt đèn, chúng ta có thể làm gì?", "a": ["Trồng cây xanh, hạn chế rác thải nhựa", "Xả rác bừa bãi", "Sử dụng nhiều túi ni lông", "Lãng phí nước"], "c": 0 },
+                        { "q": "Tại sao lại chọn tắt đèn vào buổi tối?", "a": ["Vì buổi tối mọi người đi ngủ", "Vì lúc đó nhu cầu sử dụng điện chiếu sáng cao", "Vì buổi tối mát mẻ", "Thích thì tắt"], "c": 1 },
+                        { "q": "Em cảm thấy thế nào khi tham gia Giờ Trái Đất?", "a": ["Thấy phiền phức", "Thấy tự hào vì góp phần bảo vệ môi trường", "Không quan tâm", "Sợ bóng tối"], "c": 1 }
+                    ]
+                }
+            }
+        },
+        "321-bai-ca-trai-dat": {
+            "title": "Bài ca Trái Đất",
+            "week": 32,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/bai-ca-trai-dat.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Bài ca Trái Đất
+                            </h1>
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content" style="text-align: left; text-indent: 0;">
+                                <p style="text-indent: 0;"><span class="inline-block">Trái đất này là của chúng mình</span><br>
+                                    <span class="inline-block">Quả bóng xanh bay giữa trời xanh</span><br>
+                                    <span class="inline-block">Bồ câu ơi, tiếng chim gù thương mến</span><br>
+                                    <span class="inline-block">Hải âu ơi, cánh chim vờn sóng biển</span><br>
+                                    <span class="inline-block">Cùng bay nào, cho trái đất quay!</span><br>
+                                    <span class="inline-block">Cùng bay nào, cho trái đất quay!</span>
+                                </p>
+
+                                <p style="text-indent: 0;">Trái đất trẻ của bạn trẻ năm châu<br>
+                                    Vàng, trắng, đen... dù da khác màu<br>
+                                    Ta là nụ, là hoa của đất<br>
+                                    Gió đẫm hương thơm, nắng tô thắm sắc<br>
+                                    Màu hoa nào cũng quý, cũng thơm<br>
+                                    Màu hoa nào cũng quý, cũng thơm!
+                                </p>
+
+                                <p style="text-indent: 0;">Khói hình nấm là tai hoạ đấy<br>
+                                    Bom H, bom A không phải bạn ta<br>
+                                    Tiếng hát vui giữ bình yên trái đất<br>
+                                    Tiếng cười ran cho trái đất không già<br>
+                                    Hành tinh này là của chúng ta!<br>
+                                    Hành tinh này là của chúng ta!<br>
+                                    <span class="font-bold italic">(Định Hải)</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Bài thơ gửi gắm ước mơ của các bạn thiếu nhi về một thế giới hòa bình, đoàn kết, không có chiến tranh. Trái đất là ngôi nhà chung của tất cả trẻ em trên thế giới.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/bai-ca-trai-dat.png" alt="Bài ca Trái Đất" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Những hình ảnh ở khổ thơ đầu gợi lên một Trái đất như thế nào?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Các hình ảnh: quả bóng xanh bay giữa trời xanh, tiếng chim gù của chim bồ câu, cánh hải âu vờn sóng biển gợi lên một Trái đất hòa bình, yên vui và tươi đẹp.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 2 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Khổ thơ thứ hai muốn nói lên điều gì?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Khổ thơ khẳng định Trái đất là của tất cả các bạn nhỏ trên thế giới, không phân biệt màu da. Các bạn nhỏ đều đáng quý và là những chủ nhân tương lai của hành tinh.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 3 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Những hình ảnh nào có ý nghĩa đối lập với hoà bình?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Đó là những hình ảnh: "khói hình nấm", "bom H", "bom A". Đây là những hình ảnh tượng trưng cho chiến tranh và sự tàn phá, đối lập với sự bình yên và hạnh phúc.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 4 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Bài thơ muốn gửi gắm thông điệp gì?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Bài thơ gửi gắm ước mơ của thiếu nhi về một thế giới hòa bình, đoàn kết và tình yêu thương, kêu gọi mọi người cùng chung tay giữ gìn và bảo vệ hành tinh xanh.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Bài thơ 'Bài ca Trái Đất' được viết bởi tác giả nào?", "a": ["Trần Đăng Khoa", "Định Hải", "Lâm Thị Mỹ Dạ", "Tố Hữu"], "c": 1 },
+                        { "q": "Trái đất được so sánh với hình ảnh nào trong khổ thơ đầu?", "a": ["Đĩa bay", "Quả cam", "Quả bóng xanh", "Ngôi nhà"], "c": 2 },
+                        { "q": "Những loài chim nào được nhắc đến trong bài thơ?", "a": ["Bồ câu, Hải âu", "Đại bàng, Sẻ", "Vàng anh, Chào mào", "Cò, Vạc"], "c": 0 },
+                        { "q": "Tiếng chim bồ câu gù gợi lên điều gì?", "a": ["Sự ồn ào", "Thương mến", "Sự sợ hãi", "Cảnh báo nguy hiểm"], "c": 1 },
+                        { "q": "Màu da của các bạn trẻ năm châu được kể tên là gì?", "a": ["Hồng, xanh, tím", "Vàng, trắng, đen", "Đỏ, cam, vàng", "Xám, nâu, đen"], "c": 1 },
+                        { "q": "Tác giả gọi các bạn nhỏ là gì của đất?", "a": ["Là nụ, là hoa", "Là lá, là cành", "Là rễ, là thân", "Là quả ngọt"], "c": 0 },
+                        { "q": "Nắng được nhân hóa để làm gì cho các loài hoa?", "a": ["Tưới nước", "Tô thắm sắc", "Che chở", "Nhổ cỏ"], "c": 1 },
+                        { "q": "Hình ảnh nào được coi là tai họa?", "a": ["Mây ngũ sắc", "Khói hình nấm", "Cầu vồng", "Sương mù"], "c": 1 },
+                        { "q": "Bom H, bom A được bài thơ nhận định như thế nào?", "a": ["Là bạn tốt", "Là đồ chơi", "Không phải bạn ta", "Là công cụ lao động"], "c": 2 },
+                        { "q": "Tiếng hát có vai trò gì?", "a": ["Làm ồn", "Giữ bình yên trái đất", "Dọa chim", "Gọi mưa"], "c": 1 },
+                        { "q": "Tiếng cười có tác dụng gì?", "a": ["Làm mọi người vui", "Cho trái đất không già", "Giải trí", "Chữa bệnh"], "c": 1 },
+                        { "q": "Câu 'Cùng bay nào, cho trái đất quay' thể hiện điều gì?", "a": ["Sức mạnh đoàn kết và khát vọng hòa bình", "Muốn bay lên trời", "Muốn đi du lịch", "Thích tập thể dục"], "c": 0 },
+                        { "q": "Thông điệp chính của bài thơ là gì?", "a": ["Bảo vệ môi trường", "Yêu hòa bình, chống chiến tranh", "Khám phá vũ trụ", "Trồng nhiều hoa"], "c": 1 },
+                        { "q": "Hành tinh này là của ai?", "a": ["Của người lớn", "Của chúng ta (trẻ em)", "Của người ngoài hành tinh", "Của riêng nước Mỹ"], "c": 1 },
+                        { "q": "Câu thơ nào khẳng định sự bình đẳng giữa các dân tộc?", "a": ["Trái đất này là của chúng mình", "Vàng, trắng, đen... dù da khác màu", "Hải âu ơi, cánh chim vờn sóng biển", "Khói hình nấm là tai họa đấy"], "c": 1 }
+                    ]
+                }
+            }
+        },
+        "322-nhung-con-hac-giay": {
+            "title": "Những con hạc giấy",
+            "week": 32,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/nhung-con-hac-giay.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Những con hạc giấy
+                            </h1>
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                <p>Ngày 16 tháng 7 năm 1945, nước Mỹ chế tạo được bom nguyên tử. Hơn nửa tháng sau, chính phủ Mỹ quyết định ném cả hai quả bom mới chế tạo xuống Nhật Bản. Hai quả bom lần lượt ném xuống các thành phố Hi-rô-si-ma và Na-ga-xa-ki đã cướp đi mạng sống của hàng trăm nghìn người. Tính đến cuối năm 1945, tổng số người chết vì hai quả bom và bị nhiễm phóng xạ nguyên tử đã lên đến nửa triệu.</p>
+                                <p>Khi Hi-rô-si-ma bị ném bom, cô bé Xa-xa-ki Xa-đa-cô mới hai tuổi đã may mắn thoát nạn. Nhưng em bị nhiễm phóng xạ. Mười năm sau, từ một cô bé khoẻ mạnh, nhanh nhẹn, sức khoẻ của em bị giảm sút nhanh chóng, phải nằm viện để chữa trị.</p>
+                                <p>Nằm trong bệnh viện nhẩm đếm từng ngày còn lại của đời mình, cô bé ngây thơ tin vào một truyền thuyết nói rằng nếu gấp đủ một nghìn con hạc bằng giấy treo quanh phòng, em sẽ khỏi bệnh. Em liền lặng lẽ nén đau, miệt mài gấp hạc. Biết chuyện, trẻ em toàn nước Nhật đã tới tấp gửi hàng nghìn con hạc giấy đến cho Xa-đa-cô. Nhưng Xa-đa-cô vẫn không qua khỏi, mặc dù em đã gấp được hơn một nghìn con hạc giấy.</p>
+                                <p>Xúc động trước cái chết của Xa-đa-cô, học sinh thành phố Hi-rô-si-ma đã quyên góp tiền xây một đài tưởng niệm những nạn nhân bị bom nguyên tử sát hại. Năm 1958, tượng đài Hoà bình cho trẻ em được khánh thành tại công viên Hoà Bình ở Hi-rô-si-ma.</p>
+                                <p class="text-right italic text-base">(Theo Những mẩu chuyện lịch sử thế giới)</p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Bài đọc tố cáo tội ác của chiến tranh hạt nhân đã cướp đi sinh mạng của bao người dân vô tội, đồng thời thể hiện khát vọng sống và ước vọng hòa bình của trẻ em toàn thế giới.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/nhung-con-hac-giay.png" alt="Những con hạc giấy" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Hậu quả mà hai quả bom nguyên tử gây ra cho Nhật Bản là gì?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Hai quả bom nguyên tử đã cướp đi mạng sống của hàng trăm nghìn người. Tính đến cuối năm 1945, tổng số người chết và bị nhiễm phóng xạ đã lên đến nửa triệu người.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 2 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Xa-đa-cô hi vọng kéo dài cuộc sống của mình bằng cách nào?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Xa-đa-cô tin vào truyền thuyết: nếu gấp đủ một nghìn con hạc giấy treo quanh phòng thì em sẽ khỏi bệnh. Vì thế, em đã lặng lẽ nén đau, miệt mài gấp hạc giấy.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 3 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Các bạn nhỏ đã làm gì để bày tỏ ước vọng hòa bình?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Trẻ em toàn nước Nhật đã gửi hàng nghìn con hạc giấy đến cho Xa-đa-cô. Sau khi em mất, học sinh đã quyên góp xây dựng Tượng đài Hoà bình cho trẻ em để tưởng niệm các nạn nhân.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Câu 4 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Câu chuyện muốn nói với em điều gì?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Câu chuyện lên án tội ác chiến tranh hạt nhân, đồng thời ca ngợi khát vọng sống mãnh liệt và ước mơ hòa bình, tinh thần đoàn kết của trẻ em trên toàn thế giới.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Nước Mỹ ném hai quả bom nguyên tử xuống Nhật Bản vào năm nào?", "a": ["1944", "1945", "1954", "1975"], "c": 1 },
+                        { "q": "Hai thành phố nào của Nhật Bản bị ném bom?", "a": ["Tô-ky-ô và Ô-xa-ca", "Hi-rô-si-ma và Na-ga-xa-ki", "Ki-ô-tô và Cô-bê", "Na-gô-ya và Phú Sĩ"], "c": 1 },
+                        { "q": "Hậu quả nặng nề nhất của hai quả bom là gì?", "a": ["Phá hủy nhà cửa", "Cướp đi mạng sống hàng trăm nghìn người và gây nhiễm phóng xạ", "Làm ô nhiễm môi trường", "Gây cháy rừng"], "c": 1 },
+                        { "q": "Cô bé Xa-đa-cô bao nhiêu tuổi khi bom rơi xuống?", "a": ["1 tuổi", "2 tuổi", "5 tuổi", "10 tuổi"], "c": 1 },
+                        { "q": "Xa-đa-cô bị nhiễm chất độc gì?", "a": ["Chất độc màu da cam", "Phóng xạ nguyên tử", "Khí độc", "Thuốc súng"], "c": 1 },
+                        { "q": "Xa-đa-cô tin vào truyền thuyết nào để mong khỏi bệnh?", "a": ["Gấp 1000 ngôi sao giấy", "Gấp 1000 con hạc giấy", "Gấp 1000 chiếc thuyền giấy", "Gấp 1000 bông hoa giấy"], "c": 1 },
+                        { "q": "Trẻ em Nhật Bản đã làm gì để giúp đỡ Xa-đa-cô?", "a": ["Gửi tiền", "Gửi hạc giấy", "Gửi thuốc", "Đến thăm"], "c": 1 },
+                        { "q": "Câu chuyện về Xa-đa-cô có kết thúc như thế nào?", "a": ["Em khỏi bệnh", "Em qua đời dù đã gấp hơn 1000 con hạc", "Em trở thành bác sĩ", "Em đi du học"], "c": 1 },
+                        { "q": "Sau khi Xa-đa-cô mất, học sinh Hi-rô-si-ma đã làm gì?", "a": ["Quyên góp xây đài tưởng niệm nạn nhân bom nguyên tử", "Trồng cây", "Viết sách", "Vẽ tranh"], "c": 0 },
+                        { "q": "Tượng đài Hoà bình cho trẻ em được đặt ở đâu?", "a": ["Công viên Hoà Bình ở Na-ga-xa-ki", "Công viên Hoà Bình ở Hi-rô-si-ma", "Thủ đô Tô-ky-ô", "Trong bệnh viện"], "c": 1 },
+                        { "q": "Nội dung chính của bài đọc là gì?", "a": ["Kể về cuộc đời Xa-đa-cô", "Tố cáo tội ác chiến tranh hạt nhân và ca ngợi khát vọng hòa bình", "Hướng dẫn gấp hạc giấy", "Tả cảnh nước Nhật"], "c": 1 },
+                        { "q": "Con hạc giấy trong bài là biểu tượng của điều gì?", "a": ["Sự giàu có", "Ước vọng hòa bình và sự sống", "Sự thông minh", "Sức mạnh quân sự"], "c": 1 },
+                        { "q": "Tổng số người chết và nhiễm phóng xạ tính đến cuối năm 1945 là bao nhiêu?", "a": ["Một trăm nghìn", "Nửa triệu", "Một triệu", "Hai trăm nghìn"], "c": 1 },
+                        { "q": "Cảm xúc của em khi đọc câu chuyện này là gì?", "a": ["Vui vẻ", "Xúc động, xót xa", "Bình thường", "Sợ hãi"], "c": 1 },
+                        { "q": "Để thế giới không còn chiến tranh, chúng ta cần làm gì?", "a": ["Đoàn kết, yêu thương, bảo vệ hòa bình", "Chế tạo vũ khí", "Gây gổ với nhau", "Không quan tâm"], "c": 0 }
+                    ]
+                }
+            }
+        },
+        "341-dien-thoai-di-dong": {
+            "title": "Điện thoại di động",
+            "week": 34,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/341-dien-thoai-di-dong.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                            <!-- Trang trí góc -->
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                Điện thoại di động
+                            </h1>
+
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                <p>Điện thoại di động là một vật dụng không thể thiếu trong cuộc sống của con người, nhất là trong cuộc sống hiện đại ngày nay. Thật khó hình dung khi thế giới này không có nó.</p>
+                                <p>Ngày 3 tháng 4 năm 1973, nhà phát minh Mác-tin Cúp-pơ thực hiện cuộc gọi với phiên bản đầu tiên của điện thoại di động “cục gạch” vì nó nặng tới 1,1 ki-lô-gam. Chiếc điện thoại này có màn hình chỉ hiển thị chữ, pin thì dùng được có hai mươi phút. Hẳn là bạn không muốn đi khắp nơi với một cục gạch to tướng như thế.</p>
+                                <p>Ngày nay, công nghệ cải tiến đã giúp kích thước của điện thoại di động nhỏ lại và nặng chưa đến 85 gam, bỏ vừa trong túi áo. Điện thoại di động có nhiều chức năng, chẳng khác gì một cái hộp chứa hàng loạt dụng cụ: chúng ta có thể gọi điện cho nhau bao gồm cả tiếng và hình ảnh, nhắn tin văn bản và nhắn tin thoại, chụp ảnh, nghe nhạc, chơi trò chơi điện tử, xem phim,...</p>
+                                <p>Điện thoại di động ngày càng thông minh hơn. Nó giúp mọi người mua sắm, giao dịch trực tuyến, phát, nhận video,... Hệ thống định vị toàn cầu cho phép điện thoại di động có thể xác định vị trí của bạn ở bất cứ đâu trên hành tinh này. Thật tuyệt vời!</p>
+                                <p class="text-right italic text-base">(Theo Gim Píp, Nguyễn Hoàng dịch)</p>
+                            </div>
+                        </div>
+
+                        <!-- Nội dung chính -->
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                        Điện thoại di động là một trong những phương tiện thông tin hiện đại mà con người đã phát minh được. Nhờ nó, con người có một cuộc sống tiện lợi, phát triển tinh thần, tiết kiệm sức lực và thời gian đi rất nhiều.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <!-- Ảnh minh họa -->
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/dien_thoai_di_dong.png" alt="Minh họa Điện thoại di động" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Câu 1 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">
+                                        1. Ai là người thực hiện cuộc gọi đầu tiên bằng điện thoại di động và vào thời điểm nào?
+                                    </span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Cuộc gọi đầu tiên bằng điện thoại di động do nhà phát minh Mác-tin Cúp-pơ thực hiện vào ngày 3 tháng 4 năm 1973.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 2 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">
+                                        2. So sánh sự khác biệt về khối lượng và kích thước giữa chiếc điện thoại đầu tiên và điện thoại ngày nay.
+                                    </span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">
+                                            • Điện thoại đầu tiên: Được gọi là "cục gạch" vì nặng tới 1,1 ki-lô-gam, rất to và nặng.<br>
+                                            • Điện thoại ngày nay: Nhỏ gọn, bỏ vừa trong túi áo, nặng chưa đến 85 gam.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 3 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">
+                                        3. Điện thoại di động ngày nay có những chức năng gì nổi bật?
+                                    </span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Điện thoại ngày nay như một hộp dụng cụ đa năng: có thể gọi điện (cả tiếng và hình), nhắn tin (văn bản, thoại), chụp ảnh, nghe nhạc, chơi trò chơi, xem phim, mua sắm, giao dịch trực tuyến và định vị toàn cầu.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Câu 4 -->
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">
+                                        4. Theo em, nếu không có điện thoại di động, con người ngày nay sẽ gặp khó khăn gì?
+                                    </span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Nếu không có điện thoại di động, việc liên lạc, chia sẻ thông tin nhanh chóng sẽ rất khó khăn và tốn nhiều thời gian. Ngoài ra, các tiện ích như xác định vị trí, dẫn đường, cứu nạn hoặc làm việc từ xa cũng khó thực hiện được.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Ai là người thực hiện cuộc gọi di động đầu tiên?", "a": ["Mác-tin Cúp-pơ", "A-lếch-xan-đơ Gra-ham Bell", "Xti-vờ Gióp", "Tô-mát Ê-đi-xơn"], "c": 0 },
+                        { "q": "Cuộc gọi đầu tiên được thực hiện vào năm nào?", "a": ["1950", "1960", "1973", "1980"], "c": 2 },
+                        { "q": "Chiếc điện thoại đầu tiên nặng bao nhiêu?", "a": ["0,5 ki-lô-gam", "1,1 ki-lô-gam", "2 ki-lô-gam", "5 ki-lô-gam"], "c": 1 },
+                        { "q": "Vì sao chiếc điện thoại đầu tiên được gọi là 'cục gạch'?", "a": ["Vì nó rất cứng", "Vì nó hình vuông", "Vì nó to và nặng như cục gạch", "Vì nó màu đỏ"], "c": 2 },
+                        { "q": "Pin của chiếc điện thoại đầu tiên dùng được bao lâu?", "a": ["1 tiếng", "20 phút", "5 phút", "10 phút"], "c": 1 },
+                        { "q": "Điện thoại ngày nay nặng khoảng bao nhiêu?", "a": ["Chưa đến 85 gam", "100 gam", "200 gam", "500 gam"], "c": 0 },
+                        { "q": "Điện thoại di động ngày nay được ví với vật dụng gì?", "a": ["Cái máy tính", "Hộp dụng cụ đa năng", "Cái ti vi", "Cái máy ảnh"], "c": 1 },
+                        { "q": "Ngoài nghe gọi, điện thoại ngày nay làm được gì?", "a": ["Nấu cơm", "Giặt đồ", "Chụp ảnh, xem phim, định vị...", "Quét nhà"], "c": 2 },
+                        { "q": "Hệ thống nào giúp điện thoại xác định vị trí?", "a": ["Hệ thống định vị toàn cầu (GPS)", "Hệ thống phát thanh", "Hệ thống cấp nước", "Hệ thống điện lưới"], "c": 0 },
+                        { "q": "Lợi ích chính của điện thoại di động là gì?", "a": ["Làm đồ chơi", "Liên lạc nhanh chóng, tiện lợi", "Để trang trí", "Để chặn giấy"], "c": 1 },
+                        { "q": "Nếu không có điện thoại, điều gì sẽ khó khăn nhất?", "a": ["Xem giờ", "Nghe nhạc", "Liên lạc khẩn cấp/tức thời", "Chơi game"], "c": 2 },
+                        { "q": "Điện thoại di động giúp con người tiết kiệm điều gì?", "a": ["Tiền bạc", "Sức lực và thời gian", "Thức ăn", "Nước uống"], "c": 1 },
+                        { "q": "Màn hình của chiếc thoại đầu tiên hiển thị được gì?", "a": ["Hình ảnh màu", "Video", "Chỉ hiển thị chữ", "Bản đồ"], "c": 2 },
+                        { "q": "Tác giả bài đọc là ai?", "a": ["Gim Píp", "Nam Cao", "Tô Hoài", "Trần Đăng Khoa"], "c": 0 },
+                        { "q": "Chủ điểm của bài học là gì?", "a": ["Thế giới tuổi thơ", "Vẻ đẹp cuộc sống", "Thế giới của chúng ta", "Tiếp bước cha ông"], "c": 2 }
+                    ]
+                }
+            }
+        },
+        "342-thanh-pho-thong-minh-mat-xda": {
+            "title": "Thành phố thông minh Mát-xđa",
+            "week": 34,
+            "subject": "Đọc",
+            "theme": "Thế giới của chúng ta",
+            "audio": "am_thanh/342-mat-xda.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                <!-- Cột trái (70%) - Bài đọc -->
+                <section class="w-full lg:w-[70%]">
+                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                             <!-- Trang trí góc -->
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+
+                            <h1 class="text-4xl font-black mb-12 text-blue-950 text-center uppercase tracking-tighter leading-tight relative">
+                                <span class="bg-blue-600 w-12 h-1.5 absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full"></span>
+                                THÀNH PHỐ THÔNG MINH MÁT-XĐA
+                            </h1>
+                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                <p>Mát-xđa là một ốc đảo nằm giữa sa mạc, thuộc Các Tiểu vương quốc Ả Rập Thống nhất (viết tắt là UAE). Năm 2008, UAE khởi công xây dựng dự án “Thành phố thông minh Mát-xđa" nhằm biến Mát-xđa trở thành thành phố không các-bô-níc đầu tiên trên thế giới.</p>
+                                <p>Điểm nhấn trong thiết kế của thành phố là những chiếc ô hình hoa hướng dương. Ban ngày, những chiếc ô này vừa giúp lưu trữ năng lượng mặt trời vừa là những tấm che nắng khổng lồ. Ban đêm, chúng sẽ khép lại, toả nhiệt, cung cấp điện năng lượng mặt trời cho toàn thành phố.</p>
+                                <p>Để đối phó với tình trạng nóng lên do biến đổi khí hậu, ở Mát-xđa, các toà nhà được thiết kế chụm lại với nhau, có lối đi ở giữa, giúp không khí lưu thông được dễ dàng và giúp giảm nhiệt độ mùa hè. Ngoài ra, một tháp gió được xây dựng nhằm lấy dòng không khí trên cao, mang làn gió mát mẻ vào thành phố, cũng góp phần làm giảm đáng kể nhiệt độ nơi đây so với vùng sa mạc ở xung quanh.</p>
+                                <p>Các công viên và khu thương mại ở Mát-xđa được xây dựng theo mô hình khu vườn Ả Rập truyền thống, ngập tràn màu xanh, giúp giảm thiểu tối đa lượng khí thải. Chính quyền thành phố cũng khuyến khích người dân đi bộ, đi xe đạp hoặc sử dụng các phương tiện giao thông công cộng chạy bằng điện năng lượng mặt trời để bảo vệ môi trường.</p>
+                                <p>Việc xây dựng thành công thành phố thông minh Mát-xđa đã truyền cảm hứng cho một số dự án phát triển nhà ở Anh, Bồ Đào Nha,.... Đây sẽ là những đô thị sinh thái tiếp theo giúp ngăn chặn ô nhiễm môi trường và biến đổi khí hậu.</p>
+                                <p class="text-right italic text-base">(Lâm Anh tổng hợp)</p>
+                            </div>
+                        </div>
+                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl">
+                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-lg font-bold leading-relaxed text-blue-50">Thành phố thông minh Mát-xđa là giải pháp đối phó với tình trạng nóng lên do biến đổi khí hậu và giúp ngăn chặn ô nhiễm môi trường. Đây là hình mẫu về đô thị sinh thái hiện đại cho thế giới.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <aside class="w-full lg:w-[30%]">
+                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                        <div class="mb-6 -mt-2">
+                            <img src="hinh_anh/342-mat-xda.png" alt="Minh họa Mát-xđa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Địa điểm, thời gian khởi công, mục đích của dự án?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium"><b>Địa điểm:</b> Ốc đảo Mát-xđa (UAE). <b>Thời gian:</b> Năm 2008. <b>Mục đích:</b> Biến Mát-xđa trở thành thành phố không các-bô-níc đầu tiên trên thế giới.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Thiết kế tự vận hành bằng năng lượng mặt trời?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Sử dụng những chiếc ô hình hoa hướng dương khổng lồ. Ban ngày mở ra lưu trữ năng lượng và che nắng, ban đêm khép lại toả nhiệt và cung cấp điện cho thành phố.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Cách đối phó với tình trạng nóng lên?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Các tòa nhà chụm lại với nhau tạo lối đi giúp không khí lưu thông; xây tháp gió để lấy không khí mát trên cao mang vào thành phố.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Chi tiết giúp ngăn chặn ô nhiễm môi trường?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Công viên, khu thương mại ngập tràn màu xanh; khuyến khích đi bộ, xe đạp, phương tiện công cộng chạy bằng điện mặt trời.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm overflow-hidden">
+                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5. Ý nghĩa của việc truyền cảm hứng cho nước khác?</span>
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                        <p class="font-medium">Mát-xđa là mô hình kiểu mẫu tốt, cho thấy con người rất quan tâm đến việc xây dựng thành phố chống biến đổi khí hậu và bảo vệ môi trường.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Thành phố thông minh Mát-xđa thuộc quốc gia nào?", "a": ["Ả Rập Xê Út", "Các Tiểu vương quốc Ả Rập Thống nhất (UAE)", "Ca-ta", "I-ran"], "c": 1 },
+                        { "q": "Mát-xđa được xây dựng ở đâu?", "a": ["Trên núi cao", "Dưới lòng đất", "Giữa sa mạc", "Ven biển"], "c": 2 },
+                        { "q": "Dự án khởi công năm nào?", "a": ["2000", "2005", "2008", "2010"], "c": 2 },
+                        { "q": "Mục tiêu của Mát-xđa là gì?", "a": ["Thành phố giàu nhất", "Thành phố không các-bô-níc đầu tiên", "Thành phố lớn nhất", "Thành phố du lịch"], "c": 1 },
+                        { "q": "Điểm nhấn thiết kế của thành phố là gì?", "a": ["Kim tự tháp", "Những chiếc ô hình hoa hướng dương", "Tòa nhà cao tầng", "Công viên nước"], "c": 1 },
+                        { "q": "Những chiếc ô khổng lồ làm gì vào ban ngày?", "a": ["Tạo mưa", "Lưu trữ năng lượng và che nắng", "Phát sáng", "Quay theo chiều gió"], "c": 1 },
+                        { "q": "Những chiếc ô khổng lồ làm gì vào ban đêm?", "a": ["Ngủ đông", "Khép lại, tỏa nhiệt, cung cấp điện", "Biến mất", "Chiếu phim"], "c": 1 },
+                        { "q": "Các tòa nhà được thiết kế như thế nào để giảm nóng?", "a": ["Xây cách xa nhau", "Chụm lại, có lối đi ở giữa", "Sơn màu đen", "Không có cửa sổ"], "c": 1 },
+                        { "q": "Tháp gió có tác dụng gì?", "a": ["Trang trí", "Lấy gió mát trên cao thổi vào thành phố", "Phát sóng điện thoại", "Ngắm cảnh"], "c": 1 },
+                        { "q": "Công viên ở đây xây theo mô hình nào?", "a": ["Vườn Châu Âu", "Vườn Ả Rập truyền thống", "Rừng nguyên sinh", "Vườn Nhật Bản"], "c": 1 },
+                        { "q": "Phương tiện giao thông nào được khuyến khích?", "a": ["Ô tô chạy xăng", "Xe buýt chạy dầu", "Xe đạp, đi bộ, xe điện", "Xe máy"], "c": 2 },
+                        { "q": "Mát-xđa đã truyền cảm hứng cho những nước nào?", "a": ["Mỹ và Pháp", "Anh, Bồ Đào Nha...", "Trung Quốc và Nga", "Việt Nam và Lào"], "c": 1 },
+                        { "q": "Mát-xđa là hình mẫu cho loại đô thị nào?", "a": ["Đô thị cổ", "Đô thị sinh thái", "Đô thị công nghiệp", "Đô thị biển"], "c": 1 },
+                        { "q": "Vì sao Mát-xđa được gọi là thành phố thông minh?", "a": ["Vì người dân thông minh", "Sử dụng công nghệ để bảo vệ môi trường", "Có nhiều robot", "Có trường đại học lớn"], "c": 1 },
+                        { "q": "Bài đọc thuộc chủ điểm nào?", "a": ["Thế giới tuổi thơ", "Thế giới của chúng ta", "Chủ điểm tự chọn", "Đất nước ngàn năm"], "c": 1 }
                     ]
                 }
             }
         }
     }
 };
+
