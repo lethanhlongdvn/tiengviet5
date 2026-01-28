@@ -436,7 +436,8 @@ function createBlock(block) {
 
 // Logic for clicking words in Exercise 1
 document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('word')) {
+    // Conflict fix: Ignore if element has its own onclick handler (like LTVC lessons)
+    if (e.target.classList.contains('word') && !e.target.hasAttribute('onclick')) {
         e.target.classList.toggle('selected');
         e.target.classList.toggle('text-blue-600');
         e.target.classList.toggle('font-black');
