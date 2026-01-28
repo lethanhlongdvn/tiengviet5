@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển Giáo viên - EduRobot</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- SheetJS for Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-8">
+    <div id="login-screen"
+        class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-[32px] p-10 max-w-md w-full shadow-2xl text-center">
+            <div class="w-20 h-20 bg-blue-100 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-6">👩‍🏫
+            </div>
+            <h2 class="text-3xl font-black text-gray-800 mb-2">Giáo viên</h2>
+            <p class="text-gray-500 mb-8 font-bold text-sm uppercase tracking-widest">Đăng nhập để xem báo cáo</p>
+
+            <div class="space-y-4">
+                <input type="password" id="teacher-password" placeholder="Nhập mật khẩu truy cập..."
+                    class="w-full px-6 py-4 rounded-2xl border-2 border-gray-100 focus:border-blue-500 transition-all outline-none font-bold text-center text-xl tracking-widest">
+                <button onclick="checkLogin()"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-95 uppercase tracking-widest">
+                    Vào hệ thống
+                </button>
+            </div>
+            <a href="index.html"
+                class="inline-block mt-8 text-sm font-bold text-gray-400 hover:text-blue-600 transition-colors uppercase tracking-widest">Quay
+                lại trang chủ</a>
+        </div>
+    </div>
+
+    <div id="dashboard" class="hidden container mx-auto space-y-8">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-4">
+                <div
+                    class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-blue-200">
+                    E</div>
+                <div>
+                    <h1 class="text-3xl font-black text-gray-800">Báo cáo Tiến độ</h1>
+                    <p class="text-blue-600 font-bold uppercase text-[10px] tracking-[0.3em]">Hệ thống quản lý EduRobot
+                    </p>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="exportToExcel()"
+                    class="bg-green-600 hover:bg-green-700 text-white font-black px-8 py-4 rounded-2xl shadow-xl shadow-green-200 flex items-center gap-3 transition-all transform hover:-translate-y-1 active:scale-95 text-xs uppercase tracking-widest">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                        </path>
+                    </svg>
+                    Tải file Excel (Quiz)
+                </button>
+                <button onclick="logout()"
+                    class="p-4 bg-white text-gray-400 hover:text-red-500 rounded-2xl shadow-sm transition-all border border-gray-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-card p-8 rounded-[32px] border-l-8 border-blue-500">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Tổng số lượt làm bài</p>
+                <h3 id="stat-total" class="text-4xl font-black text-gray-800">--</h3>
+            </div>
+            <div class="glass-card p-8 rounded-[32px] border-l-8 border-green-500">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Điểm trung bình</p>
+                <h3 id="stat-avg" class="text-4xl font-black text-gray-800">--</h3>
+            </div>
+            <div class="glass-card p-8 rounded-[32px] border-l-8 border-orange-500">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Học sinh tích cực</p>
+                <h3 id="stat-students" class="text-4xl font-black text-gray-800">--</h3>
+            </div>
+        </div>
+
+        <!-- Recent Results Table -->
+        <div class="glass-card rounded-[40px] overflow-hidden">
+            <div
+                class="p-8 border-b border-gray-100 bg-white/50 flex flex-col md:flex-row justify-between items-center gap-4">
+                <h3 class="text-xl font-black text-gray-800 uppercase tracking-tight">KẾT QUẢ HỌC TẬP</h3>
+                <div class="flex flex-col md:flex-row gap-4 items-center w-full md:w-auto">
+                    <div class="relative w-full md:w-72">
+                        <select id="lesson-filter" onchange="loadStats()"
+                            class="w-full pl-4 pr-10 py-2 rounded-xl border-2 border-blue-100 focus:border-blue-500 outline-none font-bold text-gray-600 appearance-none bg-white cursor-pointer transition-all text-sm">
+                            <option value="">Tất cả bài học</option>
+                            <!-- Lessons will be loaded here -->
+                        </select>
+                        <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-blue-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <span
+                        class="px-3 py-1 bg-blue-100 text-blue-600 text-[10px] font-black rounded-lg uppercase whitespace-nowrap">Trắc
+                        nghiệm</span>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-gray-50/50">
+                            <th class="p-6 text-xs font-black text-gray-400 uppercase tracking-widest">STT</th>
+                            <th class="p-6 text-xs font-black text-gray-400 uppercase tracking-widest">Học sinh</th>
+                            <th class="p-6 text-xs font-black text-gray-400 uppercase tracking-widest">Lớp</th>
+                            <th class="p-6 text-xs font-black text-gray-400 uppercase tracking-widest text-center">
+                                Trường</th>
+                            <th class="p-6 text-xs font-black text-gray-400 uppercase tracking-widest text-center">Điểm
+                                số</th>
+                            <th class="p-6 text-xs font-black text-gray-400 uppercase tracking-widest text-right">Ngày
+                                nộp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-table" class="divide-y divide-gray-50">
+                        <!-- Data rows here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/firebase-logic.js"></script>
+    <script>
+        // Simple security
+        function checkLogin() {
+            const pass = document.getElementById('teacher-password').value;
+            // The password requested is "123456" for demo or whatever the user expects.
+            // I'll use a simple check for now.
+            if (pass === "123456") {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('dashboard').classList.remove('hidden');
+                loadStats();
+            } else {
+                alert("Mật khẩu không đúng! Thầy/Cô vui lòng thử lại.");
+            }
+        }
+
+        function logout() {
+            window.location.reload();
+        }
+
+        let allQuizData = []; // Store for export
+
+        async function loadStats() {
+            const table = document.getElementById('results-table');
+            const lessonFilter = document.getElementById('lesson-filter').value;
+            table.innerHTML = `<tr><td colspan="6" class="p-10 text-center text-gray-400 font-bold italic animate-pulse">Đang tải dữ liệu...</td></tr>`;
+
+            try {
+                let query = db.collection("diem_tieng_viet_lop5").orderBy("timestamp", "desc");
+                if (lessonFilter) {
+                    query = query.where("lessonTitle", "==", lessonFilter);
+                }
+                const snapshot = await query.get();
+
+                let rows = "";
+                let totalScore = 0;
+                let studentNames = new Set();
+                document.getElementById('stats-title').innerText = lessonFilter ? `THỐNG KÊ KẾT QUẢ: ${lessonFilter.toUpperCase()}` : "TẤT CẢ BÀI HỌC";
+
+                snapshot.forEach((doc, index) => {
+                    const data = doc.data();
+                    allQuizData.push(data);
+                    const date = data.timestamp ? data.timestamp.toDate().toLocaleString('vi-VN') : "---";
+                    totalScore += data.score || 0;
+                    studentNames.add(data.studentName);
+                    if (data.lessonTitle) lessonTitles.add(data.lessonTitle);
+
+                    const scoreClass = data.score >= 80 ? 'text-green-600' : (data.score >= 50 ? 'text-orange-600' : 'text-red-600');
+
+                    rows += `
+                        <tr class="hover:bg-blue-50/30 transition-colors">
+                            <td class="p-6 text-gray-400 font-bold text-sm">${index + 1}</td>
+                            <td class="p-6">
+                                <span class="font-black text-gray-800 block text-lg">${data.studentName || "N/A"}</span>
+                                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest shrink-0">${data.studentSchool || "N/A"}</span>
+                            </td>
+                            <td class="p-6">
+                                <span class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-lg font-black text-sm">${data.studentClass || "5/1"}</span>
+                            </td>
+                            <td class="p-6 font-bold text-center text-gray-600">${data.school || data.studentSchool || "N/A"}</td>
+                            <td class="p-6">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-2xl font-black ${scoreClass}">${data.score || 0}</span>
+                                    <span class="text-xs text-gray-400 font-bold">/ 100</span>
+                                </div>
+                            </td>
+                            <td class="p-6 text-right text-sm font-bold text-gray-500">${date}</td>
+                        </tr>
+                    `;
+                });
+
+                table.innerHTML = rows || `<tr><td colspan="6" class="p-10 text-center text-gray-400">Chưa có kết quả nào cho bài học này.</td></tr>`;
+
+                // Update Stats
+                document.getElementById('stat-total').innerText = snapshot.size;
+                document.getElementById('stat-avg').innerText = snapshot.size > 0 ? (totalScore / snapshot.size).toFixed(1) : "0";
+                document.getElementById('stat-students').innerText = studentNames.size;
+
+                // Populate Lesson Filter if not already filtered
+                if (!lessonFilter) {
+                    const filter = document.getElementById('lesson-filter');
+                    const currentVal = filter.value;
+                    filter.innerHTML = '<option value="">Tất cả bài học</option>';
+                    Array.from(lessonTitles).sort().forEach(title => {
+                        const opt = document.createElement('option');
+                        opt.value = title;
+                        opt.innerText = title;
+                        filter.appendChild(opt);
+                    });
+                    filter.value = currentVal;
+                }
+
+            } catch (error) {
+                console.error("Error loading stats:", error);
+                table.innerHTML = `<tr><td colspan="6" class="p-10 text-center text-red-500 font-black">Lỗi tải dữ liệu: ${error.message}</td></tr>`;
+            }
+        }
+
+        async function exportToExcel() {
+            try {
+                const lessonFilter = document.getElementById('lesson-filter').value;
+                const dataToExport = allQuizData.map((d, index) => ({
+                    "STT": index + 1,
+                    "Họ và Tên": d.studentName,
+                    "Lớp": d.studentClass,
+                    "Trường": d.studentSchool,
+                    "Điểm (0-100)": d.score,
+                    "Số câu đúng": d.correctCount,
+                    "Tổng số câu": d.totalQuestions,
+                    "Thời gian": d.timestamp ? d.timestamp.toDate().toLocaleString('vi-VN') : ""
+                }));
+
+                if (dataToExport.length === 0) {
+                    alert("Chưa có dữ liệu để xuất!");
+                    return;
+                }
+
+                const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+                const workbook = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(workbook, worksheet, "Kết quả Trắc nghiệm");
+
+                const fileName = lessonFilter ? `Tien_Do_${lessonFilter.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().toLocaleDateString('vi-VN')}.xlsx` : `Tien_Do_Tat_Ca_${new Date().toLocaleDateString('vi-VN')}.xlsx`;
+                XLSX.writeFile(workbook, fileName);
+
+            } catch (error) {
+                console.error("Excel Export Error:", error);
+                alert("Lỗi khi xuất file Excel!");
+            }
+        }
+    </script>
+</body>
+
+</html>
