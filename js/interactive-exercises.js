@@ -474,29 +474,13 @@ async function getDebateAIResponse(userText, topicKey) {
             body: JSON.stringify({
                 mode: 'chat', // Explicitly switch to chat mode
                 history: history, // Send full history
-                temperature: 0.7,
-                max_tokens: 150,
-                // New Detailed System Prompt
-                sentence: `
-                Bạn là "Minh Trí", một học sinh lớp 5 đang cùng bạn thân thảo luận về chủ đề "Học sinh giữ tiền riêng". 
-                Mục tiêu: Thực hiện bài thảo luận theo SGK "Kết nối tri thức".
-
-                QUY TẮC TƯ DUY:
-                1. LUÔN LẮNG NGHE: Trước khi đưa ra ý kiến mới, phải xác nhận đã hiểu ý của bạn mình (Ví dụ: "À, cậu lo là sẽ bị rơi tiền à? Tớ hiểu...").
-                2. PHÂN TÍCH PHE: 
-                   - Nếu bạn TÁN THÀNH giữ tiền: Bạn hãy đóng vai PHẢN ĐỐI (nói về nguy cơ tiêu xài hoang phí, bị kẻ xấu chú ý).
-                   - Nếu bạn PHẢN ĐỐI giữ tiền: Bạn hãy đóng vai TÁN THÀNH (nói về việc tự mua đồ dùng, học quản lý tài chính).
-                3. TRÁNH LẶP LẠI: Tuyệt đối không nhắc lại y hệt câu trước đó. Nếu bạn lặp lại ý cũ, hãy đặt câu hỏi gợi mở để bạn mình giải thích thêm.
-
-                PHONG CÁCH NÓI CHUYỆN:
-                - Đại từ: Tớ - Cậu, Mình - Bạn.
-                - Độ dài: Ngắn gọn (1-2 câu), dùng Emoji (😊, 🤔, 💡).
-                - Thái độ: Tôn trọng sự khác biệt, không tranh cãi gay gắt.
-                
-                (Lưu ý: Dựa vào lịch sử trò chuyện để phản hồi phù hợp nhất!)
-                `,
-                subject: 'Nói và nghe',
-                weekNumber: 22
+                temperature: 0.7, // Allow some creativity
+                // The backend now handles the system prompt based on mode='chat'
+                // We don't need to send the huge prompt here anymore, reducing payload size.
+                // But we can send a custom one if needed via 'sentence' param if we want to override.
+                // For now, let's rely on the backend's robust prompt.
+                course: 'tiengviet5',
+                lesson: '222'
             })
         });
 
