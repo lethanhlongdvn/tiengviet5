@@ -405,5 +405,138 @@ window.handleSubmission = async function () {
         // So this ELSE block is redundant but safe to keep empty or log.
     }
 
+
     if (btn) { btn.innerHTML = "🚀 NỘP BÀI"; btn.disabled = false; }
 };
+
+// --- LESSON 222: SPEAKING & LISTENING (DEBATE) ---
+const debateData = {
+    "giữ tiền riêng": {
+        topicName: "Học sinh giữ tiền riêng",
+        pro: [
+            "Việc giữ tiền giúp học sinh có thể chủ động mua sắm đồ dùng học tập cần thiết khi bố mẹ bận.",
+            "Giúp chúng ta sớm học được cách lập kế hoạch chi tiêu hợp lí, không bị phụ thuộc.",
+            "Khi tự giữ tiền, chúng ta sẽ hiểu rõ hơn giá trị của đồng tiền và trân trọng công sức lao động của cha mẹ."
+        ],
+        con: [
+            "Học sinh có thể bị cám dỗ, tiêu xài hoang phí vào những món đồ chơi vô bổ hoặc đồ ăn vặt không tốt.",
+            "Dễ nảy sinh tâm lí so bì, đua đòi với bạn bè khi thấy bạn có nhiều tiền hơn.",
+            "Có tiền trong người có thể gặp nguy hiểm nếu bị kẻ xấu dụ dỗ hoặc trấn lột."
+        ]
+    }
+};
+
+window.nvn222_state = {
+    messages: []
+};
+
+function getAIResponse(userText, topicKey) {
+    const lowerText = userText.toLowerCase();
+    const data = debateData[topicKey];
+
+    // Giao diện AI phản hồi đơn giản (Rule-based)
+    // 1. Phân loại ý kiến người dùng (Tán thành hay Phản đối)
+    // Từ khóa Tán thành: đồng ý, nên, tốt, cần thiết, mua đồ, quản lí...
+    // Từ khóa Phản đối: không nên, hại, xấu, đua đòi, hoang phí...
+
+    let isPro = false;
+    let isCon = false;
+
+    if (lowerText.match(/(đồng ý|nên|tốt|cần thiết|mua|quản lí|tự lập)/)) isPro = true;
+    if (lowerText.match(/(không nên|hại|xấu|đua đòi|hoang phí|nguy hiểm|lo lắng)/)) isCon = true;
+
+    // Nếu không rõ ràng hoặc cả hai, AI sẽ hỏi lại hoặc đưa ra góc nhìn trung lập
+    if (!isPro && !isCon) {
+        return "Ý kiến của bạn rất đáng suy ngẫm. Bạn có thể nói rõ hơn vì sao bạn nghĩ như vậy không? 🤔";
+    }
+
+    // Logic phản biện: Người dùng Pro -> AI đưa Con. Người dùng Con -> AI đưa Pro.
+    // Dùng random để chọn ý phản biện
+    const randomIdx = Math.floor(Math.random() * 3);
+
+    if (isPro) {
+        return `Mình hiểu bạn cho rằng việc này có lợi. Tuy nhiên, bạn có lo ngại rằng: "${data.con[randomIdx]}" không? 💡`;
+    } else {
+        return `Mình trân trọng lo lắng của bạn. Nhưng ở một góc nhìn khác, liệu việc này có giúp "${data.pro[randomIdx]}" không? ✨`;
+    }
+}
+
+function nvn222_send() {
+    const input = document.getElementById('nvn-chat-input');
+    const msgContainer = document.getElementById('nvn-chat-history');
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    // 1. Add User Message
+    addMessageToChat('user', text);
+    input.value = '';
+
+    // 2. Simulate AI Thinking
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'flex items-center space-x-2 p-3 bg-gray-100 rounded-xl rounded-tl-none self-start';
+    typingIndicator.innerHTML = '<span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></span>';
+    msgContainer.appendChild(typingIndicator);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+
+    setTimeout(() => {
+        msgContainer.removeChild(typingIndicator);
+        const aiRep = getAIResponse(text, "giữ tiền riêng");
+        addMessageToChat('ai', aiRep);
+    }, 1500);
+}
+
+function addMessageToChat(role, text) {
+    const msgContainer = document.getElementById('nvn-chat-history');
+    const div = document.createElement('div');
+
+    if (role === 'user') {
+        div.className = "self-end bg-blue-600 text-white p-4 rounded-2xl rounded-tr-none max-w-[80%] shadow-md animate-in slide-in-from-right-2";
+        div.innerHTML = `<p class="font-medium">${text}</p>`;
+        // Save history for summary
+        window.nvn222_state.messages.push({ role: 'Bạn', text: text });
+    } else {
+        div.className = "self-start bg-white border border-gray-200 text-gray-800 p-4 rounded-2xl rounded-tl-none max-w-[80%] shadow-md animate-in slide-in-from-left-2";
+        div.innerHTML = `<div class="flex items-center gap-2 mb-1"><span class="text-lg">🤖</span><span class="text-xs font-black text-blue-500 uppercase">Trợ lý tranh biện</span></div><p class="font-medium">${text}</p>`;
+        window.nvn222_state.messages.push({ role: 'AI', text: text });
+    }
+
+    msgContainer.appendChild(div);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+}
+
+function nvn222_summary() {
+    if (window.nvn222_state.messages.length < 2) {
+        alert("Cuộc thảo luận còn ngắn quá! Hãy trao đổi thêm vài câu nữa nhé. 😊");
+        return;
+    }
+
+    const summaryBtn = document.getElementById('nvn-summary-btn');
+    summaryBtn.innerHTML = "đang tổng hợp...";
+    summaryBtn.disabled = true;
+
+    setTimeout(() => {
+        const msgContainer = document.getElementById('nvn-chat-history');
+        const div = document.createElement('div');
+        div.className = "mx-auto bg-amber-50 border border-amber-200 p-5 rounded-2xl w-full shadow-inner my-4 animate-in zoom-in-95";
+        div.innerHTML = `
+            <h3 class="text-lg font-black text-amber-700 text-center mb-3">📋 TỔNG KẾT THẢO LUẬN</h3>
+            <div class="space-y-2 text-sm text-gray-700">
+                <p>✅ <strong>Điểm thống nhất:</strong> Cả hai đều quan tâm đến việc sử dụng tiền sao cho hợp lí và an toàn.</p>
+                <p>⚡ <strong>Điểm khác biệt:</strong> Một bên đề cao sự tự lập và trải nghiệm (User), một bên lưu ý về rủi ro và sự cám dỗ (AI) - hoặc ngược lại.</p>
+                <p>❤️ <strong>Nhận xét:</strong> Bạn đã thể hiện thái độ tôn trọng ý kiến khác biệt rất tốt! Hãy tiếp tục phát huy nhé. 🤝</p>
+            </div>
+         `;
+        msgContainer.appendChild(div);
+        msgContainer.scrollTop = msgContainer.scrollHeight;
+        summaryBtn.innerHTML = "📝 Tóm tắt cuộc trò chuyện";
+        summaryBtn.disabled = false;
+
+        celebrate();
+    }, 1500);
+}
+
+// Expose
+window.nvn222_send = nvn222_send;
+window.nvn222_summary = nvn222_summary;
+
