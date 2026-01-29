@@ -334,9 +334,16 @@ window.handleSubmission = async function () {
         try {
             // Upload Image if present
             if (isImage && fileObj) {
+                console.log("Starting upload...");
+                alert("Debug: Starting upload for " + fileObj.name);
                 const storageRef = firebase.storage().ref(`essays/${Date.now()}_${fileObj.name}`);
+
+                alert("Debug: Created Ref, putting file...");
                 const snapshot = await storageRef.put(fileObj);
+
+                alert("Debug: Upload complete, getting URL...");
                 fileUrl = await snapshot.ref.getDownloadURL();
+                alert("Debug: Got URL: " + fileUrl);
 
                 result = {
                     score: 9.5,
@@ -351,6 +358,7 @@ window.handleSubmission = async function () {
             }
 
             // Save to Firebase Firestore (ESSAYS_V2)
+            // alert("Debug: Saving to Firestore...");
             await db.collection("essays_v2").add({
                 studentName: name,
                 studentClass: cls,
@@ -364,6 +372,7 @@ window.handleSubmission = async function () {
                 status: "Chưa chấm",
                 type: 'essay'
             });
+            // alert("Debug: Saved to Firestore!");
 
             // Show result locally
             document.getElementById('viet222-score').innerText = result.score || 8.5;
@@ -395,7 +404,7 @@ window.handleSubmission = async function () {
 
         } catch (error) {
             console.error("Error saving essay:", error);
-            alert("Có lỗi khi nộp bài: " + error.message);
+            alert("Có lỗi khi nộp bài: " + error.message + "\n" + JSON.stringify(error));
         }
 
     } else {
