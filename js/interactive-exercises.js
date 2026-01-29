@@ -311,3 +311,121 @@ function ltvc22_toggle(el) {
         }
     }
 }
+
+// --- Lesson 221-viet Special Functions ---
+
+function rateViet(starElement, count) {
+    const parent = starElement.parentElement;
+    const stars = parent.querySelectorAll('.star-btn');
+    for (let i = 0; i < stars.length; i++) {
+        if (i < count) {
+            stars[i].textContent = '★';
+            stars[i].style.color = '#facc15';
+        } else {
+            stars[i].textContent = '☆';
+            stars[i].style.color = '#9ca3af';
+        }
+    }
+    if (count === 5 && typeof confetti === 'function') {
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 }, colors: ['#facc15', '#fbbf24', '#f59e0b'] });
+    }
+}
+
+async function checkVietAI(inputId, questionPart) {
+    const val = document.getElementById(inputId).value.trim();
+    const feedbackBox = document.getElementById('feedback-' + inputId);
+
+    if (!val) {
+        alert("Em ơi, hãy viết câu văn của mình vào chỗ trống trước nhé!");
+        return;
+    }
+
+    feedbackBox.classList.remove('hidden');
+    feedbackBox.innerHTML = '<span class="flex items-center gap-2">⏳ Thầy AI đang đọc và nhận xét bài của em...</span>';
+
+    var requirement = '';
+    if (questionPart === 'a') {
+        requirement = 'Câu 3a yêu cầu học sinh viết câu văn tả người sử dụng TỪ NGỮ GIÀU SỨC GỢI TẢ hoặc HÌNH ẢNH SO SÁNH gây ấn tượng (ví dụ: như, tựa như, giống như...)';
+    } else if (questionPart === 'b') {
+        requirement = 'Câu 3b yêu cầu học sinh viết câu văn tả người thể hiện SUY NGHĨ, CẢM XÚC, TÌNH CẢM của người viết đối với người được tả (ví dụ: yêu quý, kính trọng, nhớ thương, biết ơn...)';
+    }
+
+    try {
+        const response = await fetch('/.netlify/functions/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sentence: val,
+                mode: 'sentence_review',
+                criteria: requirement,
+                subject: 'Viết',
+                weekNumber: 21
+            })
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+
+        var result;
+        if (typeof data === 'string') {
+            try { result = JSON.parse(data); } catch (e) { result = { is_good: true, feedback: data }; }
+        } else if (data.response) {
+            try { result = JSON.parse(data.response); } catch (e) { result = { is_good: true, feedback: data.response }; }
+        } else {
+            result = data;
+        }
+
+        var icon = result.is_good ? '🌟' : '💡';
+        var bgClass = result.is_good ? 'bg-green-50 border-green-200' : 'bg-orange-50 border-orange-200';
+        var textClass = result.is_good ? 'text-green-800' : 'text-orange-800';
+
+        feedbackBox.className = 'p-4 rounded-xl text-sm font-medium border ' + bgClass;
+        feedbackBox.innerHTML = '<div class="flex flex-col gap-2"><div class="font-bold text-base ' + textClass + '">' + icon + ' ' + (result.feedback || 'Bài làm tốt lắm!') + '</div>' + (result.suggestion ? '<div class="text-xs italic text-gray-600 bg-white/50 p-2 rounded-lg">💡 Gợi ý: ' + result.suggestion + '</div>' : '') + '</div>';
+
+        if (result.is_good && typeof confetti === 'function') {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#22c55e', '#10b981', '#34d399'] });
+        }
+    } catch (error) {
+        console.error('Error:', error);
+
+        // --- MOCK FALLBACK FOR LOCAL/OFFLINE TESTING ---
+        if (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            // Simulate AI Response if real API fails (likely due to local enf)
+            console.warn('Running in Mock/Offline Mode');
+
+            // Fake delay
+            await new Promise(r => setTimeout(r, 2000));
+
+            const isA = questionPart === 'a';
+            const isGood = val.length > 20; // Simple check
+
+            const mockResult = {
+                is_good: isGood,
+                feedback: isGood
+                    ? "Câu văn của em rất hay và giàu hình ảnh! (Chế độ Thử nghiệm)"
+                    : "Em viết hơi ngắn, hãy thử thêm các từ gợi tả nhé! (Chế độ Thử nghiệm)",
+                suggestion: isGood ? "" : "Ví dụ: Thêm từ 'như', 'tựa như'..."
+            };
+
+            var bgClass = mockResult.is_good ? 'bg-green-50 border-green-200' : 'bg-orange-50 border-orange-200';
+            var textClass = mockResult.is_good ? 'text-green-800' : 'text-orange-800';
+            var icon = mockResult.is_good ? '🌟' : '💡';
+
+            feedbackBox.className = 'p-4 rounded-xl text-sm font-medium border ' + bgClass;
+            feedbackBox.innerHTML = '<div class="flex flex-col gap-2"><div class="font-bold text-base ' + textClass + '">' + icon + ' ' + mockResult.feedback + '</div>' + (mockResult.suggestion ? '<div class="text-xs italic text-gray-600 bg-white/50 p-2 rounded-lg">💡 Gợi ý: ' + mockResult.suggestion + '</div>' : '') + '</div>';
+
+            if (mockResult.is_good && typeof confetti === 'function') {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#22c55e', '#10b981', '#34d399'] });
+            }
+            return; // Success handled by mock
+        }
+        // ------------------------------------------------
+
+        feedbackBox.className = 'p-4 rounded-xl text-sm font-medium border bg-red-50 border-red-200';
+        feedbackBox.innerHTML = '<span class="text-red-600">❌ Có lỗi xảy ra: ' + error.message + '</span>';
+    }
+}
+
+// Expose to window
+window.rateViet = rateViet;
+window.checkVietAI = checkVietAI;
