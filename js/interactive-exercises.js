@@ -430,38 +430,84 @@ window.nvn222_state = {
     messages: []
 };
 
-function getAIResponse(userText, topicKey) {
-    const lowerText = userText.toLowerCase();
+// --- AI DEBATE LOGIC (REAL + FALLBACK) ---
+
+async function getDebateAIResponse(userText, topicKey) {
     const data = debateData[topicKey];
 
-    // Giao diện AI phản hồi đơn giản (Rule-based)
-    // 1. Phân loại ý kiến người dùng (Tán thành hay Phản đối)
-    // Từ khóa Tán thành: đồng ý, nên, tốt, cần thiết, mua đồ, quản lí...
-    // Từ khóa Phản đối: không nên, hại, xấu, đua đòi, hoang phí...
+    // Fallback logic (Rule-based) if AI fails
+    const getFallbackResponse = () => {
+        let isPro = false;
+        let isCon = false;
+        const lower = userText.toLowerCase();
 
-    let isPro = false;
-    let isCon = false;
+        // Check "không nên" SPECIFICALLY first
+        if (lower.includes("không nên") || lower.includes("không đồng ý") || lower.includes("phản đối")) {
+            isCon = true;
+        } else {
+            if (lower.match(/(đồng ý|nên|tốt|cần thiết|mua|quản lí|tự lập|có lợi)/)) isPro = true;
+            if (lower.match(/(hại|xấu|đua đòi|hoang phí|nguy hiểm|lo lắng|mất tiền)/)) isCon = true;
+        }
 
-    if (lowerText.match(/(đồng ý|nên|tốt|cần thiết|mua|quản lí|tự lập)/)) isPro = true;
-    if (lowerText.match(/(không nên|hại|xấu|đua đòi|hoang phí|nguy hiểm|lo lắng)/)) isCon = true;
+        const randomIdx = Math.floor(Math.random() * 3);
+        if (isCon) {
+            return `Mình trân trọng lo lắng của bạn. Nhưng ở một góc nhìn khác, liệu việc này có giúp "${data.pro[randomIdx]}" không? ✨`;
+        } else {
+            // Default to questioning Pro stance if unsure
+            return `Mình hiểu bạn cho rằng việc này có lợi. Tuy nhiên, bạn có lo ngại rằng: "${data.con[randomIdx]}" không? 💡`;
+        }
+    };
 
-    // Nếu không rõ ràng hoặc cả hai, AI sẽ hỏi lại hoặc đưa ra góc nhìn trung lập
-    if (!isPro && !isCon) {
-        return "Ý kiến của bạn rất đáng suy ngẫm. Bạn có thể nói rõ hơn vì sao bạn nghĩ như vậy không? 🤔";
-    }
+    try {
+        const response = await fetch('/.netlify/functions/chat', {
+            method: 'POST',
+            body: JSON.stringify({
+                sentence: `
+                Bạn là một 'Trợ lý Tranh biện' thân thiện dành cho học sinh lớp 5. 
+                Chủ đề tranh biện: "Học sinh có nên giữ tiền riêng không?".
+                
+                Nhiệm vụ của bạn:
+                1. Đọc ý kiến của học sinh: "${userText}"
+                2. Xác định xem học sinh đang Tán thành (Pro) hay Phản đối (Con).
+                3. Đóng vai ngược lại (Devil's Advocate) để phản biện một cách LỊCH SỰ, NHẸ NHÀNG.
+                4. Đặt một câu hỏi gợi mở để học sinh suy nghĩ thêm.
+                5. TUYỆT ĐỐI KHÔNG gay gắt, không chê bai. Dùng emoticon (😊, 🤔, 💡) để thân thiện hơn.
+                6. Trả lời ngắn gọn dưới 50 từ.
+                
+                Ví dụ:
+                - Nếu HS nói "Nên giữ tiền để tự lập", bạn nói: "Mình hiểu ý bạn. Nhưng bạn có lo ngại rằng các bạn nhỏ chưa biết cách chi tiêu hợp lí sẽ dễ bị lãng phí không? 🤔"
+                `,
+                mode: 'chat', // Use generic chat mode or specific if backend supports
+                subject: 'Nói và nghe',
+                weekNumber: 22
+            })
+        });
 
-    // Logic phản biện: Người dùng Pro -> AI đưa Con. Người dùng Con -> AI đưa Pro.
-    // Dùng random để chọn ý phản biện
-    const randomIdx = Math.floor(Math.random() * 3);
+        if (!response.ok) throw new Error("Network response was not ok");
 
-    if (isPro) {
-        return `Mình hiểu bạn cho rằng việc này có lợi. Tuy nhiên, bạn có lo ngại rằng: "${data.con[randomIdx]}" không? 💡`;
-    } else {
-        return `Mình trân trọng lo lắng của bạn. Nhưng ở một góc nhìn khác, liệu việc này có giúp "${data.pro[randomIdx]}" không? ✨`;
+        const resData = await response.json();
+        // Handle different response formats from the backend
+        let aiText = typeof resData === 'string' ? resData : (resData.response || resData.content || resData.message);
+
+        if (!aiText) throw new Error("Empty response from AI");
+
+        // Clean up text if needed
+        return aiText.replace(/```json/g, '').replace(/```/g, '').trim();
+
+    } catch (error) {
+        console.warn("AI Debate Error, using fallback:", error);
+        return getFallbackResponse();
     }
 }
 
-function nvn222_send() {
+// Wrapper for backward compatibility if needed, but we mostly use nvn222_send
+function getAIResponse(userText, topicKey) {
+    // This sync version is deprecated but kept just in case.
+    // It returns a placeholder promises can't be returned here synchronously.
+    return "Đang suy nghĩ... (Lỗi đồng bộ)";
+}
+
+async function nvn222_send() {
     const input = document.getElementById('nvn-chat-input');
     const msgContainer = document.getElementById('nvn-chat-history');
     const text = input.value.trim();
@@ -475,15 +521,22 @@ function nvn222_send() {
     // 2. Simulate AI Thinking
     const typingIndicator = document.createElement('div');
     typingIndicator.className = 'flex items-center space-x-2 p-3 bg-gray-100 rounded-xl rounded-tl-none self-start';
+    typingIndicator.id = 'nvn-typing-indicator';
     typingIndicator.innerHTML = '<span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></span>';
     msgContainer.appendChild(typingIndicator);
     msgContainer.scrollTop = msgContainer.scrollHeight;
 
+    // 3. Get AI Response (Async)
+    // Min delay 1s for realism
+    const start = Date.now();
+    const aiRep = await getDebateAIResponse(text, "giữ tiền riêng");
+    const elapsed = Date.now() - start;
+    const remaining = Math.max(0, 1000 - elapsed);
+
     setTimeout(() => {
-        msgContainer.removeChild(typingIndicator);
-        const aiRep = getAIResponse(text, "giữ tiền riêng");
+        if (typingIndicator.parentNode) typingIndicator.parentNode.removeChild(typingIndicator);
         addMessageToChat('ai', aiRep);
-    }, 1500);
+    }, remaining);
 }
 
 function addMessageToChat(role, text) {
