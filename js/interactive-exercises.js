@@ -332,6 +332,11 @@ window.handleSubmission = async function () {
         let fileUrl = "";
 
         try {
+            // Check SDK
+            if (isImage && typeof firebase.storage !== 'function') {
+                throw new Error("Trình duyệt chưa tải xong thư viện Firebase Storage. Em hãy tải lại trang (F5) và thử lại nhé!");
+            }
+
             // Upload Image if present
             if (isImage && fileObj) {
                 console.log("Starting upload...");
@@ -404,7 +409,8 @@ window.handleSubmission = async function () {
 
         } catch (error) {
             console.error("Error saving essay:", error);
-            alert("Có lỗi khi nộp bài: " + error.message + "\n" + JSON.stringify(error));
+            const errMsg = error.message || error.toString();
+            alert("Có lỗi khi nộp bài: " + errMsg);
         }
 
     } else {
