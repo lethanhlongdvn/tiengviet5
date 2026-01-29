@@ -238,11 +238,10 @@ function checkQuiz(qIndex, selectedIndex, correctIndex) {
             nextQuiz(qIndex);
         }, 1200);
     } else {
-        // Last question - show submit button
-        if (nav) {
-            nav.classList.remove('opacity-0', 'pointer-events-none');
-            nav.classList.add('opacity-100', 'translate-y-0');
-        }
+        // Last question - AUTO SUBMIT after delay
+        setTimeout(() => {
+            submitQuizResult();
+        }, 1500);
     }
 
     // Update score in progress bar immediately
@@ -251,7 +250,9 @@ function checkQuiz(qIndex, selectedIndex, correctIndex) {
 }
 
 function submitQuizResult() {
-    // Open the info modal instead of prompt
+    // Set type
+    window.currentSubmissionType = 'quiz';
+
     const modal = document.getElementById('studentInfoModal');
     const content = document.getElementById('studentInfoContent');
     if (modal) {
@@ -265,32 +266,55 @@ function submitQuizResult() {
 }
 
 async function confirmSubmitQuiz() {
+    // Helper to get inputs
+    const name = document.getElementById('studentName').value.trim();
+    const cls = document.getElementById('studentClass').value;
+    const schoolSel = document.getElementById('schoolSelect').value;
+    const schoolOther = document.getElementById('otherSchool').value.trim();
+    const school = schoolSel === 'Khác' ? schoolOther : schoolSel;
+
+    if (!name) { alert("Em hãy nhập Họ và Tên của mình nhé!"); return; }
+    if (schoolSel === 'Khác' && !schoolOther) { alert("Em hãy nhập tên Trường của mình nhé!"); return; }
+
+    const btn = document.querySelector('#studentInfoContent button:last-child');
+    if (btn) { btn.disabled = true; btn.innerHTML = "🚀 Đang gửi bài..."; }
+
+    // --- CASE 1: ESSAY SUBMISSION ---
+    if (window.currentSubmissionType === 'essay') {
+        // Logic is now in interactive-exercises.js or handled here?
+        // Since I defined handleSubmission in interactive-exercises.js, I should probably standardise.
+        // But for robust code, I will call the logic here if it exists.
+        if (window.handleSubmission) {
+            await window.handleSubmission();
+            if (btn) { btn.disabled = false; btn.innerHTML = "🚀 NỘP BÀI"; }
+            return;
+        }
+    }
+
+    // --- CASE 2: QUIZ SUBMISSION (DEFAULT) ---
     const totalQuestions = window.currentQuizQuestions ? window.currentQuizQuestions.length : 0;
     const correctCount = window.quizScore || 0;
     const finalScore = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
+    const feedbackText = `Đúng ${correctCount}/${totalQuestions} câu`;
 
-    // Get info using global helper from firebase-logic.js
-    const { name, cls, school } = getStudentInfo();
+    // Local Storage Save (for Excel Export)
+    if (!window.submissions) window.submissions = [];
+    const sub = {
+        studentName: name,
+        studentClass: cls,
+        studentSchool: school,
+        lessonTitle: document.title.replace(' - EduRobot', ''),
+        type: 'quiz',
+        content: `Kết quả trắc nghiệm: ${correctCount}/${totalQuestions}`,
+        feedback: feedbackText,
+        score: finalScore,
+        timestamp: new Date().toISOString()
+    };
+    window.submissions.push(sub);
+    localStorage.setItem('eduRobotSubmissions', JSON.stringify(window.submissions));
 
-    if (!name) {
-        alert("Em hãy nhập Họ và Tên của mình nhé!");
-        return;
-    }
-
-    if (document.getElementById('schoolSelect').value === 'Khác' && !document.getElementById('otherSchool').value) {
-        alert("Em hãy nhập tên Trường của mình nhé!");
-        return;
-    }
-
-    const btn = event ? (event.currentTarget || event.target) : null;
-    let originalText = "";
-    if (btn) {
-        originalText = btn.innerHTML;
-        btn.disabled = true;
-        btn.innerHTML = "🚀 Đang gửi bài...";
-    }
-
-    const data = {
+    // Firebase (Optional - Keep existing logic if valid)
+    const fireData = {
         studentName: name,
         studentClass: cls,
         studentSchool: school,
@@ -303,16 +327,18 @@ async function confirmSubmitQuiz() {
     };
 
     try {
-        await db.collection("diem_tieng_viet_lop5").add(data);
-        alert("✨ Tuyệt vời! Kết quả của em đã được gửi thành công.");
+        await db.collection("diem_tieng_viet_lop5").add(fireData);
+        alert(`✨ Tuyệt vời! Em đạt ${finalScore} điểm. Kết quả đã gửi thành công.`);
         window.location.reload();
     } catch (error) {
         console.error("Error saving quiz:", error);
-        alert("Lỗi khi nộp bài. Vui lòng thử lại!");
+        // Fallback Success for Local
+        alert(`✨ Tuyệt vời! Em đạt ${finalScore} điểm. (Đã lưu vào máy)`);
+        window.location.reload();
     } finally {
         if (btn) {
             btn.disabled = false;
-            btn.innerHTML = originalText;
+            btn.innerHTML = "🚀 NỘP BÀI";
         }
     }
 }
