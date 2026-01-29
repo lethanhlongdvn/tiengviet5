@@ -1548,17 +1548,17 @@ window.LESSON_DATA = {
     <!-- AI Debate Chat Interface -->
     <div class="glass-card rounded-[32px] overflow-hidden shadow-2xl border-4 border-white/50 bg-gradient-to-b from-white to-blue-50/30">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 p-4 flex justify-between items-center text-white">
+        <div class="bg-gradient-to-r from-teal-600 to-emerald-500 p-4 flex justify-between items-center text-white">
             <div class="flex items-center space-x-3">
                 <div class="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                    <span class="text-2xl">👦</span>
                 </div>
                 <div>
-                    <h3 class="font-black text-lg">AI DEBATE BUDDY</h3>
-                    <p class="text-xs font-bold text-blue-100 opacity-80">Trợ lý tranh biện thông minh</p>
+                    <h3 class="font-black text-lg">MINH TRÍ</h3>
+                    <p class="text-xs font-bold text-teal-100 opacity-80">Bạn học thảo luận cùng em</p>
                 </div>
             </div>
-            <div class="bg-white/10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Trực tuyến</div>
+            <div class="bg-white/10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Đang online</div>
         </div>
 
         <!-- Chat History -->
@@ -1566,30 +1566,37 @@ window.LESSON_DATA = {
             <!-- Initial Message -->
             <div class="self-start bg-white border border-gray-200 text-gray-800 p-4 rounded-2xl rounded-tl-none max-w-[80%] shadow-md">
                 <div class="flex items-center gap-2 mb-1">
-                    <span class="text-lg">🤖</span>
-                    <span class="text-xs font-black text-blue-500 uppercase">Trợ lý tranh biện</span>
+                    <span class="text-lg">👦</span>
+                    <span class="text-xs font-black text-amber-500 uppercase">Minh Trí</span>
                 </div>
-                <p class="font-medium">Chào bạn! Chúng ta cùng thảo luận về việc "Học sinh giữ tiền riêng" nhé. Theo bạn, việc này có nên không và vì sao? 😊</p>
+                <p class="font-medium">Chào cậu! Tớ là Minh Trí. Cậu nghĩ sao về việc học sinh tụi mình tự giữ tiền riêng để tiêu nhỉ? 🤔</p>
             </div>
         </div>
 
         <!-- Input Area -->
         <div class="p-4 bg-white border-t border-gray-100">
+            <!-- Quick Talk Suggestions -->
+            <div class="mb-4 flex flex-wrap gap-2">
+                <button onclick="nvn222_quickTalk('Tớ đồng ý vì giúp tớ học cách quản lý tiền!')" class="text-[10px] font-bold bg-green-50 text-green-700 px-3 py-2 rounded-xl border border-green-100 hover:bg-green-100 transition-colors">👍 Tớ đồng ý...</button>
+                <button onclick="nvn222_quickTalk('Tớ lo là mình sẽ tiêu xài vào đồ chơi linh tinh.')" class="text-[10px] font-bold bg-orange-50 text-orange-700 px-3 py-2 rounded-xl border border-orange-100 hover:bg-orange-100 transition-colors">👎 Tớ lo là...</button>
+                <button onclick="nvn222_quickTalk('Tớ muốn giữ tiền để tự mua đồ dùng học tập.')" class="text-[10px] font-bold bg-blue-50 text-blue-700 px-3 py-2 rounded-xl border border-blue-100 hover:bg-blue-100 transition-colors">📝 Tự mua đồ...</button>
+            </div>
+
             <div class="flex gap-3">
                 <input type="text" id="nvn-chat-input" 
-                    class="flex-1 bg-gray-100 border-2 border-transparent focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all rounded-xl px-4 py-3 font-medium text-gray-700 placeholder-gray-400" 
-                    placeholder="Nhập ý kiến của em..." 
+                    class="flex-1 bg-gray-100 border-2 border-transparent focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all rounded-xl px-4 py-3 font-medium text-gray-700 placeholder-gray-400" 
+                    placeholder="Nhập ý kiến của cậu..." 
                     onkeydown="if(event.key === 'Enter') nvn222_send()">
                 <button onclick="nvn222_send()" 
-                    class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center w-14">
+                    class="bg-emerald-600 hover:bg-emerald-700 text-white p-3 rounded-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center w-14">
                     <svg class="w-6 h-6 transform rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
                 </button>
             </div>
             
-            <div class="mt-4 flex justify-center">
-                 <button id="nvn-summary-btn" onclick="nvn222_summary()" class="text-xs font-black text-gray-400 uppercase tracking-widest hover:text-blue-600 transition-colors flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    Tóm tắt cuộc trò chuyện
+            <div class="mt-4 flex justify-center border-t pt-4">
+                 <button id="nvn-summary-btn" onclick="nvn222_summary()" class="w-full bg-orange-500 py-3 rounded-xl text-white font-black uppercase tracking-widest hover:bg-orange-600 transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    Kết thúc & Tóm tắt thảo luận
                  </button>
             </div>
         </div>
