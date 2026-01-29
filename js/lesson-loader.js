@@ -249,8 +249,40 @@ function checkQuiz(qIndex, selectedIndex, correctIndex) {
     if (scoreText) scoreText.innerText = `ĐÚNG: ${window.quizScore || 0}`;
 }
 
-function submitQuizResult() {
-    // Set type
+async function submitQuizResult() {
+    // Check for Practice Mode (Lesson 222)
+    const currentQuizSettings = window.currentLesson?.tabs?.quiz?.settings;
+    if (currentQuizSettings && currentQuizSettings.mode === 'practice') {
+        const total = window.currentQuizQuestions.length;
+        const correct = window.quizScore || 0;
+        const score = Math.round((correct / total) * 10); // Scale to 10
+
+        let advice = "";
+        const advices = currentQuizSettings.advice;
+
+        if (score >= 8) advice = advices.high;
+        else if (score >= 5) advice = advices.medium;
+        else advice = advices.low;
+
+        // Custom Modal for Advice
+        const msg = `
+            <div class="text-center space-y-4">
+                <div class="text-6xl mb-2">${score >= 8 ? '🌟' : (score >= 5 ? '⭐' : '🧸')}</div>
+                <h3 class="text-2xl font-black text-gray-800">Kết quả: ${score}/10 điểm</h3>
+                <p class="text-gray-600 text-lg leading-relaxed bg-blue-50 p-4 rounded-xl border border-blue-100">
+                    "${advice}"
+                </p>
+                <button onclick="window.location.reload()" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-blue-700 transition">Làm lại để rèn luyện thêm</button>
+            </div>
+        `;
+
+        // Use a simple overlay or overwrite the quiz container
+        const container = document.getElementById('tab-quiz');
+        container.innerHTML = `<div class="glass-card p-8 max-w-lg mx-auto mt-10 shadow-2xl animate-in zoom-in-95">${msg}</div>`;
+        return; // STOP HERE
+    }
+
+    // Standard Mode (Save to DB)
     window.currentSubmissionType = 'quiz';
 
     const modal = document.getElementById('studentInfoModal');
