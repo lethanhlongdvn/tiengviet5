@@ -447,20 +447,17 @@ async function getDebateAIResponse(userText, topicKey) {
         }
         // 2. Check keywords if not already Con
         else {
-            // Expanded Con keywords: hoang phí, tiêu xài, tốn kém, đua đòi, hư, mất, sợ...
             if (lower.match(/(hại|xấu|đua đòi|hoang phí|nguy hiểm|lo lắng|mất|tốn|sợ|tiêu|xài|sài|hư_hỏng|rủi_ro)/)) isCon = true;
-
-            // Expanded Pro keywords (only if NOT Con detected yet)
             if (!isCon && lower.match(/(đồng ý|nên|tốt|cần|mua|quản|tự|lợi|giỏi|biết|ok|đc|được)/)) isPro = true;
         }
 
         const randomIdx = Math.floor(Math.random() * 3);
         if (isCon) {
             // User is CON -> AI argues PRO
-            return `Mình trân trọng lo lắng của bạn. Nhưng ở một góc nhìn khác, liệu việc này có giúp "${data.pro[randomIdx]}" không? ✨`;
+            return `Tớ hiểu ý của cậu. 😊 Nhưng mà tớ thấy nếu được giữ tiền riêng thì mình có thể: "${data.pro[randomIdx]}", cậu thấy sao?`;
         } else {
-            // User is PRO (or unclear) -> AI argues CON
-            return `Mình hiểu bạn cho rằng việc này có lợi. Tuy nhiên, bạn có lo ngại rằng: "${data.con[randomIdx]}" không? 💡`;
+            // User is PRO -> AI argues CON
+            return `Ý của cậu rất hay! 🙌 Nhưng mà tớ băn khoăn là nếu tụi mình tự giữ tiền thì dễ: "${data.con[randomIdx]}". Cậu nghĩ sao?`;
         }
     };
 
@@ -468,22 +465,25 @@ async function getDebateAIResponse(userText, topicKey) {
         const response = await fetch('/.netlify/functions/chat', {
             method: 'POST',
             body: JSON.stringify({
-                // Instruct AI clearly to act as a Debate Buddy
+                temperature: 0.7,
+                max_tokens: 150,
                 sentence: `
-                [HỆ THỐNG: Bạn là Trợ lý Tranh biện (Debate Buddy) cho học sinh lớp 5.
-                Nhiệm vụ: Phản biện lại ý kiến của học sinh một cách LỊCH SỰ, KHÔNG GAY GẮT.]
+                [HỆ THỐNG: BẠN LÀ MINH TRÍ, HỌC SINH LỚP 5.]
+                Hãy đóng vai một người bạn thân tên là Minh Trí để cùng thảo luận về chủ đề "Học sinh có nên giữ tiền riêng?".
 
-                Chủ đề: "Học sinh giữ tiền riêng".
-                Ý kiến học sinh: "${userText}"
+                PHONG CÁCH NÓI CHUYỆN:
+                1. Dùng đại từ: "Tớ - Cậu", "Mình - Bạn".
+                2. Độ dài: Chỉ trả lời 1-3 câu ngắn gọn.
+                3. Cảm xúc: Sử dụng icon 😊, 🤔, 🙌.
+                4. Phản biện: Không bác bỏ gay gắt. Dùng: "Ý của cậu rất hay, nhưng mà...", "Tớ hiểu rồi, tớ còn thấy..."
 
-                Hãy trả lời:
-                1. Xác định ý kiến là Tán thành hay Phản đối.
-                2. Đưa ra quan điểm ngược lại (khoảng 30 từ).
-                3. Bắt đầu bằng: "Mình hiểu..." hoặc "Bạn có nghĩ..."
-                4. Dùng emoji thân thiện.
+                CHIẾN THUẬT:
+                - Nếu HS tán thành -> Cậu hãy đưa ra góc nhìn phản đối (tiêu hoang, đua đòi, rủi ro).
+                - Nếu HS phản đối -> Cậu hãy đưa ra lợi ích (tự lập, học quản lý, hiểu công bố mẹ).
+
+                Ý kiến của bạn ấy: "${userText}"
+                (Kết thúc bằng một câu hỏi gợi mở nhé!)
                 `,
-                // Omit 'mode' to avoid confusing the backend logic if it defaults to something else
-                // But pass 'subject' to help logging/context if robust
                 subject: 'Nói và nghe',
                 weekNumber: 22
             })
@@ -502,13 +502,6 @@ async function getDebateAIResponse(userText, topicKey) {
         console.warn("AI Debate Error, using fallback:", error);
         return getFallbackResponse();
     }
-}
-
-// Wrapper for backward compatibility if needed, but we mostly use nvn222_send
-function getAIResponse(userText, topicKey) {
-    // This sync version is deprecated but kept just in case.
-    // It returns a placeholder promises can't be returned here synchronously.
-    return "Đang suy nghĩ... (Lỗi đồng bộ)";
 }
 
 async function nvn222_send() {
@@ -531,7 +524,6 @@ async function nvn222_send() {
     msgContainer.scrollTop = msgContainer.scrollHeight;
 
     // 3. Get AI Response (Async)
-    // Min delay 1s for realism
     const start = Date.now();
     const aiRep = await getDebateAIResponse(text, "giữ tiền riêng");
     const elapsed = Date.now() - start;
@@ -543,6 +535,11 @@ async function nvn222_send() {
     }, remaining);
 }
 
+function nvn222_quickTalk(msg) {
+    document.getElementById('nvn-chat-input').value = msg;
+    nvn222_send();
+}
+
 function addMessageToChat(role, text) {
     const msgContainer = document.getElementById('nvn-chat-history');
     const div = document.createElement('div');
@@ -550,50 +547,89 @@ function addMessageToChat(role, text) {
     if (role === 'user') {
         div.className = "self-end bg-blue-600 text-white p-4 rounded-2xl rounded-tr-none max-w-[80%] shadow-md animate-in slide-in-from-right-2";
         div.innerHTML = `<p class="font-medium">${text}</p>`;
-        // Save history for summary
         window.nvn222_state.messages.push({ role: 'Bạn', text: text });
     } else {
         div.className = "self-start bg-white border border-gray-200 text-gray-800 p-4 rounded-2xl rounded-tl-none max-w-[80%] shadow-md animate-in slide-in-from-left-2";
-        div.innerHTML = `<div class="flex items-center gap-2 mb-1"><span class="text-lg">🤖</span><span class="text-xs font-black text-blue-500 uppercase">Trợ lý tranh biện</span></div><p class="font-medium">${text}</p>`;
-        window.nvn222_state.messages.push({ role: 'AI', text: text });
+        div.innerHTML = `<div class="flex items-center gap-2 mb-1"><span class="text-lg">👦</span><span class="text-xs font-black text-amber-500 uppercase">Minh Trí</span></div><p class="font-medium">${text}</p>`;
+        window.nvn222_state.messages.push({ role: 'Minh Trí', text: text });
     }
 
     msgContainer.appendChild(div);
     msgContainer.scrollTop = msgContainer.scrollHeight;
 }
 
-function nvn222_summary() {
+async function nvn222_summary() {
     if (window.nvn222_state.messages.length < 2) {
         alert("Cuộc thảo luận còn ngắn quá! Hãy trao đổi thêm vài câu nữa nhé. 😊");
         return;
     }
 
     const summaryBtn = document.getElementById('nvn-summary-btn');
-    summaryBtn.innerHTML = "đang tổng hợp...";
+    const originalText = summaryBtn.innerHTML;
+    summaryBtn.innerHTML = "⏳ Đang tổng hợp...";
     summaryBtn.disabled = true;
 
-    setTimeout(() => {
+    const chatContent = window.nvn222_state.messages.map(m => `${m.role}: ${m.text}`).join("\n");
+
+    try {
+        const response = await fetch('/.netlify/functions/chat', {
+            method: 'POST',
+            body: JSON.stringify({
+                sentence: `
+                Hãy đóng vai người điều hành thảo luận lớp 5. 
+                Dựa trên cuộc trò chuyện sau: "${chatContent}". 
+                Hãy viết một bản tóm tắt ngắn gọn theo đúng định dạng sau:
+                {
+                    "agree": "Những điểm hai bên đã thống nhất",
+                    "diff": "Những điểm vẫn còn khác biệt",
+                    "praise": "Lời khen cho thái độ thảo luận của bạn học sinh"
+                }
+                Dùng ngôn ngữ thân thiện, vui vẻ.`,
+                mode: 'json'
+            })
+        });
+
+        let summaryData = {
+            agree: "Cả hai đều quan tâm đến việc sử dụng tiền sao cho hợp lí.",
+            diff: "Một bên đề cao sự tự lập, một bên lo ngại rủi ro.",
+            praise: "Bạn đã thể hiện thái độ tôn trọng ý kiến khác biệt rất tốt!"
+        };
+
+        if (response.ok) {
+            const data = await response.json();
+            let resString = typeof data === 'string' ? data : data.response;
+            resString = resString.replace(/```json/g, '').replace(/```/g, '').trim();
+            try {
+                const parsed = JSON.parse(resString);
+                summaryData = parsed;
+            } catch (e) { console.error("Parse summary error", e); }
+        }
+
         const msgContainer = document.getElementById('nvn-chat-history');
         const div = document.createElement('div');
         div.className = "mx-auto bg-amber-50 border border-amber-200 p-5 rounded-2xl w-full shadow-inner my-4 animate-in zoom-in-95";
         div.innerHTML = `
             <h3 class="text-lg font-black text-amber-700 text-center mb-3">📋 TỔNG KẾT THẢO LUẬN</h3>
             <div class="space-y-2 text-sm text-gray-700">
-                <p>✅ <strong>Điểm thống nhất:</strong> Cả hai đều quan tâm đến việc sử dụng tiền sao cho hợp lí và an toàn.</p>
-                <p>⚡ <strong>Điểm khác biệt:</strong> Một bên đề cao sự tự lập và trải nghiệm (User), một bên lưu ý về rủi ro và sự cám dỗ (AI) - hoặc ngược lại.</p>
-                <p>❤️ <strong>Nhận xét:</strong> Bạn đã thể hiện thái độ tôn trọng ý kiến khác biệt rất tốt! Hãy tiếp tục phát huy nhé. 🤝</p>
+                <p>✅ <strong>Điểm thống nhất:</strong> ${summaryData.agree || summaryData.thong_nhat}</p>
+                <p>⚡ <strong>Điểm khác biệt:</strong> ${summaryData.diff || summaryData.khac_biet}</p>
+                <p>❤️ <strong>Nhận xét:</strong> ${summaryData.praise || summaryData.nhan_xet} 🤝</p>
             </div>
          `;
         msgContainer.appendChild(div);
         msgContainer.scrollTop = msgContainer.scrollHeight;
-        summaryBtn.innerHTML = "📝 Tóm tắt cuộc trò chuyện";
-        summaryBtn.disabled = false;
-
         celebrate();
-    }, 1500);
+
+    } catch (error) {
+        console.error("Summary error:", error);
+    } finally {
+        summaryBtn.innerHTML = originalText;
+        summaryBtn.disabled = false;
+    }
 }
 
 // Expose
 window.nvn222_send = nvn222_send;
 window.nvn222_summary = nvn222_summary;
+window.nvn222_quickTalk = nvn222_quickTalk;
 
