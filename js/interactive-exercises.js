@@ -441,19 +441,25 @@ async function getDebateAIResponse(userText, topicKey) {
         let isCon = false;
         const lower = userText.toLowerCase();
 
-        // Check "không nên" SPECIFICALLY first
-        if (lower.includes("không nên") || lower.includes("không đồng ý") || lower.includes("phản đối")) {
+        // 1. Check strong negatives first
+        if (lower.includes("không nên") || lower.includes("không đồng ý") || lower.includes("phản đối") || lower.includes("ko nên")) {
             isCon = true;
-        } else {
-            if (lower.match(/(đồng ý|nên|tốt|cần thiết|mua|quản lí|tự lập|có lợi)/)) isPro = true;
-            if (lower.match(/(hại|xấu|đua đòi|hoang phí|nguy hiểm|lo lắng|mất tiền)/)) isCon = true;
+        }
+        // 2. Check keywords if not already Con
+        else {
+            // Expanded Con keywords: hoang phí, tiêu xài, tốn kém, đua đòi, hư, mất, sợ...
+            if (lower.match(/(hại|xấu|đua đòi|hoang phí|nguy hiểm|lo lắng|mất|tốn|sợ|tiêu|xài|sài|hư_hỏng|rủi_ro)/)) isCon = true;
+
+            // Expanded Pro keywords (only if NOT Con detected yet)
+            if (!isCon && lower.match(/(đồng ý|nên|tốt|cần|mua|quản|tự|lợi|giỏi|biết|ok|đc|được)/)) isPro = true;
         }
 
         const randomIdx = Math.floor(Math.random() * 3);
         if (isCon) {
+            // User is CON -> AI argues PRO
             return `Mình trân trọng lo lắng của bạn. Nhưng ở một góc nhìn khác, liệu việc này có giúp "${data.pro[randomIdx]}" không? ✨`;
         } else {
-            // Default to questioning Pro stance if unsure
+            // User is PRO (or unclear) -> AI argues CON
             return `Mình hiểu bạn cho rằng việc này có lợi. Tuy nhiên, bạn có lo ngại rằng: "${data.con[randomIdx]}" không? 💡`;
         }
     };
@@ -462,22 +468,22 @@ async function getDebateAIResponse(userText, topicKey) {
         const response = await fetch('/.netlify/functions/chat', {
             method: 'POST',
             body: JSON.stringify({
+                // Instruct AI clearly to act as a Debate Buddy
                 sentence: `
-                Bạn là một 'Trợ lý Tranh biện' thân thiện dành cho học sinh lớp 5. 
-                Chủ đề tranh biện: "Học sinh có nên giữ tiền riêng không?".
-                
-                Nhiệm vụ của bạn:
-                1. Đọc ý kiến của học sinh: "${userText}"
-                2. Xác định xem học sinh đang Tán thành (Pro) hay Phản đối (Con).
-                3. Đóng vai ngược lại (Devil's Advocate) để phản biện một cách LỊCH SỰ, NHẸ NHÀNG.
-                4. Đặt một câu hỏi gợi mở để học sinh suy nghĩ thêm.
-                5. TUYỆT ĐỐI KHÔNG gay gắt, không chê bai. Dùng emoticon (😊, 🤔, 💡) để thân thiện hơn.
-                6. Trả lời ngắn gọn dưới 50 từ.
-                
-                Ví dụ:
-                - Nếu HS nói "Nên giữ tiền để tự lập", bạn nói: "Mình hiểu ý bạn. Nhưng bạn có lo ngại rằng các bạn nhỏ chưa biết cách chi tiêu hợp lí sẽ dễ bị lãng phí không? 🤔"
+                [HỆ THỐNG: Bạn là Trợ lý Tranh biện (Debate Buddy) cho học sinh lớp 5.
+                Nhiệm vụ: Phản biện lại ý kiến của học sinh một cách LỊCH SỰ, KHÔNG GAY GẮT.]
+
+                Chủ đề: "Học sinh giữ tiền riêng".
+                Ý kiến học sinh: "${userText}"
+
+                Hãy trả lời:
+                1. Xác định ý kiến là Tán thành hay Phản đối.
+                2. Đưa ra quan điểm ngược lại (khoảng 30 từ).
+                3. Bắt đầu bằng: "Mình hiểu..." hoặc "Bạn có nghĩ..."
+                4. Dùng emoji thân thiện.
                 `,
-                mode: 'chat', // Use generic chat mode or specific if backend supports
+                // Omit 'mode' to avoid confusing the backend logic if it defaults to something else
+                // But pass 'subject' to help logging/context if robust
                 subject: 'Nói và nghe',
                 weekNumber: 22
             })
@@ -486,12 +492,10 @@ async function getDebateAIResponse(userText, topicKey) {
         if (!response.ok) throw new Error("Network response was not ok");
 
         const resData = await response.json();
-        // Handle different response formats from the backend
         let aiText = typeof resData === 'string' ? resData : (resData.response || resData.content || resData.message);
 
         if (!aiText) throw new Error("Empty response from AI");
 
-        // Clean up text if needed
         return aiText.replace(/```json/g, '').replace(/```/g, '').trim();
 
     } catch (error) {
