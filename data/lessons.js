@@ -5018,7 +5018,7 @@ window.LESSON_DATA = {
         },
         "221-ltvc": {
             "title": "Luyện tập về câu ghép",
-            "week": 22,
+            "week": 21,
             "subject": "Luyện từ và câu",
             "theme": "Vẻ đẹp cuộc sống",
             "tabs": {
@@ -5068,10 +5068,31 @@ window.LESSON_DATA = {
                                         <span class="word" onclick="toggleWord(this)">Xung</span> <span class="word" onclick="toggleWord(this)">quanh</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">nào</span> <span class="word" onclick="toggleWord(this)">cũng</span> <span class="word" onclick="toggleWord(this)">sum</span> <span class="word" onclick="toggleWord(this)">sê</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">đào,</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">lê.</span>
                                     </div>
                                 </div>
+                                <!-- A4 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-blue-400 shrink-0">(4)</span>
+                                        <p class="text-base md:text-lg font-medium leading-relaxed">Giữa mùa đông, hoa lê trắng ngần.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Giữa</span> <span class="word" onclick="toggleWord(this)">mùa</span> <span class="word" onclick="toggleWord(this)">đông,</span> <span class="word" onclick="toggleWord(this)">hoa</span> <span class="word" onclick="toggleWord(this)">lê</span> <span class="word" onclick="toggleWord(this)">trắng</span> <span class="word" onclick="toggleWord(this)">ngần.</span>
+                                    </div>
+                                </div>
+                                <!-- A5 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-blue-400 shrink-0">(5)</span>
+                                        <p class="text-base md:text-lg font-medium leading-relaxed">Vào đầu xuân, hoa đào nở hồng cả trời.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Vào</span> <span class="word" onclick="toggleWord(this)">đầu</span> <span class="word" onclick="toggleWord(this)">xuân,</span> <span class="word" onclick="toggleWord(this)">hoa</span> <span class="word" onclick="toggleWord(this)">đào</span> <span class="word" onclick="toggleWord(this)">nở</span> <span class="word" onclick="toggleWord(this)">hồng</span> <span class="word" onclick="toggleWord(this)">cả</span> <span class="word" onclick="toggleWord(this)">trời.</span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="mt-3 flex justify-end">
-                                <button onclick="ltvc22_check1('p1a', this)" class="btn btn-primary w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all" title="Kiểm tra đoạn a">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                <button onclick="ltvc22_check1('p1a', this)" class="btn btn-primary px-4 py-2 flex items-center gap-2 rounded-xl font-black shadow-lg transition-all hover:scale-105" title="Kiểm tra đoạn a">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Kiểm tra</span>
                                 </button>
                             </div>
                         </div>
@@ -5172,8 +5193,9 @@ window.LESSON_DATA = {
                                 </div>
                             </div>
                             <div class="mt-3 flex justify-end">
-                                <button onclick="ltvc22_check1('p1b', this)" class="btn btn-primary w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all" title="Kiểm tra đoạn b">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                <button onclick="ltvc22_check1('p1b', this)" class="btn btn-primary px-4 py-2 flex items-center gap-2 rounded-xl font-black shadow-lg transition-all hover:scale-105" title="Kiểm tra đoạn b">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Kiểm tra</span>
                                 </button>
                             </div>
                         </div>
@@ -5259,7 +5281,7 @@ window.LESSON_DATA = {
                                     <textarea id="ai-3" rows="5" placeholder="Nhập đoạn văn tại đây..." class="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:ring-4 focus:ring-purple-100 focus:border-purple-500 focus:bg-white bg-gray-50 text-base font-medium transition-all focus:outline-none"></textarea>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <span class="text-xs text-gray-400 font-bold italic">* Cô AI sẽ chấm thực hành câu ghép nhé!</span>
+                                    <span class="text-xs text-gray-400 font-bold italic">* Thầy AI sẽ chấm thực hành câu ghép nhé!</span>
                                     <button onclick="askAI('3', 'Đoạn văn về Đoàn thuyền đánh cá:')" class="btn btn-secondary px-8 py-3 rounded-2xl font-black shadow-xl flex items-center group">
                                         NỘP BÀI CHẤM ĐIỂM
                                     </button>
@@ -5284,6 +5306,222 @@ window.LESSON_DATA = {
                         { "q": "Câu ghép 'Vết sẹo của anh là huy chương, còn chúng ta là những người may mắn' dùng từ nối nào?", "a": ["Và", "Còn", "Nhưng", "Mà"], "c": 1 },
                         { "q": "Đặc điểm của câu ghép là gì?", "a": ["Có 1 cụm C-V", "Có từ 2 vế câu trở lên", "Chỉ có vị ngữ", "Là câu đặc biệt"], "c": 1 },
                         { "q": "Từ nào không phải là kết từ?", "a": ["Và", "Nhưng", "Vì", "Đẹp"], "c": 3 }
+                    ]
+                }
+            }
+        },
+        "221-viet": {
+            "title": "Đánh giá, chỉnh sửa bài văn tả người",
+            "week": 21,
+            "subject": "Viết",
+            "theme": "Vẻ đẹp cuộc sống",
+            "tabs": {
+                "lesson": {
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<style>
+                                .label-viet { color: #ef4444; font-weight: 800; border: 2px solid #ef4444; padding: 2px 16px; display: inline-block; border-top-right-radius: 20px; border-bottom-right-radius: 20px; margin-bottom: 24px; letter-spacing: 0.05em; background: rgba(254, 226, 226, 0.3); }
+                                .criteria-box { border: 2px solid #06b6d4; border-radius: 16px; display: flex; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+                                .criteria-icon { background-color: #06b6d4; width: 80px; display: flex; align-items: center; justify-content: center; color: white; font-size: 50px; font-weight: 900; }
+                                .star-rating { color: #d1d5db; cursor: pointer; font-size: 1.2rem; transition: 0.2s; }
+                                .star-rating.active { color: #facc15; transform: scale(1.2); }
+                                .input-line { border: none; border-bottom: 2px dashed #9ca3af; width: 100%; padding: 8px 0; outline: none; font-style: italic; color: #374151; background: transparent; transition: border-bottom-color 0.3s; }
+                                .input-line:focus { border-bottom: 2px solid #3b82f6; }
+                            </style>
+                            <div class="max-w-4xl mx-auto">
+                                <div class="label-viet">VIẾT</div>
+                                <h1 class="text-3xl md:text-4xl font-black text-center text-blue-800 mb-8 uppercase tracking-tight">ĐÁNH GIÁ, CHỈNH SỬA BÀI VĂN TẢ NGƯỜI</h1>
+
+                                <!-- Section 1 -->
+                                <div class="mb-10 text-gray-800 bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                                    <p class="text-lg"><span class="text-red-500 font-extrabold mr-2 text-2xl">1.</span> <span class="font-bold">Nghe thầy cô giáo nhận xét về bài làm.</span></p>
+                                    <p class="mt-2 text-gray-600 ml-8 italic">Em hãy lắng nghe và ghi chép lại những nhận xét chung của thầy cô về bài văn của cả lớp nhé.</p>
+                                </div>
+
+                                <!-- Section 2 -->
+                                <div class="mb-12">
+                                    <p class="text-lg font-bold text-gray-800 mb-6 flex items-baseline">
+                                        <span class="text-red-500 font-extrabold mr-2 text-2xl">2.</span>
+                                        <span>Đọc lại bài văn của em để biết bài đã đạt được những yêu cầu nào dưới đây:</span>
+                                    </p>
+                                    <div class="criteria-box">
+                                        <div class="criteria-icon">?</div>
+                                        <div class="flex-1 bg-cyan-50">
+                                            <table class="w-full">
+                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100/50 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium">– Có đủ mở bài, thân bài, kết bài.</td>
+                                                    <td class="p-4 w-40 text-center">
+                                                        <div class="flex gap-1 justify-center" data-row="1">
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 1)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 2)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 3)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 4)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 5)"></i>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100/50 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium">– Miêu tả ngoại hình, hoạt động,... làm nổi bật đặc điểm riêng của người được tả.</td>
+                                                    <td class="p-4 w-40 text-center">
+                                                        <div class="flex gap-1 justify-center" data-row="2">
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 1)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 2)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 3)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 4)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 5)"></i>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100/50 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium">– Thể hiện tình cảm đối với người được tả.</td>
+                                                    <td class="p-4 w-40 text-center">
+                                                        <div class="flex gap-1 justify-center" data-row="3">
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 1)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 2)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 3)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 4)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 5)"></i>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="hover:bg-cyan-100/50 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium">– Trình bày bài sạch đẹp, không mắc lỗi chính tả, lỗi diễn đạt.</td>
+                                                    <td class="p-4 w-40 text-center">
+                                                        <div class="flex gap-1 justify-center" data-row="4">
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 1)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 2)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 3)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 4)"></i>
+                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 5)"></i>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Section 3 -->
+                                <div class="mb-12">
+                                    <p class="text-lg font-bold text-gray-800 mb-8 flex items-baseline">
+                                        <span class="text-red-500 font-extrabold mr-2 text-2xl">3.</span>
+                                        <span>Viết lại một số câu văn hoặc đoạn văn trong bài làm của em cho hay hơn theo gợi ý dưới đây:</span>
+                                    </p>
+                                    <div class="space-y-10 pl-4 border-l-4 border-blue-100 ml-3">
+                                        <!-- 3a -->
+                                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                                            <p class="text-gray-800 font-bold mb-4 text-lg">a. Sử dụng từ ngữ giàu sức gợi tả hoặc hình ảnh so sánh gây ấn tượng.</p>
+                                            <div class="bg-blue-50/50 p-4 rounded-xl mb-4 text-sm text-gray-600 italic">
+                                                <p class="mb-2">Ví dụ: <br>"- Giọng nói của bà tôi đặc biệt trầm bổng, nghe <b>như</b> tiếng chuông đồng..."</p>
+                                                <p>"- A Cháng đẹp người thật... ngực nở vòng cung, da đỏ <b>như</b> lim..."</p>
+                                            </div>
+                                            <div class="flex flex-col gap-2">
+                                                <div class="flex items-center gap-4">
+                                                    <input type="text" id="viet-inputA" class="input-line px-2 text-lg" placeholder="Nhập câu văn em đã chỉnh sửa...">
+                                                    <button onclick="checkVietAI('viet-inputA', 'Sử dụng từ ngữ gợi tả hoặc hình ảnh so sánh')" class="w-12 h-12 rounded-xl bg-gradient-to-tr from-green-400 to-green-600 text-white shadow-lg shadow-green-200 flex items-center justify-center hover:scale-105 transition-transform shrink-0" title="Nhờ AI nhận xét">
+                                                        <i class="fas fa-robot text-xl"></i>
+                                                    </button>
+                                                </div>
+                                                <div id="feedback-viet-inputA" class="hidden p-3 rounded-xl bg-green-50 text-green-800 text-sm font-medium border border-green-200"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 3b -->
+                                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                                            <p class="text-gray-800 font-bold mb-4 text-lg">b. Bộc lộ suy nghĩ, cảm xúc với người được tả.</p>
+                                            <div class="bg-blue-50/50 p-4 rounded-xl mb-4 text-sm text-gray-600 italic">
+                                                <p>Ví dụ: "...tôi sẽ <b>không bao giờ quên</b> đôi mắt của cô giáo nhìn tôi lúc ấy. Ánh mắt cô cũng <b>âu yếm, trìu mến</b> như ánh mắt bà nhìn tôi."</p>
+                                            </div>
+                                            <div class="flex flex-col gap-2">
+                                                <div class="flex items-center gap-4">
+                                                    <input type="text" id="viet-inputB" class="input-line px-2 text-lg" placeholder="Nhập câu văn em đã chỉnh sửa...">
+                                                    <button onclick="checkVietAI('viet-inputB', 'Bộc lộ suy nghĩ, cảm xúc')" class="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-400 to-purple-600 text-white shadow-lg shadow-purple-200 flex items-center justify-center hover:scale-105 transition-transform shrink-0" title="Nhờ AI nhận xét">
+                                                        <i class="fas fa-robot text-xl"></i>
+                                                    </button>
+                                                </div>
+                                                <div id="feedback-viet-inputB" class="hidden p-3 rounded-xl bg-purple-50 text-purple-800 text-sm font-medium border border-purple-200"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Footer Section -->
+                                <div class="mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center gap-6 bg-orange-50/30 p-6 rounded-2xl">
+                                    <div class="bg-orange-100 p-4 rounded-2xl shadow-sm text-orange-500">
+                                        <i class="fas fa-home text-2xl"></i>
+                                    </div>
+                                    <p class="text-gray-700 italic font-medium text-lg text-center md:text-left">Đọc bài văn tả người của em cho người thân nghe, chia sẻ những điều thầy cô nhận xét về bài làm của em và các bạn.</p>
+                                </div>
+                            </div>
+                            
+                            <script>
+                                // Star rating for Viet lesson  
+                                function rateViet(starElement, count) {
+                                    const parent = starElement.parentElement;
+                                    const stars = parent.getElementsByClassName('star-rating');
+                                    for (let i = 0; i < stars.length; i++) {
+                                        if (i < count) stars[i].classList.add('active');
+                                        else stars[i].classList.remove('active');
+                                    }
+                                    if (count === 5 && typeof confetti === 'function') {
+                                        confetti({ particleCount: 50, spread: 40, origin: { y: 0.7 }, colors: ['#facc15'] });
+                                    }
+                                }
+
+                                // AI Review for Viet lesson
+                                async function checkVietAI(inputId, criteria) {
+                                    const val = document.getElementById(inputId).value.trim();
+                                    const feedbackBox = document.getElementById('feedback-' + inputId);
+
+                                    if (!val) {
+                                        alert("Em ơi, hãy viết câu văn của mình vào chỗ trống trước nhé!");
+                                        return;
+                                    }
+
+                                    feedbackBox.classList.remove('hidden');
+                                    feedbackBox.innerHTML = '<span class="flex items-center gap-2"><i class="fas fa-spinner fa-spin"></i> Thầy AI đang suy nghĩ...</span>';
+
+                                    try {
+                                        const response = await fetch('/.netlify/functions/chat', {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({ sentence: val, mode: 'sentence_review', criteria: criteria })
+                                        });
+
+                                        if (!response.ok) throw new Error('Network response was not ok');
+                                        const data = await response.json();
+
+                                        const icon = data.is_good ? '🌟' : '💡';
+                                        const colorClass = data.is_good ? 'text-green-800' : 'text-orange-800';
+
+                                        feedbackBox.innerHTML = '<div class="flex flex-col gap-1"><div class="font-bold ' + colorClass + '">' + icon + ' ' + data.feedback + '</div>' + (data.suggestion ? '<div class="text-xs italic text-gray-600 mt-1">Gợi ý: ' + data.suggestion + '</div>' : '') + '</div>';
+
+                                        if (data.is_good && typeof confetti === 'function') {
+                                            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#2563eb', '#f59e0b', '#10b981', '#ef4444'] });
+                                        }
+                                    } catch (error) {
+                                        console.error("Error:", error);
+                                        feedbackBox.innerHTML = '<span class="text-red-500">Thầy AI đang bận, em thử lại sau nhé! (Lỗi kết nối)</span>';
+                                    }
+                                }
+                            </script>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Bài văn tả người cần có những phần nào?", "a": ["Chỉ mở bài", "Mở bài, thân bài, kết bài", "Chỉ thân bài", "Mở bài và kết bài"], "c": 1 },
+                        { "q": "Khi miêu tả người, ta cần làm nổi bật điều gì?", "a": ["Đặc điểm chung", "Đặc điểm riêng của người được tả", "Giống mọi người", "Không cần nổi bật"], "c": 1 },
+                        { "q": "Phần nào giúp bài văn thể hiện tình cảm với người được tả?", "a": ["Chỉ mở bài", "Chỉ kết bài", "Cả bài văn", "Không cần thể hiện"], "c": 2 },
+                        { "q": "Câu văn nào sử dụng hình ảnh so sánh?", "a": ["Bà tôi rất hiền.", "Giọng bà như tiếng chuông đồng.", "Bà hay kể chuyện.", "Bà thích đọc sách."], "c": 1 },
+                        { "q": "Từ nào là từ ngữ giàu sức gợi tả?", "a": ["Đẹp", "Cao", "Trầm bổng", "Tốt"], "c": 2 },
+                        { "q": "Bài văn tả người nên tránh điều gì?", "a": ["Dùng từ ngữ sinh động", "Mắc lỗi chính tả", "Thể hiện tình cảm", "Miêu tả chi tiết"], "c": 1 },
+                        { "q": "Câu nào bộc lộ cảm xúc với người được tả?", "a": ["Mẹ tôi 40 tuổi.", "Tôi yêu mẹ vô cùng.", "Mẹ làm giáo viên.", "Mẹ cao 1m60."], "c": 1 },
+                        { "q": "Khi chỉnh sửa bài văn, ta cần làm gì?", "a": ["Viết lại toàn bộ", "Sửa những câu chưa hay", "Xóa hết", "Không cần sửa"], "c": 1 },
+                        { "q": "Hình ảnh so sánh giúp bài văn như thế nào?", "a": ["Ngắn hơn", "Sinh động, gợi cảm hơn", "Khô khan hơn", "Dài hơn"], "c": 1 },
+                        { "q": "Sau khi viết xong, em nên làm gì?", "a": ["Nộp ngay", "Đọc lại và chỉnh sửa", "Xé bỏ", "Không làm gì"], "c": 1 }
                     ]
                 }
             }
