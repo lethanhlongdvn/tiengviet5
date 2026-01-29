@@ -256,14 +256,37 @@
         async function exportToExcel() {
             try {
                 const lessonFilter = document.getElementById('lesson-filter').value;
-                const dataToExport = allQuizData.map((d, index) => ({
+
+                // Filter: Keep only highest score per student
+                const bestAttempts = {};
+                allQuizData.forEach(attempt => {
+                    // Create a unique key for each student (Name + Class + Phone/ID if avail, but Name+Class is strictly used here)
+                    const key = `${attempt.studentName}_${attempt.studentClass}`;
+
+                    // If no record yet, or this attempt has higher score, save it.
+                    // If scores are equal, maybe prefer the latest timestamp? (optional, here we just take >)
+                    // Let's take strictly > for score. If equal, current one (older in the array? Array order depends on query)
+                    // Query was orderBy("timestamp", "desc"). So first item is LATEST.
+                    // If we want highest score:
+                    if (!bestAttempts[key]) {
+                        bestAttempts[key] = attempt;
+                    } else {
+                        if ((attempt.score || 0) > (bestAttempts[key].score || 0)) {
+                            bestAttempts[key] = attempt;
+                        }
+                    }
+                });
+
+                const uniqueData = Object.values(bestAttempts);
+
+                const dataToExport = uniqueData.map((d, index) => ({
                     "STT": index + 1,
                     "Họ và Tên": d.studentName,
                     "Lớp": d.studentClass,
                     "Trường": d.studentSchool,
                     "Điểm (0-100)": d.score,
-                    "Số câu đúng": d.correctCount,
-                    "Tổng số câu": d.totalQuestions,
+                    "Số câu đúng": d.correctCount || "N/A",
+                    "Tổng số câu": d.totalQuestions || "N/A",
                     "Thời gian": d.timestamp ? d.timestamp.toDate().toLocaleString('vi-VN') : ""
                 }));
 
@@ -276,7 +299,10 @@
                 const workbook = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(workbook, worksheet, "Kết quả Trắc nghiệm");
 
-                const fileName = lessonFilter ? `Tien_Do_${lessonFilter.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().toLocaleDateString('vi-VN')}.xlsx` : `Tien_Do_Tat_Ca_${new Date().toLocaleDateString('vi-VN')}.xlsx`;
+                const dateStr = new Date().toLocaleDateString('vi-VN').replace(/\//g, '-');
+                const safeFilter = lessonFilter ? lessonFilter.replace(/[^a-zA-Z0-9]/g, '_') : 'Tat_Ca';
+                const fileName = `Ket_Qua_Trac_Nghiem_${safeFilter}_${dateStr}.xlsx`;
+
                 XLSX.writeFile(workbook, fileName);
 
             } catch (error) {
