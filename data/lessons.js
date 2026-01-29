@@ -5345,60 +5345,65 @@ window.LESSON_DATA = {
                                         <span class="text-red-500 font-extrabold mr-2 text-2xl">2.</span>
                                         <span>Đọc lại bài văn của em để biết bài đã đạt được những yêu cầu nào dưới đây:</span>
                                     </p>
-                                    <div class="criteria-box">
-                                        <div class="criteria-icon">?</div>
-                                        <div class="flex-1 bg-cyan-50">
-                                            <table class="w-full">
-                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100/50 transition-colors">
-                                                    <td class="p-4 text-gray-700 font-medium">– Có đủ mở bài, thân bài, kết bài.</td>
-                                                    <td class="p-4 w-40 text-center">
-                                                        <div class="flex gap-1 justify-center" data-row="1">
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 1)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 2)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 3)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 4)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 5)"></i>
+                                    <div class="overflow-hidden rounded-2xl border-2 border-cyan-400 shadow-lg">
+                                        <table class="w-full">
+                                            <thead>
+                                                <tr class="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white">
+                                                    <th class="p-4 text-left font-bold text-lg">📋 Tiêu chí tự đánh giá</th>
+                                                    <th class="p-4 text-center font-bold text-lg w-48">⭐ Tự đánh giá</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-cyan-50">
+                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium text-base">– Có đủ mở bài, thân bài, kết bài.</td>
+                                                    <td class="p-4 text-center">
+                                                        <div class="star-group flex gap-2 justify-center" data-row="1">
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 1)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 2)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 3)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 4)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 5)">☆</span>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100/50 transition-colors">
-                                                    <td class="p-4 text-gray-700 font-medium">– Miêu tả ngoại hình, hoạt động,... làm nổi bật đặc điểm riêng của người được tả.</td>
-                                                    <td class="p-4 w-40 text-center">
-                                                        <div class="flex gap-1 justify-center" data-row="2">
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 1)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 2)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 3)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 4)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 5)"></i>
+                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium text-base">– Miêu tả ngoại hình, hoạt động,... làm nổi bật đặc điểm riêng của người được tả.</td>
+                                                    <td class="p-4 text-center">
+                                                        <div class="star-group flex gap-2 justify-center" data-row="2">
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 1)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 2)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 3)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 4)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 5)">☆</span>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100/50 transition-colors">
-                                                    <td class="p-4 text-gray-700 font-medium">– Thể hiện tình cảm đối với người được tả.</td>
-                                                    <td class="p-4 w-40 text-center">
-                                                        <div class="flex gap-1 justify-center" data-row="3">
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 1)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 2)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 3)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 4)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 5)"></i>
+                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium text-base">– Thể hiện tình cảm đối với người được tả.</td>
+                                                    <td class="p-4 text-center">
+                                                        <div class="star-group flex gap-2 justify-center" data-row="3">
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 1)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 2)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 3)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 4)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 5)">☆</span>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <tr class="hover:bg-cyan-100/50 transition-colors">
-                                                    <td class="p-4 text-gray-700 font-medium">– Trình bày bài sạch đẹp, không mắc lỗi chính tả, lỗi diễn đạt.</td>
-                                                    <td class="p-4 w-40 text-center">
-                                                        <div class="flex gap-1 justify-center" data-row="4">
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 1)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 2)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 3)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 4)"></i>
-                                                            <i class="fas fa-star star-rating hover:text-yellow-400" onclick="rateViet(this, 5)"></i>
+                                                <tr class="hover:bg-cyan-100 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium text-base">– Trình bày bài sạch đẹp, không mắc lỗi chính tả, lỗi diễn đạt.</td>
+                                                    <td class="p-4 text-center">
+                                                        <div class="star-group flex gap-2 justify-center" data-row="4">
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 1)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 2)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 3)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 4)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 5)">☆</span>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            </table>
-                                        </div>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 
@@ -5416,14 +5421,16 @@ window.LESSON_DATA = {
                                                 <p class="mb-2">Ví dụ: <br>"- Giọng nói của bà tôi đặc biệt trầm bổng, nghe <b>như</b> tiếng chuông đồng..."</p>
                                                 <p>"- A Cháng đẹp người thật... ngực nở vòng cung, da đỏ <b>như</b> lim..."</p>
                                             </div>
-                                            <div class="flex flex-col gap-2">
-                                                <div class="flex items-center gap-4">
-                                                    <input type="text" id="viet-inputA" class="input-line px-2 text-lg" placeholder="Nhập câu văn em đã chỉnh sửa...">
-                                                    <button onclick="checkVietAI('viet-inputA', 'Sử dụng từ ngữ gợi tả hoặc hình ảnh so sánh')" class="w-12 h-12 rounded-xl bg-gradient-to-tr from-green-400 to-green-600 text-white shadow-lg shadow-green-200 flex items-center justify-center hover:scale-105 transition-transform shrink-0" title="Nhờ AI nhận xét">
-                                                        <i class="fas fa-robot text-xl"></i>
+                                            <div class="flex flex-col gap-3">
+                                                <label class="text-sm font-bold text-blue-600">📝 Bài làm của em:</label>
+                                                <textarea id="viet-inputA" rows="3" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-base font-medium transition-all resize-none bg-gray-50 focus:bg-white" placeholder="Nhập câu văn em đã chỉnh sửa..."></textarea>
+                                                <div class="flex justify-end">
+                                                    <button onclick="checkVietAI('viet-inputA', 'a')" class="px-5 py-2.5 rounded-xl bg-gradient-to-tr from-green-400 to-green-600 text-white shadow-lg shadow-green-200 flex items-center gap-2 hover:scale-105 transition-transform font-bold" title="Nhờ AI nhận xét">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                                        Xem nhận xét
                                                     </button>
                                                 </div>
-                                                <div id="feedback-viet-inputA" class="hidden p-3 rounded-xl bg-green-50 text-green-800 text-sm font-medium border border-green-200"></div>
+                                                <div id="feedback-viet-inputA" class="hidden p-4 rounded-xl bg-green-50 text-green-800 text-sm font-medium border border-green-200"></div>
                                             </div>
                                         </div>
 
@@ -5433,14 +5440,16 @@ window.LESSON_DATA = {
                                             <div class="bg-blue-50/50 p-4 rounded-xl mb-4 text-sm text-gray-600 italic">
                                                 <p>Ví dụ: "...tôi sẽ <b>không bao giờ quên</b> đôi mắt của cô giáo nhìn tôi lúc ấy. Ánh mắt cô cũng <b>âu yếm, trìu mến</b> như ánh mắt bà nhìn tôi."</p>
                                             </div>
-                                            <div class="flex flex-col gap-2">
-                                                <div class="flex items-center gap-4">
-                                                    <input type="text" id="viet-inputB" class="input-line px-2 text-lg" placeholder="Nhập câu văn em đã chỉnh sửa...">
-                                                    <button onclick="checkVietAI('viet-inputB', 'Bộc lộ suy nghĩ, cảm xúc')" class="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-400 to-purple-600 text-white shadow-lg shadow-purple-200 flex items-center justify-center hover:scale-105 transition-transform shrink-0" title="Nhờ AI nhận xét">
-                                                        <i class="fas fa-robot text-xl"></i>
+                                            <div class="flex flex-col gap-3">
+                                                <label class="text-sm font-bold text-purple-600">📝 Bài làm của em:</label>
+                                                <textarea id="viet-inputB" rows="3" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-100 text-base font-medium transition-all resize-none bg-gray-50 focus:bg-white" placeholder="Nhập câu văn em đã chỉnh sửa..."></textarea>
+                                                <div class="flex justify-end">
+                                                    <button onclick="checkVietAI('viet-inputB', 'b')" class="px-5 py-2.5 rounded-xl bg-gradient-to-tr from-purple-400 to-purple-600 text-white shadow-lg shadow-purple-200 flex items-center gap-2 hover:scale-105 transition-transform font-bold" title="Nhờ AI nhận xét">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                                        Xem nhận xét
                                                     </button>
                                                 </div>
-                                                <div id="feedback-viet-inputB" class="hidden p-3 rounded-xl bg-purple-50 text-purple-800 text-sm font-medium border border-purple-200"></div>
+                                                <div id="feedback-viet-inputB" class="hidden p-4 rounded-xl bg-purple-50 text-purple-800 text-sm font-medium border border-purple-200"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -5455,57 +5464,7 @@ window.LESSON_DATA = {
                                 </div>
                             </div>
                             
-                            <script>
-                                // Star rating for Viet lesson  
-                                function rateViet(starElement, count) {
-                                    const parent = starElement.parentElement;
-                                    const stars = parent.getElementsByClassName('star-rating');
-                                    for (let i = 0; i < stars.length; i++) {
-                                        if (i < count) stars[i].classList.add('active');
-                                        else stars[i].classList.remove('active');
-                                    }
-                                    if (count === 5 && typeof confetti === 'function') {
-                                        confetti({ particleCount: 50, spread: 40, origin: { y: 0.7 }, colors: ['#facc15'] });
-                                    }
-                                }
-
-                                // AI Review for Viet lesson
-                                async function checkVietAI(inputId, criteria) {
-                                    const val = document.getElementById(inputId).value.trim();
-                                    const feedbackBox = document.getElementById('feedback-' + inputId);
-
-                                    if (!val) {
-                                        alert("Em ơi, hãy viết câu văn của mình vào chỗ trống trước nhé!");
-                                        return;
-                                    }
-
-                                    feedbackBox.classList.remove('hidden');
-                                    feedbackBox.innerHTML = '<span class="flex items-center gap-2"><i class="fas fa-spinner fa-spin"></i> Thầy AI đang suy nghĩ...</span>';
-
-                                    try {
-                                        const response = await fetch('/.netlify/functions/chat', {
-                                            method: 'POST',
-                                            headers: { 'Content-Type': 'application/json' },
-                                            body: JSON.stringify({ sentence: val, mode: 'sentence_review', criteria: criteria })
-                                        });
-
-                                        if (!response.ok) throw new Error('Network response was not ok');
-                                        const data = await response.json();
-
-                                        const icon = data.is_good ? '🌟' : '💡';
-                                        const colorClass = data.is_good ? 'text-green-800' : 'text-orange-800';
-
-                                        feedbackBox.innerHTML = '<div class="flex flex-col gap-1"><div class="font-bold ' + colorClass + '">' + icon + ' ' + data.feedback + '</div>' + (data.suggestion ? '<div class="text-xs italic text-gray-600 mt-1">Gợi ý: ' + data.suggestion + '</div>' : '') + '</div>';
-
-                                        if (data.is_good && typeof confetti === 'function') {
-                                            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#2563eb', '#f59e0b', '#10b981', '#ef4444'] });
-                                        }
-                                    } catch (error) {
-                                        console.error("Error:", error);
-                                        feedbackBox.innerHTML = '<span class="text-red-500">Thầy AI đang bận, em thử lại sau nhé! (Lỗi kết nối)</span>';
-                                    }
-                                }
-                            </script>`
+`
                         }
                     ]
                 },
