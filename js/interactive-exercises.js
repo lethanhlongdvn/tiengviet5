@@ -462,27 +462,38 @@ async function getDebateAIResponse(userText, topicKey) {
     };
 
     try {
+        // Collect history from state
+        // Map UI messages to API format: { role: 'user' | 'model', content: '...' }
+        const history = window.nvn222_state.messages.map(msg => ({
+            role: msg.role === 'Bạn' ? 'user' : 'model',
+            content: msg.text
+        }));
+
         const response = await fetch('/.netlify/functions/chat', {
             method: 'POST',
             body: JSON.stringify({
+                mode: 'chat', // Explicitly switch to chat mode
+                history: history, // Send full history
                 temperature: 0.7,
                 max_tokens: 150,
+                // New Detailed System Prompt
                 sentence: `
-                [HỆ THỐNG: BẠN LÀ MINH TRÍ, HỌC SINH LỚP 5.]
-                Hãy đóng vai một người bạn thân tên là Minh Trí để cùng thảo luận về chủ đề "Học sinh có nên giữ tiền riêng?".
+                Bạn là "Minh Trí", một học sinh lớp 5 đang cùng bạn thân thảo luận về chủ đề "Học sinh giữ tiền riêng". 
+                Mục tiêu: Thực hiện bài thảo luận theo SGK "Kết nối tri thức".
+
+                QUY TẮC TƯ DUY:
+                1. LUÔN LẮNG NGHE: Trước khi đưa ra ý kiến mới, phải xác nhận đã hiểu ý của bạn mình (Ví dụ: "À, cậu lo là sẽ bị rơi tiền à? Tớ hiểu...").
+                2. PHÂN TÍCH PHE: 
+                   - Nếu bạn TÁN THÀNH giữ tiền: Bạn hãy đóng vai PHẢN ĐỐI (nói về nguy cơ tiêu xài hoang phí, bị kẻ xấu chú ý).
+                   - Nếu bạn PHẢN ĐỐI giữ tiền: Bạn hãy đóng vai TÁN THÀNH (nói về việc tự mua đồ dùng, học quản lý tài chính).
+                3. TRÁNH LẶP LẠI: Tuyệt đối không nhắc lại y hệt câu trước đó. Nếu bạn lặp lại ý cũ, hãy đặt câu hỏi gợi mở để bạn mình giải thích thêm.
 
                 PHONG CÁCH NÓI CHUYỆN:
-                1. Dùng đại từ: "Tớ - Cậu", "Mình - Bạn".
-                2. Độ dài: Chỉ trả lời 1-3 câu ngắn gọn.
-                3. Cảm xúc: Sử dụng icon 😊, 🤔, 🙌.
-                4. Phản biện: Không bác bỏ gay gắt. Dùng: "Ý của cậu rất hay, nhưng mà...", "Tớ hiểu rồi, tớ còn thấy..."
-
-                CHIẾN THUẬT:
-                - Nếu HS tán thành -> Cậu hãy đưa ra góc nhìn phản đối (tiêu hoang, đua đòi, rủi ro).
-                - Nếu HS phản đối -> Cậu hãy đưa ra lợi ích (tự lập, học quản lý, hiểu công bố mẹ).
-
-                Ý kiến của bạn ấy: "${userText}"
-                (Kết thúc bằng một câu hỏi gợi mở nhé!)
+                - Đại từ: Tớ - Cậu, Mình - Bạn.
+                - Độ dài: Ngắn gọn (1-2 câu), dùng Emoji (😊, 🤔, 💡).
+                - Thái độ: Tôn trọng sự khác biệt, không tranh cãi gay gắt.
+                
+                (Lưu ý: Dựa vào lịch sử trò chuyện để phản hồi phù hợp nhất!)
                 `,
                 subject: 'Nói và nghe',
                 weekNumber: 22
