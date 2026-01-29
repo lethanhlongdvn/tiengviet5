@@ -5276,7 +5276,9 @@ window.LESSON_DATA = {
                             Nhận diện câu ghép
                         </h3>
                         <p class="text-sm text-gray-500 mb-6 italic bg-blue-50/50 p-3 rounded-xl border border-blue-100">
-                            Bấm vào các từ tạo thành <b class="text-blue-600">cặp từ nối</b> hoặc <b class="text-blue-600">từ nối</b> trong các câu ghép dưới đây.
+                            1. Tìm câu ghép trong các đoạn văn dưới đây và cho biết các vế của mỗi câu ghép được nối với nhau bằng cách nào.
+                            <br><br>
+                            (Bấm vào các từ tạo thành <b class="text-blue-600">cặp từ nối</b> hoặc <b class="text-blue-600">từ nối</b> trong các câu ghép dưới đây).
                         </p>
                         <!-- ĐOẠN VĂN A -->
                         <div class="mb-6">
@@ -5332,6 +5334,7 @@ window.LESSON_DATA = {
                                         <span class="word" onclick="toggleWord(this)">Vào</span> <span class="word" onclick="toggleWord(this)">đầu</span> <span class="word" onclick="toggleWord(this)">xuân,</span> <span class="word" onclick="toggleWord(this)">hoa</span> <span class="word" onclick="toggleWord(this)">đào</span> <span class="word" onclick="toggleWord(this)">nở</span> <span class="word" onclick="toggleWord(this)">hồng</span> <span class="word" onclick="toggleWord(this)">cả</span> <span class="word" onclick="toggleWord(this)">trời.</span>
                                     </div>
                                 </div>
+                                <p class="text-right font-bold text-gray-600 italic mt-2">(Tô Hoài)</p>
                             </div>
                             <div class="mt-3 flex justify-end">
                                 <button onclick="ltvc22_check1('p1a', this)" class="btn btn-primary px-4 py-2 flex items-center gap-2 rounded-xl font-black shadow-lg transition-all hover:scale-105" title="Kiểm tra đoạn a">
@@ -5435,6 +5438,7 @@ window.LESSON_DATA = {
                                         <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">cố</span> <span class="word" onclick="toggleWord(this)">khều</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">đưa</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">không</span> <span class="word" onclick="toggleWord(this)">tới.</span>
                                     </div>
                                 </div>
+                                <p class="text-right font-bold text-gray-600 italic mt-2">(Võ Quảng)</p>
                             </div>
                             <div class="mt-3 flex justify-end">
                                 <button onclick="ltvc22_check1('p1b', this)" class="btn btn-primary px-4 py-2 flex items-center gap-2 rounded-xl font-black shadow-lg transition-all hover:scale-105" title="Kiểm tra đoạn b">
@@ -5453,7 +5457,7 @@ window.LESSON_DATA = {
                             Điền cặp từ phù hợp
                         </h3>
                         <p class="text-sm text-gray-500 mb-6 italic bg-orange-50/50 p-3 rounded-xl border border-orange-100">
-                            Tìm cặp kết từ hoặc cặp từ hô ứng thay cho 🌸 để tạo câu ghép:
+                            2. Tìm cặp kết từ hoặc cặp từ hô ứng thay cho 🌸 để tạo câu ghép.
                         </p>
                         <div class="space-y-4 text-gray-700">
                             <!-- Câu 2a -->
@@ -5515,7 +5519,7 @@ window.LESSON_DATA = {
                         </h3>
                         <div class="bg-purple-50/50 p-5 rounded-2xl border border-purple-100 mb-6">
                             <p class="text-gray-700 leading-relaxed font-medium">
-                                Em hãy viết một đoạn văn (từ 3 đến 5 câu) về bài thơ <b>Đoàn thuyền đánh cá</b> của Huy Cận, trong đó có sử dụng ít nhất một <b>câu ghép</b> chứa kết từ để nối các vế câu.
+                                3. Viết đoạn văn (3 – 5 câu) về bài thơ <i>Đoàn thuyền đánh cá</i>, trong đó có câu ghép chứa kết từ để nối các vế câu.
                             </p>
                         </div>
                         <div class="space-y-4">
