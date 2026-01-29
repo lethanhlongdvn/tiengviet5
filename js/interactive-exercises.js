@@ -181,14 +181,25 @@ function ltvc22_check1(id, btn) {
 
     items.forEach(item => {
         const isCompound = item.getAttribute('data-is-compound') === 'true';
-        const connectors = (item.getAttribute('data-connectors') || '').split(',').filter(x => x);
+        // Handle connectors - use pipe | as delimiter, but also handle comma-only case
+        const connectorsStr = (item.getAttribute('data-connectors') || '').trim();
+        let connectors;
+        if (connectorsStr === ',') {
+            connectors = [',']; // Special case: comma itself is the connector
+        } else if (connectorsStr.includes('|')) {
+            connectors = connectorsStr.split('|').filter(x => x.trim());
+        } else {
+            connectors = connectorsStr.split(',').filter(x => x.trim());
+        }
         const words = item.querySelectorAll('.word');
         let foundConnectors = 0;
 
         if (isCompound) {
             totalCompound++;
             words.forEach(w => {
-                const txt = w.innerText.replace(/[.,]/g, "").toLowerCase().trim();
+                // Get text - for comma check, keep the comma; for normal words, strip punctuation
+                const rawText = w.innerText.trim();
+                const txt = rawText === ',' ? ',' : rawText.replace(/[.,]/g, "").toLowerCase().trim();
                 if (w.classList.contains('selected')) {
                     if (connectors.includes(txt)) {
                         w.classList.add('is-correct');
@@ -199,6 +210,7 @@ function ltvc22_check1(id, btn) {
                     }
                 }
             });
+
 
             // Nếu là câu không có connector (nối trực tiếp)
             if (connectors.length === 0) {
@@ -267,7 +279,35 @@ function ltvc22_check2(id) {
 }
 function ltvc22_toggle(el) {
     const container = el.nextElementSibling;
-    if (container && (container.classList.contains('words-container') || container.classList.contains('hidden'))) {
+    if (container && container.classList.contains('words-container')) {
+        const isHidden = container.classList.contains('hidden');
         container.classList.toggle('hidden');
+        // Hide/show preview text when expanded/collapsed
+        if (isHidden) {
+            el.classList.add('hidden');
+            // Add close button if not exists
+            if (!container.querySelector('.ltvc-close-btn')) {
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'ltvc-close-btn absolute top-1 right-1 w-6 h-6 rounded-full bg-gray-200 hover:bg-red-400 hover:text-white flex items-center justify-center text-gray-500 text-xs font-bold transition-colors z-10';
+                closeBtn.innerHTML = '✕';
+                closeBtn.onclick = function (e) {
+                    e.stopPropagation();
+                    container.classList.add('hidden');
+                    el.classList.remove('hidden');
+                };
+                container.style.position = 'relative';
+                container.insertBefore(closeBtn, container.firstChild);
+
+                // Add sentence number header
+                const numSpan = el.querySelector('span');
+                const sentenceNum = numSpan ? numSpan.textContent : '';
+                const header = document.createElement('span');
+                header.className = 'w-full text-xs font-black text-blue-500 mb-2 block';
+                header.textContent = sentenceNum + ' Chọn từ nối:';
+                container.insertBefore(header, container.firstChild);
+            }
+        } else {
+            el.classList.remove('hidden');
+        }
     }
 }
