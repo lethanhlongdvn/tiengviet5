@@ -190,7 +190,8 @@ function viet222_submit() {
     window.currentEssayData = {
         mb, tb, kb,
         isImage: hasFile,
-        fileName: hasFile ? fileInput.files[0].name : null
+        fileName: hasFile ? fileInput.files[0].name : null,
+        fileObj: hasFile ? fileInput.files[0] : null // Store file object for upload
     };
 
     const modal = document.getElementById('studentInfoModal');
@@ -324,54 +325,78 @@ window.handleSubmission = async function () {
     if (btn) { btn.innerHTML = "⏳ Đang xử lý..."; btn.disabled = true; }
 
     if (window.currentSubmissionType === 'essay') {
-        const { mb, tb, kb, isImage, fileName } = window.currentEssayData;
+        const { mb, tb, kb, isImage, fileName, fileObj } = window.currentEssayData;
 
         let result = {};
         let contentToSave = "";
+        let fileUrl = "";
 
-        if (isImage) {
-            // Image Submission: Skip Text AI
-            result = {
-                score: 9.5, // High score for effort
-                good: "Thầy/Cô đã nhận được ảnh bài làm của em.",
-                bad: "Thầy/Cô sẽ xem và chấm điểm chi tiết trên lớp nhé!"
+        try {
+            // Upload Image if present
+            if (isImage && fileObj) {
+                const storageRef = firebase.storage().ref(`essays/${Date.now()}_${fileObj.name}`);
+                const snapshot = await storageRef.put(fileObj);
+                fileUrl = await snapshot.ref.getDownloadURL();
+
+                result = {
+                    score: 9.5,
+                    good: "Thầy/Cô đã nhận được ảnh bài làm của em.",
+                    bad: "Thầy/Cô sẽ xem và chấm điểm chi tiết trên lớp nhé!"
+                };
+                contentToSave = `[FILE ẢNH]`;
+            } else {
+                // Text Submission: Call AI
+                result = await analyzeEssayAI(mb, tb, kb);
+                contentToSave = `MB: ${mb}\nTB: ${tb}\nKB: ${kb}`;
+            }
+
+            // Save to Firebase Firestore (ESSAYS_V2)
+            await db.collection("essays_v2").add({
+                studentName: name,
+                studentClass: cls,
+                studentSchool: school,
+                content: contentToSave,
+                fileUrl: fileUrl,
+                lessonTitle: document.title.replace(" - EduRobot", ""),
+                aiFeedback: `Good: ${result.good} | Bad: ${result.bad}`,
+                aiGrade: result.score,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                status: "Chưa chấm",
+                type: 'essay'
+            });
+
+            // Show result locally
+            document.getElementById('viet222-score').innerText = result.score || 8.5;
+            document.getElementById('viet222-feedback-good').innerText = result.good || result.feedback || "Tốt";
+            document.getElementById('viet222-feedback-bad').innerText = result.bad || result.suggestion || "";
+
+            const stars = Math.floor(result.score / 2);
+            let starHtml = '';
+            for (let i = 0; i < 5; i++) starHtml += i < stars ? '★' : '<span class=\'text-gray-300\'>★</span>';
+            document.getElementById('viet222-stars').innerHTML = starHtml;
+
+            document.getElementById('viet222-result').classList.remove('hidden');
+            document.getElementById('viet222-result').scrollIntoView({ behavior: 'smooth' });
+
+            // LocalStorage Backup
+            const sub = {
+                studentName: name, studentClass: cls, studentSchool: school,
+                type: 'essay',
+                content: contentToSave,
+                feedback: `Good: ${result.good} | Bad: ${result.bad}`,
+                score: result.score,
+                timestamp: new Date().toISOString()
             };
-            contentToSave = `[FILE ẢNH]: ${fileName}`;
-            if (mb || tb || kb) contentToSave += `\n(Ghi chú: ${mb} / ${tb} / ${kb})`;
-        } else {
-            // Text Submission: Call AI
-            result = await analyzeEssayAI(mb, tb, kb);
-            contentToSave = `MB: ${mb}\nTB: ${tb}\nKB: ${kb}`;
+            window.submissions.push(sub);
+            localStorage.setItem('eduRobotSubmissions', JSON.stringify(window.submissions));
+
+            closeStudentModal();
+            celebrate();
+
+        } catch (error) {
+            console.error("Error saving essay:", error);
+            alert("Có lỗi khi nộp bài: " + error.message);
         }
-
-        // Show result
-        document.getElementById('viet222-score').innerText = result.score || 8.5;
-        document.getElementById('viet222-feedback-good').innerText = result.good || result.feedback || "Tốt";
-        document.getElementById('viet222-feedback-bad').innerText = result.bad || result.suggestion || "";
-
-        // Render Stars
-        const stars = Math.floor(result.score / 2);
-        let starHtml = '';
-        for (let i = 0; i < 5; i++) starHtml += i < stars ? '★' : '<span class=\'text-gray-300\'>★</span>';
-        document.getElementById('viet222-stars').innerHTML = starHtml;
-
-        document.getElementById('viet222-result').classList.remove('hidden');
-        document.getElementById('viet222-result').scrollIntoView({ behavior: 'smooth' });
-
-        // Save
-        const sub = {
-            studentName: name, studentClass: cls, studentSchool: school,
-            type: 'essay',
-            content: contentToSave,
-            feedback: `Good: ${result.good} | Bad: ${result.bad}`,
-            score: result.score,
-            timestamp: new Date().toISOString()
-        };
-        window.submissions.push(sub);
-        localStorage.setItem('eduRobotSubmissions', JSON.stringify(window.submissions));
-
-        closeStudentModal();
-        celebrate();
 
     } else {
         // Quiz Submission (Existing logic - delegates to nothing here but usually caller handles it?)
