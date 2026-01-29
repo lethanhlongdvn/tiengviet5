@@ -126,17 +126,10 @@ function ltvc22_check2(id) { ltvc21_check2(id); } // Reuse
 function ltvc22_toggle(el) {
     const container = el.nextElementSibling;
     if (container) {
-        const isHidden = container.classList.contains('hidden');
         container.classList.toggle('hidden');
-        if (isHidden) { el.classList.add('hidden'); } else { el.classList.remove('hidden'); }
-        // Add close logic if needed (simplified here)
-        if (isHidden && !container.querySelector('.close-btn')) {
-            const btn = document.createElement('button');
-            btn.innerHTML = '✕';
-            btn.className = 'close-btn absolute top-0 right-0 p-2 text-red-500 font-bold';
-            btn.onclick = () => { container.classList.add('hidden'); el.classList.remove('hidden'); };
-            container.prepend(btn);
-        }
+        // Toggle opacity or color to indicate active state
+        el.classList.toggle('text-blue-600');
+        el.classList.toggle('opacity-50');
     }
 }
 
