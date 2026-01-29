@@ -5034,65 +5034,151 @@ window.LESSON_DATA = {
                         <p class="text-sm text-gray-500 mb-6 italic bg-blue-50/50 p-3 rounded-xl border border-blue-100">
                             Bấm vào các từ tạo thành <b class="text-blue-600">cặp từ nối</b> hoặc <b class="text-blue-600">từ nối</b> trong các câu ghép dưới đây.
                         </p>
-                        <div class="space-y-6" id="p1-combined">
-                            <!-- A1 -->
-                            <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="nhưng">
-                                <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
-                                    <span class="font-bold text-blue-400 shrink-0">(1)</span>
-                                    <p class="text-base md:text-lg font-medium leading-relaxed">Làng Tày, làng Dao ven suối và trong rừng, nhưng làng người Mông ở chơ vơ đỉnh núi, giữa cỏ tranh mênh mông.</p>
+                        <!-- ĐOẠN VĂN A -->
+                        <div class="mb-6">
+                            <h4 class="font-bold text-blue-600 mb-3 text-sm uppercase tracking-wider">a) Đoạn văn a</h4>
+                            <div class="space-y-4" id="p1a">
+                                <!-- A1 -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="nhưng">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-blue-400 shrink-0">(1)</span>
+                                        <p class="text-base md:text-lg font-medium leading-relaxed">Làng Tày, làng Dao ven suối và trong rừng, nhưng làng người Mông ở chơ vơ đỉnh núi, giữa cỏ tranh mênh mông.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Làng</span> <span class="word" onclick="toggleWord(this)">Tày,</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">Dao</span> <span class="word" onclick="toggleWord(this)">ven</span> <span class="word" onclick="toggleWord(this)">suối</span> <span class="word" onclick="toggleWord(this)">và</span> <span class="word" onclick="toggleWord(this)">trong</span> <span class="word" onclick="toggleWord(this)">rừng,</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">người</span> <span class="word" onclick="toggleWord(this)">Mông</span> <span class="word" onclick="toggleWord(this)">ở</span> <span class="word" onclick="toggleWord(this)">chơ</span> <span class="word" onclick="toggleWord(this)">vơ</span> <span class="word" onclick="toggleWord(this)">đỉnh</span> <span class="word" onclick="toggleWord(this)">núi,</span> <span class="word" onclick="toggleWord(this)">giữa</span> <span class="word" onclick="toggleWord(this)">cỏ</span> <span class="word" onclick="toggleWord(this)">tranh</span> <span class="word" onclick="toggleWord(this)">mênh</span> <span class="word" onclick="toggleWord(this)">mông.</span>
+                                    </div>
                                 </div>
-                                <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
-                                    <span class="word" onclick="toggleWord(this)">Làng</span> <span class="word" onclick="toggleWord(this)">Tày,</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">Dao</span> <span class="word" onclick="toggleWord(this)">ven</span> <span class="word" onclick="toggleWord(this)">suối</span> <span class="word" onclick="toggleWord(this)">và</span> <span class="word" onclick="toggleWord(this)">trong</span> <span class="word" onclick="toggleWord(this)">rừng,</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">người</span> <span class="word" onclick="toggleWord(this)">Mông</span> <span class="word" onclick="toggleWord(this)">ở</span> <span class="word" onclick="toggleWord(this)">chơ</span> <span class="word" onclick="toggleWord(this)">vơ</span> <span class="word" onclick="toggleWord(this)">đỉnh</span> <span class="word" onclick="toggleWord(this)">núi,</span> <span class="word" onclick="toggleWord(this)">giữa</span> <span class="word" onclick="toggleWord(this)">cỏ</span> <span class="word" onclick="toggleWord(this)">tranh</span> <span class="word" onclick="toggleWord(this)">mênh</span> <span class="word" onclick="toggleWord(this)">mông.</span>
+                                <!-- A2 -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors=",">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-blue-400 shrink-0">(2)</span>
+                                        <p class="text-base md:text-lg font-medium leading-relaxed">Vách và mái nhà đều ghép bằng những miếng gỗ pơ-mu, nhà nhà ám khói sạm đen tưởng như làng xóm liền với trời xanh.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Vách</span> <span class="word" onclick="toggleWord(this)">và</span> <span class="word" onclick="toggleWord(this)">mái</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">đều</span> <span class="word" onclick="toggleWord(this)">ghép</span> <span class="word" onclick="toggleWord(this)">bằng</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">miếng</span> <span class="word" onclick="toggleWord(this)">gỗ</span> <span class="word" onclick="toggleWord(this)">pơ-mu</span> <span class="word" onclick="toggleWord(this)" style="font-size: 1.4em; font-weight: 900; color: #f59e0b; padding: 2px 10px;">,</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">ám</span> <span class="word" onclick="toggleWord(this)">khói</span> <span class="word" onclick="toggleWord(this)">sạm</span> <span class="word" onclick="toggleWord(this)">đen</span> <span class="word" onclick="toggleWord(this)">tưởng</span> <span class="word" onclick="toggleWord(this)">như</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">xóm</span> <span class="word" onclick="toggleWord(this)">liền</span> <span class="word" onclick="toggleWord(this)">với</span> <span class="word" onclick="toggleWord(this)">trời</span> <span class="word" onclick="toggleWord(this)">xanh.</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- A2 -->
-                            <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="">
-                                <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
-                                    <span class="font-bold text-blue-400 shrink-0">(2)</span>
-                                    <p class="text-base md:text-lg font-medium leading-relaxed">Vách và mái nhà đều ghép bằng những miếng gỗ pơ-mu, nhà nhà ám khói sạm đen tưởng như làng xóm liền với trời xanh.</p>
-                                </div>
-                                <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
-                                    <span class="word" onclick="toggleWord(this)">Vách</span> <span class="word" onclick="toggleWord(this)">và</span> <span class="word" onclick="toggleWord(this)">mái</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">đều</span> <span class="word" onclick="toggleWord(this)">ghép</span> <span class="word" onclick="toggleWord(this)">bằng</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">miếng</span> <span class="word" onclick="toggleWord(this)">gỗ</span> <span class="word" onclick="toggleWord(this)">pơ-mu,</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">ám</span> <span class="word" onclick="toggleWord(this)">khói</span> <span class="word" onclick="toggleWord(this)">sạm</span> <span class="word" onclick="toggleWord(this)">đen</span> <span class="word" onclick="toggleWord(this)">tưởng</span> <span class="word" onclick="toggleWord(this)">như</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">xóm</span> <span class="word" onclick="toggleWord(this)">liền</span> <span class="word" onclick="toggleWord(this)">với</span> <span class="word" onclick="toggleWord(this)">trời</span> <span class="word" onclick="toggleWord(this)">xanh.</span>
-                                    <div class="w-full mt-1 text-xs text-blue-500 font-bold italic hidden direct-connect-msg">Nối trực tiếp song song</div>
-                                </div>
-                            </div>
-                            <!-- A3 (Simple) -->
-                            <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
-                                <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
-                                    <span class="font-bold text-blue-400 shrink-0">(3)</span>
-                                    <p class="text-base md:text-lg font-medium leading-relaxed">Xung quanh nhà nào cũng sum sê những đào, những lê.</p>
-                                </div>
-                                <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
-                                    <span class="word" onclick="toggleWord(this)">Xung</span> <span class="word" onclick="toggleWord(this)">quanh</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">nào</span> <span class="word" onclick="toggleWord(this)">cũng</span> <span class="word" onclick="toggleWord(this)">sum</span> <span class="word" onclick="toggleWord(this)">sê</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">đào,</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">lê.</span>
-                                </div>
-                            </div>
-                            <!-- B8 -->
-                             <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="vừa,đã">
-                                <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
-                                    <span class="font-bold text-blue-400 shrink-0">(4)</span>
-                                    <p class="text-base md:text-lg font-medium leading-relaxed">Thỏ vừa đặt chân xuống nước đã vội co chân lên.</p>
-                                </div>
-                                <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
-                                    <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">vừa</span> <span class="word" onclick="toggleWord(this)">đặt</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">xuống</span> <span class="word" onclick="toggleWord(this)">nước</span> <span class="word" onclick="toggleWord(this)">đã</span> <span class="word" onclick="toggleWord(this)">vội</span> <span class="word" onclick="toggleWord(this)">co</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">lên.</span>
+                                <!-- A3 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-blue-400 shrink-0">(3)</span>
+                                        <p class="text-base md:text-lg font-medium leading-relaxed">Xung quanh nhà nào cũng sum sê những đào, những lê.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Xung</span> <span class="word" onclick="toggleWord(this)">quanh</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">nào</span> <span class="word" onclick="toggleWord(this)">cũng</span> <span class="word" onclick="toggleWord(this)">sum</span> <span class="word" onclick="toggleWord(this)">sê</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">đào,</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">lê.</span>
+                                    </div>
                                 </div>
                             </div>
-                             <!-- B9 -->
-                             <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="nhưng">
-                                <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
-                                    <span class="font-bold text-blue-400 shrink-0">(5)</span>
-                                    <p class="text-base md:text-lg font-medium leading-relaxed">Thỏ cố khều nhưng đưa chân không tới.</p>
-                                </div>
-                                <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 animate-in slide-in-from-top-2 duration-300">
-                                    <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">cố</span> <span class="word" onclick="toggleWord(this)">khều</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">đưa</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">không</span> <span class="word" onclick="toggleWord(this)">tới.</span>
-                                </div>
+                            <div class="mt-3 flex justify-end">
+                                <button onclick="ltvc22_check1('p1a', this)" class="btn btn-primary w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all" title="Kiểm tra đoạn a">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                </button>
                             </div>
                         </div>
-                        <div class="mt-4 flex justify-end">
-                            <button onclick="ltvc22_check1('p1-combined', this)" class="btn btn-primary w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all" title="Kiểm tra">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            </button>
+
+                        <!-- ĐOẠN VĂN B -->
+                        <div class="mb-4">
+                            <h4 class="font-bold text-green-600 mb-3 text-sm uppercase tracking-wider">b) Đoạn văn b</h4>
+                            <div class="space-y-4" id="p1b">
+                                <!-- B1 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(1)</span>
+                                        <p class="text-base leading-relaxed">Gió bấc thổi ào ào qua khu rừng vắng.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Gió</span> <span class="word" onclick="toggleWord(this)">bấc</span> <span class="word" onclick="toggleWord(this)">thổi</span> <span class="word" onclick="toggleWord(this)">ào</span> <span class="word" onclick="toggleWord(this)">ào</span> <span class="word" onclick="toggleWord(this)">qua</span> <span class="word" onclick="toggleWord(this)">khu</span> <span class="word" onclick="toggleWord(this)">rừng</span> <span class="word" onclick="toggleWord(this)">vắng.</span>
+                                    </div>
+                                </div>
+                                <!-- B2 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(2)</span>
+                                        <p class="text-base leading-relaxed">Những cành cây khẳng khiu chốc chốc run lên bần bật.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Những</span> <span class="word" onclick="toggleWord(this)">cành</span> <span class="word" onclick="toggleWord(this)">cây</span> <span class="word" onclick="toggleWord(this)">khẳng</span> <span class="word" onclick="toggleWord(this)">khiu</span> <span class="word" onclick="toggleWord(this)">chốc</span> <span class="word" onclick="toggleWord(this)">chốc</span> <span class="word" onclick="toggleWord(this)">run</span> <span class="word" onclick="toggleWord(this)">lên</span> <span class="word" onclick="toggleWord(this)">bần</span> <span class="word" onclick="toggleWord(this)">bật.</span>
+                                    </div>
+                                </div>
+                                <!-- B3 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(3)</span>
+                                        <p class="text-base leading-relaxed">Mưa phùn lất phất...</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Mưa</span> <span class="word" onclick="toggleWord(this)">phùn</span> <span class="word" onclick="toggleWord(this)">lất</span> <span class="word" onclick="toggleWord(this)">phất...</span>
+                                    </div>
+                                </div>
+                                <!-- B4 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(4)</span>
+                                        <p class="text-base leading-relaxed">Bên gốc đa, một chú thỏ bước ra, tay cầm một tấm vải dệt bằng rong.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Bên</span> <span class="word" onclick="toggleWord(this)">gốc</span> <span class="word" onclick="toggleWord(this)">đa,</span> <span class="word" onclick="toggleWord(this)">một</span> <span class="word" onclick="toggleWord(this)">chú</span> <span class="word" onclick="toggleWord(this)">thỏ</span> <span class="word" onclick="toggleWord(this)">bước</span> <span class="word" onclick="toggleWord(this)">ra,</span> <span class="word" onclick="toggleWord(this)">tay</span> <span class="word" onclick="toggleWord(this)">cầm</span> <span class="word" onclick="toggleWord(this)">một</span> <span class="word" onclick="toggleWord(this)">tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">dệt</span> <span class="word" onclick="toggleWord(this)">bằng</span> <span class="word" onclick="toggleWord(this)">rong.</span>
+                                    </div>
+                                </div>
+                                <!-- B5 (Câu ghép - nhưng) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="nhưng">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(5)</span>
+                                        <p class="text-base md:text-lg font-medium leading-relaxed">Thỏ tìm cách quấn tấm vải lên người cho đỡ rét, nhưng tấm vải bị gió lật tung, bay đi vun vút.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">tìm</span> <span class="word" onclick="toggleWord(this)">cách</span> <span class="word" onclick="toggleWord(this)">quấn</span> <span class="word" onclick="toggleWord(this)">tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">lên</span> <span class="word" onclick="toggleWord(this)">người</span> <span class="word" onclick="toggleWord(this)">cho</span> <span class="word" onclick="toggleWord(this)">đỡ</span> <span class="word" onclick="toggleWord(this)">rét,</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">bị</span> <span class="word" onclick="toggleWord(this)">gió</span> <span class="word" onclick="toggleWord(this)">lật</span> <span class="word" onclick="toggleWord(this)">tung,</span> <span class="word" onclick="toggleWord(this)">bay</span> <span class="word" onclick="toggleWord(this)">đi</span> <span class="word" onclick="toggleWord(this)">vun</span> <span class="word" onclick="toggleWord(this)">vút.</span>
+                                    </div>
+                                </div>
+                                <!-- B6 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(6)</span>
+                                        <p class="text-base leading-relaxed">Thỏ đuổi theo.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">đuổi</span> <span class="word" onclick="toggleWord(this)">theo.</span>
+                                    </div>
+                                </div>
+                                <!-- B7 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(7)</span>
+                                        <p class="text-base leading-relaxed">Tấm vải tròng trành trên ao.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">tròng</span> <span class="word" onclick="toggleWord(this)">trành</span> <span class="word" onclick="toggleWord(this)">trên</span> <span class="word" onclick="toggleWord(this)">ao.</span>
+                                    </div>
+                                </div>
+                                <!-- B8 (Câu ghép - vừa...đã) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="vừa|đã">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(8)</span>
+                                        <p class="text-base md:text-lg font-medium leading-relaxed">Thỏ vừa đặt chân xuống nước đã vội co chân lên.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">vừa</span> <span class="word" onclick="toggleWord(this)">đặt</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">xuống</span> <span class="word" onclick="toggleWord(this)">nước</span> <span class="word" onclick="toggleWord(this)">đã</span> <span class="word" onclick="toggleWord(this)">vội</span> <span class="word" onclick="toggleWord(this)">co</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">lên.</span>
+                                    </div>
+                                </div>
+                                <!-- B9 (Câu ghép - nhưng) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="nhưng">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(9)</span>
+                                        <p class="text-base md:text-lg font-medium leading-relaxed">Thỏ cố khều nhưng đưa chân không tới.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">cố</span> <span class="word" onclick="toggleWord(this)">khều</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">đưa</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">không</span> <span class="word" onclick="toggleWord(this)">tới.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 flex justify-end">
+                                <button onclick="ltvc22_check1('p1b', this)" class="btn btn-primary w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all" title="Kiểm tra đoạn b">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
+
 
                     <!-- Exercise 2 -->
                     <div class="glass-card rounded-[24px] p-6 shadow-lg border-l-8 border-orange-400">
