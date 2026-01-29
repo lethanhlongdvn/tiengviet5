@@ -117,13 +117,22 @@ function renderQuiz(quizData) {
         if (!q.a) { console.error("Question options (a) undefined at index", index, q); }
         let optionsHtml = '';
         if (q.a && Array.isArray(q.a)) {
-            q.a.forEach((opt, i) => {
+            // 1. Map to objects to track original index
+            let mappedOptions = q.a.map((opt, originalIdx) => ({ text: opt, originalIdx }));
+
+            // 2. Shuffle options
+            mappedOptions = shuffle(mappedOptions);
+
+            // 3. Find new correct index
+            const newCorrectIndex = mappedOptions.findIndex(item => item.originalIdx === q.c);
+
+            mappedOptions.forEach((item, i) => {
                 optionsHtml += `
                 <label class="flex items-center p-3 rounded-xl border-2 border-transparent bg-white/70 hover:bg-blue-50 hover:border-blue-300 cursor-pointer transition-all group relative h-full">
                     <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full border-2 border-gray-300 group-hover:border-blue-500 mr-3">
-                        <input type="radio" name="q${index}" value="${i}" onclick="checkQuiz(${index}, ${i}, ${q.c})" class="appearance-none w-full h-full rounded-full checked:bg-blue-600 checked:border-transparent cursor-pointer">
+                        <input type="radio" name="q${index}" value="${i}" onclick="checkQuiz(${index}, ${i}, ${newCorrectIndex})" class="appearance-none w-full h-full rounded-full checked:bg-blue-600 checked:border-transparent cursor-pointer">
                     </div>
-                    <span class="text-2xl text-gray-800 font-medium group-hover:text-blue-900 leading-snug flex-1">${opt}</span>
+                    <span class="text-2xl text-gray-800 font-medium group-hover:text-blue-900 leading-snug flex-1">${item.text}</span>
                     <span class="ml-2 hidden status-icon status-${index}-${i} animate-bounce flex-shrink-0"></span>
                 </label>
                 `;
