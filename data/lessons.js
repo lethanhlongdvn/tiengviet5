@@ -1498,6 +1498,108 @@ window.LESSON_DATA = {
                 }
             }
         },
+        "222-nvn-nhung-y-kien-khac-biet": {
+            "title": "Nói và nghe: Những ý kiến khác biệt",
+            "week": 22,
+            "subject": "Nói và nghe",
+            "theme": "Vẻ đẹp cuộc sống",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col gap-6">
+    <!-- Header with Image Context -->
+    <div class="glass-card p-6 border-l-8 border-indigo-500">
+        <h2 class="text-2xl font-black text-indigo-700 mb-2">Chủ đề: Học sinh giữ tiền riêng</h2>
+        <p class="text-gray-600 italic">Dựa trên gợi ý từ bài học "Những ý kiến khác biệt".</p>
+    </div>
+
+    <!-- Split View: Pro vs Con -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Pro -->
+        <div class="bg-blue-50/50 rounded-[24px] p-6 border-2 border-blue-200">
+            <div class="flex items-center space-x-3 mb-4">
+                 <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-2xl">✨</div>
+                 <h3 class="font-black text-blue-700 text-xl uppercase">Tán thành</h3>
+            </div>
+            <ul class="space-y-3 text-blue-900 font-medium">
+                <li class="flex items-start"><span class="mr-2">•</span>Học sinh tự mua được đồ dùng học tập, thức ăn khi cần thiết.</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Học cách quản lí tài chính từ sớm.</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Hiểu giá trị đồng tiền và trân trọng sức lao động.</li>
+            </ul>
+        </div>
+
+        <!-- Con -->
+        <div class="bg-orange-50/50 rounded-[24px] p-6 border-2 border-orange-200">
+            <div class="flex items-center space-x-3 mb-4">
+                 <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-2xl">💡</div>
+                 <h3 class="font-black text-orange-700 text-xl uppercase">Phản đối</h3>
+            </div>
+            <ul class="space-y-3 text-orange-900 font-medium">
+                <li class="flex items-start"><span class="mr-2">•</span>Dễ hình thành thói quen tiêu xài hoang phí.</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Có thể đua đòi bạn bè mua những thứ không cần thiết.</li>
+                <li class="flex items-start"><span class="mr-2">•</span>Nguy cơ bị mất tiền hoặc bị kẻ xấu lợi dụng.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- AI Debate Chat Interface -->
+    <div class="glass-card rounded-[32px] overflow-hidden shadow-2xl border-4 border-white/50 bg-gradient-to-b from-white to-blue-50/30">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 p-4 flex justify-between items-center text-white">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="font-black text-lg">AI DEBATE BUDDY</h3>
+                    <p class="text-xs font-bold text-blue-100 opacity-80">Trợ lý tranh biện thông minh</p>
+                </div>
+            </div>
+            <div class="bg-white/10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Trực tuyến</div>
+        </div>
+
+        <!-- Chat History -->
+        <div id="nvn-chat-history" class="h-[400px] overflow-y-auto p-6 space-y-4 bg-slate-50 relative">
+            <!-- Initial Message -->
+            <div class="self-start bg-white border border-gray-200 text-gray-800 p-4 rounded-2xl rounded-tl-none max-w-[80%] shadow-md">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-lg">🤖</span>
+                    <span class="text-xs font-black text-blue-500 uppercase">Trợ lý tranh biện</span>
+                </div>
+                <p class="font-medium">Chào bạn! Chúng ta cùng thảo luận về việc "Học sinh giữ tiền riêng" nhé. Theo bạn, việc này có nên không và vì sao? 😊</p>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="p-4 bg-white border-t border-gray-100">
+            <div class="flex gap-3">
+                <input type="text" id="nvn-chat-input" 
+                    class="flex-1 bg-gray-100 border-2 border-transparent focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all rounded-xl px-4 py-3 font-medium text-gray-700 placeholder-gray-400" 
+                    placeholder="Nhập ý kiến của em..." 
+                    onkeydown="if(event.key === 'Enter') nvn222_send()">
+                <button onclick="nvn222_send()" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center w-14">
+                    <svg class="w-6 h-6 transform rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
+                </button>
+            </div>
+            
+            <div class="mt-4 flex justify-center">
+                 <button id="nvn-summary-btn" onclick="nvn222_summary()" class="text-xs font-black text-gray-400 uppercase tracking-widest hover:text-blue-600 transition-colors flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    Tóm tắt cuộc trò chuyện
+                 </button>
+            </div>
+        </div>
+    </div>
+</div>`
+                        }
+                    ]
+                }
+            }
+        },
         "231-hoi-thoi-com-thi-o-dong-van": {
             "title": "Hội thổi cơm thi ở Đồng Vân",
             "week": 23,
