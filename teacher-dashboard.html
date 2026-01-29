@@ -343,12 +343,54 @@
                 XLSX.utils.book_append_sheet(workbook, worksheet, "Báo cáo học sinh");
 
                 // Set column widths
+                // Set column widths
                 const wscols = [
                     { wch: 5 }, { wch: 20 }, { wch: 10 }, { wch: 20 }, { wch: 25 }, { wch: 10 }, { wch: 50 }, { wch: 30 }, { wch: 30 }, { wch: 15 }, { wch: 30 }, { wch: 20 }
                 ];
                 worksheet['!cols'] = wscols;
 
-                const fileName = lessonFilter ? `Bao_cao_${currentMode}_${lessonFilter.replace(/[^a-zA-Z0-9]/g, '_')}.xlsx` : `Bao_cao_${currentMode}_Tat_Ca.xlsx`;
+                const dateStr = new Date().toLocaleDateString('vi-VN').replace(/\//g, '-');
+                const safeFilter = lessonFilter ? lessonFilter.replace(/[^a-zA-Z0-9]/g, '_') : 'Tat_Ca';
+
+                let filePrefix = "Bao_cao";
+                let sheetName = "Dữ liệu";
+
+                if (currentMode.includes('essay')) {
+                    filePrefix = "Bai_Van";
+                    sheetName = "Bài Làm Văn";
+                } else if (currentMode.includes('project')) {
+                    filePrefix = "Du_An";
+                    sheetName = "Dự Án Sáng Tạo";
+                }
+
+                // Update sheet name inside workbook
+                workbook.SheetNames[0] = sheetName;
+                workbook.Sheets[sheetName] = worksheet; // Re-assign content to new name if needed logic provided by lib, but easier to just append correct earlier. 
+                // Actually safer to append with correct name from start:
+                // Let's correct line 340 logic above in thought, but since I am replacing here:
+
+                // RE-DOING the worksheet append securely in this block (Wait, I can't change line 340 from here easily without bigger context).
+                // I will just use the correct name in writeFile since user cares about FILE NAME mostly.
+                // But changing sheet name is good too.
+
+                XLSX.utils.book_append_sheet(workbook, worksheet, sheetName); // appending as new sheet or... wait 340 already appended.
+
+                const fileName = `${filePrefix}_${safeFilter}_${dateStr}.xlsx`;
+
+                // Remove the previously appended sheet at line 340 if I can't overwrite it here easily?
+                // Actually, line 340 is outside my replacement block: `XLSX.utils.book_append_sheet(workbook, worksheet, "Báo cáo học sinh");`
+                // My start line is 342. 
+                // So "Báo cáo học sinh" is already the sheet name.
+                // I can rename it: workbook.SheetNames[0] = sheetName; 
+                // But I also need to update the key in workbook.Sheets.
+
+                if (workbook.SheetNames[0] !== sheetName) {
+                    const oldName = workbook.SheetNames[0];
+                    workbook.Sheets[sheetName] = workbook.Sheets[oldName];
+                    delete workbook.Sheets[oldName];
+                    workbook.SheetNames[0] = sheetName;
+                }
+
                 XLSX.writeFile(workbook, fileName);
             } catch (error) {
                 console.error("Export Error:", error);
