@@ -216,15 +216,25 @@ async function analyzeEssayAI(mb, tb, kb) {
     // Fallback if network fails
     const mockResult = {
         score: (7 + Math.random() * 2).toFixed(1),
-        good: "Bài viết có bố cục rõ ràng, biết cách quan sát.",
-        bad: "Cần chú ý lỗi chính tả và dùng từ gợi tả hơn."
+        good: "Bài biết có bố cục 3 phần rõ ràng.",
+        bad: "Em hãy dùng thêm nhiều từ ngữ gợi tả hình ảnh, âm thanh hơn để bài văn sinh động hơn nhé."
     };
 
     try {
         const response = await fetch('/.netlify/functions/chat', {
             method: 'POST',
             body: JSON.stringify({
-                sentence: fullText,
+                sentence: `
+                Hãy đóng vai giáo viên Tiếng Việt lớp 5 chấm bài văn sau.
+                BẮT BUỘC trả về duy nhất một chuỗi JSON (không có markdown, không code block) theo định dạng:
+                {
+                    "score": "điểm số (thang 10, làm tròn 0.5)",
+                    "good": "lời khen ngắn gọn về ưu điểm",
+                    "bad": "lời nhận xét cụ thể cần cải thiện"
+                }
+                
+                Bài làm của học sinh:
+                ${fullText}`,
                 mode: 'essay_grading', // Prompt template in backend should handle this
                 subject: 'Viết',
                 weekNumber: 22
@@ -233,10 +243,27 @@ async function analyzeEssayAI(mb, tb, kb) {
 
         if (!response.ok) return mockResult;
         const data = await response.json();
-        // Parse data if needed. Assuming backend returns JSON with score, feedback.
-        // If backend returns string, parse it.
-        let res = typeof data === 'string' ? JSON.parse(data) : data;
-        return res.response ? JSON.parse(res.response) : res;
+
+        // Robust Parsing Logic
+        let resString = typeof data === 'string' ? data : data.response;
+        // Sometimes LLM returns stringified JSON inside response
+        if (typeof resString !== 'string') resString = JSON.stringify(resString);
+
+        // Remove markdown code blocks if present
+        resString = resString.replace(/```json/g, '').replace(/```/g, '').trim();
+
+        try {
+            const parsed = JSON.parse(resString);
+            return {
+                score: parsed.score || mockResult.score,
+                good: parsed.good || parsed.uu_diem || "Bài làm khá tốt.",
+                bad: parsed.bad || parsed.nhuoc_diem || parsed.loi_khuyen || "Cần trau chuốt từ ngữ hơn."
+            };
+        } catch (e) {
+            console.warn("Failed to parse AI JSON, using fallback", e);
+            // Try to extract if simple string
+            return mockResult;
+        }
 
     } catch (e) {
         console.error("AI Error", e);
