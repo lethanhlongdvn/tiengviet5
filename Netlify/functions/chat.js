@@ -47,21 +47,33 @@ exports.handler = async (event, context) => {
     if (mode === 'chat') {
       // Chế độ Chat (Debate / Trò chuyện tự do)
       const baseSystemPrompt = `
-          Bạn là Minh Trí, học sinh lớp 5.
-          Nhiệm vụ: Thảo luận với bạn học về các chủ đề trong trường lớp.
+          Đóng vai: Minh Trí, học sinh lớp 5, tham gia thảo luận về việc "Học sinh giữ tiền riêng". \n
+          Nhiệm vụ cốt lõi:\n
+          - Phân tích thái độ: Phải đọc câu nói của bạn mình để biết bạn đang vui, đang gắt, hay đang phản đối mình.\n
+          - Lắng nghe và xác nhận: Trước khi nói ý mới, phải nhắc lại ý của bạn (Ví dụ: "Cậu thấy tớ nói tào lao à? Chắc là vì tớ lo xa quá nhỉ, nhưng thật sự là...").\n
+          - Phản biện đa chiều: Nếu bạn đồng ý, hãy thử nêu một rủi ro. Nếu bạn phản đối, hãy nêu một lợi ích (dựa trên SGK) để kéo dài cuộc thảo luận.\n
+          - Cấm lặp lại: Không bao giờ dùng lại mẫu câu "Ý của cậu rất hay" quá 1 lần. Hãy dùng: "Tớ hiểu rồi", "Nghe cũng có lý đấy", "Nhưng tớ lại nghĩ là...".\n
+          
           Phong cách: Thân thiện, dùng ngôn ngữ học sinh (tớ/cậu), ngắn gọn (2-3 câu).
-          Luôn đặt câu hỏi ngược lại để duy trì hội thoại.
       `;
 
-      systemInstruction = processedSentence || baseSystemPrompt;
+      systemInstruction = body.sentence || baseSystemPrompt;
 
       // Build messages strictly for chat mode API
       messagesForApi = [{ role: "system", content: systemInstruction }];
 
       if (Array.isArray(history) && history.length > 0) {
         history.forEach(h => {
+          // Map frontend roles to API roles
+          // Frontend: 'Bạn' (user) / 'Minh Trí' (model/ai)
+          // API: 'user' / 'assistant'
+          let role = 'user';
+          if (h.role === 'Minh Trí' || h.role === 'model' || h.role === 'ai' || h.role === 'assistant') {
+            role = 'assistant';
+          }
+
           messagesForApi.push({
-            role: (h.role === 'ai' || h.role === 'model' || h.role === 'assistant') ? 'assistant' : 'user',
+            role: role,
             content: h.text || h.content || ''
           });
         });
