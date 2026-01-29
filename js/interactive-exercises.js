@@ -343,7 +343,13 @@ window.handleSubmission = async function () {
                 const storageInstance = window.storage || firebase.storage();
                 const storageRef = storageInstance.ref(`essays/${Date.now()}_${fileObj.name}`);
 
-                const snapshot = await storageRef.put(fileObj);
+                // Timeout Helper (20s)
+                const uploadTask = storageRef.put(fileObj);
+                const timeoutPromise = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error("Mạng quá chậm (sau 20s), không thể tải ảnh lên. Em hãy kiểm tra lại kết nối hoặc thử nộp lại nhé!")), 20000)
+                );
+
+                const snapshot = await Promise.race([uploadTask, timeoutPromise]);
                 fileUrl = await snapshot.ref.getDownloadURL();
 
                 result = {
