@@ -5841,6 +5841,5 @@ window.LESSON_DATA = {
         }
     }
 }
-    }
 };
 
