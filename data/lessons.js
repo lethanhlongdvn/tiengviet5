@@ -1618,104 +1618,104 @@ window.LESSON_DATA = {
                     },
                     "questions": [
                         {
-                            "question": "Khi bạn đưa ra ý kiến khác mình, em nên làm gì?",
-                            "options": ["Ngắt lời bạn ngay lập tức.", "Lắng nghe và tôn trọng sự khác biệt.", "Tỏ thái độ khó chịu.", "Bỏ đi chỗ khác."],
-                            "answer": 1
+                            "q": "Khi bạn đưa ra ý kiến khác mình, em nên làm gì?",
+                            "a": ["Ngắt lời bạn ngay lập tức.", "Lắng nghe và tôn trọng sự khác biệt.", "Tỏ thái độ khó chịu.", "Bỏ đi chỗ khác."],
+                            "c": 1
                         },
                         {
-                            "question": "Thái độ đúng mực nhất khi tham gia thảo luận là gì?",
-                            "options": ["Cố gắng thắng bằng mọi giá.", "Giữ im lặng từ đầu đến cuối.", "Cầu thị, lắng nghe và hòa nhã.", "Chỉ nghe những người đồng ý với mình."],
-                            "answer": 2
+                            "q": "Thái độ đúng mực nhất khi tham gia thảo luận là gì?",
+                            "a": ["Cố gắng thắng bằng mọi giá.", "Giữ im lặng từ đầu đến cuối.", "Cầu thị, lắng nghe và hòa nhã.", "Chỉ nghe những người đồng ý với mình."],
+                            "c": 2
                         },
                         {
-                            "question": "Nếu em cảm thấy ý kiến của bạn chưa hợp lý, em nên:",
-                            "options": ["Chê bai ý kiến đó là dở.", "Đưa ra phản biện một cách lịch sự.", "Cười nhạo bạn.", "Bảo các bạn khác không nghe bạn đó nữa."],
-                            "answer": 1
+                            "q": "Nếu em cảm thấy ý kiến của bạn chưa hợp lý, em nên:",
+                            "a": ["Chê bai ý kiến đó là dở.", "Đưa ra phản biện một cách lịch sự.", "Cười nhạo bạn.", "Bảo các bạn khác không nghe bạn đó nữa."],
+                            "c": 1
                         },
                         {
-                            "question": "Việc lắng nghe người khác giúp ích gì cho cuộc thảo luận?",
-                            "options": ["Làm mất thời gian.", "Để tìm ra điểm yếu của bạn.", "Hiểu rõ vấn đề và tìm ra điểm thống nhất.", "Để làm hài lòng thầy cô."],
-                            "answer": 2
+                            "q": "Việc lắng nghe người khác giúp ích gì cho cuộc thảo luận?",
+                            "a": ["Làm mất thời gian.", "Để tìm ra điểm yếu của bạn.", "Hiểu rõ vấn đề và tìm ra điểm thống nhất.", "Để làm hài lòng thầy cô."],
+                            "c": 2
                         },
                         {
-                            "question": "Khi có nhiều ý kiến trái chiều, mục tiêu của thảo luận là:",
-                            "options": ["Tìm ra ai là người giỏi nhất.", "Thống nhất các ý kiến hoặc hiểu rõ sự khác biệt.", "Ép buộc mọi người theo một ý duy nhất.", "Kết thúc cuộc nói chuyện càng nhanh càng tốt."],
-                            "answer": 1
+                            "q": "Khi có nhiều ý kiến trái chiều, mục tiêu của thảo luận là:",
+                            "a": ["Tìm ra ai là người giỏi nhất.", "Thống nhất các ý kiến hoặc hiểu rõ sự khác biệt.", "Ép buộc mọi người theo một ý duy nhất.", "Kết thúc cuộc nói chuyện càng nhanh càng tốt."],
+                            "c": 1
                         },
                         {
-                            "question": "Khi phát biểu ý kiến, em cần nói với âm lượng thế nào?",
-                            "options": ["Nói thật to để át tiếng người khác.", "Nói vừa đủ nghe, rõ ràng.", "Nói thật nhỏ để không ai nghe thấy.", "Nói càng nhanh càng tốt."],
-                            "answer": 1
+                            "q": "Khi phát biểu ý kiến, em cần nói với âm lượng thế nào?",
+                            "a": ["Nói thật to để át tiếng người khác.", "Nói vừa đủ nghe, rõ ràng.", "Nói thật nhỏ để không ai nghe thấy.", "Nói càng nhanh càng tốt."],
+                            "c": 1
                         },
                         {
-                            "question": "Cụm từ nào dưới đây thể hiện sự tôn trọng khi bắt đầu phản biện?",
-                            "options": ["Cậu sai rồi, nghe tớ đây...", "Ý kiến đó chán quá...", "Tớ hiểu ý cậu, nhưng tớ có một góc nhìn khác là...", "Đừng nói nữa, ý tớ mới đúng..."],
-                            "answer": 2
+                            "q": "Cụm từ nào dưới đây thể hiện sự tôn trọng khi bắt đầu phản biện?",
+                            "a": ["Cậu sai rồi, nghe tớ đây...", "Ý kiến đó chán quá...", "Tớ hiểu ý cậu, nhưng tớ có một góc nhìn khác là...", "Đừng nói nữa, ý tớ mới đúng..."],
+                            "c": 2
                         },
                         {
-                            "question": "Trong thảo luận nhóm, chúng ta nên xưng hô như thế nào?",
-                            "options": ["Xưng hô tùy tiện.", "Dùng đại từ phù hợp (Tớ - Cậu, Mình - Bạn).", "Không cần xưng hô.", "Gọi tên kèm theo biệt danh xấu."],
-                            "answer": 1
+                            "q": "Trong thảo luận nhóm, chúng ta nên xưng hô như thế nào?",
+                            "a": ["Xưng hô tùy tiện.", "Dùng đại từ phù hợp (Tớ - Cậu, Mình - Bạn).", "Không cần xưng hô.", "Gọi tên kèm theo biệt danh xấu."],
+                            "c": 1
                         },
                         {
-                            "question": "Khi trình bày một ý kiến tán thành, em nên kèm theo điều gì để thuyết phục?",
-                            "options": ["Một lời đe dọa.", "Lý do và dẫn chứng cụ thể.", "Lời nói to tiếng.", "Sự im lặng."],
-                            "answer": 1
+                            "q": "Khi trình bày một ý kiến tán thành, em nên kèm theo điều gì để thuyết phục?",
+                            "a": ["Một lời đe dọa.", "Lý do và dẫn chứng cụ thể.", "Lời nói to tiếng.", "Sự im lặng."],
+                            "c": 1
                         },
                         {
-                            "question": "Nếu em muốn thay đổi ý kiến của mình sau khi nghe bạn giải thích, em nên:",
-                            "options": ["Cứ giữ khư khư ý cũ để không bị \"mất mặt\".", "Thừa nhận bạn có lý và tiếp thu ý kiến hay.", "Tức giận với bạn.", "Không thảo luận nữa."],
-                            "answer": 1
+                            "q": "Nếu em muốn thay đổi ý kiến của mình sau khi nghe bạn giải thích, em nên:",
+                            "a": ["Cứ giữ khư khư ý cũ để không bị \"mất mặt\".", "Thừa nhận bạn có lý và tiếp thu ý kiến hay.", "Tức giận với bạn.", "Không thảo luận nữa."],
+                            "c": 1
                         },
                         {
-                            "question": "Trong lúc nghe bạn trình bày, em cần làm gì?",
-                            "options": ["Làm việc riêng.", "Ghi chép những thông tin đáng chú ý.", "Nhìn ra ngoài cửa sổ.", "Chuẩn bị sẵn câu để mắng bạn."],
-                            "answer": 1
+                            "q": "Trong lúc nghe bạn trình bày, em cần làm gì?",
+                            "a": ["Làm việc riêng.", "Ghi chép những thông tin đáng chú ý.", "Nhìn ra ngoài cửa sổ.", "Chuẩn bị sẵn câu để mắng bạn."],
+                            "c": 1
                         },
                         {
-                            "question": "Vai trò của người điều hành cuộc thảo luận là:",
-                            "options": ["Chỉ định ai được nói và tóm tắt nội dung.", "Áp đặt ý kiến cá nhân lên cả nhóm.", "Ngồi chơi và quan sát.", "Quyết định ai thắng ai thua."],
-                            "answer": 0
+                            "q": "Vai trò của người điều hành cuộc thảo luận là:",
+                            "a": ["Chỉ định ai được nói và tóm tắt nội dung.", "Áp đặt ý kiến cá nhân lên cả nhóm.", "Ngồi chơi và quan sát.", "Quyết định ai thắng ai thua."],
+                            "c": 0
                         },
                         {
-                            "question": "Sau khi thảo luận xong, bước quan trọng nhất là:",
-                            "options": ["Đi về ngay.", "Tóm tắt các điểm thống nhất và khác biệt.", "Cãi nhau xem ai nói nhiều hơn.", "Quên hết những gì vừa nói."],
-                            "answer": 1
+                            "q": "Sau khi thảo luận xong, bước quan trọng nhất là:",
+                            "a": ["Đi về ngay.", "Tóm tắt các điểm thống nhất và khác biệt.", "Cãi nhau xem ai nói nhiều hơn.", "Quên hết những gì vừa nói."],
+                            "c": 1
                         },
                         {
-                            "question": "Khi chuẩn bị ý kiến cho chủ đề \"Học sinh giữ tiền riêng\", em cần:",
-                            "options": ["Chỉ tìm lý do tán thành.", "Chỉ tìm lý do phản đối.", "Tìm hiểu cả hai mặt của vấn đề.", "Không cần chuẩn bị gì."],
-                            "answer": 2
+                            "q": "Khi chuẩn bị ý kiến cho chủ đề \"Học sinh giữ tiền riêng\", em cần:",
+                            "a": ["Chỉ tìm lý do tán thành.", "Chỉ tìm lý do phản đối.", "Tìm hiểu cả hai mặt của vấn đề.", "Không cần chuẩn bị gì."],
+                            "c": 2
                         },
                         {
-                            "question": "Để ghi chép hiệu quả khi thảo luận, em nên:",
-                            "options": ["Viết lại từng từ bạn nói.", "Chỉ ghi những từ khóa và ý chính.", "Vẽ bậy vào sổ ghi chép.", "Ghi lại những lỗi sai của bạn để cười."],
-                            "answer": 1
+                            "q": "Để ghi chép hiệu quả khi thảo luận, em nên:",
+                            "a": ["Viết lại từng từ bạn nói.", "Chỉ ghi những từ khóa và ý chính.", "Vẽ bậy vào sổ ghi chép.", "Ghi lại những lỗi sai của bạn để cười."],
+                            "c": 1
                         },
                         {
-                            "question": "Bạn Minh Trí đưa ra ý kiến trái ngược với em, em sẽ:",
-                            "options": ["Coi Minh Trí không còn là bạn.", "Lắng nghe và đặt câu hỏi để hiểu tại sao bạn nghĩ thế.", "Bảo Minh Trí im lặng.", "Nói xấu bạn với người khác."],
-                            "answer": 1
+                            "q": "Bạn Minh Trí đưa ra ý kiến trái ngược với em, em sẽ:",
+                            "a": ["Coi Minh Trí không còn là bạn.", "Lắng nghe và đặt câu hỏi để hiểu tại sao bạn nghĩ thế.", "Bảo Minh Trí im lặng.", "Nói xấu bạn với người khác."],
+                            "c": 1
                         },
                         {
-                            "question": "Nếu cuộc thảo luận trở nên căng thẳng, em nên làm gì?",
-                            "options": ["Quát to hơn để mọi người im lặng.", "Nhắc lại mục tiêu tôn trọng sự khác biệt và bình tĩnh lại.", "Khóc.", "Rời khỏi nhóm."],
-                            "answer": 1
+                            "q": "Nếu cuộc thảo luận trở nên căng thẳng, em nên làm gì?",
+                            "a": ["Quát to hơn để mọi người im lặng.", "Nhắc lại mục tiêu tôn trọng sự khác biệt và bình tĩnh lại.", "Khóc.", "Rời khỏi nhóm."],
+                            "c": 1
                         },
                         {
-                            "question": "Một người tham gia thảo luận tích cực là người:",
-                            "options": ["Nói liên tục không cho ai nói.", "Biết lắng nghe và đóng góp ý kiến xây dựng.", "Không bao giờ đưa ra ý kiến.", "Luôn đồng ý với tất cả mọi người."],
-                            "answer": 1
+                            "q": "Một người tham gia thảo luận tích cực là người:",
+                            "a": ["Nói liên tục không cho ai nói.", "Biết lắng nghe và đóng góp ý kiến xây dựng.", "Không bao giờ đưa ra ý kiến.", "Luôn đồng ý với tất cả mọi người."],
+                            "c": 1
                         },
                         {
-                            "question": "Khi tóm tắt ý kiến của người khác, em cần:",
-                            "options": ["Thêm thắt những điều họ không nói.", "Trình bày trung thực và khách quan ý của họ.", "Cắt xén bớt ý của họ cho xấu đi.", "Chỉ tóm tắt ý của mình."],
-                            "answer": 1
+                            "q": "Khi tóm tắt ý kiến của người khác, em cần:",
+                            "a": ["Thêm thắt những điều họ không nói.", "Trình bày trung thực và khách quan ý của họ.", "Cắt xén bớt ý của họ cho xấu đi.", "Chỉ tóm tắt ý của mình."],
+                            "c": 1
                         },
                         {
-                            "question": "Tại sao cần có \"Những ý kiến khác biệt\" trong cuộc sống?",
-                            "options": ["Để chúng ta cãi nhau nhiều hơn.", "Để chúng ta nhìn nhận vấn đề từ nhiều góc độ và toàn diện hơn.", "Để làm cuộc sống rắc rối thêm.", "Vì ai cũng muốn mình là người đặc biệt."],
-                            "answer": 1
+                            "q": "Tại sao cần có \"Những ý kiến khác biệt\" trong cuộc sống?",
+                            "a": ["Để chúng ta cãi nhau nhiều hơn.", "Để chúng ta nhìn nhận vấn đề từ nhiều góc độ và toàn diện hơn.", "Để làm cuộc sống rắc rối thêm.", "Vì ai cũng muốn mình là người đặc biệt."],
+                            "c": 1
                         }
                     ]
                 }
