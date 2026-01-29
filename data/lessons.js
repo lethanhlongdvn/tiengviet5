@@ -1278,7 +1278,7 @@ window.LESSON_DATA = {
                                         <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
                                             <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
                                             <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
-                                            <div class="serif-font text-gray-800 text-xl leading-relaxed relative text-left max-w-4xl mx-auto px-4 md:px-10">
+                                            <div class="serif-font text-gray-800 text-3xl leading-relaxed relative text-left max-w-5xl mx-auto px-4 md:px-10">
                                                 <p class="mb-6 italic text-base bg-blue-50 p-4 rounded-xl border-l-4 border-blue-400">
                                                     <b>Giới thiệu chung:</b> Người dân miền biển phải sống bám biển, nhờ vào biển để làm kinh tế như nuôi trồng, đánh bắt thuỷ hải sản, làm muối, làm khô cá, khô mực. Cuộc sống của họ vất vả và nguy hiểm với những chuyến ra khơi luôn rình rập những bất trắc về thời tiết và thành quả thu hoạch.
                                                 </p>
@@ -1296,11 +1296,11 @@ window.LESSON_DATA = {
                                             <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
                                             <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
                                                 <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
-                                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
-                                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                                    <p class="text-sm font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                                    <h3 class="text-3xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
                                                 </div>
                                                 <div class="flex-grow">
-                                                    <p class="text-lg font-bold leading-relaxed text-blue-50">Bài thơ thể hiện niềm vui của người lao động hòa với cảm xúc trước khung cảnh huy hoàng của biển cả, xua tan những gian lao, vất vả. Tác giả đã thành công trong việc sử dụng những từ ngữ giàu sức gợi tả, hình ảnh so sánh và nhân hóa để ca ngợi vẻ đẹp của những con người yêu lao động.</p>
+                                                    <p class="text-2xl font-bold leading-relaxed text-blue-50">Bài thơ thể hiện niềm vui của người lao động hòa với cảm xúc trước khung cảnh huy hoàng của biển cả, xua tan những gian lao, vất vả. Tác giả đã thành công trong việc sử dụng những từ ngữ giàu sức gợi tả, hình ảnh so sánh và nhân hóa để ca ngợi vẻ đẹp của những con người yêu lao động.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1321,11 +1321,11 @@ window.LESSON_DATA = {
                                             <!-- Câu 1 -->
                                             <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
                                                 <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
-                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Ở khổ thơ thứ nhất, đoàn thuyền đánh cá ra khơi trong khung cảnh thiên nhiên như thế nào? Cách miêu tả của nhà thơ có gì đặc biệt?</span>
+                                                    <span class="font-bold text-gray-700 text-xl group-hover:text-blue-600 transition-colors">1. Ở khổ thơ thứ nhất, đoàn thuyền đánh cá ra khơi trong khung cảnh thiên nhiên như thế nào? Cách miêu tả của nhà thơ có gì đặc biệt?</span>
                                                     <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
                                                 </button>
                                                 <div class="accordion-content">
-                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                    <div class="px-6 pb-6 text-gray-600 text-xl leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
                                                         <p class="font-medium">Đoàn thuyền ra khơi vào thời điểm mặt trời đang khuất dần, ngày chuyển sang đêm. Nhà thơ sử dụng hình ảnh so sánh "mặt trời xuống biển như hòn lửa" và nhân hóa "sóng đã cài then, đêm sập cửa", khiến biển cả hiện lên như một ngôi nhà thân quen đối với người ngư dân.</p>
                                                     </div>
                                                 </div>
@@ -1333,11 +1333,11 @@ window.LESSON_DATA = {
                                             <!-- Câu 2 -->
                                             <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
                                                 <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
-                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Tìm trong bài thơ những chi tiết thể hiện tình cảm, cảm xúc của những người đánh cá trên biển:</span>
+                                                    <span class="font-bold text-gray-700 text-xl group-hover:text-blue-600 transition-colors">2. Tìm trong bài thơ những chi tiết thể hiện tình cảm, cảm xúc của những người đánh cá trên biển:</span>
                                                     <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
                                                 </button>
                                                 <div class="accordion-content">
-                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                    <div class="px-6 pb-6 text-gray-600 text-xl leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
                                                         <ul class="list-disc pl-5 space-y-2">
                                                             <li><b>Niềm vui trong lao động:</b> Thể hiện qua tâm trạng hào hứng, phấn chấn; tiếng hát hòa cùng gió làm căng cánh buồm khi ra khơi. Trong khi làm việc, tiếng hát xua tan mệt nhọc ("Ta hát bài ca gọi cá vào") và khi trở về, tiếng hát lại vang lên náo nức cùng thành quả bội thu.</li>
                                                             <li><b>Tình yêu và lòng biết ơn:</b> Biển được ví như "lòng mẹ" đã nuôi lớn đời người dân tự bao đời, thể hiện sự gắn bó và trân trọng nguồn tài nguyên biển cả.</li>
@@ -1348,11 +1348,11 @@ window.LESSON_DATA = {
                                             <!-- Câu 3 -->
                                             <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
                                                 <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
-                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Những hình ảnh ở khổ thơ cuối có ý nghĩa gì?</span>
+                                                    <span class="font-bold text-gray-700 text-xl group-hover:text-blue-600 transition-colors">3. Những hình ảnh ở khổ thơ cuối có ý nghĩa gì?</span>
                                                     <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
                                                 </button>
                                                 <div class="accordion-content">
-                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                    <div class="px-6 pb-6 text-gray-600 text-xl leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
                                                         <p class="font-medium">Khổ thơ cuối mở ra hình ảnh rực rỡ, huy hoàng của triệu triệu mắt cá lấp lánh giữa biển khơi. Đó là sự hòa quyện tuyệt đẹp giữa vẻ đẹp của thiên nhiên và vẻ đẹp khỏe khoắn, lạc quan của người lao động trong tư thế "chạy đua cùng mặt trời".</p>
                                                     </div>
                                                 </div>
@@ -1360,11 +1360,11 @@ window.LESSON_DATA = {
                                             <!-- Câu 4 -->
                                             <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
                                                 <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
-                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Bài thơ giúp em cảm nhận được vẻ đẹp nào của cuộc sống?</span>
+                                                    <span class="font-bold text-gray-700 text-xl group-hover:text-blue-600 transition-colors">4. Bài thơ giúp em cảm nhận được vẻ đẹp nào của cuộc sống?</span>
                                                     <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
                                                 </button>
                                                 <div class="accordion-content">
-                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                    <div class="px-6 pb-6 text-gray-600 text-xl leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
                                                         <p class="font-medium">Bài thơ giúp cảm nhận được vẻ đẹp của những người lao động hăng say, yêu đời và luôn lạc quan. Đồng thời, nó ca ngợi sự giàu có, huy hoàng của biển cả quê hương.</p>
                                                     </div>
                                                 </div>
@@ -5271,11 +5271,11 @@ window.LESSON_DATA = {
                         {
                             "type": "html",
                             "content": `<div class="glass-card rounded-[24px] p-6 shadow-lg border-l-8 border-blue-500 mb-8 w-full">
-                        <h3 class="font-black text-xl text-gray-800 mb-4 flex items-center">
-                            <span class="bg-blue-100 text-blue-600 rounded-lg px-4 py-1 text-sm mr-3 shadow-sm">Bài 1</span>
+                        <h3 class="font-black text-3xl text-gray-800 mb-4 flex items-center">
+                            <span class="bg-blue-100 text-blue-600 rounded-lg px-4 py-1 text-base mr-3 shadow-sm">Bài 1</span>
                             Nhận diện câu ghép
                         </h3>
-                        <p class="text-sm text-gray-500 mb-6 italic bg-blue-50/50 p-3 rounded-xl border border-blue-100">
+                        <p class="text-xl text-gray-600 mb-6 italic bg-blue-50/50 p-4 rounded-xl border border-blue-100 leading-relaxed">
                             1. Tìm câu ghép trong các đoạn văn dưới đây và cho biết các vế của mỗi câu ghép được nối với nhau bằng cách nào.
                             <br><br>
                             (Bấm vào các từ tạo thành <b class="text-blue-600">cặp từ nối</b> hoặc <b class="text-blue-600">từ nối</b> trong các câu ghép dưới đây).
@@ -5288,9 +5288,9 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="nhưng">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-blue-400 shrink-0">(1)</span>
-                                        <p class="text-base md:text-lg font-medium leading-relaxed">Làng Tày, làng Dao ven suối và trong rừng, nhưng làng người Mông ở chơ vơ đỉnh núi, giữa cỏ tranh mênh mông.</p>
+                                        <p class="text-2xl font-medium leading-relaxed">Làng Tày, làng Dao ven suối và trong rừng, nhưng làng người Mông ở chơ vơ đỉnh núi, giữa cỏ tranh mênh mông.</p>
                                     </div>
-                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
+                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 text-2xl">
                                         <span class="word" onclick="toggleWord(this)">Làng</span> <span class="word" onclick="toggleWord(this)">Tày,</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">Dao</span> <span class="word" onclick="toggleWord(this)">ven</span> <span class="word" onclick="toggleWord(this)">suối</span> <span class="word" onclick="toggleWord(this)">và</span> <span class="word" onclick="toggleWord(this)">trong</span> <span class="word" onclick="toggleWord(this)">rừng,</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">người</span> <span class="word" onclick="toggleWord(this)">Mông</span> <span class="word" onclick="toggleWord(this)">ở</span> <span class="word" onclick="toggleWord(this)">chơ</span> <span class="word" onclick="toggleWord(this)">vơ</span> <span class="word" onclick="toggleWord(this)">đỉnh</span> <span class="word" onclick="toggleWord(this)">núi,</span> <span class="word" onclick="toggleWord(this)">giữa</span> <span class="word" onclick="toggleWord(this)">cỏ</span> <span class="word" onclick="toggleWord(this)">tranh</span> <span class="word" onclick="toggleWord(this)">mênh</span> <span class="word" onclick="toggleWord(this)">mông.</span>
                                     </div>
                                 </div>
@@ -5298,7 +5298,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors=",">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-blue-400 shrink-0">(2)</span>
-                                        <p class="text-base md:text-lg font-medium leading-relaxed">Vách và mái nhà đều ghép bằng những miếng gỗ pơ-mu, nhà nhà ám khói sạm đen tưởng như làng xóm liền với trời xanh.</p>
+                                        <p class="text-2xl font-medium leading-relaxed">Vách và mái nhà đều ghép bằng những miếng gỗ pơ-mu, nhà nhà ám khói sạm đen tưởng như làng xóm liền với trời xanh.</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Vách</span> <span class="word" onclick="toggleWord(this)">và</span> <span class="word" onclick="toggleWord(this)">mái</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">đều</span> <span class="word" onclick="toggleWord(this)">ghép</span> <span class="word" onclick="toggleWord(this)">bằng</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">miếng</span> <span class="word" onclick="toggleWord(this)">gỗ</span> <span class="word" onclick="toggleWord(this)">pơ-mu</span> <span class="word" onclick="toggleWord(this)" style="font-size: 1.4em; font-weight: 900; color: #f59e0b; padding: 2px 10px;">,</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">ám</span> <span class="word" onclick="toggleWord(this)">khói</span> <span class="word" onclick="toggleWord(this)">sạm</span> <span class="word" onclick="toggleWord(this)">đen</span> <span class="word" onclick="toggleWord(this)">tưởng</span> <span class="word" onclick="toggleWord(this)">như</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">xóm</span> <span class="word" onclick="toggleWord(this)">liền</span> <span class="word" onclick="toggleWord(this)">với</span> <span class="word" onclick="toggleWord(this)">trời</span> <span class="word" onclick="toggleWord(this)">xanh.</span>
@@ -5308,7 +5308,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-blue-400 shrink-0">(3)</span>
-                                        <p class="text-base md:text-lg font-medium leading-relaxed">Xung quanh nhà nào cũng sum sê những đào, những lê.</p>
+                                        <p class="text-2xl font-medium leading-relaxed">Xung quanh nhà nào cũng sum sê những đào, những lê.</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Xung</span> <span class="word" onclick="toggleWord(this)">quanh</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">nào</span> <span class="word" onclick="toggleWord(this)">cũng</span> <span class="word" onclick="toggleWord(this)">sum</span> <span class="word" onclick="toggleWord(this)">sê</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">đào,</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">lê.</span>
@@ -5318,7 +5318,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-blue-400 shrink-0">(4)</span>
-                                        <p class="text-base md:text-lg font-medium leading-relaxed">Giữa mùa đông, hoa lê trắng ngần.</p>
+                                        <p class="text-2xl font-medium leading-relaxed">Giữa mùa đông, hoa lê trắng ngần.</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Giữa</span> <span class="word" onclick="toggleWord(this)">mùa</span> <span class="word" onclick="toggleWord(this)">đông,</span> <span class="word" onclick="toggleWord(this)">hoa</span> <span class="word" onclick="toggleWord(this)">lê</span> <span class="word" onclick="toggleWord(this)">trắng</span> <span class="word" onclick="toggleWord(this)">ngần.</span>
@@ -5328,7 +5328,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-blue-400 shrink-0">(5)</span>
-                                        <p class="text-base md:text-lg font-medium leading-relaxed">Vào đầu xuân, hoa đào nở hồng cả trời.</p>
+                                        <p class="text-2xl font-medium leading-relaxed">Vào đầu xuân, hoa đào nở hồng cả trời.</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Vào</span> <span class="word" onclick="toggleWord(this)">đầu</span> <span class="word" onclick="toggleWord(this)">xuân,</span> <span class="word" onclick="toggleWord(this)">hoa</span> <span class="word" onclick="toggleWord(this)">đào</span> <span class="word" onclick="toggleWord(this)">nở</span> <span class="word" onclick="toggleWord(this)">hồng</span> <span class="word" onclick="toggleWord(this)">cả</span> <span class="word" onclick="toggleWord(this)">trời.</span>
@@ -5352,9 +5352,9 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-green-400 shrink-0">(1)</span>
-                                        <p class="text-base leading-relaxed">Gió bấc thổi ào ào qua khu rừng vắng.</p>
+                                        <p class="text-2xl leading-relaxed">Gió bấc thổi ào ào qua khu rừng vắng.</p>
                                     </div>
-                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2 text-2xl">
                                         <span class="word" onclick="toggleWord(this)">Gió</span> <span class="word" onclick="toggleWord(this)">bấc</span> <span class="word" onclick="toggleWord(this)">thổi</span> <span class="word" onclick="toggleWord(this)">ào</span> <span class="word" onclick="toggleWord(this)">ào</span> <span class="word" onclick="toggleWord(this)">qua</span> <span class="word" onclick="toggleWord(this)">khu</span> <span class="word" onclick="toggleWord(this)">rừng</span> <span class="word" onclick="toggleWord(this)">vắng.</span>
                                     </div>
                                 </div>
@@ -5362,7 +5362,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-green-400 shrink-0">(2)</span>
-                                        <p class="text-base leading-relaxed">Những cành cây khẳng khiu chốc chốc run lên bần bật.</p>
+                                        <p class="text-2xl leading-relaxed">Những cành cây khẳng khiu chốc chốc run lên bần bật.</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Những</span> <span class="word" onclick="toggleWord(this)">cành</span> <span class="word" onclick="toggleWord(this)">cây</span> <span class="word" onclick="toggleWord(this)">khẳng</span> <span class="word" onclick="toggleWord(this)">khiu</span> <span class="word" onclick="toggleWord(this)">chốc</span> <span class="word" onclick="toggleWord(this)">chốc</span> <span class="word" onclick="toggleWord(this)">run</span> <span class="word" onclick="toggleWord(this)">lên</span> <span class="word" onclick="toggleWord(this)">bần</span> <span class="word" onclick="toggleWord(this)">bật.</span>
@@ -5372,7 +5372,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-green-400 shrink-0">(3)</span>
-                                        <p class="text-base leading-relaxed">Mưa phùn lất phất...</p>
+                                        <p class="text-2xl leading-relaxed">Mưa phùn lất phất...</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Mưa</span> <span class="word" onclick="toggleWord(this)">phùn</span> <span class="word" onclick="toggleWord(this)">lất</span> <span class="word" onclick="toggleWord(this)">phất...</span>
@@ -5382,7 +5382,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-green-400 shrink-0">(4)</span>
-                                        <p class="text-base leading-relaxed">Bên gốc đa, một chú thỏ bước ra, tay cầm một tấm vải dệt bằng rong.</p>
+                                        <p class="text-2xl leading-relaxed">Bên gốc đa, một chú thỏ bước ra, tay cầm một tấm vải dệt bằng rong.</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Bên</span> <span class="word" onclick="toggleWord(this)">gốc</span> <span class="word" onclick="toggleWord(this)">đa,</span> <span class="word" onclick="toggleWord(this)">một</span> <span class="word" onclick="toggleWord(this)">chú</span> <span class="word" onclick="toggleWord(this)">thỏ</span> <span class="word" onclick="toggleWord(this)">bước</span> <span class="word" onclick="toggleWord(this)">ra,</span> <span class="word" onclick="toggleWord(this)">tay</span> <span class="word" onclick="toggleWord(this)">cầm</span> <span class="word" onclick="toggleWord(this)">một</span> <span class="word" onclick="toggleWord(this)">tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">dệt</span> <span class="word" onclick="toggleWord(this)">bằng</span> <span class="word" onclick="toggleWord(this)">rong.</span>
@@ -5392,7 +5392,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="nhưng">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-green-400 shrink-0">(5)</span>
-                                        <p class="text-base md:text-lg font-medium leading-relaxed">Thỏ tìm cách quấn tấm vải lên người cho đỡ rét, nhưng tấm vải bị gió lật tung, bay đi vun vút.</p>
+                                        <p class="text-2xl font-medium leading-relaxed">Thỏ tìm cách quấn tấm vải lên người cho đỡ rét, nhưng tấm vải bị gió lật tung, bay đi vun vút.</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">tìm</span> <span class="word" onclick="toggleWord(this)">cách</span> <span class="word" onclick="toggleWord(this)">quấn</span> <span class="word" onclick="toggleWord(this)">tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">lên</span> <span class="word" onclick="toggleWord(this)">người</span> <span class="word" onclick="toggleWord(this)">cho</span> <span class="word" onclick="toggleWord(this)">đỡ</span> <span class="word" onclick="toggleWord(this)">rét,</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">bị</span> <span class="word" onclick="toggleWord(this)">gió</span> <span class="word" onclick="toggleWord(this)">lật</span> <span class="word" onclick="toggleWord(this)">tung,</span> <span class="word" onclick="toggleWord(this)">bay</span> <span class="word" onclick="toggleWord(this)">đi</span> <span class="word" onclick="toggleWord(this)">vun</span> <span class="word" onclick="toggleWord(this)">vút.</span>
@@ -5402,7 +5402,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-green-400 shrink-0">(6)</span>
-                                        <p class="text-base leading-relaxed">Thỏ đuổi theo.</p>
+                                        <p class="text-2xl leading-relaxed">Thỏ đuổi theo.</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">đuổi</span> <span class="word" onclick="toggleWord(this)">theo.</span>
@@ -5412,7 +5412,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-green-400 shrink-0">(7)</span>
-                                        <p class="text-base leading-relaxed">Tấm vải tròng trành trên ao.</p>
+                                        <p class="text-2xl leading-relaxed">Tấm vải tròng trành trên ao.</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">tròng</span> <span class="word" onclick="toggleWord(this)">trành</span> <span class="word" onclick="toggleWord(this)">trên</span> <span class="word" onclick="toggleWord(this)">ao.</span>
@@ -5422,7 +5422,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="vừa|đã">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-green-400 shrink-0">(8)</span>
-                                        <p class="text-base md:text-lg font-medium leading-relaxed">Thỏ vừa đặt chân xuống nước đã vội co chân lên.</p>
+                                        <p class="text-2xl font-medium leading-relaxed">Thỏ vừa đặt chân xuống nước đã vội co chân lên.</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">vừa</span> <span class="word" onclick="toggleWord(this)">đặt</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">xuống</span> <span class="word" onclick="toggleWord(this)">nước</span> <span class="word" onclick="toggleWord(this)">đã</span> <span class="word" onclick="toggleWord(this)">vội</span> <span class="word" onclick="toggleWord(this)">co</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">lên.</span>
@@ -5432,7 +5432,7 @@ window.LESSON_DATA = {
                                 <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="nhưng">
                                     <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
                                         <span class="font-bold text-green-400 shrink-0">(9)</span>
-                                        <p class="text-base md:text-lg font-medium leading-relaxed">Thỏ cố khều nhưng đưa chân không tới.</p>
+                                        <p class="text-2xl font-medium leading-relaxed">Thỏ cố khều nhưng đưa chân không tới.</p>
                                     </div>
                                     <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
                                         <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">cố</span> <span class="word" onclick="toggleWord(this)">khều</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">đưa</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">không</span> <span class="word" onclick="toggleWord(this)">tới.</span>
@@ -5452,17 +5452,17 @@ window.LESSON_DATA = {
 
                     <!-- Exercise 2 -->
                     <div class="glass-card rounded-[24px] p-6 shadow-lg border-l-8 border-orange-400">
-                        <h3 class="font-black text-xl text-gray-800 mb-4 flex items-center">
-                            <span class="bg-orange-100 text-orange-600 rounded-lg px-4 py-1 text-sm mr-3 shadow-sm">Bài 2</span>
+                        <h3 class="font-black text-3xl text-gray-800 mb-4 flex items-center">
+                            <span class="bg-orange-100 text-orange-600 rounded-lg px-4 py-1 text-base mr-3 shadow-sm">Bài 2</span>
                             Điền cặp từ phù hợp
                         </h3>
-                        <p class="text-sm text-gray-500 mb-6 italic bg-orange-50/50 p-3 rounded-xl border border-orange-100">
+                        <p class="text-xl text-gray-500 mb-6 italic bg-orange-50/50 p-4 rounded-xl border border-orange-100 leading-relaxed">
                             2. Tìm cặp kết từ hoặc cặp từ hô ứng thay cho 🌸 để tạo câu ghép.
                         </p>
                         <div class="space-y-4 text-gray-700">
                             <!-- Câu 2a -->
                             <div class="p-5 border border-orange-100 rounded-2xl bg-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all hover:border-orange-200" id="q2a" data-ans="Nếu-thì">
-                                <p class="flex-1 text-lg font-medium">
+                                <p class="flex-1 text-2xl font-medium">
                                     a. <span class="slot mx-1">🌸</span> em có một khu vườn rộng <span class="slot mx-1">🌸</span> em sẽ trồng thật nhiều loại cây.
                                 </p>
                                 <div class="flex gap-3 shrink-0 w-full sm:w-auto">
@@ -5478,7 +5478,7 @@ window.LESSON_DATA = {
                             </div>
                             <!-- Câu 2b -->
                             <div class="p-5 border border-orange-100 rounded-2xl bg-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all hover:border-orange-200" id="q2b" data-ans="Mặc dù-nhưng">
-                                <p class="flex-1 text-lg font-medium">
+                                <p class="flex-1 text-2xl font-medium">
                                     b. <span class="slot mx-1">🌸</span> thành phố này không sầm uất, hiện đại <span class="slot mx-1">🌸</span> nó rất hấp dẫn du khách.
                                 </p>
                                 <div class="flex gap-3 shrink-0 w-full sm:w-auto">
@@ -5494,7 +5494,7 @@ window.LESSON_DATA = {
                             </div>
                              <!-- Câu 2c -->
                             <div class="p-5 border border-orange-100 rounded-2xl bg-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all hover:border-orange-200" id="q2c" data-ans="càng-càng">
-                                <p class="flex-1 text-lg font-medium">
+                                <p class="flex-1 text-2xl font-medium">
                                     c. Mọi người <span class="slot mx-1">🌸</span> đối xử tốt với nhau thì cuộc sống <span class="slot mx-1">🌸</span> tốt đẹp hơn.
                                 </p>
                                 <div class="flex gap-3 shrink-0 w-full sm:w-auto">
@@ -5513,20 +5513,20 @@ window.LESSON_DATA = {
 
                     <!-- Exercise 3 -->
                     <div class="glass-card rounded-[24px] p-6 shadow-lg border-l-8 border-purple-500 mt-8 API-box">
-                         <h3 class="font-black text-xl text-gray-800 mb-4 flex items-center">
-                            <span class="bg-purple-100 text-purple-600 rounded-lg px-4 py-1 text-sm mr-3 shadow-sm">Bài 3</span>
+                         <h3 class="font-black text-3xl text-gray-800 mb-4 flex items-center">
+                            <span class="bg-purple-100 text-purple-600 rounded-lg px-4 py-1 text-base mr-3 shadow-sm">Bài 3</span>
                             Viết đoạn văn sáng tạo
                         </h3>
-                        <div class="bg-purple-50/50 p-5 rounded-2xl border border-purple-100 mb-6">
-                            <p class="text-gray-700 leading-relaxed font-medium">
+                        <div class="bg-purple-50/50 p-6 rounded-2xl border border-purple-100 mb-6">
+                            <p class="text-gray-700 text-2xl leading-relaxed font-medium">
                                 3. Viết đoạn văn (3 – 5 câu) về bài thơ <i>Đoàn thuyền đánh cá</i>, trong đó có câu ghép chứa kết từ để nối các vế câu.
                             </p>
                         </div>
                         <div class="space-y-4">
                              <div class="p-6 bg-white rounded-2xl border border-purple-100 shadow-sm flex flex-col gap-5">
                                 <div class="flex flex-col gap-3">
-                                    <label for="ai-3" class="text-xs font-black text-purple-400 uppercase tracking-widest">Đoạn văn của em:</label>
-                                    <textarea id="ai-3" rows="5" placeholder="Nhập đoạn văn tại đây..." class="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:ring-4 focus:ring-purple-100 focus:border-purple-500 focus:bg-white bg-gray-50 text-base font-medium transition-all focus:outline-none"></textarea>
+                                    <label for="ai-3" class="text-base font-black text-purple-400 uppercase tracking-widest">Đoạn văn của em:</label>
+                                    <textarea id="ai-3" rows="5" placeholder="Nhập đoạn văn tại đây..." class="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:ring-4 focus:ring-purple-100 focus:border-purple-500 focus:bg-white bg-gray-50 text-xl font-medium transition-all focus:outline-none"></textarea>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-xs text-gray-400 font-bold italic">* Thầy AI sẽ chấm thực hành câu ghép nhé!</span>
