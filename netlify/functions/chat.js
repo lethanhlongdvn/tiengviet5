@@ -34,13 +34,40 @@ exports.handler = async (event, context) => {
     noisePatterns.forEach(p => processedSentence = processedSentence.replace(p, ""));
     processedSentence = processedSentence.trim().replace(/^[:.]\s*/, "").trim();
 
-    // 3. Chế độ Chấm bài (Essay vs Sentence)
-    const mode = JSON.parse(event.body).mode || 'essay'; // Mặc định là chấm bài văn
-    const criteria = JSON.parse(event.body).criteria || ''; // Tiêu chí chấm câu (nếu có)
+
+    // 3. Chế độ Chấm bài (Essay vs Sentence) vs Chat
+    const body = JSON.parse(event.body);
+    const mode = body.mode || 'essay'; // Mặc định là chấm bài văn
+    const criteria = body.criteria || ''; // Tiêu chí chấm câu (nếu có)
+    const history = body.history || []; // Lịch sử chat (cho mode 'chat')
 
     let systemInstruction = "";
+    let messagesForApi = [];
 
-    if (mode === 'sentence_review') {
+    if (mode === 'chat') {
+      // Chế độ Chat (Debate / Trò chuyện tự do)
+      const baseSystemPrompt = `
+          Bạn là Minh Trí, học sinh lớp 5.
+          Nhiệm vụ: Thảo luận với bạn học về các chủ đề trong trường lớp.
+          Phong cách: Thân thiện, dùng ngôn ngữ học sinh (tớ/cậu), ngắn gọn (2-3 câu).
+          Luôn đặt câu hỏi ngược lại để duy trì hội thoại.
+      `;
+
+      systemInstruction = processedSentence || baseSystemPrompt;
+
+      // Build messages strictly for chat mode API
+      messagesForApi = [{ role: "system", content: systemInstruction }];
+
+      if (Array.isArray(history) && history.length > 0) {
+        history.forEach(h => {
+          messagesForApi.push({
+            role: (h.role === 'ai' || h.role === 'model' || h.role === 'assistant') ? 'assistant' : 'user',
+            content: h.text || h.content || ''
+          });
+        });
+      }
+
+    } else if (mode === 'sentence_review') {
       // Chế độ chấm câu văn ngắn
       systemInstruction = `
             Bạn là Trợ lý Ngôn ngữ Tiếng Việt cho học sinh tiểu học.
@@ -53,6 +80,11 @@ exports.handler = async (event, context) => {
             - is_good: true (nếu đạt tiêu chí) hoặc false (nếu chưa đạt).
             - suggestion: Gợi ý sửa lại (nếu chưa đạt).
         `;
+      messagesForApi = [
+        { role: "system", content: systemInstruction },
+        { role: "user", content: `Đánh giá câu văn: "${processedSentence}" theo tiêu chí: "${criteria}"` }
+      ];
+
     } else {
       // Chế độ chấm bài văn (Mặc định - V4)
       systemInstruction = `
@@ -82,6 +114,10 @@ exports.handler = async (event, context) => {
           - loi_nhan: Lời nhắn tình cảm từ Thầy/Cô
           - analysis: { "mo_bai": "...", "than_bai": "...", "ket_bai": "..." } (Phân tích nội dung từng phần)
         `;
+      messagesForApi = [
+        { role: "system", content: systemInstruction },
+        { role: "user", content: `Hãy phân tích bài văn sau của học sinh lớp 5: "${processedSentence}"` }
+      ];
     }
 
     try {
@@ -94,16 +130,8 @@ exports.handler = async (event, context) => {
         },
         body: JSON.stringify({
           model: "llama-3.3-70b-versatile",
-          messages: [
-            { role: "system", content: systemInstruction },
-            {
-              role: "user",
-              content: mode === 'sentence_review'
-                ? `Đánh giá câu văn: "${processedSentence}" theo tiêu chí: "${criteria}"`
-                : `Hãy phân tích bài văn sau của học sinh lớp 5: "${processedSentence}"`
-            }
-          ],
-          response_format: { type: "json_object" },
+          messages: messagesForApi,
+          response_format: mode === 'chat' ? { type: "text" } : { type: "json_object" }, // Chat mode returns text usually, unless summary
           temperature: 0.7
         })
       });
