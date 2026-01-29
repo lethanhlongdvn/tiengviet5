@@ -17,8 +17,17 @@ const firebaseConfig = {
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
-const db = firebase.firestore();
-const storage = firebase.storage();
+window.db = firebase.firestore();
+window.storage = null;
+try {
+    if (firebase.storage) {
+        window.storage = firebase.storage();
+    } else {
+        console.warn("Firebase Storage SDK not loaded.");
+    }
+} catch (e) {
+    console.warn("Storage init skipped:", e);
+}
 
 /**
  * Global helper to get common student data
