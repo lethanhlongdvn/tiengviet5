@@ -197,20 +197,46 @@
                 }
                 const snapshot = await query.get();
 
-                let rows = "";
-                let totalScore = 0;
-                let studentNames = new Set();
-                let lessonTitles = new Set(); // Added initialization
-                document.getElementById('stats-title').innerText = lessonFilter ? `THỐNG KÊ KẾT QUẢ: ${lessonFilter.toUpperCase()}` : "TẤT CẢ BÀI HỌC";
+                let lessonTitles = new Set();
+                const bestAttempts = {};
+                let totalAttempts = snapshot.size;
 
-                snapshot.forEach((doc, index) => {
+                snapshot.forEach(doc => {
                     const data = doc.data();
-                    allQuizData.push(data);
-                    const date = data.timestamp ? data.timestamp.toDate().toLocaleString('vi-VN') : "---";
-                    totalScore += data.score || 0;
-                    studentNames.add(data.studentName);
                     if (data.lessonTitle) lessonTitles.add(data.lessonTitle);
 
+                    // Key for uniqueness: Name + Class
+                    const key = `${data.studentName}_${data.studentClass}`;
+
+                    // Update logic: Keep if new, or if Score is higher
+                    if (!bestAttempts[key]) {
+                        bestAttempts[key] = data;
+                    } else {
+                        // If current data score is strictly greater than stored, replace.
+                        // (Since we iterate desc by timestamp, the first one is NEWEST. 
+                        // If equal score, we keep NEWEST. If older has higher score, we take older.)
+                        if ((data.score || 0) > (bestAttempts[key].score || 0)) {
+                            bestAttempts[key] = data;
+                        }
+                    }
+                });
+
+                // Convert to array for display
+                const uniqueData = Object.values(bestAttempts);
+
+                // Update Global Data for Export
+                allQuizData = uniqueData;
+
+                // Calculate Stats based on UNIQUE students
+                let totalScore = 0;
+                uniqueData.forEach(d => totalScore += (d.score || 0));
+
+                let rows = "";
+
+                document.getElementById('stats-title').innerText = lessonFilter ? `THỐNG KÊ KẾT QUẢ: ${lessonFilter.toUpperCase()}` : "TẤT CẢ BÀI HỌC";
+
+                uniqueData.forEach((data, index) => {
+                    const date = data.timestamp ? data.timestamp.toDate().toLocaleString('vi-VN') : "---";
                     const scoreClass = data.score >= 80 ? 'text-green-600' : (data.score >= 50 ? 'text-orange-600' : 'text-red-600');
 
                     rows += `
@@ -238,9 +264,9 @@
                 table.innerHTML = rows || `<tr><td colspan="6" class="p-10 text-center text-gray-400">Chưa có kết quả nào cho bài học này.</td></tr>`;
 
                 // Update Stats
-                document.getElementById('stat-total').innerText = snapshot.size;
-                document.getElementById('stat-avg').innerText = snapshot.size > 0 ? (totalScore / snapshot.size).toFixed(1) : "0";
-                document.getElementById('stat-students').innerText = studentNames.size;
+                document.getElementById('stat-total').innerText = totalAttempts; // Total attempts (raw)
+                document.getElementById('stat-avg').innerText = uniqueData.length > 0 ? (totalScore / uniqueData.length).toFixed(1) : "0"; // Avg of BEST scores
+                document.getElementById('stat-students').innerText = uniqueData.length; // Unique Students
 
                 // Populate Lesson Filter if not already filtered
                 if (!lessonFilter) {
@@ -266,29 +292,8 @@
             try {
                 const lessonFilter = document.getElementById('lesson-filter').value;
 
-                // Filter: Keep only highest score per student
-                const bestAttempts = {};
-                allQuizData.forEach(attempt => {
-                    // Create a unique key for each student (Name + Class + Phone/ID if avail, but Name+Class is strictly used here)
-                    const key = `${attempt.studentName}_${attempt.studentClass}`;
-
-                    // If no record yet, or this attempt has higher score, save it.
-                    // If scores are equal, maybe prefer the latest timestamp? (optional, here we just take >)
-                    // Let's take strictly > for score. If equal, current one (older in the array? Array order depends on query)
-                    // Query was orderBy("timestamp", "desc"). So first item is LATEST.
-                    // If we want highest score:
-                    if (!bestAttempts[key]) {
-                        bestAttempts[key] = attempt;
-                    } else {
-                        if ((attempt.score || 0) > (bestAttempts[key].score || 0)) {
-                            bestAttempts[key] = attempt;
-                        }
-                    }
-                });
-
-                const uniqueData = Object.values(bestAttempts);
-
-                const dataToExport = uniqueData.map((d, index) => ({
+                // Use already filtered data from loadStats()
+                const dataToExport = allQuizData.map((d, index) => ({
                     "STT": index + 1,
                     "Họ và Tên": d.studentName,
                     "Lớp": d.studentClass,
