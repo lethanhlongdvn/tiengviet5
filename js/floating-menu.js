@@ -29,7 +29,7 @@ const curriculumData = {
                 {
                     "id": 22, "name": "Tuần 22",
                     "lessons": [
-                        { "title": "Bài 7: Đoàn thuyền đánh cá", "sections": [{ "title": "Đọc: Đoàn thuyền đánh cá", "url": "lesson_viewer.html?id=221-doan-thuyen-danh-ca" }, { "title": "LTVC: Luyện tập về câu ghép", "url": "lesson_viewer.html?id=221-ltvc" }] },
+                        { "title": "Bài 7: Đoàn thuyền đánh cá", "sections": [{ "title": "Đọc: Đoàn thuyền đánh cá", "url": "lesson_viewer.html?id=221-doan-thuyen-danh-ca" }, { "title": "LTVC: Luyện tập về câu ghép", "url": "lesson_viewer.html?id=221-ltvc" }, { "title": "Viết: Đánh giá, chỉnh sửa bài văn tả người", "url": "lesson_viewer.html?id=221-viet" }] },
                         { "title": "Bài 8: Khu rừng của Mát", "sections": [{ "title": "Đọc: Khu rừng của Mát", "url": "lesson_viewer.html?id=222-khu-rung-cua-mat" }] }
                     ]
                 }
