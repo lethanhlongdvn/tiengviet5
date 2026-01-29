@@ -110,10 +110,15 @@ function renderQuiz(quizData) {
             <div id="quiz-cards-container">
     `;
 
+    // DEBUG LOGGING
+    console.log("Rendering questions:", questions);
     questions.forEach((q, index) => {
+        if (!q) { console.error("Question query undefined at index", index); return; }
+        if (!q.a) { console.error("Question options (a) undefined at index", index, q); }
         let optionsHtml = '';
-        q.a.forEach((opt, i) => {
-            optionsHtml += `
+        if (q.a && Array.isArray(q.a)) {
+            q.a.forEach((opt, i) => {
+                optionsHtml += `
                 <label class="flex items-center p-3 rounded-xl border-2 border-transparent bg-white/70 hover:bg-blue-50 hover:border-blue-300 cursor-pointer transition-all group relative h-full">
                     <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full border-2 border-gray-300 group-hover:border-blue-500 mr-3">
                         <input type="radio" name="q${index}" value="${i}" onclick="checkQuiz(${index}, ${i}, ${q.c})" class="appearance-none w-full h-full rounded-full checked:bg-blue-600 checked:border-transparent cursor-pointer">
@@ -121,8 +126,9 @@ function renderQuiz(quizData) {
                     <span class="text-2xl text-gray-800 font-medium group-hover:text-blue-900 leading-snug flex-1">${opt}</span>
                     <span class="ml-2 hidden status-icon status-${index}-${i} animate-bounce flex-shrink-0"></span>
                 </label>
-            `;
-        });
+                `;
+            });
+        }
 
         html += `
             <div class="glass-card p-4 rounded-[24px] shadow-lg border-l-[8px] border-indigo-500 relative overflow-hidden quiz-card ${index === 0 ? 'animate-in fade-in slide-in-from-bottom-4 duration-500' : 'hidden'}" id="quiz-card-${index}">
