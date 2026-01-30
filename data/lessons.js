@@ -1272,106 +1272,125 @@ window.LESSON_DATA = {
                         { "type": "header", "text": "Đoàn thuyền đánh cá" },
                         {
                             "type": "html",
-                            "content": `<div class="flex flex-col lg:flex-row gap-6">
-                                <section class="w-full lg:w-[70%]">
-                                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
-                                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
-                                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
-                                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
-                                            <div class="serif-font text-gray-800 text-3xl leading-relaxed relative text-left max-w-5xl mx-auto px-4 md:px-10">
-                                                <p class="mb-6 italic text-base bg-blue-50 p-4 rounded-xl border-l-4 border-blue-400">
+                            "content": `<div class="space-y-8 animate-in fade-in duration-700">
+                                <!-- 1. READING CONTENT (POEM) + IMAGE -->
+                                <section class="w-full">
+                                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl relative overflow-hidden">
+                                        <!-- Decorative Background -->
+                                        <div class="absolute -top-10 -left-10 w-40 h-40 bg-blue-100/50 rounded-full blur-3xl"></div>
+                                        <div class="absolute top-20 right-10 w-32 h-32 bg-amber-100/40 rounded-full blur-3xl"></div>
+
+                                        <div class="relative z-10">
+                                            <!-- Image Floated Right (TV Optimized) -->
+                                            <div class="float-none md:float-right w-full md:w-[35%] md:ml-8 mb-6 md:mb-2 text-center md:text-right">
+                                                <img src="hinh_anh/doanthuyendanhca.png" alt="Minh họa" class="inline-block w-auto max-h-[400px] rounded-3xl object-contain shadow-lg border-4 border-white/50 transform hover:scale-[1.02] transition-transform duration-500">
+                                            </div>
+
+                                            <!-- Content -->
+                                            <div class="serif-font text-gray-800 text-xl md:text-2xl leading-relaxed text-justify">
+                                                <p class="mb-6 italic text-lg bg-blue-50/80 p-6 rounded-2xl border-l-4 border-blue-400">
                                                     <b>Giới thiệu chung:</b> Người dân miền biển phải sống bám biển, nhờ vào biển để làm kinh tế như nuôi trồng, đánh bắt thuỷ hải sản, làm muối, làm khô cá, khô mực. Cuộc sống của họ vất vả và nguy hiểm với những chuyến ra khơi luôn rình rập những bất trắc về thời tiết và thành quả thu hoạch.
                                                 </p>
-                                                <div class="space-y-8">
+
+                                                <!-- Poem Text -->
+                                                <div class="space-y-6 md:space-y-8 pl-0 md:pl-4 border-l-0 md:border-l-2 border-transparent md:border-gray-100">
                                                     <div>Mặt trời xuống biển như hòn lửa<br>Sóng đã cài then, đêm sập cửa<br>Đoàn thuyền đánh cá lại ra khơi<br>Câu hát căng buồm cùng gió khơi.</div>
                                                     <div>Hát rằng: cá bạc Biển Đông lặng,<br>Cá thu Biển Đông như đoàn thoi<br>Đêm ngày dệt biển muôn luồng sáng<br>Đến dệt lưới ta, đoàn cá ơi!</div>
                                                     <div>Ta hát bài ca gọi cá vào<br>Gõ thuyền đã có nhịp trăng cao<br>Biển cho ta cá như lòng mẹ<br>Nuôi lớn đời ta tự buổi nào.</div>
                                                     <div>Sao mờ, kéo lưới kịp trời sáng<br>Ta kéo xoăn tay chùm cá nặng<br>Vảy bạc đuôi vàng loé rạng đông,<br>Lưới xếp buồm lên đón nắng hồng.</div>
                                                     <div>Câu hát căng buồm với gió khơi,<br>Đoàn thuyền chạy đua cùng mặt trời<br>Mặt trời đội biển nhô màu mới,<br>Mắt cá huy hoàng muôn dặm phơi.</div>
                                                 </div>
-                                                <p class="text-right font-black text-blue-900 uppercase tracking-widest text-sm mt-8">Huy Cận</p>
+                                                
+                                                <p class="text-right font-black text-blue-900 uppercase tracking-widest text-base mt-8 clear-both pt-4 border-t border-gray-100/50">Huy Cận</p>
                                             </div>
                                         </div>
-                                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
-                                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
-                                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
-                                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
-                                                    <p class="text-sm font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
-                                                    <h3 class="text-3xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                    </div>
+                                </section>
+
+                                <!-- 2. QUESTIONS (TÌM HIỂU BÀI) -->
+                                <section class="w-full">
+                                    <div class="glass-card rounded-[32px] p-8 shadow-xl border-t-4 border-amber-400 bg-amber-50/30">
+                                        <div class="flex items-center space-x-4 mb-6">
+                                            <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center shadow-lg text-white">
+                                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            </div>
+                                            <h2 class="text-3xl font-black text-gray-800 uppercase tracking-tight">Tìm hiểu bài</h2>
+                                        </div>
+                                        
+                                        <!-- Single Column Layout for Questions -->
+                                        <div class="space-y-4">
+                                            <!-- Q1 -->
+                                            <div class="accordion-item bg-white/80 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-start group">
+                                                    <span class="font-bold text-gray-800 text-xl group-hover:text-blue-600">1. Ở khổ thơ thứ nhất, đoàn thuyền đánh cá ra khơi trong khung cảnh thiên nhiên như thế nào? Cách miêu tả có gì đặc biệt?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0 ml-2 group-hover:bg-blue-100 transition-colors"><span class="text-blue-600 font-bold">?</span></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 pt-4 text-gray-700 text-xl leading-relaxed border-t border-gray-100 bg-blue-50/30">
+                                                        <p>Đoàn thuyền ra khơi vào thời điểm mặt trời đang khuất dần, ngày chuyển sang đêm. Nhà thơ sử dụng hình ảnh so sánh "mặt trời xuống biển như hòn lửa" và nhân hóa "sóng đã cài then, đêm sập cửa", khiến biển cả hiện lên như một ngôi nhà thân quen đối với người ngư dân.</p>
+                                                    </div>
                                                 </div>
-                                                <div class="flex-grow">
-                                                    <p class="text-2xl font-bold leading-relaxed text-blue-50">Bài thơ thể hiện niềm vui của người lao động hòa với cảm xúc trước khung cảnh huy hoàng của biển cả, xua tan những gian lao, vất vả. Tác giả đã thành công trong việc sử dụng những từ ngữ giàu sức gợi tả, hình ảnh so sánh và nhân hóa để ca ngợi vẻ đẹp của những con người yêu lao động.</p>
+                                            </div>
+                                            <!-- Q2 -->
+                                            <div class="accordion-item bg-white/80 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-start group">
+                                                    <span class="font-bold text-gray-800 text-xl group-hover:text-blue-600">2. Tìm trong bài thơ những chi tiết thể hiện tình cảm, cảm xúc của những người đánh cá trên biển:</span>
+                                                    <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0 ml-2 group-hover:bg-blue-100 transition-colors"><span class="text-blue-600 font-bold">?</span></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 pt-4 text-gray-700 text-xl leading-relaxed border-t border-gray-100 bg-blue-50/30">
+                                                        <ul class="list-disc pl-5 space-y-2">
+                                                            <li><b>Niềm vui trong lao động:</b> Thể hiện qua tâm trạng hào hứng, phấn chấn; tiếng hát hòa cùng gió làm căng cánh buồm.</li>
+                                                            <li><b>Tình yêu và lòng biết ơn:</b> Biển được ví như "lòng mẹ" đã nuôi lớn đời người dân tự bao đời.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Q3 -->
+                                            <div class="accordion-item bg-white/80 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-start group">
+                                                    <span class="font-bold text-gray-800 text-xl group-hover:text-blue-600">3. Những hình ảnh ở khổ thơ cuối có ý nghĩa gì?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0 ml-2 group-hover:bg-blue-100 transition-colors"><span class="text-blue-600 font-bold">?</span></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 pt-4 text-gray-700 text-xl leading-relaxed border-t border-gray-100 bg-blue-50/30">
+                                                        <p>Khổ thơ cuối mở ra hình ảnh rực rỡ, huy hoàng của triệu triệu mắt cá lấp lánh. Đó là sự hòa quyện tuyệt đẹp giữa thiên nhiên và người lao động trong tư thế "chạy đua cùng mặt trời".</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Q4 -->
+                                            <div class="accordion-item bg-white/80 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-start group">
+                                                    <span class="font-bold text-gray-800 text-xl group-hover:text-blue-600">4. Bài thơ giúp em cảm nhận được vẻ đẹp nào của cuộc sống?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0 ml-2 group-hover:bg-blue-100 transition-colors"><span class="text-blue-600 font-bold">?</span></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 pt-4 text-gray-700 text-xl leading-relaxed border-t border-gray-100 bg-blue-50/30">
+                                                        <p>Bài thơ giúp cảm nhận được vẻ đẹp của những người lao động hăng say, yêu đời và luôn lạc quan. Đồng thời, nó ca ngợi sự giàu có, huy hoàng của biển cả quê hương.</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </section>
-                                <aside class="w-full lg:w-[30%]">
-                                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
-                                        <div class="mb-6 -mt-2">
-                                            <img src="hinh_anh/doanthuyendanhca.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
-                                        </div>
-                                        <div class="flex items-center space-x-4 mb-8">
-                                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
-                                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+
+                                <!-- 3. MEANING (NỘI DUNG CHÍNH) -->
+                                <section class="w-full">
+                                    <div class="bg-gradient-to-r from-indigo-800 to-blue-900 rounded-[32px] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden transform hover:scale-[1.01] transition-transform">
+                                        <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+                                        <div class="absolute left-0 bottom-0 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl"></div>
+                                        <div class="flex flex-col items-center text-center relative z-10">
+                                            <div class="inline-block p-3 rounded-xl bg-white/10 backdrop-blur-md mb-4 border border-white/20">
+                                                <svg class="w-8 h-8 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                                             </div>
-                                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
-                                        </div>
-                                        <div class="space-y-4">
-                                            <!-- Câu 1 -->
-                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
-                                                    <span class="font-bold text-gray-700 text-xl group-hover:text-blue-600 transition-colors">1. Ở khổ thơ thứ nhất, đoàn thuyền đánh cá ra khơi trong khung cảnh thiên nhiên như thế nào? Cách miêu tả của nhà thơ có gì đặc biệt?</span>
-                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
-                                                </button>
-                                                <div class="accordion-content">
-                                                    <div class="px-6 pb-6 text-gray-600 text-xl leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                                        <p class="font-medium">Đoàn thuyền ra khơi vào thời điểm mặt trời đang khuất dần, ngày chuyển sang đêm. Nhà thơ sử dụng hình ảnh so sánh "mặt trời xuống biển như hòn lửa" và nhân hóa "sóng đã cài then, đêm sập cửa", khiến biển cả hiện lên như một ngôi nhà thân quen đối với người ngư dân.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Câu 2 -->
-                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
-                                                    <span class="font-bold text-gray-700 text-xl group-hover:text-blue-600 transition-colors">2. Tìm trong bài thơ những chi tiết thể hiện tình cảm, cảm xúc của những người đánh cá trên biển:</span>
-                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
-                                                </button>
-                                                <div class="accordion-content">
-                                                    <div class="px-6 pb-6 text-gray-600 text-xl leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                                        <ul class="list-disc pl-5 space-y-2">
-                                                            <li><b>Niềm vui trong lao động:</b> Thể hiện qua tâm trạng hào hứng, phấn chấn; tiếng hát hòa cùng gió làm căng cánh buồm khi ra khơi. Trong khi làm việc, tiếng hát xua tan mệt nhọc ("Ta hát bài ca gọi cá vào") và khi trở về, tiếng hát lại vang lên náo nức cùng thành quả bội thu.</li>
-                                                            <li><b>Tình yêu và lòng biết ơn:</b> Biển được ví như "lòng mẹ" đã nuôi lớn đời người dân tự bao đời, thể hiện sự gắn bó và trân trọng nguồn tài nguyên biển cả.</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Câu 3 -->
-                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
-                                                    <span class="font-bold text-gray-700 text-xl group-hover:text-blue-600 transition-colors">3. Những hình ảnh ở khổ thơ cuối có ý nghĩa gì?</span>
-                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
-                                                </button>
-                                                <div class="accordion-content">
-                                                    <div class="px-6 pb-6 text-gray-600 text-xl leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                                        <p class="font-medium">Khổ thơ cuối mở ra hình ảnh rực rỡ, huy hoàng của triệu triệu mắt cá lấp lánh giữa biển khơi. Đó là sự hòa quyện tuyệt đẹp giữa vẻ đẹp của thiên nhiên và vẻ đẹp khỏe khoắn, lạc quan của người lao động trong tư thế "chạy đua cùng mặt trời".</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Câu 4 -->
-                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
-                                                    <span class="font-bold text-gray-700 text-xl group-hover:text-blue-600 transition-colors">4. Bài thơ giúp em cảm nhận được vẻ đẹp nào của cuộc sống?</span>
-                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
-                                                </button>
-                                                <div class="accordion-content">
-                                                    <div class="px-6 pb-6 text-gray-600 text-xl leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                                        <p class="font-medium">Bài thơ giúp cảm nhận được vẻ đẹp của những người lao động hăng say, yêu đời và luôn lạc quan. Đồng thời, nó ca ngợi sự giàu có, huy hoàng của biển cả quê hương.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <h3 class="text-3xl md:text-4xl font-black uppercase tracking-widest mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">NỘI DUNG CHÍNH</h3>
+                                            <div class="w-32 h-1.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent rounded-full mb-8"></div>
+                                            <p class="text-xl md:text-2xl font-medium leading-relaxed max-w-4xl text-blue-50">
+                                                Bài thơ thể hiện niềm vui của người lao động hòa với cảm xúc trước khung cảnh huy hoàng của biển cả, xua tan những gian lao, vất vả. Tác giả đã thành công trong việc sử dụng những từ ngữ giàu sức gợi tả, hình ảnh so sánh và nhân hóa để ca ngợi vẻ đẹp của những con người yêu lao động.
+                                            </p>
                                         </div>
                                     </div>
-                                </aside>
+                                </section>
                             </div>`
                         }
                     ]
