@@ -636,12 +636,17 @@ window.nvn222_summary = nvn222_summary;
 window.nvn222_quickTalk = nvn222_quickTalk;
 
 // --- LESSON 222: LTVC Q2 HELPER ---
-window.checkLTVC222_Q2 = function () {
+// --- LESSON 222: LTVC Q2 HELPER ---
+window.checkLTVC222_Q2 = async function () {
     const inputId = '222-q2';
     const inputEl = document.getElementById('ai-' + inputId);
 
+    // Debugging: Alert to confirm function call
+    // alert("Đang kiểm tra kết nối AI..."); 
+
     if (!inputEl) {
         console.error("Input element not found: ai-" + inputId);
+        alert("Lỗi: Không tìm thấy ô nhập liệu!");
         return;
     }
 
@@ -654,10 +659,23 @@ window.checkLTVC222_Q2 = function () {
 
     if (typeof askAI === 'function') {
         const prompt = "Đặt một câu ghép nói về nhân vật Mát hoặc trang trại của Mát, trong đó các vế của câu ghép được nối với nhau bằng một kết từ (và, hay, nhưng, rồi, thì,...).";
-        askAI(inputId, prompt);
+
+        // Show loading state manually if askAI doesn't immediately
+        const feedbackEl = document.getElementById('fb-' + inputId);
+        if (feedbackEl) {
+            feedbackEl.classList.remove('hidden');
+            feedbackEl.innerHTML = '<div class="text-blue-600 font-bold animate-pulse">🤖 Thầy giáo đang đọc bài của em...</div>';
+        }
+
+        try {
+            await askAI(inputId, prompt, "single", "ltvc", 22);
+        } catch (e) {
+            console.error(e);
+            alert("Có lỗi khi gọi AI: " + e.message);
+        }
     } else {
         console.error("askAI function is missing!");
-        alert("Hệ thống AI đang khởi động. Em vui lòng tải lại trang và thử lại nhé!");
+        alert("Hệ thống AI chưa sẵn sàng. Em hãy tải lại trang và thử lại xem sao nhé!");
     }
 };
 
