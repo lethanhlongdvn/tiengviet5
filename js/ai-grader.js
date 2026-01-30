@@ -726,16 +726,53 @@ async function gradeParagraphV2(studentText, requirements, weekNumber = null) {
         };
 
     } catch (e) {
-        console.error("AI Grade Paragraph Failed:", e);
+        console.error("AI Grade Paragraph Failed (API), switching to Heuristic:", e);
+
+        // --- HEURISTIC FALLBACK (Offline Mode) ---
+        const cleanText = studentText.trim();
+        const sentences = cleanText.split(/[.!?]+/).filter(s => s.trim().length > 0);
+        const sentenceCount = sentences.length;
+        const wordCount = cleanText.split(/\s+/).length;
+
+        let score = 5;
+        let advice = "Em hãy viết thêm nhé.";
+        let generalComment = "Bài làm sơ sài.";
+
+        // Scoring logic
+        if (sentenceCount >= 3) score += 2;
+        if (sentenceCount >= 5) score += 1;
+        if (wordCount > 30) score += 1;
+
+        // Keyword check
+        const lowerText = cleanText.toLowerCase();
+        const keywords = ['vì', 'nên', 'nếu', 'thì', 'tuy', 'nhưng', 'bởi', 'do', 'mà', 'càng', 'vừa', 'đã'];
+        const hasKeywords = keywords.some(k => lowerText.includes(k));
+        if (hasKeywords) score += 1;
+
+        if (score >= 8) {
+            generalComment = "Bài viết tốt, đúng cấu trúc.";
+            advice = "Em hãy phát huy cách dùng từ này nhé.";
+        } else if (score >= 6) {
+            generalComment = "Bài viết tạm được.";
+            advice = "Em nên viết các câu dài hơn và dùng từ ngữ gợi tả.";
+        } else {
+            advice = "Em nhớ viết đủ 3 phần: Mở đoạn, Thân đoạn, Kết đoạn.";
+        }
+
         return {
             persona: "paragraph",
-            status: "incomplete",
-            diem: "Lỗi",
-            uu_diem: "Không thể chấm bài lúc này.",
-            loi_sai: "Lỗi kết nối.",
-            huong_dan: "Em hãy thử nộp lại sau nhé.",
-            analysis: { mo_bai: "...", than_bai: "...", ket_bai: "..." },
-            word_count: 0
+            status: score >= 5 ? "complete" : "incomplete",
+            diem: score + "/10",
+            score: score,
+            uu_diem: hasKeywords ? "Đã dùng từ nối câu." : "Đã có nội dung.",
+            loi_sai: sentenceCount < 3 ? "Đoạn văn quá ngắn." : "Cần trau chuốt hơn.",
+            huong_dan: advice,
+            analysis: {
+                mo_bai: sentences[0] || "Thiếu",
+                than_bai: sentences.length > 2 ? "Đã có thân đoạn" : "Sơ sài",
+                ket_bai: sentences.length > 1 ? sentences[sentences.length - 1] : "Thiếu"
+            },
+            word_count: wordCount
         };
     }
 }
