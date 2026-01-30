@@ -5840,6 +5840,17 @@ window.LESSON_DATA = {
                                     </div>
                                 </div>
 
+                                    </div>
+                                </div>
+                                
+                                <!-- Submit All Button -->
+                                <div class="flex justify-center mb-12">
+                                    <button onclick="startSubmitLesson221Viet()" class="bg-gradient-to-r from-red-500 to-pink-600 text-white px-10 py-4 rounded-full font-black text-xl shadow-xl hover:scale-110 transition-transform flex items-center gap-3 animate-bounce shadow-pink-200">
+                                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        NỘP CẢ BÀI CHO GIÁO VIÊN
+                                    </button>
+                                </div>
+
                                 <!-- Footer Section -->
                                 <div class="mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center gap-6 bg-orange-50/30 p-6 rounded-2xl">
                                     <div class="bg-orange-100 p-4 rounded-2xl shadow-sm text-orange-500">
