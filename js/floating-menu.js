@@ -1,6 +1,29 @@
 // Curriculum Data - Reset
 const curriculumData = {
-    "Học kỳ 1": [],
+    "Học kỳ 1": [
+        {
+            "theme": "Ôn tập Giữa Học kỳ 1",
+            "weeks": [
+                {
+                    "id": 9, "name": "Tuần 9",
+                    "lessons": [
+                        { "title": "Ôn tập Giữa HK1", "sections": [{ "title": "Ôn tập Giữa HK1", "url": "on-tap-hk1-giua.html" }] }
+                    ]
+                }
+            ]
+        },
+        {
+            "theme": "Ôn tập Cuối Học kỳ 1",
+            "weeks": [
+                {
+                    "id": 18, "name": "Tuần 18",
+                    "lessons": [
+                        { "title": "Ôn tập Cuối HK1", "sections": [{ "title": "Ôn tập Cuối HK1", "url": "on-tap-hk1-cuoi.html" }] }
+                    ]
+                }
+            ]
+        }
+    ],
     "Học kỳ 2": [
         {
             "theme": "Chủ điểm 5: Vẻ đẹp cuộc sống",
@@ -134,6 +157,17 @@ const curriculumData = {
                     "lessons": [
                         { "title": "Bài 29: Điện thoại di động", "sections": [{ "title": "Đọc: Điện thoại di động", "url": "lesson_viewer.html?id=341-dien-thoai-di-dong" }] },
                         { "title": "Bài 30: Thành phố thông minh Mát-xđa", "sections": [{ "title": "Đọc: Thành phố thông minh Mát-xđa", "url": "lesson_viewer.html?id=342-thanh-pho-thong-minh-mat-xda" }] }
+                    ]
+                }
+            ]
+        },
+        {
+            "theme": "Ôn tập Cuối năm",
+            "weeks": [
+                {
+                    "id": 35, "name": "Tuần 35",
+                    "lessons": [
+                        { "title": "Ôn tập Cuối năm", "sections": [{ "title": "Ôn tập Cuối năm", "url": "on-tap-hk2-cuoi.html" }] }
                     ]
                 }
             ]
