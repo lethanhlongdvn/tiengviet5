@@ -730,6 +730,7 @@ window.checkVietAI = async function (inputId, type) {
                 - Nếu chưa đạt: Gợi ý cách sửa cụ thể.
                 `,
                 persona: "tlv",
+                mode: "chat",
                 weekNumber: 21
             })
         });
