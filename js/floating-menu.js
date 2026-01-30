@@ -494,27 +494,4 @@ if (document.readyState === 'loading') {
     startFloatingMenu();
 }
 
-// DEBUG: Visual Indicator
-const debugDiv = document.createElement('div');
-debugDiv.style.position = 'fixed';
-debugDiv.style.bottom = '10px';
-debugDiv.style.left = '10px';
-debugDiv.style.background = 'red';
-debugDiv.style.color = 'white';
-debugDiv.style.padding = '5px';
-debugDiv.style.zIndex = '9999999';
-debugDiv.innerText = 'Menu JS Loaded (v3)';
-document.body.appendChild(debugDiv);
-
-// DEBUG: Auto-click top menu after 3s to test
-setTimeout(() => {
-    const btn = document.getElementById('top-menu-lesson-btn');
-    if (btn) {
-        console.log("Auto-clicking top menu...");
-        btn.click();
-        debugDiv.style.background = 'green';
-        debugDiv.innerText = 'Menu Auto-Clicked';
-    } else {
-        debugDiv.innerText = 'Menu Btn Not Found';
-    }
-}, 3000);
+console.log("Floating menu script initialized.");
