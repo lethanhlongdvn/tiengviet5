@@ -180,9 +180,9 @@ const style = document.createElement('style');
 style.textContent = `
     :root { --sidebar-width: 320px; }
     #floating-menu-btn {
-        position: fixed; left: 0; top: 50%;
-        transform: translateY(-50%) translateX(0);
-        z-index: 10002; width: 45px; height: 90px;
+        position: fixed; left: 0; top: 15%; /* Moved up to avoid conflict */
+        transform: translateX(0);
+        z-index: 999999; width: 45px; height: 90px;
         background: white; border-radius: 0 45px 45px 0;
         box-shadow: 4px 0 20px rgba(37, 99, 235, 0.15);
         display: flex; align-items: center; justify-content: center;
@@ -190,14 +190,14 @@ style.textContent = `
         border: 2px solid #e5e7eb; border-left: none; user-select: none;
     }
     #floating-menu-btn:hover { background: #eff6ff; box-shadow: 4px 0 25px rgba(37, 99, 235, 0.25); }
-    #floating-menu-btn.active { transform: translateY(-50%) translateX(var(--sidebar-width)); }
+    #floating-menu-btn.active { transform: translateX(var(--sidebar-width)); }
     #floating-menu-btn svg { color: #2563eb; stroke-width: 3; width: 24px; height: 24px; }
     #floating-sidebar {
         position: fixed; left: 0; top: 0;
         width: var(--sidebar-width); height: 100vh;
         background: rgba(255, 255, 255, 0.98);
         box-shadow: 4px 0 20px rgba(0,0,0,0.1);
-        z-index: 10001; transform: translateX(-100%);
+        z-index: 999998; transform: translateX(-100%);
         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex; flex-direction: column;
         border-right: 1px solid rgba(0,0,0,0.05);
@@ -246,32 +246,83 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Inject HTML
-const floatingBtn = document.createElement('button');
-floatingBtn.id = 'floating-menu-btn';
-floatingBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+function startFloatingMenu() {
+    console.log("Floating Menu Script Initializing...");
+    try {
+        if (document.getElementById('floating-menu-btn')) {
+            console.log("Floating menu already exists.");
+            return;
+        }
 
-const sidebar = document.createElement('div');
-sidebar.id = 'floating-sidebar';
-sidebar.innerHTML = `
-    <div class="menu-header">
-        <span class="font-bold text-lg">Mục lục</span>
-        <button class="close-btn" onclick="toggleMenu()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-    </div>
-    <div class="menu-content" id="menu-content"></div>
-    <div class="p-4 border-t border-gray-100 bg-gray-50/50">
-        <a href="teacher.html" class="flex items-center justify-center gap-2 w-full p-3 bg-white border-2 border-blue-100 rounded-xl text-blue-600 font-black text-xs uppercase tracking-widest hover:bg-blue-50 transition-all shadow-sm">
-            <span>👩‍🏫</span> Trang Giáo viên
-        </a>
-    </div>
-`;
+        // Inject HTML
+        const floatingBtn = document.createElement('button');
+        floatingBtn.id = 'floating-menu-btn';
+        floatingBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+        floatingBtn.title = "Mở mục lục";
 
-document.body.appendChild(floatingBtn);
-document.body.appendChild(sidebar);
+        const sidebar = document.createElement('div');
+        sidebar.id = 'floating-sidebar';
+        sidebar.innerHTML = `
+            <div class="menu-header">
+                <span class="font-bold text-lg">Mục lục</span>
+                <button class="close-btn" onclick="toggleMenu()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="menu-content" id="menu-content"></div>
+            <div class="p-4 border-t border-gray-100 bg-gray-50/50">
+                <a href="teacher.html" class="flex items-center justify-center gap-2 w-full p-3 bg-white border-2 border-blue-100 rounded-xl text-blue-600 font-black text-xs uppercase tracking-widest hover:bg-blue-50 transition-all shadow-sm">
+                    <span>👩‍🏫</span> Trang Giáo viên
+                </a>
+            </div>
+        `;
+
+        document.body.appendChild(floatingBtn);
+        document.body.appendChild(sidebar);
+        console.log("Floating menu elements appended to body.");
+
+        floatingBtn.addEventListener('click', () => toggleMenu());
+
+        // Render Menu
+        const menuContent = document.getElementById('menu-content');
+        if (typeof curriculumData !== 'undefined') {
+            renderCurriculumTo(menuContent, false);
+            console.log("Sidebar menu rendered.");
+        } else {
+            console.error("curriculumData is missing!");
+            menuContent.innerHTML = "<div class='p-4 text-red-500'>Không tải được dữ liệu bài học.</div>";
+        }
+
+        // Top menu support (if exists)
+        const topMenuDropdown = document.getElementById('top-menu-lessons-dropdown');
+        if (topMenuDropdown) {
+            console.log("Top menu dropdown found.");
+            renderCurriculumTo(topMenuDropdown, false);
+            const topMenuBtn = document.getElementById('top-menu-lesson-btn');
+            const topMenuChevron = document.getElementById('top-menu-chevron');
+            if (topMenuBtn) {
+                topMenuBtn.onclick = (e) => { // Use onclick directly to ensure binding
+                    e.stopPropagation();
+                    console.log("Top menu clicked");
+                    const isHidden = topMenuDropdown.classList.contains('hidden');
+                    if (isHidden) {
+                        topMenuDropdown.classList.remove('hidden');
+                        if (topMenuChevron) topMenuChevron.style.transform = 'rotate(180deg)';
+                    } else {
+                        topMenuDropdown.classList.add('hidden');
+                        if (topMenuChevron) topMenuChevron.style.transform = 'rotate(0deg)';
+                    }
+                };
+            }
+        } else {
+            console.warn("Top menu dropdown NOT found. Check ID 'top-menu-lessons-dropdown'.");
+        }
+    } catch (e) {
+        console.error("Error starting floating menu:", e);
+    }
+}
 
 // Toggle Logic
 function toggleMenu(forceState) {
@@ -279,6 +330,9 @@ function toggleMenu(forceState) {
     const floatingBtn = document.getElementById('floating-menu-btn');
     if (!sidebar || !floatingBtn) return;
     const isActive = forceState !== undefined ? forceState : !sidebar.classList.contains('active');
+
+    console.log("Toggling menu. Active:", isActive);
+
     if (isActive) {
         sidebar.classList.add('active');
         floatingBtn.classList.add('active');
@@ -290,154 +344,136 @@ function toggleMenu(forceState) {
     }
 }
 window.toggleMenu = toggleMenu;
-floatingBtn.addEventListener('click', toggleMenu);
 
-// Render Menu
-const menuContent = document.getElementById('menu-content');
 const createChevron = () => `<svg class="icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
 
 function renderCurriculumTo(container, autoExpand = false) {
     if (!container) return;
-    container.innerHTML = '';
-    Object.entries(curriculumData).forEach(([semesterName, themes]) => {
-        const semTitle = document.createElement('div');
-        semTitle.className = 'menu-section-title';
-        semTitle.innerText = semesterName;
-        container.appendChild(semTitle);
+    try {
+        container.innerHTML = '';
+        Object.entries(curriculumData).forEach(([semesterName, themes]) => {
+            const semTitle = document.createElement('div');
+            semTitle.className = 'menu-section-title';
+            semTitle.innerText = semesterName;
+            container.appendChild(semTitle);
 
-        themes.forEach((theme) => {
-            const themeItem = document.createElement('div');
-            themeItem.className = 'theme-item';
-            const themeBtn = document.createElement('button');
-            themeBtn.className = 'theme-btn';
-            themeBtn.innerHTML = `<span>${theme.theme}</span>${createChevron()}`;
-            const themeContent = document.createElement('div');
-            themeContent.className = 'theme-content';
+            themes.forEach((theme) => {
+                const themeItem = document.createElement('div');
+                themeItem.className = 'theme-item';
+                const themeBtn = document.createElement('button');
+                themeBtn.className = 'theme-btn';
+                themeBtn.innerHTML = `<span>${theme.theme}</span>${createChevron()}`;
+                const themeContent = document.createElement('div');
+                themeContent.className = 'theme-content';
 
-            theme.weeks.forEach(week => {
-                const weekItem = document.createElement('div');
-                weekItem.className = 'week-item';
-                const weekBtn = document.createElement('button');
-                weekBtn.className = 'week-btn';
-                weekBtn.innerHTML = `<span>${week.name}</span>${createChevron()}`;
-                const weekContent = document.createElement('div');
-                weekContent.className = 'week-content';
-                let isCurrentInWeek = false;
+                theme.weeks.forEach(week => {
+                    const weekItem = document.createElement('div');
+                    weekItem.className = 'week-item';
+                    const weekBtn = document.createElement('button');
+                    weekBtn.className = 'week-btn';
+                    weekBtn.innerHTML = `<span>${week.name}</span>${createChevron()}`;
+                    const weekContent = document.createElement('div');
+                    weekContent.className = 'week-content';
+                    let isCurrentInWeek = false;
 
-                if (week.lessons && week.lessons.length > 0) {
-                    week.lessons.forEach(lesson => {
-                        const lessonItem = document.createElement('div');
-                        lessonItem.className = 'lesson-item';
-                        const lessonBtn = document.createElement('button');
-                        lessonBtn.className = 'lesson-btn';
-                        lessonBtn.innerHTML = `<span>${lesson.title}</span>${createChevron()}`;
-                        const lessonContentDiv = document.createElement('div');
-                        lessonContentDiv.className = 'lesson-content';
-                        let isCurrentInLesson = false;
-                        const sections = lesson.sections || [{ title: "Vào bài học", url: lesson.url }];
+                    if (week.lessons && week.lessons.length > 0) {
+                        week.lessons.forEach(lesson => {
+                            const lessonItem = document.createElement('div');
+                            lessonItem.className = 'lesson-item';
+                            const lessonBtn = document.createElement('button');
+                            lessonBtn.className = 'lesson-btn';
+                            lessonBtn.innerHTML = `<span>${lesson.title}</span>${createChevron()}`;
+                            const lessonContentDiv = document.createElement('div');
+                            lessonContentDiv.className = 'lesson-content';
+                            let isCurrentInLesson = false;
+                            const sections = lesson.sections || [{ title: "Vào bài học", url: lesson.url }];
 
-                        sections.forEach(section => {
-                            const sectionLink = document.createElement('a');
-                            sectionLink.className = 'section-link';
-                            sectionLink.href = section.url;
-                            const titleParts = section.title.split(':');
-                            if (titleParts.length > 1) {
-                                sectionLink.innerHTML = `<strong>${titleParts[0]}:</strong> ${titleParts.slice(1).join(':')}`;
-                            } else {
-                                sectionLink.innerText = section.title;
+                            sections.forEach(section => {
+                                const sectionLink = document.createElement('a');
+                                sectionLink.className = 'section-link';
+                                sectionLink.href = section.url;
+                                const titleParts = section.title.split(':');
+                                if (titleParts.length > 1) {
+                                    sectionLink.innerHTML = `<strong>${titleParts[0]}:</strong> ${titleParts.slice(1).join(':')}`;
+                                } else {
+                                    sectionLink.innerText = section.title;
+                                }
+                                const isCurrent = window.location.pathname.endsWith(section.url) || (section.url !== '#' && window.location.href.includes(section.url));
+                                if (isCurrent) {
+                                    sectionLink.classList.add('current');
+                                    isCurrentInLesson = true;
+                                    isCurrentInWeek = true;
+                                }
+                                lessonContentDiv.appendChild(sectionLink);
+                            });
+
+                            lessonItem.appendChild(lessonBtn);
+                            lessonItem.appendChild(lessonContentDiv);
+                            weekContent.appendChild(lessonItem);
+
+                            if (isCurrentInLesson) {
+                                lessonContentDiv.classList.add('open');
+                                lessonBtn.classList.add('active');
+                                lessonBtn.querySelector('svg').style.transform = 'rotate(180deg)';
                             }
-                            const isCurrent = window.location.pathname.endsWith(section.url) || (section.url !== '#' && window.location.href.includes(section.url));
-                            if (isCurrent) {
-                                sectionLink.classList.add('current');
-                                isCurrentInLesson = true;
-                                isCurrentInWeek = true;
-                            }
-                            lessonContentDiv.appendChild(sectionLink);
+                            lessonBtn.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                const isOpen = lessonContentDiv.classList.contains('open');
+                                lessonContentDiv.classList.toggle('open');
+                                lessonBtn.classList.toggle('active');
+                                lessonBtn.querySelector('svg').style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+                            });
                         });
+                    } else {
+                        weekContent.innerHTML = `<div class="lesson-link italic text-xs">Đang cập nhật...</div>`;
+                    }
 
-                        lessonItem.appendChild(lessonBtn);
-                        lessonItem.appendChild(lessonContentDiv);
-                        weekContent.appendChild(lessonItem);
+                    weekItem.appendChild(weekBtn);
+                    weekItem.appendChild(weekContent);
+                    themeContent.appendChild(weekItem);
 
-                        if (isCurrentInLesson) {
-                            lessonContentDiv.classList.add('open');
-                            lessonBtn.classList.add('active');
-                            lessonBtn.querySelector('svg').style.transform = 'rotate(180deg)';
-                        }
-                        lessonBtn.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            const isOpen = lessonContentDiv.classList.contains('open');
-                            lessonContentDiv.classList.toggle('open');
-                            lessonBtn.classList.toggle('active');
-                            lessonBtn.querySelector('svg').style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
-                        });
+                    if (isCurrentInWeek) {
+                        weekContent.classList.add('open');
+                        weekBtn.classList.add('active');
+                        weekBtn.querySelector('svg').style.transform = 'rotate(180deg)';
+                    }
+                    weekBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isOpen = weekContent.classList.contains('open');
+                        weekContent.classList.toggle('open');
+                        weekBtn.classList.toggle('active');
+                        weekBtn.querySelector('svg').style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
                     });
-                } else {
-                    weekContent.innerHTML = `<div class="lesson-link italic text-xs">Đang cập nhật...</div>`;
-                }
+                });
 
-                weekItem.appendChild(weekBtn);
-                weekItem.appendChild(weekContent);
-                themeContent.appendChild(weekItem);
+                themeItem.appendChild(themeBtn);
+                themeItem.appendChild(themeContent);
+                container.appendChild(themeItem);
 
-                if (isCurrentInWeek) {
-                    weekContent.classList.add('open');
-                    weekBtn.classList.add('active');
-                    weekBtn.querySelector('svg').style.transform = 'rotate(180deg)';
+                if (themeContent.querySelector('.week-content.open')) {
+                    themeContent.classList.add('open');
+                    themeBtn.classList.add('active');
+                    themeBtn.querySelector('svg').style.transform = 'rotate(180deg)';
+                    if (autoExpand) toggleMenu(true);
                 }
-                weekBtn.addEventListener('click', (e) => {
+                themeBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    const isOpen = weekContent.classList.contains('open');
-                    weekContent.classList.toggle('open');
-                    weekBtn.classList.toggle('active');
-                    weekBtn.querySelector('svg').style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+                    const isOpen = themeContent.classList.contains('open');
+                    themeContent.classList.toggle('open');
+                    themeBtn.classList.toggle('active');
+                    themeBtn.querySelector('svg').style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
                 });
             });
-
-            themeItem.appendChild(themeBtn);
-            themeItem.appendChild(themeContent);
-            container.appendChild(themeItem);
-
-            if (themeContent.querySelector('.week-content.open')) {
-                themeContent.classList.add('open');
-                themeBtn.classList.add('active');
-                themeBtn.querySelector('svg').style.transform = 'rotate(180deg)';
-                if (autoExpand) toggleMenu(true);
-            }
-            themeBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const isOpen = themeContent.classList.contains('open');
-                themeContent.classList.toggle('open');
-                themeBtn.classList.toggle('active');
-                themeBtn.querySelector('svg').style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
-            });
         });
-    });
-}
-
-renderCurriculumTo(menuContent, false);
-
-const topMenuDropdown = document.getElementById('top-menu-lessons-dropdown');
-if (topMenuDropdown) {
-    renderCurriculumTo(topMenuDropdown, false);
-    const topMenuBtn = document.getElementById('top-menu-lesson-btn');
-    const topMenuChevron = document.getElementById('top-menu-chevron');
-    if (topMenuBtn) {
-        topMenuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isHidden = topMenuDropdown.classList.contains('hidden');
-            if (isHidden) {
-                topMenuDropdown.classList.remove('hidden');
-                if (topMenuChevron) topMenuChevron.style.transform = 'rotate(180deg)';
-            } else {
-                topMenuDropdown.classList.add('hidden');
-                if (topMenuChevron) topMenuChevron.style.transform = 'rotate(0deg)';
-            }
-        });
+    } catch (e) {
+        console.error("Error rendering curriculum:", e);
     }
 }
 
+// Global click handler for closing menu
 document.addEventListener('click', (e) => {
+    const sidebar = document.getElementById('floating-sidebar');
+    const floatingBtn = document.getElementById('floating-menu-btn');
     if (sidebar && !sidebar.contains(e.target) && !floatingBtn.contains(e.target) && sidebar.classList.contains('active')) {
         toggleMenu();
     }
@@ -449,3 +485,36 @@ document.addEventListener('click', (e) => {
         if (topMenuChevron) topMenuChevron.style.transform = 'rotate(0deg)';
     }
 });
+
+console.log("Floating menu script loaded. Checking Document Ready State:", document.readyState);
+// Init
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startFloatingMenu);
+} else {
+    startFloatingMenu();
+}
+
+// DEBUG: Visual Indicator
+const debugDiv = document.createElement('div');
+debugDiv.style.position = 'fixed';
+debugDiv.style.bottom = '10px';
+debugDiv.style.left = '10px';
+debugDiv.style.background = 'red';
+debugDiv.style.color = 'white';
+debugDiv.style.padding = '5px';
+debugDiv.style.zIndex = '9999999';
+debugDiv.innerText = 'Menu JS Loaded (v3)';
+document.body.appendChild(debugDiv);
+
+// DEBUG: Auto-click top menu after 3s to test
+setTimeout(() => {
+    const btn = document.getElementById('top-menu-lesson-btn');
+    if (btn) {
+        console.log("Auto-clicking top menu...");
+        btn.click();
+        debugDiv.style.background = 'green';
+        debugDiv.innerText = 'Menu Auto-Clicked';
+    } else {
+        debugDiv.innerText = 'Menu Btn Not Found';
+    }
+}, 3000);
