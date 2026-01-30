@@ -635,3 +635,29 @@ window.nvn222_send = nvn222_send;
 window.nvn222_summary = nvn222_summary;
 window.nvn222_quickTalk = nvn222_quickTalk;
 
+// --- LESSON 222: LTVC Q2 HELPER ---
+window.checkLTVC222_Q2 = function () {
+    const inputId = '222-q2';
+    const inputEl = document.getElementById('ai-' + inputId);
+
+    if (!inputEl) {
+        console.error("Input element not found: ai-" + inputId);
+        return;
+    }
+
+    const value = inputEl.value.trim();
+    if (!value) {
+        alert("Em hãy viết câu trước khi nhờ AI nhận xét nhé!");
+        inputEl.focus();
+        return;
+    }
+
+    if (typeof askAI === 'function') {
+        const prompt = "Đặt một câu ghép nói về nhân vật Mát hoặc trang trại của Mát, trong đó các vế của câu ghép được nối với nhau bằng một kết từ (và, hay, nhưng, rồi, thì,...).";
+        askAI(inputId, prompt);
+    } else {
+        console.error("askAI function is missing!");
+        alert("Hệ thống AI đang khởi động. Em vui lòng tải lại trang và thử lại nhé!");
+    }
+};
+
