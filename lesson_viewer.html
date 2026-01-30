@@ -584,6 +584,42 @@
                 }
             }
         }
+
+        // Direct Fix for LTVC 222 AI Button
+        window.checkLTVC222_Q2 = async function () {
+            console.log("Button clicked!"); // Debug log
+            const inputId = '222-q2';
+            const inputEl = document.getElementById('ai-' + inputId);
+
+            if (!inputEl) {
+                alert("Lỗi: Không tìm thấy ô nhập liệu! Hãy tải lại trang.");
+                return;
+            }
+
+            const value = inputEl.value.trim();
+            if (!value) {
+                alert("Em hãy viết câu trước khi nhờ AI nhận xét nhé!");
+                inputEl.focus();
+                return;
+            }
+
+            // Show Feedback immediately
+            const feedbackEl = document.getElementById('fb-' + inputId);
+            if (feedbackEl) {
+                feedbackEl.classList.remove('hidden');
+                feedbackEl.innerHTML = '<div class="flex items-center space-x-2 p-3 bg-blue-50 text-blue-800 rounded-xl animate-pulse"><span class="text-xl">🤖</span> <b>Thầy đang đọc bài của em...</b></div>';
+            }
+
+            if (typeof askAI === 'function') {
+                try {
+                    await askAI(inputId, "Đặt một câu ghép nói về nhân vật Mát hoặc trang trại của Mát, dùng quan hệ từ", "single", "ltvc", 22);
+                } catch (e) {
+                    alert("Có lỗi kết nối: " + e.message);
+                }
+            } else {
+                alert("Hệ thống AI chưa tải xong. Vui lòng chờ 3 giây và thử lại!");
+            }
+        };
     </script>
 </body>
 
