@@ -5667,7 +5667,7 @@ window.LESSON_DATA = {
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-xs text-gray-400 font-bold italic">* Thầy AI sẽ chấm thực hành câu ghép nhé!</span>
-                                    <button onclick="askAI('3', 'Đoạn văn về Đoàn thuyền đánh cá:')" class="btn btn-secondary px-8 py-3 rounded-2xl font-black shadow-xl flex items-center group">
+                                    <button onclick="checkLTVC221_Q3()" class="btn btn-secondary px-8 py-3 rounded-2xl font-black shadow-xl flex items-center group">
                                         NỘP BÀI CHẤM ĐIỂM
                                     </button>
                                 </div>
