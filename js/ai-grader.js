@@ -451,7 +451,8 @@ function renderFeedback(container, data) {
                 ` : ''}
             </div>
 
-            <!-- Detailed Analysis parts -->
+            <!-- Detailed Analysis parts (Hiddne for LTVC) -->
+            ${persona !== 'ltvc' ? `
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 ${['mo_bai', 'than_bai', 'ket_bai'].map(part => {
         const partLabel = labels[part];
@@ -465,9 +466,9 @@ function renderFeedback(container, data) {
                             </p>
                         </div>
                     `;
-
     }).join('')}
             </div>
+            ` : ''}
 
             <!-- Feedback Sections -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
