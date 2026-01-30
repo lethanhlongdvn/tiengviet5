@@ -241,36 +241,41 @@
             try {
                 // Determine query. Note: Without an index, compound queries (where + orderBy) might fail.
                 // We'll try to fetch all first (client-side filter) if the specific query fails, or just simplify for now.
-                // DEBUG: Removing orderBy for now to see if data appears (Index issue suspected)
-                let query = db.collection(currentMode);
 
-                // Only Apply Filter if selected
-                if (lessonFilter) {
-                    query = query.where("lessonTitle", "==", lessonFilter);
+                // DEBUG: Force load both essays and essays_v2 for safety if mode is essays_v2
+                let queries = [];
+                if (currentMode === 'essays_v2') {
+                    queries.push(db.collection('essays_v2').get());
+                    queries.push(db.collection('essays').get());
                 } else {
-                    // Only order by timestamp if no filter (or if index exists)
-                    // We'll try to order in JS to be safe
-                    // query = query.orderBy("timestamp", "desc"); 
+                    queries.push(db.collection(currentMode).get());
                 }
 
-                const snapshot = await query.get();
+                const snapshots = await Promise.all(queries);
+
                 loading.classList.add('hidden');
                 allDataSnapshot = [];
 
-                if (snapshot.empty) {
-                    list.innerHTML = `<div class="text-center text-gray-400 font-bold col-span-2">Chưa có dữ liệu nào (Bộ sưu tập: ${currentMode})</div>`;
+                let allDocs = [];
+                snapshots.forEach(snapshot => {
+                    snapshot.forEach(doc => {
+                        const d = doc.data();
+                        d.id = doc.id;
+                        // Client-side Filter
+                        if (lessonFilter && d.lessonTitle !== lessonFilter) return;
+                        allDocs.push(d);
+                    });
+                });
+
+                if (allDocs.length === 0) {
+                    list.innerHTML = `<div class="text-center text-gray-400 font-bold col-span-2">Chưa có dữ liệu nào (Đã kiểm tra cả essays và essays_v2)</div>`;
                     return;
                 }
 
-                document.getElementById('stats-title').innerText = lessonFilter ? `DANH SÁCH: ${lessonFilter.toUpperCase()}` : "TẤT CẢ BÀI HỌC";
+                document.getElementById('stats-title').innerText = lessonFilter ? `DANH SÁCH: ${lessonFilter.toUpperCase()} (${allDocs.length})` : `TẤT CẢ BÀI HỌC (${allDocs.length})`;
 
                 // Manual Sort (Client-side)
-                let docs = [];
-                snapshot.forEach(doc => {
-                    const d = doc.data();
-                    d.id = doc.id;
-                    docs.push(d);
-                });
+                let docs = allDocs;
 
                 const getTime = (t) => {
                     if (!t) return 0;
