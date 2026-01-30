@@ -1430,88 +1430,110 @@ window.LESSON_DATA = {
                         { "type": "header", "text": "Khu rừng của Mát" },
                         {
                             "type": "html",
-                            "content": `<div class="flex flex-col lg:flex-row gap-6">
-                                <section class="w-full lg:w-[70%]">
-                                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
-                                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
-                                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
-                                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
-                                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
-                                                <p class="mb-4">Mát sống với ông nội ở "Trang trại rừng" – một trang trại rộng lớn, nổi tiếng trong vùng. Đây là cơ nghiệp của tổ tiên để lại. Trang trại trồng nhiều loại cây, trong đó có những giống cây quý hiếm.</p>
-                                                <p class="mb-4">Hằng ngày, Mát cùng ông chăm sóc rừng cây. Dưới sự chỉ dạy của ông, Mát nhớ được tên và đặc tính của nhiều loại cây. Năm Mát tròn mười tám tuổi, ông nội qua đời. Trước khi mất, ông gửi gắm trang trại cho Mát. Mát cũng hứa với ông sẽ bảo vệ trang trại thật tốt và gìn giữ hồi ức đẹp đã có cùng ông tại nơi này.</p>
-                                                <p class="mb-4">Đáng tiếc, một đêm nọ, sấm chớp đùng đùng nổi lên. Một tia sét đánh trúng ngọn cây cao nhất trong trang trại. Cây bốc cháy, ngọn lửa mau chóng lan khắp rừng. Mọi người hô hào, cùng nhau dập lửa, nhưng đành bất lực trước ngọn lửa cao cả chục mét. Trang trại cháy suốt một ngày và một đêm mới dần tắt.</p>
-                                                <p class="mb-4">Nhìn cảnh hoang tàn của trang trại, Mát đau xót và kiệt sức, ngất lịm đi. Mọi người vội đưa anh vào bệnh viện. Lúc tỉnh dậy, anh buồn bã và tuyệt vọng. Bà lão cạnh giường của Mát thấy vậy, liền hỏi:</p>
-                                                <p class="mb-4 pl-8 italic text-gray-600">– Chàng trai trẻ, sao trông cậu ủ rũ vậy?</p>
-                                                <p class="mb-4 pl-8 italic text-gray-600">– Cây cối trong trang trại nhà cháu bị cháy sạch rồi bà ạ! – Mát buồn rầu đáp.</p>
-                                                <p class="mb-4 pl-8 italic text-gray-600">– Cây bị thiêu cháy thì trồng lại là được. Cậu còn trẻ mà!</p>
-                                                <p class="mb-4">Nghe bà cụ nói, Mát bừng tỉnh.</p>
-                                                <p class="mb-4">Xuất viện trở về, Mát thuê người đến, biến những thân cây bị đốt cháy thành than củi, đem bán để có tiền mua cây giống. Mát mua cây giống, trồng trong trang trại.</p>
-                                                <p class="mb-4">Nhiều năm sau, trang trại lại được phủ một màu xanh mướt.</p>
-                                                <p class="text-right font-black text-blue-900 uppercase tracking-widest text-sm mt-8">(Theo Truyện đọc lớp 5)</p>
+                            "content": `<div class="space-y-8 animate-in fade-in duration-700">
+                                <!-- 1. READING CONTENT + IMAGE -->
+                                <section class="w-full">
+                                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl relative overflow-hidden">
+                                        <!-- Decorative Background -->
+                                        <div class="absolute -top-10 -left-10 w-40 h-40 bg-blue-100/50 rounded-full blur-3xl"></div>
+                                        <div class="absolute top-20 right-10 w-32 h-32 bg-amber-100/40 rounded-full blur-3xl"></div>
+
+                                        <div class="relative z-10">
+                                            <!-- Image Floated Right (TV Optimized) -->
+                                            <div class="float-none md:float-right w-full md:w-[35%] md:ml-8 mb-6 md:mb-2 text-center md:text-right">
+                                                <img src="hinh_anh/khurungcuamat.png" alt="Minh họa" class="inline-block w-auto max-h-[400px] rounded-3xl object-contain shadow-lg border-4 border-white/50 transform hover:scale-[1.02] transition-transform duration-500">
+                                            </div>
+
+                                            <!-- Content -->
+                                            <div class="serif-font text-gray-800 text-xl md:text-2xl leading-relaxed text-justify">
+                                                <div class="space-y-6 md:space-y-8 pl-0 md:pl-4 border-l-0 md:border-l-2 border-transparent md:border-gray-100">
+                                                    <p>Mát sống với ông nội ở "Trang trại rừng" – một trang trại rộng lớn, nổi tiếng trong vùng. Đây là cơ nghiệp của tổ tiên để lại. Trang trại trồng nhiều loại cây, trong đó có những giống cây quý hiếm.</p>
+                                                    <p>Hằng ngày, Mát cùng ông chăm sóc rừng cây. Dưới sự chỉ dạy của ông, Mát nhớ được tên và đặc tính của nhiều loại cây. Năm Mát tròn mười tám tuổi, ông nội qua đời. Trước khi mất, ông gửi gắm trang trại cho Mát. Mát cũng hứa với ông sẽ bảo vệ trang trại thật tốt và gìn giữ hồi ức đẹp đã có cùng ông tại nơi này.</p>
+                                                    <p>Đáng tiếc, một đêm nọ, sấm chớp đùng đùng nổi lên. Một tia sét đánh trúng ngọn cây cao nhất trong trang trại. Cây bốc cháy, ngọn lửa mau chóng lan khắp rừng. Mọi người hô hào, cùng nhau dập lửa, nhưng đành bất lực trước ngọn lửa cao cả chục mét. Trang trại cháy suốt một ngày và một đêm mới dần tắt.</p>
+                                                    <p>Nhìn cảnh hoang tàn của trang trại, Mát đau xót và kiệt sức, ngất lịm đi. Mọi người vội đưa anh vào bệnh viện. Lúc tỉnh dậy, anh buồn bã và tuyệt vọng. Bà lão cạnh giường của Mát thấy vậy, liền hỏi:</p>
+                                                    <p class="pl-8 italic text-gray-600">– Chàng trai trẻ, sao trông cậu ủ rũ vậy?</p>
+                                                    <p class="pl-8 italic text-gray-600">– Cây cối trong trang trại nhà cháu bị cháy sạch rồi bà ạ! – Mát buồn rầu đáp.</p>
+                                                    <p class="pl-8 italic text-gray-600">– Cây bị thiêu cháy thì trồng lại là được. Cậu còn trẻ mà!</p>
+                                                    <p>Nghe bà cụ nói, Mát bừng tỉnh.</p>
+                                                    <p>Xuất viện trở về, Mát thuê người đến, biến những thân cây bị đốt cháy thành than củi, đem bán để có tiền mua cây giống. Mát mua cây giống, trồng trong trang trại.</p>
+                                                    <p>Nhiều năm sau, trang trại lại được phủ một màu xanh mướt.</p>
+                                                </div>
+                                                
+                                                <p class="text-right font-black text-blue-900 uppercase tracking-widest text-base mt-8 clear-both pt-4 border-t border-gray-100/50">(Theo Truyện đọc lớp 5)</p>
                                             </div>
                                         </div>
-                                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
-                                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
-                                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
-                                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
-                                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
-                                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                    </div>
+                                </section>
+
+                                <!-- 2. QUESTIONS (TÌM HIỂU BÀI) -->
+                                <section class="w-full">
+                                    <div class="glass-card rounded-[32px] p-8 shadow-xl border-t-4 border-amber-400 bg-amber-50/30">
+                                        <div class="flex items-center space-x-4 mb-6">
+                                            <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center shadow-lg text-white">
+                                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            </div>
+                                            <h2 class="text-3xl font-black text-gray-800 uppercase tracking-tight">Tìm hiểu bài</h2>
+                                        </div>
+                                        
+                                        <!-- Single Column Layout for Questions -->
+                                        <div class="space-y-4">
+                                            <!-- Q1 -->
+                                            <div class="accordion-item bg-white/80 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-start group">
+                                                    <span class="font-bold text-gray-800 text-xl group-hover:text-blue-600">1. Chuyện gì đã xảy ra với trang trại của Mát trong một đêm nọ?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0 ml-2 group-hover:bg-blue-100 transition-colors"><span class="text-blue-600 font-bold">?</span></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 pt-4 text-gray-700 text-xl leading-relaxed border-t border-gray-100 bg-blue-50/30">
+                                                        <p>Một đêm nọ, sấm sét đánh trúng cây cao nhất, gây cháy lan khắp trang trại. Dù mọi người cố gắng dập lửa nhưng trang trại vẫn bị thiêu rụi suốt một ngày một đêm.</p>
+                                                    </div>
                                                 </div>
-                                                <div class="flex-grow">
-                                                    <p class="text-lg font-bold leading-relaxed text-blue-50">Ý chí vươn lên và tình yêu thiên nhiên. Mát không bỏ cuộc trước khó khăn mà tìm cách khôi phục trang trại, giữ trọn lời hứa với ông nội.</p>
+                                            </div>
+                                            <!-- Q2 -->
+                                            <div class="accordion-item bg-white/80 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-start group">
+                                                    <span class="font-bold text-gray-800 text-xl group-hover:text-blue-600">2. Lời khuyên của bà cụ ở bệnh viện đã giúp Mát thay đổi suy nghĩ như thế nào?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0 ml-2 group-hover:bg-blue-100 transition-colors"><span class="text-blue-600 font-bold">?</span></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 pt-4 text-gray-700 text-xl leading-relaxed border-t border-gray-100 bg-blue-50/30">
+                                                        <p>Bà cụ khuyên: "Cây bị thiêu cháy thì trồng lại là được. Cậu còn trẻ mà!". Lời này giúp Mát bừng tỉnh, nhận ra mình vẫn còn cơ hội để bắt đầu lại thay vì tuyệt vọng.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Q3 -->
+                                            <div class="accordion-item bg-white/80 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-start group">
+                                                    <span class="font-bold text-gray-800 text-xl group-hover:text-blue-600">3. Mát đã làm gì để khôi phục lại trang trại rừng của mình?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0 ml-2 group-hover:bg-blue-100 transition-colors"><span class="text-blue-600 font-bold">?</span></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 pt-4 text-gray-700 text-xl leading-relaxed border-t border-gray-100 bg-blue-50/30">
+                                                        <p>Mát cho biến những thân cây cháy thành than củi để bán lấy tiền mua cây giống mới, sau đó kiên trì trồng lại trang trại cho đến khi nó xanh tươi trở lại.</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </section>
-                                <aside class="w-full lg:w-[30%]">
-                                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
-                                        <div class="mb-6 -mt-2">
-                                            <img src="hinh_anh/khurungcuamat.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
-                                        </div>
-                                        <div class="flex items-center space-x-4 mb-8">
-                                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
-                                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+
+                                <!-- 3. MEANING (NỘI DUNG CHÍNH) -->
+                                <section class="w-full">
+                                    <div class="bg-gradient-to-r from-indigo-800 to-blue-900 rounded-[32px] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden transform hover:scale-[1.01] transition-transform">
+                                        <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+                                        <div class="absolute left-0 bottom-0 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl"></div>
+                                        <div class="flex flex-col items-center text-center relative z-10">
+                                            <div class="inline-block p-3 rounded-xl bg-white/10 backdrop-blur-md mb-4 border border-white/20">
+                                                <svg class="w-8 h-8 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                                             </div>
-                                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
-                                        </div>
-                                        <div class="space-y-4">
-                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
-                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Chuyện gì đã xảy ra với trang trại của Mát trong một đêm nọ?</span>
-                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
-                                                </button>
-                                                <div class="accordion-content">
-                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                                        <p class="font-medium">Một đêm nọ, sấm sét đánh trúng cây cao nhất, gây cháy lan khắp trang trại. Dù mọi người cố gắng dập lửa nhưng trang trại vẫn bị thiêu rụi suốt một ngày một đêm.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
-                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Lời khuyên của bà cụ ở bệnh viện đã giúp Mát thay đổi suy nghĩ như thế nào?</span>
-                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
-                                                </button>
-                                                <div class="accordion-content">
-                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                                        <p class="font-medium">Bà cụ khuyên: "Cây bị thiêu cháy thì trồng lại là được. Cậu còn trẻ mà!". Lời này giúp Mát bừng tỉnh, nhận ra mình vẫn còn cơ hội để bắt đầu lại thay vì tuyệt vọng.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
-                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
-                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Mát đã làm gì để khôi phục lại trang trại rừng của mình?</span>
-                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
-                                                </button>
-                                                <div class="accordion-content">
-                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
-                                                        <p class="font-medium">Mát cho biến những thân cây cháy thành than củi để bán lấy tiền mua cây giống mới, sau đó kiên trì trồng lại trang trại cho đến khi nó xanh tươi trở lại.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <h3 class="text-3xl md:text-4xl font-black uppercase tracking-widest mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">NỘI DUNG CHÍNH</h3>
+                                            <div class="w-32 h-1.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent rounded-full mb-8"></div>
+                                            <p class="text-xl md:text-2xl font-medium leading-relaxed max-w-4xl text-blue-50">
+                                                Ý chí vươn lên và tình yêu thiên nhiên. Mát không bỏ cuộc trước khó khăn mà tìm cách khôi phục trang trại, giữ trọn lời hứa với ông nội.
+                                            </p>
                                         </div>
                                     </div>
-                                </aside>
+                                </section>
                             </div>`
                         }
                     ]
