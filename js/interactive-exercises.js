@@ -215,7 +215,7 @@ async function analyzeEssayAI(mb, tb, kb) {
     };
 
     try {
-        const response = await fetch('/.netlify/functions/chat', {
+        const response = await fetch('https://tiengviet5.netlify.app/.netlify/functions/chat', {
             method: 'POST',
             body: JSON.stringify({
                 sentence: `
@@ -476,7 +476,7 @@ async function getDebateAIResponse(userText, topicKey) {
             content: msg.text
         }));
 
-        const response = await fetch('/.netlify/functions/chat', {
+        const response = await fetch('https://tiengviet5.netlify.app/.netlify/functions/chat', {
             method: 'POST',
             body: JSON.stringify({
                 mode: 'chat', // Explicitly switch to chat mode
@@ -574,7 +574,7 @@ async function nvn222_summary() {
     const chatContent = window.nvn222_state.messages.map(m => `${m.role}: ${m.text}`).join("\n");
 
     try {
-        const response = await fetch('/.netlify/functions/chat', {
+        const response = await fetch('https://tiengviet5.netlify.app/.netlify/functions/chat', {
             method: 'POST',
             body: JSON.stringify({
                 sentence: `
@@ -716,7 +716,7 @@ window.checkVietAI = async function (inputId, type) {
         // OR direct call. Since gradeParagraph forces 3-part structure, we use direct call here 
         // but with the same Endpoint and Persona logic.
 
-        const response = await fetch('/.netlify/functions/chat', {
+        const response = await fetch('https://tiengviet5.netlify.app/.netlify/functions/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
