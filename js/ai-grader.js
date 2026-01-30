@@ -1,6 +1,10 @@
 // ============================================================================
 // DỮ LIỆU GIẢNG DẠY THEO CHƯƠNG TRÌNH KẾT NỐI TRI THỨC LỚP 5
 // ============================================================================
+// --- CONFIGURATION ---
+const API_ENDPOINT = 'https://tiengviet5.netlify.app/.netlify/functions/chat';
+
+// --- DATA & STATE ---
 let graderCurriculumData = null;
 
 async function loadCurriculumData() {
@@ -601,7 +605,7 @@ async function gradeParagraph(studentText, requirements, weekNumber = null) {
 
     // 5. Call AI API
     try {
-        const response = await fetch('https://tiengviet5.netlify.app/.netlify/functions/chat', {
+        const response = await fetch(API_ENDPOINT, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -683,7 +687,7 @@ async function gradeParagraphV2(studentText, requirements, weekNumber = null) {
 
     // 4. Call AI API
     try {
-        const response = await fetch('https://tiengviet5.netlify.app/.netlify/functions/chat', {
+        const response = await fetch(API_ENDPOINT, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
