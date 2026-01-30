@@ -496,8 +496,12 @@ async function getDebateAIResponse(userText, topicKey) {
 }
 
 async function nvn222_send() {
-    const input = document.getElementById('nvn-chat-input');
+    const input = document.getElementById('btn-nvn-input') || document.getElementById('nvn-chat-input');
     const msgContainer = document.getElementById('nvn-chat-history');
+    if (!input) {
+        console.error("Input not found: btn-nvn-input or nvn-chat-input");
+        return;
+    }
     const text = input.value.trim();
 
     if (!text) return;
@@ -527,7 +531,8 @@ async function nvn222_send() {
 }
 
 function nvn222_quickTalk(msg) {
-    document.getElementById('nvn-chat-input').value = msg;
+    const input = document.getElementById('btn-nvn-input') || document.getElementById('nvn-chat-input');
+    if (input) input.value = msg;
     nvn222_send();
 }
 
@@ -852,20 +857,23 @@ window.rateViet = function (element, score) {
 
     // Reset all stars
     allStars.forEach((star, index) => {
+        // Ensure stars are inline-block so scale/transform works
+        star.style.display = 'inline-block';
+
         if (index < score) {
             star.textContent = '★'; // Filled star
-            star.classList.add('text-yellow-400', 'scale-110');
+            star.classList.add('text-yellow-400', 'scale-125');
             star.classList.remove('text-gray-300');
         } else {
             star.textContent = '☆'; // Empty star
-            star.classList.remove('text-yellow-400', 'scale-110');
+            star.classList.remove('text-yellow-400', 'scale-125');
             star.classList.add('text-gray-300');
         }
     });
 
     // Optional: Add a subtle animation or sound
-    element.classList.add('animate-ping');
-    setTimeout(() => element.classList.remove('animate-ping'), 300);
+    element.classList.add('scale-150');
+    setTimeout(() => element.classList.remove('scale-150'), 300);
 
     // Could save to local storage here if needed
     console.log(`Rated row ${parent.dataset.row}: ${score} stars`);
