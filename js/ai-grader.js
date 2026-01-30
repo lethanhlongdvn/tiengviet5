@@ -230,7 +230,7 @@ async function askAI(id, prefix = "", mode = "single", persona = "auto", weekNum
             ? `${curriculumContext}\n\n📝 BÀI LÀM CỦA HỌC SINH:\n${sentence}`
             : sentence;
 
-        const response = await fetch('/.netlify/functions/chat', {
+        const response = await fetch('https://tiengviet5.netlify.app/.netlify/functions/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -601,7 +601,7 @@ async function gradeParagraph(studentText, requirements, weekNumber = null) {
 
     // 5. Call AI API
     try {
-        const response = await fetch('/.netlify/functions/chat', {
+        const response = await fetch('https://tiengviet5.netlify.app/.netlify/functions/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -683,7 +683,7 @@ async function gradeParagraphV2(studentText, requirements, weekNumber = null) {
 
     // 4. Call AI API
     try {
-        const response = await fetch('/.netlify/functions/chat', {
+        const response = await fetch('https://tiengviet5.netlify.app/.netlify/functions/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
