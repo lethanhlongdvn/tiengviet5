@@ -1,26 +1,18 @@
-/**
- * Interactive Exercises Logic
- * Used by lesson_viewer.html for custom interactive content (LTVC, etc.)
- */
+// --- CONFIGURATION ---
+window.AI_API_URL = window.AI_API_URL || 'https://tiengviet5.netlify.app/.netlify/functions/chat';
+const AI_API_URL = window.AI_API_URL;
 console.log('Interactive Exercises Loaded');
-window.ltvc21_check1 = ltvc21_check1;
-window.ltvc21_reset1 = ltvc21_reset1;
-window.ltvc21_check2 = ltvc21_check2;
-window.ltvc21_update2 = ltvc21_update2;
-window.toggleWord = toggleWord;
-window.askAI = askAI; // From ai-grader.js if present, or we define fallback
-window.ltvc22_check1 = ltvc21_check1;
-window.ltvc22_update2 = ltvc22_update2;
-window.ltvc22_check2 = ltvc22_check2;
-window.ltvc22_toggle = ltvc22_toggle;
+
+// Ensure functions from other scripts are referenced safely
+const askAI = window.askAI;
 
 // Global Submissions Store (Mock Backend)
-if (!window.submissions) {
-    window.submissions = JSON.parse(localStorage.getItem('eduRobotSubmissions') || '[]');
-}
+window.submissions = window.submissions || JSON.parse(localStorage.getItem('eduRobotSubmissions') || '[]');
+const submissions = window.submissions;
 
 // Global Celebrate Function
-function celebrate() {
+window.celebrate = function () {
+    console.log("CELEBRATE!");
     if (typeof confetti === 'function') {
         confetti({
             particleCount: 150,
@@ -215,7 +207,7 @@ async function analyzeEssayAI(mb, tb, kb) {
     };
 
     try {
-        const response = await fetch(API_ENDPOINT, {
+        const response = await fetch(AI_API_URL, {
             method: 'POST',
             body: JSON.stringify({
                 sentence: `
@@ -438,7 +430,6 @@ window.nvn222_state = {
     messages: []
 };
 
-const API_ENDPOINT = 'https://tiengviet5.netlify.app/.netlify/functions/chat';
 
 // --- AI DEBATE LOGIC (REAL + FALLBACK) ---
 
@@ -479,7 +470,7 @@ async function getDebateAIResponse(userText, topicKey) {
             content: msg.text
         }));
 
-        const response = await fetch('https://tiengviet5.netlify.app/.netlify/functions/chat', {
+        const response = await fetch(AI_API_URL, {
             method: 'POST',
             body: JSON.stringify({
                 mode: 'chat', // Explicitly switch to chat mode
@@ -577,7 +568,7 @@ async function nvn222_summary() {
     const chatContent = window.nvn222_state.messages.map(m => `${m.role}: ${m.text}`).join("\n");
 
     try {
-        const response = await fetch(API_ENDPOINT, {
+        const response = await fetch(AI_API_URL, {
             method: 'POST',
             body: JSON.stringify({
                 sentence: `
@@ -719,7 +710,7 @@ window.checkVietAI = async function (inputId, type) {
         // OR direct call. Since gradeParagraph forces 3-part structure, we use direct call here 
         // but with the same Endpoint and Persona logic.
 
-        const response = await fetch(API_ENDPOINT, {
+        const response = await fetch(AI_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -908,76 +899,103 @@ window.startSubmitLesson221Viet = function () {
 };
 
 window.submitLesson221VietData = async function (name, cls, school) {
-    // 1. Gather Data
+    console.log("Starting Submission for 221-viet...");
 
-    // Bài 2: Ratings
-    let ratings = {};
-    document.querySelectorAll('.star-group').forEach(group => {
-        const row = group.dataset.row;
-        const stars = group.querySelectorAll('.star-btn');
-        let score = 0;
-        stars.forEach((s, i) => {
-            if (s.textContent === '★') score = i + 1;
+    try {
+        // 1. Gather Data
+
+        // Bài 2: Ratings
+        let ratings = {};
+        const starGroups = document.querySelectorAll('.star-group');
+        if (starGroups.length === 0) {
+            console.warn("No star groups found - skipping ratings");
+        }
+        starGroups.forEach(group => {
+            const row = group.dataset.row;
+            const stars = group.querySelectorAll('.star-btn');
+            let score = 0;
+            stars.forEach((s, i) => {
+                if (s.textContent === '★') score = i + 1;
+            });
+            ratings[`TieuChi_${row}`] = score;
         });
-        ratings[`TieuChi_${row}`] = score;
-    });
 
-    // Bài 3: Content
-    const textA = document.getElementById('viet-inputA')?.value || "";
-    const fbA = document.getElementById('feedback-viet-inputA')?.innerText || "";
-    const textB = document.getElementById('viet-inputB')?.value || "";
-    const fbB = document.getElementById('feedback-viet-inputB')?.innerText || "";
+        // Bài 3: Content
+        const textA = document.getElementById('viet-inputA')?.value || "";
+        const fbA = document.getElementById('feedback-viet-inputA')?.innerText || "";
+        const textB = document.getElementById('viet-inputB')?.value || "";
+        const fbB = document.getElementById('feedback-viet-inputB')?.innerText || "";
 
-    // Calculate Score (Average of ratings or arbitrary?)
-    // User didn't specify, but let's sum ratings
-    const totalRating = Object.values(ratings).reduce((a, b) => a + b, 0);
-    const maxRating = 20; // 4 rows * 5 stars
-    const score = Math.round((totalRating / maxRating) * 10);
+        // Calculate Score
+        const ratingValues = Object.values(ratings);
+        const totalRating = ratingValues.length > 0 ? ratingValues.reduce((a, b) => a + b, 0) : 0;
+        const maxPossible = (ratingValues.length || 4) * 5;
+        const score = maxPossible > 0 ? Math.round((totalRating / maxPossible) * 10) : 0;
 
-    // Format Content for Excel
-    const contentSummary = `
+        // Format Content for Excel
+        const contentSummary = `
 [BÀI 2 - ĐÁNH GIÁ]
-- Nội dung: ${ratings['TieuChi_1']}/5
-- Cấu trúc: ${ratings['TieuChi_2']}/5
-- Tình cảm: ${ratings['TieuChi_3']}/5
-- Trình bày: ${ratings['TieuChi_4']}/5
+- Nội dung: ${ratings['TieuChi_1'] || 0}/5
+- Cấu trúc: ${ratings['TieuChi_2'] || 0}/5
+- Tình cảm: ${ratings['TieuChi_3'] || 0}/5
+- Trình bày: ${ratings['TieuChi_4'] || 0}/5
 
 [BÀI 3 - VIẾT LẠI CÂU]
-a) ${textA}
-=> AI nhận xét: ${fbA}
+a) ${textA || "(Trống)"}
+=> AI nhận xét: ${fbA || "(Chưa có nhận xét)"}
 
-b) ${textB}
-=> AI nhận xét: ${fbB}
+b) ${textB || "(Trống)"}
+=> AI nhận xét: ${fbB || "(Chưa có nhận xét)"}
     `.trim();
 
-    // 2. Save
-    const submission = {
-        studentName: name,
-        studentClass: cls,
-        studentSchool: school,
-        lessonTitle: "Bài 221 - Viết: Đánh giá, chỉnh sửa bài văn tả người",
-        type: 'lesson_221_viet',
-        content: contentSummary,
-        aiFeedback: `Đã hoàn thành. Điểm tự đánh giá: ${score}/10`,
-        aiGrade: score,
-        status: "Chưa chấm",
-        timestamp: new Date().toISOString()
-    };
+        // 2. Prepare Submission Object
+        const submission = {
+            studentName: name,
+            studentClass: cls,
+            studentSchool: school,
+            lessonTitle: "Bài 221 - Viết: Đánh giá, chỉnh sửa bài văn tả người",
+            type: 'lesson_221_viet',
+            content: contentSummary,
+            aiFeedback: `Điểm tự đánh giá: ${score}/10. Bài 3a: ${textA ? 'Đã làm' : 'Trống'}, Bài 3b: ${textB ? 'Đã làm' : 'Trống'}`,
+            aiGrade: score,
+            status: "Chưa chấm",
+            timestamp: new Date().toISOString()
+        };
 
-    // LocalStorage
-    if (!window.submissions) window.submissions = [];
-    window.submissions.push(submission);
-    localStorage.setItem('eduRobotSubmissions', JSON.stringify(window.submissions));
+        // 3. Save to LocalStorage (Backup)
+        if (!window.submissions) window.submissions = [];
+        window.submissions.push(submission);
+        localStorage.setItem('eduRobotSubmissions', JSON.stringify(window.submissions));
+        console.log("Local backup saved.");
 
-    // Firebase
-    try {
-        const fireData = { ...submission, timestamp: firebase.firestore.FieldValue.serverTimestamp() };
-        await db.collection("essays_v2").add(fireData); // Use essays_v2 for Dashboard
-        alert("Nộp bài thành công! Thầy cô đã nhận được bài của em.");
-        window.location.reload();
-    } catch (e) {
-        console.error(e);
-        alert("Nộp bài thành công (đã lưu vào máy)!");
-        window.location.reload();
+        // 4. Save to Firebase
+        if (typeof db !== 'undefined' && db.collection) {
+            console.log("Saving to Firebase (essays_v2)...");
+            const fireData = {
+                ...submission,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            await db.collection("essays_v2").add(fireData);
+            console.log("Firebase save successful.");
+            alert("🎉 Tuyệt vời! Bài làm của em đã được gửi tới Thầy/Cô thành công.");
+        } else {
+            console.error("Firebase DB (db) is not initialized.");
+            alert("✅ Bài làm đã được lưu trên máy! (Lưu ý: Hệ thống đang bận nên chưa gửi được lên mạng).");
+        }
+
+        // 5. Success UI
+        if (typeof celebrate === 'function') celebrate();
+        setTimeout(() => window.location.reload(), 1500);
+
+    } catch (err) {
+        console.error("Detailed Submission Error:", err);
+        alert("❌ Có lỗi xảy ra khi nộp bài: " + err.message + "\nEm hãy thử lại hoặc báo với Thầy/Cô nhé!");
+
+        // Re-enable button via global selector since we don't have btn ref here
+        const btn = document.querySelector('#studentInfoContent button:last-child');
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = "🚀 NỘP BÀI";
+        }
     }
 };
