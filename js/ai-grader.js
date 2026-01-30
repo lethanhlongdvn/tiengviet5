@@ -248,6 +248,8 @@ async function askAI(id, prefix = "", mode = "single", persona = "auto", weekNum
         }
 
         const data = await response.json();
+        // Ensure persona is set for rendering
+        if (!data.persona) data.persona = persona;
         renderFeedback(feedback, data);
         const gradeNum = parseFloat(data.diem) || data.grade || 0;
         if (typeof celebrate === 'function' && gradeNum >= 8) celebrate();
@@ -451,7 +453,7 @@ function renderFeedback(container, data) {
                 ` : ''}
             </div>
 
-            <!-- Detailed Analysis parts (Hiddne for LTVC) -->
+            <!-- Detailed Analysis parts (Hidden for LTVC) -->
             ${persona !== 'ltvc' ? `
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 ${['mo_bai', 'than_bai', 'ket_bai'].map(part => {
