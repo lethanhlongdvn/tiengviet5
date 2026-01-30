@@ -6,6 +6,7 @@ console.log('--- Interactive Exercises Script Starting ---');
 window.submissions = window.submissions || JSON.parse(localStorage.getItem('eduRobotSubmissions') || '[]');
 
 // --- CORE UTILITIES ---
+// --- CORE UTILITIES ---
 window.celebrate = function () {
     console.log("CELEBRATE!");
     if (typeof confetti === 'function') {
@@ -340,13 +341,17 @@ window.handleSubmission = async function () {
             }
 
             // Save to Firebase Firestore (ESSAYS_V2)
-            await db.collection("essays_v2").add({
+            // One submission per student logic: use a deterministic ID
+            const lessonTitle = document.title.replace(" - EduRobot", "");
+            const docId = window.getSlug(`${name}_${cls}_${school}_${lessonTitle}`);
+
+            await db.collection("essays_v2").doc(docId).set({
                 studentName: name,
                 studentClass: cls,
                 studentSchool: school,
                 content: contentToSave,
                 fileUrl: fileUrl,
-                lessonTitle: document.title.replace(" - EduRobot", ""),
+                lessonTitle: lessonTitle,
                 aiFeedback: `Good: ${result.good} | Bad: ${result.bad}`,
                 aiGrade: result.score,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -965,8 +970,12 @@ b) ${textB || "(Trống)"}
                 ...submission,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             };
-            await db.collection("essays_v2").add(fireData);
-            console.log("Firebase save successful.");
+
+            // Deterministic ID for one score per student
+            const docId = window.getSlug(`${name}_${cls}_${school}_${submission.lessonTitle}`);
+            await db.collection("essays_v2").doc(docId).set(fireData);
+
+            console.log("Firebase save successful (ID: " + docId + ")");
             alert("🎉 Tuyệt vời! Bài làm của em đã được gửi tới Thầy/Cô thành công.");
         } else {
             console.error("Firebase DB (db) is not initialized.");
