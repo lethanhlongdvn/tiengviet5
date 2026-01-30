@@ -1,8 +1,7 @@
-// ============================================================================
-// DỮ LIỆU GIẢNG DẠY THEO CHƯƠNG TRÌNH KẾT NỐI TRI THỨC LỚP 5
-// ============================================================================
 // --- CONFIGURATION ---
-const API_ENDPOINT = 'https://tiengviet5.netlify.app/.netlify/functions/chat';
+window.AI_API_URL = window.AI_API_URL || 'https://tiengviet5.netlify.app/.netlify/functions/chat';
+const API_ENDPOINT = window.AI_API_URL;
+console.log('AI Grader using endpoint:', API_ENDPOINT);
 
 // --- DATA & STATE ---
 let graderCurriculumData = null;
