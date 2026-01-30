@@ -212,9 +212,8 @@ async function askAI(id, prefix = "", mode = "single", persona = "auto", weekNum
         </div>
     `;
 
-    // SIMULATION MODE: Always use mock mode for now (no real AI backend configured)
-    // TODO: Set to false when Netlify AI function is ready
-    const isMockable = true; // mode === "table" || id.includes('q') || id === '3';
+    // SIMULATION MODE: Set to false to use REAL AI
+    const isMockable = false;
 
     if (isMockable) {
         setTimeout(() => {
@@ -521,3 +520,6 @@ function continueWriting(hint) {
         }
     }, 500);
 }
+
+// Expose globally
+window.askAI = askAI;
