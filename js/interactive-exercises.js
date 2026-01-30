@@ -1,16 +1,11 @@
 // --- CONFIGURATION ---
 window.AI_API_URL = window.AI_API_URL || 'https://tiengviet5.netlify.app/.netlify/functions/chat';
-const AI_API_URL = window.AI_API_URL;
-console.log('Interactive Exercises Loaded');
+console.log('--- Interactive Exercises Script Starting ---');
 
-// Ensure functions from other scripts are referenced safely
-const askAI = window.askAI;
-
-// Global Submissions Store (Mock Backend)
+// Global Submissions Store
 window.submissions = window.submissions || JSON.parse(localStorage.getItem('eduRobotSubmissions') || '[]');
-const submissions = window.submissions;
 
-// Global Celebrate Function
+// --- CORE UTILITIES ---
 window.celebrate = function () {
     console.log("CELEBRATE!");
     if (typeof confetti === 'function') {
@@ -26,22 +21,16 @@ window.celebrate = function () {
         audio.currentTime = 0;
         audio.play().catch(e => { });
     }
-}
+};
 
-// UI Helpers
-function toggleWord(el) {
+window.toggleWord = function (el) {
     if (!el.closest('.locked')) {
         el.classList.toggle('selected');
     }
-}
+};
 
-// ... [Keep existing LTVC functions checks/updates] ...
-
-// Since I am overwriting the file, I need to include the previous LTVC functions. 
-// I will copy them from previous view or assume they are standard.
-// To be safe, I'll keep the ones I saw in Step 127.
-
-function ltvc21_check1(id) {
+// --- LTVC FUNCTIONS (Week 21 & 22) ---
+window.ltvc21_check1 = function (id) {
     // ... [Previous implementation] ...
     const row = document.getElementById(id);
     if (!row) return;
@@ -67,7 +56,7 @@ function ltvc21_check1(id) {
     });
 
     if (selectedCount > 0 && !error && right === ans.length) {
-        celebrate();
+        window.celebrate();
         row.classList.add('locked');
     } else if (selectedCount > 0 && !error && right < ans.length) {
         alert('Em chọn đúng nhưng chưa đủ! Tìm thêm nhé.');
@@ -76,14 +65,14 @@ function ltvc21_check1(id) {
     }
 }
 
-function ltvc21_reset1(id) {
+window.ltvc21_reset1 = function (id) {
     const row = document.getElementById(id);
     if (!row) return;
     row.classList.remove('locked');
     row.querySelectorAll('.word').forEach(w => w.classList.remove('selected', 'is-correct', 'is-wrong'));
 }
 
-function ltvc21_update2(id, val) {
+window.ltvc21_update2 = function (id, val) {
     const row = document.getElementById(id);
     if (!row) return;
     const slots = row.querySelectorAll('.slot');
@@ -99,23 +88,24 @@ function ltvc21_update2(id, val) {
     }
 }
 
-function ltvc21_check2(id) {
+window.ltvc21_check2 = function (id) {
     const row = document.getElementById(id);
     if (!row) return;
     const select = row.querySelector('select');
     if (select.value === row.getAttribute('data-ans')) {
         row.querySelectorAll('.slot').forEach(s => { s.style.color = "#22c55e"; s.classList.add('filled'); });
-        celebrate();
+        window.celebrate();
     } else {
         row.querySelectorAll('.slot').forEach(s => { s.style.color = "#ef4444"; });
     }
 }
 
 // Week 22 LTVC
-function ltvc22_update2(id, val) { ltvc21_update2(id, val); } // Reuse
-function ltvc22_check2(id) { ltvc21_check2(id); } // Reuse
+window.ltvc22_update2 = function (id, val) { window.ltvc21_update2(id, val); } // Reuse
+window.ltvc22_check2 = function (id) { window.ltvc21_check2(id); } // Reuse
+window.ltvc22_check1 = function (id) { window.ltvc21_check1(id); } // Reuse
 
-function ltvc22_toggle(el) {
+window.ltvc22_toggle = function (el) {
     const container = el.nextElementSibling;
     if (container) {
         container.classList.toggle('hidden');
@@ -130,7 +120,7 @@ function ltvc22_toggle(el) {
 // State
 window.viet222_state = { topic: 0 };
 
-function viet222_selectTopic(topicId) {
+window.viet222_selectTopic = function (topicId) {
     window.viet222_state.topic = topicId;
     const section2 = document.getElementById('viet222-p2');
     const badge = document.getElementById('viet222-badge');
@@ -207,7 +197,7 @@ async function analyzeEssayAI(mb, tb, kb) {
     };
 
     try {
-        const response = await fetch(AI_API_URL, {
+        const response = await fetch(window.AI_API_URL, {
             method: 'POST',
             body: JSON.stringify({
                 sentence: `
@@ -470,7 +460,7 @@ async function getDebateAIResponse(userText, topicKey) {
             content: msg.text
         }));
 
-        const response = await fetch(AI_API_URL, {
+        const response = await fetch(window.AI_API_URL, {
             method: 'POST',
             body: JSON.stringify({
                 mode: 'chat', // Explicitly switch to chat mode
@@ -568,7 +558,7 @@ async function nvn222_summary() {
     const chatContent = window.nvn222_state.messages.map(m => `${m.role}: ${m.text}`).join("\n");
 
     try {
-        const response = await fetch(AI_API_URL, {
+        const response = await fetch(window.AI_API_URL, {
             method: 'POST',
             body: JSON.stringify({
                 sentence: `
@@ -710,7 +700,7 @@ window.checkVietAI = async function (inputId, type) {
         // OR direct call. Since gradeParagraph forces 3-part structure, we use direct call here 
         // but with the same Endpoint and Persona logic.
 
-        const response = await fetch(AI_API_URL, {
+        const response = await fetch(window.AI_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
