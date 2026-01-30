@@ -752,8 +752,42 @@ window.checkVietAI = async function (inputId, type) {
              `;
         }
     } catch (e) {
-        console.error(e);
-        if (feedbackEl) feedbackEl.innerHTML = "❌ Thầy đang bận chấm bài khác, em thử lại sau nhé!";
+        console.error("AI Check Failed, switching to Heuristic:", e);
+
+        // --- HEURISTIC FALLBACK ---
+        let fallbackMsg = "Bài làm của em đã được ghi nhận.";
+        const lowerText = studentText.toLowerCase();
+
+        if (type === 'a') {
+            const hasComparison = ['như', 'tựa', 'hơn', 'giống', 'y hệt', 'chẳng khác gì'].some(w => lowerText.includes(w));
+            const hasAdjectives = ['đẹp', 'xinh', 'cao', 'trắng', 'đen', 'nhanh', 'chậm', 'buồn', 'vui'].some(w => lowerText.includes(w)); // Basic list
+
+            if (hasComparison) {
+                fallbackMsg = "Tuyệt vời! Em đã biết sử dụng hình ảnh so sánh để câu văn sinh động hơn.";
+            } else if (hasAdjectives) {
+                fallbackMsg = "Em đã dùng từ ngữ gợi tả. Thử thêm hình ảnh so sánh (như, tựa...) nữa nhé!";
+            } else {
+                fallbackMsg = "Câu văn hơi đơn giản. Em hãy thử thêm các từ so sánh như 'trắng như tuyết', 'nhanh như cắt' xem sao.";
+            }
+        } else {
+            // Type b: Emotion
+            const hasEmotion = ['yêu', 'thương', 'nhớ', 'quý', 'kính trọng', 'biết ơn', 'xúc động', 'ngưỡng mộ'].some(w => lowerText.includes(w));
+            if (hasEmotion) {
+                fallbackMsg = "Cô cảm nhận được tình cảm chân thành của em qua câu văn này. Rất tốt!";
+            } else {
+                fallbackMsg = "Em hãy thử thêm các từ chỉ cảm xúc (yêu, thương, nhớ...) để bộc lộ rõ tình cảm hơn nhé.";
+            }
+        }
+
+        if (feedbackEl) {
+            feedbackEl.classList.remove('hidden');
+            feedbackEl.innerHTML = `
+                <div class="flex gap-3">
+                    <div class="text-2xl">🤖</div> <!-- Robot Icon for offline mode -->
+                    <div class="text-gray-800"><b>(Chế độ chấm nhanh):</b> ${fallbackMsg}</div>
+                </div>
+             `;
+        }
     }
 };
 
@@ -819,4 +853,30 @@ window.checkLTVC221_Q3 = async function () {
         console.error(e);
         if (feedbackEl) feedbackEl.innerHTML = `<span class="text-red-500">Lỗi kết nối: ${e.message}</span>`;
     }
+};
+
+// --- LESSON 221-VIET: STAR RATING ---
+window.rateViet = function (element, score) {
+    const parent = element.parentElement;
+    const allStars = parent.querySelectorAll('.star-btn');
+
+    // Reset all stars
+    allStars.forEach((star, index) => {
+        if (index < score) {
+            star.textContent = '★'; // Filled star
+            star.classList.add('text-yellow-400', 'scale-110');
+            star.classList.remove('text-gray-300');
+        } else {
+            star.textContent = '☆'; // Empty star
+            star.classList.remove('text-yellow-400', 'scale-110');
+            star.classList.add('text-gray-300');
+        }
+    });
+
+    // Optional: Add a subtle animation or sound
+    element.classList.add('animate-ping');
+    setTimeout(() => element.classList.remove('animate-ping'), 300);
+
+    // Could save to local storage here if needed
+    console.log(`Rated row ${parent.dataset.row}: ${score} stars`);
 };
