@@ -523,3 +523,112 @@ function continueWriting(hint) {
 
 // Expose globally
 window.askAI = askAI;
+
+/**
+ * Chấm điểm đoạn văn theo cấu trúc: Mở đoạn - Thân đoạn - Kết đoạn
+ * @param {string} studentText - Bài làm của học sinh
+ * @param {string} requirements - Yêu cầu của đề bài (VD: Viết đoạn văn tả người...)
+ * @param {number} weekNumber - Tuần học để lấy ngữ cảnh (tùy chọn)
+ */
+async function gradeParagraph(studentText, requirements, weekNumber = null) {
+    // 1. Loading State (nếu có element hiển thị)
+    // Hàm này trả về data, việc hiển thị UI do nơi gọi hàm xử lý
+
+    // 2. Load context
+    await loadCurriculumData();
+    await loadWritingCurriculumData();
+    let context = "";
+    if (weekNumber) {
+        context = buildWritingContext(weekNumber);
+    }
+
+    // 3. Build Prompt
+    const prompt = `
+    ${context}
+    
+    🎯 YÊU CẦU ĐỀ BÀI: ${requirements}
+    
+    📝 BÀI LÀM CỦA HỌC SINH:
+    "${studentText}"
+    
+    👮 YÊU CẦU CHẤM:
+    Bạn là giáo viên Tiếng Việt lớp 5. Hãy phân tích và chấm điểm đoạn văn trên.
+    Đoạn văn cần có đủ 3 phần: 
+    1. Câu mở đoạn (Giới thiệu đối tượng)
+    2. Các câu thân đoạn (Miêu tả/Kể chi tiết)
+    3. Câu kết đoạn (Cảm nghĩ/Nhận xét)
+
+    Hãy trả về kết quả dưới dạng JSON (Chỉ JSON, không markdown) theo mẫu:
+    {
+        "parts": {
+            "open": { "text": "Trích câu mở đoạn (nếu có, không thì để null)", "comment": "Nhận xét câu mở đoạn" },
+            "body": { "text": "Trích các câu thân đoạn", "comment": "Nhận xét nội dung, từ ngữ, hình ảnh trong thân đoạn" },
+            "close": { "text": "Trích câu kết đoạn", "comment": "Nhận xét câu kết đoạn" }
+        },
+        "general_comment": "Nhận xét chung về cả đoạn văn (ưu điểm/nhược điểm)",
+        "score": 8.5,
+        "advice": "Lời khuyên cụ thể để em viết tốt hơn"
+    }
+    `;
+
+    // 4. Mock Logic (Simulation)
+    const isMock = false; // Set true to tes without API
+    if (isMock) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                const sentences = studentText.split(/[.!?]+/).filter(s => s.trim().length > 0);
+                const score = sentences.length >= 3 ? 9 : 6;
+                resolve({
+                    parts: {
+                        open: { text: sentences[0] || "", comment: sentences.length > 0 ? "Em đã có câu mở đoạn." : "Thiếu câu mở đoạn." },
+                        body: { text: sentences.slice(1, -1).join(". "), comment: "Nội dung khá chi tiết." },
+                        close: { text: sentences[sentences.length - 1] || "", comment: "Câu kết đoạn giàu cảm xúc." }
+                    },
+                    general_comment: "Bài làm có cố gắng.",
+                    score: score,
+                    advice: "Em hãy viết câu văn dài hơn và dùng nhiều hình ảnh so sánh nhé."
+                });
+            }, 1500);
+        });
+    }
+
+    // 5. Call AI API
+    try {
+        const response = await fetch('/.netlify/functions/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sentence: prompt,
+                weekNumber: weekNumber,
+                mode: 'json' // Hint to backend to return JSON
+            })
+        });
+
+        if (!response.ok) throw new Error("API Error");
+
+        const data = await response.json();
+        let jsonStr = typeof data === 'string' ? data : (data.response || data.content);
+
+        // Clean JSON formatting
+        if (typeof jsonStr !== 'string') jsonStr = JSON.stringify(jsonStr);
+        jsonStr = jsonStr.replace(/```json/g, '').replace(/```/g, '').trim();
+
+        return JSON.parse(jsonStr);
+
+    } catch (e) {
+        console.error("AI Grade Paragraph Failed:", e);
+        // Fallback
+        return {
+            parts: {
+                open: { text: "...", comment: "Chưa xác định" },
+                body: { text: "...", comment: "Chưa xác định" },
+                close: { text: "...", comment: "Chưa xác định" }
+            },
+            general_comment: "Hệ thống đang bận, em hãy kiểm tra lại bài làm nhé.",
+            score: 7,
+            advice: "Em hãy đọc lại bài và soát lỗi chính tả nhé."
+        };
+    }
+}
+
+window.gradeParagraph = gradeParagraph;
