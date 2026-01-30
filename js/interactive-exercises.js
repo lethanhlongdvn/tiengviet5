@@ -884,3 +884,100 @@ window.rateViet = function (element, score) {
     // Could save to local storage here if needed
     console.log(`Rated row ${parent.dataset.row}: ${score} stars`);
 };
+
+// --- LESSON 221-VIET: SUBMIT ALL ---
+// [TEMPLATE REFERENCE]
+// This function serves as the standard template for "Submit All" features.
+// To create a new submission for another lesson:
+// 1. Create a start function (e.g. startSubmitLessonXYZ) that sets window.currentSubmissionType
+// 2. Create a data function (e.g. submitLessonXYZData) that gathers specific DOM elements
+// 3. Register the new type in lesson-loader.js -> confirmSubmitQuiz()
+// 4. Ensure data is saved to 'essays_v2' with 'aiGrade', 'aiFeedback', and 'content'.
+window.startSubmitLesson221Viet = function () {
+    window.currentSubmissionType = 'lesson_221_viet';
+    const modal = document.getElementById('studentInfoModal');
+    const content = document.getElementById('studentInfoContent');
+    if (modal) {
+        modal.classList.remove('hidden');
+        void modal.offsetWidth;
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.add('flex', 'opacity-100', 'pointer-events-auto');
+        content.classList.remove('scale-95');
+        content.classList.add('scale-100');
+    }
+};
+
+window.submitLesson221VietData = async function (name, cls, school) {
+    // 1. Gather Data
+
+    // Bài 2: Ratings
+    let ratings = {};
+    document.querySelectorAll('.star-group').forEach(group => {
+        const row = group.dataset.row;
+        const stars = group.querySelectorAll('.star-btn');
+        let score = 0;
+        stars.forEach((s, i) => {
+            if (s.textContent === '★') score = i + 1;
+        });
+        ratings[`TieuChi_${row}`] = score;
+    });
+
+    // Bài 3: Content
+    const textA = document.getElementById('viet-inputA')?.value || "";
+    const fbA = document.getElementById('feedback-viet-inputA')?.innerText || "";
+    const textB = document.getElementById('viet-inputB')?.value || "";
+    const fbB = document.getElementById('feedback-viet-inputB')?.innerText || "";
+
+    // Calculate Score (Average of ratings or arbitrary?)
+    // User didn't specify, but let's sum ratings
+    const totalRating = Object.values(ratings).reduce((a, b) => a + b, 0);
+    const maxRating = 20; // 4 rows * 5 stars
+    const score = Math.round((totalRating / maxRating) * 10);
+
+    // Format Content for Excel
+    const contentSummary = `
+[BÀI 2 - ĐÁNH GIÁ]
+- Nội dung: ${ratings['TieuChi_1']}/5
+- Cấu trúc: ${ratings['TieuChi_2']}/5
+- Tình cảm: ${ratings['TieuChi_3']}/5
+- Trình bày: ${ratings['TieuChi_4']}/5
+
+[BÀI 3 - VIẾT LẠI CÂU]
+a) ${textA}
+=> AI nhận xét: ${fbA}
+
+b) ${textB}
+=> AI nhận xét: ${fbB}
+    `.trim();
+
+    // 2. Save
+    const submission = {
+        studentName: name,
+        studentClass: cls,
+        studentSchool: school,
+        lessonTitle: "Bài 221 - Viết: Đánh giá, chỉnh sửa bài văn tả người",
+        type: 'lesson_221_viet',
+        content: contentSummary,
+        aiFeedback: `Đã hoàn thành. Điểm tự đánh giá: ${score}/10`,
+        aiGrade: score,
+        status: "Chưa chấm",
+        timestamp: new Date().toISOString()
+    };
+
+    // LocalStorage
+    if (!window.submissions) window.submissions = [];
+    window.submissions.push(submission);
+    localStorage.setItem('eduRobotSubmissions', JSON.stringify(window.submissions));
+
+    // Firebase
+    try {
+        const fireData = { ...submission, timestamp: firebase.firestore.FieldValue.serverTimestamp() };
+        await db.collection("essays_v2").add(fireData); // Use essays_v2 for Dashboard
+        alert("Nộp bài thành công! Thầy cô đã nhận được bài của em.");
+        window.location.reload();
+    } catch (e) {
+        console.error(e);
+        alert("Nộp bài thành công (đã lưu vào máy)!");
+        window.location.reload();
+    }
+};
