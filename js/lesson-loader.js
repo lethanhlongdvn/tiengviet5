@@ -328,11 +328,17 @@ async function confirmSubmitQuiz() {
 
     // --- CASE 1: ESSAY SUBMISSION ---
     if (window.currentSubmissionType === 'essay') {
-        // Logic is now in interactive-exercises.js or handled here?
-        // Since I defined handleSubmission in interactive-exercises.js, I should probably standardise.
-        // But for robust code, I will call the logic here if it exists.
         if (window.handleSubmission) {
             await window.handleSubmission();
+            if (btn) { btn.disabled = false; btn.innerHTML = "🚀 NỘP BÀI"; }
+            return;
+        }
+    }
+
+    // --- CASE 1.5: LESSON 221 VIET SUBMISSION ---
+    if (window.currentSubmissionType === 'lesson_221_viet') {
+        if (window.submitLesson221VietData) {
+            await window.submitLesson221VietData(name, cls, school);
             if (btn) { btn.disabled = false; btn.innerHTML = "🚀 NỘP BÀI"; }
             return;
         }
