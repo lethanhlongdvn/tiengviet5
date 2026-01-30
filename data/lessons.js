@@ -1620,9 +1620,9 @@ window.LESSON_DATA = {
                                                 
                                                 <div class="p-4 bg-white/60 rounded-xl flex flex-col gap-4 border border-green-50">
                                                      <p class="text-sm text-gray-500 italic">Ví dụ: Mát rất buồn bã <b>nhưng</b> cậu vẫn quyết tâm khôi phục lại trang trại.</p>
-                                                     <div class="flex gap-2 w-full items-center">
+                                                    <div class="flex gap-2 w-full items-center">
                                                         <input type="text" id="ai-222-q2" placeholder="Nhập câu ghép của em..." class="flex-1 px-5 py-4 rounded-xl border border-gray-200 focus:ring-4 focus:ring-green-100 focus:border-green-500 focus:outline-none text-lg transition-all shadow-sm">
-                                                        <button onclick="askAI('222-q2', 'Đặt câu ghép nói về nhân vật Mát hoặc trang trại của Mát, dùng quan hệ từ')" class="btn btn-success w-14 h-14 flex items-center justify-center rounded-xl text-white bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg hover:shadow-green-200 hover:scale-105 transition-all text-xl">✓</button>
+                                                        <button onclick="checkLTVC222_Q2()" class="btn btn-success w-14 h-14 flex items-center justify-center rounded-xl text-white bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg hover:shadow-green-200 hover:scale-105 transition-all text-xl">✓</button>
                                                     </div>
                                                     <div class="ai-feedback hidden p-4 bg-green-50 text-green-800 text-base rounded-lg border border-green-100 shadow-inner" id="fb-222-q2"></div>
                                                 </div>
