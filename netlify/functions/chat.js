@@ -168,17 +168,21 @@ exports.handler = async (event, context) => {
       const rawData = await response.json();
       let content = rawData.choices[0].message.content;
 
-      // Clean up markdown if present
-      const markdownMatch = content.match(/```json\n([\s\S]*?)\n```/) || content.match(/```([\s\S]*?)```/);
-      if (markdownMatch) {
-        content = markdownMatch[1];
+      let analysis;
+      if (mode === 'chat') {
+        analysis = { content: content };
+      } else {
+        // Clean up markdown if present
+        const markdownMatch = content.match(/```json\n([\s\S]*?)\n```/) || content.match(/```([\s\S]*?)```/);
+        if (markdownMatch) {
+          content = markdownMatch[1];
+        }
+        analysis = JSON.parse(content);
+
+        // Thêm đếm từ phía server để chắc chắn
+        const wordCount = processedSentence.split(/\s+/).filter(word => word.length > 0).length;
+        analysis.word_count = wordCount;
       }
-
-      const analysis = JSON.parse(content);
-
-      // Thêm đếm từ phía server để chắc chắn
-      const wordCount = processedSentence.split(/\s+/).filter(word => word.length > 0).length;
-      analysis.word_count = wordCount;
 
       return {
         statusCode: 200,
