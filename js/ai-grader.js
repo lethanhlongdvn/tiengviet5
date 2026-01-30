@@ -410,6 +410,13 @@ function renderFeedback(container, data) {
             ket_bai: "Kết nối"
         };
         wordCountRequirement = `Độ dài: ${wordCount} từ (Viết câu hoàn chỉnh)`;
+    } else if (persona === "paragraph") {
+        labels = {
+            mo_bai: "Mở đoạn",
+            than_bai: "Thân đoạn",
+            ket_bai: "Kết đoạn"
+        };
+        wordCountRequirement = `Độ dài: ${wordCount} từ (Yêu cầu: 3-5 câu)`;
     } else {
         wordCountRequirement = `Độ dài: ${wordCount} từ (Yêu cầu: >50 từ)`;
     }
@@ -631,4 +638,106 @@ async function gradeParagraph(studentText, requirements, weekNumber = null) {
     }
 }
 
-window.gradeParagraph = gradeParagraph;
+
+// --- UPDATED LOGIC FOR PARAGRAPH GRADING ---
+window.renderFeedback = renderFeedback;
+
+async function gradeParagraphV2(studentText, requirements, weekNumber = null) {
+    // 1. Loading State (handled by caller)
+
+    // 2. Load context
+    await loadCurriculumData();
+    await loadWritingCurriculumData();
+    let context = "";
+    if (weekNumber) {
+        context = buildWritingContext(weekNumber);
+    }
+
+    // 3. Build Prompt
+    const prompt = `
+    ${context}
+    
+    🎯 YÊU CẦU ĐỀ BÀI: ${requirements}
+    
+    📝 BÀI LÀM CỦA HỌC SINH:
+    "${studentText}"
+    
+    👮 YÊU CẦU CHẤM:
+    Bạn là giáo viên Tiếng Việt lớp 5. Hãy phân tích và chấm điểm ĐOẠN VĂN này.
+    Lưu ý: Đây là một đoạn văn ngắn (3-5 câu).
+    Cần có: Câu mở đoạn + Các câu thân đoạn + Câu kết đoạn.
+    Tìm xem học sinh có dùng CÂU GHÉP có KẾT TỪ hay chưa.
+
+    Hãy trả về kết quả dưới dạng JSON (Chỉ JSON, không markdown) theo mẫu:
+    {
+        "parts": {
+            "open": { "text": "trích dẫn...", "comment": "Nhận xét ngắn gọn câu mở đoạn" },
+            "body": { "text": "trích dẫn...", "comment": "Nhận xét ngắn gọn thân đoạn" },
+            "close": { "text": "trích dẫn...", "comment": "Nhận xét ngắn gọn câu kết đoạn" }
+        },
+        "general_comment": "Nhận xét chung ngắn gọn (ưu điểm)",
+        "score": 8.5,
+        "advice": "Lời khuyên ngắn gọn để cải thiện"
+    }
+    `;
+
+    // 4. Call AI API
+    try {
+        const response = await fetch('/.netlify/functions/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sentence: prompt,
+                weekNumber: weekNumber,
+                mode: 'json'
+            })
+        });
+
+        if (!response.ok) throw new Error("API Error");
+
+        const data = await response.json();
+        let jsonStr = typeof data === 'string' ? data : (data.response || data.content);
+
+        if (typeof jsonStr !== 'string') jsonStr = JSON.stringify(jsonStr);
+        jsonStr = jsonStr.replace(/```json/g, '').replace(/```/g, '').trim();
+
+        let rawResult;
+        try {
+            rawResult = JSON.parse(jsonStr);
+        } catch (e) {
+            console.error("JSON Parse Error", e);
+            rawResult = { score: 5, general_comment: "Lỗi phân tích bài làm", advice: "Hãy thử lại" };
+        }
+
+        return {
+            persona: "paragraph",
+            status: (rawResult.score || 0) >= 5 ? "complete" : "incomplete",
+            diem: (rawResult.score || 0) + "/10",
+            score: rawResult.score,
+            uu_diem: rawResult.general_comment || "Đã ghi nhận bài làm.",
+            loi_sai: rawResult.advice || "Em hãy kiểm tra lại yêu cầu.",
+            huong_dan: rawResult.advice || "Cố gắng viết đúng yêu cầu đề bài nhé.",
+            analysis: {
+                mo_bai: rawResult.parts?.open?.comment || "Chưa có nhận xét",
+                than_bai: rawResult.parts?.body?.comment || "Chưa có nhận xét",
+                ket_bai: rawResult.parts?.close?.comment || "Chưa có nhận xét"
+            },
+            word_count: studentText.split(/\s+/).length
+        };
+
+    } catch (e) {
+        console.error("AI Grade Paragraph Failed:", e);
+        return {
+            persona: "paragraph",
+            status: "incomplete",
+            diem: "Lỗi",
+            uu_diem: "Không thể chấm bài lúc này.",
+            loi_sai: "Lỗi kết nối.",
+            huong_dan: "Em hãy thử nộp lại sau nhé.",
+            analysis: { mo_bai: "...", than_bai: "...", ket_bai: "..." },
+            word_count: 0
+        };
+    }
+}
+window.gradeParagraph = gradeParagraphV2;
+
