@@ -1,37 +1,37 @@
 // ============================================================================
 // DỮ LIỆU GIẢNG DẠY THEO CHƯƠNG TRÌNH KẾT NỐI TRI THỨC LỚP 5
 // ============================================================================
-let curriculumData = null;
+let graderCurriculumData = null;
 
 async function loadCurriculumData() {
-    if (curriculumData) return curriculumData;
+    if (graderCurriculumData) return graderCurriculumData;
     try {
         const response = await fetch('/data/du_lieu_giang_day.json');
         if (response.ok) {
-            curriculumData = await response.json();
+            graderCurriculumData = await response.json();
             console.log('✅ Đã tải dữ liệu giảng dạy thành công');
         }
     } catch (e) {
         console.warn('⚠️ Không tải được dữ liệu giảng dạy:', e);
     }
-    return curriculumData;
+    return graderCurriculumData;
 }
 
 // Tìm kiến thức theo tuần học
 function getCurriculumByWeek(weekNumber) {
-    if (!curriculumData) return null;
+    if (!graderCurriculumData) return null;
 
     const weekStr = `Tuần ${weekNumber}`;
 
     // Tìm trong Học kỳ 1
-    for (const [key, value] of Object.entries(curriculumData["Học kỳ 1"] || {})) {
+    for (const [key, value] of Object.entries(graderCurriculumData["Học kỳ 1"] || {})) {
         if (key.includes(weekStr) || key === weekStr) {
             return { ...value, tuanHoc: key, hocKy: 1 };
         }
     }
 
     // Tìm trong Học kỳ 2
-    for (const [key, value] of Object.entries(curriculumData["Học kỳ 2"] || {})) {
+    for (const [key, value] of Object.entries(graderCurriculumData["Học kỳ 2"] || {})) {
         if (key.includes(weekStr) || key === weekStr) {
             return { ...value, tuanHoc: key, hocKy: 2 };
         }
