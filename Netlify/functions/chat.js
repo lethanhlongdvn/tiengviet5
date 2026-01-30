@@ -1,14 +1,25 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event, context) => {
+  // CORS Headers
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS"
+  };
+
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 200, headers, body: "OK" };
+  }
+
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return { statusCode: 405, headers, body: "Method Not Allowed" };
   }
 
   try {
     const { sentence } = JSON.parse(event.body);
     if (!sentence) {
-      return { statusCode: 400, body: JSON.stringify({ error: "No sentence or content provided" }) };
+      return { statusCode: 400, headers, body: JSON.stringify({ error: "No sentence or content provided" }) };
     }
 
     // 1. Cấu hình Groq API
@@ -16,6 +27,7 @@ exports.handler = async (event, context) => {
     if (!apiKey) {
       return {
         statusCode: 500,
+        headers,
         body: JSON.stringify({ error: "Chưa cấu hình GROQ_API_KEY trên Netlify." })
       };
     }
@@ -170,7 +182,12 @@ exports.handler = async (event, context) => {
 
       return {
         statusCode: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "POST, OPTIONS"
+        },
         body: JSON.stringify(analysis)
       };
     } catch (error) {
