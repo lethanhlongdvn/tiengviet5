@@ -679,3 +679,80 @@ window.checkLTVC222_Q2 = async function () {
     }
 };
 
+
+// --- LESSON 221: VIET QUESTIONS CHECKER ---
+window.checkVietAI = async function (inputId, type) {
+    const inputEl = document.getElementById(inputId);
+    const feedbackEl = document.getElementById('feedback-' + inputId);
+
+    if (!inputEl) return;
+
+    const studentText = inputEl.value.trim();
+    if (!studentText) {
+        alert("Em chưa viết bài nè!");
+        inputEl.focus();
+        return;
+    }
+
+    if (feedbackEl) {
+        feedbackEl.classList.remove('hidden');
+        feedbackEl.innerHTML = `
+            <div class="flex items-center gap-2 text-blue-600">
+                <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Thầy đang đọc bài của em...</span>
+            </div>
+        `;
+    }
+
+    let requirement = type === 'a'
+        ? "Viết lại câu văn có sử dụng từ ngữ gợi tả hoặc hình ảnh so sánh để câu văn sinh động hơn."
+        : "Viết lại câu văn bộc lộ suy nghĩ, cảm xúc chân thật với người được tả.";
+
+    try {
+        // Use gradeParagraph if available for consistent AI persona, 
+        // OR direct call. Since gradeParagraph forces 3-part structure, we use direct call here 
+        // but with the same Endpoint and Persona logic.
+
+        const response = await fetch('/.netlify/functions/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sentence: `
+                🎯 YÊU CẦU: ${requirement}
+                📝 BÀI LÀM: "${studentText}"
+                
+                Hãy đóng vai giáo viên Tiếng Việt lớp 5.
+                Nhận xét ngắn gọn (tối đa 3 câu). 
+                - Nếu bài làm hay/đúng: Khen ngợi.
+                - Nếu chưa đạt: Gợi ý cách sửa cụ thể.
+                `,
+                persona: "tlv",
+                weekNumber: 21
+            })
+        });
+
+        if (!response.ok) throw new Error("API Error");
+
+        const data = await response.json();
+        let reply = typeof data === 'string' ? data : (data.response || data.content);
+
+        // Clean markdown
+        reply = reply.replace(/\*\*/g, '<b>').replace(/\*/g, '').replace(/\n/g, '<br>');
+
+        if (feedbackEl) {
+            feedbackEl.classList.remove('hidden');
+            feedbackEl.innerHTML = `
+                <div class="flex gap-3">
+                    <div class="text-2xl">👨‍🏫</div>
+                    <div class="text-gray-800">${reply}</div>
+                </div>
+             `;
+        }
+    } catch (e) {
+        console.error(e);
+        if (feedbackEl) feedbackEl.innerHTML = "❌ Thầy đang bận chấm bài khác, em thử lại sau nhé!";
+    }
+};
