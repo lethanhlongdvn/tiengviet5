@@ -587,18 +587,19 @@
 
         // Direct Fix for LTVC 222 AI Button
         window.checkLTVC222_Q2 = async function () {
-            console.log("Button clicked!"); // Debug log
             const inputId = '222-q2';
             const inputEl = document.getElementById('ai-' + inputId);
 
             if (!inputEl) {
-                alert("Lỗi: Không tìm thấy ô nhập liệu! Hãy tải lại trang.");
+                console.error("Lỗi: Không tìm thấy ô nhập liệu!");
                 return;
             }
 
             const value = inputEl.value.trim();
             if (!value) {
-                alert("Em hãy viết câu trước khi nhờ AI nhận xét nhé!");
+                // Shake effect or simple visual cue instead of alert
+                inputEl.classList.add('ring-4', 'ring-red-300');
+                setTimeout(() => inputEl.classList.remove('ring-4', 'ring-red-300'), 500);
                 inputEl.focus();
                 return;
             }
@@ -614,10 +615,12 @@
                 try {
                     await askAI(inputId, "Đặt một câu ghép nói về nhân vật Mát hoặc trang trại của Mát, dùng quan hệ từ", "single", "ltvc", 22);
                 } catch (e) {
-                    alert("Có lỗi kết nối: " + e.message);
+                    console.error("AI Error:", e);
+                    if (feedbackEl) feedbackEl.innerHTML = '<div class="text-red-500 font-bold">Có lỗi kết nối. Em thử lại nhé!</div>';
                 }
             } else {
-                alert("Hệ thống AI chưa tải xong. Vui lòng chờ 3 giây và thử lại!");
+                console.warn("askAI not ready");
+                if (feedbackEl) feedbackEl.innerHTML = '<div class="text-orange-500 font-bold">Hệ thống đang khởi động...</div>';
             }
         };
     </script>
