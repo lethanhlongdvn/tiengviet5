@@ -239,19 +239,49 @@
             loading.classList.remove('hidden');
 
             try {
-                let query = db.collection(currentMode).orderBy("timestamp", "desc");
+                // Determine query. Note: Without an index, compound queries (where + orderBy) might fail.
+                // We'll try to fetch all first (client-side filter) if the specific query fails, or just simplify for now.
+                // DEBUG: Removing orderBy for now to see if data appears (Index issue suspected)
+                let query = db.collection(currentMode);
+
+                // Only Apply Filter if selected
                 if (lessonFilter) {
                     query = query.where("lessonTitle", "==", lessonFilter);
+                } else {
+                    // Only order by timestamp if no filter (or if index exists)
+                    // We'll try to order in JS to be safe
+                    // query = query.orderBy("timestamp", "desc"); 
                 }
+
                 const snapshot = await query.get();
                 loading.classList.add('hidden');
                 allDataSnapshot = [];
 
+                if (snapshot.empty) {
+                    list.innerHTML = `<div class="text-center text-gray-400 font-bold col-span-2">Chưa có dữ liệu nào (Bộ sưu tập: ${currentMode})</div>`;
+                    return;
+                }
+
                 document.getElementById('stats-title').innerText = lessonFilter ? `DANH SÁCH: ${lessonFilter.toUpperCase()}` : "TẤT CẢ BÀI HỌC";
 
-                snapshot.forEach((doc, index) => {
-                    const data = doc.data();
-                    data.id = doc.id;
+                // Manual Sort (Client-side)
+                let docs = [];
+                snapshot.forEach(doc => {
+                    const d = doc.data();
+                    d.id = doc.id;
+                    docs.push(d);
+                });
+
+                const getTime = (t) => {
+                    if (!t) return 0;
+                    if (t.seconds) return t.seconds * 1000; // Firestore Timestamp
+                    if (t.toDate) return t.toDate().getTime(); // Firestore Timestamp method
+                    return new Date(t).getTime(); // String or Date object
+                };
+
+                docs.sort((a, b) => getTime(b.timestamp) - getTime(a.timestamp));
+
+                docs.forEach((data, index) => {
                     allDataSnapshot.push(data);
 
                     if (data.status === "Chưa chấm") pendingCount++;
