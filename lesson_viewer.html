@@ -674,7 +674,9 @@
             };
 
             try {
-                await doAskAI(inputId, "Đặt một câu ghép nói về nhân vật Mát hoặc trang trại của Mát, dùng quan hệ từ", "single", "ltvc", 22);
+                // Modified prompt to enforce Grammar Teacher persona
+                const prompt = "Hãy đóng vai Thầy Giáo Ngữ Pháp. Chấm điểm câu ghép sau của học sinh lớp 5: '" + value + "'. Yêu cầu: 1. Câu phải có 2 vế câu (Mát... và... hoặc Vì Mát... nên...). 2. Dùng từ nối (và, nhưng, thì, mà, vì, nên...). KHÔNG yêu cầu mở bài/thân bài. Chỉ nhận xét về ngữ pháp và nội dung câu.";
+                await doAskAI(inputId, prompt, "single", "ltvc", 22);
             } catch (e) {
                 console.error("Exec Error:", e);
                 if (feedbackEl) feedbackEl.innerHTML = `<div class="p-3 bg-red-50 text-red-600 rounded-xl font-bold border border-red-100">⚠️ Có lỗi kết nối: ${e.message}. Em thử lại sau giây lát nhé!</div>`;
