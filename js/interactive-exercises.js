@@ -790,9 +790,27 @@ window.checkLTVC221_Q3 = async function () {
     }
 
     try {
-        if (typeof askAI === 'function') {
-            const prefix = "Đoạn văn về Đoàn thuyền đánh cá (Yêu cầu: 3-5 câu, có câu ghép dùng kết từ):";
-            // Using askAI with weekNumber 21
+        const prefix = "Đoạn văn về Đoàn thuyền đánh cá (Yêu cầu: 3-5 câu, có câu ghép dùng kết từ):";
+
+        // Use the new simplified Paragraph Grader
+        if (typeof window.gradeParagraph === 'function') {
+            const result = await window.gradeParagraph(value, prefix, 21);
+
+            // Ensure renderFeedback is available
+            if (typeof window.renderFeedback === 'function') {
+                // Force persona to paragraph just in case
+                result.persona = 'paragraph';
+                window.renderFeedback(feedbackEl, result);
+            } else {
+                feedbackEl.innerHTML = `
+                    <div class="p-6 bg-green-50 text-green-800 rounded-2xl border border-green-200">
+                        <div class="text-2xl font-black mb-2">${result.diem}</div>
+                        <b>${result.uu_diem}</b><br>
+                        ${result.loi_sai}
+                    </div>`;
+            }
+        } else if (typeof askAI === 'function') {
+            // Fallback to old askAI
             await askAI('3', prefix, 'single', 'ltvc', 21);
         } else {
             if (feedbackEl) feedbackEl.innerHTML = "<span class='text-red-500'>Hệ thống AI chưa sẵn sàng. Em hãy tải lại trang nhé!</span>";
