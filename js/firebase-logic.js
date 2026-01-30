@@ -30,6 +30,24 @@ try {
 }
 
 /**
+ * Standard Slugify for Document IDs
+ */
+window.getSlug = function (str) {
+    if (!str) return "unknown";
+    return str.toString().toLowerCase()
+        .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+        .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
+        .replace(/ì|í|ị|ỉ|ĩ/g, "i")
+        .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
+        .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
+        .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
+        .replace(/đ/g, "d")
+        .replace(/[^a-z0-9]/g, "_")
+        .replace(/_+/g, "_")
+        .replace(/^_+|_+$/g, "");
+};
+
+/**
  * Global helper to get common student data
  */
 function getStudentInfo() {
@@ -69,7 +87,8 @@ async function submitEssay(event) {
     }
 
     try {
-        await db.collection("essays_v2").add({
+        const docId = window.getSlug(`${name}_${cls}_${school}_${lessonTitle}`);
+        await db.collection("essays_v2").doc(docId).set({
             studentName: name,
             studentClass: cls,
             studentSchool: school,
@@ -127,7 +146,8 @@ async function submitProject(projectId, projectTitle) {
             fileUrl = await snapshot.ref.getDownloadURL();
         }
 
-        await db.collection("projects").add({
+        const docId = window.getSlug(`${name}_${cls}_${school}_${lessonTitle}_${projectId}`);
+        await db.collection("projects").doc(docId).set({
             studentName: name,
             studentClass: cls,
             studentSchool: school,
