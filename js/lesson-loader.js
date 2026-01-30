@@ -380,7 +380,8 @@ async function confirmSubmitQuiz() {
     };
 
     try {
-        await db.collection("diem_tieng_viet_lop5").add(fireData);
+        const docId = window.getSlug(`${name}_${cls}_${school}_${fireData.lessonTitle}`);
+        await db.collection("diem_tieng_viet_lop5").doc(docId).set(fireData);
         alert(`✨ Tuyệt vời! Em đạt ${finalScore} điểm. Kết quả đã gửi thành công.`);
         window.location.reload();
     } catch (error) {
