@@ -756,3 +756,49 @@ window.checkVietAI = async function (inputId, type) {
         if (feedbackEl) feedbackEl.innerHTML = "❌ Thầy đang bận chấm bài khác, em thử lại sau nhé!";
     }
 };
+
+// --- LESSON 221: LTVC Q3 CHECKER ---
+window.checkLTVC221_Q3 = async function () {
+    const inputId = 'ai-3';
+    const feedbackId = 'fb-3';
+    const inputEl = document.getElementById(inputId);
+    const feedbackEl = document.getElementById(feedbackId);
+
+    if (!inputEl) {
+        console.error("Input not found: " + inputId);
+        return;
+    }
+
+    const value = inputEl.value.trim();
+    if (!value) {
+        alert("Em hãy viết đoạn văn trước nhé!");
+        inputEl.focus();
+        return;
+    }
+
+    if (feedbackEl) {
+        feedbackEl.classList.remove('hidden');
+        feedbackEl.innerHTML = `
+            <div class="flex items-center gap-2 text-purple-600">
+                <svg class="animate-spin w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Thầy đang chấm bài...</span>
+            </div>
+        `;
+    }
+
+    try {
+        if (typeof askAI === 'function') {
+            const prefix = "Đoạn văn về Đoàn thuyền đánh cá (Yêu cầu: 3-5 câu, có câu ghép dùng kết từ):";
+            // Using askAI with weekNumber 21
+            await askAI('3', prefix, 'single', 'ltvc', 21);
+        } else {
+            if (feedbackEl) feedbackEl.innerHTML = "<span class='text-red-500'>Hệ thống AI chưa sẵn sàng. Em hãy tải lại trang nhé!</span>";
+        }
+    } catch (e) {
+        console.error(e);
+        if (feedbackEl) feedbackEl.innerHTML = `<span class="text-red-500">Lỗi kết nối: ${e.message}</span>`;
+    }
+};
