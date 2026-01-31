@@ -125,7 +125,7 @@ function generateNumpad() {
         if (i > 18 && i < 36) bgColor = "from-orange-500 to-orange-600 shadow-orange-200";
         if (i === 36) bgColor = "from-gray-500 to-gray-600 shadow-gray-200";
 
-        btn.className = `aspect-square rounded-xl bg-gradient-to-br ${bgColor} text-white font-black text-sm shadow-md transition-all active:scale-90 hover:-translate-y-0.5 hover:brightness-110`;
+        btn.className = `aspect-[2/3] rounded-xl bg-gradient-to-br ${bgColor} text-white font-black text-xs shadow-md transition-all active:scale-90 hover:-translate-y-0.5 hover:brightness-110 flex items-center justify-center border-b-2 border-black/10`;
 
         // Logic khóa tuần nếu không phải Admin và không phải tuần Active
         if (!isAdmin && i !== activeWeek) {
