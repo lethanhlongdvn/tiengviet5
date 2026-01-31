@@ -53,7 +53,7 @@ const UI = {
                 <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-200 group-hover:scale-110 transition-transform">E</div>
                 <div class="flex flex-col">
                     <span class="text-xl font-black text-gray-800 leading-none">EduRobot</span>
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Tiếng Việt Lớp 5</span>
+                    <span class="text-[10px] font-black text-amber-500 uppercase tracking-widest">Tiếng Việt Lớp 5</span>
                 </div>
             </a>`;
 
