@@ -124,7 +124,6 @@
         window.checkParagraph = evaluateLTVC;
         window.toggleSentence = toggleSentence;
         window.ltvc22_check1 = evaluateLTVC;
-        window.ltvc22_toggle = function (el) { toggleSentence(el); };
         window.toggleWord = function (el) { toggleSentence(el.closest('.sentence-box, .interactive-row'), { target: el }); };
         cleanResiduals();
     };
