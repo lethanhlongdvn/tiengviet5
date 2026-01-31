@@ -73,7 +73,7 @@ const UI = {
 
                 <a href="teacher.html" class="px-4 py-2 rounded-xl text-sm font-bold ${activeLinks.teacher ? 'text-blue-600 bg-blue-50' : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50'} transition-colors">Giáo viên</a>
                 
-                ${type === 'home' ? `<button class="bg-orange-500 hover:bg-orange-600 text-white font-black px-5 py-2.5 rounded-xl shadow-lg shadow-orange-200 transition-all active:scale-95 text-xs uppercase tracking-wider">Liên hệ</button>` : ''}
+                ${type === 'home' ? `<a href="contact.html" class="bg-orange-500 hover:bg-orange-600 text-white font-black px-5 py-2.5 rounded-xl shadow-lg shadow-orange-200 transition-all active:scale-95 text-xs uppercase tracking-wider">Góp ý</a>` : ''}
             </div>`;
 
         if (type === 'home') {
