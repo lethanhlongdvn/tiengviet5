@@ -1,0 +1,1097 @@
+window.LESSON_DATA = window.LESSON_DATA || { lessons: {} };
+Object.assign(window.LESSON_DATA.lessons, {
+
+
+        "211-gio-hoa-thang-nam": {
+            "title": "Giỏ hoa tháng Năm",
+            "week": 21,
+            "subject": "Đọc",
+            "theme": "Vẻ đẹp cuộc sống",
+            "audio": "am_thanh/giohoathangnam.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Giỏ hoa tháng Năm" },
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                                <!-- Cột trái (70%) - Bài đọc -->
+                                <section class="w-full lg:w-[70%]">
+                                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                                            
+                                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                                <p class="mb-4">Với bọn trẻ chúng tôi, ngày lễ Mừng xuân vào tháng Năm luôn đáng mong chờ, bởi đó là dịp chúng tôi được vui đùa thoả thích. Chúng tôi thường bí mật làm những giỏ hoa rực rỡ, đặt lên bậc thềm nhà người quen hoặc bạn bè, gõ cửa rồi ba chân bốn cẳng chạy trốn thật nhanh. Từ xa, chúng tôi hồi hộp theo dõi chủ nhà mở cửa, cầm món quà lên với vẻ ngạc nhiên, thích thú.</p>
+                                                <p>Tôi còn nhớ lễ Mừng xuân năm tôi học lớp Năm. Lúc đó, tôi đang giận Pam, cô bạn thân nhất của mình. Từ nhỏ Pam và tôi đã thân nhau như hình với bóng. Gần đây, một gia đình mới dọn đến thị trấn của chúng tôi và Pam đã kết thân với con gái của họ. Mặc dù chúng tôi vẫn chơi với nhau, nhưng thời gian Pam dành cho tôi không còn nhiều như trước. Tôi cảm thấy như bị bỏ rơi. Giận Pam, tôi không chơi với bạn mấy ngày. Khi mẹ hỏi tôi có mang hoa cho Pam không, tôi trả lời: "Không bao giờ, mẹ ạ!". Mẹ dừng tay làm bếp, ôm tôi và an ủi. Cơn tủi thân bỗng dâng lên và tôi oà khóc nức nở. Mẹ dịu dàng vuốt tóc và lau nước mắt cho tôi. Mẹ bảo càng lớn, chúng tôi sẽ càng có nhiều bạn. Những người bạn không thể chỉ chơi với một mình tôi. Và ngay cả tôi cũng không thể chỉ chơi với một người bạn.</p>
+                                                <p>Cuối cùng, tôi cũng quyết định tặng Pam một giỏ hoa. Tôi chọn thật nhiều hoa màu vàng mà Pam yêu thích, rồi nhờ chị tôi đem đến nhà bạn. Từ chỗ nấp, tôi thấy Pam nâng giỏ hoa lên, dịu dàng áp mặt vào những bông hoa và nói to như để tôi nghe được: "Cảm ơn Xu-di, hi vọng cậu không còn giận mình!".</p>
+                                                <p>Lần ấy tôi học được rằng là bạn bè đích thực, ta sẽ đặt bạn trong tim nhưng không buộc họ luôn ở bên mình.</p>
+                                                <p class="text-right italic font-bold text-gray-600 mt-6">(Theo Minh Hương)</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                                </div>
+                                                <div class="flex-grow">
+                                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                                        Đã là bạn bè đích thực luôn có sự gắn bó thân thiết, chân thành, luôn ở bên nhau, quan tâm đến nhau dù không ở cạnh nhau thường xuyên nhưng tấm lòng luôn hướng về nhau, luôn trân trọng và có vị trí nhất định trong lòng mỗi người.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                                <aside class="w-full lg:w-[30%]">
+                                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                                        <div class="mb-6 -mt-2">
+                                            <img src="hinh_anh/giohoathangnam.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                                        </div>
+
+                                        <div class="flex items-center space-x-4 mb-8">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                            </div>
+                                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                                        </div>
+
+                                        <div class="space-y-4">
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Ngày lễ nào trong năm được các bạn nhỏ mong chờ? Việc làm nào trong ngày đó khiến các bạn thấy thú vị?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Ngày lễ được các bạn nhỏ mong chờ là ngày lễ mừng xuân vào tháng năm. Các bạn thường bí mật làm những giỏ hoa rực rỡ, đặt lên bậc thềm nhà người quen hoặc bạn bè, gõ cửa rồi ba chân bốn cẳng chạy trốn thật nhanh, hồi hộp theo dõi chủ nhà có cảm xúc như thế nào trước món quà đó.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Bạn thân của Xu-di là ai? Vì sao Xu-di lại giận người bạn thân của mình?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Bạn thân của Xu-di là Pam. Xu-di giận người bạn thân của mình vì có một gia đình mới dọn đến thị trấn của hai người và Pam đã kết thân với con gái của gia đình đó, thời gian Pam dành cho Xu-di không còn nhiều như trước, Xu-di cảm thấy như bị bỏ rơi.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Việc Xu-di vẫn quyết định tặng bạn giỏ hoa với nhiều bông màu vàng mà bạn yêu thích thể hiện điều gì?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Việc đó cho thấy Xu-di rất yêu quý Pam và hiểu sở thích của bạn.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Người bạn của Xu-di đón nhận giỏ hoa như thế nào? Theo em, Xu-di có cảm nghĩ gì trước cử chỉ, lời nói của bạn lúc nhận giỏ hoa?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Pam nâng giỏ hoa lên, dịu dàng áp mặt vào những bông hoa và nói to như để Xu-di nghe được: "Cảm ơn Xu-di, hi vọng cậu không còn giận mình!". Chắc hẳn là Xu-di rất cảm động trước cử chỉ, lời nói của Pam lúc nhận hoa.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5. Đoạn kết của câu chuyện muốn nói điều gì?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Đã là bạn bè đích thực luôn có sự gắn bó thân thiết, chân thành, luôn ở bên nhau, quan tâm đến nhau dù không ở cạnh nhau thường xuyên nhưng tấm lòng luôn hướng về nhau, luôn trân trọng và có vị trí nhất định trong lòng mỗi người.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aside>
+                            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Ngày lễ Mừng xuân vào tháng Năm các bạn nhỏ thường làm gì?", "a": ["Làm những giỏ hoa rực rỡ mang tặng người thân, bạn bè", "Đi du xuân cùng bố mẹ", "Tổ chức cắm trại ở trường", "Đi mua sắm quần áo mới"], "c": 0 },
+                        { "q": "Các bạn nhỏ tặng hoa cho người thân, bạn bè bằng cách nào?", "a": ["Gửi qua bưu điện", "Đưa tận tay chủ nhà", "Đặt lên bậc thềm, gõ cửa rồi ba chân bốn cẳng chạy trốn", "Nhờ bố mẹ mang đến tặng"], "c": 2 },
+                        { "q": "Tại sao Xu-di lại giận Pam?", "a": ["Vì Pam không tặng hoa cho Xu-di", "Vì Pam có thêm bạn mới và không dành nhiều thời gian cho Xu-di", "Vì Pam làm hỏng đồ chơi của Xu-di", "Vì Pam chuyển nhà đi nơi khác"], "c": 1 },
+                        { "q": "Khi thấy Xu-di buồn vì giận bạn, mẹ đã làm gì?", "a": ["Mắng Xu-di vì tính hay dỗi", "Khuyên Xu-di nên tìm bạn mới", "Ôm ấp, an ủi và khuyên nhủ Xu-di về tình bạn", "Bảo Xu-di không nên chơi với Pam nữa"], "c": 2 },
+                        { "q": "Theo lời mẹ, Xu-di đã học được điều gì về tình bạn?", "a": ["Càng lớn sẽ càng có nhiều bạn, không thể chỉ chơi với một người", "Bạn bè phải luôn ở bên cạnh nhau mọi lúc mợi nơi", "Chỉ nên chơi với một người bạn thân duy nhất", "Không nên giận dỗi bạn bè lâu"], "c": 0 },
+                        { "q": "Xu-di đã tặng Pam giỏ hoa có màu gì?", "a": ["Màu đỏ", "Màu xanh", "Màu vàng", "Màu tím"], "c": 2 },
+                        { "q": "Tại sao Xu-di lại chọn hoa màu đó để tặng Pam?", "a": ["Vì đó là màu hoa mẹ Xu-di thích", "Vì đó là màu hoa Pam yêu thích", "Vì trong vườn chỉ có duy nhất loại hoa đó", "Vì hoa đó rẻ nhất"], "c": 1 },
+                        { "q": "Pam đã làm gì khi nhận được giỏ hoa của Xu-di?", "a": ["Mang vào nhà cất ngay", "Nâng giỏ hoa lên, áp mặt vào hoa và nói lời cảm ơn", "Chia cho người bạn mới cùng ngắm", "Cất vào một góc vì vẫn còn giận Xu-di"], "c": 1 },
+                        { "q": "Câu nói: 'hi vọng cậu không còn giận mình' của Pam cho thấy điều gì?", "a": ["Pam không biết Xu-di đang giận", "Pam rất trân trọng tình bạn với Xu-di và mong muốn làm hòa", "Pam muốn Xu-di phải xin lỗi mình", "Pam đang trêu chọc Xu-di"], "c": 1 },
+                        { "q": "Bài học quan trọng nhất về tình bạn mà Xu-di rút ra ở cuối truyện là gì?", "a": ["Phải luôn tặng quà cho bạn vào các ngày lễ", "Bạn bè đích thực là đặt bạn trong tim nhưng không buộc họ luôn ở bên mình", "Chỉ nên chơi với những người bạn thích hoa màu vàng", "Không bao giờ được giận bạn thân"], "c": 1 },
+                        { "q": "Từ 'bí mật' trong câu 'Chúng tôi thường bí mật làm những giỏ hoa rực rỡ' thuộc từ loại nào?", "a": ["Danh từ", "Động từ", "Tính từ", "Trạng từ"], "c": 2 },
+                        { "q": "Từ 'rực rỡ' trong bài có nghĩa là gì?", "a": ["Có màu sắc tươi sáng, đẹp mắt và nổi bật", "Có mùi thơm ngào ngạt", "Rất to lớn", "Rất đắt tiền"], "c": 0 },
+                        { "q": "Trong câu 'Tôi và Pam thân nhau như hình với bóng', tác giả sử dụng biện pháp nghệ thuật gì?", "a": ["Nhân hóa", "So sánh", "Điệp ngữ", "Đảo ngữ"], "c": 1 },
+                        { "q": "Từ nào đồng nghĩa với từ 'đích thực'?", "a": ["Giả tạo", "Chân thực", "Hờ hững", "Tạm thời"], "c": 1 },
+                        { "q": "Câu văn 'Mẹ dịu dàng vuốt tóc và lau nước mắt cho tôi' thuộc kiểu câu nào?", "a": ["Câu kể", "Câu hỏi", "Câu cảm", "Câu khiến"], "c": 0 }
+                    ]
+                }
+            }
+        },
+        "211-ltvc-gio-hoa-thang-nam": {
+            "title": "LTVC: Cách nối các vế câu ghép (Tiếp theo)",
+            "week": 21,
+            "subject": "Luyện từ và câu",
+            "theme": "Vẻ đẹp cuộc sống",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "CÁCH NỐI CÁC VẾ CÂU GHÉP (Tiếp theo)" },
+                        {
+                            "type": "html",
+                            "content": `<div class="mb-8">
+                                <h4 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                    <span class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center mr-3 text-sm font-black">1</span>
+                                    Tìm cặp kết từ nối các vế câu trong mỗi câu ghép dưới đây:
+                                </h4>
+                                <div class="space-y-4">
+                                    <!-- Câu a -->
+                                    <div id="ltvc21_q1a" data-ans="Bởi,nên" class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 transition-all">
+                                        <p class="text-lg leading-loose text-gray-700 font-medium mb-2">
+                                            a. <span class="word" onclick="toggleWord(this)">Bởi</span> <span class="word" onclick="toggleWord(this)">tôi</span> <span class="word" onclick="toggleWord(this)">ăn</span> <span class="word" onclick="toggleWord(this)">uống</span> <span class="word" onclick="toggleWord(this)">điều</span> <span class="word" onclick="toggleWord(this)">độ</span> <span class="word" onclick="toggleWord(this)">và</span> <span class="word" onclick="toggleWord(this)">làm</span> <span class="word" onclick="toggleWord(this)">việc</span> <span class="word" onclick="toggleWord(this)">có</span> <span class="word" onclick="toggleWord(this)">chừng</span> <span class="word" onclick="toggleWord(this)">mực</span> <span class="word" onclick="toggleWord(this)">nên</span> <span class="word" onclick="toggleWord(this)">tôi</span> <span class="word" onclick="toggleWord(this)">chóng</span> <span class="word" onclick="toggleWord(this)">lớn</span> <span class="word" onclick="toggleWord(this)">lắm.</span>
+                                        </p>
+                                        <p class="text-right text-gray-500 italic text-sm">(Tô Hoài)</p>
+                                        <div class="flex gap-2 mt-2">
+                                            <button onclick="ltvc21_check1('ltvc21_q1a')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-sm transition-colors">Kiểm tra</button>
+                                            <button onclick="ltvc21_reset1('ltvc21_q1a')" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded-lg text-sm transition-colors">Làm lại</button>
+                                        </div>
+                                    </div>
+                                    <!-- Câu b -->
+                                    <div id="ltvc21_q1b" data-ans="Mặc dù,nhưng" class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 transition-all">
+                                        <p class="text-lg leading-loose text-gray-700 font-medium mb-2">
+                                            b. <span class="word" onclick="toggleWord(this)">Mặc dù</span> <span class="word" onclick="toggleWord(this)">chúng</span> <span class="word" onclick="toggleWord(this)">tôi</span> <span class="word" onclick="toggleWord(this)">vẫn</span> <span class="word" onclick="toggleWord(this)">chơi</span> <span class="word" onclick="toggleWord(this)">với</span> <span class="word" onclick="toggleWord(this)">nhau</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">thời</span> <span class="word" onclick="toggleWord(this)">gian</span> <span class="word" onclick="toggleWord(this)">Pam</span> <span class="word" onclick="toggleWord(this)">dành</span> <span class="word" onclick="toggleWord(this)">cho</span> <span class="word" onclick="toggleWord(this)">tôi</span> <span class="word" onclick="toggleWord(this)">không</span> <span class="word" onclick="toggleWord(this)">còn</span> <span class="word" onclick="toggleWord(this)">nhiều</span> <span class="word" onclick="toggleWord(this)">như</span> <span class="word" onclick="toggleWord(this)">trước.</span>
+                                        </p>
+                                        <p class="text-right text-gray-500 italic text-sm">(Theo Minh Hương)</p>
+                                        <div class="flex gap-2 mt-2">
+                                            <button onclick="ltvc21_check1('ltvc21_q1b')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-sm transition-colors">Kiểm tra</button>
+                                            <button onclick="ltvc21_reset1('ltvc21_q1b')" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded-lg text-sm transition-colors">Làm lại</button>
+                                        </div>
+                                    </div>
+                                    <!-- Câu c -->
+                                    <div id="ltvc21_q1c" data-ans="Nếu,thì" class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 transition-all">
+                                        <p class="text-lg leading-loose text-gray-700 font-medium mb-2">
+                                            c. <span class="word" onclick="toggleWord(this)">Nếu</span> <span class="word" onclick="toggleWord(this)">hoa</span> <span class="word" onclick="toggleWord(this)">mua</span> <span class="word" onclick="toggleWord(this)">có</span> <span class="word" onclick="toggleWord(this)">màu</span> <span class="word" onclick="toggleWord(this)">tím</span> <span class="word" onclick="toggleWord(this)">hồng</span> <span class="word" onclick="toggleWord(this)">thì</span> <span class="word" onclick="toggleWord(this)">hoa</span> <span class="word" onclick="toggleWord(this)">sim</span> <span class="word" onclick="toggleWord(this)">tím</span> <span class="word" onclick="toggleWord(this)">nhạt,</span> <span class="word" onclick="toggleWord(this)">phơn</span> <span class="word" onclick="toggleWord(this)">phớt</span> <span class="word" onclick="toggleWord(this)">như</span> <span class="word" onclick="toggleWord(this)">má</span> <span class="word" onclick="toggleWord(this)">con</span> <span class="word" onclick="toggleWord(this)">gái.</span>
+                                        </p>
+                                        <p class="text-right text-gray-500 italic text-sm">(Băng Sơn)</p>
+                                        <div class="flex gap-2 mt-2">
+                                            <button onclick="ltvc21_check1('ltvc21_q1c')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-sm transition-colors">Kiểm tra</button>
+                                            <button onclick="ltvc21_reset1('ltvc21_q1c')" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded-lg text-sm transition-colors">Làm lại</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`
+                        },
+                        {
+                            "type": "html",
+                            "content": `<div class="mb-8">
+                                <h4 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                    <span class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center mr-3 text-sm font-black">2</span>
+                                    <span>Chọn cặp từ (<i>đâu ... đó ...; chưa ... đã ...; bao nhiêu ... bấy nhiêu ...</i>) thay cho bông hoa.</span>
+                                </h4>
+                                <div class="space-y-4">
+                                     <!-- Câu a -->
+                                     <div id="ltvc21_q2a" data-ans="chưa-đã" class="p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                                        <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-2">
+                                            <p class="text-lg text-gray-700 font-medium flex-grow">
+                                                a. Ngày <span class="slot text-blue-500">✿</span> tắt hẳn, trăng <span class="slot text-blue-500">✿</span> lên rồi.
+                                            </p>
+                                            <select onchange="ltvc21_update2('ltvc21_q2a', this.value)" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                                                <option value="">-- Chọn --</option>
+                                                <option value="chưa-đã">chưa ... đã</option>
+                                                <option value="đâu-đó">đâu ... đó</option>
+                                                <option value="bao nhiêu-bấy nhiêu">bao nhiêu ... bấy nhiêu</option>
+                                            </select>
+                                        </div>
+                                        <p class="text-right text-gray-500 italic text-sm mb-2">(Theo Thạch Lam)</p>
+                                        <button onclick="ltvc21_check2('ltvc21_q2a')" class="w-full py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-bold rounded-lg transition-colors">Kiểm tra</button>
+                                     </div>
+                                     <!-- Câu b -->
+                                     <div id="ltvc21_q2b" data-ans="đâu-đấy" class="p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                                        <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-2">
+                                            <p class="text-lg text-gray-700 font-medium flex-grow">
+                                                b. Trăng đi đến <span class="slot text-blue-500">✿</span>, lũy tre được tắm đẫm màu sữa đến <span class="slot text-blue-500">✿</span>.
+                                            </p>
+                                            <select onchange="ltvc21_update2('ltvc21_q2b', this.value)" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                                                <option value="">-- Chọn --</option>
+                                                <option value="đâu-đấy">đâu ... đấy</option>
+                                                <option value="chưa-đã">chưa ... đã</option>
+                                                <option value="bao nhiêu-bấy nhiêu">bao nhiêu ... bấy nhiêu</option>
+                                            </select>
+                                        </div>
+                                        <p class="text-right text-gray-500 italic text-sm mb-2">(Theo Phan Sĩ Châu)</p>
+                                        <button onclick="ltvc21_check2('ltvc21_q2b')" class="w-full py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-bold rounded-lg transition-colors">Kiểm tra</button>
+                                     </div>
+                                     <!-- Câu c -->
+                                     <div id="ltvc21_q2c" data-ans="bao nhiêu-bấy nhiêu" class="p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                                        <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-2">
+                                            <p class="text-lg text-gray-700 font-medium flex-grow">
+                                                c. Nước dâng lên cao <span class="slot text-blue-500">✿</span>, Sơn Tinh lại làm cho đồi, núi mọc cao lên <span class="slot text-blue-500">✿</span>.
+                                            </p>
+                                            <select onchange="ltvc21_update2('ltvc21_q2c', this.value)" class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                                                <option value="">-- Chọn --</option>
+                                                <option value="bao nhiêu-bấy nhiêu">bao nhiêu ... bấy nhiêu</option>
+                                                <option value="càng-càng">càng ... càng</option>
+                                                <option value="vừa-đã">vừa ... đã</option>
+                                            </select>
+                                        </div>
+                                        <p class="text-right text-gray-500 italic text-sm mb-2">(Truyện Sơn Tinh, Thủy Tinh)</p>
+                                        <button onclick="ltvc21_check2('ltvc21_q2c')" class="w-full py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-bold rounded-lg transition-colors">Kiểm tra</button>
+                                     </div>
+                                </div>
+                            </div>`
+                        },
+                        {
+                            "type": "html",
+                            "content": `<div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r-lg shadow-sm mb-8 relative">
+                                <div class="absolute -left-3 top-4">
+                                     <span class="text-3xl">📎</span>
+                                </div>
+                                <h3 class="text-xl font-black text-gray-800 mb-3 pl-4">Ghi nhớ</h3>
+                                <div class="pl-4 text-gray-800 leading-relaxed font-medium">
+                                    <p class="mb-2">Các vế của câu ghép có thể nối với nhau bằng các cặp từ:</p>
+                                    <ul class="list-disc list-outside ml-5 space-y-2">
+                                        <li>
+                                            Các cặp kết từ: 
+                                            <i>vì ... nên ...; bởi ... nên ...; nhờ ... nên (mà) ...; nếu ... thì ...; hễ ... thì ...; giá ... thì ...; tuy ... nhưng ...; mặc dù ... nhưng ...; dù ... nhưng ...; chẳng những ... mà ...; không chỉ ... mà ...;...</i>
+                                        </li>
+                                        <li>
+                                            Các cặp từ hô ứng: 
+                                            <i>vừa ... đã ...; chưa ... đã ...; càng ... càng ...; đâu ... đó ...; bao nhiêu ... bấy nhiêu ...;...</i>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>`
+                        },
+                        {
+                            "type": "html",
+                            "content": `<div class="mb-8">
+                                <h4 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                    <span class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center mr-3 text-sm font-black">3</span>
+                                    Tìm vế câu thay cho bông hoa để tạo câu ghép.
+                                </h4>
+                                <div class="space-y-4">
+                                    <!-- Câu a -->
+                                    <div class="p-4 bg-white/60 rounded-xl flex flex-col gap-4">
+                                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                                            <p class="text-lg font-bold text-gray-700 flex-1">
+                                                a. Vào dịp lễ Mừng xuân, chẳng những trẻ em được vui đùa thoả thích mà <span class="text-blue-500">✿</span>.
+                                            </p>
+                                            <div class="flex gap-2 w-full sm:w-auto items-center">
+                                                <input type="text" id="ai-3a" placeholder="Viết tiếp vế câu..." class="flex-1 sm:w-72 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:outline-none text-base">
+                                                <button onclick="askAI('3a', 'Vào dịp lễ Mừng xuân, chẳng những trẻ em được vui đùa thoả thích mà')" class="btn btn-success w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
+                                            </div>
+                                        </div>
+                                        <div class="ai-feedback hidden p-4 bg-green-50 text-green-800 text-base rounded-lg" id="fb-3a"></div>
+                                    </div>
+                                    <!-- Câu b -->
+                                     <div class="p-4 bg-white/60 rounded-xl flex flex-col gap-4">
+                                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                                            <p class="text-lg font-bold text-gray-700 flex-1">
+                                                b. Mặc dù thiên nhiên khắc nghiệt nhưng <span class="text-blue-500">✿</span>.
+                                            </p>
+                                            <div class="flex gap-2 w-full sm:w-auto items-center">
+                                                <input type="text" id="ai-3b" placeholder="Viết tiếp vế câu..." class="flex-1 sm:w-72 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:outline-none text-base">
+                                                <button onclick="askAI('3b', 'Mặc dù thiên nhiên khắc nghiệt nhưng')" class="btn btn-success w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
+                                            </div>
+                                        </div>
+                                        <div class="ai-feedback hidden p-4 bg-green-50 text-green-800 text-base rounded-lg" id="fb-3b"></div>
+                                    </div>
+                                    <!-- Câu c -->
+                                     <div class="p-4 bg-white/60 rounded-xl flex flex-col gap-4">
+                                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                                            <p class="text-lg font-bold text-gray-700 flex-1">
+                                                c. Nhờ bố kể những câu chuyện cổ tích mà <span class="text-blue-500">✿</span>.
+                                            </p>
+                                            <div class="flex gap-2 w-full sm:w-auto items-center">
+                                                <input type="text" id="ai-3c" placeholder="Viết tiếp vế câu..." class="flex-1 sm:w-72 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:outline-none text-base">
+                                                <button onclick="askAI('3c', 'Nhờ bố kể những câu chuyện cổ tích mà')" class="btn btn-success w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
+                                            </div>
+                                        </div>
+                                        <div class="ai-feedback hidden p-4 bg-green-50 text-green-800 text-base rounded-lg" id="fb-3c"></div>
+                                    </div>
+                                </div>
+                            </div>`
+                        },
+                        {
+                            "type": "html",
+                            "content": `<div class="mb-8">
+                                <h4 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                    <span class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center mr-3 text-sm font-black">4</span>
+                                    Đặt câu ghép theo các yêu cầu sau:
+                                </h4>
+                                <div class="space-y-4">
+                                    <div class="p-4 bg-white/60 rounded-xl flex flex-col gap-4">
+                                        <p class="text-lg font-bold text-gray-700">a. Một câu ghép sử dụng một trong các cặp kết từ: <i>vì ... nên ..., bởi ... nên ..., nhờ ... nên (mà) ...</i></p>
+                                        <div class="flex gap-2 w-full items-center">
+                                            <input type="text" id="ai-4a" placeholder="Đặt câu của em..." class="flex-1 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:outline-none text-base">
+                                            <button onclick="askAI('4a', 'Đặt câu ghép với cặp từ chỉ nguyên nhân kết quả')" class="btn btn-success w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
+                                        </div>
+                                        <div class="ai-feedback hidden p-4 bg-green-50 text-green-800 text-base rounded-lg" id="fb-4a"></div>
+                                    </div>
+                                     <div class="p-4 bg-white/60 rounded-xl flex flex-col gap-4">
+                                        <p class="text-lg font-bold text-gray-700">b. Một câu ghép sử dụng một trong các cặp kết từ: <i>nếu ... thì ..., hễ ... thì ..., giá ... thì ...</i></p>
+                                        <div class="flex gap-2 w-full items-center">
+                                            <input type="text" id="ai-4b" placeholder="Đặt câu của em..." class="flex-1 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:outline-none text-base">
+                                            <button onclick="askAI('4b', 'Đặt câu ghép với cặp từ chỉ điều kiện kết quả')" class="btn btn-success w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
+                                        </div>
+                                        <div class="ai-feedback hidden p-4 bg-green-50 text-green-800 text-base rounded-lg" id="fb-4b"></div>
+                                    </div>
+                                    <div class="p-4 bg-white/60 rounded-xl flex flex-col gap-4">
+                                        <p class="text-lg font-bold text-gray-700">c. Một câu ghép sử dụng một trong các cặp từ hô ứng: <i>vừa ... đã ..., càng ... càng ...</i></p>
+                                        <div class="flex gap-2 w-full items-center">
+                                            <input type="text" id="ai-4c" placeholder="Đặt câu của em..." class="flex-1 px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-green-500 focus:outline-none text-base">
+                                            <button onclick="askAI('4c', 'Đặt câu ghép với cặp từ hô ứng')" class="btn btn-success w-12 h-12 flex items-center justify-center rounded-lg text-sm font-black shadow-md">✓</button>
+                                        </div>
+                                        <div class="ai-feedback hidden p-4 bg-green-50 text-green-800 text-base rounded-lg" id="fb-4c"></div>
+                                    </div>
+                                </div>
+                            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Cặp quan hệ từ trong câu: 'Bởi tôi ăn uống điều độ nên tôi chóng lớn lắm.' là?", "a": ["Bởi... nên...", "Vì... nên...", "Nếu... thì...", "Tuy... nhưng..."], "c": 0 },
+                        { "q": "Câu 'Mặc dù chúng tôi vẫn chơi với nhau nhưng thời gian dành cho nhau không còn nhiều' có cặp từ nối nào?", "a": ["Mặc dù... nhưng...", "Vì... nên...", "Tuy... nhưng...", "Chẳng những... mà còn..."], "c": 0 },
+                        { "q": "Tìm cặp quan hệ từ trong: 'Nếu hoa mua có màu tím hồng thì hoa sim tím nhạt.'", "a": ["Nếu... thì...", "Vì... nên...", "Hễ... thì...", "Nhờ... mà..."], "c": 0 },
+                        { "q": "Cặp quan hệ từ 'Tuy... nhưng...' xuất hiện trong câu nào?", "a": ["Tuy rét nhưng Lan vẫn đi học.", "Lan đi học vì trời không mưa.", "Hễ trời mưa thì Lan nghỉ.", "Lan và Huệ đi học."], "c": 0 },
+                        { "q": "Trong câu 'Chẳng những bạn Lan học giỏi mà bạn ấy còn hát hay', cặp từ nối là gì?", "a": ["Chẳng những... mà còn...", "Không những... mà còn...", "Vì... nên...", "Nhờ... mà..."], "c": 0 },
+                        { "q": "Điền cặp từ hô ứng: 'Ngày ____ tắt hẳn, trăng ____ lên rồi.'", "a": ["chưa... đã...", "vừa... đã...", "mới... đã...", "đâu... đấy..."], "c": 0 },
+                        { "q": "Điền cặp từ: 'Trăng đi đến ____, lũy tre được tắm đẫm màu sữa đến ____.'", "a": ["đâu... đó...", "đâu... đấy...", "nào... ấy...", "bao nhiêu... bấy nhiêu..."], "c": 0 },
+                        { "q": "Điền cặp từ: 'Nước dâng lên cao ____, Sơn Tinh lại làm cho đồi, núi mọc cao lên ____.'", "a": ["bao nhiêu... bấy nhiêu...", "vừa... đã...", "càng... càng...", "đâu... đấy..."], "c": 0 },
+                        { "q": "Điền cặp từ: 'Trời ____ hửng sáng, nông dân ____ ra đồng.'", "a": ["vừa... đã...", "mới... đã...", "càng... càng...", "đâu... đấy..."], "c": 0 },
+                        { "q": "Điền cặp từ: 'Gió ____ to, con thuyền ____ lướt nhanh trên mặt biển.'", "a": ["càng... càng...", "bao nhiêu... bấy nhiêu...", "đâu... đấy...", "vừa... đã..."], "c": 0 },
+                        { "q": "Hoàn thành câu: 'Vào dịp lễ Mừng xuân, chẳng những trẻ em được vui đùa thoả thích mà...'", "a": ["người già cũng thấy ấm lòng.", "các em đi học.", "hoa mai nở rộ.", "trời nắng to."], "c": 0 },
+                        { "q": "Hoàn thành câu: 'Mặc dù thiên nhiên khắc nghiệt nhưng...'", "a": ["cây cối vẫn xanh tươi.", "bão sắp đến.", "trời mưa to.", "đất đai khô cằn."], "c": 0 },
+                        { "q": "Hoàn thành câu: 'Nếu chúng ta không bảo vệ môi trường thì...'", "a": ["cuộc sống sẽ bị ảnh hưởng nghiêm trọng.", "cây cối sẽ xanh tươi.", "không khí trong lành.", "chim chóc ca hát."], "c": 0 },
+                        { "q": "Hoàn thành câu: 'Tuy Lan không thông minh bằng các bạn nhưng...'", "a": ["Lan rất cần cù, chịu khó.", "Lan học rất giỏi.", "Lan đi học muộn.", "Lan thích vẽ tranh."], "c": 0 },
+                        { "q": "Tham khảo: 'Vì bạn Nam tích cực luyện tập nên...'", "a": ["bạn ấy đã giành giải nhất.", "bạn ấy bị mệt.", "bạn ấy đi ngủ sớm.", "bạn ấy không đi học."], "c": 0 },
+                        { "q": "Câu ghép 'Trăng lên, gió mơn man cây cỏ' được nối bằng cách nào?", "a": ["Nối trực tiếp (dấu phẩy)", "Quan hệ từ", "Cặp từ hô ứng", "Cặp quan hệ từ"], "c": 0 },
+                        { "q": "Câu 'Mặt biển càng rộng, con tàu càng nhỏ bé' biểu thị quan hệ gì?", "a": ["Tăng tiến (Tương ứng)", "Nguyên nhân", "Tương phản", "Giả thiết"], "c": 0 },
+                        { "q": "Trong câu ghép, các vế câu phải có quan hệ như thế nào?", "a": ["Chặt chẽ về ý nghĩa", "Không liên quan gì nhau", "Chỉ cần nối bằng dấu câu", "Chỉ cần có từ nối"], "c": 0 },
+                        { "q": "Câu nào dưới đây là câu ghép nối bằng quan hệ từ?", "a": ["Mưa to nên đường trơn.", "Đường trơn như đổ mỡ.", "Trời mưa, đường trơn.", "Mưa rơi tí tách."], "c": 0 },
+                        { "q": "Cặp từ 'bao nhiêu... bấy nhiêu' thuộc loại từ gì?", "a": ["Cặp từ hô ứng", "Quan hệ từ đơn", "Cặp quan hệ từ", "Tính từ"], "c": 0 }
+                    ]
+                }
+            }
+        },
+        "212-thu-cua-bo": {
+            "title": "Thư của bố",
+            "week": 21,
+            "subject": "Đọc",
+            "theme": "Vẻ đẹp cuộc sống",
+            "audio": "am_thanh/thuguibo.wav",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Thư của bố" },
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                                <!-- Cột trái (70%) - Bài đọc -->
+                                <section class="w-full lg:w-[70%]">
+                                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                                            
+                                            <div class="serif-font text-gray-800 text-xl leading-relaxed relative text-left max-w-4xl mx-auto px-4 md:px-10">
+                                                <p class="text-center italic text-gray-600 mb-8">Tác giả: Thuỵ Anh</p>
+                                                <div class="space-y-8">
+                                                    <div>
+                                                        Con lớn lên, quen vắng bố trong nhà<br>
+                                                        Hai mẹ con, nhà một phòng cũng trống<br>
+                                                        Chỉ mong đợi những lá thư gió lộng<br>
+                                                        Và mặn mòi hương biển xa xôi...<br>
+                                                        Nghe êm đềm sóng lặng lững lờ trôi,<br>
+                                                        Thấy đàn cá heo giỡn đùa mặt nước.
+                                                    </div>
+                                                    <div>
+                                                        Thư không kể về cơn bão chờ phía trước,<br>
+                                                        Dải đá ngầm, thăm thẳm nước đen.<br>
+                                                        Nhịp bước khẩn trương khi khẩu lệnh vang lên,<br>
+                                                        Mắt dõi theo vật ra-đa rà quét,<br>
+                                                        Áo đọng muối khô, da nhận mùi nắng khét,...<br>
+                                                        Thư chỉ nói về nỗi nhớ với thương yêu..
+                                                    </div>
+                                                    <div>
+                                                        Con đã lớn khôn, đọc được cả những điều<br>
+                                                        Chưa được viết trong thư người lính biển<br>
+                                                        Nơi đầu sóng, sẵn sàng nghênh chiến<br>
+                                                        Vẫn dịu dàng, êm ái lá thư xanh...
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform">
+                                            <div class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                                            <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                                <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                                    <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                                </div>
+                                                <div class="flex-grow">
+                                                    <p class="text-lg font-bold leading-relaxed text-blue-50">
+                                                        Bài thơ là lời của người bố đang đi công tác ở đảo xa gửi về cho con, thể hiện tình yêu thương sâu nặng, nỗi nhớ da diết và niềm tin tưởng, hy vọng vào con ở nơi quê nhà.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Cột phải (30%) - Tìm hiểu bài -->
+                                <aside class="w-full lg:w-[30%]">
+                                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl border-amber-100/50">
+                                        <div class="mb-6 -mt-2">
+                                            <img src="hinh_anh/thuguibo_minhhoa.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl transform hover:scale-105 transition-transform duration-500">
+                                        </div>
+
+                                        <div class="flex items-center space-x-4 mb-8">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                            </div>
+                                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                                        </div>
+
+                                        <div class="space-y-4">
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Chiếc thư của bố có những đặc điểm gì?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Thế thư của bố gửi về rất nhanh, chắc nhờ "gió biển thổi mái chèo". Trong thư không chỉ có lời lẽ mà còn có cả "mùi nắng", "mùi muối" của biển đảo xa xôi.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Quà của bố gửi về cho con có những gì?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Bố gửi về cho con cả "nghìn dặm khơi xa", kèm theo một con sò và viên đá cuội lạ.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Vì sao bố lại gửi những món quà đó cho con?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Bố muốn con cảm nhận được vẻ đẹp của biển đảo quê hương, nơi bố đang ngày đêm canh giữ, đồng thời gửi gắm tình yêu thương bao la từ nơi xa gửi về.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Tình cảm của bố dành cho con thể hiện qua những từ ngữ, hình ảnh nào?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Tình cảm thể hiện qua việc bố viết thư gửi về rất nhanh, bố gửi những món quà đặc biệt của biển cả, bố kể về nơi bố ở với muôn loài chim và quan trọng nhất là những lời dặn dò con chăm ngoan, học giỏi.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5. Khổ thơ cuối bài muốn nói điều gì?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Khổ thơ cuối khẳng định tình yêu thương vô bờ bến và sự hy vọng, tin tưởng của bố dành cho con. Bố mong con ở nhà ngoan ngoãn, học tốt để làm bố yên tâm công tác.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aside>
+                            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Người con trong bài thơ đã quen với điều gì?", "a": ["Quen với việc bố luôn ở nhà", "Quen với việc vắng bố trong nhà", "Quen với việc đi biển cùng bố", "Quen với việc viết thư cho bố"], "c": 1 },
+                        { "q": "Hai mẹ con mong đợi điều gì từ bố?", "a": ["Những món quà từ biển", "Những lá thư gió lộng", "Những cuộc gọi điện thoại", "Những bức ảnh đẹp"], "c": 1 },
+                        { "q": "Trong thư, bố kể về điều gì?", "a": ["Những cơn bão nguy hiểm", "Những khó khăn trong công việc", "Sóng êm đềm, cá heo giỡn đùa và nỗi nhớ thương", "Những trận chiến ác liệt"], "c": 2 },
+                        { "q": "Bố không kể trong thư về điều gì?", "a": ["Cơn bão, dải đá ngầm, công việc khẩn trương", "Nỗi nhớ và thương yêu", "Hương biển xa xôi", "Đàn cá heo giỡn đùa"], "c": 0 },
+                        { "q": "Tại sao bố không kể về những khó khăn trong thư?", "a": ["Vì bố quên mất", "Vì bố không muốn con lo lắng", "Vì những khó khăn đó không quan trọng", "Vì bố không gặp khó khăn gì"], "c": 1 },
+                        { "q": "Người con đã 'đọc được cả những điều chưa được viết' nghĩa là gì?", "a": ["Con đã biết đọc thư rất giỏi", "Con đã hiểu được những khó khăn mà bố không nói ra", "Con đã tự viết thư thay bố", "Con đã đoán được nội dung thư"], "c": 1 },
+                        { "q": "Nghề nghiệp của bố trong bài thơ là gì?", "a": ["Ngư dân", "Lính biển", "Thuyền trưởng", "Thợ lặn"], "c": 1 },
+                        { "q": "Bài thơ thể hiện tình cảm gì của bố dành cho con?", "a": ["Sự nghiêm khắc", "Tình yêu thương sâu nặng và nỗi nhớ", "Sự thờ ơ", "Sự lo lắng quá mức"], "c": 1 },
+                        { "q": "Cụm từ 'lá thư xanh' trong bài thơ ám chỉ điều gì?", "a": ["Thư được viết bằng mực xanh", "Thư được gửi qua bưu điện", "Thư của người lính biển gửi từ biển cả", "Thư được viết trên giấy màu xanh"], "c": 2 },
+                        { "q": "Thông điệp chính của bài thơ là gì?", "a": ["Cuộc sống của người lính biển rất vất vả", "Tình yêu thương và sự hy sinh thầm lặng của người bố", "Biển cả rất đẹp và thơ mộng", "Con cái cần hiểu và thương yêu bố mẹ"], "c": 1 }
+                    ]
+                }
+            }
+        },
+        "221-ltvc": {
+            "title": "Luyện tập về câu ghép",
+            "week": 21,
+            "subject": "Luyện từ và câu",
+            "theme": "Vẻ đẹp cuộc sống",
+            "tabs": {
+                "lesson": {
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<div class="glass-card rounded-[24px] p-6 shadow-lg border-l-8 border-blue-500 mb-8 w-full">
+                        <h3 class="font-black text-3xl text-gray-800 mb-4 flex items-center">
+                            <span class="bg-blue-100 text-blue-600 rounded-lg px-4 py-1 text-base mr-3 shadow-sm">Bài 1</span>
+                            Nhận diện câu ghép
+                        </h3>
+                        <p class="text-xl text-gray-600 mb-6 italic bg-blue-50/50 p-4 rounded-xl border border-blue-100 leading-relaxed">
+                            1. Tìm câu ghép trong các đoạn văn dưới đây và cho biết các vế của mỗi câu ghép được nối với nhau bằng cách nào.
+                            <br><br>
+                            (Bấm vào các từ tạo thành <b class="text-blue-600">cặp từ nối</b> hoặc <b class="text-blue-600">từ nối</b> trong các câu ghép dưới đây).
+                        </p>
+                        <!-- ĐOẠN VĂN A -->
+                        <div class="mb-6">
+                            <h4 class="font-bold text-blue-600 mb-3 text-sm uppercase tracking-wider">a) Đoạn văn a</h4>
+                            <div class="space-y-4" id="p1a">
+                                <!-- A1 -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="nhưng">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-blue-400 shrink-0">(1)</span>
+                                        <p class="text-2xl font-medium leading-relaxed">Làng Tày, làng Dao ven suối và trong rừng, nhưng làng người Mông ở chơ vơ đỉnh núi, giữa cỏ tranh mênh mông.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2 text-2xl">
+                                        <span class="word" onclick="toggleWord(this)">Làng</span> <span class="word" onclick="toggleWord(this)">Tày,</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">Dao</span> <span class="word" onclick="toggleWord(this)">ven</span> <span class="word" onclick="toggleWord(this)">suối</span> <span class="word" onclick="toggleWord(this)">và</span> <span class="word" onclick="toggleWord(this)">trong</span> <span class="word" onclick="toggleWord(this)">rừng,</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">người</span> <span class="word" onclick="toggleWord(this)">Mông</span> <span class="word" onclick="toggleWord(this)">ở</span> <span class="word" onclick="toggleWord(this)">chơ</span> <span class="word" onclick="toggleWord(this)">vơ</span> <span class="word" onclick="toggleWord(this)">đỉnh</span> <span class="word" onclick="toggleWord(this)">núi,</span> <span class="word" onclick="toggleWord(this)">giữa</span> <span class="word" onclick="toggleWord(this)">cỏ</span> <span class="word" onclick="toggleWord(this)">tranh</span> <span class="word" onclick="toggleWord(this)">mênh</span> <span class="word" onclick="toggleWord(this)">mông.</span>
+                                    </div>
+                                </div>
+                                <!-- A2 -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors=",">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-blue-400 shrink-0">(2)</span>
+                                        <p class="text-2xl font-medium leading-relaxed">Vách và mái nhà đều ghép bằng những miếng gỗ pơ-mu, nhà nhà ám khói sạm đen tưởng như làng xóm liền với trời xanh.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Vách</span> <span class="word" onclick="toggleWord(this)">và</span> <span class="word" onclick="toggleWord(this)">mái</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">đều</span> <span class="word" onclick="toggleWord(this)">ghép</span> <span class="word" onclick="toggleWord(this)">bằng</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">miếng</span> <span class="word" onclick="toggleWord(this)">gỗ</span> <span class="word" onclick="toggleWord(this)">pơ-mu</span> <span class="word" onclick="toggleWord(this)" style="font-size: 1.4em; font-weight: 900; color: #f59e0b; padding: 2px 10px;">,</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">ám</span> <span class="word" onclick="toggleWord(this)">khói</span> <span class="word" onclick="toggleWord(this)">sạm</span> <span class="word" onclick="toggleWord(this)">đen</span> <span class="word" onclick="toggleWord(this)">tưởng</span> <span class="word" onclick="toggleWord(this)">như</span> <span class="word" onclick="toggleWord(this)">làng</span> <span class="word" onclick="toggleWord(this)">xóm</span> <span class="word" onclick="toggleWord(this)">liền</span> <span class="word" onclick="toggleWord(this)">với</span> <span class="word" onclick="toggleWord(this)">trời</span> <span class="word" onclick="toggleWord(this)">xanh.</span>
+                                    </div>
+                                </div>
+                                <!-- A3 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-blue-400 shrink-0">(3)</span>
+                                        <p class="text-2xl font-medium leading-relaxed">Xung quanh nhà nào cũng sum sê những đào, những lê.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Xung</span> <span class="word" onclick="toggleWord(this)">quanh</span> <span class="word" onclick="toggleWord(this)">nhà</span> <span class="word" onclick="toggleWord(this)">nào</span> <span class="word" onclick="toggleWord(this)">cũng</span> <span class="word" onclick="toggleWord(this)">sum</span> <span class="word" onclick="toggleWord(this)">sê</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">đào,</span> <span class="word" onclick="toggleWord(this)">những</span> <span class="word" onclick="toggleWord(this)">lê.</span>
+                                    </div>
+                                </div>
+                                <!-- A4 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-blue-400 shrink-0">(4)</span>
+                                        <p class="text-2xl font-medium leading-relaxed">Giữa mùa đông, hoa lê trắng ngần.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Giữa</span> <span class="word" onclick="toggleWord(this)">mùa</span> <span class="word" onclick="toggleWord(this)">đông,</span> <span class="word" onclick="toggleWord(this)">hoa</span> <span class="word" onclick="toggleWord(this)">lê</span> <span class="word" onclick="toggleWord(this)">trắng</span> <span class="word" onclick="toggleWord(this)">ngần.</span>
+                                    </div>
+                                </div>
+                                <!-- A5 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-blue-400 shrink-0">(5)</span>
+                                        <p class="text-2xl font-medium leading-relaxed">Vào đầu xuân, hoa đào nở hồng cả trời.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-blue-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Vào</span> <span class="word" onclick="toggleWord(this)">đầu</span> <span class="word" onclick="toggleWord(this)">xuân,</span> <span class="word" onclick="toggleWord(this)">hoa</span> <span class="word" onclick="toggleWord(this)">đào</span> <span class="word" onclick="toggleWord(this)">nở</span> <span class="word" onclick="toggleWord(this)">hồng</span> <span class="word" onclick="toggleWord(this)">cả</span> <span class="word" onclick="toggleWord(this)">trời.</span>
+                                    </div>
+                                </div>
+                                <p class="text-right font-bold text-gray-600 italic mt-2">(Tô Hoài)</p>
+                            </div>
+                            <div class="mt-3 flex justify-end">
+                                <button onclick="ltvc22_check1('p1a', this)" class="btn btn-primary px-4 py-2 flex items-center gap-2 rounded-xl font-black shadow-lg transition-all hover:scale-105" title="Kiểm tra đoạn a">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Kiểm tra</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- ĐOẠN VĂN B -->
+                        <div class="mb-4">
+                            <h4 class="font-bold text-green-600 mb-3 text-sm uppercase tracking-wider">b) Đoạn văn b</h4>
+                            <div class="space-y-4" id="p1b">
+                                <!-- B1 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(1)</span>
+                                        <p class="text-2xl leading-relaxed">Gió bấc thổi ào ào qua khu rừng vắng.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2 text-2xl">
+                                        <span class="word" onclick="toggleWord(this)">Gió</span> <span class="word" onclick="toggleWord(this)">bấc</span> <span class="word" onclick="toggleWord(this)">thổi</span> <span class="word" onclick="toggleWord(this)">ào</span> <span class="word" onclick="toggleWord(this)">ào</span> <span class="word" onclick="toggleWord(this)">qua</span> <span class="word" onclick="toggleWord(this)">khu</span> <span class="word" onclick="toggleWord(this)">rừng</span> <span class="word" onclick="toggleWord(this)">vắng.</span>
+                                    </div>
+                                </div>
+                                <!-- B2 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(2)</span>
+                                        <p class="text-2xl leading-relaxed">Những cành cây khẳng khiu chốc chốc run lên bần bật.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Những</span> <span class="word" onclick="toggleWord(this)">cành</span> <span class="word" onclick="toggleWord(this)">cây</span> <span class="word" onclick="toggleWord(this)">khẳng</span> <span class="word" onclick="toggleWord(this)">khiu</span> <span class="word" onclick="toggleWord(this)">chốc</span> <span class="word" onclick="toggleWord(this)">chốc</span> <span class="word" onclick="toggleWord(this)">run</span> <span class="word" onclick="toggleWord(this)">lên</span> <span class="word" onclick="toggleWord(this)">bần</span> <span class="word" onclick="toggleWord(this)">bật.</span>
+                                    </div>
+                                </div>
+                                <!-- B3 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(3)</span>
+                                        <p class="text-2xl leading-relaxed">Mưa phùn lất phất...</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Mưa</span> <span class="word" onclick="toggleWord(this)">phùn</span> <span class="word" onclick="toggleWord(this)">lất</span> <span class="word" onclick="toggleWord(this)">phất...</span>
+                                    </div>
+                                </div>
+                                <!-- B4 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(4)</span>
+                                        <p class="text-2xl leading-relaxed">Bên gốc đa, một chú thỏ bước ra, tay cầm một tấm vải dệt bằng rong.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Bên</span> <span class="word" onclick="toggleWord(this)">gốc</span> <span class="word" onclick="toggleWord(this)">đa,</span> <span class="word" onclick="toggleWord(this)">một</span> <span class="word" onclick="toggleWord(this)">chú</span> <span class="word" onclick="toggleWord(this)">thỏ</span> <span class="word" onclick="toggleWord(this)">bước</span> <span class="word" onclick="toggleWord(this)">ra,</span> <span class="word" onclick="toggleWord(this)">tay</span> <span class="word" onclick="toggleWord(this)">cầm</span> <span class="word" onclick="toggleWord(this)">một</span> <span class="word" onclick="toggleWord(this)">tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">dệt</span> <span class="word" onclick="toggleWord(this)">bằng</span> <span class="word" onclick="toggleWord(this)">rong.</span>
+                                    </div>
+                                </div>
+                                <!-- B5 (Câu ghép - nhưng) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="nhưng">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(5)</span>
+                                        <p class="text-2xl font-medium leading-relaxed">Thỏ tìm cách quấn tấm vải lên người cho đỡ rét, nhưng tấm vải bị gió lật tung, bay đi vun vút.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">tìm</span> <span class="word" onclick="toggleWord(this)">cách</span> <span class="word" onclick="toggleWord(this)">quấn</span> <span class="word" onclick="toggleWord(this)">tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">lên</span> <span class="word" onclick="toggleWord(this)">người</span> <span class="word" onclick="toggleWord(this)">cho</span> <span class="word" onclick="toggleWord(this)">đỡ</span> <span class="word" onclick="toggleWord(this)">rét,</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">bị</span> <span class="word" onclick="toggleWord(this)">gió</span> <span class="word" onclick="toggleWord(this)">lật</span> <span class="word" onclick="toggleWord(this)">tung,</span> <span class="word" onclick="toggleWord(this)">bay</span> <span class="word" onclick="toggleWord(this)">đi</span> <span class="word" onclick="toggleWord(this)">vun</span> <span class="word" onclick="toggleWord(this)">vút.</span>
+                                    </div>
+                                </div>
+                                <!-- B6 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(6)</span>
+                                        <p class="text-2xl leading-relaxed">Thỏ đuổi theo.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">đuổi</span> <span class="word" onclick="toggleWord(this)">theo.</span>
+                                    </div>
+                                </div>
+                                <!-- B7 (Câu đơn) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="false" data-connectors="">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(7)</span>
+                                        <p class="text-2xl leading-relaxed">Tấm vải tròng trành trên ao.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Tấm</span> <span class="word" onclick="toggleWord(this)">vải</span> <span class="word" onclick="toggleWord(this)">tròng</span> <span class="word" onclick="toggleWord(this)">trành</span> <span class="word" onclick="toggleWord(this)">trên</span> <span class="word" onclick="toggleWord(this)">ao.</span>
+                                    </div>
+                                </div>
+                                <!-- B8 (Câu ghép - vừa...đã) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="vừa|đã">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(8)</span>
+                                        <p class="text-2xl font-medium leading-relaxed">Thỏ vừa đặt chân xuống nước đã vội co chân lên.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">vừa</span> <span class="word" onclick="toggleWord(this)">đặt</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">xuống</span> <span class="word" onclick="toggleWord(this)">nước</span> <span class="word" onclick="toggleWord(this)">đã</span> <span class="word" onclick="toggleWord(this)">vội</span> <span class="word" onclick="toggleWord(this)">co</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">lên.</span>
+                                    </div>
+                                </div>
+                                <!-- B9 (Câu ghép - nhưng) -->
+                                <div class="sentence-box group border-b border-blue-50 pb-2" data-is-compound="true" data-connectors="nhưng">
+                                    <div class="sentence-preview cursor-pointer hover:text-blue-600 transition-colors flex items-start gap-3" onclick="ltvc22_toggle(this)">
+                                        <span class="font-bold text-green-400 shrink-0">(9)</span>
+                                        <p class="text-2xl font-medium leading-relaxed">Thỏ cố khều nhưng đưa chân không tới.</p>
+                                    </div>
+                                    <div class="words-container hidden mt-3 p-3 bg-green-50/30 rounded-xl flex flex-wrap gap-2">
+                                        <span class="word" onclick="toggleWord(this)">Thỏ</span> <span class="word" onclick="toggleWord(this)">cố</span> <span class="word" onclick="toggleWord(this)">khều</span> <span class="word" onclick="toggleWord(this)">nhưng</span> <span class="word" onclick="toggleWord(this)">đưa</span> <span class="word" onclick="toggleWord(this)">chân</span> <span class="word" onclick="toggleWord(this)">không</span> <span class="word" onclick="toggleWord(this)">tới.</span>
+                                    </div>
+                                </div>
+                                <p class="text-right font-bold text-gray-600 italic mt-2">(Võ Quảng)</p>
+                            </div>
+                            <div class="mt-3 flex justify-end">
+                                <button onclick="ltvc22_check1('p1b', this)" class="btn btn-primary px-4 py-2 flex items-center gap-2 rounded-xl font-black shadow-lg transition-all hover:scale-105" title="Kiểm tra đoạn b">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                    <span>Kiểm tra</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Exercise 2 -->
+                    <div class="glass-card rounded-[24px] p-6 shadow-lg border-l-8 border-orange-400">
+                        <h3 class="font-black text-3xl text-gray-800 mb-4 flex items-center">
+                            <span class="bg-orange-100 text-orange-600 rounded-lg px-4 py-1 text-base mr-3 shadow-sm">Bài 2</span>
+                            Điền cặp từ phù hợp
+                        </h3>
+                        <p class="text-xl text-gray-500 mb-6 italic bg-orange-50/50 p-4 rounded-xl border border-orange-100 leading-relaxed">
+                            2. Tìm cặp kết từ hoặc cặp từ hô ứng thay cho 🌸 để tạo câu ghép.
+                        </p>
+                        <div class="space-y-4 text-gray-700">
+                            <!-- Câu 2a -->
+                            <div class="p-5 border border-orange-100 rounded-2xl bg-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all hover:border-orange-200" id="q2a" data-ans="Nếu-thì">
+                                <p class="flex-1 text-2xl font-medium">
+                                    a. <span class="slot mx-1">🌸</span> em có một khu vườn rộng <span class="slot mx-1">🌸</span> em sẽ trồng thật nhiều loại cây.
+                                </p>
+                                <div class="flex gap-3 shrink-0 w-full sm:w-auto">
+                                    <select class="flex-1 sm:w-52 p-3 rounded-xl border-2 border-gray-100 text-base font-bold bg-gray-50 focus:ring-4 focus:ring-orange-100 focus:border-orange-400 focus:bg-white focus:outline-none transition-all cursor-pointer" onchange="ltvc22_update2('q2a', this.value)">
+                                        <option value="">-- Chọn cặp từ --</option>
+                                        <option value="Nếu-thì">Nếu... thì...</option>
+                                        <option value="Vì-nên">Vì... nên...</option>
+                                        <option value="Tuy-nhưng">Tuy... nhưng...</option>
+                                        <option value="Hễ-là">Hễ... là...</option>
+                                    </select>
+                                    <button onclick="ltvc22_check2('q2a')" class="btn btn-warning w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all">✓</button>
+                                </div>
+                            </div>
+                            <!-- Câu 2b -->
+                            <div class="p-5 border border-orange-100 rounded-2xl bg-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all hover:border-orange-200" id="q2b" data-ans="Mặc dù-nhưng">
+                                <p class="flex-1 text-2xl font-medium">
+                                    b. <span class="slot mx-1">🌸</span> thành phố này không sầm uất, hiện đại <span class="slot mx-1">🌸</span> nó rất hấp dẫn du khách.
+                                </p>
+                                <div class="flex gap-3 shrink-0 w-full sm:w-auto">
+                                    <select class="flex-1 sm:w-52 p-3 rounded-xl border-2 border-gray-100 text-base font-bold bg-gray-50 focus:ring-4 focus:ring-orange-100 focus:border-orange-400 focus:bg-white focus:outline-none transition-all cursor-pointer" onchange="ltvc22_update2('q2b', this.value)">
+                                        <option value="">-- Chọn cặp từ --</option>
+                                        <option value="Nếu-thì">Nếu... thì...</option>
+                                        <option value="Mặc dù-nhưng">Mặc dù... nhưng...</option>
+                                        <option value="Bởi vì-cho nên">Bởi vì... cho nên...</option>
+                                        <option value="Chẳng những-mà">Chẳng những... mà...</option>
+                                    </select>
+                                    <button onclick="ltvc22_check2('q2b')" class="btn btn-warning w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all">✓</button>
+                                </div>
+                            </div>
+                             <!-- Câu 2c -->
+                            <div class="p-5 border border-orange-100 rounded-2xl bg-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all hover:border-orange-200" id="q2c" data-ans="càng-càng">
+                                <p class="flex-1 text-2xl font-medium">
+                                    c. Mọi người <span class="slot mx-1">🌸</span> đối xử tốt với nhau thì cuộc sống <span class="slot mx-1">🌸</span> tốt đẹp hơn.
+                                </p>
+                                <div class="flex gap-3 shrink-0 w-full sm:w-auto">
+                                    <select class="flex-1 sm:w-52 p-3 rounded-xl border-2 border-gray-100 text-base font-bold bg-gray-50 focus:ring-4 focus:ring-orange-100 focus:border-orange-400 focus:bg-white focus:outline-none transition-all cursor-pointer" onchange="ltvc22_update2('q2c', this.value)">
+                                        <option value="">-- Chọn cặp từ --</option>
+                                        <option value="vừa-đã">vừa... đã...</option>
+                                        <option value="càng-càng">càng... càng...</option>
+                                        <option value="đâu-đó">đâu... đó...</option>
+                                        <option value="mới-đã">mới... đã...</option>
+                                    </select>
+                                    <button onclick="ltvc22_check2('q2c')" class="btn btn-warning w-10 h-10 flex items-center justify-center rounded-xl font-black shadow-lg transition-all">✓</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 3 -->
+                    <div class="glass-card rounded-[24px] p-6 shadow-lg border-l-8 border-purple-500 mt-8 API-box">
+                         <h3 class="font-black text-3xl text-gray-800 mb-4 flex items-center">
+                            <span class="bg-purple-100 text-purple-600 rounded-lg px-4 py-1 text-base mr-3 shadow-sm">Bài 3</span>
+                            Viết đoạn văn sáng tạo
+                        </h3>
+                        <div class="bg-purple-50/50 p-6 rounded-2xl border border-purple-100 mb-6">
+                            <p class="text-gray-700 text-2xl leading-relaxed font-medium">
+                                3. Viết đoạn văn (3 – 5 câu) về bài thơ <i>Đoàn thuyền đánh cá</i>, trong đó có câu ghép chứa kết từ để nối các vế câu.
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                             <div class="p-6 bg-white rounded-2xl border border-purple-100 shadow-sm flex flex-col gap-5">
+                                <div class="flex flex-col gap-3">
+                                    <label for="ai-3" class="text-base font-black text-purple-400 uppercase tracking-widest">Đoạn văn của em:</label>
+                                    <textarea id="ai-3" rows="5" placeholder="Nhập đoạn văn tại đây..." class="w-full px-5 py-4 rounded-2xl border-2 border-gray-100 focus:ring-4 focus:ring-purple-100 focus:border-purple-500 focus:bg-white bg-gray-50 text-xl font-medium transition-all focus:outline-none"></textarea>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs text-gray-400 font-bold italic">* Thầy AI sẽ chấm thực hành câu ghép nhé!</span>
+                                    <button onclick="checkLTVC221_Q3()" class="btn btn-secondary px-8 py-3 rounded-2xl font-black shadow-xl flex items-center group">
+                                        NỘP BÀI CHẤM ĐIỂM
+                                    </button>
+                                </div>
+                                <div class="ai-feedback hidden p-6 bg-purple-50 text-purple-800 rounded-2xl border border-purple-100" id="fb-3"></div>
+                            </div>
+                        </div>
+                    </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Cặp từ 'nhưng' trong đoạn văn (a) dùng để làm gì?", "a": ["Nối hai vế câu ghép", "Nối hai câu đơn", "Nối hai từ đơn", "Làm chủ ngữ"], "c": 0 },
+                        { "q": "Cách nối các vế câu ghép trong câu (2) đoạn văn (a) là gì?", "a": ["Dùng từ nối", "Dùng cặp kết từ", "Dùng cặp từ hô ứng", "Nối trực tiếp (dấu phẩy)"], "c": 3 },
+                        { "q": "Câu nào sau đây là câu ghép nối bằng cặp từ hô ứng?", "a": ["Lan đi học.", "Thỏ vừa đặt chân xuống nước đã vội co chân lên.", "Vì trời mưa nên Lan nghỉ.", "Tuy rét nhưng Lan vẫn đi."], "c": 1 },
+                        { "q": "Điền cặp từ: '... em có một khu vườn rộng ... em sẽ trồng thật nhiều loại cây.'", "a": ["Nếu... thì...", "Vì... nên...", "Tuy... nhưng...", "Chẳng những... mà..."], "c": 0 },
+                        { "q": "Cặp từ 'càng... càng...' biểu thị quan hệ gì?", "a": ["Tương phản", "Tăng tiến", "Nguyên nhân", "Điều kiện"], "c": 1 },
+                        { "q": "Trong câu ghép 'Thỏ cố khều nhưng đưa chân không tới', vế 2 nối với vế 1 bằng từ nào?", "a": ["Vừa", "Và", "Nhưng", "Đã"], "c": 2 },
+                        { "q": "Tìm cặp từ hô ứng phù hợp: 'Mưa ... to, gió ... thổi mạnh.'", "a": ["Nếu... thì...", "Càng... càng...", "Vì... nên...", "Mặc dù... nhưng..."], "c": 1 },
+                        { "q": "Câu ghép 'Vết sẹo của anh là huy chương, còn chúng ta là những người may mắn' dùng từ nối nào?", "a": ["Và", "Còn", "Nhưng", "Mà"], "c": 1 },
+                        { "q": "Đặc điểm của câu ghép là gì?", "a": ["Có 1 cụm C-V", "Có từ 2 vế câu trở lên", "Chỉ có vị ngữ", "Là câu đặc biệt"], "c": 1 },
+                        { "q": "Từ nào không phải là kết từ?", "a": ["Và", "Nhưng", "Vì", "Đẹp"], "c": 3 }
+                    ]
+                }
+            }
+        },
+        "221-viet": {
+            "title": "Đánh giá, chỉnh sửa bài văn tả người",
+            "week": 21,
+            "subject": "Viết",
+            "theme": "Vẻ đẹp cuộc sống",
+            "tabs": {
+                "lesson": {
+                    "blocks": [
+                        {
+                            "type": "html",
+                            "content": `<style>
+                                .label-viet { color: #ef4444; font-weight: 800; border: 2px solid #ef4444; padding: 2px 16px; display: inline-block; border-top-right-radius: 20px; border-bottom-right-radius: 20px; margin-bottom: 24px; letter-spacing: 0.05em; background: rgba(254, 226, 226, 0.3); }
+                                .criteria-box { border: 2px solid #06b6d4; border-radius: 16px; display: flex; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+                                .criteria-icon { background-color: #06b6d4; width: 80px; display: flex; align-items: center; justify-content: center; color: white; font-size: 50px; font-weight: 900; }
+                                .star-rating { color: #d1d5db; cursor: pointer; font-size: 1.2rem; transition: 0.2s; }
+                                .star-rating.active { color: #facc15; transform: scale(1.2); }
+                                .input-line { border: none; border-bottom: 2px dashed #9ca3af; width: 100%; padding: 8px 0; outline: none; font-style: italic; color: #374151; background: transparent; transition: border-bottom-color 0.3s; }
+                                .input-line:focus { border-bottom: 2px solid #3b82f6; }
+                            </style>
+                            <div class="max-w-4xl mx-auto">
+                                <div class="label-viet">VIẾT</div>
+                                <h1 class="text-3xl md:text-4xl font-black text-center text-blue-800 mb-8 uppercase tracking-tight">ĐÁNH GIÁ, CHỈNH SỬA BÀI VĂN TẢ NGƯỜI</h1>
+
+                                <!-- Section 1 -->
+                                <div class="mb-10 text-gray-800 bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                                    <p class="text-lg"><span class="text-red-500 font-extrabold mr-2 text-2xl">1.</span> <span class="font-bold">Nghe thầy cô giáo nhận xét về bài làm.</span></p>
+                                    <p class="mt-2 text-gray-600 ml-8 italic">Em hãy lắng nghe và ghi chép lại những nhận xét chung của thầy cô về bài văn của cả lớp nhé.</p>
+                                </div>
+
+                                <!-- Section 2 -->
+                                <div class="mb-12">
+                                    <p class="text-lg font-bold text-gray-800 mb-6 flex items-baseline">
+                                        <span class="text-red-500 font-extrabold mr-2 text-2xl">2.</span>
+                                        <span>Đọc lại bài văn của em để biết bài đã đạt được những yêu cầu nào dưới đây:</span>
+                                    </p>
+                                    <div class="overflow-hidden rounded-2xl border-2 border-cyan-400 shadow-lg">
+                                        <table class="w-full">
+                                            <thead>
+                                                <tr class="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white">
+                                                    <th class="p-4 text-left font-bold text-lg">📋 Tiêu chí tự đánh giá</th>
+                                                    <th class="p-4 text-center font-bold text-lg w-48">⭐ Tự đánh giá</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-cyan-50">
+                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium text-base">– Có đủ mở bài, thân bài, kết bài.</td>
+                                                    <td class="p-4 text-center">
+                                                        <div class="star-group flex gap-2 justify-center" data-row="1">
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 1)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 2)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 3)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 4)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 5)">☆</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium text-base">– Miêu tả ngoại hình, hoạt động,... làm nổi bật đặc điểm riêng của người được tả.</td>
+                                                    <td class="p-4 text-center">
+                                                        <div class="star-group flex gap-2 justify-center" data-row="2">
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 1)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 2)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 3)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 4)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 5)">☆</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="border-b border-cyan-200 hover:bg-cyan-100 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium text-base">– Thể hiện tình cảm đối với người được tả.</td>
+                                                    <td class="p-4 text-center">
+                                                        <div class="star-group flex gap-2 justify-center" data-row="3">
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 1)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 2)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 3)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 4)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 5)">☆</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="hover:bg-cyan-100 transition-colors">
+                                                    <td class="p-4 text-gray-700 font-medium text-base">– Trình bày bài sạch đẹp, không mắc lỗi chính tả, lỗi diễn đạt.</td>
+                                                    <td class="p-4 text-center">
+                                                        <div class="star-group flex gap-2 justify-center" data-row="4">
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 1)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 2)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 3)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 4)">☆</span>
+                                                            <span class="star-btn text-2xl cursor-pointer transition-all hover:scale-125" onclick="rateViet(this, 5)">☆</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- Section 3 -->
+                                <div class="mb-12">
+                                    <p class="text-lg font-bold text-gray-800 mb-8 flex items-baseline">
+                                        <span class="text-red-500 font-extrabold mr-2 text-2xl">3.</span>
+                                        <span>Viết lại một số câu văn hoặc đoạn văn trong bài làm của em cho hay hơn theo gợi ý dưới đây:</span>
+                                    </p>
+                                    <div class="space-y-10 pl-4 border-l-4 border-blue-100 ml-3">
+                                        <!-- 3a -->
+                                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                                            <p class="text-gray-800 font-bold mb-4 text-lg">a. Sử dụng từ ngữ giàu sức gợi tả hoặc hình ảnh so sánh gây ấn tượng.</p>
+                                            <div class="bg-blue-50/50 p-4 rounded-xl mb-4 text-sm text-gray-600 italic">
+                                                <p class="mb-2">Ví dụ: <br>"- Giọng nói của bà tôi đặc biệt trầm bổng, nghe <b>như</b> tiếng chuông đồng..."</p>
+                                                <p>"- A Cháng đẹp người thật... ngực nở vòng cung, da đỏ <b>như</b> lim..."</p>
+                                            </div>
+                                            <div class="flex flex-col gap-3">
+                                                <label class="text-sm font-bold text-blue-600">📝 Bài làm của em:</label>
+                                                <textarea id="viet-inputA" rows="3" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 text-base font-medium transition-all resize-none bg-gray-50 focus:bg-white" placeholder="Nhập câu văn em đã chỉnh sửa..."></textarea>
+                                                <div class="flex justify-end">
+                                                    <button onclick="checkVietAI('viet-inputA', 'a')" class="px-5 py-2.5 rounded-xl bg-gradient-to-tr from-green-400 to-green-600 text-white shadow-lg shadow-green-200 flex items-center gap-2 hover:scale-105 transition-transform font-bold" title="Nhờ AI nhận xét">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                                        Xem nhận xét
+                                                    </button>
+                                                </div>
+                                                <div id="feedback-viet-inputA" class="hidden p-4 rounded-xl bg-green-50 text-green-800 text-sm font-medium border border-green-200"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 3b -->
+                                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                                            <p class="text-gray-800 font-bold mb-4 text-lg">b. Bộc lộ suy nghĩ, cảm xúc với người được tả.</p>
+                                            <div class="bg-blue-50/50 p-4 rounded-xl mb-4 text-sm text-gray-600 italic">
+                                                <p>Ví dụ: "...tôi sẽ <b>không bao giờ quên</b> đôi mắt của cô giáo nhìn tôi lúc ấy. Ánh mắt cô cũng <b>âu yếm, trìu mến</b> như ánh mắt bà nhìn tôi."</p>
+                                            </div>
+                                            <div class="flex flex-col gap-3">
+                                                <label class="text-sm font-bold text-purple-600">📝 Bài làm của em:</label>
+                                                <textarea id="viet-inputB" rows="3" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-100 text-base font-medium transition-all resize-none bg-gray-50 focus:bg-white" placeholder="Nhập câu văn em đã chỉnh sửa..."></textarea>
+                                                <div class="flex justify-end">
+                                                    <button onclick="checkVietAI('viet-inputB', 'b')" class="px-5 py-2.5 rounded-xl bg-gradient-to-tr from-purple-400 to-purple-600 text-white shadow-lg shadow-purple-200 flex items-center gap-2 hover:scale-105 transition-transform font-bold" title="Nhờ AI nhận xét">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                                        Xem nhận xét
+                                                    </button>
+                                                </div>
+                                                <div id="feedback-viet-inputB" class="hidden p-4 rounded-xl bg-purple-50 text-purple-800 text-sm font-medium border border-purple-200"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Submit All Button -->
+                                <div class="flex justify-center my-12 pt-8 border-t border-gray-100">
+                                    <div class="text-center">
+                                        <p class="text-gray-500 font-bold mb-4 uppercase tracking-widest text-xs">Sau khi hoàn thành bài 2 và bài 3, em hãy nộp bài nhé:</p>
+                                        <button onclick="startSubmitLesson221Viet()" class="bg-gradient-to-r from-red-500 to-pink-600 text-white px-10 py-5 rounded-3xl font-black text-2xl shadow-2xl hover:scale-110 transition-all flex items-center gap-4 animate-bounce shadow-pink-200 border-4 border-white">
+                                            <span class="text-3xl">🚀</span>
+                                            <span>NỘP CẢ BÀI CHO GIÁO VIÊN</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Footer Section -->
+                                <div class="mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center gap-6 bg-orange-50/30 p-6 rounded-2xl">
+                                    <div class="bg-orange-100 p-4 rounded-2xl shadow-sm text-orange-500">
+                                        <i class="fas fa-home text-2xl"></i>
+                                    </div>
+                                    <p class="text-gray-700 italic font-medium text-lg text-center md:text-left">Đọc bài văn tả người của em cho người thân nghe, chia sẻ những điều thầy cô nhận xét về bài làm của em và các bạn.</p>
+                                </div>
+                            </div>
+                            
+`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Bài văn tả người cần có những phần nào?", "a": ["Chỉ mở bài", "Mở bài, thân bài, kết bài", "Chỉ thân bài", "Mở bài và kết bài"], "c": 1 },
+                        { "q": "Khi miêu tả người, ta cần làm nổi bật điều gì?", "a": ["Đặc điểm chung", "Đặc điểm riêng của người được tả", "Giống mọi người", "Không cần nổi bật"], "c": 1 },
+                        { "q": "Phần nào giúp bài văn thể hiện tình cảm với người được tả?", "a": ["Chỉ mở bài", "Chỉ kết bài", "Cả bài văn", "Không cần thể hiện"], "c": 2 },
+                        { "q": "Câu văn nào sử dụng hình ảnh so sánh?", "a": ["Bà tôi rất hiền.", "Giọng bà như tiếng chuông đồng.", "Bà hay kể chuyện.", "Bà thích đọc sách."], "c": 1 },
+                        { "q": "Từ nào là từ ngữ giàu sức gợi tả?", "a": ["Đẹp", "Cao", "Trầm bổng", "Tốt"], "c": 2 },
+                        { "q": "Bài văn tả người nên tránh điều gì?", "a": ["Dùng từ ngữ sinh động", "Mắc lỗi chính tả", "Thể hiện tình cảm", "Miêu tả chi tiết"], "c": 1 },
+                        { "q": "Câu nào bộc lộ cảm xúc với người được tả?", "a": ["Mẹ tôi 40 tuổi.", "Tôi yêu mẹ vô cùng.", "Mẹ làm giáo viên.", "Mẹ cao 1m60."], "c": 1 },
+                        { "q": "Khi chỉnh sửa bài văn, ta cần làm gì?", "a": ["Viết lại toàn bộ", "Sửa những câu chưa hay", "Xóa hết", "Không cần sửa"], "c": 1 },
+                        { "q": "Hình ảnh so sánh giúp bài văn như thế nào?", "a": ["Ngắn hơn", "Sinh động, gợi cảm hơn", "Khô khan hơn", "Dài hơn"], "c": 1 },
+                        { "q": "Sau khi viết xong, em nên làm gì?", "a": ["Nộp ngay", "Đọc lại và chỉnh sửa", "Xé bỏ", "Không làm gì"], "c": 1 }
+                    ]
+                }
+            }
+        }
+});
