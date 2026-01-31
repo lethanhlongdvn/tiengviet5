@@ -1,4 +1,4 @@
-// Curriculum Data - Reset
+// Curriculum Data - Reset (Updated for Week 19)
 const curriculumData = {
     "Học kỳ 1": [
         {
@@ -64,7 +64,7 @@ const curriculumData = {
                 {
                     "id": 23, "name": "Tuần 23",
                     "lessons": [
-                        { "title": "Bài 9: Hội thổi cơm thi ở Đồng Vân", "sections": [{ "title": "Đọc: Hội thổi cơm thi ở Đồng Vân", "url": "lesson_viewer.html?id=231-hoi-thoi-com-thi-o-dong-van" }] },
+                        { "title": "Bài 9: Hội thổi cơm thi ở Đồng Vân", "sections": [{ "title": "Đọc: Hội thổi cơm thi ở Đồng Vân", "url": "lesson_viewer.html?id=231-hoi-thoi-com-thi-o-dong-van" }, { "title": "LTVC: Luyện tập về câu ghép", "url": "lesson_viewer.html?id=231-ltvc" }] },
                         { "title": "Bài 10: Những búp chè trên cây cổ thụ", "sections": [{ "title": "Đọc: Những búp chè trên cây cổ thụ", "url": "lesson_viewer.html?id=232-nhung-bup-che-tren-cay-co-thu" }] }
                     ]
                 },
@@ -247,10 +247,9 @@ style.textContent = `
 document.head.appendChild(style);
 
 function startFloatingMenu() {
-    console.log("Floating Menu Script Initializing...");
+    // Floating Menu Script Initializing...
     try {
         if (document.getElementById('floating-menu-btn')) {
-            console.log("Floating menu already exists.");
             return;
         }
 
@@ -281,7 +280,6 @@ function startFloatingMenu() {
 
         document.body.appendChild(floatingBtn);
         document.body.appendChild(sidebar);
-        console.log("Floating menu elements appended to body.");
 
         floatingBtn.addEventListener('click', () => toggleMenu());
 
@@ -289,7 +287,6 @@ function startFloatingMenu() {
         const menuContent = document.getElementById('menu-content');
         if (typeof curriculumData !== 'undefined') {
             renderCurriculumTo(menuContent, false);
-            console.log("Sidebar menu rendered.");
         } else {
             console.error("curriculumData is missing!");
             menuContent.innerHTML = "<div class='p-4 text-red-500'>Không tải được dữ liệu bài học.</div>";
@@ -298,14 +295,12 @@ function startFloatingMenu() {
         // Top menu support (if exists)
         const topMenuDropdown = document.getElementById('top-menu-lessons-dropdown');
         if (topMenuDropdown) {
-            console.log("Top menu dropdown found.");
             renderCurriculumTo(topMenuDropdown, false);
             const topMenuBtn = document.getElementById('top-menu-lesson-btn');
             const topMenuChevron = document.getElementById('top-menu-chevron');
             if (topMenuBtn) {
                 topMenuBtn.onclick = (e) => { // Use onclick directly to ensure binding
                     e.stopPropagation();
-                    console.log("Top menu clicked");
                     const isHidden = topMenuDropdown.classList.contains('hidden');
                     if (isHidden) {
                         topMenuDropdown.classList.remove('hidden');
@@ -316,8 +311,6 @@ function startFloatingMenu() {
                     }
                 };
             }
-        } else {
-            console.warn("Top menu dropdown NOT found. Check ID 'top-menu-lessons-dropdown'.");
         }
     } catch (e) {
         console.error("Error starting floating menu:", e);
@@ -330,8 +323,6 @@ function toggleMenu(forceState) {
     const floatingBtn = document.getElementById('floating-menu-btn');
     if (!sidebar || !floatingBtn) return;
     const isActive = forceState !== undefined ? forceState : !sidebar.classList.contains('active');
-
-    console.log("Toggling menu. Active:", isActive);
 
     if (isActive) {
         sidebar.classList.add('active');
@@ -486,7 +477,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-console.log("Floating menu script loaded. Checking Document Ready State:", document.readyState);
 // Init
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', startFloatingMenu);
@@ -494,4 +484,9 @@ if (document.readyState === 'loading') {
     startFloatingMenu();
 }
 
-console.log("Floating menu script initialized.");
+// Load 231-LTVC functions if needed
+if (window.location.search.includes('id=231-ltvc')) {
+    const script = document.createElement('script');
+    script.src = 'js/231-ltvc-functions.js';
+    document.head.appendChild(script);
+}
