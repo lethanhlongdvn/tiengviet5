@@ -20,6 +20,10 @@ window.LESSON_DATA.lessons["221-ltvc"] = {
                     "subtitle": "Đoạn văn a (Tìm câu ghép & từ nối)",
                     "instruction": "Bấm vào câu ghép để chọn từ nối. Sau khi làm xong cả đoạn, bấm 'Kiểm tra'.",
                     "id": "block-e1-a",
+                    "feedback": {
+                        "correct": "Tuyệt vời! Đoạn văn a có 2 câu ghép: câu (1) dùng từ nối 'nhưng', câu (2) nối trực tiếp bằng dấu ','.",
+                        "wrong": "Gợi ý: Đoạn văn này có 2 câu ghép, em hãy tìm kỹ nhé!"
+                    },
                     "data": [
                         {
                             "id": "e1-a1",
@@ -56,6 +60,10 @@ window.LESSON_DATA.lessons["221-ltvc"] = {
                     "subtitle": "Đoạn văn b (Tìm câu ghép & từ nối)",
                     "instruction": "Bấm vào câu ghép để chọn từ nối. Sau khi làm xong cả đoạn, bấm 'Kiểm tra'.",
                     "id": "block-e1-b",
+                    "feedback": {
+                        "correct": "Cần lưu ý: Trong đoạn văn b có 2 câu ghép là câu 4 và câu 5. Câu 4: 2 vế kết nối trực tiếp với nhau bởi dấu \",\"; câu 5: 2 vế kết nối với nhau bởi từ \"nhưng\".",
+                        "wrong": "Gợi ý: Đoạn văn này chỉ có 2 câu ghép thôi, em thử chọn lại nhé!"
+                    },
                     "data": [
                         {
                             "id": "e1-b1",
@@ -64,7 +72,7 @@ window.LESSON_DATA.lessons["221-ltvc"] = {
                         },
                         {
                             "id": "e1-b2",
-                            "text": "<strong>(2)</strong> <span class='word'>Những</span> <span class='word'>cành</span> <span class='word'>cây</span> <span class='word'>khẳng</span> <span class='word'>khiu</span> <span class='word'>chốc</span> <span class='word'>chốc</span> <span class='word'>run</span> <span class='word'>lên</span> <span class='word'>bần</span> <span class='word'>bật.</span>",
+                            "text": "<strong>(2)</strong> <span class='word'>Những</span> <span class='word'>cành</span> <span class='word'>cây</span> <span class='word'>khẳng</span> <span class='word'>khiu</span>, <span class='word'>chốc</span> <span class='word'>chốc</span> <span class='word'>run</span> <span class='word'>lên</span> <span class='word'>bần</span> <span class='word'>bật.</span>",
                             "targets": []
                         },
                         {
@@ -74,8 +82,9 @@ window.LESSON_DATA.lessons["221-ltvc"] = {
                         },
                         {
                             "id": "e1-b4",
-                            "text": "<strong>(4)</strong> <span class='word'>Bên</span> <span class='word'>gốc</span> <span class='word'>đa,</span> <span class='word'>một</span> <span class='word'>chú</span> <span class='word'>thỏ</span> <span class='word'>bước</span> <span class='word'>ra,</span> <span class='word'>tay</span> <span class='word'>cầm</span> <span class='word'>một</span> <span class='word'>tấm</span> <span class='word'>vải</span> <span class='word'>dệt</span> <span class='word'>bằng</span> <span class='word'>rong.</span>",
-                            "targets": []
+                            "isCompound": true,
+                            "text": "<strong>(4)</strong> <span class='word'>Bên</span> <span class='word'>gốc</span> <span class='word'>đa</span>, <span class='word'>một</span> <span class='word'>chú</span> <span class='word'>thỏ</span> <span class='word'>bước</span> <span class='word'>ra</span> <span class='word'>,</span> <span class='word'>tay</span> <span class='word'>cầm</span> <span class='word'>một</span> <span class='word'>tấm</span> <span class='word'>vải</span> <span class='word'>dệt</span> <span class='word'>bằng</span> <span class='word'>rong.</span>",
+                            "targets": [","]
                         },
                         {
                             "id": "e1-b5",
@@ -95,15 +104,15 @@ window.LESSON_DATA.lessons["221-ltvc"] = {
                         },
                         {
                             "id": "e1-b8",
-                            "isCompound": true,
+                            "isCompound": false,
                             "text": "<strong>(8)</strong> <span class='word'>Thỏ</span> <span class='word'>vừa</span> <span class='word'>đặt</span> <span class='word'>chân</span> <span class='word'>xuống</span> <span class='word'>nước</span> <span class='word'>đã</span> <span class='word'>vội</span> <span class='word'>co</span> <span class='word'>chân</span> <span class='word'>lên.</span>",
-                            "targets": ["vừa", "đã"]
+                            "targets": []
                         },
                         {
                             "id": "e1-b9",
-                            "isCompound": true,
+                            "isCompound": false,
                             "text": "<strong>(9)</strong> <span class='word'>Thỏ</span> <span class='word'>cố</span> <span class='word'>khều</span> <span class='word'>nhưng</span> <span class='word'>đưa</span> <span class='word'>chân</span> <span class='word'>không</span> <span class='word'>tới.</span>",
-                            "targets": ["nhưng"]
+                            "targets": []
                         }
                     ]
                 },
