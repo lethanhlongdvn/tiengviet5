@@ -175,6 +175,9 @@ window.checkLTVC222_Q2 = async () => {
 // --- UNIFIED SUBMISSION SYSTEM ---
 window.UnifiedSubmission = {
     getContext: function () {
+        const quizTab = document.getElementById('tab-quiz');
+        if (quizTab && quizTab.classList.contains('active')) return 'quiz_tab';
+        if (window.currentSubmissionType === 'quiz') return 'quiz_tab';
         if (document.querySelector('.exercise-click-word-container') || document.querySelector('[id^="block-e1"]')) return 'ltvc_full';
         if (document.getElementById('viet222-mb')) return 'essay_222';
         if (document.getElementById('viet-inputA')) return 'lesson_221_viet';
@@ -185,37 +188,57 @@ window.UnifiedSubmission = {
         const type = this.getContext();
         let data = { type: type, score: 0, content: "", feedback: "" };
 
-        if (type === 'ltvc_full') {
-            let ex1a = { s: 0, t: 0 }, ex1b = { s: 0, t: 0 }, ex2 = { s: 0, t: 0 };
-            document.querySelectorAll('#block-e1-a .interactive-row').forEach(row => {
-                ex1a.t++;
-                const truth = (row.dataset.ans || "").split(',');
-                const selected = Array.from(row.querySelectorAll('.word.selected')).map(w => w.innerText.replace(/[.,]/g, '').trim());
-                if (truth.length === selected.length && truth.every(t => selected.includes(t))) ex1a.s++;
-            });
-            document.querySelectorAll('#block-e1-b .interactive-row').forEach(row => {
-                ex1b.t++;
-                const truth = (row.dataset.ans || "").split(',');
-                const selected = Array.from(row.querySelectorAll('.word.selected')).map(w => w.innerText.replace(/[.,]/g, '').trim());
-                if (truth.length === selected.length && truth.every(t => selected.includes(t))) ex1b.s++;
-            });
-            document.querySelectorAll('[id^="e2-q"]').forEach(block => {
-                ex2.t++; if (block.querySelector('select')?.value === block.dataset.ans) ex2.s++;
+        if (type === 'quiz_tab') {
+            const total = window.currentQuizQuestions ? window.currentQuizQuestions.length : 0;
+            const correct = window.quizScore || 0;
+            data.score = total > 0 ? ((correct / total) * 10).toFixed(1) : 0;
+            data.content = `[TRẮC NGHIỆM] Đúng ${correct}/${total} câu.`;
+            data.feedback = `Hệ thống tự động chấm điểm bài trắc nghiệm.`;
+        }
+        else if (type === 'ltvc_full') {
+            let contentParts = [];
+            let totalS = 0, totalT = 0;
+
+            // Collect all interactive-row/sentence-box results
+            document.querySelectorAll('.exercise-click-word-container').forEach(container => {
+                const blockId = container.id;
+                let s = 0, t = 0;
+                container.querySelectorAll('.interactive-row, .sentence-box').forEach(row => {
+                    const isComp = row.dataset.compound === 'true' || row.dataset.isCompound === 'true' || row.getAttribute('data-compound') === 'true';
+                    if (isComp) {
+                        t++;
+                        const truth = (row.getAttribute('data-ans') || "").split(',').map(x => x.trim().toLowerCase()).filter(x => x);
+                        const selected = Array.from(row.querySelectorAll('.word.selected')).map(w => w.innerText.replace(/[.,]/g, '').trim().toLowerCase());
+                        if (truth.length > 0 && truth.length === selected.length && truth.every(val => selected.includes(val))) s++;
+                    }
+                });
+                if (t > 0) {
+                    contentParts.push(`${blockId}: ${s}/${t}`);
+                    totalS += s; totalT += t;
+                }
             });
 
-            const input3 = document.getElementById('ai-' + passedId) || document.querySelector('textarea[id^="ai-"]');
-            const feedbackEl = document.getElementById('fb-' + (input3?.id.replace('ai-', '') || passedId));
+            // Collect legacy select answers (like Ex 2)
+            document.querySelectorAll('[id^="ex231-2-"]').forEach(sel => {
+                // Special check for Lesson 231-Ex2
+                if (sel.id.includes('ex231-2')) {
+                    // This is handled manually for a specific grade if needed, 
+                    // or we just trust the AI part for the rest
+                }
+            });
 
-            data.content = `[LTVC] 1a: ${ex1a.s}/${ex1a.t}, 1b: ${ex1b.s}/${ex1b.t}, B2: ${ex2.s}/${ex2.t}\n[VIẾT] ${input3 ? input3.value : "(Trống)"}`;
-            if (feedbackEl && !feedbackEl.classList.contains('hidden')) {
+            const input3 = document.querySelector('textarea[id^="ai-"], textarea[id*="q4"]');
+            data.content = `[LTVC] ${contentParts.join(', ')}\n[VIẾT] ${input3 ? input3.value : "(Trống)"}`;
+
+            const feedbackEl = document.querySelector('[id^="fb-ai-"], [id^="fb-231-"], #fb-222-q2');
+            if (feedbackEl && !feedbackEl.classList.contains('hidden') && feedbackEl.innerText.includes('/10')) {
                 const m = feedbackEl.innerText.match(/(\d+\.?\d*)\/10/);
                 data.score = m ? parseFloat(m[1]) : 0;
                 data.feedback = feedbackEl.innerText;
             } else {
-                const totalS = ex1a.s + ex1b.s + ex2.s;
-                const totalT = ex1a.t + ex1b.t + ex2.t;
-                const exScore = totalT > 0 ? (totalS / totalT) * 5 : 0;
-                data.score = (exScore + (input3 && input3.value.trim().length > 10 ? 4 : 0)).toFixed(1);
+                const exScore = totalT > 0 ? (totalS / totalT) * 6 : 0;
+                data.score = Math.min(10, (exScore + (input3 && input3.value.trim().length > 10 ? 4 : 0))).toFixed(1);
+                data.feedback = `Tự động chấm: ${totalS}/${totalT} câu đúng.`;
             }
         }
         else if (type === 'essay_222') {
@@ -327,27 +350,48 @@ window.UnifiedSubmission = {
                 if (btn) btn.innerHTML = "⏳ ĐANG NỘP BÀI...";
             }
 
-            // UNIQUE ID USING TIMESTAMP TO PREVENT OVERWRITING
-            const docId = window.getSlug(`${name}_${cls}_${lessonTitle}_${Date.now()}`);
+            // CHOOSE COLLECTION BASED ON TYPE
+            const collectionName = data.type === 'quiz_tab' ? "diem_tieng_viet_lop5" : "essays_v2";
 
-            if (typeof db === 'undefined' || !db.collection) {
-                throw new Error("Hệ thống Firebase chưa sẵn sàng.");
-            }
-
-            await db.collection("essays_v2").doc(docId).set({
+            let saveData = {
                 studentName: name, studentClass: cls, studentSchool: school || "Tiểu học",
                 content: data.content, lessonTitle: lessonTitle,
-                aiFeedback: data.feedback, aiGrade: data.score,
-                fileUrl: fileUrl, // Include the uploaded image URL
+                aiFeedback: data.feedback,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 status: "Chưa chấm", type: data.type
-            });
+            };
 
-            alert("🎉 Tuyệt vời! Bài làm của em đã được gửi thành công.");
+            if (data.type === 'quiz_tab') {
+                // Compatibility for Teacher Dashboard (diem_tieng_viet_lop5)
+                const total = window.currentQuizQuestions ? window.currentQuizQuestions.length : 0;
+                const correct = window.quizScore || 0;
+                saveData.score = total > 0 ? Math.round((correct / total) * 100) : 0;
+                saveData.correctCount = correct;
+                saveData.totalQuestions = total;
+            } else {
+                saveData.aiGrade = data.score; // 0-10 for essays
+                saveData.fileUrl = fileUrl;
+            }
+
+            await db.collection(collectionName).doc(docId).set(saveData);
+
+            if (data.type === 'quiz_tab') {
+                alert(`✨ Tuyệt vời! Em đạt ${saveData.score} điểm. Kết quả đã gửi thành công.`);
+            } else {
+                alert("🎉 Tuyệt vời! Bài làm của em đã được gửi thành công.");
+            }
             if (typeof closeStudentModal === 'function') closeStudentModal();
             window.celebrate();
         } catch (e) { alert("Lỗi nộp bài: " + e.message); }
         finally { if (btn) { btn.innerHTML = "🚀 NỘP BÀI"; btn.disabled = false; } }
+    }
+};
+
+window.submitLTVCUnified = function (id) {
+    if (window.UnifiedSubmission) {
+        window.UnifiedSubmission.startProcess(id);
+    } else {
+        alert("Hệ thống nộp bài đang khởi tạo, vui lòng đợi 2 giây...");
     }
 };
 
