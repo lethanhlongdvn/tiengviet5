@@ -13,7 +13,7 @@ const UI = {
         const footerHTML = `
         <footer class="py-6 px-4 mt-8 bg-white/40 backdrop-blur-md border-t border-white/50 w-full z-10 flex-none print:hidden">
             <div class="container mx-auto text-center">
-                <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">© 2026 EduRobot - Hệ thống học tập thông minh</p>
+                <p id="admin-trigger" class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2 cursor-pointer select-none border-b border-transparent hover:border-gray-200 transition-all inline-block">© 2026 EduRobot - Hệ thống học tập thông minh</p>
                 <p class="text-sm font-bold text-blue-600 flex items-center justify-center gap-1">
                     Phát triển bởi Lê Thành Long
                 </p>
@@ -49,7 +49,7 @@ const UI = {
 
         // DOM Elements for Dynamic Content
         const logoHTML = `
-            <a href="index.html" class="flex items-center gap-3 group">
+            <a href="index.html" id="main-logo" class="flex items-center gap-3 group">
                 <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-200 group-hover:scale-110 transition-transform">E</div>
                 <div class="flex flex-col">
                     <span class="text-xl font-black text-gray-800 leading-none">EduRobot</span>
@@ -57,9 +57,19 @@ const UI = {
                 </div>
             </a>`;
 
+        // Check Admin Status for Badge
+        const isAdmin = localStorage.getItem('edu_admin') === 'true';
+        const adminBadge = isAdmin ? `
+            <div class="flex items-center gap-2 bg-red-100 text-red-600 px-3 py-1.5 rounded-xl border border-red-200 animate-pulse">
+                <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                <span class="text-[10px] font-black uppercase tracking-wider">Draft Mode</span>
+            </div>
+        ` : '';
+
         // Right Menu Items (Standard)
         const standardMenuHTML = `
             <div class="flex items-center gap-4">
+                ${adminBadge}
                 <a href="index.html" class="hidden md:block px-4 py-2 rounded-xl text-sm font-bold ${activeLinks.home ? 'text-blue-600 bg-blue-50' : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50'} transition-colors">Trang chủ</a>
                 
                 <div class="relative group" id="top-menu-lesson-container">
@@ -163,8 +173,40 @@ const UI = {
                 element.innerHTML = headerContent;
             }
         }
+    },
+
+    /**
+     * Khởi tạo các sự kiện toàn cục cho UI
+     */
+    initGlobalEvents: () => {
+        // Xử lý Secret Admin Toggle (Click Footer 3 lần)
+        let clickCount = 0;
+        let lastClickTime = 0;
+
+        document.addEventListener('click', (e) => {
+            const trigger = e.target.closest('#admin-trigger');
+            if (trigger) {
+                const now = Date.now();
+                if (now - lastClickTime > 2000) clickCount = 0; // Reset nếu quá 2s
+
+                clickCount++;
+                lastClickTime = now;
+
+                if (clickCount >= 3) {
+                    const isAdmin = localStorage.getItem('edu_admin') === 'true';
+                    localStorage.setItem('edu_admin', !isAdmin);
+
+                    clickCount = 0;
+                    alert(!isAdmin ? "🔓 ĐÃ BẬT CHẾ ĐỘ SOẠN THẢO\n(Dữ liệu sẽ được ghi nhớ trên máy tính này)" : "🔒 ĐÃ TẮT CHẾ ĐỘ SOẠN THẢO\n(Giao diện dành cho học sinh)");
+                    location.reload();
+                }
+            }
+        });
     }
 };
+
+// Khởi chạy sự kiện toàn cục
+UI.initGlobalEvents();
 
 // Auto-init nếu có thuộc tính data-init-ui
 document.addEventListener('DOMContentLoaded', () => {
