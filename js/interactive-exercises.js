@@ -151,6 +151,27 @@ window.ltvc22_toggle = (el) => {
     }
 };
 
+window.checkLTVC222_Q2 = async () => {
+    const input = document.getElementById('ai-222-q2');
+    if (!input || !input.value.trim()) {
+        alert("Em hãy nhập câu ghép của mình vào ô trống nhé!");
+        return;
+    }
+    const feedback = document.getElementById('fb-222-q2');
+    if (feedback) {
+        feedback.classList.remove('hidden');
+        feedback.innerHTML = `<div class="flex items-center gap-2 text-blue-600 animate-pulse"><span>🤖 Đợi Thầy xem câu của em nhé...</span></div>`;
+    }
+
+    if (typeof askAI === 'function') {
+        // prefix cho prompt chuyên biệt
+        const prefix = "Em hãy kiểm tra và nhận xét xem câu sau có phải là câu ghép có sử dụng kết từ (và, hay, nhưng, rồi, thì,...) không. Hãy khen nếu em làm đúng, hoặc góp ý nhẹ nhàng nếu còn thiếu kết từ: ";
+        await askAI('222-q2', prefix, 'single', 'ltvc', 22);
+    } else {
+        if (feedback) feedback.innerHTML = "Lỗi: Hệ thống AI chưa sẵn sàng. Vui lòng thử lại sau.";
+    }
+};
+
 // --- UNIFIED SUBMISSION SYSTEM ---
 window.UnifiedSubmission = {
     getContext: function () {
@@ -199,8 +220,8 @@ window.UnifiedSubmission = {
         }
         else if (type === 'essay_222') {
             data.content = `Đề: ${window.viet222_currentTopic || '?'}\nMB: ${document.getElementById('viet222-mb').value}\nTB: ${document.getElementById('viet222-tb').value}\nKB: ${document.getElementById('viet222-kb').value}`;
-            data.score = parseFloat(document.getElementById('viet222-score').innerText) || 0;
-            data.feedback = document.getElementById('viet222-feedback-good').innerText + " | " + document.getElementById('viet222-feedback-bad').innerText;
+            data.score = window.viet222_aiGrade || 0;
+            data.feedback = window.viet222_aiFeedback || "Chưa có nhận xét AI";
         }
         else if (type === 'lesson_221_viet') {
             const ratings = Array.from(document.querySelectorAll('.star-group')).map(g => {
@@ -401,6 +422,15 @@ window.viet222_aiCheck = async () => {
         });
         const data = await res.json();
         let reply = typeof data === 'string' ? data : (data.response || data.content || "Thầy chưa đưa ra được nhận xét.");
+
+        // Trích xuất điểm nếu không có sẵn trong data.diem
+        let detectedScore = data.diem || data.grade;
+        if (!detectedScore) {
+            // Tìm số đứng sau các từ khóa "điểm", "dự kiến", "khoảng" hoặc số có /10
+            const scoreMatch = reply.match(/Dự đoán điểm.*?(\d+(\.\d+)?)/i) || reply.match(/(\d+(\.\d+)?)\/10/);
+            if (scoreMatch) detectedScore = scoreMatch[1];
+        }
+
         if (fb) {
             fb.innerHTML = `
                 <div class="p-6 bg-white border-4 border-teal-100 rounded-3xl shadow-xl space-y-3">
@@ -408,9 +438,13 @@ window.viet222_aiCheck = async () => {
                         <span>👨‍🏫</span> NHẬN XÉT CỦA THẦY (DỰ THẢO)
                     </h4>
                     <div class="text-gray-800 leading-relaxed text-base">${reply.replace(/\n/g, '<br>').replace(/\*\*/g, '<b>')}</div>
+                    <div class="mt-2 text-xs font-black text-teal-500 uppercase tracking-widest bg-teal-50 py-1 px-3 rounded-lg inline-block">Dự kiến: ${detectedScore || '...'}đ</div>
                     <p class="text-xs text-gray-400 italic mt-2">*Đây là nhận xét thử nghiệm giúp em cải thiện bài viết trước khi nộp chính thức.</p>
                 </div>
             `;
+            // Lưu lại điểm và feedback để nộp bài
+            window.viet222_aiGrade = parseFloat(detectedScore) || 0;
+            window.viet222_aiFeedback = reply;
         }
     } catch (e) {
         if (fb) fb.innerHTML = `<div class="p-4 bg-red-50 text-red-600 rounded-xl">Lỗi kết nối AI. Em thử lại sau nhé!</div>`;
