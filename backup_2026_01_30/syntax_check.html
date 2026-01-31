@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Syntax Checker</title>
+</head>
+
+<body>
+    <h1>Syntax Check Result</h1>
+    <div id="result">Waiting...</div>
+    <script>
+        window.onerror = function (message, source, lineno, colno, error) {
+            document.getElementById('result').innerText = "ERROR: " + message + " at " + lineno + ":" + colno;
+            return true;
+        };
+        window.LESSON_DATA = {}; // Init
+    </script>
+    <script src="data/lessons.js"></script>
+    <script>
+        if (window.LESSON_DATA && window.LESSON_DATA.lessons) {
+            document.getElementById('result').innerText = "SUCCESS: lessons.js loaded correctly.";
+        } else {
+            // If no error but data is missing
+            if (document.getElementById('result').innerText === "Waiting...") {
+                document.getElementById('result').innerText = "FAILURE: Script loaded but LESSON_DATA is missing.";
+            }
+        }
+    </script>
+</body>
+
+</html>
