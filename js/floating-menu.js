@@ -64,7 +64,7 @@ const curriculumData = {
                 {
                     "id": 23, "name": "Tuần 23",
                     "lessons": [
-                        { "title": "Bài 9: Hội thổi cơm thi ở Đồng Vân", "sections": [{ "title": "Đọc: Hội thổi cơm thi ở Đồng Vân", "url": "lesson_viewer.html?id=231-hoi-thoi-com-thi-o-dong-van" }, { "title": "LTVC: Luyện tập về câu ghép", "url": "lesson_viewer.html?id=231-ltvc" }] },
+                        { "title": "Bài 9: Hội thổi cơm thi ở Đồng Vân", "sections": [{ "title": "Đọc: Hội thổi cơm thi ở Đồng Vân", "url": "lesson_viewer.html?id=231-hoi-thoi-com-thi-o-dong-van" }, { "title": "LTVC: Liên kết câu bằng cách lặp từ ngữ", "url": "lesson_viewer.html?id=231-ltvc" }] },
                         { "title": "Bài 10: Những búp chè trên cây cổ thụ", "sections": [{ "title": "Đọc: Những búp chè trên cây cổ thụ", "url": "lesson_viewer.html?id=232-nhung-bup-che-tren-cay-co-thu" }] }
                     ]
                 },
