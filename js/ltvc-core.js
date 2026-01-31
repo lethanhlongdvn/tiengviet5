@@ -129,6 +129,6 @@
     };
 
     setInterval(corePulse, 50);
-    window.addEventListener('load', () => { cleanResiduals(); localStorage.clear(); sessionStorage.clear(); });
-    window.forceRefresh = function () { localStorage.clear(); sessionStorage.clear(); window.location.reload(true); };
+    window.addEventListener('load', () => { cleanResiduals(); /* localStorage.clear(); sessionStorage.clear(); */ });
+    window.forceRefresh = function () { /* localStorage.clear(); sessionStorage.clear(); */ window.location.reload(true); };
 })();
