@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Góp ý & Liên hệ - EduRobot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="js/components.js"></script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col">
+    <!-- Header -->
+    <header id="navbar"></header>
+
+    <main class="container mx-auto px-4 py-12 flex-1">
+        <div class="max-w-5xl mx-auto">
+            <!-- Hero Section -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-black text-gray-900 mb-4">Góp ý & <span class="text-blue-600">Phát
+                        triển</span></h1>
+                <p class="text-lg text-gray-500 font-bold max-w-2xl mx-auto">EduRobot luôn trân trọng mọi ý kiến đóng
+                    góp từ Quý đồng nghiệp, các bậc Phụ huynh và các em học sinh để hệ thống ngày một hoàn thiện hơn.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Contact Info -->
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="glass-card p-8 rounded-[32px] hover:scale-[1.02] transition-transform duration-300">
+                        <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl mb-4">📧
+                        </div>
+                        <h3 class="text-xl font-black text-gray-800 mb-2">Hộp thư điện tử</h3>
+                        <p class="text-gray-500 font-bold">lethanhlongdvn@gmail.com</p>
+                    </div>
+
+                    <!-- Hiding Phone and Social Channels for now as per user request
+                    <div class="glass-card p-8 rounded-[32px] hover:scale-[1.02] transition-transform duration-300">
+                        <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center text-2xl mb-4">
+                            📞</div>
+                        <h3 class="text-xl font-black text-gray-800 mb-2">Đường dây nóng</h3>
+                        <p class="text-gray-500 font-bold">0909.123.456</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-[32px] hover:scale-[1.02] transition-transform duration-300">
+                        <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center text-2xl mb-4">
+                            🌐</div>
+                        <h3 class="text-xl font-black text-gray-800 mb-2">Kênh thông tin</h3>
+                        <div class="flex gap-4 mt-4">
+                            <a href="#"
+                                class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold hover:scale-110 transition-all">f</a>
+                            <a href="#"
+                                class="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center text-white font-bold hover:scale-110 transition-all">y</a>
+                            <a href="#"
+                                class="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center text-white font-bold hover:scale-110 transition-all">z</a>
+                        </div>
+                    </div>
+                    -->
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-2">
+                    <div class="glass-card p-8 md:p-12 rounded-[40px] relative overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2">
+                        </div>
+
+                        <form id="contact-form" class="space-y-6 relative z-10">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label
+                                        class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 px-2">Họ
+                                        và tên của bạn</label>
+                                    <input type="text" id="name" required
+                                        class="w-full px-6 py-4 rounded-2xl border-2 border-transparent bg-white/50 focus:bg-white focus:border-blue-500 transition-all outline-none font-bold"
+                                        placeholder="VD: Cô Nguyễn Văn A, Phụ huynh em B...">
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 px-2">Kênh
+                                        liên hệ phản hồi</label>
+                                    <input type="text" id="contact" required
+                                        class="w-full px-6 py-4 rounded-2xl border-2 border-transparent bg-white/50 focus:bg-white focus:border-blue-500 transition-all outline-none font-bold"
+                                        placeholder="Email hoặc Số điện thoại của bạn...">
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 px-2">Ý
+                                    kiến đóng góp & Gợi ý cải thiện</label>
+                                <textarea id="message" rows="5" required
+                                    class="w-full px-6 py-4 rounded-2xl border-2 border-transparent bg-white/50 focus:bg-white focus:border-blue-500 transition-all outline-none font-bold resize-none"
+                                    placeholder="Hãy giúp chúng tôi biết hệ thống cần cải thiện điều gì hoặc tính năng nào bạn mong muốn có thêm..."></textarea>
+                            </div>
+                            <button type="submit"
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-95 uppercase tracking-widest text-lg">
+                                Gửi ý kiến đóng góp
+                            </button>
+                        </form>
+
+                        <div id="success-msg" class="hidden text-center py-12 animate-in fade-in zoom-in duration-500">
+                            <div
+                                class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 floating">
+                                💖</div>
+                            <h3 class="text-2xl font-black text-gray-800 mb-2">Trân trọng cảm ơn!</h3>
+                            <p class="text-gray-500 font-bold mb-8">Mỗi ý kiến của bạn là một viên gạch xây dựng
+                                EduRobot trở nên tốt đẹp hơn. Chúng tôi sẽ nghiên cứu kỹ và sớm áp dụng những ý tưởng
+                                hay vào hệ thống.</p>
+                            <button onclick="location.reload()"
+                                class="text-blue-600 font-black uppercase text-sm hover:underline">Gửi thêm ý kiến
+                                khác</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Welcome Message Modal -->
+    <div id="welcome-overlay"
+        class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-500">
+        <div class="bg-white rounded-[40px] overflow-hidden max-w-xl w-full text-center shadow-[0_32px_64px_-15px_rgba(0,0,0,0.3)] transform scale-95 transition-transform duration-500"
+            id="welcome-modal">
+            <!-- Modal Header with Gradient -->
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-10 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2">
+                </div>
+                <div
+                    class="w-24 h-24 bg-white/20 backdrop-blur-md rounded-3xl flex items-center justify-center text-5xl mx-auto mb-4 floating shadow-inner">
+                    📢</div>
+                <h2 class="text-3xl md:text-4xl font-black text-white relative z-10">Chào mừng bạn!</h2>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-8 md:p-12 bg-gradient-to-b from-white to-blue-50">
+                <p class="text-gray-700 font-bold leading-relaxed mb-10 text-xl">
+                    EduRobot luôn nỗ lực không ngừng để hỗ trợ việc dạy và học tốt hơn.
+                    Chúng tôi rất mong nhận được những <span
+                        class="text-blue-600 underline decoration-wavy decoration-blue-200 underline-offset-4">ý kiến
+                        quý
+                        báu</span> của Quý thầy cô, Phụ huynh và các em.
+                </p>
+                <button onclick="closeWelcome()"
+                    class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-black py-5 rounded-3xl shadow-2xl shadow-blue-200 transition-all transform active:scale-95 uppercase tracking-widest text-lg">
+                    Cùng giúp EduRobot hoàn thiện 💖
+                </button>
+                <p class="mt-4 text-gray-400 text-sm font-bold">Ý kiến của bạn là món quà vô giá với chúng tôi</p>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer"></footer>
+
+    <script>
+        // Init Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6zlWn8BKYU7P6A2-PYq6IIWOzaqJWFhc",
+            authDomain: "gamhoctap.firebaseapp.com",
+            projectId: "gamhoctap",
+            storageBucket: "gamhoctap.firebasestorage.app",
+            messagingSenderId: "833329613932",
+            appId: "1:833329613932:web:0d8574827bcfe50b535c49"
+        };
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Welcome Message Logic
+        function closeWelcome() {
+            const overlay = document.getElementById('welcome-overlay');
+            const modal = document.getElementById('welcome-modal');
+            overlay.classList.remove('opacity-100');
+            modal.classList.remove('scale-100');
+            setTimeout(() => overlay.classList.add('hidden'), 500);
+            localStorage.setItem('welcome_shown', 'true');
+        }
+
+        function showWelcome() {
+            if (localStorage.getItem('welcome_shown')) return;
+            const overlay = document.getElementById('welcome-overlay');
+            const modal = document.getElementById('welcome-modal');
+            overlay.classList.remove('hidden');
+            setTimeout(() => {
+                overlay.classList.add('opacity-100', 'flex');
+                modal.classList.add('scale-100');
+            }, 100);
+        }
+
+        // Render Components
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.UI) {
+                UI.renderNavbar({ type: 'home', target: '#navbar' });
+                UI.renderFooter('#footer');
+            }
+            showWelcome();
+        });
+
+        // Form Handling
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.disabled = true;
+            btn.innerText = "⏳ Đang gửi...";
+
+            const data = {
+                name: document.getElementById('name').value,
+                contact: document.getElementById('contact').value,
+                message: document.getElementById('message').value,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                await db.collection('contacts').add(data);
+                document.getElementById('contact-form').classList.add('hidden');
+                document.getElementById('success-msg').classList.remove('hidden');
+            } catch (error) {
+                alert("Lỗi khi gửi lời nhắn: " + error.message);
+                btn.disabled = false;
+                btn.innerText = originalText;
+            }
+        });
+    </script>
+</body>
+
+</html>
