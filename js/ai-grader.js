@@ -308,6 +308,13 @@ function generateMockResponse(userInput, persona, prefix = "") {
             requirementDesc = "cặp từ hô ứng (Vừa... đã..., Càng... càng...)";
         }
 
+        // Group 6: Repetition/Linkage explanation (Phép lặp/Liên kết)
+        if (lowerPrefix.includes("lặp") || lowerPrefix.includes("liên kết") || lowerPrefix.includes("tác dụng")) {
+            targetConnectors.push('lặp', 'liên kết', 'nối', 'giúp', 'tác dụng');
+            requirementDesc = "giải thích về phép lặp hoặc liên kết câu";
+        }
+
+
         // Fallback if no specific requirements detected
         if (targetConnectors.length === 0) {
             targetConnectors = ['vì', 'nên', 'tuy', 'nhưng', 'nếu', 'thì', 'chẳng những', 'mà còn', 'vừa', 'đã', 'bởi', 'do', 'nhờ', 'mà'];
