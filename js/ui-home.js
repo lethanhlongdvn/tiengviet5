@@ -111,6 +111,11 @@ function generateNumpad() {
     // Xóa nội dung cũ nếu có để tránh trùng lặp
     grid.innerHTML = '';
 
+    // Kiểm tra quyền Admin (Chế độ soạn thảo - Ghi nhớ trên máy tính)
+    const isAdmin = localStorage.getItem('edu_admin') === 'true';
+    console.log("Current Admin Status:", isAdmin);
+    const activeWeek = 22;
+
     for (let i = 1; i <= 36; i++) {
         const btn = document.createElement('button');
         const label = i === 36 ? "DP" : i;
@@ -121,6 +126,13 @@ function generateNumpad() {
         if (i === 36) bgColor = "from-gray-500 to-gray-600 shadow-gray-200";
 
         btn.className = `aspect-square rounded-xl bg-gradient-to-br ${bgColor} text-white font-black text-sm shadow-md transition-all active:scale-90 hover:-translate-y-0.5 hover:brightness-110`;
+
+        // Logic khóa tuần nếu không phải Admin và không phải tuần Active
+        if (!isAdmin && i !== activeWeek) {
+            btn.classList.add('opacity-30', 'grayscale', 'cursor-not-allowed', 'pointer-events-none');
+            btn.title = "Đang soạn thảo...";
+        }
+
         btn.innerText = label;
         btn.onclick = () => openWeekMenuModal(i);
         grid.appendChild(btn);
