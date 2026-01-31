@@ -400,116 +400,12 @@ async function submitQuizResult() {
     }
 }
 
+// --- SUBMISSION CORE ---
 async function confirmSubmitQuiz() {
-    // Helper to get inputs
-    const name = document.getElementById('studentName').value.trim();
-    const cls = document.getElementById('studentClass').value;
-    const schoolSel = document.getElementById('schoolSelect').value;
-    const schoolOther = document.getElementById('otherSchool').value.trim();
-    const school = schoolSel === 'Khác' ? schoolOther : schoolSel;
-
-    if (!name) { alert("Em hãy nhập Họ và Tên của mình nhé!"); return; }
-    if (schoolSel === 'Khác' && !schoolOther) { alert("Em hãy nhập tên Trường của mình nhé!"); return; }
-
-    const btn = document.querySelector('#studentInfoContent button:last-child');
-    if (btn) { btn.disabled = true; btn.innerHTML = "🚀 Đang gửi bài..."; }
-
-    // --- CASE 1: ESSAY SUBMISSION ---
-    if (window.currentSubmissionType === 'essay') {
-        if (window.handleSubmission) {
-            await window.handleSubmission();
-            if (btn) { btn.disabled = false; btn.innerHTML = "🚀 NỘP BÀI"; }
-            return;
-        }
-    }
-
-    // --- CASE 1.5: LESSON 221 VIET SUBMISSION ---
-    if (window.currentSubmissionType === 'lesson_221_viet') {
-        if (window.submitLesson221VietData) {
-            await window.submitLesson221VietData(name, cls, school);
-            if (btn) { btn.disabled = false; btn.innerHTML = "🚀 NỘP BÀI"; }
-            return;
-        }
-    }
-
-    // --- CASE 1.6: LTVC FULL SUBMISSION (Emergency Fix) ---
-    if (window.currentSubmissionType === 'ltvc_full') {
-        if (window.handleSubmission) {
-            await window.handleSubmission();
-            if (btn) { btn.disabled = false; btn.innerHTML = "🚀 NỘP BÀI"; }
-            return;
-        }
-    }
-
-    // --- CASE 1.7: LESSON 222 VIET SUBMISSION ---
-    if (window.currentSubmissionType === 'lesson_222_viet') {
-        if (window.submitLesson222VietData) {
-            await window.submitLesson222VietData(name, cls, school);
-            if (btn) { btn.disabled = false; btn.innerHTML = "🚀 NỘP BÀI"; }
-            return;
-        }
-    }
-
-    // --- CASE 2: QUIZ SUBMISSION (DEFAULT) ---
-    const totalQuestions = window.currentQuizQuestions ? window.currentQuizQuestions.length : 0;
-    const correctCount = window.quizScore || 0;
-    const finalScore = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
-    const feedbackText = `Đúng ${correctCount}/${totalQuestions} câu`;
-
-    // Local Storage Save (for Excel Export)
-    if (!window.submissions) window.submissions = [];
-    const sub = {
-        studentName: name,
-        studentClass: cls,
-        studentSchool: school,
-        lessonTitle: document.title.replace(' - EduRobot', ''),
-        type: 'quiz',
-        content: `Kết quả trắc nghiệm: ${correctCount}/${totalQuestions}`,
-        feedback: feedbackText,
-        score: finalScore,
-        timestamp: new Date().toISOString()
-    };
-    window.submissions.push(sub);
-    localStorage.setItem('eduRobotSubmissions', JSON.stringify(window.submissions));
-
-    // Firebase (Optional - Keep existing logic if valid)
-    const fireData = {
-        studentName: name,
-        studentClass: cls,
-        studentSchool: school,
-        lessonTitle: document.title.replace(' - EduRobot', ''),
-        score: finalScore,
-        correctCount: correctCount,
-        totalQuestions: totalQuestions,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        type: 'quiz'
-    };
-
-    try {
-        const docId = window.getSlug(`${name}_${cls}_${school}_${fireData.lessonTitle}`);
-        await db.collection("diem_tieng_viet_lop5").doc(docId).set(fireData);
-        alert(`✨ Tuyệt vời! Em đạt ${finalScore} điểm. Kết quả đã gửi thành công.`);
-        window.location.reload();
-    } catch (error) {
-        console.error("Error saving quiz:", error);
-        // Fallback Success for Local
-        alert(`✨ Tuyệt vời! Em đạt ${finalScore} điểm. (Đã lưu vào máy)`);
-        window.location.reload();
-    } finally {
-        if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = "🚀 NỘP BÀI";
-        }
-    }
-}
-
-function confirmSubmitQuiz() {
-    if (window.UnifiedSubmission) {
-        window.UnifiedSubmission.confirmSave();
-    } else if (window.handleSubmission) {
-        window.handleSubmission();
+    if (window.UnifiedSubmission && typeof window.UnifiedSubmission.confirmSave === 'function') {
+        await window.UnifiedSubmission.confirmSave();
     } else {
-        alert("Hệ thống nộp bài đang tải, vui lòng thử lại sau 2 giây!");
+        alert("Hệ thống nộp bài đang khởi tạo, vui lòng đợi giây lát...");
     }
 }
 
