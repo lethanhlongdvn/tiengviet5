@@ -1,11 +1,10 @@
 // --- CONFIGURATION ---
 window.AI_API_URL = window.AI_API_URL || 'https://tiengviet5.netlify.app/.netlify/functions/chat';
-console.log('--- Interactive Exercises Script Starting ---');
+console.log('--- Interactive Exercises Script Starting (V20) ---');
 
 // Global Submissions Store
 window.submissions = window.submissions || JSON.parse(localStorage.getItem('eduRobotSubmissions') || '[]');
 
-// --- CORE UTILITIES ---
 // --- CORE UTILITIES ---
 window.celebrate = function () {
     console.log("CELEBRATE!");
@@ -24,985 +23,583 @@ window.celebrate = function () {
     }
 };
 
-window.toggleWord = function (el) {
-    if (!el.closest('.locked')) {
-        el.classList.toggle('selected');
+window.getSlug = function (str) {
+    if (!str) return 'slug-' + Date.now();
+    return str.toLowerCase()
+        .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+        .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
+        .replace(/ì|í|ị|ỉ|ĩ/g, "i")
+        .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
+        .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
+        .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
+        .replace(/đ/g, "d")
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '')
+        .replace(/-+/g, '-');
+};
+
+// --- TOGGLE & CHECK LOGIC ---
+window.toggleSentence = function (el, e) {
+    const evt = e || window.event;
+    const targetWord = evt ? evt.target.closest('.word') : null;
+    if (targetWord) {
+        if (!el.classList.contains('sentence-locked')) {
+            targetWord.classList.toggle('selected');
+        }
+        if (evt) {
+            evt.stopPropagation();
+            if (evt.preventDefault) evt.preventDefault();
+        }
+        return;
+    }
+    if (el.classList.contains('sentence-locked')) {
+        el.classList.remove('sentence-locked');
+        el.classList.add('bg-blue-50', 'ring-2', 'ring-blue-300');
+    } else {
+        const words = el.querySelectorAll('.word.selected');
+        words.forEach(w => w.classList.remove('selected'));
+        el.classList.remove('bg-blue-50', 'ring-2', 'ring-blue-300');
+        el.classList.add('sentence-locked');
+        el.querySelectorAll('.word.is-wrong, .word.is-correct').forEach(w => w.classList.remove('is-wrong', 'is-correct'));
+        el.classList.remove('ring-green-400', 'bg-green-50', 'ring-red-200', 'ring-orange-200');
     }
 };
 
-// --- LTVC FUNCTIONS (Week 21 & 22) ---
-window.ltvc21_check1 = function (id) {
-    // ... [Previous implementation] ...
-    const row = document.getElementById(id);
-    if (!row) return;
-    const ans = row.getAttribute('data-ans').split(',').map(s => s.trim());
-    const words = row.querySelectorAll('.word');
-    let right = 0, error = false;
-    let selectedCount = 0;
+window.checkParagraph = function (blockId) {
+    const container = document.getElementById(blockId);
+    const resultEl = document.getElementById('result-' + blockId);
+    if (!container || !resultEl) return;
 
-    words.forEach(w => {
-        if (w.classList.contains('selected')) {
-            selectedCount++;
-            const txt = w.innerText.replace(/[.,]/g, "").trim();
-            if (ans.includes(txt)) {
-                w.classList.remove('is-wrong'); w.classList.add('is-correct');
-                right++;
+    const rows = container.querySelectorAll('.interactive-row');
+    let totalCompound = 0, foundCompound = 0, errors = 0;
+
+    rows.forEach(row => {
+        const isCompound = row.getAttribute('data-compound') === 'true';
+        const targets = (row.getAttribute('data-ans') || "").split(',').map(s => s.trim().toLowerCase()).filter(s => s !== "");
+        const selectedWords = Array.from(row.querySelectorAll('.word.selected'));
+
+        if (isCompound) {
+            totalCompound++;
+            if (row.classList.contains('sentence-locked')) {
+                row.classList.add('ring-2', 'ring-red-200');
             } else {
-                w.classList.remove('is-correct'); w.classList.add('is-wrong');
-                error = true;
+                let rowCorrectWords = 0, rowHasError = false;
+                selectedWords.forEach(w => {
+                    const txt = w.innerText.replace(/[.,]/g, "").trim().toLowerCase();
+                    if (targets.includes(txt)) {
+                        w.classList.add('is-correct'); w.classList.remove('is-wrong');
+                        rowCorrectWords++;
+                    } else {
+                        w.classList.add('is-wrong'); w.classList.remove('is-correct');
+                        rowHasError = true; errors++;
+                    }
+                });
+                if (!rowHasError && rowCorrectWords === targets.length) {
+                    foundCompound++;
+                    row.classList.remove('bg-blue-50', 'ring-blue-300');
+                    row.classList.add('ring-2', 'ring-green-400', 'bg-green-50');
+                } else {
+                    row.classList.remove('ring-green-400', 'bg-green-50');
+                    row.classList.add('ring-2', 'ring-red-200');
+                }
             }
-        } else {
-            w.classList.remove('is-correct', 'is-wrong');
+        } else if (selectedWords.length > 0) {
+            selectedWords.forEach(w => { w.classList.add('is-wrong'); errors++; });
+            row.classList.add('ring-2', 'ring-red-200');
         }
     });
 
-    if (selectedCount > 0 && !error && right === ans.length) {
+    resultEl.classList.remove('hidden');
+    if (errors === 0 && foundCompound === totalCompound) {
         window.celebrate();
-        row.classList.add('locked');
-    } else if (selectedCount > 0 && !error && right < ans.length) {
-        alert('Em chọn đúng nhưng chưa đủ! Tìm thêm nhé.');
-    } else if (selectedCount === 0) {
-        alert('Em chưa chọn từ nào cả!');
+        resultEl.innerHTML = `<div class="p-4 bg-green-50 border-2 border-green-200 rounded-2xl text-green-700 text-center animate-bounce">
+            <p class="font-black text-xl mb-1">🎉 Xuất sắc!</p>
+            <p class="font-medium">Em đã tìm đúng tất cả <b>${totalCompound}/${totalCompound}</b> câu ghép!</p>
+        </div>`;
+    } else {
+        resultEl.innerHTML = `<div class="p-4 bg-red-50 border-2 border-red-100 rounded-2xl text-red-700">
+            <p class="font-bold text-lg mb-2">❌ Kết quả chưa đúng: <b>${foundCompound}/${totalCompound}</b> câu ghép. Lỗi: <b>${errors}</b>.</p>
+        </div>`;
     }
-}
+};
 
-window.ltvc21_reset1 = function (id) {
-    const row = document.getElementById(id);
-    if (!row) return;
-    row.classList.remove('locked');
+// --- LTVC LEGACY ---
+window.ltvc21_reset1 = (id) => {
+    const row = document.getElementById(id); if (!row) return;
     row.querySelectorAll('.word').forEach(w => w.classList.remove('selected', 'is-correct', 'is-wrong'));
-}
-
-window.ltvc21_update2 = function (id, val) {
-    const row = document.getElementById(id);
-    if (!row) return;
+};
+window.ltvc21_update2 = (id, val) => {
+    const row = document.getElementById(id); if (!row) return;
     const slots = row.querySelectorAll('.slot');
-    if (!val) {
-        slots.forEach(s => { s.innerText = "..."; s.style.color = "var(--accent)"; s.classList.remove('filled'); });
-        return;
-    }
-    const p = val.split('-');
-    if (p.length >= 2) {
-        slots.forEach((s, i) => {
-            if (p[i]) { s.innerText = p[i]; s.style.color = "#f59e0b"; }
-        });
-    }
-}
-
-window.ltvc21_check2 = function (id) {
-    const row = document.getElementById(id);
-    if (!row) return;
-    const select = row.querySelector('select');
-    if (select.value === row.getAttribute('data-ans')) {
+    if (!val) { slots.forEach(s => { s.innerText = "..."; s.classList.remove('filled'); }); return; }
+    val.split('-').forEach((v, i) => { if (slots[i]) { slots[i].innerText = v; } });
+};
+window.ltvc21_check2 = (id) => {
+    const row = document.getElementById(id); if (!row) return;
+    if (row.querySelector('select').value === row.getAttribute('data-ans')) {
         row.querySelectorAll('.slot').forEach(s => { s.style.color = "#22c55e"; s.classList.add('filled'); });
         window.celebrate();
     } else {
         row.querySelectorAll('.slot').forEach(s => { s.style.color = "#ef4444"; });
     }
-}
-
-// Week 22 LTVC
-window.ltvc22_update2 = function (id, val) { window.ltvc21_update2(id, val); } // Reuse
-window.ltvc22_check2 = function (id) { window.ltvc21_check2(id); } // Reuse
-window.ltvc22_check1 = function (id) { window.ltvc21_check1(id); } // Reuse
-
-window.ltvc22_toggle = function (el) {
+};
+window.ltvc22_toggle = (el) => {
     const container = el.nextElementSibling;
     if (container) {
         container.classList.toggle('hidden');
-        // Toggle opacity or color to indicate active state
-        el.classList.toggle('text-blue-600');
         el.classList.toggle('opacity-50');
     }
-}
+};
 
-// --- LESSON 222: ESSAY WRITING ---
+// --- UNIFIED SUBMISSION SYSTEM ---
+window.UnifiedSubmission = {
+    getContext: function () {
+        if (document.querySelector('.exercise-click-word-container') || document.querySelector('[id^="block-e1"]')) return 'ltvc_full';
+        if (document.getElementById('viet222-mb')) return 'essay_222';
+        if (document.getElementById('viet-inputA')) return 'lesson_221_viet';
+        return 'basic_lesson';
+    },
 
-// State
-window.viet222_state = { topic: 0 };
+    collectData: function (passedId) {
+        const type = this.getContext();
+        let data = { type: type, score: 0, content: "", feedback: "" };
 
-window.viet222_selectTopic = function (topicId) {
-    window.viet222_state.topic = topicId;
-    const section2 = document.getElementById('viet222-p2');
-    const badge = document.getElementById('viet222-badge');
-    const hint = document.getElementById('viet222-mb');
+        if (type === 'ltvc_full') {
+            let ex1a = { s: 0, t: 0 }, ex1b = { s: 0, t: 0 }, ex2 = { s: 0, t: 0 };
+            document.querySelectorAll('#block-e1-a .interactive-row').forEach(row => {
+                ex1a.t++;
+                const truth = (row.dataset.ans || "").split(',');
+                const selected = Array.from(row.querySelectorAll('.word.selected')).map(w => w.innerText.replace(/[.,]/g, '').trim());
+                if (truth.length === selected.length && truth.every(t => selected.includes(t))) ex1a.s++;
+            });
+            document.querySelectorAll('#block-e1-b .interactive-row').forEach(row => {
+                ex1b.t++;
+                const truth = (row.dataset.ans || "").split(',');
+                const selected = Array.from(row.querySelectorAll('.word.selected')).map(w => w.innerText.replace(/[.,]/g, '').trim());
+                if (truth.length === selected.length && truth.every(t => selected.includes(t))) ex1b.s++;
+            });
+            document.querySelectorAll('[id^="e2-q"]').forEach(block => {
+                ex2.t++; if (block.querySelector('select')?.value === block.dataset.ans) ex2.s++;
+            });
 
-    document.querySelectorAll('.viet222-topic-btn').forEach(b => {
-        b.classList.remove('ring-4', 'ring-teal-400', 'bg-white', 'shadow-xl');
-        b.querySelector('.check-icon').classList.add('hidden');
-    });
+            const input3 = document.getElementById('ai-' + passedId) || document.querySelector('textarea[id^="ai-"]');
+            const feedbackEl = document.getElementById('fb-' + (input3?.id.replace('ai-', '') || passedId));
 
-    const activeBtn = document.getElementById('viet222-topic-' + topicId);
-    if (activeBtn) {
-        activeBtn.classList.add('ring-4', 'ring-teal-400', 'bg-white', 'shadow-xl');
-        activeBtn.querySelector('.check-icon').classList.remove('hidden');
+            data.content = `[LTVC] 1a: ${ex1a.s}/${ex1a.t}, 1b: ${ex1b.s}/${ex1b.t}, B2: ${ex2.s}/${ex2.t}\n[VIẾT] ${input3 ? input3.value : "(Trống)"}`;
+            if (feedbackEl && !feedbackEl.classList.contains('hidden')) {
+                const m = feedbackEl.innerText.match(/(\d+\.?\d*)\/10/);
+                data.score = m ? parseFloat(m[1]) : 0;
+                data.feedback = feedbackEl.innerText;
+            } else {
+                const totalS = ex1a.s + ex1b.s + ex2.s;
+                const totalT = ex1a.t + ex1b.t + ex2.t;
+                const exScore = totalT > 0 ? (totalS / totalT) * 5 : 0;
+                data.score = (exScore + (input3 && input3.value.trim().length > 10 ? 4 : 0)).toFixed(1);
+            }
+        }
+        else if (type === 'essay_222') {
+            data.content = `Đề: ${window.viet222_currentTopic || '?'}\nMB: ${document.getElementById('viet222-mb').value}\nTB: ${document.getElementById('viet222-tb').value}\nKB: ${document.getElementById('viet222-kb').value}`;
+            data.score = parseFloat(document.getElementById('viet222-score').innerText) || 0;
+            data.feedback = document.getElementById('viet222-feedback-good').innerText + " | " + document.getElementById('viet222-feedback-bad').innerText;
+        }
+        else if (type === 'lesson_221_viet') {
+            const ratings = Array.from(document.querySelectorAll('.star-group')).map(g => {
+                return Array.from(g.querySelectorAll('.star-btn')).filter(s => s.textContent === '★').length;
+            });
+            const avgRating = ratings.length ? (ratings.reduce((a, b) => a + b, 0) / (ratings.length * 5)) * 10 : 0;
+            data.content = `A: ${document.getElementById('viet-inputA')?.value}\nB: ${document.getElementById('viet-inputB')?.value}`;
+            data.score = avgRating.toFixed(1);
+            data.feedback = `Tự đánh giá: ${avgRating}/10`;
+        }
+        return data;
+    },
+
+    startProcess: function (passedId) {
+        window.tempSubmissionData = this.collectData(passedId);
+        const modal = document.getElementById('studentInfoModal');
+        if (modal) {
+            modal.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+            modal.classList.add('flex', 'opacity-100', 'pointer-events-auto');
+            document.getElementById('studentInfoContent')?.classList.add('scale-100');
+        }
+    },
+
+    confirmSave: async function () {
+        const name = document.getElementById('studentName').value.trim();
+        const cls = document.getElementById('studentClass').value;
+        const school = document.getElementById('schoolSelect')?.value === 'Khác' ? document.getElementById('otherSchool')?.value.trim() : document.getElementById('schoolSelect')?.value;
+
+        if (!name) { alert("Em chưa nhập tên kìa!"); return; }
+        const btn = document.querySelector('#studentInfoContent button:last-child') || document.querySelector('#submitFinalBtn');
+        if (btn) {
+            btn.innerHTML = "⏳ ĐANG LƯU...";
+            btn.disabled = true;
+        }
+
+        try {
+            const data = window.tempSubmissionData || this.collectData();
+            const lessonTitle = document.title.replace(" - EduRobot", "");
+
+            // --- NEW: ZERO-DEPENDENCY BASE64 UPLOAD (V31) ---
+            let fileUrl = "";
+            const fileInputs = Array.from(document.querySelectorAll('input[type="file"]'));
+            const fileInput = fileInputs.find(input => input.files && input.files[0]);
+
+            const prog = document.getElementById('uploadProgress');
+            const bar = document.getElementById('uploadBar');
+            const pct = document.getElementById('uploadPercent');
+            const statusText = document.getElementById('uploadStatus');
+
+            if (fileInput && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                if (prog) prog.classList.remove('hidden');
+                if (btn) btn.disabled = true;
+                if (statusText) statusText.innerText = "ĐANG TỐI ƯU ẢNH (NÉN DUNG LƯỢNG)...";
+
+                try {
+                    // 1. COMPRESS IMAGE & CONVERT TO DATA URL
+                    fileUrl = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = (e) => {
+                            const img = new Image();
+                            img.src = e.target.result;
+                            img.onload = () => {
+                                const canvas = document.createElement('canvas');
+                                let width = img.width;
+                                let height = img.height;
+                                const MAX_SIZE = 1000; // Slightly smaller for safety in DB
+                                if (width > height) {
+                                    if (width > MAX_SIZE) { height *= MAX_SIZE / width; width = MAX_SIZE; }
+                                } else {
+                                    if (height > MAX_SIZE) { width *= MAX_SIZE / height; height = MAX_SIZE; }
+                                }
+                                canvas.width = width; canvas.height = height;
+                                const ctx = canvas.getContext('2d');
+                                ctx.drawImage(img, 0, 0, width, height);
+
+                                // Export as high-compression JPEG
+                                const dataUrl = canvas.toDataURL('image/jpeg', 0.6);
+
+                                // Check size (Firestore limit 1MB, so we keep under 950KB)
+                                if (dataUrl.length > 950000) {
+                                    reject(new Error("Ảnh quá lớn sau khi nén. Vui lòng chụp lại gần hơn hoặc giảm độ phân giải."));
+                                } else {
+                                    resolve(dataUrl);
+                                }
+                            };
+                            img.onerror = () => reject(new Error("Không thể đọc định dạng ảnh này."));
+                        };
+                        reader.onerror = () => reject(new Error("Lỗi đọc tệp tin."));
+                    });
+
+                    if (bar) bar.style.width = '100%';
+                    if (pct) pct.innerText = 'OK';
+                    if (statusText) statusText.innerText = "ĐANG LƯU BÀI LÀM TRỰC TIẾP...";
+
+                } catch (error) {
+                    console.error("Compression error:", error);
+                    alert("Lỗi xử lý ảnh: " + error.message);
+                    throw error;
+                }
+            } else {
+                if (btn) btn.innerHTML = "⏳ ĐANG NỘP BÀI...";
+            }
+
+            // UNIQUE ID USING TIMESTAMP TO PREVENT OVERWRITING
+            const docId = window.getSlug(`${name}_${cls}_${lessonTitle}_${Date.now()}`);
+
+            if (typeof db === 'undefined' || !db.collection) {
+                throw new Error("Hệ thống Firebase chưa sẵn sàng.");
+            }
+
+            await db.collection("essays_v2").doc(docId).set({
+                studentName: name, studentClass: cls, studentSchool: school || "Tiểu học",
+                content: data.content, lessonTitle: lessonTitle,
+                aiFeedback: data.feedback, aiGrade: data.score,
+                fileUrl: fileUrl, // Include the uploaded image URL
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                status: "Chưa chấm", type: data.type
+            });
+
+            alert("🎉 Tuyệt vời! Bài làm của em đã được gửi thành công.");
+            if (typeof closeStudentModal === 'function') closeStudentModal();
+            window.celebrate();
+        } catch (e) { alert("Lỗi nộp bài: " + e.message); }
+        finally { if (btn) { btn.innerHTML = "🚀 NỘP BÀI"; btn.disabled = false; } }
     }
+};
 
-    if (section2) section2.classList.remove('opacity-50', 'pointer-events-none', 'grayscale');
-    if (badge) badge.classList.remove('hidden');
-    if (hint) {
-        hint.placeholder = topicId === 1
-            ? 'Ví dụ: Hôm ấy, trên đường đi học về, em tình cờ gặp một người lạ...'
-            : 'Ví dụ: Trong bộ phim "Doraemon", em ấn tượng nhất với nhân vật Nobita...';
+// --- AI HELPERS ---
+window.checkVietAI = async (type) => {
+    const inputId = type === 'a' ? 'viet-inputA' : 'viet-inputB';
+    const el = document.getElementById(inputId);
+    if (!el || !el.value.trim()) {
+        alert("Em hãy viết bài trước khi xem nhận xét nhé!");
+        if (el) el.focus();
+        return;
     }
-}
+    const fb = document.getElementById('feedback-' + inputId);
+    if (fb) {
+        fb.classList.remove('hidden');
+        fb.innerHTML = `<div class="flex items-center gap-2 text-blue-600 animate-pulse"><span>🤖 Thầy đang đọc bài của em...</span></div>`;
+    }
+    try {
+        const res = await fetch(window.AI_API_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                sentence: `Hãy đóng vai giáo viên Tiếng Việt lớp 5. 
+                Đề bài: ${type === 'a' ? 'Sử dụng từ ngữ gợi tả hoặc so sánh' : 'Bộc lộ cảm xúc với người thân'}.
+                Nhận xét ngắn gọn (tối đa 2 câu) bài làm sau của học sinh: "${el.value.trim()}". 
+                Nếu hay thì khen, nếu chưa hay thì gợi ý nhẹ nhàng. Tuyệt đối không giải thích khoa học về sinh lý cơ thể hay lão hóa.`,
+                mode: 'chat',
+                persona: 'tlv'
+            })
+        });
+        const data = await res.json();
+        let reply = typeof data === 'string' ? data : (data.response || data.content || "Thầy chưa nghĩ ra nhận xét nào.");
+        if (fb) fb.innerHTML = reply.replace(/\n/g, '<br>').replace(/\*\*/g, '<b>');
+    } catch (e) { if (fb) fb.innerText = "Lỗi kết nối AI."; }
+};
 
-// Trigger Modal for Essay
-function viet222_submit() {
-    // 1. Validate inputs
+window.viet222_aiCheck = async () => {
     const mb = document.getElementById('viet222-mb').value.trim();
     const tb = document.getElementById('viet222-tb').value.trim();
     const kb = document.getElementById('viet222-kb').value.trim();
-    const fileInput = document.getElementById('viet222-file');
-    const hasFile = fileInput && fileInput.files && fileInput.files.length > 0;
-
-    if ((!mb || !tb || !kb) && !hasFile) {
-        alert('Em hãy viết đủ 3 phần hoặc chụp ảnh bài làm để nộp nhé!');
+    if (!mb || !tb || !kb) {
+        alert("Em hãy viết đủ 3 phần (Mở bài, Thân bài, Kết bài) để Thầy chấm thử nhé!");
         return;
     }
 
-    // 2. Open Student Info Modal
-    window.currentSubmissionType = 'essay';
-    window.currentEssayData = {
-        mb, tb, kb,
-        isImage: hasFile,
-        fileName: hasFile ? fileInput.files[0].name : null,
-        fileObj: hasFile ? fileInput.files[0] : null // Store file object for upload
-    };
-
-    const modal = document.getElementById('studentInfoModal');
-    const content = document.getElementById('studentInfoContent');
-    if (modal) {
-        modal.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
-        modal.classList.add('flex', 'opacity-100', 'pointer-events-auto');
-        content.classList.remove('scale-95');
-        content.classList.add('scale-100');
+    const fb = document.getElementById('viet222-pre-feedback');
+    const btn = document.getElementById('viet222-aicheck-btn');
+    if (fb) {
+        fb.classList.remove('hidden');
+        fb.innerHTML = `<div class="p-6 bg-blue-50 border-2 border-blue-200 rounded-3xl text-blue-800 text-center animate-pulse font-bold">🤖 Thầy đang đọc và chấm thử bài cho em đây, đợi Thầy một chút nhé...</div>`;
+        fb.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-}
-
-// The modal in lesson_viewer.html calls confirmSubmitQuiz(). We need to patch that to handle Essay too.
-// We can do this by assigning a new function to the window or modifying confirmSubmitQuiz in lesson-loader.js?
-// Better: Override/Extend the shared logic here since checkVietAI is specific.
-// Actually, I can't easily change `onclick` in HTML without DOM manip.
-// I will attach a global hook.
-
-// --- AI GRADING LOGIC (REAL) ---
-async function analyzeEssayAI(mb, tb, kb) {
-    const fullText = `Đề tài: Tả người.\nMở bài: ${mb}\nThân bài: ${tb}\nKết bài: ${kb}`;
-
-    // Fallback if network fails
-    const mockResult = {
-        score: (7 + Math.random() * 2).toFixed(1),
-        good: "Bài biết có bố cục 3 phần rõ ràng.",
-        bad: "Em hãy dùng thêm nhiều từ ngữ gợi tả hình ảnh, âm thanh hơn để bài văn sinh động hơn nhé."
-    };
+    if (btn) { btn.disabled = true; btn.innerText = "⏳ Đang xem bài..."; }
 
     try {
-        const response = await fetch(window.AI_API_URL, {
+        const res = await fetch(window.AI_API_URL, {
             method: 'POST',
             body: JSON.stringify({
-                sentence: `
-                Hãy đóng vai giáo viên Tiếng Việt lớp 5 chấm bài văn sau.
-                BẮT BUỘC trả về duy nhất một chuỗi JSON (không có markdown, không code block) theo định dạng:
-                {
-                    "score": "điểm số (thang 10, làm tròn 0.5)",
-                    "good": "lời khen ngắn gọn về ưu điểm",
-                    "bad": "lời nhận xét cụ thể cần cải thiện"
-                }
-                
+                sentence: `Hãy đóng vai giáo viên Tiếng Việt lớp 5 chuyên bồi dưỡng học sinh giỏi. 
+                Đề bài: ${window.viet222_currentTopic === 1 ? 'Tả một người em mới gặp nhưng để lại ấn tượng sâu sắc' : 'Tả nhân vật chính trong phim/kịch em đã xem'}.
                 Bài làm của học sinh:
-                ${fullText}`,
-                mode: 'essay_grading', // Prompt template in backend should handle this
-                subject: 'Viết',
-                weekNumber: 22
-            })
-        });
-
-        if (!response.ok) return mockResult;
-        const data = await response.json();
-
-        // Robust Parsing Logic
-        let resString = typeof data === 'string' ? data : data.response;
-        // Sometimes LLM returns stringified JSON inside response
-        if (typeof resString !== 'string') resString = JSON.stringify(resString);
-
-        // Remove markdown code blocks if present
-        resString = resString.replace(/```json/g, '').replace(/```/g, '').trim();
-
-        try {
-            const parsed = JSON.parse(resString);
-            return {
-                score: parsed.score || mockResult.score,
-                good: parsed.good || parsed.uu_diem || "Bài làm khá tốt.",
-                bad: parsed.bad || parsed.nhuoc_diem || parsed.loi_khuyen || "Cần trau chuốt từ ngữ hơn."
-            };
-        } catch (e) {
-            console.warn("Failed to parse AI JSON, using fallback", e);
-            // Try to extract if simple string
-            return mockResult;
-        }
-
-    } catch (e) {
-        console.error("AI Error", e);
-        return mockResult;
-    }
-}
-
-// --- EXCEL EXPORT ---
-function exportTeacherExcel() {
-    if (!window.submissions || window.submissions.length === 0) {
-        alert("Chưa có bài nào được nộp!");
-        return;
-    }
-
-    try {
-        // Data Structure: [TT, Name, Class, School, Content, Feedback, Score]
-        const data = window.submissions.map((sub, idx) => ({
-            "STT": idx + 1,
-            "Họ và Tên": sub.studentName,
-            "Lớp": sub.studentClass,
-            "Trường": sub.studentSchool,
-            "Loại bài": sub.type === 'quiz' ? 'Trắc nghiệm' : 'Tập làm văn',
-            "Nội dung": sub.content || 'N/A',
-            "Nhận xét AI": sub.feedback || 'N/A',
-            "Điểm số": sub.score
-        }));
-
-        const ws = XLSX.utils.json_to_sheet(data);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "Bai_Lam_Hoc_Sinh");
-        XLSX.writeFile(wb, "Danh_Sach_Bai_Lam.xlsx");
-    } catch (e) {
-        alert("Lỗi xuất file: " + e.message);
-    }
-}
-
-// Expose functions
-window.viet222_submit = viet222_submit;
-window.exportTeacherExcel = exportTeacherExcel;
-window.viet222_selectTopic = viet222_selectTopic;
-window.analyzeEssayAI = analyzeEssayAI;
-
-// Override confirmSubmitQuiz to handle both Quiz and Essay
-// (This is a bit of a hack, ideally we'd edit lesson-loader.js too, which I will do next)
-// But to ensure `interactive-exercises.js` handles the logic:
-window.handleSubmission = async function () {
-    // Get info
-    const name = document.getElementById('studentName').value.trim();
-    const cls = document.getElementById('studentClass').value;
-    const schoolSel = document.getElementById('schoolSelect').value;
-    const schoolOther = document.getElementById('otherSchool').value.trim();
-    const school = schoolSel === 'Khác' ? schoolOther : schoolSel;
-
-    if (!name) { alert("Thiếu tên!"); return; }
-    if (schoolSel === 'Khác' && !schoolOther) { alert("Thiếu tên trường!"); return; }
-
-    const btn = document.querySelector('#studentInfoContent button:last-child');
-    if (btn) { btn.innerHTML = "⏳ Đang xử lý..."; btn.disabled = true; }
-
-    if (window.currentSubmissionType === 'essay') {
-        const { mb, tb, kb, isImage, fileName, fileObj } = window.currentEssayData;
-
-        let result = {};
-        let contentToSave = "";
-        let fileUrl = "";
-
-        try {
-            // Check SDK
-            if (isImage && !window.storage && typeof firebase.storage !== 'function') {
-                throw new Error("Hệ thống chưa tải xong chức năng nộp ảnh. Em vui lòng tải lại trang (F5) và thử lại nhé!");
-            }
-
-            // Upload Image if present
-            if (isImage && fileObj) {
-                // Use global storage or init new ref
-                const storageInstance = window.storage || firebase.storage();
-                const storageRef = storageInstance.ref(`essays/${Date.now()}_${fileObj.name}`);
-
-                // Timeout Helper (20s)
-                const uploadTask = storageRef.put(fileObj);
-                const timeoutPromise = new Promise((_, reject) =>
-                    setTimeout(() => reject(new Error("Mạng quá chậm (sau 20s), không thể tải ảnh lên. Em hãy kiểm tra lại kết nối hoặc thử nộp lại nhé!")), 20000)
-                );
-
-                const snapshot = await Promise.race([uploadTask, timeoutPromise]);
-                fileUrl = await snapshot.ref.getDownloadURL();
-
-                result = {
-                    score: 9.5,
-                    good: "Thầy/Cô đã nhận được ảnh bài làm của em.",
-                    bad: "Thầy/Cô sẽ xem và chấm điểm chi tiết trên lớp nhé!"
-                };
-                contentToSave = `[FILE ẢNH]`;
-            } else {
-                // Text Submission: Call AI
-                result = await analyzeEssayAI(mb, tb, kb);
-                contentToSave = `MB: ${mb}\nTB: ${tb}\nKB: ${kb}`;
-            }
-
-            // Save to Firebase Firestore (ESSAYS_V2)
-            // One submission per student logic: use a deterministic ID
-            const lessonTitle = document.title.replace(" - EduRobot", "");
-            const docId = window.getSlug(`${name}_${cls}_${school}_${lessonTitle}`);
-
-            await db.collection("essays_v2").doc(docId).set({
-                studentName: name,
-                studentClass: cls,
-                studentSchool: school,
-                content: contentToSave,
-                fileUrl: fileUrl,
-                lessonTitle: lessonTitle,
-                aiFeedback: `Good: ${result.good} | Bad: ${result.bad}`,
-                aiGrade: result.score,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                status: "Chưa chấm",
-                type: 'essay'
-            });
-
-            // Show result locally
-            document.getElementById('viet222-score').innerText = result.score || 8.5;
-            document.getElementById('viet222-feedback-good').innerText = result.good || result.feedback || "Tốt";
-            document.getElementById('viet222-feedback-bad').innerText = result.bad || result.suggestion || "";
-
-            const stars = Math.floor(result.score / 2);
-            let starHtml = '';
-            for (let i = 0; i < 5; i++) starHtml += i < stars ? '★' : '<span class=\'text-gray-300\'>★</span>';
-            document.getElementById('viet222-stars').innerHTML = starHtml;
-
-            document.getElementById('viet222-result').classList.remove('hidden');
-            document.getElementById('viet222-result').scrollIntoView({ behavior: 'smooth' });
-
-            // LocalStorage Backup
-            const sub = {
-                studentName: name, studentClass: cls, studentSchool: school,
-                type: 'essay',
-                content: contentToSave,
-                feedback: `Good: ${result.good} | Bad: ${result.bad}`,
-                score: result.score,
-                timestamp: new Date().toISOString()
-            };
-            window.submissions.push(sub);
-            localStorage.setItem('eduRobotSubmissions', JSON.stringify(window.submissions));
-
-            closeStudentModal();
-            celebrate();
-
-        } catch (error) {
-            console.error("Error saving essay:", error);
-            alert("Có lỗi khi nộp bài: " + (error.message || "Lỗi không xác định"));
-        }
-
-    } else {
-        // Quiz Submission (Existing logic - delegates to nothing here but usually caller handles it?)
-        // Wait, confirmingSubmitQuiz in lesson-loader CALLS this *only* for essay per my previous logic?
-        // Ah, in step 146 I made confirmSubmitQuiz call window.handleSubmission IF type is essay.
-        // So this ELSE block is redundant but safe to keep empty or log.
-    }
-
-
-    if (btn) { btn.innerHTML = "🚀 NỘP BÀI"; btn.disabled = false; }
-};
-
-// --- LESSON 222: SPEAKING & LISTENING (DEBATE) ---
-const debateData = {
-    "giữ tiền riêng": {
-        topicName: "Học sinh giữ tiền riêng",
-        pro: [
-            "Việc giữ tiền giúp học sinh có thể chủ động mua sắm đồ dùng học tập cần thiết khi bố mẹ bận.",
-            "Giúp chúng ta sớm học được cách lập kế hoạch chi tiêu hợp lí, không bị phụ thuộc.",
-            "Khi tự giữ tiền, chúng ta sẽ hiểu rõ hơn giá trị của đồng tiền và trân trọng công sức lao động của cha mẹ."
-        ],
-        con: [
-            "Học sinh có thể bị cám dỗ, tiêu xài hoang phí vào những món đồ chơi vô bổ hoặc đồ ăn vặt không tốt.",
-            "Dễ nảy sinh tâm lí so bì, đua đòi với bạn bè khi thấy bạn có nhiều tiền hơn.",
-            "Có tiền trong người có thể gặp nguy hiểm nếu bị kẻ xấu dụ dỗ hoặc trấn lột."
-        ]
-    }
-};
-
-window.nvn222_state = {
-    history: [],
-    messages: []
-};
-
-
-// --- AI DEBATE LOGIC (REAL + FALLBACK) ---
-
-async function getDebateAIResponse(userText, topicKey) {
-    const data = debateData[topicKey];
-
-    // Fallback logic (Rule-based) if AI fails
-    const getFallbackResponse = () => {
-        let isPro = false;
-        let isCon = false;
-        const lower = userText.toLowerCase();
-
-        // 1. Check strong negatives first
-        if (lower.includes("không nên") || lower.includes("không đồng ý") || lower.includes("phản đối") || lower.includes("ko nên")) {
-            isCon = true;
-        }
-        // 2. Check keywords if not already Con
-        else {
-            if (lower.match(/(hại|xấu|đua đòi|hoang phí|nguy hiểm|lo lắng|mất|tốn|sợ|tiêu|xài|sài|hư_hỏng|rủi_ro)/)) isCon = true;
-            if (!isCon && lower.match(/(đồng ý|nên|tốt|cần|mua|quản|tự|lợi|giỏi|biết|ok|đc|được)/)) isPro = true;
-        }
-
-        const randomIdx = Math.floor(Math.random() * 3);
-        if (isCon) {
-            // User is CON -> AI argues PRO
-            return `Tớ hiểu ý của cậu. 😊 Nhưng mà tớ thấy nếu được giữ tiền riêng thì mình có thể: "${data.pro[randomIdx]}", cậu thấy sao?`;
-        } else {
-            // User is PRO -> AI argues CON
-            return `Ý của cậu rất hay! 🙌 Nhưng mà tớ băn khoăn là nếu tụi mình tự giữ tiền thì dễ: "${data.con[randomIdx]}". Cậu nghĩ sao?`;
-        }
-    };
-
-    try {
-        // Collect history from state
-        // Map UI messages to API format: { role: 'user' | 'model', content: '...' }
-        const history = window.nvn222_state.messages.map(msg => ({
-            role: msg.role === 'Bạn' ? 'user' : 'model',
-            content: msg.text
-        }));
-
-        const response = await fetch(window.AI_API_URL, {
-            method: 'POST',
-            body: JSON.stringify({
-                mode: 'chat', // Explicitly switch to chat mode
-                history: history, // Send full history
-                temperature: 0.7, // Allow some creativity
-                // The backend now handles the system prompt based on mode='chat'
-                // We don't need to send the huge prompt here anymore, reducing payload size.
-                // But we can send a custom one if needed via 'sentence' param if we want to override.
-                // For now, let's rely on the backend's robust prompt.
-                course: 'tiengviet5',
-                lesson: '222'
-            })
-        });
-
-        if (!response.ok) throw new Error("Network response was not ok");
-
-        const resData = await response.json();
-        let aiText = typeof resData === 'string' ? resData : (resData.response || resData.content || resData.message);
-
-        if (!aiText) throw new Error("Empty response from AI");
-
-        return aiText.replace(/```json/g, '').replace(/```/g, '').trim();
-
-    } catch (error) {
-        console.warn("AI Debate Error, using fallback:", error);
-        return getFallbackResponse();
-    }
-}
-
-async function nvn222_send() {
-    const input = document.getElementById('btn-nvn-input') || document.getElementById('nvn-chat-input');
-    const msgContainer = document.getElementById('nvn-chat-history');
-    if (!input) {
-        console.error("Input not found: btn-nvn-input or nvn-chat-input");
-        return;
-    }
-    const text = input.value.trim();
-
-    if (!text) return;
-
-    // 1. Add User Message
-    addMessageToChat('user', text);
-    input.value = '';
-
-    // 2. Simulate AI Thinking
-    const typingIndicator = document.createElement('div');
-    typingIndicator.className = 'flex items-center space-x-2 p-3 bg-gray-100 rounded-xl rounded-tl-none self-start';
-    typingIndicator.id = 'nvn-typing-indicator';
-    typingIndicator.innerHTML = '<span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></span>';
-    msgContainer.appendChild(typingIndicator);
-    msgContainer.scrollTop = msgContainer.scrollHeight;
-
-    // 3. Get AI Response (Async)
-    const start = Date.now();
-    const aiRep = await getDebateAIResponse(text, "giữ tiền riêng");
-    const elapsed = Date.now() - start;
-    const remaining = Math.max(0, 1000 - elapsed);
-
-    setTimeout(() => {
-        if (typingIndicator.parentNode) typingIndicator.parentNode.removeChild(typingIndicator);
-        addMessageToChat('ai', aiRep);
-    }, remaining);
-}
-
-function nvn222_quickTalk(msg) {
-    const input = document.getElementById('btn-nvn-input') || document.getElementById('nvn-chat-input');
-    if (input) input.value = msg;
-    nvn222_send();
-}
-
-function addMessageToChat(role, text) {
-    const msgContainer = document.getElementById('nvn-chat-history');
-    const div = document.createElement('div');
-
-    if (role === 'user') {
-        div.className = "self-end bg-blue-600 text-white p-4 rounded-2xl rounded-tr-none max-w-[80%] shadow-md animate-in slide-in-from-right-2";
-        div.innerHTML = `<p class="font-medium">${text}</p>`;
-        window.nvn222_state.messages.push({ role: 'Bạn', text: text });
-    } else {
-        div.className = "self-start bg-white border border-gray-200 text-gray-800 p-4 rounded-2xl rounded-tl-none max-w-[80%] shadow-md animate-in slide-in-from-left-2";
-        div.innerHTML = `<div class="flex items-center gap-2 mb-1"><span class="text-lg">👦</span><span class="text-xs font-black text-amber-500 uppercase">Minh Trí</span></div><p class="font-medium">${text}</p>`;
-        window.nvn222_state.messages.push({ role: 'Minh Trí', text: text });
-    }
-
-    msgContainer.appendChild(div);
-    msgContainer.scrollTop = msgContainer.scrollHeight;
-}
-
-async function nvn222_summary() {
-    if (window.nvn222_state.messages.length < 2) {
-        alert("Cuộc thảo luận còn ngắn quá! Hãy trao đổi thêm vài câu nữa nhé. 😊");
-        return;
-    }
-
-    const summaryBtn = document.getElementById('nvn-summary-btn');
-    const originalText = summaryBtn.innerHTML;
-    summaryBtn.innerHTML = "⏳ Đang tổng hợp...";
-    summaryBtn.disabled = true;
-
-    const chatContent = window.nvn222_state.messages.map(m => `${m.role}: ${m.text}`).join("\n");
-
-    try {
-        const response = await fetch(window.AI_API_URL, {
-            method: 'POST',
-            body: JSON.stringify({
-                sentence: `
-                Hãy đóng vai người điều hành thảo luận lớp 5. 
-                Dựa trên cuộc trò chuyện sau: "${chatContent}". 
-                Hãy viết một bản tóm tắt ngắn gọn theo đúng định dạng sau:
-                {
-                    "agree": "Những điểm hai bên đã thống nhất",
-                    "diff": "Những điểm vẫn còn khác biệt",
-                    "praise": "Lời khen cho thái độ thảo luận của bạn học sinh"
-                }
-                Dùng ngôn ngữ thân thiện, vui vẻ.`,
-                mode: 'json'
-            })
-        });
-
-        let summaryData = {
-            agree: "Cả hai đều quan tâm đến việc sử dụng tiền sao cho hợp lí.",
-            diff: "Một bên đề cao sự tự lập, một bên lo ngại rủi ro.",
-            praise: "Bạn đã thể hiện thái độ tôn trọng ý kiến khác biệt rất tốt!"
-        };
-
-        if (response.ok) {
-            const data = await response.json();
-            let resString = typeof data === 'string' ? data : data.response;
-            resString = resString.replace(/```json/g, '').replace(/```/g, '').trim();
-            try {
-                const parsed = JSON.parse(resString);
-                summaryData = parsed;
-            } catch (e) { console.error("Parse summary error", e); }
-        }
-
-        const msgContainer = document.getElementById('nvn-chat-history');
-        const div = document.createElement('div');
-        div.className = "mx-auto bg-amber-50 border border-amber-200 p-5 rounded-2xl w-full shadow-inner my-4 animate-in zoom-in-95";
-        div.innerHTML = `
-            <h3 class="text-lg font-black text-amber-700 text-center mb-3">📋 TỔNG KẾT THẢO LUẬN</h3>
-            <div class="space-y-2 text-sm text-gray-700">
-                <p>✅ <strong>Điểm thống nhất:</strong> ${summaryData.agree || summaryData.thong_nhat}</p>
-                <p>⚡ <strong>Điểm khác biệt:</strong> ${summaryData.diff || summaryData.khac_biet}</p>
-                <p>❤️ <strong>Nhận xét:</strong> ${summaryData.praise || summaryData.nhan_xet} 🤝</p>
-            </div>
-         `;
-        msgContainer.appendChild(div);
-        msgContainer.scrollTop = msgContainer.scrollHeight;
-        celebrate();
-
-    } catch (error) {
-        console.error("Summary error:", error);
-    } finally {
-        summaryBtn.innerHTML = originalText;
-        summaryBtn.disabled = false;
-    }
-}
-
-// Expose
-window.nvn222_send = nvn222_send;
-window.nvn222_summary = nvn222_summary;
-window.nvn222_quickTalk = nvn222_quickTalk;
-
-// --- LESSON 222: LTVC Q2 HELPER ---
-// --- LESSON 222: LTVC Q2 HELPER ---
-window.checkLTVC222_Q2 = async function () {
-    const inputId = '222-q2';
-    const inputEl = document.getElementById('ai-' + inputId);
-
-    // Debugging: Alert to confirm function call
-    // alert("Đang kiểm tra kết nối AI..."); 
-
-    if (!inputEl) {
-        console.error("Input element not found: ai-" + inputId);
-        alert("Lỗi: Không tìm thấy ô nhập liệu!");
-        return;
-    }
-
-    const value = inputEl.value.trim();
-    if (!value) {
-        alert("Em hãy viết câu trước khi nhờ AI nhận xét nhé!");
-        inputEl.focus();
-        return;
-    }
-
-    if (typeof askAI === 'function') {
-        const prompt = "Đặt một câu ghép nói về nhân vật Mát hoặc trang trại của Mát, trong đó các vế của câu ghép được nối với nhau bằng một kết từ (và, hay, nhưng, rồi, thì,...).";
-
-        // Show loading state manually if askAI doesn't immediately
-        const feedbackEl = document.getElementById('fb-' + inputId);
-        if (feedbackEl) {
-            feedbackEl.classList.remove('hidden');
-            feedbackEl.innerHTML = '<div class="text-blue-600 font-bold animate-pulse">🤖 Thầy giáo đang đọc bài của em...</div>';
-        }
-
-        try {
-            await askAI(inputId, prompt, "single", "ltvc", 22);
-        } catch (e) {
-            console.error(e);
-            alert("Có lỗi khi gọi AI: " + e.message);
-        }
-    } else {
-        console.error("askAI function is missing!");
-        alert("Hệ thống AI chưa sẵn sàng. Em hãy tải lại trang và thử lại xem sao nhé!");
-    }
-};
-
-
-// --- LESSON 221: VIET QUESTIONS CHECKER ---
-window.checkVietAI = async function (inputId, type) {
-    const inputEl = document.getElementById(inputId);
-    const feedbackEl = document.getElementById('feedback-' + inputId);
-
-    if (!inputEl) return;
-
-    const studentText = inputEl.value.trim();
-    if (!studentText) {
-        alert("Em chưa viết bài nè!");
-        inputEl.focus();
-        return;
-    }
-
-    if (feedbackEl) {
-        feedbackEl.classList.remove('hidden');
-        feedbackEl.innerHTML = `
-            <div class="flex items-center gap-2 text-blue-600">
-                <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                <span>Thầy đang đọc bài của em...</span>
-            </div>
-        `;
-    }
-
-    let requirement = type === 'a'
-        ? "Viết lại câu văn có sử dụng từ ngữ gợi tả hoặc hình ảnh so sánh để câu văn sinh động hơn."
-        : "Viết lại câu văn bộc lộ suy nghĩ, cảm xúc chân thật với người được tả.";
-
-    try {
-        // Use gradeParagraph if available for consistent AI persona, 
-        // OR direct call. Since gradeParagraph forces 3-part structure, we use direct call here 
-        // but with the same Endpoint and Persona logic.
-
-        const response = await fetch(window.AI_API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                sentence: `
-                🎯 YÊU CẦU: ${requirement}
-                📝 BÀI LÀM: "${studentText}"
+                Mở bài: ${mb}
+                Thân bài: ${tb}
+                Kết bài: ${kb}
                 
-                Hãy đóng vai giáo viên Tiếng Việt lớp 5.
-                Nhận xét ngắn gọn (tối đa 3 câu). 
-                - Nếu bài làm hay/đúng: Khen ngợi.
-                - Nếu chưa đạt: Gợi ý cách sửa cụ thể.
-                `,
-                persona: "tlv",
-                mode: "chat",
-                weekNumber: 21
+                Hãy chấm thử và nhận xét ngắn gọn (tối đa 4 câu) theo định dạng:
+                1. Điểm mạnh (văn phong, hình ảnh so sánh...).
+                2. Góp ý sửa đổi (chính tả, cách dùng từ, nội dung).
+                3. Dự đoán điểm (trên thang 10).`,
+                mode: 'chat',
+                persona: 'tlv'
             })
         });
-
-        if (!response.ok) throw new Error("API Error");
-
-        const data = await response.json();
-        let reply = typeof data === 'string' ? data : (data.response || data.content);
-
-        // Clean markdown
-        reply = reply.replace(/\*\*/g, '<b>').replace(/\*/g, '').replace(/\n/g, '<br>');
-
-        if (feedbackEl) {
-            feedbackEl.classList.remove('hidden');
-            feedbackEl.innerHTML = `
-                <div class="flex gap-3">
-                    <div class="text-2xl">👨‍🏫</div>
-                    <div class="text-gray-800">${reply}</div>
+        const data = await res.json();
+        let reply = typeof data === 'string' ? data : (data.response || data.content || "Thầy chưa đưa ra được nhận xét.");
+        if (fb) {
+            fb.innerHTML = `
+                <div class="p-6 bg-white border-4 border-teal-100 rounded-3xl shadow-xl space-y-3">
+                    <h4 class="font-black text-teal-600 flex items-center gap-2 text-lg">
+                        <span>👨‍🏫</span> NHẬN XÉT CỦA THẦY (DỰ THẢO)
+                    </h4>
+                    <div class="text-gray-800 leading-relaxed text-base">${reply.replace(/\n/g, '<br>').replace(/\*\*/g, '<b>')}</div>
+                    <p class="text-xs text-gray-400 italic mt-2">*Đây là nhận xét thử nghiệm giúp em cải thiện bài viết trước khi nộp chính thức.</p>
                 </div>
-             `;
+            `;
         }
     } catch (e) {
-        console.error("AI Check Failed, switching to Heuristic:", e);
-
-        // --- HEURISTIC FALLBACK ---
-        let fallbackMsg = "Bài làm của em đã được ghi nhận.";
-        const lowerText = studentText.toLowerCase();
-
-        if (type === 'a') {
-            const hasComparison = ['như', 'tựa', 'hơn', 'giống', 'y hệt', 'chẳng khác gì'].some(w => lowerText.includes(w));
-            const hasAdjectives = ['đẹp', 'xinh', 'cao', 'trắng', 'đen', 'nhanh', 'chậm', 'buồn', 'vui'].some(w => lowerText.includes(w)); // Basic list
-
-            if (hasComparison) {
-                fallbackMsg = "Tuyệt vời! Em đã biết sử dụng hình ảnh so sánh để câu văn sinh động hơn.";
-            } else if (hasAdjectives) {
-                fallbackMsg = "Em đã dùng từ ngữ gợi tả. Thử thêm hình ảnh so sánh (như, tựa...) nữa nhé!";
-            } else {
-                fallbackMsg = "Câu văn hơi đơn giản. Em hãy thử thêm các từ so sánh như 'trắng như tuyết', 'nhanh như cắt' xem sao.";
-            }
-        } else {
-            // Type b: Emotion
-            const hasEmotion = ['yêu', 'thương', 'nhớ', 'quý', 'kính trọng', 'biết ơn', 'xúc động', 'ngưỡng mộ'].some(w => lowerText.includes(w));
-            if (hasEmotion) {
-                fallbackMsg = "Cô cảm nhận được tình cảm chân thành của em qua câu văn này. Rất tốt!";
-            } else {
-                fallbackMsg = "Em hãy thử thêm các từ chỉ cảm xúc (yêu, thương, nhớ...) để bộc lộ rõ tình cảm hơn nhé.";
-            }
-        }
-
-        if (feedbackEl) {
-            feedbackEl.classList.remove('hidden');
-            feedbackEl.innerHTML = `
-                <div class="flex gap-3">
-                    <div class="text-2xl">🤖</div> <!-- Robot Icon for offline mode -->
-                    <div class="text-gray-800"><b>(Chế độ chấm nhanh):</b> ${fallbackMsg}</div>
-                </div>
-             `;
-        }
+        if (fb) fb.innerHTML = `<div class="p-4 bg-red-50 text-red-600 rounded-xl">Lỗi kết nối AI. Em thử lại sau nhé!</div>`;
+    } finally {
+        if (btn) { btn.disabled = false; btn.innerText = "🔍 NHẬN XÉT & GỢI Ý"; }
     }
 };
 
-// --- LESSON 221: LTVC Q3 CHECKER ---
-window.checkLTVC221_Q3 = async function () {
-    const inputId = 'ai-3';
-    const feedbackId = 'fb-3';
-    const inputEl = document.getElementById(inputId);
-    const feedbackEl = document.getElementById(feedbackId);
+window.startSubmitLesson221Viet = function () {
+    window.UnifiedSubmission.startProcess();
+};
 
-    if (!inputEl) {
-        console.error("Input not found: " + inputId);
+// --- CHAT DEBATE ---
+window.nvn222_state = { messages: [] };
+window.nvn222_send = async () => {
+    const input = document.getElementById('btn-nvn-input') || document.getElementById('nvn-chat-input');
+    const msgContainer = document.getElementById('nvn-chat-history');
+    if (!input || !input.value.trim() || !msgContainer) return;
+    const text = input.value.trim(); input.value = '';
+
+    addMsg('user', text);
+
+    // Add "AI is thinking" indicator
+    const typingId = 'ai-typing-' + Date.now();
+    const typingDiv = document.createElement('div');
+    typingDiv.id = typingId;
+    typingDiv.className = "self-start bg-gray-100 p-3 rounded-xl mr-10 mb-2 border border-gray-200 animate-pulse text-gray-500 italic text-sm";
+    typingDiv.innerText = "Minh Trí đang suy nghĩ...";
+    msgContainer.appendChild(typingDiv);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+
+    try {
+        const res = await fetch(window.AI_API_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                sentence: `Bạn là Minh Trí, một học sinh lớp 5 cực kỳ thông minh, lém lỉnh và giỏi tranh biện. 
+                Nhiệm vụ của bạn là tranh luận với người dùng về chủ đề "Học sinh có nên giữ tiền riêng?".
+                
+                PHONG CÁCH:
+                - Xưng hô: "tớ" - "cậu".
+                - Ngôn ngữ: Trẻ trung, thông minh, đôi khi dùng emoji phù hợp lứa tuổi lớp 5.
+                - Thái độ: Tôn trọng nhưng sẵn sàng "vặn" lại các lập luận chưa chặt chẽ.
+                
+                CHIẾN THUẬT TRANH BIỆN:
+                1. Nếu người dùng đưa ra ý kiến, hãy hỏi "Tại sao?".
+                2. Yêu cầu dẫn chứng thực tế: "Cậu có ví dụ nào cho việc này không?".
+                3. Chỉ ra mâu thuẫn: Nếu họ nói giữ tiền để tự lập, hãy hỏi về việc nếu tiêu xài hoang phí thì sao.
+                4. Luôn giữ thế chủ động bằng cách kết thúc với một câu hỏi vặn lại.`,
+                history: window.nvn222_state.messages.map(m => ({
+                    role: m.role === 'Bạn' ? 'user' : 'assistant',
+                    text: m.text
+                })),
+                mode: 'chat',
+                persona: 'minhtri'
+            })
+        });
+        const data = await res.json();
+
+        // Remove typing indicator
+        const indicator = document.getElementById(typingId);
+        if (indicator) indicator.remove();
+
+        addMsg('ai', data.response || data.content || data);
+    } catch (e) {
+        console.error("Chat Error:", e);
+        const indicator = document.getElementById(typingId);
+        if (indicator) indicator.remove();
+        addMsg('ai', "Tớ đang mải nghĩ quá, cậu nói lại câu vừa nãy được không?");
+    }
+};
+
+window.nvn222_summary = async () => {
+    const msgContainer = document.getElementById('nvn-chat-history');
+    if (!msgContainer || window.nvn222_state.messages.length < 2) {
+        alert("Cậu và tớ chưa tranh luận gì mà, nói thêm vài câu đi!");
         return;
     }
 
-    const value = inputEl.value.trim();
-    if (!value) {
-        alert("Em hãy viết đoạn văn trước nhé!");
-        inputEl.focus();
-        return;
-    }
-
-    if (feedbackEl) {
-        feedbackEl.classList.remove('hidden');
-        feedbackEl.innerHTML = `
-            <div class="flex items-center gap-2 text-purple-600">
-                <svg class="animate-spin w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                <span>Thầy đang chấm bài...</span>
-            </div>
-        `;
+    const summaryBtn = document.querySelector('button[onclick="nvn222_summary()"]');
+    if (summaryBtn) {
+        summaryBtn.disabled = true;
+        summaryBtn.innerText = "⏳ ĐANG TỔNG KẾT...";
     }
 
     try {
-        const prefix = "Đoạn văn về Đoàn thuyền đánh cá (Yêu cầu: 3-5 câu, có câu ghép dùng kết từ):";
+        const res = await fetch(window.AI_API_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                sentence: `Dựa trên lịch sử tranh luận này, hãy viết một bài tổng kết cực kỳ chuyên nghiệp nhưng vẫn đúng chất Minh Trí lớp 5.
+                
+                Yêu cầu tổng kết:
+                1. Đánh giá khả năng lập luận của người dùng (Có sắc bén không? Có dẫn chứng không?).
+                2. Nhận xét về thái độ (Có văn minh, tôn trọng sự khác biệt không?).
+                3. Xếp hạng "Nhà Tranh Biện Nhí": Đồng, Bạc, Vàng hoặc Kim Cương.
+                4. Một lời khuyên để cậu ấy giỏi hơn.
+                
+                Định dạng trả về: HTML đẹp mắt với các icon, chữ in đậm.`,
+                history: window.nvn222_state.messages.map(m => ({
+                    role: m.role === 'Bạn' ? 'user' : 'assistant',
+                    text: m.text
+                })),
+                mode: 'chat',
+                persona: 'minhtri'
+            })
+        });
+        const data = await res.json();
+        const reply = data.response || data.content || data;
 
-        // Use the new simplified Paragraph Grader
-        if (typeof window.gradeParagraph === 'function') {
-            const result = await window.gradeParagraph(value, prefix, 21);
-
-            // Ensure renderFeedback is available
-            if (typeof window.renderFeedback === 'function') {
-                // Force persona to paragraph just in case
-                result.persona = 'paragraph';
-                window.renderFeedback(feedbackEl, result);
-            } else {
-                feedbackEl.innerHTML = `
-                    <div class="p-6 bg-green-50 text-green-800 rounded-2xl border border-green-200">
-                        <div class="text-2xl font-black mb-2">${result.diem}</div>
-                        <b>${result.uu_diem}</b><br>
-                        ${result.loi_sai}
-                    </div>`;
-            }
-        } else if (typeof askAI === 'function') {
-            // Fallback to old askAI
-            await askAI('3', prefix, 'single', 'ltvc', 21);
-        } else {
-            if (feedbackEl) feedbackEl.innerHTML = "<span class='text-red-500'>Hệ thống AI chưa sẵn sàng. Em hãy tải lại trang nhé!</span>";
-        }
+        const summaryDiv = document.createElement('div');
+        summaryDiv.className = "self-stretch bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-3xl border-2 border-amber-200 shadow-inner my-4 animate-in zoom-in duration-500";
+        summaryDiv.innerHTML = `
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-3xl">🏆</span>
+                <h3 class="text-xl font-black text-amber-700 uppercase">Kết quả cuộc tranh biện</h3>
+            </div>
+            <div class="text-gray-800 leading-relaxed">${reply.replace(/\n/g, '<br>')}</div>
+            <div class="mt-4 pt-4 border-t border-amber-200 text-center">
+                <button onclick="window.location.reload()" class="text-sm font-bold text-amber-600 hover:underline">Thử tranh luận lại từ đầu 🔄</button>
+            </div>
+        `;
+        msgContainer.appendChild(summaryDiv);
+        msgContainer.scrollTop = msgContainer.scrollHeight;
     } catch (e) {
-        console.error(e);
-        if (feedbackEl) feedbackEl.innerHTML = `<span class="text-red-500">Lỗi kết nối: ${e.message}</span>`;
+        alert("Lỗi khi tổng kết, cậu thử lại nhé!");
+    } finally {
+        if (summaryBtn) {
+            summaryBtn.disabled = false;
+            summaryBtn.innerText = "🏁 TỔNG KẾT TRANH BIỆN";
+        }
     }
 };
 
-// --- LESSON 221-VIET: STAR RATING ---
-window.rateViet = function (element, score) {
-    const parent = element.parentElement;
-    const allStars = parent.querySelectorAll('.star-btn');
+function addMsg(role, text) {
+    const container = document.getElementById('nvn-chat-history'); if (!container) return;
+    const div = document.createElement('div');
+    if (role === 'user') {
+        div.className = "self-end max-w-[80%] animate-in slide-in-from-right-5 fade-in duration-500";
+        div.innerHTML = `
+            <div class="flex items-center justify-end gap-2 mb-2">
+                <span class="text-xs font-black text-blue-600 uppercase bg-blue-100 px-2 py-1 rounded-lg">Cậu</span>
+                <span class="text-2xl">👤</span>
+            </div>
+            <div class="bg-blue-600 text-white p-4 rounded-3xl rounded-tr-none shadow-md text-lg leading-relaxed">
+                ${text}
+            </div>
+        `;
+    } else {
+        div.className = "self-start max-w-[80%] animate-in slide-in-from-left-5 fade-in duration-500";
+        div.innerHTML = `
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-2xl">👦</span>
+                <span class="text-xs font-black text-amber-600 uppercase bg-amber-100 px-2 py-1 rounded-lg">Minh Trí AI</span>
+            </div>
+            <div class="bg-white p-4 rounded-3xl rounded-tl-none border border-gray-100 shadow-sm text-gray-800 text-lg leading-relaxed">
+                ${text.replace(/\n/g, '<br>').replace(/\*\*/g, '<b>')}
+            </div>
+        `;
+    }
+    container.appendChild(div); container.scrollTop = container.scrollHeight;
+    window.nvn222_state.messages.push({ role: role === 'user' ? 'Bạn' : 'Minh Trí', text: text });
+}
 
-    // Reset all stars
-    allStars.forEach((star, index) => {
-        // Ensure stars are inline-block so scale/transform works
-        star.style.display = 'inline-block';
-
-        if (index < score) {
-            star.textContent = '★'; // Filled star
-            star.classList.add('text-yellow-400', 'scale-125');
-            star.classList.remove('text-gray-300');
+// --- BINDINGS ---
+window.submitLTVCUnified = (id) => window.UnifiedSubmission.startProcess(id);
+window.submitFullLessonLTVC = window.submitLTVCUnified;
+window.viet222_submit = () => window.UnifiedSubmission.startProcess();
+window.handleSubmission = () => window.UnifiedSubmission.confirmSave();
+window.rateViet = (el, score) => {
+    const g = el.closest('.star-group'); if (!g) return;
+    g.querySelectorAll('.star-btn').forEach((s, i) => {
+        if (i < score) {
+            s.textContent = '★'; s.classList.add('text-yellow-400'); s.classList.remove('text-gray-300');
         } else {
-            star.textContent = '☆'; // Empty star
-            star.classList.remove('text-yellow-400', 'scale-125');
-            star.classList.add('text-gray-300');
+            s.textContent = '☆'; s.classList.remove('text-yellow-400'); s.classList.add('text-gray-300');
         }
     });
-
-    // Optional: Add a subtle animation or sound
-    element.classList.add('scale-150');
-    setTimeout(() => element.classList.remove('scale-150'), 300);
-
-    // Could save to local storage here if needed
-    console.log(`Rated row ${parent.dataset.row}: ${score} stars`);
+};
+window.viet222_selectTopic = (topicId) => {
+    window.viet222_currentTopic = topicId;
+    document.getElementById('viet222-p2')?.classList.remove('opacity-50', 'pointer-events-none', 'grayscale');
 };
 
-// --- LESSON 221-VIET: SUBMIT ALL ---
-// [TEMPLATE REFERENCE]
-// This function serves as the standard template for "Submit All" features.
-// To create a new submission for another lesson:
-// 1. Create a start function (e.g. startSubmitLessonXYZ) that sets window.currentSubmissionType
-// 2. Create a data function (e.g. submitLessonXYZData) that gathers specific DOM elements
-// 3. Register the new type in lesson-loader.js -> confirmSubmitQuiz()
-// 4. Ensure data is saved to 'essays_v2' with 'aiGrade', 'aiFeedback', and 'content'.
-window.startSubmitLesson221Viet = function () {
-    window.currentSubmissionType = 'lesson_221_viet';
-    const modal = document.getElementById('studentInfoModal');
-    const content = document.getElementById('studentInfoContent');
-    if (modal) {
-        modal.classList.remove('hidden');
-        void modal.offsetWidth;
-        modal.classList.remove('opacity-0', 'pointer-events-none');
-        modal.classList.add('flex', 'opacity-100', 'pointer-events-auto');
-        content.classList.remove('scale-95');
-        content.classList.add('scale-100');
+document.addEventListener('click', (e) => {
+    if (e.target.closest('#viet222-submit-btn')) window.viet222_submit();
+    const tBtn = e.target.closest('.viet222-topic-btn');
+    if (tBtn) {
+        const id = tBtn.id.includes('1') ? 1 : 2;
+        window.viet222_selectTopic(id);
     }
-};
+}, true);
 
-window.submitLesson221VietData = async function (name, cls, school) {
-    console.log("Starting Submission for 221-viet...");
-
-    try {
-        // 1. Gather Data
-
-        // Bài 2: Ratings
-        let ratings = {};
-        const starGroups = document.querySelectorAll('.star-group');
-        if (starGroups.length === 0) {
-            console.warn("No star groups found - skipping ratings");
-        }
-        starGroups.forEach(group => {
-            const row = group.dataset.row;
-            const stars = group.querySelectorAll('.star-btn');
-            let score = 0;
-            stars.forEach((s, i) => {
-                if (s.textContent === '★') score = i + 1;
-            });
-            ratings[`TieuChi_${row}`] = score;
-        });
-
-        // Bài 3: Content
-        const textA = document.getElementById('viet-inputA')?.value || "";
-        const fbA = document.getElementById('feedback-viet-inputA')?.innerText || "";
-        const textB = document.getElementById('viet-inputB')?.value || "";
-        const fbB = document.getElementById('feedback-viet-inputB')?.innerText || "";
-
-        // Calculate Score
-        const ratingValues = Object.values(ratings);
-        const totalRating = ratingValues.length > 0 ? ratingValues.reduce((a, b) => a + b, 0) : 0;
-        const maxPossible = (ratingValues.length || 4) * 5;
-        const score = maxPossible > 0 ? Math.round((totalRating / maxPossible) * 10) : 0;
-
-        // Format Content for Excel
-        const contentSummary = `
-[BÀI 2 - ĐÁNH GIÁ]
-- Nội dung: ${ratings['TieuChi_1'] || 0}/5
-- Cấu trúc: ${ratings['TieuChi_2'] || 0}/5
-- Tình cảm: ${ratings['TieuChi_3'] || 0}/5
-- Trình bày: ${ratings['TieuChi_4'] || 0}/5
-
-[BÀI 3 - VIẾT LẠI CÂU]
-a) ${textA || "(Trống)"}
-=> AI nhận xét: ${fbA || "(Chưa có nhận xét)"}
-
-b) ${textB || "(Trống)"}
-=> AI nhận xét: ${fbB || "(Chưa có nhận xét)"}
-    `.trim();
-
-        // 2. Prepare Submission Object
-        const submission = {
-            studentName: name,
-            studentClass: cls,
-            studentSchool: school,
-            lessonTitle: "Bài 221 - Viết: Đánh giá, chỉnh sửa bài văn tả người",
-            type: 'lesson_221_viet',
-            content: contentSummary,
-            aiFeedback: `Điểm tự đánh giá: ${score}/10. Bài 3a: ${textA ? 'Đã làm' : 'Trống'}, Bài 3b: ${textB ? 'Đã làm' : 'Trống'}`,
-            aiGrade: score,
-            status: "Chưa chấm",
-            timestamp: new Date().toISOString()
-        };
-
-        // 3. Save to LocalStorage (Backup)
-        if (!window.submissions) window.submissions = [];
-        window.submissions.push(submission);
-        localStorage.setItem('eduRobotSubmissions', JSON.stringify(window.submissions));
-        console.log("Local backup saved.");
-
-        // 4. Save to Firebase
-        if (typeof db !== 'undefined' && db.collection) {
-            console.log("Saving to Firebase (essays_v2)...");
-            const fireData = {
-                ...submission,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            };
-
-            // Deterministic ID for one score per student
-            const docId = window.getSlug(`${name}_${cls}_${school}_${submission.lessonTitle}`);
-            await db.collection("essays_v2").doc(docId).set(fireData);
-
-            console.log("Firebase save successful (ID: " + docId + ")");
-            alert("🎉 Tuyệt vời! Bài làm của em đã được gửi tới Thầy/Cô thành công.");
-        } else {
-            console.error("Firebase DB (db) is not initialized.");
-            alert("✅ Bài làm đã được lưu trên máy! (Lưu ý: Hệ thống đang bận nên chưa gửi được lên mạng).");
-        }
-
-        // 5. Success UI
-        if (typeof celebrate === 'function') celebrate();
-        setTimeout(() => window.location.reload(), 1500);
-
-    } catch (err) {
-        console.error("Detailed Submission Error:", err);
-        alert("❌ Có lỗi xảy ra khi nộp bài: " + err.message + "\nEm hãy thử lại hoặc báo với Thầy/Cô nhé!");
-
-        // Re-enable button via global selector since we don't have btn ref here
-        const btn = document.querySelector('#studentInfoContent button:last-child');
-        if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = "🚀 NỘP BÀI";
-        }
-    }
-};
+console.log("Interactive Exercises V31 Loaded Successfully.");
