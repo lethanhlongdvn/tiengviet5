@@ -258,6 +258,70 @@
             justify-content: center;
         }
 
+        /* SENTENCE LOCKING STYLES - CRITICAL FOR LTVC EXERCISE 1 */
+        .sentence-locked .word {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
+            pointer-events: none !important;
+            display: inline !important;
+            color: inherit !important;
+        }
+
+        .sentence-locked {
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .sentence-locked:hover {
+            background-color: rgba(59, 130, 246, 0.05);
+            /* blue-50 */
+            border-radius: 8px;
+        }
+
+        /* Side-by-side layout for small exercise blocks */
+        #tab-practice {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        #tab-practice>div {
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+
+        /* Make Bài 1a and 1b side-by-side on desktop */
+        @media (min-width: 1024px) {
+            #tab-practice>div:has([id^="block-e1"]) {
+                flex: 1 1 calc(50% - 10px);
+                max-width: calc(50% - 10px);
+            }
+        }
+
+        /* Compacting the word clickable blocks */
+        .interactive-row {
+            padding: 8px 12px !important;
+        }
+
+        .exercise-click-word-container h3 {
+            font-size: 1.1rem !important;
+        }
+
+        .sentence-content {
+            font-size: 1rem !important;
+        }
+
+        .word {
+            padding: 2px 6px !important;
+            margin: 2px !important;
+            font-size: 0.95rem !important;
+        }
+
+
         .btn:hover {
             transform: translateY(-2px);
         }
@@ -331,56 +395,14 @@
 
 <body class="bg-blue-50 text-gray-800">
     <!-- Header -->
-    <header class="sticky top-0 z-50 px-4 py-2">
-        <nav class="container mx-auto glass-card rounded-xl px-5 py-2 flex justify-between items-center shadow-lg">
-            <div class="flex items-center space-x-4">
-                <div
-                    class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 shrink-0">
-                    <span class="text-xl font-black">E</span>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
-                    <div class="flex items-center space-x-3">
-                        <span class="text-2xl font-black text-blue-700">EduRobot</span>
-                        <span
-                            class="text-[11px] font-bold px-3 py-1 rounded-full bg-orange-500 text-white shadow-sm shadow-orange-200 tracking-wide">TV5</span>
-                    </div>
-                    <div class="hidden md:flex items-center space-x-3 border-l-2 border-gray-100 pl-6">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-[10px] font-black uppercase text-gray-400">CHỦ ĐIỂM:</span>
-                            <span class="text-[11px] font-black uppercase text-blue-800 lesson-theme">...</span>
-                        </div>
-                        <div class="h-4 w-px bg-gray-200"></div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-[10px] font-black uppercase text-gray-400 lesson-week">TUẦN ...</span>
-                            <span class="text-[11px] font-black uppercase text-blue-800 lesson-subject">BÀI: ...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <ul class="flex space-x-4 text-xs font-bold items-center">
-                <li class="relative group">
-                    <button id="top-menu-lesson-btn"
-                        class="flex items-center space-x-1 text-gray-500 hover:text-blue-600 py-2 transition-colors">
-                        <span>Bài học</span>
-                        <svg id="top-menu-chevron" class="w-4 h-4 transition-transform duration-200" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <!-- Dropdown Menu -->
-                    <div id="top-menu-lessons-dropdown"
-                        class="absolute top-full right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-blue-100 hidden overflow-hidden max-h-[80vh] overflow-y-auto z-[60]">
-                        <!-- JS renders content here -->
-                    </div>
-                </li>
-                <li><a href="index.html" class="text-gray-500 hover:text-blue-600 py-2">Trang chủ</a></li>
-                <li><a href="teacher.html"
-                        class="px-3 py-1.5 rounded-lg text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors">Giáo
-                        viên</a></li>
-            </ul>
-        </nav>
-    </header>
+    <header id="main-header" class="sticky top-0 z-50 px-4 py-2"></header>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.UI && window.UI.renderNavbar) {
+                window.UI.renderNavbar({ type: 'lesson', target: '#main-header' });
+            }
+        });
+    </script>
 
     <main class="container mx-auto px-4 py-2">
         <!-- Tab Navigation -->
@@ -485,7 +507,36 @@
                 <!-- Other School Input -->
                 <input type="text" id="otherSchool" placeholder="Nhập tên trường..."
                     class="hidden w-full px-4 py-2 rounded-xl border-2 border-orange-100 bg-orange-50/30 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-100 transition-all outline-none font-bold text-sm text-gray-700 animate-in slide-in-from-top-1 duration-300">
+
+                <!-- NEW: Real-time Upload Progress Bar -->
+                <div id="uploadProgress"
+                    class="hidden mt-6 space-y-3 p-4 bg-indigo-50/50 rounded-3xl border-2 border-indigo-100/50 animate-in fade-in zoom-in duration-500 shadow-inner">
+                    <div class="flex justify-between items-center px-1">
+                        <span id="uploadStatus"
+                            class="text-[11px] font-black text-indigo-600 uppercase tracking-[0.15em] animate-pulse">ĐANG
+                            TẢI ẢNH LÊN...</span>
+                        <span id="uploadPercent"
+                            class="text-xs font-black text-indigo-700 bg-white px-2 py-0.5 rounded-full shadow-sm">0%</span>
+                    </div>
+                    <div
+                        class="w-full bg-gray-200/50 rounded-full h-4 overflow-hidden shadow-inner border border-gray-100 p-1">
+                        <div id="uploadBar"
+                            class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 h-full rounded-full w-0 transition-all duration-300 shadow-[0_0_10px_rgba(79,70,229,0.4)] border-r-2 border-white/30 relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite]">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <style>
+                @keyframes shimmer {
+                    100% {
+                        transform: translateX(100%);
+                    }
+                }
+            </style>
 
             <div class="mt-6 flex gap-3">
                 <button onclick="closeStudentModal()"
@@ -501,24 +552,52 @@
     </div>
 
     <!-- Footer -->
-    <footer class="py-6 px-4 mt-8 bg-white/40 backdrop-blur-md border-t border-white/50">
-        <div class="container mx-auto text-center">
-            <p class="text-xs font-black text-gray-400 uppercase tracking-[0.3em] mb-2">© 2026 EduRobot - Hệ thống học
-                tập thông minh</p>
-            <p class="text-sm font-bold text-blue-600">Phát triển bởi Lê Thành Long</p>
-        </div>
-    </footer>
+    <!-- Footer -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Đợi một chút để đảm bảo UI.renderFooter tồn tại nếu load async, 
+            // nhưng ở đây ta để script ở dưới cùng nên gọi thẳng hoặc qua event
+            if (window.UI) UI.renderFooter();
+        });
+    </script>
 
     <!-- Scripts -->
     <script src="data/lessons.js?v=week29-fix-ids-2"></script> <!-- Load Data First -->
     <audio id="clapSound" src="https://www.soundjay.com/human/applause-01.mp3" preload="auto"></audio>
 
     <!-- Core Logic Scripts -->
-    <script src="js/floating-menu.js?v=4"></script> <!-- UI Menu - Load early to ensure visibility -->
-    <script src="js/firebase-logic.js"></script> <!-- Init Firebase First -->
-    <script src="js/ai-grader.js?v=4"></script>
-    <script src="js/interactive-exercises.js?v=14"></script> <!-- Custom Logic for LTVC -->
-    <script src="js/lesson-loader.js"></script> <!-- Main logic depends on above -->
+    <!-- Core Logic Scripts -->
+    <script src="js/floating-menu.js?v=FIX_FINAL"></script> <!-- UI Menu - Load early to ensure visibility -->
+    <script src="js/components.js"></script>
+    <script src="js/firebase-logic.js?v=FIX_FINAL"></script> <!-- Init Firebase First -->
+    <script src="js/ai-grader.js?v=FIX_FINAL"></script>
+    <script src="js/interactive-exercises.js?v=FIX_FINAL_V31"></script> <!-- Custom Logic for LTVC -->
+    <script src="js/lesson-engine.js?v=FIX_FINAL"></script>
+    <script src="js/ltvc-core.js?v=FIX_FINAL"></script> <!-- Core Production Logic -->
+
+    <script>
+        // FAIL-SAFE: Ensure submitLTVCUnified exists even if library fails
+        window.addEventListener('load', function () {
+            if (typeof window.submitLTVCUnified !== 'function') {
+                console.warn("CRITICAL: interactive-exercises.js failed to load submitLTVCUnified");
+                window.submitLTVCUnified = function () {
+                    alert("⚠️ Lỗi hệ thống: Thư viện nộp bài chưa tải xong. Vui lòng tải lại trang (F5) hoặc kiểm tra kết nối mạng! (Mã lỗi: IE-LOAD-FAIL)");
+                };
+            }
+        });
+    </script>
+
+    <script>
+        // FAIL-SAFE: Ensure submitLTVCUnified exists even if library fails
+        window.addEventListener('load', function () {
+            if (typeof window.submitLTVCUnified !== 'function') {
+                console.warn("CRITICAL: interactive-exercises.js failed to load submitLTVCUnified");
+                window.submitLTVCUnified = function () {
+                    alert("⚠️ Lỗi hệ thống: Thư viện nộp bài chưa tải xong. Vui lòng tải lại trang (F5) hoặc kiểm tra kết nối mạng!");
+                };
+            }
+        });
+    </script>
 
     <style>
         .bg-paper {
@@ -542,148 +621,6 @@
             display: none;
         }
     </style>
-    <script>
-        // UI Helpers
-        function switchTab(id) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            const btn = document.getElementById('btn-' + id);
-            const tab = document.getElementById('tab-' + id);
-            if (btn) btn.classList.add('active');
-            if (tab) tab.classList.add('active');
-        }
-
-        // Accordion Helpers (Compatible with standard details/summary but supports custom too if needed)
-        // Original file used custom divs. The new data uses <details> which is native.
-        // But if we want the exact animation we might need specific styles or stick to native.
-        // The migrated data in lessons.js uses <details>, so native behavior works. 
-        // We just need to ensure the arrow rotates.
-
-        const audio = document.getElementById('lessonAudio');
-        const playIcon = document.getElementById('playIcon');
-        const pauseIcon = document.getElementById('pauseIcon');
-        const audioStatus = document.getElementById('audioStatus');
-
-        function toggleAudio() {
-            if (!audio) return;
-            if (audio.paused) {
-                audio.play();
-                if (playIcon) playIcon.classList.add('hidden');
-                if (pauseIcon) pauseIcon.classList.remove('hidden');
-                if (audioStatus) {
-                    audioStatus.innerText = "Đang phát...";
-                    audioStatus.className = "text-[10px] text-green-500 font-bold italic";
-                }
-            } else {
-                audio.pause();
-                if (playIcon) playIcon.classList.remove('hidden');
-                if (pauseIcon) pauseIcon.classList.add('hidden');
-                if (audioStatus) {
-                    audioStatus.innerText = "Đang dừng...";
-                    audioStatus.className = "text-[10px] text-gray-400 font-bold italic";
-                }
-            }
-        }
-
-        // Helper to get Feedback Element safely
-        function getFeedbackEl(id) {
-            let el = document.getElementById('fb-' + id);
-            if (!el) {
-                // If missing, create it dynamically after the button's container
-                const inputBtnRow = document.getElementById('ai-' + id)?.parentNode;
-                if (inputBtnRow) {
-                    el = document.createElement('div');
-                    el.id = 'fb-' + id;
-                    el.className = 'mt-3 hidden';
-                    inputBtnRow.parentNode.appendChild(el);
-                }
-            }
-            return el;
-        }
-
-        // Direct Fix for LTVC 222 AI Button
-        window.checkLTVC222_Q2 = async function () {
-            const inputId = '222-q2';
-            const inputEl = document.getElementById('ai-' + inputId);
-            const feedbackEl = getFeedbackEl(inputId);
-
-            if (!inputEl) {
-                console.error("Lỗi: Không tìm thấy ô nhập liệu!");
-                return;
-            }
-
-            const value = inputEl.value.trim();
-            if (!value) {
-                inputEl.classList.add('ring-4', 'ring-red-300');
-                setTimeout(() => inputEl.classList.remove('ring-4', 'ring-red-300'), 500);
-                inputEl.focus();
-                return;
-            }
-
-            // Show Feedback immediately
-            if (feedbackEl) {
-                feedbackEl.classList.remove('hidden');
-                feedbackEl.innerHTML = '<div class="flex items-center space-x-2 p-3 bg-blue-50 text-blue-800 rounded-xl animate-pulse"><span class="text-xl">🤖</span> <b>Thầy đang đọc bài của em...</b></div>';
-            }
-
-            // Fallback AI implementation
-            const doAskAI = window.askAI ? window.askAI : async (id, prefix, mode, persona, week) => {
-                try {
-                    const endpoint = window.AI_API_URL || 'https://tiengviet5.netlify.app/.netlify/functions/chat';
-                    const response = await fetch(endpoint, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            sentence: prefix + " " + value,
-                            weekNumber: week,
-                            persona: persona
-                        })
-                    });
-
-                    if (!response.ok) throw new Error("Server Error: " + response.status);
-
-                    const data = await response.json();
-
-                    // Simple render for fallback
-                    const grade = data.diem || data.grade || "?/10";
-                    const nice = data.uu_diem || "Bài làm tốt";
-                    const improve = data.loi_sai || "Cần cố gắng hơn";
-                    const guide = data.huong_dan || "Tiếp tục phát huy nhé!";
-
-                    const html = `
-                        <div class="mt-4 p-5 bg-white border border-green-200 rounded-2xl shadow-sm animate-in fade-in slide-in-from-bottom-2">
-                             <div class="flex justify-between items-center mb-3">
-                                <span class="text-xs font-black text-green-600 uppercase tracking-widest bg-green-50 px-2 py-1 rounded-lg">Kết quả</span>
-                                <span class="text-2xl font-black text-green-600">${grade}</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <p><strong>✨ Điểm sáng:</strong> ${nice}</p>
-                                <p><strong>🔧 Góp ý:</strong> ${improve}</p>
-                                <div class="mt-3 p-3 bg-blue-50 text-blue-800 rounded-xl font-bold italic">
-                                    " ${guide} "
-                                </div>
-                            </div>
-                        </div>
-                    `;
-
-                    if (feedbackEl) feedbackEl.innerHTML = html;
-
-                } catch (e) {
-                    console.error("Fallback AI Error", e);
-                    throw e;
-                }
-            };
-
-            try {
-                // Modified prompt to enforce Grammar Teacher persona
-                const prompt = "Hãy đóng vai Thầy Giáo Ngữ Pháp. Chấm điểm câu ghép sau của học sinh lớp 5: '" + value + "'. Yêu cầu: 1. Câu phải có 2 vế câu (Mát... và... hoặc Vì Mát... nên...). 2. Dùng từ nối (và, nhưng, thì, mà, vì, nên...). KHÔNG yêu cầu mở bài/thân bài. Chỉ nhận xét về ngữ pháp và nội dung câu.";
-                await doAskAI(inputId, prompt, "single", "ltvc", 22);
-            } catch (e) {
-                console.error("Exec Error:", e);
-                if (feedbackEl) feedbackEl.innerHTML = `<div class="p-3 bg-red-50 text-red-600 rounded-xl font-bold border border-red-100">⚠️ Có lỗi kết nối: ${e.message}. Em thử lại sau giây lát nhé!</div>`;
-            }
-        };
-    </script>
 </body>
 
 </html>
