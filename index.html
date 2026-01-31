@@ -53,46 +53,14 @@
 
 <body>
     <!-- Header -->
-    <header class="w-full z-50 glass-header shadow-sm transition-all duration-300 flex-none" id="navbar">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-3 group">
-                <div
-                    class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-200 group-hover:scale-110 transition-transform">
-                    E</div>
-                <div class="flex flex-col">
-                    <span class="text-xl font-black text-gray-800 leading-none">EduRobot</span>
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Tiếng Việt Lớp 5</span>
-                </div>
-            </a>
-
-            <div class="flex items-center gap-4">
-                <a href="index.html"
-                    class="hidden md:block px-4 py-2 rounded-xl text-sm font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors">Trang
-                    chủ</a>
-                <div class="relative group" id="top-menu-lesson-container">
-                    <button id="top-menu-lesson-btn"
-                        class="flex items-center gap-1 px-4 py-2 rounded-xl text-sm font-bold text-gray-500 hover:text-gray-800 hover:bg-gray-50 transition-colors">
-                        Bài học
-                        <svg id="top-menu-chevron" class="w-4 h-4 transition-transform duration-300" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <!-- Dropdown Content (Populated by JS) -->
-                    <div id="top-menu-lessons-dropdown"
-                        class="hidden absolute top-full right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 max-h-[80vh] overflow-y-auto custom-scrollbar z-[60]">
-                    </div>
-                </div>
-                <a href="teacher.html"
-                    class="px-4 py-2 rounded-xl text-sm font-bold text-gray-500 hover:text-gray-800 hover:bg-gray-50 transition-colors">Giáo
-                    viên</a>
-                <button
-                    class="bg-orange-500 hover:bg-orange-600 text-white font-black px-5 py-2.5 rounded-xl shadow-lg shadow-orange-200 transition-all active:scale-95 text-xs uppercase tracking-wider">Liên
-                    hệ</button>
-            </div>
-        </div>
-    </header>
+    <header id="navbar"></header>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.UI && window.UI.renderNavbar) {
+                window.UI.renderNavbar({ type: 'home', target: '#navbar', activeLinks: { home: true } });
+            }
+        });
+    </script>
 
     <main class="container mx-auto px-4 py-4 flex-1 min-h-0">
 
@@ -108,9 +76,7 @@
 
                     <div class="flex flex-col md:flex-row items-center relative z-10 h-full">
                         <div class="md:w-1/2 text-center md:text-left mb-4 md:mb-0">
-                            <span
-                                class="inline-block bg-blue-50 text-blue-600 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-2 border border-blue-100">Phiên
-                                bản 2026</span>
+
                             <h1 class="text-3xl md:text-5xl font-black text-gray-900 mb-4 leading-tight">
                                 Học <br>
                                 <span
@@ -179,15 +145,11 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-3 px-4 bg-white/30 backdrop-blur-md border-t border-white/50 w-full z-10 flex-none">
-        <div class="container mx-auto text-center">
-            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">@ 2026 EduRobot - Hệ thống
-                học tập thông minh</p>
-            <p class="text-xs font-bold text-blue-600 flex items-center justify-center">
-                Phát triển bởi Lê Thành Long
-            </p>
-        </div>
-    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.UI) UI.renderFooter();
+        });
+    </script>
 
     <!-- Stats Modal (Placeholder/Consistent for Teacher view) -->
     <div id="statsModal"
@@ -466,138 +428,17 @@
 
     <script>
         function openWeekMenuModal(weekId) {
-            const modal = document.getElementById('weekMenuModal');
-            const content = document.getElementById('weekMenuContent');
-            const weekTitle = document.getElementById('week-title-display').querySelector('h3');
-            const semesterDisplay = document.getElementById('semester-display');
-            const lessonsList = document.getElementById('week-lessons-list');
-
-            // Find week data from curriculumData
-            let weekData = null;
-            let currentSemester = "";
-            for (const sem in curriculumData) {
-                for (const theme of curriculumData[sem]) {
-                    weekData = theme.weeks.find(w => w.id === weekId);
-                    if (weekData) {
-                        currentSemester = sem;
-                        break;
-                    }
-                }
-                if (weekData) break;
-            }
-
-            if (!weekData) {
-                // For Backup button or if data not found
-                weekTitle.innerText = weekId === 36 ? "Dự phòng" : `Tuần ${weekId}`;
-                semesterDisplay.innerText = "Đang cập nhật";
-                lessonsList.innerHTML = `<p class="text-center text-gray-400 py-4 italic">Nội dung đang được soạn thảo...</p>`;
-            } else {
-                weekTitle.innerText = `Tuần ${weekId}`;
-                semesterDisplay.innerText = currentSemester;
-                lessonsList.innerHTML = '';
-
-                weekData.lessons.forEach(lesson => {
-                    const lessonContainer = document.createElement('div');
-                    lessonContainer.className = "flex flex-col gap-2 p-4 rounded-2xl bg-blue-50/50 border-2 border-blue-100";
-
-                    const lessonHeader = document.createElement('div');
-                    lessonHeader.className = "font-black text-blue-900 text-sm mb-2 pb-2 border-b border-blue-100 flex items-center gap-2";
-                    lessonHeader.innerHTML = `<span>📖</span> ${lesson.title}`;
-                    lessonContainer.appendChild(lessonHeader);
-
-                    const sections = lesson.sections || [{ title: "Vào bài học", url: lesson.url || "#" }];
-                    sections.forEach(section => {
-                        const sectionLink = document.createElement('a');
-                        sectionLink.href = section.url;
-                        sectionLink.className = "flex items-center justify-between p-2 rounded-xl bg-white border border-blue-50 hover:border-blue-300 hover:shadow-sm transition-all text-xs font-bold text-gray-700 group";
-
-                        // Split title to highlight the part before ':'
-                        const parts = section.title.split(':');
-                        const displayTitle = parts.length > 1
-                            ? `<span class="text-blue-600 mr-1">${parts[0]}:</span><span>${parts.slice(1).join(':')}</span>`
-                            : section.title;
-
-                        sectionLink.innerHTML = `
-                            <span class="flex-1">${displayTitle}</span>
-                            <span class="text-blue-300 group-hover:translate-x-1 transition-transform ml-2">→</span>
-                        `;
-
-                        if (section.url === "#") {
-                            sectionLink.classList.add('opacity-50', 'cursor-not-allowed');
-                            sectionLink.onclick = (e) => e.preventDefault();
-                        }
-
-                        lessonContainer.appendChild(sectionLink);
-                    });
-
-                    lessonsList.appendChild(lessonContainer);
-                });
-            }
-
-            modal.classList.remove('hidden');
-            void modal.offsetWidth;
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.classList.add('flex', 'opacity-100', 'pointer-events-auto');
-            content.classList.remove('scale-95');
-            content.classList.add('scale-100');
+            // Placeholder to prevent errors if js/ui-home.js fails to load
+            console.log("Loading ui-home.js...");
         }
-
-        function closeWeekMenuModal() {
-            const modal = document.getElementById('weekMenuModal');
-            const content = document.getElementById('weekMenuContent');
-            modal.classList.remove('opacity-100', 'pointer-events-auto');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.remove('flex');
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        function generateNumpad() {
-            const grid = document.getElementById('week-numpad-grid');
-            if (!grid) return;
-
-            for (let i = 1; i <= 36; i++) {
-                const btn = document.createElement('button');
-                const label = i === 36 ? "DP" : i;
-
-                // Style based on semester (1-18: Sem 1, 19-35: Sem 2)
-                let bgColor = "from-blue-500 to-blue-600 shadow-blue-200";
-                if (i > 18 && i < 36) bgColor = "from-orange-500 to-orange-600 shadow-orange-200";
-                if (i === 36) bgColor = "from-gray-500 to-gray-600 shadow-gray-200";
-
-                btn.className = `aspect-square rounded-xl bg-gradient-to-br ${bgColor} text-white font-black text-sm shadow-md transition-all active:scale-90 hover:-translate-y-0.5 hover:brightness-110`;
-                btn.innerText = label;
-                btn.onclick = () => openWeekMenuModal(i);
-                grid.appendChild(btn);
-            }
-        }
-
-        // Initialize numpad on load
-        window.addEventListener('DOMContentLoaded', generateNumpad);
-
-        // Close on outside click for Week Menu
-        document.getElementById('weekMenuModal').addEventListener('click', function (e) {
-            if (e.target === this) closeWeekMenuModal();
-        });
-
     </script>
 
     <!-- Scripts -->
-    <script src="js/floating-menu.js"></script>
+    <script src="js/floating-menu.js?v=1000"></script>
+    <script src="js/components.js"></script>
+    <script src="js/ui-home.js"></script>
     <script src="js/rss-loader.js"></script>
-    <script>
-        // Simple mock for the Teacher Stats button on homepage to avoid errors if clicked
-        function openTeacherStats() {
-            // Check if floating-menu.js is loaded mostly used for lessons, 
-            // but for index we might just show a simple alert or reuse the modal structure
-            const modal = document.getElementById('statsModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-    </script>
+    <!-- Stats Logic Moved to ui-home.js -->
 </body>
 
 </html>
