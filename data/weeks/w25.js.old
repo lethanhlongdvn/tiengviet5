@@ -1,0 +1,289 @@
+window.LESSON_DATA = window.LESSON_DATA || { lessons: {} };
+Object.assign(window.LESSON_DATA.lessons, {
+        "252-duong-que-dong-thap-muoi": {
+            "title": "Đường quê Đồng Tháp Mười",
+            "week": 25,
+            "subject": "Đọc",
+            "theme": "Hương sắc trăm miền",
+            "audio": "am_thanh/duongquedongthapmuoi.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Đường quê Đồng Tháp Mười" },
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                                <section class="w-full lg:w-[75%]">
+                                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative md:pl-12 pl-4">
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                                                    <div>
+                                                        <p class="mb-4">Bông súng thả lồng đèn<br>Sáng bồng bềnh mặt nước<br>Cá lòng tong chạy trước<br>Dẫn đường về thăm ông.</p>
+                                                        <p class="mb-4">Đường quê, sào vít cong<br>Xuồng lướt như tên bắn<br>Cò ở đâu giật mình<br>Bay lẫn vào mây trắng.</p>
+                                                        <p class="mb-4">Lấm lem con trâu đầm<br>Chém cặp sừng loé nắng<br>Xình xịch thuyền đuôi tôm<br>Chở lúa vàng, rẽ sóng.</p>
+                                                    </div>
+                                                    <div>
+                                                        <p class="mb-4">Kìa mấy búp sen hồng<br>Nối đầu thu, cuối hạ<br>Nước lớn sông Cửu Long<br>Chơi với sen nghiêng ngả.</p>
+                                                        <p class="mb-4">Về xứ mười tầng tháp<br>Leo cầu trăm đốt tre<br>Ông đứng như bụt hiện<br>Chờ cháu cuối đường quê.</p>
+                                                    </div>
+                                                </div>
+                                                <p class="text-right italic text-sm text-gray-400 mt-8">Trần Quốc Toàn</p>
+                                            </div>
+                                        </div>
+                                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white shadow-xl">
+                                                <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                                    <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                                        <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                                    </div>
+                                                    <div class="flex-grow">
+                                                        <p class="text-lg font-bold leading-relaxed text-blue-50">Bài thơ ca ngợi vẻ đẹp riêng biệt của cảnh vật thiên nhiên, cuộc sống sinh hoạt sôi động và tâm hồn đôn hậu, chất phác của con người vùng Đồng Tháp Mười - nơi có hệ thống sông ngòi, kênh rạch chằng chịt.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </section>
+                                <aside class="w-full lg:w-[25%]">
+                                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl">
+                                        <div class="mb-6"><img src="hinh_anh/dong-thap-muoi.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl"></div>
+                                        <div class="flex items-center space-x-4 mb-8">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            </div>
+                                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                                        </div>
+                                        <div class="space-y-4">
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Ở khổ thơ đầu, đường về quê thú vị như thế nào?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Đường về quê rất thú vị với các hình ảnh: bông súng nở đẹp như đang "thả lồng đèn", sáng bồng bềnh; những chú cá lòng tong bơi lội tung tăng như đang dẫn đường về thăm ông.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Tìm những nét đẹp riêng của vùng Đồng Tháp Mười?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Về thiên nhiên: sông nước với sào vít cong, xuồng lướt nhanh, thuyền đuôi tôm, búp sen hồng, cầu trăm đốt tre. Về con người: người ông hiền hậu, đứng chờ cháu như "bụt hiện".</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Những từ ngữ nào gợi tả nhịp sống sôi động, náo nức?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Những từ ngữ: lướt như tên bắn, giật mình, chém (cặp sừng), xình xịch, rẽ sóng, nước lớn, nghiêng ngả.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Bạn nhỏ muốn nói điều gì về quê hương mình?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Bạn nhỏ ca ngợi quê hương Đồng Tháp Mười đẹp đẽ, mộc mạc và chất phác. Thể hiện tình yêu quê hương, con người qua những hình ảnh hiền lành và tốt đẹp nhất.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5. Những chi tiết nào gợi nhớ truyện cổ tích?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Chi tiết: "Cầu trăm đốt tre" (gợi nhớ truyện Cây tre trăm đốt) và "Ông đứng như bụt hiện" (gợi nhớ hình ảnh ông Bụt trong cổ tích).</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aside>
+                            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Loài hoa nào được ví như những chiếc 'lồng đèn' thả trên mặt nước trong khổ thơ đầu?", "a": ["Hoa sen", "Hoa phượng", "Bông súng", "Hoa mai"], "c": 2 },
+                        { "q": "Con vật nào được nhân hóa với hành động 'chạy trước dẫn đường' về thăm ông?", "a": ["Con chó mực", "Con trâu", "Cá lòng tong", "Con cò trắng"], "c": 2 },
+                        { "q": "Hình ảnh 'Xuồng lướt như tên bắn' sử dụng biện pháp nghệ thuật gì?", "a": ["Nhân hóa", "So sánh", "Điệp ngữ", "Ẩn dụ"], "c": 1 },
+                        { "q": "Khi chiếc xuồng lướt nhanh, con vật nào đã 'giật mình' bay lẫn vào mây trắng?", "a": ["Con chim sẻ", "Con bướm", "Con cò", "Con chuồn chuồn"], "c": 2 },
+                        { "q": "Trong khổ 3, hình ảnh con trâu đầm được miêu tả với hành động mạnh mẽ nào?", "a": ["Gõ cặp sừng", "Chém cặp sừng loé nắng", "Húc cặp sừng", "Lắc cặp sừng"], "c": 1 },
+                        { "q": "Phương tiện nào phát ra tiếng kêu 'xình xịch' và chở lúa vàng rẽ sóng?", "a": ["Xuồng ba lá", "Ghe bầu", "Thuyền đuôi tôm", "Phà máy"], "c": 2 },
+                        { "q": "Búp sen hồng ở Đồng Tháp Mười nở vào khoảng thời gian nào?", "a": ["Mùa xuân", "Mùa đông", "Nối đầu thu, cuối hạ", "Quanh năm"], "c": 2 },
+                        { "q": "Dòng sông nào được nhắc đến trong câu 'Chơi với sen nghiêng ngả'?", "a": ["Sông Hồng", "Sông Hương", "Sông Cửu Long", "Sông Đồng Nai"], "c": 2 },
+                        { "q": "Cụm từ 'Xứ mười tầng tháp' dùng để chỉ vùng đất nào?", "a": ["Mũi Cà Mau", "Tây Nguyên", "Đồng Tháp Mười", "Thành phố Hồ Chí Minh"], "c": 2 },
+                        { "q": "Chi tiết 'Leo cầu trăm đốt tre' gợi nhớ đến câu chuyện cổ tích nào?", "a": ["Thánh Gióng", "Thạch Sanh", "Cây tre trăm đốt", "Tấm Cám"], "c": 2 },
+                        { "q": "Hình ảnh người ông đứng chờ cháu được so sánh với nhân vật nào?", "a": ["Ông Tiên", "Ông Bụt", "Ông đồ", "Ông lão đánh cá"], "c": 1 },
+                        { "q": "Các từ ngữ: 'lướt như tên bắn', 'xình xịch', 'rẽ sóng' gợi tả điều gì về nhịp sống nơi đây?", "a": ["Nhịp sống chậm rãi, buồn tẻ", "Nhịp sống sôi động, náo nức và khẩn trương", "Nhịp sống yên tĩnh, vắng vẻ", "Nhịp sống lo âu, vất vả"], "c": 1 },
+                        { "q": "Biện pháp nhân hóa được sử dụng trong câu thơ nào dưới đây?", "a": ["Xuồng lướt như tên bắn", "Ông đứng như bụt hiện", "Nước lớn sông Cửu Long / Chơi với sen nghiêng ngả", "Lấm lem con trâu đầm"], "c": 2 },
+                        { "q": "Qua bài thơ, em thấy con người Đồng Tháp Mười hiện lên như thế nào?", "a": ["Giàu sang và xa cách", "Hiền lành, chất phác và đôn hậu (như Bụt)", "Khó tính và nghiêm khắc", "Thích phiêu lưu mạo hiểm"], "c": 1 },
+                        { "q": "Nội dung chính của bài thơ là gì?", "a": ["Miêu tả quy trình thu hoạch lúa", "Kể về chuyến đi thăm ông của bạn nhỏ", "Ca ngợi vẻ đẹp thiên nhiên độc đáo, cuộc sống sôi động và con người đôn hậu của Đồng Tháp Mười", "Giới thiệu các loại phương tiện giao thông đường thủy"], "c": 2 }
+                    ]
+                }
+            }
+        },
+
+
+
+
+
+
+
+
+
+
+        "251-dan-t'rung-tieng-ca-dai-ngan": {
+            "title": "Đàn t'rưng, tiếng ca đại ngàn",
+            "week": 25,
+            "subject": "Đọc",
+            "theme": "Hương sắc trăm miền",
+            "audio": "am_thanh/dantrungtiengcadainan.mp3",
+            "tabs": {
+                "lesson": {
+                    "title": "Bài học",
+                    "blocks": [
+                        { "type": "header", "text": "Đàn t'rưng, tiếng ca đại ngàn" },
+                        {
+                            "type": "html",
+                            "content": `<div class="flex flex-col lg:flex-row gap-6">
+                                <section class="w-full lg:w-[70%]">
+                                    <div class="glass-card rounded-[40px] p-6 md:p-10 shadow-2xl">
+                                        <div class="bg-paper rounded-[32px] p-8 md:p-12 shadow-inner border border-white/50 relative overflow-hidden">
+                                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100/30 rounded-full blur-3xl"></div>
+                                            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-amber-100/30 rounded-full blur-3xl"></div>
+                                            <div class="serif-font text-gray-800 text-lg leading-relaxed relative reading-content">
+                                                <p class="mb-4">Đến Tây Nguyên, ta thường được nghe tiếng đàn t’rưng ngân dài theo dòng suối, hoà cùng tiếng gió trên đèo núi hoang vu...</p>
+                                                <p class="mb-4">Cùng với điệu hát ru, tiếng đàn t’rưng đã đi vào kí ức tuổi thơ của các bạn trẻ Tây Nguyên từ lúc còn được địu trên lưng mẹ. Lớn lên, mỗi bước chân của họ vào rừng kiếm củi, xuống suối lấy nước, ra nương trỉa lúa,... đều vấn vương nhịp điệu khi khoan khi nhặt, khi trầm hùng như tiếng thác đổ, khi thánh thót, róc rách như suối reo của đàn t’rưng.</p>
+                                                <p class="mb-4">Dưới mỗi gầm chòi cao lêu nghêu ở sát bên chân rẫy, đều có một chiếc đàn t’rưng cong cong như chiếc võng đưa em. Mùa lúa chín, trai làng thay phiên nhau trực ở chòi canh. Chốc chốc, họ lại gõ trên chiếc đàn t’rưng, dạo một bản nhạc “đánh tiếng” đuổi chim muông và thú rừng mon men đến rẫy phá lúa. Tiếng đàn chẳng những rộn rã suốt ngày mà còn thánh thót thâu đêm, làm ấm lòng những chàng trai canh rẫy trong rừng khuya sương lạnh.</p>
+                                                <p class="mb-4">Từ buôn này sang buôn khác, ta còn thấy những chiếc đàn t’rưng trên đỉnh dốc cao. Người đi qua đây sẽ gõ cho tiếng đàn vang lên để thêm yên tâm, vững bước vượt qua quãng đường rừng u tịch.</p>
+                                                <p class="mb-4">Cùng với mái nhà rông thân thương, cao vút, tiếng đàn t’rưng rộn ràng, lưu luyến đã trở thành niềm thương, nỗi nhớ của người Tây Nguyên.</p>
+                                                <p class="text-right italic text-sm text-gray-400 mt-8">(Theo Ay Dun và Lê Tấn)</p>
+                                            </div>
+                                        </div>
+                                        <div class="mt-8 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white shadow-xl">
+                                                <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                                                    <div class="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 shadow-lg shrink-0 text-center min-w-[160px]">
+                                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-1">Thông điệp</p>
+                                                        <h3 class="text-2xl font-black uppercase tracking-tight">Ý NGHĨA</h3>
+                                                    </div>
+                                                    <div class="flex-grow">
+                                                        <p class="text-lg font-bold leading-relaxed text-blue-50">Bài đọc ca ngợi vẻ đẹp của tiếng đàn t'rưng và khẳng định sự gắn bó mật thiết của loại nhạc cụ này với đời sống vật chất, tinh thần của người dân Tây Nguyên. Qua đó, tác giả thể hiện sự trân trọng đối với bàn tay, khối óc và tâm hồn của những con người đã tạo nên bản sắc văn hóa riêng biệt cho vùng đất đại ngàn.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </section>
+                                <aside class="w-full lg:w-[30%]">
+                                    <div class="glass-card rounded-[40px] p-6 sticky top-28 shadow-xl">
+                                        <div class="mb-6"><img src="hinh_anh/dan-trung.png" alt="Minh họa" class="w-full h-auto rounded-3xl object-contain drop-shadow-xl"></div>
+                                        <div class="flex items-center space-x-4 mb-8">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-amber-200">
+                                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            </div>
+                                            <h2 class="text-2xl font-black text-gray-800 tracking-tight">Tìm hiểu bài</h2>
+                                        </div>
+                                        <div class="space-y-4">
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">1. Bài đọc nói về điểm nổi bật nào của vùng đất Tây Nguyên?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Bài đọc nói về một nét đẹp văn hóa độc đáo, một âm thanh đặc trưng của vùng đất Tây Nguyên, đó là tiếng đàn t'rưng.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">2. Tiếng đàn t’rưng gắn bó với người Tây Nguyên như thế nào?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Tiếng đàn gắn bó với họ từ lúc còn nhỏ (được địu trên lưng mẹ nghe cùng điệu hát ru) cho đến khi lớn lên. Tiếng đàn theo họ trong mọi hoạt động lao động sản xuất: vào rừng kiếm củi, xuống suối lấy nước, ra nương trỉa lúa....</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">3. Những chi tiết nào cho thấy đàn t’rưng là nhạc cụ phổ biến?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Dưới mỗi gầm chòi canh rẫy đều có đàn t'rưng. Mùa lúa chín, trai làng dùng tiếng đàn đuổi chim thú và làm ấm lòng đêm khuya. Trên đỉnh dốc cao cũng có đàn t'rưng để người đi rừng gõ cho yên tâm.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">4. Vì sao tiếng đàn t’rưng là niềm thương, nỗi nhớ?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Vì tiếng đàn hiện diện mọi mặt đời sống, từ tuổi thơ đến trưởng thành. Nó là người bạn tinh thần, giúp con người xua tan mệt mỏi, sợ hãi và gắn kết với buôn làng.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item bg-white/50 rounded-[24px] border border-white shadow-sm transition-all hover:shadow-md overflow-hidden">
+                                                <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center group">
+                                                    <span class="font-bold text-gray-700 group-hover:text-blue-600 transition-colors">5. Bài đọc giúp em cảm nhận gì về con người Tây Nguyên?</span>
+                                                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-50 transition-colors"><svg class="w-4 h-4 text-gray-400 group-hover:text-blue-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg></div>
+                                                </button>
+                                                <div class="accordion-content">
+                                                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-white/50 pt-4 bg-blue-50/30">
+                                                        <p class="font-medium">Họ rất yêu âm nhạc, ca hát. Cuộc sống giản dị gắn liền với nương rẫy nhưng luôn sôi động, vui tươi và lạc quan, yêu đời.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aside>
+                            </div>`
+                        }
+                    ]
+                },
+                "quiz": {
+                    "settings": { "pick": 10 },
+                    "questions": [
+                        { "q": "Bài đọc \"Đàn t'rưng - tiếng ca đại ngàn\" viết về vùng đất nào của nước ta?", "a": ["Tây Bắc", "Tây Nguyên", "Đồng bằng sông Cửu Long", "Duyên hải Nam Trung Bộ"], "c": 1 },
+                        { "q": "Tiếng đàn t'rưng thường được nghe thấy ở những không gian nào trong bài?", "a": ["Trong các nhà hát lớn", "Ngân dài theo dòng suối, trên đèo núi, trên nương rẫy", "Trong các trường học", "Trên những con thuyền ngoài biển"], "c": 1 },
+                        { "q": "Âm thanh của đàn t'rưng được so sánh với những âm thanh nào của thiên nhiên?", "a": ["Tiếng sấm và tiếng mưa", "Tiếng chim hót và tiếng lá rơi", "Tiếng thác đổ trầm hùng và tiếng suối reo róc rách", "Tiếng gió thổi và tiếng sóng biển"], "c": 2 },
+                        { "q": "Ngay từ khi còn nhỏ, những đứa trẻ Tây Nguyên đã làm quen với tiếng đàn t'rưng trong hoàn cảnh nào?", "a": ["Khi đi học đánh đàn", "Khi xem tivi", "Khi được địu trên lưng mẹ, nghe cùng điệu hát ru", "Khi tham gia lễ hội"], "c": 2 },
+                        { "q": "Hình dáng của chiếc đàn t'rưng dưới gầm chòi canh được miêu tả như thế nào?", "a": ["Thẳng tắp như cây tre", "Tròn như cái mâm", "Cong cong như chiếc võng đưa em", "Vuông vức như cái hộp"], "c": 2 },
+                        { "q": "Vào mùa lúa chín, đàn t'rưng có tác dụng thực tế gì đối với việc canh tác?", "a": ["Để gọi mưa về tưới lúa", "Để cầu mùa màng bội thu", "Dạo bản nhạc “đánh tiếng” phát đuổi chim muông, thú rừng", "Để báo hiệu giờ nghỉ trưa"], "c": 2 },
+                        { "q": "Tiếng đàn t'rưng trong đêm khuya còn làm gì với các chàng trai canh rẫy?", "a": ["Làm ấm lòng họ trong rừng khuya sương lạnh", "Giúp họ không buồn ngủ", "Giúp họ gọi bạn bè đến chơi", "Giúp họ quên đi cơn đói"], "c": 0 },
+                        { "q": "Trên đỉnh dốc cao, người ta đặt đàn t'rưng để làm gì?", "a": ["Để trang trí", "Để bán", "Để người đi qua gõ vang lên cho thêm yên tâm, vững bước", "Để đánh dấu ranh giới"], "c": 2 },
+                        { "q": "Từ \"u tịch\" trong câu \"quãng đường rừng u tịch\" có nghĩa là gì?", "a": ["Ồn ào náo nhiệt", "Vắng vẻ, yên lặng và có vẻ hơi tối tăm, bí ẩn", "Rực rỡ sắc màu", "Đông đúc người qua"], "c": 1 },
+                        { "q": "Tiếng đàn t'rưng gắn bó với người Tây Nguyên trong hoạt động nào?", "a": ["Chỉ các lễ hội", "Chỉ đi đánh giặc", "Chỉ khi nghỉ ngơi", "Mọi hoạt động: kiếm củi, lấy nước, trỉa lúa, canh rẫy..."], "c": 3 },
+                        { "q": "Cùng với đàn t'rưng, hình ảnh nào khác là biểu tượng thân thương của Tây Nguyên?", "a": ["Con voi", "Cây kơ-nia", "Mái nhà rông cao vút", "Cồng chiêng"], "c": 2 },
+                        { "q": "Biện pháp nghệ thuật nào được sử dụng: \"đàn t’rưng cong cong như chiếc võng\"?", "a": ["So sánh", "Nhân hóa", "Điệp ngữ", "Ẩn dụ"], "c": 0 },
+                        { "q": "Nội dung bài đọc muốn khẳng định điều gì về tiếng đàn t'rưng?", "a": ["Đàn t'rưng là nhạc cụ đắt tiền", "Tiếng đàn t'rưng là niềm thương, nỗi nhớ của người Tây Nguyên", "Đàn t'rưng rất khó sử dụng", "Chỉ dành cho người già"], "c": 1 },
+                        { "q": "Qua bài đọc, em thấy người dân Tây Nguyên có tinh thần như thế nào?", "a": ["Lo lắng và sợ hãi", "Lạc quan, yêu đời, yêu ca hát và gắn bó với thiên nhiên", "Thích cuộc sống hiện đại", "Sống khép kín"], "c": 1 },
+                        { "q": "Cụm từ \"tiếng ca đại ngàn\" trong nhan đề muốn nói điều gì?", "a": ["Tiếng hát người khổng lồ", "Tiếng hót của chim", "Tiếng đàn đại diện cho vẻ đẹp và tâm hồn núi rừng Tây Nguyên", "Tiếng gió thổi qua khe núi"], "c": 2 }
+                    ]
+                }
+            }
+        }
+});
