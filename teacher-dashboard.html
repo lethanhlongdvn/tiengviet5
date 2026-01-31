@@ -238,13 +238,14 @@
             list.innerHTML = "";
             loading.classList.remove('hidden');
 
-            try {
-                // Determine query. Note: Without an index, compound queries (where + orderBy) might fail.
-                // We'll try to fetch all first (client-side filter) if the specific query fails, or just simplify for now.
+            console.log("Loading data with mode:", currentMode);
 
-                // DEBUG: Force load both essays and essays_v2 for safety if mode is essays_v2
+            try {
+                // SOLUTION: Fetch ALL data first, then Filter/Sort on Client-side.
+                // This avoids the "Requires an Index" error from Firestore for complex compound queries.
                 let queries = [];
                 if (currentMode === 'essays_v2') {
+                    // Fetch both new and old collections for backward compatibility
                     queries.push(db.collection('essays_v2').get());
                     queries.push(db.collection('essays').get());
                 } else {
@@ -257,54 +258,79 @@
                 allDataSnapshot = [];
 
                 let allDocs = [];
+                let lessonTitles = new Set(); // Track titles for filter dropdown
+                let pendingCount = 0;
+                let projectCount = 0;
+
                 snapshots.forEach(snapshot => {
                     snapshot.forEach(doc => {
                         const d = doc.data();
                         d.id = doc.id;
+
+                        // Collect Metadata
+                        if (d.lessonTitle) lessonTitles.add(d.lessonTitle);
+                        if (d.status === "Chưa chấm") pendingCount++;
+                        if (currentMode === 'projects') projectCount++;
+
                         // Client-side Filter
                         if (lessonFilter && d.lessonTitle !== lessonFilter) return;
+
                         allDocs.push(d);
                     });
                 });
 
                 if (allDocs.length === 0) {
-                    list.innerHTML = `<div class="text-center text-gray-400 font-bold col-span-2">Chưa có dữ liệu nào (Đã kiểm tra cả essays và essays_v2)</div>`;
+                    list.innerHTML = `<div class="text-center text-gray-400 font-bold col-span-2 py-8">Chưa có bài nào. Thầy/Cô hãy nhắc nhở học sinh nộp nhé!</div>`;
+
+                    // Still update stats even if empty list (for the counts)
+                    document.getElementById('stat-pending').innerText = pendingCount;
+                    document.getElementById('stat-projects').innerText = projectCount;
+                    updateFilterDropdown(lessonTitles);
                     return;
                 }
 
                 document.getElementById('stats-title').innerText = lessonFilter ? `DANH SÁCH: ${lessonFilter.toUpperCase()} (${allDocs.length})` : `TẤT CẢ BÀI HỌC (${allDocs.length})`;
 
-                // Manual Sort (Client-side)
-                let docs = allDocs;
-
+                // Manual Client-side Sort (Newest first)
                 const getTime = (t) => {
                     if (!t) return 0;
-                    if (t.seconds) return t.seconds * 1000; // Firestore Timestamp
-                    if (t.toDate) return t.toDate().getTime(); // Firestore Timestamp method
-                    return new Date(t).getTime(); // String or Date object
+                    if (t.seconds) return t.seconds * 1000;
+                    if (t.toDate) return t.toDate().getTime();
+                    return new Date(t).getTime();
                 };
 
-                docs.sort((a, b) => getTime(b.timestamp) - getTime(a.timestamp));
+                allDocs.sort((a, b) => getTime(b.timestamp) - getTime(a.timestamp));
 
-                docs.forEach((data, index) => {
+                allDocs.forEach((data, index) => {
                     allDataSnapshot.push(data);
-
-                    if (data.status === "Chưa chấm") pendingCount++;
-                    if (currentMode === 'projects') projectCount++;
-                    if (data.lessonTitle) lessonTitles.add(data.lessonTitle);
 
                     const card = document.createElement('div');
                     card.className = "dashboard-card bg-white p-6 rounded-[32px] shadow-sm border border-gray-100 space-y-4";
 
                     let mediaHtml = data.fileUrl ? `<div class="bg-gray-100 p-2 rounded-2xl"><img src="${data.fileUrl}" class="w-full max-h-[300px] object-contain rounded-xl shadow-sm"></div>` : "";
 
+                    // Handle rawScores from LTVC Full
+                    let scoresHtml = "";
+                    if (data.rawScores) {
+                        const rs = data.rawScores;
+                        scoresHtml = `
+                         <div class="grid grid-cols-4 gap-2 mt-2 text-[10px] font-bold text-gray-500 bg-blue-50 p-2 rounded-xl text-center">
+                            <div>1a: ${rs.ex1a.score}</div>
+                            <div>1b: ${rs.ex1b.score}</div>
+                            <div>2: ${rs.ex2.score}</div>
+                            <div>3: ${rs.ex3.score}</div>
+                         </div>
+                         `;
+                    }
+
                     card.innerHTML = `
                         <div class="flex justify-between items-start">
-                            <div class="flex gap-4 items-center">
+                             <div class="flex gap-4 items-center">
                                 <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center font-black text-gray-400 text-xs">${index + 1}</div>
                                 <div>
                                     <h4 class="text-lg font-black text-gray-800">${data.studentName}</h4>
                                     <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Lớp: ${data.studentClass}</span>
+                                    <div class="text-[10px] text-gray-400 font-bold mt-1">${data.lessonTitle || "Bài tập"}</div>
                                 </div>
                             </div>
                             <span class="px-3 py-1 rounded-lg text-[10px] font-black uppercase ${data.status === 'Chưa chấm' ? 'bg-yellow-100 text-yellow-600' : 'bg-green-100 text-green-600'}">
@@ -315,9 +341,13 @@
                             "${data.content}"
                         </div>
                         ${mediaHtml}
+                        ${scoresHtml}
                         <div class="flex justify-between items-center pt-2">
-                            <span class="text-[10px] text-gray-400 font-bold">${data.timestamp ? new Date(data.timestamp.toDate()).toLocaleString('vi-VN') : ''}</span>
-                            <button onclick="openGrading('${doc.id}', '${data.studentName}', '${data.studentClass}')" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl font-bold text-sm transition-all">
+                             <div class="flex flex-col">
+                                <span class="text-[10px] text-gray-400 font-bold">${data.timestamp ? new Date(data.timestamp.toDate ? data.timestamp.toDate() : data.timestamp).toLocaleString('vi-VN') : ''}</span>
+                                <span class="text-[10px] text-indigo-500 font-bold">AI Chấm: ${data.aiGrade || 0}đ</span>
+                            </div>
+                            <button onclick="openGrading('${data.id}', '${data.studentName}', '${data.studentClass}')" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl font-bold text-sm transition-all shadow-md shadow-blue-200">
                                 Chấm bài
                             </button>
                         </div>
@@ -334,24 +364,26 @@
                 document.getElementById('stat-pending').innerText = pendingCount;
                 document.getElementById('stat-projects').innerText = projectCount;
 
-                // Update filter dropdown
-                if (!lessonFilter) {
-                    const filter = document.getElementById('lesson-filter');
-                    const currentVal = filter.value;
-                    filter.innerHTML = '<option value="">Tất cả bài học</option>';
-                    Array.from(lessonTitles).sort().forEach(title => {
-                        const opt = document.createElement('option');
-                        opt.value = title;
-                        opt.innerText = title;
-                        filter.appendChild(opt);
-                    });
-                    filter.value = currentVal;
-                }
+                updateFilterDropdown(lessonTitles);
 
             } catch (error) {
                 console.error("Error loading data:", error);
-                loading.innerHTML = `<p class="text-red-500">Lỗi kết nối Firebase. Em hãy kiểm tra cấu hình nhé!</p>`;
+                // Show actual error to debug
+                loading.innerHTML = `<p class="text-red-500 bg-red-50 p-4 rounded-xl">Lỗi: ${error.message}<br><small>Thầy/Cô vui lòng nhấn Ctrl+F5 để tải lại.</small></p>`;
             }
+        }
+
+        function updateFilterDropdown(titles) {
+            const filter = document.getElementById('lesson-filter');
+            const currentVal = filter.value;
+            // Only update if needed or empty to preserve selection context if re-run
+            // Actually, simplest is to rebuild it preserving selection
+
+            let html = '<option value="">Tất cả bài học</option>';
+            Array.from(titles).sort().forEach(title => {
+                html += `<option value="${title}" ${title === currentVal ? 'selected' : ''}>${title}</option>`;
+            });
+            filter.innerHTML = html;
         }
 
         function openGrading(id, name, cls) {
@@ -397,6 +429,9 @@
                 let index = 1;
 
                 allDataSnapshot.forEach(row => {
+                    // Safety check: ensure row is a data object with properties
+                    if (!row || typeof row !== 'object') return;
+
                     let timeStr = "";
                     if (row.timestamp) {
                         try {
@@ -410,16 +445,17 @@
 
                     data.push({
                         "STT": index++,
-                        "Họ tên": row.studentName,
-                        "Lớp": row.studentClass,
+                        "Họ tên": row.studentName || "N/A",
+                        "Lớp": row.studentClass || "N/A",
                         "Trường": row.studentSchool || "",
-                        "Điểm AI": row.aiGrade || "",
-                        "Nội dung bài làm": row.content,
+                        "Điểm AI": row.aiGrade || 0,
+                        "Nội dung bài làm": row.content || "",
                         "Nhận xét của AI": row.aiFeedback || "",
+                        "Phân loại": row.type || "essay",
                         "Lời phê giáo viên": row.teacherFeedback || "",
                         "Điểm giáo viên": row.teacherGrade || "",
                         "Link ảnh nộp": row.fileUrl || "",
-                        "Thời gian": timeStr
+                        "Thời gian nộp": timeStr
                     });
                 });
 
