@@ -106,16 +106,28 @@
 
         if (resultEl) {
             resultEl.classList.remove('hidden');
+            const missedSentences = total - correct;
+            let statusText = `<span class="text-green-600">${correct}/${total} đúng</span>`;
+            if (missedSentences > 0) {
+                statusText += `<span class="text-gray-300">|</span><span class="text-red-500">${missedSentences} câu chưa đạt</span>`;
+            }
+            if (errors > 0) {
+                statusText += `<span class="text-gray-300">|</span><span class="text-orange-500">${errors} lỗi nhấn sai</span>`;
+            }
+
             resultEl.innerHTML = `
-                <div class="p-6 bg-white border-4 border-blue-500 rounded-2xl shadow-xl text-center">
-                    <p class="font-black text-xl text-blue-800 uppercase mb-4">Kết quả bài làm</p>
-                    <div class="flex justify-around items-center">
-                        <div><p class="text-xs font-bold text-gray-400 uppercase">Chính xác</p><p class="text-4xl font-black text-green-600">${correct}/${total}</p></div>
-                        <div class="h-10 w-px bg-gray-100"></div>
-                        <div><p class="text-xs font-bold text-gray-400 uppercase">Sai sót</p><p class="text-4xl font-black text-red-500">${errors}</p></div>
-                    </div>
+                <div class="mt-2 py-1.5 px-3 bg-blue-50/50 border border-blue-100 rounded-lg text-sm font-bold inline-flex items-center gap-2 animate-in fade-in">
+                    <span class="text-blue-600">📝 Kết quả:</span>
+                    ${statusText}
                 </div>`;
-            if (errors === 0 && correct === total && typeof window.celebrate === 'function') window.celebrate();
+            if (errors === 0 && correct === total) {
+                if (typeof window.celebrate === 'function') window.celebrate();
+                const sound = document.getElementById('clapSound');
+                if (sound) { sound.currentTime = 0; sound.play().catch(e => console.log("Audio play blocked")); }
+            } else if (errors > 0 || missedSentences > 0) {
+                const sound = document.getElementById('saiSound');
+                if (sound) { sound.currentTime = 0; sound.play().catch(e => console.log("Audio play blocked")); }
+            }
         }
     };
 
