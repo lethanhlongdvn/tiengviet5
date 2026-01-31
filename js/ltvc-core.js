@@ -55,78 +55,109 @@
         const container = document.getElementById(blockId);
         const resultEl = document.getElementById('result-' + blockId) || document.getElementById('result-p1a') || document.getElementById('result-p1b');
 
-        // BYPASS FOR LESSON 221 (GUARANTEED WIN) - Clean & Professional UI
-        if (blockId.includes('221') || blockId.includes('p1a') || blockId.includes('p1b') || blockId.includes('e1-a') || blockId.includes('e1-b')) {
-            if (resultEl) {
-                resultEl.classList.remove('hidden');
-                const scoreText = (blockId.includes('e1-b') || blockId.includes('p1b')) ? "3/3" : "2/2";
-                resultEl.innerHTML = `
-                    <div class="mt-2 w-full p-2 bg-green-50 text-green-700 font-bold border-y border-green-200 flex items-center justify-center gap-2 animate-in fade-in slide-in-from-top-1">
-                        <span class="text-sm">🏆</span>
-                        <span class="text-xs uppercase tracking-wider">Hoàn thành xuất sắc! Hệ thống đã ghi nhận. (${scoreText})</span>
-                    </div>`;
-                if (typeof window.celebrate === 'function') window.celebrate();
-                if (container) {
-                    container.querySelectorAll('.interactive-row, .sentence-box').forEach(r => {
-                        r.classList.add('ring-4', 'ring-green-400', 'bg-green-50');
-                    });
-                }
-                return;
-            }
+        if (!container) return;
+
+        // Find the block data from window.currentLesson
+        let blockData = null;
+        if (window.currentLesson && window.currentLesson.tabs && window.currentLesson.tabs.lesson) {
+            blockData = window.currentLesson.tabs.lesson.blocks.find(b => b.id === blockId);
         }
 
-        // Logic for other lessons
-        if (!container) return;
         const rows = Array.from(container.querySelectorAll('.interactive-row, .sentence-box'));
         const compRows = rows.filter(r => (r.getAttribute('data-compound') === 'true') || (r.getAttribute('data-is-compound') === 'true'));
-        let total = compRows.length || 1;
+        let total = compRows.length || 0;
         let correct = 0;
         let errors = 0;
+        let missedComp = 0;
 
         rows.forEach(row => {
             const isComp = (row.getAttribute('data-compound') === 'true') || (row.getAttribute('data-is-compound') === 'true');
             const rawAns = row.getAttribute('data-ans') || row.getAttribute('data-connectors') || "";
-            let targets = (rawAns === ",") ? [","] : rawAns.split(',').map(s => s.trim().toLowerCase()).filter(s => s !== "");
+
+            // Fix: If rawAns is just ",", split(',') will return ["", ""].
+            // We need to handle comma as a target correctly.
+            let targets = [];
+            if (rawAns === ",") {
+                targets = [","];
+            } else if (rawAns.includes(',')) {
+                // If there are multiple targets (e.g., "vừa,đã"), but not just a single comma
+                targets = rawAns.split(',').map(s => s.trim().toLowerCase()).filter(s => s !== "");
+            } else if (rawAns.trim() !== "") {
+                targets = [rawAns.trim().toLowerCase()];
+            }
             const sel = Array.from(row.querySelectorAll('.word.selected'));
-            row.classList.remove('ring-4', 'ring-green-400', 'bg-green-50', 'ring-red-500');
+
+            row.classList.remove('ring-4', 'ring-green-400', 'bg-green-50', 'ring-red-500', 'bg-red-50');
 
             if (isComp) {
                 let matches = 0;
                 let misclicks = 0;
                 sel.forEach(w => {
                     const txt = (w.innerText || w.textContent).toLowerCase().trim();
+                    // Match direct text or text without punctuation
                     const isMatch = targets.some(t => t === txt || t === txt.replace(/[.,]/g, ""));
-                    if (isMatch) { w.classList.add('is-correct'); w.style.backgroundColor = '#10b981'; matches++; }
-                    else { w.classList.add('is-wrong'); w.style.backgroundColor = '#ef4444'; misclicks++; errors++; }
+                    if (isMatch) {
+                        w.classList.add('is-correct');
+                        w.style.backgroundColor = '#10b981';
+                        matches++;
+                    } else {
+                        w.classList.add('is-wrong');
+                        w.style.backgroundColor = '#ef4444';
+                        misclicks++;
+                        errors++;
+                    }
                 });
-                if (misclicks === 0 && matches >= targets.length && sel.length > 0) { correct++; row.classList.add('ring-4', 'ring-green-400', 'bg-green-50'); }
-                else { row.classList.add('ring-4', 'ring-red-500'); }
-            } else { if (sel.length > 0) { sel.forEach(w => { w.classList.add('is-wrong'); w.style.backgroundColor = '#ef4444'; errors++; }); row.classList.add('ring-4', 'ring-red-500'); } }
+
+                if (misclicks === 0 && matches >= targets.length && sel.length === targets.length) {
+                    correct++;
+                    row.classList.add('ring-4', 'ring-green-400', 'bg-green-50');
+                } else {
+                    row.classList.add('ring-4', 'ring-red-500', 'bg-red-50');
+                    if (sel.length === 0) missedComp++;
+                }
+            } else {
+                if (sel.length > 0) {
+                    sel.forEach(w => {
+                        w.classList.add('is-wrong');
+                        w.style.backgroundColor = '#ef4444';
+                        errors++;
+                    });
+                    row.classList.add('ring-4', 'ring-red-500', 'bg-red-50');
+                }
+            }
         });
 
         if (resultEl) {
             resultEl.classList.remove('hidden');
-            const missedSentences = total - correct;
-            let statusText = `<span class="text-green-600">${correct}/${total} đúng</span>`;
-            if (missedSentences > 0) {
-                statusText += `<span class="text-gray-300">|</span><span class="text-red-500">${missedSentences} câu chưa đạt</span>`;
-            }
-            if (errors > 0) {
-                statusText += `<span class="text-gray-300">|</span><span class="text-orange-500">${errors} lỗi nhấn sai</span>`;
-            }
+            const isPerfect = (errors === 0 && correct === total);
 
-            resultEl.innerHTML = `
-                <div class="mt-2 py-1.5 px-3 bg-blue-50/50 border border-blue-100 rounded-lg text-sm font-bold inline-flex items-center gap-2 animate-in fade-in">
-                    <span class="text-blue-600">📝 Kết quả:</span>
-                    ${statusText}
-                </div>`;
-            if (errors === 0 && correct === total) {
+            if (isPerfect) {
+                const feedbackText = (blockData && blockData.feedback && blockData.feedback.correct)
+                    ? blockData.feedback.correct
+                    : `Hoàn thành xuất sắc! (${correct}/${total})`;
+
+                resultEl.innerHTML = `
+                    <div class="mt-4 p-4 bg-green-100 text-green-700 font-bold rounded-2xl border border-green-200 flex flex-col items-center justify-center gap-2 animate-in zoom-in-95">
+                        <span class="text-2xl">🏆</span>
+                        <div class="text-center text-sm leading-relaxed">${feedbackText}</div>
+                    </div>`;
+
                 if (typeof window.celebrate === 'function') window.celebrate();
                 const sound = document.getElementById('clapSound');
-                if (sound) { sound.currentTime = 0; sound.play().catch(e => console.log("Audio play blocked")); }
-            } else if (errors > 0 || missedSentences > 0) {
+                if (sound) { sound.currentTime = 0; sound.play().catch(e => { }); }
+            } else {
+                const feedbackText = (blockData && blockData.feedback && blockData.feedback.wrong)
+                    ? blockData.feedback.wrong
+                    : `Em thử kiểm tra lại nhé! (${correct}/${total} câu ghép đúng)`;
+
+                resultEl.innerHTML = `
+                    <div class="mt-4 p-4 bg-red-50 text-red-600 font-bold rounded-2xl border border-red-100 flex flex-col items-center justify-center gap-2 animate-in shake">
+                        <span class="text-2xl">😅</span>
+                        <div class="text-center text-sm leading-relaxed">${feedbackText}</div>
+                    </div>`;
+
                 const sound = document.getElementById('saiSound');
-                if (sound) { sound.currentTime = 0; sound.play().catch(e => console.log("Audio play blocked")); }
+                if (sound) { sound.currentTime = 0; sound.play().catch(e => { }); }
             }
         }
     };
