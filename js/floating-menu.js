@@ -64,8 +64,8 @@ const curriculumData = {
                 {
                     "id": 23, "name": "Tuần 23",
                     "lessons": [
-                        { "title": "Bài 9: Hội thổi cơm thi ở Đồng Vân", "sections": [{ "title": "Đọc: Hội thổi cơm thi ở Đồng Vân", "url": "lesson_viewer.html?id=231-hoi-thoi-com-thi-o-dong-van" }, { "title": "LTVC: Liên kết câu bằng cách lặp từ ngữ", "url": "lesson_viewer.html?id=231-ltvc" }] },
-                        { "title": "Bài 10: Những búp chè trên cây cổ thụ", "sections": [{ "title": "Đọc: Những búp chè trên cây cổ thụ", "url": "lesson_viewer.html?id=232-nhung-bup-che-tren-cay-co-thu" }] }
+                        { "title": "Bài 9: Hội thổi cơm thi ở Đồng Vân", "sections": [{ "title": "Đọc: Hội thổi cơm thi ở Đồng Vân", "url": "lesson_viewer.html?id=231-hoi-thoi-com-thi-o-dong-van" }, { "title": "LTVC: Liên kết câu bằng cách lặp từ ngữ", "url": "lesson_viewer.html?id=231-ltvc" }, { "title": "Viết: Tìm hiểu cách viết đoạn văn thể hiện tình cảm, cảm xúc về một sự việc", "url": "lesson_viewer.html?id=231-viet" }] },
+                        { "title": "Bài 10: Những búp chè trên cây cổ thụ", "sections": [{ "title": "Đọc: Những búp chè trên cây cổ thụ", "url": "lesson_viewer.html?id=232-nhung-bup-che-tren-cay-co-thu" }, { "title": "LTVC: Quy tắc viết tên cơ quan, tổ chức", "url": "lesson_viewer.html?id=232-ltvc" }, { "title": "Viết: Luyện tập viết đoạn văn thể hiện tình cảm, cảm xúc về một sự việc", "url": "lesson_viewer.html?id=232-viet" }] }
                     ]
                 },
                 {
