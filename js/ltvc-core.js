@@ -74,17 +74,18 @@
             const isComp = (row.getAttribute('data-compound') === 'true') || (row.getAttribute('data-is-compound') === 'true');
             const rawAns = row.getAttribute('data-ans') || row.getAttribute('data-connectors') || "";
 
-            // Fix: If rawAns is just ",", split(',') will return ["", ""].
-            // We need to handle comma as a target correctly.
+            // Tách các mục tiêu từ data-ans, hỗ trợ cả cụm từ và dấu phẩy
             let targets = [];
-            if (rawAns === ",") {
-                targets = [","];
-            } else if (rawAns.includes(',')) {
-                // If there are multiple targets (e.g., "vừa,đã"), but not just a single comma
-                targets = rawAns.split(',').map(s => s.trim().toLowerCase()).filter(s => s !== "");
-            } else if (rawAns.trim() !== "") {
-                targets = [rawAns.trim().toLowerCase()];
-            }
+            rawAns.split(',').forEach(part => {
+                let trimmedPart = part.trim().toLowerCase();
+                if (trimmedPart.includes(' ')) {
+                    // Nếu là cụm từ (ví dụ: "tiếng đàn"), tách thành các từ đơn để so khớp với .word
+                    trimmedPart.split(/\s+/).forEach(w => { if (w) targets.push(w); });
+                } else if (trimmedPart || part === ",") {
+                    targets.push(trimmedPart || ",");
+                }
+            });
+
             const sel = Array.from(row.querySelectorAll('.word.selected'));
 
             row.classList.remove('ring-4', 'ring-green-400', 'bg-green-50', 'ring-red-500', 'bg-red-50');
@@ -92,10 +93,18 @@
             if (isComp) {
                 let matches = 0;
                 let misclicks = 0;
+
+                // Đếm xem thực tế trong đoạn này có bao nhiêu từ khớp với targets
+                let totalTargetOccurrences = 0;
+                row.querySelectorAll('.word').forEach(w => {
+                    const txt = (w.innerText || w.textContent).toLowerCase().trim();
+                    const isMatch = targets.some(t => t === txt || t === txt.replace(/[.,?!:;]/g, "").replace(/\.\.\./g, ""));
+                    if (isMatch) totalTargetOccurrences++;
+                });
+
                 sel.forEach(w => {
                     const txt = (w.innerText || w.textContent).toLowerCase().trim();
-                    // Match direct text or text without punctuation
-                    const isMatch = targets.some(t => t === txt || t === txt.replace(/[.,]/g, ""));
+                    const isMatch = targets.some(t => t === txt || t === txt.replace(/[.,?!:;]/g, "").replace(/\.\.\./g, ""));
                     if (isMatch) {
                         w.classList.add('is-correct');
                         w.style.backgroundColor = '#10b981';
@@ -108,7 +117,7 @@
                     }
                 });
 
-                if (misclicks === 0 && matches >= targets.length && sel.length === targets.length) {
+                if (misclicks === 0 && matches >= totalTargetOccurrences && matches > 0) {
                     correct++;
                     row.classList.add('ring-4', 'ring-green-400', 'bg-green-50');
                 } else {
@@ -132,28 +141,30 @@
             const isPerfect = (errors === 0 && correct === total);
 
             if (isPerfect) {
-                const feedbackText = (blockData && blockData.feedback && blockData.feedback.correct)
-                    ? blockData.feedback.correct
-                    : `Hoàn thành xuất sắc! (${correct}/${total})`;
+                // Ưu tiên lấy từ data-feedback-correct của container, sau đó mới đến blockData
+                const feedbackText = container.getAttribute('data-feedback-correct') ||
+                    ((blockData && blockData.feedback && blockData.feedback.correct)
+                        ? blockData.feedback.correct
+                        : `Hoàn thành xuất sắc! (${correct}/${total})`);
 
                 resultEl.innerHTML = `
-                    <div class="mt-4 p-4 bg-green-100 text-green-700 font-bold rounded-2xl border border-green-200 flex flex-col items-center justify-center gap-2 animate-in zoom-in-95">
-                        <span class="text-2xl">🏆</span>
-                        <div class="text-center text-sm leading-relaxed">${feedbackText}</div>
+                    <div class="mt-4 p-4 bg-green-100 text-green-700 font-bold rounded-2xl border border-green-200 flex flex-col items-start justify-center gap-2 animate-in zoom-in-95">
+                        <div class="text-left text-sm leading-relaxed">${feedbackText}</div>
                     </div>`;
 
                 if (typeof window.celebrate === 'function') window.celebrate();
                 const sound = document.getElementById('clapSound');
                 if (sound) { sound.currentTime = 0; sound.play().catch(e => { }); }
             } else {
-                const feedbackText = (blockData && blockData.feedback && blockData.feedback.wrong)
-                    ? blockData.feedback.wrong
-                    : `Em thử kiểm tra lại nhé! (${correct}/${total} câu ghép đúng)`;
+                // Ưu tiên lấy từ data-feedback-wrong của container, sau đó mới đến blockData
+                const feedbackText = container.getAttribute('data-feedback-wrong') ||
+                    ((blockData && blockData.feedback && blockData.feedback.wrong)
+                        ? blockData.feedback.wrong
+                        : `Bạn chọn sai rồi, thử lại nhé!`);
 
                 resultEl.innerHTML = `
-                    <div class="mt-4 p-4 bg-red-50 text-red-600 font-bold rounded-2xl border border-red-100 flex flex-col items-center justify-center gap-2 animate-in shake">
-                        <span class="text-2xl">😅</span>
-                        <div class="text-center text-sm leading-relaxed">${feedbackText}</div>
+                    <div class="mt-4 p-4 bg-red-50 text-red-600 font-bold rounded-2xl border border-red-100 flex flex-col items-start justify-center gap-2 animate-in shake">
+                        <div class="text-left text-sm leading-relaxed">${feedbackText}</div>
                     </div>`;
 
                 const sound = document.getElementById('saiSound');
@@ -162,11 +173,29 @@
         }
     };
 
+    const resetLTVC = function (id) {
+        const container = document.getElementById(id);
+        if (!container) return;
+        container.querySelectorAll('.word').forEach(w => {
+            w.classList.remove('selected', 'is-correct', 'is-wrong');
+            w.style.backgroundColor = ''; w.style.color = ''; w.style.borderRadius = ''; w.style.padding = '';
+        });
+        container.querySelectorAll('.interactive-row, .sentence-box').forEach(r => {
+            r.classList.remove('ring-4', 'ring-green-400', 'bg-green-50', 'ring-red-500', 'bg-red-50', 'sentence-locked', 'locked', 'bg-sky-50', 'ring-2', 'ring-sky-400');
+        });
+        container.querySelectorAll('input, select, textarea').forEach(el => {
+            if (el.tagName === 'SELECT') el.selectedIndex = 0; else el.value = '';
+        });
+        const resultEl = document.getElementById('result-' + id) || document.getElementById('fb-' + id);
+        if (resultEl) { resultEl.classList.add('hidden'); resultEl.innerHTML = ''; }
+    };
+
     const corePulse = function () {
         window.evaluateLTVCE1 = evaluateLTVC;
         window.checkParagraph = evaluateLTVC;
         window.toggleSentence = toggleSentence;
         window.ltvc22_check1 = evaluateLTVC;
+        window.resetLTVC = resetLTVC;
         window.toggleWord = function (el) { toggleSentence(el.closest('.sentence-box, .interactive-row'), { target: el }); };
         cleanResiduals();
     };
