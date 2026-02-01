@@ -11,6 +11,11 @@ window.LESSON_DATA.lessons["231-ltvc"] = {
                 { "type": "header", "text": "Liên kết câu bằng cách lặp từ ngữ" },
                 {
                     "type": "html",
+                    "id": "block-231-ex1",
+                    "feedback": {
+                        "correct": "Từ được lặp lại nhiều lần là: choắt, tôi.",
+                        "wrong": "Bạn chọn sai từ rồi, cần chọn đúng và chọn tất cả các từ."
+                    },
                     "content": `<div class="space-y-8 animate-in fade-in duration-700">
                         <!-- 1. KHÁM PHÁ -->
                         <section class="w-full">
@@ -45,7 +50,7 @@ window.LESSON_DATA.lessons["231-ltvc"] = {
                                                 <div class="interactive-row py-1 px-3 rounded-xl transition-all whitespace-normal" data-compound="true" data-ans="Choắt,tôi">
                                                     (3) <span class="word">Choắt</span> <span class="word">nọ</span> <span class="word">có</span> <span class="word">lẽ</span> <span class="word">cũng</span> <span class="word">trạc</span> <span class="word">tuổi</span> <span class="word">tôi</span>.
                                                 </div>
-                                                <div class="interactive-row py-1 px-3 rounded-xl transition-all whitespace-normal" data-compound="true" data-ans="Choắt,tôi">
+                                                <div class="interactive-row py-1 px-3 rounded-xl transition-all whitespace-normal" data-compound="true" data-ans="Choắt,tôi,tôi">
                                                     (4) <span class="word">Nhưng</span> <span class="word">vì</span> <span class="word">Choắt</span> <span class="word">bẩm</span> <span class="word">sinh</span> <span class="word">yếu</span> <span class="word">đuối</span> <span class="word">nên</span> <span class="word">tôi</span> <span class="word">coi</span> <span class="word">thường</span> <span class="word">và</span> <span class="word">gã</span> <span class="word">cũng</span> <span class="word">sợ</span> <span class="word">tôi</span> <span class="word">lắm</span>.
                                                 </div>
                                             </div>
@@ -60,6 +65,7 @@ window.LESSON_DATA.lessons["231-ltvc"] = {
 
                                     <div class="flex items-center gap-3 mb-4">
                                         <button onclick="checkParagraph('block-231-ex1')" class="px-5 py-2 bg-blue-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-blue-700 transition-all active:scale-95">KIỂM TRA (a)</button>
+                                        <button onclick="resetLTVC('block-231-ex1')" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-bold rounded-xl hover:bg-gray-300 transition-all">LÀM LẠI</button>
                                         <div id="result-block-231-ex1" class="hidden"></div>
                                     </div>
 
@@ -69,6 +75,7 @@ window.LESSON_DATA.lessons["231-ltvc"] = {
                                         <textarea id="ai-231-ex1b" rows="2" class="w-full p-3 rounded-xl border border-blue-200 outline-none serif-font text-lg shadow-inner bg-white" placeholder="Việc lặp lại từ ngữ ấy giúp..."></textarea>
                                         <div class="mt-2 flex items-center gap-3">
                                             <button onclick="checkEx1bAI()" class="px-5 py-2 bg-indigo-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-indigo-700 transition-all active:scale-95">KIỂM TRA (b)</button>
+                                            <button onclick="resetLTVC('ai-231-ex1b'); document.getElementById('fb-231-ex1b').classList.add('hidden');" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-bold rounded-xl hover:bg-gray-300 transition-all">LÀM LẠI</button>
                                             <div id="fb-231-ex1b" class="hidden text-sm flex-1 bg-white p-2 rounded-lg border border-indigo-100 italic"></div>
                                         </div>
                                     </div>
@@ -90,6 +97,7 @@ window.LESSON_DATA.lessons["231-ltvc"] = {
                                     </div>
                                     <div class="mt-3 flex items-center gap-3">
                                         <button onclick="checkEx231_2()" class="px-5 py-2 bg-amber-500 text-white text-sm font-bold rounded-xl shadow-md hover:bg-amber-600 transition-all active:scale-95">KIỂM TRA</button>
+                                        <button onclick="resetLTVC('ex231-2-1'); resetLTVC('ex231-2-2'); document.getElementById('fb-231-ex2').classList.add('hidden');" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-bold rounded-xl hover:bg-gray-300 transition-all">LÀM LẠI</button>
                                     <div id="fb-231-ex2" class="hidden text-base font-bold"></div>
                                     </div>
                                 </div>
@@ -127,43 +135,46 @@ window.LESSON_DATA.lessons["231-ltvc"] = {
 
                                 <div class="space-y-6">
                                     <!-- 3a. Thạch Sanh -->
-                                    <div class="bg-white/90 rounded-2xl p-4 shadow-sm border border-green-100">
+                                    <div class="bg-white/90 rounded-2xl p-4 shadow-sm border border-green-100" id="block-231-ex3a" data-feedback-correct="Từ đàn lặp lại có tác dụng liên kết câu." data-feedback-wrong="Bạn chọn sai rồi, thử lại nhé!">
                                         <p class="text-sm font-bold text-green-600 mb-2 uppercase tracking-wider">a)</p>
-                                        <div class="serif-font text-lg leading-relaxed text-gray-800 exercise-click-word-container" id="block-231-ex3a">
-                                            <p class="interactive-row py-1 px-3 rounded-xl transition-all whitespace-normal" data-compound="true" data-ans="tiếng đàn,Tiếng đàn">
+                                        <div class="serif-font text-lg leading-relaxed text-gray-800 exercise-click-word-container">
+                                            <p class="interactive-row py-1 px-3 rounded-xl transition-all whitespace-normal" data-compound="true" data-ans="đàn">
                                                 (1) <span class="word">Một</span> <span class="word">hôm</span>, <span class="word">Thạch</span> <span class="word">Sanh</span> <span class="word">ngồi</span> <span class="word">trong</span> <span class="word">ngục</span> <span class="word">tối</span>, <span class="word">đem</span> <span class="word">đàn</span> <span class="word">của</span> <span class="word">vua</span> <span class="word">Thuỷ</span> <span class="word">Tề</span> <span class="word">cho</span> <span class="word">ra</span> <span class="word">gảy</span>. (2) <span class="word">Tiếng</span> <span class="word">đàn</span> <span class="word">vang</span> <span class="word">lên</span> <span class="word">như</span> <span class="word">những</span> <span class="word">lời</span> <span class="word">trách</span> <span class="word">oán</span>, <span class="word">trách</span> <span class="word">sự</span> <span class="word">hững</span> <span class="word">hờ</span> <span class="word">của</span> <span class="word">công</span> <span class="word">chúa</span> <span class="word">và</span> <span class="word">oán</span> <span class="word">sự</span> <span class="word">độc</span> <span class="word">ác</span> <span class="word">của</span> <span class="word">Lý</span> <span class="word">Thông</span>. (3) <span class="word">Tiếng</span> <span class="word">đàn</span> <span class="word">vẳng</span> <span class="word">đến</span> <span class="word">hoàng</span> <span class="word">cung</span>, <span class="word">lọt</span> <span class="word">vào</span> <span class="word">tai</span> <span class="word">công</span> <span class="word">chúa</span>. (4) <span class="word">Vừa</span> <span class="word">nghe</span> <span class="word">tiếng</span> <span class="word">đàn</span>, <span class="word">công</span> <span class="word">chúa</span> <span class="word">bỗng</span> <span class="word">cười</span> <span class="word">nói</span> <span class="word">vui</span> <span class="word">vẻ</span>. (5) <span class="word">Nàng</span> <span class="word">xin</span> <span class="word">vua</span> <span class="word">cha</span> <span class="word">cho</span> <span class="word">gọi</span> <span class="word">người</span> <span class="word">đánh</span> <span class="word">đàn</span> <span class="word">vào</span> <span class="word">cung</span>.
                                             </p>
                                         </div>
-                                        <div class="mt-2 flex items-center justify-end gap-3 border-t border-green-50 pt-3">
+                                        <div class="mt-2 flex items-center gap-3 border-t border-green-50 pt-3">
                                             <button onclick="checkParagraph('block-231-ex3a')" class="px-5 py-2 bg-green-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-green-700 active:scale-95 transition-all">KIỂM TRA (a)</button>
+                                            <button onclick="resetLTVC('block-231-ex3a')" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-bold rounded-xl hover:bg-gray-300 transition-all">LÀM LẠI</button>
                                             <div id="result-block-231-ex3a" class="hidden"></div>
                                         </div>
                                     </div>
 
                                     <!-- 3b. Cây sau sau -->
-                                    <div class="bg-white/90 rounded-2xl p-4 shadow-sm border border-green-100">
+                                    <div class="bg-white/90 rounded-2xl p-4 shadow-sm border border-green-100" id="block-231-ex3b" data-feedback-correct="Từ lá, cây sau sau lặp lại có tác dụng liên kết câu." data-feedback-wrong="Bạn chọn sai rồi, thử lại nhé!">
                                         <p class="text-sm font-bold text-green-600 mb-2 uppercase tracking-wider">b)</p>
-                                        <div class="serif-font text-lg leading-relaxed text-gray-800 exercise-click-word-container" id="block-231-ex3b">
-                                            <p class="interactive-row py-1 px-3 rounded-xl transition-all whitespace-normal" data-compound="true" data-ans="sau sau">
+                                        <div class="serif-font text-lg leading-relaxed text-gray-800 exercise-click-word-container">
+                                            <p class="interactive-row py-1 px-3 rounded-xl transition-all whitespace-normal" data-compound="true" data-ans="lá,cây sau sau">
                                                 (1) <span class="word">Trong</span> <span class="word">rừng</span>, <span class="word">những</span> <span class="word">cây</span> <span class="word">sau</span> <span class="word">sau</span> <span class="word">đã</span> <span class="word">ra</span> <span class="word">lá</span> <span class="word">non</span>. (2) <span class="word">Những</span> <span class="word">mầm</span> <span class="word">lá</span> <span class="word">mới</span> <span class="word">nảy</span> <span class="word">chưa</span> <span class="word">có</span> <span class="word">màu</span> <span class="word">xanh</span>, <span class="word">chúng</span> <span class="word">mang</span> <span class="word">màu</span> <span class="word">nâu</span> <span class="word">hồng</span> <span class="word">trong</span> <span class="word">suốt</span>. (3) <span class="word">Những</span> <span class="word">lá</span> <span class="word">lớn</span> <span class="word">hơn</span> <span class="word">xanh</span> <span class="word">mơn</span> <span class="word">mởn</span>. (4) <span class="word">Đi</span> <span class="word">dưới</span> <span class="word">rừng</span> <span class="word">cây</span> <span class="word">sau</span> <span class="word">sau</span>, <span class="word">tưởng</span> <span class="word">như</span> <span class="word">đi</span> <span class="word">dưới</span> <span class="word">một</span> <span class="word">vòm</span> <span class="word">nhà</span> <span class="word">lợp</span> <span class="word">đầy</span> <span class="word">những</span> <span class="word">ngôi</span> <span class="word">sao</span> <span class="word">xanh</span>. (5) <span class="word">Ánh</span> <span class="word">mặt</span> <span class="word">trời</span> <span class="word">chiếu</span> <span class="word">qua</span> <span class="word">tán</span> <span class="word">lá</span> <span class="word">xuống</span> <span class="word">như</span> <span class="word">một</span> <span class="word">ánh</span> <span class="word">đèn</span> <span class="word">xanh</span> <span class="word">dịu</span>.
                                             </p>
                                         </div>
-                                        <div class="mt-2 flex items-center justify-end gap-3 border-t border-green-50 pt-3">
+                                        <div class="mt-2 flex items-center gap-3 border-t border-green-50 pt-3">
                                             <button onclick="checkParagraph('block-231-ex3b')" class="px-5 py-2 bg-green-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-green-700 active:scale-95 transition-all">KIỂM TRA (b)</button>
+                                            <button onclick="resetLTVC('block-231-ex3b')" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-bold rounded-xl hover:bg-gray-300 transition-all">LÀM LẠI</button>
                                             <div id="result-block-231-ex3b" class="hidden"></div>
                                         </div>
                                     </div>
 
                                     <!-- 3c. Chú sơn ca -->
-                                    <div class="bg-white/90 rounded-2xl p-4 shadow-sm border border-green-100">
+                                    <div class="bg-white/90 rounded-2xl p-4 shadow-sm border border-green-100" id="block-231-ex3c" data-feedback-correct="Từ chú lặp lại có tác dụng liên kết câu." data-feedback-wrong="Bạn chọn sai rồi, thử lại nhé!">
                                         <p class="text-sm font-bold text-green-600 mb-2 uppercase tracking-wider">c)</p>
-                                        <div class="serif-font text-lg leading-relaxed text-gray-800 exercise-click-word-container" id="block-231-ex3c">
-                                            <p class="interactive-row py-1 px-3 rounded-xl transition-all whitespace-normal" data-compound="true" data-ans="Chú,chú">
+                                        <div class="serif-font text-lg leading-relaxed text-gray-800 exercise-click-word-container">
+                                            <p class="interactive-row py-1 px-3 rounded-xl transition-all whitespace-normal" data-compound="true" data-ans="chú">
                                                 (1) <span class="word">Chú</span> <span class="word">sơn</span> <span class="word">ca</span> <span class="word">tiếp</span> <span class="word">tục</span> <span class="word">vỗ</span> <span class="word">cánh</span> <span class="word">bay</span> <span class="word">lên</span> <span class="word">cao</span> <span class="word">vút</span>. (2) <span class="word">Chú</span> <span class="word">thấy</span> <span class="word">cần</span> <span class="word">phải</span> <span class="word">làm</span> <span class="word">một</span> <span class="word">chuyến</span> <span class="word">đi</span> <span class="word">xa</span> <span class="word">để</span> <span class="word">thăm</span> <span class="word">tất</span> <span class="word">cả</span> <span class="word">mảnh</span> <span class="word">đất</span> <span class="word">quê</span> <span class="word">hương</span> <span class="word">của</span> <span class="word">chú</span>. (3) <span class="word">Đôi</span> <span class="word">cánh</span> <span class="word">nhỏ</span> <span class="word">chao</span> <span class="word">chát</span> <span class="word">trên</span> <span class="word">không</span> <span class="word">dẫn</span> <span class="word">chú</span> <span class="word">đi</span>. (4) <span class="word">Cảnh</span> <span class="word">vật</span> <span class="word">loang</span> <span class="word">loáng</span> <span class="word">in</span> <span class="word">vào</span> <span class="word">đôi</span> <span class="word">mắt</span> <span class="word">tinh</span> <span class="word">nhanh</span> <span class="word">tuyệt</span> <span class="word">diệu</span> <span class="word">của</span> <span class="word">chú</span>. (5) <span class="word">Chú</span> <span class="word">xiết</span> <span class="word">bao</span> <span class="word">kinh</span> <span class="word">ngạc</span> <span class="word">vì</span> <span class="word">thấy</span> <span class="word">quê</span> <span class="word">hương</span> <span class="word">của</span> <span class="word">chú</span>, <span class="word">ngoài</span> <span class="word">dãy</span> <span class="word">đồi</span> <span class="word">đầy</span> <span class="word">một</span> <span class="word">màu</span> <span class="word">xanh</span> <span class="word">và</span> <span class="word">ánh</span> <span class="word">nắng</span>, <span class="word">còn</span> <span class="word">trải</span> <span class="word">ra</span> <span class="word">bao</span> <span class="word">la</span>!
                                             </p>
                                         </div>
-                                        <div class="mt-2 flex items-center justify-end gap-3 border-t border-green-50 pt-3">
+                                        <div class="mt-2 flex items-center gap-3 border-t border-green-50 pt-3">
                                             <button onclick="checkParagraph('block-231-ex3c')" class="px-5 py-2 bg-green-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-green-700 active:scale-95 transition-all">KIỂM TRA (c)</button>
+                                            <button onclick="resetLTVC('block-231-ex3c')" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-bold rounded-xl hover:bg-gray-300 transition-all">LÀM LẠI</button>
                                             <div id="result-block-231-ex3c" class="hidden"></div>
                                         </div>
                                     </div>
@@ -186,6 +197,7 @@ window.LESSON_DATA.lessons["231-ltvc"] = {
                                     <textarea id="ai-231-q4" rows="2" placeholder="Ví dụ: Hội Lim rất vui. Hội Lim diễn ra vào mùa xuân..." class="w-full p-4 serif-font text-lg rounded-xl border-2 border-rose-100 focus:border-rose-400 outline-none shadow-inner bg-rose-50/20"></textarea>
                                     <div class="mt-3 flex gap-3">
                                         <button onclick="checkLTVC231_Q4()" class="px-5 py-2 bg-rose-600 text-white text-sm font-bold rounded-xl shadow-md hover:bg-rose-700 active:scale-95 transition-all">🤖 AI CHẤM</button>
+                                        <button onclick="resetLTVC('ai-231-q4'); document.getElementById('fb-231-q4').classList.add('hidden');" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-bold rounded-xl hover:bg-gray-300 transition-all">LÀM LẠI</button>
                                         <button onclick="submitLTVCUnified('231-q4')" class="px-5 py-2 bg-gray-800 text-white text-sm font-bold rounded-xl shadow-md hover:bg-black transition-all">🚀 NỘP BÀI</button>
                                     </div>
                                     <div id="fb-231-q4" class="hidden mt-3 p-4 bg-white border border-rose-200 rounded-xl shadow-sm text-sm italic"></div>
@@ -200,7 +212,7 @@ window.LESSON_DATA.lessons["231-ltvc"] = {
             "settings": { "pick": 10 },
             "questions": [
                 {
-                    "q": "Các câu trong một đoạn văn có thể liên kết với nhau bằng cách nào dưới đây?",
+                    "q": "Các câu trong một đoạn văn có thể liên kết with nhau bằng cách nào dưới đây?",
                     "a": ["Lặp lại từ ngữ ở câu trước", "Dùng từ ngữ có nghĩa trái ngược", "Thay đổi chủ đề hoàn toàn", "Dùng câu thật dài"],
                     "c": 0
                 },
