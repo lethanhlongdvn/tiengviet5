@@ -181,6 +181,7 @@ window.UnifiedSubmission = {
         if (document.querySelector('.exercise-click-word-container') || document.querySelector('[id^="block-e1"]')) return 'ltvc_full';
         if (document.getElementById('viet222-mb')) return 'essay_222';
         if (document.getElementById('viet-inputA')) return 'lesson_221_viet';
+        if (document.getElementById('ai-v231-1a')) return 'lesson_231_viet';
         return 'basic_lesson';
     },
 
@@ -254,6 +255,36 @@ window.UnifiedSubmission = {
             data.content = `A: ${document.getElementById('viet-inputA')?.value}\nB: ${document.getElementById('viet-inputB')?.value}`;
             data.score = avgRating.toFixed(1);
             data.feedback = `Tự đánh giá: ${avgRating}/10`;
+        }
+        else if (type === 'lesson_231_viet') {
+            let score = 0;
+            if (document.getElementById('ai-v231-1a')?.value.trim().length > 5) score += 10;
+            if (document.getElementById('v231-1b-m')?.value === '2') score += 10;
+            if (document.getElementById('v231-1b-t')?.value === '3') score += 10;
+            if (document.getElementById('v231-1b-k')?.value === '1') score += 10;
+            if (document.getElementById('ai-v231-1c')?.value.trim().length > 5) score += 10;
+            if (document.getElementById('ai-v231-1d')?.value.trim().length > 5) score += 10;
+            if (document.getElementById('v231-ex2-1')?.value.trim().length > 2) score += 10;
+            if (document.getElementById('v231-ex2-2')?.value.trim().length > 2) score += 10;
+            if (document.getElementById('v231-ex2-3')?.value.trim().length > 2) score += 10;
+            if (document.getElementById('v231-ex2-4')?.value.trim().length > 2) score += 10;
+            if (document.getElementById('ai-v231-lt1')?.value.trim().length > 5) score += 10;
+            if (document.getElementById('v231-lt2-book')?.value.trim().length > 2) score += 10;
+
+            data.score = score;
+            data.content = `[231-VIẾT] Tổng điểm: ${score}/120. ` +
+                `Bài 1a: ${document.getElementById('ai-v231-1a')?.value.substring(0, 50)}... ` +
+                `Luyện tập: ${document.getElementById('ai-v231-lt1')?.value.substring(0, 50)}...`;
+            data.feedback = `Học sinh tự hoàn thành các hoạt động trong tiết 231-Viết.`;
+
+            // Cập nhật giao diện hiển thị điểm (nếu có id)
+            if (passedId) {
+                const res = document.getElementById(passedId);
+                if (res) {
+                    res.classList.remove('hidden');
+                    res.innerHTML = `🎉 Tổng điểm tiết học: <span class="text-rose-400 text-3xl font-black">${score} / 120</span>`;
+                }
+            }
         }
         return data;
     },
@@ -373,7 +404,7 @@ window.UnifiedSubmission = {
                 saveData.fileUrl = fileUrl;
             }
 
-            await db.collection(collectionName).doc(docId).set(saveData);
+            await db.collection(collectionName).add(saveData);
 
             if (data.type === 'quiz_tab') {
                 alert(`✨ Tuyệt vời! Em đạt ${saveData.score} điểm. Kết quả đã gửi thành công.`);
