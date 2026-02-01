@@ -30,11 +30,18 @@ window.LESSON_DATA.lessons["231-viet"] = {
                                     </h3>
                                     
                                     <div class="bg-amber-50/50 rounded-3xl p-6 md:p-8 border-2 border-amber-100 shadow-inner mb-8 relative">
-                                        <div class="serif-font text-xl leading-[1.8] text-gray-800 text-justify">
+                                         <div class="serif-font text-xl leading-[1.8] text-gray-800 text-justify relative z-10">
+                                             <!-- Video Floated Right -->
+                                             <div class="float-none md:float-right w-full md:w-[45%] md:ml-8 mb-6 md:mb-2 text-center md:text-right">
+                                                 <video controls class="inline-block w-full rounded-3xl shadow-lg border-4 border-white/50">
+                                                     <source src="MOCCHAU.mp4" type="video/mp4">
+                                                     Trình duyệt của bạn không hỗ trợ video.
+                                                 </video>
+                                             </div>
                                              <p class="mb-4 indent-8">
                                                  Nhân dịp Quốc khánh ngày 2 tháng 9, tôi được bố mẹ cho đi Mộc Châu tham dự Ngày hội văn hoá các dân tộc thiểu số. Tôi vô cùng hứng thú với sự kiện mang đậm vẻ đẹp văn hoá này. Ngay từ sáng ngày 1 tháng 9, không khí ngày hội đã tràn ngập khắp thị trấn. Cờ hoa, những bộ trang phục truyền thống làm cho cả thị trấn trở nên rực rỡ sắc màu. Tiếng trống, tiếng chiêng rộn rã khiến tôi cảm thấy háo hức lạ thường. Mỗi dân tộc mang đến ngày hội một tiết mục trình diễn riêng. Trước cuộc thi ném còn của những cô gái Thái, tôi trở thành cổ động viên tự lúc nào không rõ. Tôi chăm chú dõi theo quả còn bay vút lên cao, lơ lửng trên không trung. Tôi và mọi người hò reo khi quả còn bất ngờ bay vèo qua vòng tròn gắn trên đầu cây tre. Điệu múa khèn tràn đầy sức sống của các chàng trai người Mông đã khiến tôi rất ngạc nhiên và thán phục. Tôi nhún nhảy liên hồi theo các động tác của họ. Tôi như bị cuốn theo bước múa sạp khéo léo, rộn ràng của những cô gái Mường. Tôi say sưa thưởng thức điệu múa xoè uyển chuyển của những cô gái Thái... Đến với Ngày hội văn hoá các dân tộc thiểu số ở Mộc Châu, tôi đã rất xúc động và hiểu vì sao cần phải giữ gìn giá trị văn hoá truyền thống của dân tộc.
                                              </p>
-                                            <p class="text-right italic font-bold text-gray-600 text-sm">(Lâm Phong)</p>
+                                            <p class="text-right italic font-bold text-gray-600 text-sm clear-both">(Lâm Phong)</p>
                                         </div>
                                     </div>
 
