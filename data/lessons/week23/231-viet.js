@@ -34,7 +34,7 @@ window.LESSON_DATA.lessons["231-viet"] = {
                                              <!-- Video Floated Right -->
                                              <div class="float-none md:float-right w-full md:w-[45%] md:ml-8 mb-6 md:mb-2 text-center md:text-right">
                                                  <video controls class="inline-block w-full rounded-3xl shadow-lg border-4 border-white/50">
-                                                     <source src="MOCCHAU.mp4" type="video/mp4">
+                                                     <source src="video/MOCCHAU.mp4" type="video/mp4">
                                                      Trình duyệt của bạn không hỗ trợ video.
                                                  </video>
                                              </div>
