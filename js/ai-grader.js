@@ -200,7 +200,8 @@ async function askAI(id, prefix = "", mode = "single", persona = "auto", weekNum
         }
     }
 
-    const sentence = (prefix + " " + userInput).trim();
+    const wordCount = userInput.split(/\s+/).filter(w => w.length > 0).length;
+    const sentence = userInput; // Chỉ gửi bài làm của học sinh làm text chính
 
     // UI: Loading state with Persona
     const teacherName = persona === "ltvc" ? "Thầy Giáo Ngữ Pháp" : "Thầy Giáo Văn";
@@ -228,10 +229,13 @@ async function askAI(id, prefix = "", mode = "single", persona = "auto", weekNum
     }
 
     try {
-        // Xây dựng prompt với ngữ cảnh curriculum
-        const fullPrompt = curriculumContext
-            ? `${curriculumContext}\n\n📝 BÀI LÀM CỦA HỌC SINH:\n${sentence}`
-            : sentence;
+        // Xây dựng prompt với ngữ cảnh curriculum và prefix hướng dẫn
+        let systemNote = "";
+        if (persona === "ltvc") {
+            systemNote = "Bạn là chuyên gia Ngữ pháp Tiếng Việt. Đây là bài tập về Luyện từ và câu (LTVC), yêu cầu trả lời ngắn gọn một vấn đề ngữ pháp. ĐỪNG yêu cầu cấu trúc Mở bài/Thân bài/Kết bài.";
+        }
+
+        const fullPrompt = `${curriculumContext}\n${systemNote}\n\n🎯 HƯỚNG DẪN CHẤM: ${prefix}\n\n📝 BÀI LÀM CỦA HỌC SINH:\n"${userInput}"`;
 
         const response = await fetch('https://tiengviet5.netlify.app/.netlify/functions/chat', {
             method: 'POST',
@@ -250,6 +254,7 @@ async function askAI(id, prefix = "", mode = "single", persona = "auto", weekNum
         const data = await response.json();
         // Ensure persona is set for rendering
         if (!data.persona) data.persona = persona;
+        data.word_count = wordCount; // Override word_count để hiển thị đúng thực tế
         renderFeedback(feedback, data);
         const gradeNum = parseFloat(data.diem) || data.grade || 0;
         if (typeof celebrate === 'function' && gradeNum >= 8) celebrate();
